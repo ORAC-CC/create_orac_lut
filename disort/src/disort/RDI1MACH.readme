@@ -1,0 +1,34 @@
+
+{R,D,I}1MACH:  The routines we needed but hated
+W. Wiscombe (wiscombe@gsfc.nasa.gov)
+July 1998
+
+   The machine-constant routines R1MACH, D1MACH, I1MACH caused more 
+problems for me and for users of my programs than any others.  Their 
+functions were simple, but people just had a hard time getting the 
+versions distributed on netlib (and which I re-distributed) to work 
+correctly.
+
+   At this point in time, it no longer makes sense to distribute or 
+use these routines.  Fortran-90 contains intrinsic functions which 
+contain all the functionality of R1MACH and D1MACH, and almost all of 
+I1MACH.  Eric Grosse of Bell Labs has been kind enough to provide versions 
+of {R,D,I}1MACH which use these new F-90 intrinsic functions.  I have 
+slightly edited his routines.  The package is called RDI1MACH.f and 
+is self-documenting.
+
+   Fortran-90 compilers have matured on most platforms and we 
+highly recommend buying/using them (see http://www.fortran.com/fortran/).
+There are even some free Fortran-90 subset compilers (http://www.lahey.com/).
+Soon, Fortran-77 compilers may no longer be supported.  Fortran-90 
+compilers can compile any Fortran-77 programs or routines, so once they 
+became reliable it is inevitable that support for f77 compilers will wither.
+
+   Since Fortran-90 is entirely backward compatible with Fortran-77, 
+you need not use any other feature of Fortran-90; you can just use 
+RDI1MACH.f inside an old Fortran-77 program.  Remember that the .f
+extension only means the file is in fixed source form, not that it is
+pure Fortran-77.  In fact, any .f file can contain f90 constructs.
+
+  Those without access to Fortran-90 compilers can obtain the old 
+versions of {R,D,I}1MACH at http://www.netlib.org/.

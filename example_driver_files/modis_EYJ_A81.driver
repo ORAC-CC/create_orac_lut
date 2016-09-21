@@ -1,0 +1,10 @@
+# Non-optional arguments:
+../create_orac_lut/example_driver_files
+../create_orac_lut/example_driver_files/modis.inst
+../create_orac_lut/example_driver_files/Eyja_A81.mie
+../create_orac_lut/example_driver_files/aerosol_for_cloudcci.lut
+../create_orac_lut/example_driver_files/midsatm.dat
+output/modis_EYJ_A81
+# Optional keyword parameters below:
+channels=['01', '02', '03', '04', '05', '06', '07', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '31', '32', '33', '34', '35', '36']
+/no_screen

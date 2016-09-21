@@ -1,0 +1,14 @@
+# SLSTR channel definition for ORAC LUT generation code
+# Two header rows are: instrument name and number of channels (in this file)
+# Columns are: channel number, centre wavelength, thermal flag, solar flag
+SLSTR
+9
+01  0.555 0 1
+02  0.659 0 1
+03  0.865 0 1
+04  1.375 0 1
+05  1.640 0 1
+06  2.250 0 1
+07  3.740 1 1
+08  10.85 1 0
+09  12.00 1 0

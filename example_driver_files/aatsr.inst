@@ -1,0 +1,12 @@
+# AATSR channel definition for ORAC LUT generation code
+# Two header rows are: instrument name and number of channels (in this file)
+# Columns are: channel number, centre wavelength, thermal flag, solar flag
+AATSR
+7
+01  0.560 0 1
+02  0.660 0 1
+03  0.862 0 1
+04  1.594 0 1
+05  3.742 1 1
+06 10.857 1 0
+07 12.051 1 0
