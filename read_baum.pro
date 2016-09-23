@@ -166,7 +166,7 @@ pro read_baum_channel, filename, chans, r_e, Bext, w, g, theta, P
    i_theta = interpol(indgen(n_elements(phase_angles)), phase_angles, theta)
 
    for i = 0, n_chans - 1 do begin
-      P[*,i,*] = transpose(interpolate(temp[i,*,*], i_r_e, i_theta, /grid))
+      P[*,i,*] = transpose(interpolate(temp[chans[i] - 1,*,*], i_r_e, i_theta, /grid))
    endfor
 
    ncdf_close, nc_id
