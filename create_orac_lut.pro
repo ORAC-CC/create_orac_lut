@@ -111,6 +111,8 @@
 ;    algorithms.
 ; 31/08/16, G McGarragh: Add the tmatrix_path keyword as the path to the Dubovik
 ;    T-Matrix LUTs was fixed before.
+; 12/10/16, G McGarragh: The phase functions interpolated from the Baran and
+;    Baum ice crystal scattering properties must be normalized.
 
 
 ; Include the libraries of procedures for reading and writing driver files and
@@ -319,6 +321,7 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
       endif
    endif
 
+
 ;  -----------------------------------------------------------------------------
 ;  Determine scattering properties either through calling a scattering code for
 ;  Mie or t-matrix or loading 'baum' or 'buran' or ice crystal properties, or by
@@ -474,12 +477,24 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
             g550_c[c,*]     = g1
             Phs550_c[*,c,*] = Phs1
 
+            ; Normalize
+            for r=0,lutstr.NEfR-1 do begin
+               Phs550_c[*, c, r] /= total(Phs550_c[*, c, r] * weights) / 2.
+            endfor
+
             read_baran, scatstr.compname[c], inststr.ChanWl, lutstr.EfR, Bext1, $
                         w1, g1, PTheta * 180. / !pi, Phs1
             Bext_c[*,c,*]  = Bext1
             w_c[*,c,*]     = w1
             g_c[*,c,*]     = g1
             Phs_c[*,*,c,*] = Phs1
+
+            ; Normalize
+            for r=0,lutstr.NEfR-1 do begin
+               for l=0,inststr.NChan-1 do begin
+                  Phs_c[*, l, c, r] /= total(Phs_c[*, l, c, r] * weights) / 2.
+               endfor
+            endfor
 
          endif else if scatstr.comptype[c] eq 'baum' then begin
             read_baum_lambda, scatstr.compname[c], 0.55, lutstr.EfR, Bext1, $
@@ -489,6 +504,12 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
             g550_c[c,*]     = g1
             Phs550_c[*,c,*] = Phs1
 
+            ; Normalize
+            for r=0,lutstr.NEfR-1 do begin
+               Phs550_c[*, c, r] /= total(Phs550_c[*, c, r] * weights) / 2.
+            endfor
+
+            ; Choose between spectral or instrument/channel specific properties
             if scatstr.compname2[c] eq '' then begin
                read_baum_lambda, scatstr.compname[c], inststr.ChanWl, lutstr.EfR, $
                                  Bext1, w1, g1, PTheta * 180. / !pi, Phs1
@@ -500,6 +521,13 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
             w_c[*,c,*]     = w1
             g_c[*,c,*]     = g1
             Phs_c[*,*,c,*] = Phs1
+
+            ; Normalize
+            for r=0,lutstr.NEfR-1 do begin
+               for l=0,inststr.NChan-1 do begin
+                  Phs_c[*, l, c, r] /= total(Phs_c[*, l, c, r] * weights) / 2.
+               endfor
+            endfor
          endif
       endfor
 
@@ -543,11 +571,14 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
                tMratBext  = total(MratBext)
                MratBextw  = MratBext * w550_c[*,r]
                tMratBextw = total(MratBextw)
+
                Bext550[r] = tMratBext / total(lut_Mrat[*,r])
                w550[r]    = tMratBextw / tMratBext
                g550[r]    = total(MratBextw * g550_c[*,r]) / tMratBextw
                for p=0,NMom-1 do $
                   Phs550[p,r] = total(MratBextw * Phs550_c[p,*,r]) / tMratBextw
+
+;              Calculate the Legendre moments for the phase function
                legpexp, NMom, QV, weights, Phs550[*,r], Inlc, alc
                AMom550[*,r] = alc / (2.0*findgen(NMom)+1.0)
             endif
@@ -599,10 +630,12 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
       x = create_struct(x, 'P', tmp1)
       x = create_struct(x, 'WLS', [0.55, inststr.ChanWl], 'Re', lutstr.EfR)
       x = create_struct(x, 'Theta', Ptheta*!radeg)
+
 ;     Output this structure using the save procedure
       save, x, filename=out_path+'/'+strupcase(inststr.name)+'_'+ $
             scatstr.outname+verstrng+'_scattering.str', /compress
    endelse
+
 
 ;  -----------------------------------------------------------------------------
 ;  Output scattering data into ORAC LUTs
@@ -637,6 +670,13 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
                          Wl=inststr.ChanWl[l], logAOD=lutstr.LAOD, $
                          logEfR=lutstr.LEfR
 
+;     Bext ratio
+      lutname = lutbase+'_BextRat_'+ChStrng+verstrng+'.sad'
+      BextLUT = fltarr(lutstr.NAOD, lutstr.NEfR)
+      for a=0,lutstr.NAOD-1 do BextLUT[a,*] = BextRat[l,*]
+      write_orac_lut_2d, lutname, lutstr.AOD, lutstr.EfR, BextLUT, $
+                         logAOD=lutstr.LAOD, logEfR=lutstr.LEfR
+
 ;     w
       lutname = lutbase+'_w_'+ChStrng+verstrng+'.sad'
       wLUT = fltarr(lutstr.NAOD, lutstr.NEfR)
@@ -652,13 +692,6 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
       write_orac_lut_2d, lutname, lutstr.AOD, lutstr.EfR, gLUT, $
                          Wl=inststr.ChanWl[l], logAOD=lutstr.LAOD, $
                          logEfR=lutstr.LEfR
-
-;     Bext ratio
-      lutname = lutbase+'_BextRat_'+ChStrng+verstrng+'.sad'
-      BextLUT = fltarr(lutstr.NAOD, lutstr.NEfR)
-      for a=0,lutstr.NAOD-1 do BextLUT[a,*] = BextRat[l,*]
-      write_orac_lut_2d, lutname, lutstr.AOD, lutstr.EfR, BextLUT, $
-                         logAOD=lutstr.LAOD, logEfR=lutstr.LEfR
    endfor
 
 ;  **** Done with calculating scattering parameters, return if that is all that
@@ -670,6 +703,7 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
    if keyword_set(scat_only) then begin
       return,0
    endif
+
 
 ;  -----------------------------------------------------------------------------
 ;  Run DISORT
