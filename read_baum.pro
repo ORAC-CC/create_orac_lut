@@ -11,7 +11,9 @@
 ;    https://www.ssec.wisc.edu/ice_models/
 ;
 ; History:
-; ??/??/15 G. McGarragh: Initial implementation.
+; ??/??/15, G. McGarragh: Initial implementation.
+; 12/10/16, G. McGarragh: Extrapolate scattering properties for effective radii
+;    larger than the maximum Baum effective radius.
 
 
 ; procedure read_baum_lambda
@@ -21,67 +23,92 @@
 ;
 ; INPUT ARGUMENTS:
 ; filename (string) Full path to the satellite imager model NetCDF file.
-; wls      (array)  Wavelengths (um) at which to interpolate optical properties.
-; r_e      (array)  Effective radii  at which to interpolate optical properties.
+; wl       (array)  Wavelengths (um) at which to interpolate optical properties.
+; Re       (array)  Effective radii  at which to interpolate optical properties.
 ; theta    (array)  Angles at which to interpolate the phase function.
 ;
 ; INPUT KEYWORDS:
 ; None
 ;
 ; OUTPUT ARGUMENTS:
-; Bext (fltarr) Extinction coefficient   (n_elements(wls), n_elements(r_e))
-; w    (fltarr) Single scattering albedo (n_elements(wls), n_elements(r_e))
-; g    (fltarr) Asymmetry parameter      (n_elements(wls), n_elements(r_e))
+; Bext (fltarr) Extinction coefficient   (n_elements(wl), n_elements(Re))
+; w    (fltarr) Single scattering albedo (n_elements(wl), n_elements(Re))
+; g    (fltarr) Asymmetry parameter      (n_elements(wl), n_elements(Re))
 ; P    (fltarr) Phase function           (n_elements(theta),
-;                                         n_elements(wls), n_elements(r_e))
-;
-; HISTORY:
-; ??/??/15 G. McGarragh: Initial implementation.
+;                                         n_elements(wl), n_elements(Re))
 
-pro read_baum_lambda, filename, wls, r_e, Bext, w, g, theta, P
+pro read_baum_lambda, filename, wl, Re, Bext, w, g, theta, P
 
-   n_wls   = n_elements(wls)
-   n_r_e   = n_elements(r_e)
+   n_wl    = n_elements(wl)
+   n_Re    = n_elements(Re)
    n_theta = n_elements(theta)
 
-   Bext = fltarr(n_wls, n_r_e)
-   w    = fltarr(n_wls, n_r_e)
-   g    = fltarr(n_wls, n_r_e)
-   P    = fltarr(n_theta, n_wls, n_r_e)
+   Bext = fltarr(n_wl, n_Re)
+   w    = fltarr(n_wl, n_Re)
+   g    = fltarr(n_wl, n_Re)
+   P    = fltarr(n_theta, n_wl, n_Re)
 
    nc_id = ncdf_open(filename, /nowrite)
 
    var_id = ncdf_varid(nc_id, 'wavelengths')
-   ncdf_varget, nc_id, var_id, wls_baum
+   ncdf_varget, nc_id, var_id, wl_baum
 
    var_id = ncdf_varid(nc_id, 'effective_diameter')
-   ncdf_varget, nc_id, var_id, D_e
+   ncdf_varget, nc_id, var_id, De
 
-   r_e_baum = D_e / 2.
+   Re_baum = De / 2.
+
+   extrap = 0
+   n_Re_baum = n_elements(Re_baum)
+   if (Re_baum[n_Re_baum - 1] lt Re[n_Re - 1]) then begin
+      extrap = 1
+      Re_baum = [Re_baum, Re[n_Re - 1]]
+      f_Re_extrap = (Re[n_Re - 1] - Re_baum[n_Re_baum - 2]) / $
+                    (Re_baum[n_Re_baum - 1] - Re_baum[n_Re_baum - 2])
+   endif
 
    var_id = ncdf_varid(nc_id, 'phase_angles')
-   ncdf_varget, nc_id, var_id, phase_angles
+   ncdf_varget, nc_id, var_id, theta_baum
 
-   i_wls = interpol(indgen(n_elements(wls_baum)), wls_baum, wls)
-   i_r_e = interpol(indgen(n_elements(r_e_baum)), r_e_baum, r_e)
+   i_wl = interpol(indgen(n_elements(wl_baum)), wl_baum, wl)
+   i_Re = interpol(indgen(n_elements(Re_baum)), Re_baum, Re)
 
    ; Bext
-   baum_read_field_lambda, nc_id, 'extinction_coefficient_over_iwc', $
-                           wls_baum, wls, i_wls, r_e_baum, r_e, i_r_e, Bext
+   baum_read_field_lambda, nc_id, 'extinction_efficiency', $
+                           wl_baum, wl, i_wl, Re, i_Re, Bext, extrap, f_Re_extrap
    ; w
    baum_read_field_lambda, nc_id, 'single_scattering_albedo', $
-                           wls_baum, wls, i_wls, r_e_baum, r_e, i_r_e, w
+                           wl_baum, wl, i_wl, Re, i_Re, w, extrap, f_Re_extrap
    ; g
    baum_read_field_lambda, nc_id, 'asymmetry_parameter', $
-                           wls_baum, wls, i_wls, r_e_baum, r_e, i_r_e, g
+                           wl_baum, wl, i_wl, Re, i_Re, g, extrap, f_Re_extrap
 
    ; Phs
    var_id = ncdf_varid(nc_id, 'p11_phase_function')
    ncdf_varget, nc_id, var_id, temp
 
-   i_theta = interpol(indgen(n_elements(phase_angles)), phase_angles, theta)
+   if extrap then begin
+      n_wl_baum    = n_elements(temp[*,0,0])
+      n_Re_baum    = n_elements(temp[0,*,0])
+      n_theta_baum = n_elements(theta_baum)
 
-   temp = interpolate(temp, i_wls, i_r_e, i_theta, /grid)
+      temp2 = fltarr(n_wl_baum, n_Re_baum + 1, n_theta_baum)
+
+      temp2[0:n_wl_baum-1, 0:n_Re_baum-1, 0:n_theta_baum-1] = temp
+
+      for i = 0, n_theta_baum - 1 do begin
+         for j = 0, n_wl_baum - 1 do begin
+            temp2[j, n_Re_baum, i] = (1. - f_Re_extrap) * temp2[j, n_Re_baum - 2, i] + $
+                                           f_Re_extrap  * temp2[j, n_Re_baum - 1, i]
+         endfor
+      endfor
+   endif else begin
+      temp2 = temp
+   endelse
+
+   i_theta = interpol(indgen(n_elements(theta_baum)), theta_baum, theta)
+
+   temp = interpolate(temp2, i_wl, i_Re, i_theta, /grid)
 
    for i = 0, n_theta - 1 do begin
       P[i,*,*] = temp[*,*,i]
@@ -91,13 +118,31 @@ pro read_baum_lambda, filename, wls, r_e, Bext, w, g, theta, P
 end
 
 
-pro baum_read_field_lambda, nc_id, name, wls_baum, wls, i_wls, $
-                            r_e_baum, r_e, i_r_e, x
+pro baum_read_field_lambda, nc_id, name, wl_baum, wl, i_wl, Re, i_Re, x, $
+                            extrap, f_Re_extrap
 
    var_id = ncdf_varid(nc_id, name)
    ncdf_varget, nc_id, var_id, temp
 
-   x = interpolate(temp, i_wls, i_r_e, /grid)
+   n_Re = n_elements(Re)
+
+   if extrap then begin
+      n_wl_baum = n_elements(temp[*,0])
+      n_Re_baum = n_elements(temp[0,*])
+
+      temp2 = fltarr(n_wl_baum, n_Re_baum + 1)
+
+      temp2[0:n_wl_baum-1, 0:n_Re_baum-1] = temp
+
+      for i = 0, n_wl_baum - 1 do begin
+         temp2[i, n_Re_baum] = (1. - f_Re_extrap) * temp2[i, n_Re_baum - 2] + $
+                                     f_Re_extrap  * temp2[i, n_Re_baum - 1]
+      endfor
+   endif else begin
+      temp2 = temp
+   endelse
+
+   x = interpolate(temp2, i_wl, i_Re, /grid)
 end
 
 
@@ -110,77 +155,123 @@ end
 ; INPUT ARGUMENTS:
 ; filename (string) Full path to the satellite imager model NetCDF file.
 ; chans    (array)  Instrument channels for which to obtain optical properties.
-; r_e      (array)  Effective radii at which to interpolate optical properties.
+; Re       (array)  Effective radii at which to interpolate optical properties.
 ; theta    (array)  Angles at which to interpolate the phase function.
 ;
 ; INPUT KEYWORDS:
 ; None
 ;
 ; OUTPUT ARGUMENTS:
-; Bext (fltarr) Extinction coefficient   (n_elements(chans), n_elements(r_e))
-; w    (fltarr) Single scattering albedo (n_elements(chans), n_elements(r_e))
-; g    (fltarr) Asymmetry parameter      (n_elements(chans), n_elements(r_e))
+; Bext (fltarr) Extinction coefficient   (n_elements(chans), n_elements(Re))
+; w    (fltarr) Single scattering albedo (n_elements(chans), n_elements(Re))
+; g    (fltarr) Asymmetry parameter      (n_elements(chans), n_elements(Re))
 ; P    (fltarr) Phase function           (n_elements(theta),
-;                                         n_elements(chans), n_elements(r_e))
+;                                         n_elements(chans), n_elements(Re))
 ;
 ; HISTORY:
 ; ??/??/15 G. McGarragh: Initial implementation.
 
-pro read_baum_channel, filename, chans, r_e, Bext, w, g, theta, P
+pro read_baum_channel, filename, chans, Re, Bext, w, g, theta, P
 
    n_chans = n_elements(chans)
-   n_r_e   = n_elements(r_e)
+   n_Re    = n_elements(Re)
    n_theta = n_elements(theta)
 
-   Bext = fltarr(n_chans, n_r_e)
-   w    = fltarr(n_chans, n_r_e)
-   g    = fltarr(n_chans, n_r_e)
-   P    = fltarr(n_theta, n_chans, n_r_e)
+   Bext = fltarr(n_chans, n_Re)
+   w    = fltarr(n_chans, n_Re)
+   g    = fltarr(n_chans, n_Re)
+   P    = fltarr(n_theta, n_chans, n_Re)
 
    nc_id = ncdf_open(filename, /nowrite)
 
    var_id = ncdf_varid(nc_id, 'effective_diameter')
-   ncdf_varget, nc_id, var_id, D_e
+   ncdf_varget, nc_id, var_id, De
 
-   r_e_baum = D_e / 2.
+   Re_baum = De / 2.
+
+   extrap = 0
+   n_Re_baum = n_elements(Re_baum)
+   if (Re_baum[n_Re_baum - 1] lt Re[n_Re - 1]) then begin
+      extrap = 1
+      Re_baum = [Re_baum, Re[n_Re - 1]]
+      f_Re_extrap = (Re[n_Re - 1] - Re_baum[n_Re_baum - 2]) / $
+                    (Re_baum[n_Re_baum - 1] - Re_baum[n_Re_baum - 2])
+   endif
 
    var_id = ncdf_varid(nc_id, 'phase_angles')
-   ncdf_varget, nc_id, var_id, phase_angles
+   ncdf_varget, nc_id, var_id, theta_baum
 
-   i_r_e = interpol(indgen(n_elements(r_e_baum)), r_e_baum, r_e)
+   i_Re = interpol(indgen(n_elements(Re_baum)), Re_baum, Re)
 
    ; Bext
-   baum_read_field_channel, nc_id, 'extinction_coefficient_over_iwc', $
-                            chans, r_e_baum, r_e, i_r_e, Bext
+   baum_read_field_channel, nc_id, 'extinction_efficiency', $
+                            chans, Re, i_Re, Bext, extrap, f_Re_extrap
    ; w
    baum_read_field_channel, nc_id, 'single_scattering_albedo', $
-                            chans, r_e_baum, r_e, i_r_e, w
+                            chans, Re, i_Re, w, extrap, f_Re_extrap
    ; g
    baum_read_field_channel, nc_id, 'asymmetry_parameter', $
-                            chans, r_e_baum, r_e, i_r_e, g
+                            chans, Re, i_Re, g, extrap, f_Re_extrap
 
    ; Phs
    var_id = ncdf_varid(nc_id, 'p11_phase_function')
    ncdf_varget, nc_id, var_id, temp
 
-   i_theta = interpol(indgen(n_elements(phase_angles)), phase_angles, theta)
+   if extrap then begin
+      n_chans_baum = n_elements(temp[*,0,0])
+      n_Re_baum    = n_elements(temp[0,*,0])
+      n_theta_baum = n_elements(theta_baum)
+
+      temp2 = fltarr(n_chans_baum, n_Re_baum + 1, n_theta_baum)
+
+      temp2[0:n_chans_baum-1, 0:n_Re_baum-1, 0:n_theta_baum-1] = temp
+
+      for i = 0, n_theta_baum - 1 do begin
+         for j = 0, n_chans_baum - 1 do begin
+            temp2[j, n_Re_baum, i] = (1. - f_Re_extrap) * temp2[j, n_Re_baum - 2, i] + $
+                                           f_Re_extrap  * temp2[j, n_Re_baum - 1, i]
+         endfor
+      endfor
+   endif else begin
+      temp2 = temp
+   endelse
+
+   i_theta = interpol(indgen(n_elements(theta_baum)), theta_baum, theta)
 
    for i = 0, n_chans - 1 do begin
-      P[*,i,*] = transpose(interpolate(temp[chans[i] - 1,*,*], i_r_e, i_theta, /grid))
+      P[*,i,*] = transpose(interpolate(temp2[chans[i] - 1,*,*], i_Re, i_theta, /grid))
    endfor
 
    ncdf_close, nc_id
 end
 
 
-pro baum_read_field_channel, nc_id, name, chans, r_e_baum, r_e, i_r_e, x
+pro baum_read_field_channel, nc_id, name, chans, Re, i_Re, x, extrap, f_Re_extrap
 
    n_chans = n_elements(chans)
 
    var_id = ncdf_varid(nc_id, name)
    ncdf_varget, nc_id, var_id, temp
 
+   n_Re = n_elements(Re)
+
+   if extrap then begin
+      n_chans_baum = n_elements(temp[*,0])
+      n_Re_baum    = n_elements(temp[0,*])
+
+      temp2 = fltarr(n_chans_baum, n_Re_baum + 1)
+
+      temp2[0:n_chans_baum-1, 0:n_Re_baum-1] = temp
+
+      for i = 0, n_chans_baum - 1 do begin
+         temp2[i, n_Re_baum] = (1. - f_Re_extrap) * temp2[i, n_Re_baum - 2] + $
+                                     f_Re_extrap  * temp2[i, n_Re_baum - 1]
+      endfor
+   endif else begin
+      temp2 = temp
+   endelse
+
    for i = 0, n_chans - 1 do begin
-      x[i,*] = interpolate(temp[chans[i] - 1, *], i_r_e, /grid)
+      x[i,*] = interpolate(temp2[chans[i] - 1, *], i_Re, /grid)
    endfor
 end
