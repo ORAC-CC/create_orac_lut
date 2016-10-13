@@ -10,6 +10,8 @@
 ; ??/??/15, G. McGarragh: Initial implementation.
 ; 12/10/16, G. McGarragh: Properly integrate the SW scattering properties over
 ;    size distribution and significant refactoring.
+; 13/10/16, G. McGarragh: Add init_baran() so that the large solar files need
+;    only be read once per session.
 
 
 function baran_Re
@@ -30,28 +32,21 @@ function baran_map_i_9_to_i_30_subset, i
 end
 
 
-; procedure read_baran
+; procedure init_baran
 ;
 ; Read and interpolate Anthony Baran's ice cloud optical properties for a set of
 ; wavelengths and effective radii.
 ;
 ; INPUT ARGUMENTS:
-; path  (string) Path to the base directory containing the optical properties.
-; wl    (array)  Wavelengths for which to obtain optical properties.
-; Re    (array)  Effective radii for which to obtain optical properties.
-; theta (array)  Angles to which to interpolate the phase function output.
+; path (string) Path to the base directory containing the optical properties.
 ;
 ; INPUT KEYWORDS:
 ; None
 ;
 ; OUTPUT ARGUMENTS:
-; Bext (fltarr) Extinction coefficient   (n_elements(wl), n_elements(Re))
-; w    (fltarr) Single scattering albedo (n_elements(wl), n_elements(Re))
-; g    (fltarr) Asymmetry parameter      (n_elements(wl), n_elements(Re))
-; P    (fltarr) Phase function           (n_elements(theta),
-;                                         n_elements(wl), n_elements(Re))
+; baran (structure) Structure to be passed to each call of read_baran().
 
-pro read_baran, path, wl, Re, Bext, w, g, theta, P
+pro init_baran, path, baran
 
    n_wl_baran = 54
    n_Dm_baran = 24
@@ -69,15 +64,6 @@ pro read_baran, path, wl, Re, Bext, w, g, theta, P
               1092.833, 1942.815, 3035.649, 5130.246, 9296.675, 15367.97, $
               22957.09, 37186.70, 61471.88, 91828.38, 128256.1, 170755.3, $
               245887.5, 401464.6, 594987.2, 929667.4, 1897281., 3718670.]
-
-   n_wl    = n_elements(wl)
-   n_Re    = n_elements(Re)
-   n_theta = n_elements(theta)
-
-   Bext    = fltarr(n_wl, n_Re)
-   w       = fltarr(n_wl, n_Re)
-   g       = fltarr(n_wl, n_Re)
-   P       = fltarr(n_theta, n_wl, n_Re)
 
    theta1  = fltarr(n_theta_baran)
    theta2  = fltarr(n_theta_baran)
@@ -143,20 +129,69 @@ pro read_baran, path, wl, Re, Bext, w, g, theta, P
 
    dist_w = dist_Bsca / dist_Bext
 
+   baran = {baran, path  : path, $
+                   Re    : dist_Re, $
+                   Bext  : dist_Bext, $
+                   Bsca  : dist_Bsca, $
+                   w     : dist_w, $
+                   g     : dist_g, $
+                   theta : theta1, $
+                   P     : dist_P}
+end
+
+
+; procedure read_baran
+;
+; Read and interpolate Anthony Baran's ice cloud optical properties for a set of
+; wavelengths and effective radii.
+;
+; INPUT ARGUMENTS:
+; baran (structure) Output from init_baran().
+; wl    (array)     Wavelengths for which to obtain optical properties.
+; Re    (array)     Effective radii for which to obtain optical properties.
+; theta (array)     Angles to which to interpolate the phase function output.
+;
+; INPUT KEYWORDS:
+; None
+;
+; OUTPUT ARGUMENTS:
+; Bext (fltarr) Extinction coefficient   (n_elements(wl), n_elements(Re))
+; w    (fltarr) Single scattering albedo (n_elements(wl), n_elements(Re))
+; g    (fltarr) Asymmetry parameter      (n_elements(wl), n_elements(Re))
+; P    (fltarr) Phase function           (n_elements(theta),
+;                                         n_elements(wl), n_elements(Re))
+
+pro read_baran, baran, wl, Re, Bext, w, g, theta, P
+
+   n_theta_baran = baran_n_theta()
+
+   n_wl    = n_elements(wl)
+   n_Re    = n_elements(Re)
+   n_theta = n_elements(theta)
+
+   Bext    = fltarr(n_wl, n_Re)
+   w       = fltarr(n_wl, n_Re)
+   g       = fltarr(n_wl, n_Re)
+   P       = fltarr(n_theta, n_wl, n_Re)
+
+   theta1  = fltarr(n_theta_baran)
+   P1      = fltarr(n_theta_baran)
+
    for i = 0, n_Re - 1 do begin
       for j = 0, n_wl - 1 do begin
          if wl[j] lt 4. then begin
-            baran_interp_sw, wl[j], Re[i], dist_Bext, dist_w, dist_g, dist_P, $
-                             Bext1, w1, g1, P1
+            baran_interp_sw, wl[j], Re[i], baran.Bext, baran.w, baran.g, $
+                             baran.P, Bext1, w1, g1, P1
          endif else begin
-            baran_read_and_interp_lw, path, wl[j], Re[i], Bext1, w1, theta2, P1
+            baran_read_and_interp_lw, baran.path, wl[j], Re[i], Bext1, w1, $
+                                      theta1, P1
             g1 = 0.
          endelse
 
          Bext[j,i] = Bext1
          w   [j,i] = w1
          g   [j,i] = g1
-         P [*,j,i] = interpol(P1, theta1, theta)
+         P [*,j,i] = interpol(P1, baran.theta, theta)
       endfor
    endfor
 end

@@ -470,7 +470,9 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
             endfor
 
          endif else if scatstr.comptype[c] eq 'baran' then begin
-            read_baran, scatstr.compname[c], 0.55, lutstr.EfR, Bext1, w1, g1, $
+            init_baran, scatstr.compname[c], baran
+
+            read_baran, baran, 0.55, lutstr.EfR, Bext1, w1, g1, $
                         PTheta * 180. / !pi, Phs1
             Bext550_c[c,*]  = Bext1
             w550_c[c,*]     = w1
@@ -482,8 +484,8 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
                Phs550_c[*, c, r] /= total(Phs550_c[*, c, r] * weights) / 2.
             endfor
 
-            read_baran, scatstr.compname[c], inststr.ChanWl, lutstr.EfR, Bext1, $
-                        w1, g1, PTheta * 180. / !pi, Phs1
+            read_baran, baran, inststr.ChanWl, lutstr.EfR, Bext1, w1, g1, $
+                        PTheta * 180. / !pi, Phs1
             Bext_c[*,c,*]  = Bext1
             w_c[*,c,*]     = w1
             g_c[*,c,*]     = g1
