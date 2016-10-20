@@ -66,7 +66,11 @@ end
 ; DISORT.
 ;
 ; HISTORY:
-; 21/06/13 G Thomas: Original version.
+; 21/06/13, G Thomas: Original version.
+; 19/10/16, G McGarragh: Compress the layer stack by combining layers with
+;    identical values for SSALB and PMOM.  This can lead to a significant speed
+;    increase in some cases like when Rayleigh scattering is the only radiative
+;    component in layers without cloud.
 
 pro call_disort, DTAUC, SSALB, PMOM, UTAU, UMU, PHI, FBEAM, UMU0, FISOT, $
                  RFLDIR, RFLDN, FLUP, DFDT, UAVG, UU, ALBMED, TRNMED, $
@@ -86,17 +90,43 @@ pro call_disort, DTAUC, SSALB, PMOM, UTAU, UMU, PHI, FBEAM, UMU0, FISOT, $
    endelse
 
 ;  Do some array size checks, just to make sure all is as expected
-   if n_elements(dtauc)     ne nlyr1  then stop, 'DTAUC dimension missmatch'
-   if n_elements(ssalb)     ne nlyr1  then stop, 'SSALB dimension missmatch'
-   if n_elements(PMOM[*,0]) ne nmom+1 then stop, 'PMOM dimension 1 missmatch'
-   if n_elements(PMOM[0,*]) ne nlyr1  then stop, 'PMOM dimension 2 missmatch'
-;  if n_elements(TEMPER)    ne nlyr   then stop, 'TEMPER dimension missmatch'
-   if n_elements(utau)      ne ntau   then stop, 'UTAU dimension missmatch'
-   if n_elements(umu)       ne numu   then stop, 'UMU dimension missmatch'
-   if n_elements(phi)       ne nphi   then stop, 'PHI dimension missmatch'
+   if n_elements(DTAUC)     ne NLYR1  then stop, 'DTAUC dimension missmatch'
+   if n_elements(SSALB)     ne NLYR1  then stop, 'SSALB dimension missmatch'
+   if n_elements(PMOM[*,0]) ne NMOM+1 then stop, 'PMOM dimension 1 missmatch'
+   if n_elements(PMOM[0,*]) ne NLYR1  then stop, 'PMOM dimension 2 missmatch'
+;  if n_elements(TEMPER)    ne NLYR   then stop, 'TEMPER dimension missmatch'
+   if n_elements(UTAU)      ne NTAU   then stop, 'UTAU dimension missmatch'
+   if n_elements(UMU)       ne NUMU   then stop, 'UMU dimension missmatch'
+   if n_elements(PHI)       ne NPHI   then stop, 'PHI dimension missmatch'
+
+;  Compress the layer stack by combining layers with identical values fr SSALB
+;  and PMOM
+   MAXCLY1 = NLYR1
+
+   DTAUC1 = fltarr(NLYR1)
+   SSALB1 = fltarr(NLYR1)
+   PMOM1  = fltarr(NMOM+1,NLYR1)
+
+   DTAUC1[0]  = DTAUC[0]
+   SSALB1[0]  = SSALB[0]
+   PMOM1[*,0] = PMOM[*,0]
+   ii = 0
+   for i = 1, NLYR1 - 1 do begin
+      if (SSALB1[ii] eq SSALB[i]) and array_equal(PMOM1[*,ii], PMOM[*,i]) then begin
+           DTAUC1[ii] += DTAUC[i]
+      endif else begin
+           ii += 1
+           DTAUC1[ii] = DTAUC[i]
+           SSALB1[ii] = SSALB[i]
+           PMOM1[*,ii] = PMOM[*,i]
+      endelse
+   endfor
+
+   NLYR1 = ii + 1
 
    TEMPER = fltarr(nlyr)
 
+;  Set thermal related inputs based on whether the plank keyword was set or not
    if keyword_set(plank) then begin
       if (n_elements(wnlo) eq 0) or (n_elements(wnhi) eq 0)  then $
          message, 'Wavenumber must be specified for emission calculations!'
@@ -119,7 +149,8 @@ pro call_disort, DTAUC, SSALB, PMOM, UTAU, UMU, PHI, FBEAM, UMU0, FISOT, $
       TEMIS     = 0.0
    endelse
 
-   DISORT, NLYR1, DTAUC, SSALB, NMOM, PMOM, TEMPER, WVNMLO, WVNMHI, USRTAU, $
+;  Call DISORT
+   DISORT, NLYR1, DTAUC1, SSALB1, NMOM, PMOM1, TEMPER, WVNMLO, WVNMHI, USRTAU, $
            NTAU, UTAU, NSTR, USRANG, NUMU, UMU, NPHI, PHI, IBCND, FBEAM, UMU0, $
            PHI0, FISOT, LAMBER, ALBEDO, BTEMP, TTEMP, TEMIS, PLANK, ONLYFL, $
            ACCUR, PRNT, MAXCLY1, MAXULV, MAXUMU, MAXPHI, MAXMOM, RFLDIR, $
