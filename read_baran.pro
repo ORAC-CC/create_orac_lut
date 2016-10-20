@@ -376,8 +376,8 @@ pro baran_read_and_interp_lw, path, wl, Re, Bext, w, theta, P
                        Bext_Re1, w_Re1, theta, P_Re1
    baran_read_lw_file, path, file_tags[i_wl1], i_Re2, $
                        Bext_Re2, w_Re2, theta, P_Re2
-   g_Re1 = !Values.F_NAN
-   g_Re2 = !Values.F_NAN
+   g_Re1 = 0.
+   g_Re2 = 0.
    baran_combine_props, a_Re, Bext_Re1, w_Re1, g_Re1, P_Re1, $
                               Bext_Re2, w_Re2, g_Re2, P_Re2, $
                               Bext_wl1, w_wl1, g_wl1, P_wl1
@@ -386,8 +386,8 @@ pro baran_read_and_interp_lw, path, wl, Re, Bext, w, theta, P
                        Bext_Re1, w_Re1, theta, P_Re1
    baran_read_lw_file, path, file_tags[i_wl2], i_Re2, $
                        Bext_Re2, w_Re2, theta, P_Re2
-   g_Re1 = !Values.F_NAN
-   g_Re2 = !Values.F_NAN
+   g_Re1 = 0.
+   g_Re2 = 0.
    baran_combine_props, a_Re, Bext_Re1, w_Re1, g_Re1, P_Re1, $
                               Bext_Re2, w_Re2, g_Re2, P_Re2, $
                               Bext_wl2, w_wl2, g_wl2, P_wl2

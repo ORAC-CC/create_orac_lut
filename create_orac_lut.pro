@@ -479,6 +479,12 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
             g550_c[c,*]     = g1
             Phs550_c[*,c,*] = Phs1
 
+            ; The Baran optical property data set for thermal channels does not
+            ; have g in which case it sets g to zero but g is used below *only*
+            ; to distinguish particle layers from layers without particles so we
+            ; set g to a nonzero value if it is zero.
+            g550_c[where(g_c eq 0)] = -999.
+
             ; Normalize
             for r=0,lutstr.NEfR-1 do begin
                Phs550_c[*, c, r] /= total(Phs550_c[*, c, r] * weights) / 2.
@@ -490,6 +496,8 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
             w_c[*,c,*]     = w1
             g_c[*,c,*]     = g1
             Phs_c[*,*,c,*] = Phs1
+
+            g_c[where(g_c eq 0)] = -999.
 
             ; Normalize
             for r=0,lutstr.NEfR-1 do begin
