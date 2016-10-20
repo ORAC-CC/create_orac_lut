@@ -91,9 +91,9 @@
 ; XX/XX/15, G McGarragh: Add support for a gamma distribution as a single mode.
 ;    Useful for liquid water cloud.
 ; XX/XX/15, G McGarragh: Add support for a single mode of ice crystals according
-;    Braun Baum.
+;    Braun Baum et al.
 ; XX/XX/15, G McGarragh: Add support for a single mode of ice crystals according
-;    Anthony Baran.
+;    Anthony Baran et al.
 ; XX/XX/15, G McGarragh: Change Bext output to be that actual Bext and not the
 ;    ratio with that of the reference wavelength.  Put the actual ratio output
 ;    into the BextRat LUT.  Output single scattering albedo into the 'w' LUT,
@@ -371,8 +371,8 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
 ;     The quadrature procedure gives us our phase function angles
       quadrature, 'g', NMom, Abscissas, Weights
 ;     Note that QV = cos(scattering_angle)
-      QV0 =  1.0                    ; theta = 0
-      QV1 = -1.0                    ; theta = 180
+      QV0 =  1.0 ; theta = 0
+      QV1 = -1.0 ; theta = 180
       QV = ((QV1-QV0)*Abscissas + (QV0+QV1)) / 2d0
       PTheta = acos(QV)
 
@@ -728,8 +728,8 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
                  lutstr.NAzi, lutstr.NEfR, inststr.NChan)
    Em   = fltarr(lutstr.NAOD, lutstr.NSat, lutstr.NEfR, inststr.NChan)
 
-   UUd = fltarr(lutstr.NAOD, lutstr.NSat*2, lutstr.NSol, lutstr.NAzi, $
-                lutstr.NEfR, inststr.NChan)
+   UUd  = fltarr(lutstr.NAOD, lutstr.NSat*2, lutstr.NSol, lutstr.NAzi, $
+                 lutstr.NEfR, inststr.NChan)
 
 ;  **** Loop through the channels (and solar zenith angles) and run DISORT for
 ;       the beam and diffuse cases. Also produce the emissivity for the channels

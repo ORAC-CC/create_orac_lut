@@ -14,13 +14,23 @@
 ;    only be read once per session.
 
 
-function baran_Re
-   return, [3.6, 5.5, 13.0, 22.1, 33.6, 35.8, 46.1, 77.4, 92.2]
+function baran_n_Dm
+   return, 24
+end
+
+
+function baran_n_Re
+   return, 9
 end
 
 
 function baran_n_theta
    return, 1801
+end
+
+
+function baran_Re
+   return, [3.6, 5.5, 13.0, 22.1, 33.6, 35.8, 46.1, 77.4, 92.2]
 end
 
 
@@ -49,48 +59,47 @@ end
 pro init_baran, path, baran
 
    n_wl_baran = 54
-   n_Dm_baran = 24
-   n_Re_baran = 9
+   n_Dm_baran = baran_n_Dm()
+   n_Re_baran = baran_n_Re()
 
    n_theta_baran = baran_n_theta()
 
-   part_V  = [1.695980, 26.49968, 211.9975, 981.4697, 2693.153, 5723.932, $
-              13567.84, 32160.80, 62814.06, 138002.5, 336644.1, 715491.4, $
-              1306336., 2693153., 5723931., 1.0450690E+07, 1.7250314E+07, $
-              2.6499678E+07, 4.5791448E+07, 9.5532328E+07, 1.7236178E+08, $
-              3.3664413E+08, 9.8146970E+08, 2.6931530E+09]
+   part_V = [1.695980, 26.49968, 211.9975, 981.4697, 2693.153, 5723.932, $
+             13567.84, 32160.80, 62814.06, 138002.5, 336644.1, 715491.4, $
+             1306336., 2693153., 5723931., 1.0450690E+07, 1.7250314E+07, $
+             2.6499678E+07, 4.5791448E+07, 9.5532328E+07, 1.7236178E+08, $
+             3.3664413E+08, 9.8146970E+08, 2.6931530E+09]
 
-   part_A  = [2.732084, 17.07552, 68.30209, 189.7280, 371.8670, 614.7189, $
-              1092.833, 1942.815, 3035.649, 5130.246, 9296.675, 15367.97, $
-              22957.09, 37186.70, 61471.88, 91828.38, 128256.1, 170755.3, $
-              245887.5, 401464.6, 594987.2, 929667.4, 1897281., 3718670.]
+   part_A = [2.732084, 17.07552, 68.30209, 189.7280, 371.8670, 614.7189, $
+             1092.833, 1942.815, 3035.649, 5130.246, 9296.675, 15367.97, $
+             22957.09, 37186.70, 61471.88, 91828.38, 128256.1, 170755.3, $
+             245887.5, 401464.6, 594987.2, 929667.4, 1897281., 3718670.]
 
    theta1  = fltarr(n_theta_baran)
    theta2  = fltarr(n_theta_baran)
    P1      = fltarr(n_theta_baran)
 
-   part_Cext  = fltarr(n_Dm_baran, n_wl_baran)
-   part_Csca  = fltarr(n_Dm_baran, n_wl_baran)
-   part_w     = fltarr(n_Dm_baran, n_wl_baran)
-   part_g     = fltarr(n_Dm_baran, n_wl_baran)
-   part_theta = fltarr(n_theta_baran, n_Dm_baran, n_wl_baran)
-   part_P     = fltarr(n_theta_baran, n_Dm_baran, n_wl_baran)
+   part_Cext = fltarr(n_Dm_baran, n_wl_baran)
+   part_Csca = fltarr(n_Dm_baran, n_wl_baran)
+   part_w    = fltarr(n_Dm_baran, n_wl_baran)
+   part_g    = fltarr(n_Dm_baran, n_wl_baran)
+   part_P    = fltarr(n_theta_baran, n_Dm_baran, n_wl_baran)
 
-   filename = path + '/' + 'solar' + '/' + 'solar_optical_phase_aggregate.dat'
+   filename = path + '/solar/solar_optical_phase_aggregate.dat'
 
    openr, lun, filename, /get_lun
    skip_lun, lun, 1ul, /lines
 
    flag = 1
-   for j = 0, n_wl_baran - 1 do begin
-      for k = 0, n_Dm_baran - 1 do begin
-         baran_read_sw_opt_phase_agg, lun, j, k, Cext1, Csca1, w1, g1, theta2, P1
+   for i = 0, n_wl_baran - 1 do begin
+      for j = 0, n_Dm_baran - 1 do begin
+         baran_read_sw_opt_phase_agg, lun, i, j, Cext1, Csca1, w1, g1, theta2, P1
 
-         part_Cext[k,j] = Cext1
-         part_Csca[k,j] = Csca1
-         part_w   [k,j] = w1
-         part_g   [k,j] = g1
-         part_P [*,k,j] = P1
+         part_Cext[j,i] = Cext1
+         part_Csca[j,i] = Csca1
+         part_w   [j,i] = w1
+         part_g   [j,i] = g1
+         part_P [*,j,i] = P1
 
          if flag then begin
             flag = 0
@@ -122,8 +131,8 @@ pro init_baran, path, baran
             dist_g   [  i,j] += n_x_Dl[k] * part_g   [  k,j] * part_Csca[k,j]
             dist_P   [*,i,j] += n_x_Dl[k] * part_P   [*,k,j] * part_Csca[k,j]
          endfor
-         dist_g [  i,j] = dist_g[  i,j] / dist_Bsca[i,j]
-         dist_P [*,i,j] = dist_P[*,i,j] / dist_Bsca[i,j]
+         dist_g [  i,j] /= dist_Bsca[i,j]
+         dist_P [*,i,j] /= dist_Bsca[i,j]
       endfor
    endfor
 
@@ -267,12 +276,12 @@ end
 
 pro baran_read_sw_nsized, path, i_dist, Dm, nx, Dl
 
-   filename = path + '/' + 'solar' + '/' + 'nsized' + $
+   filename = path + '/solar/nsized' + $
               string(baran_map_i_9_to_i_30_subset(i_dist), format='(i0)') + '.dat'
 
    openr, lun, filename, /get_lun
 
-   n = 24
+   n = baran_n_Dm()
 
    Dm = fltarr(n)
    nx = fltarr(n)
@@ -290,11 +299,11 @@ pro baran_read_sw_nsized, path, i_dist, Dm, nx, Dl
 end
 
 
-pro baran_skip_sw_opt_phase_agg, lun, i_wl, i_Dm, n_Dms
+pro baran_skip_sw_opt_phase_agg, lun, i_wl, i_Dm
 
    point_lun, lun, 0
 
-   skip_lun, lun, 1ul + (i_wl * n_Dms + i_Dm) * 1808ul, /lines
+   skip_lun, lun, 1ul + (i_wl * baran_n_Dm() + i_Dm) * 1808ul, /lines
 end
 
 
@@ -387,13 +396,13 @@ pro baran_read_and_interp_lw, path, wl, Re, Bext, w, theta, P
                               Bext_wl2, w_wl2, g_wl2, P_wl2, $
                               Bext, w, g, P
 
-   Bext = Bext / 1000.
+   Bext /= 1000.
 end
 
 
 pro baran_read_lw_file, path, tag, i_sd, Bext, w, theta, P
 
-   filename = path + '/' + 'nir' + '/' + 'sbxt_' + tag + '_sd' + $
+   filename = path + '/nir/sbxt_' + tag + '_sd' + $
               string(i_sd+1, format='(i0)') + '.dat'
    openr, lun, filename, /get_lun
    readf, lun, wl, Bext, w, fdelta

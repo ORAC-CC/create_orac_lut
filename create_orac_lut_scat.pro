@@ -131,11 +131,11 @@ pro create_range, Rat, MR, Spd, Radii, Nrat_o, NMR_o, verbose=verbose, $
       g = exp(2.0*alog(Spq)^2)
       f = exp(4.5*alog(Spq)^2)
 
-      if (nunq eq 1)then begin
+      if (nunq eq 1) then begin
          Nrat[*,I] = 1.
          Nmr[*,I]  = Mrq[0]*Radii[I]/Erq[0]
       endif
-      if (nunq eq 2)then begin
+      if (nunq eq 2) then begin
          if (Radii[I] Le Erq[0]) then begin
             Nrat[*,I] = [1., 0]
             Nmr[*,I]  = [Mrq[0]*Radii[I]/Erq[0] , Mrq[1]]
@@ -155,7 +155,7 @@ pro create_range, Rat, MR, Spd, Radii, Nrat_o, NMR_o, verbose=verbose, $
             Nmr[*,I]  = [Mrq[0], Mrq[1] * Radii[I] / Erq[1] ]
          endif
       endif
-      if (nunq eq 3)then begin
+      if (nunq eq 3) then begin
          if (Radii[I] Le Erq[0]) then begin
             Nrat[*,I] = [1.,                      0,      0     ]
             Nmr[*,I]  = [Mrq[0]*Radii[I]/Erq[0] , Mrq[1], Mrq[2]]
@@ -213,7 +213,7 @@ pro create_range, Rat, MR, Spd, Radii, Nrat_o, NMR_o, verbose=verbose, $
                      ', New effective radius: ',strtrim(type_re,2)
          endif
       endif
-      if (nunq eq 4)then begin
+      if (nunq eq 4) then begin
          if (Radii[I] Le Erq[0]) then begin
              Nrat[*,I] = [1., 0.,0.,0.]
              Nmr[*,I]  = [Mrq[0]*Radii[I]/Erq[0] , Mrq[1],Mrq[2], Mrq[3]]

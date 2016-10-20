@@ -60,7 +60,7 @@ pro read_baum_lambda, filename, wl, Re, Bext, w, g, theta, P
 
    extrap = 0
    n_Re_baum = n_elements(Re_baum)
-   if (Re_baum[n_Re_baum - 1] lt Re[n_Re - 1]) then begin
+   if Re_baum[n_Re_baum - 1] lt Re[n_Re - 1] then begin
       extrap = 1
       Re_baum = [Re_baum, Re[n_Re - 1]]
       f_Re_extrap = (Re[n_Re - 1] - Re_baum[n_Re_baum - 2]) / $
@@ -191,7 +191,7 @@ pro read_baum_channel, filename, chans, Re, Bext, w, g, theta, P
 
    extrap = 0
    n_Re_baum = n_elements(Re_baum)
-   if (Re_baum[n_Re_baum - 1] lt Re[n_Re - 1]) then begin
+   if Re_baum[n_Re_baum - 1] lt Re[n_Re - 1] then begin
       extrap = 1
       Re_baum = [Re_baum, Re[n_Re - 1]]
       f_Re_extrap = (Re[n_Re - 1] - Re_baum[n_Re_baum - 2]) / $
