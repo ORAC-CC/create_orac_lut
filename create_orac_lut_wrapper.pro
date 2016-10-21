@@ -176,7 +176,7 @@ pro create_orac_lut_wrapper, driver=driver, in_path=k_in_path, $
                           no_rayleigh=no_rayleigh, no_screen=no_screen, $
                           ntheta=ntheta, reuse_scat=reuse_scat, $
                           scat_only=scat_only, tmatrix_path=tmatrix_path, $
-                          version=version)
+                          version=version, driver=driver)
 
 ;  Check the output status of create_orac_lut
    if stat ne 0 then print,'create_orac_lut failed with code: ', strtrim(stat,2)

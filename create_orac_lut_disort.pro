@@ -107,15 +107,15 @@ pro call_disort, DTAUC, SSALB, PMOM, UTAU, UMU, PHI, FBEAM, UMU0, FISOT, $
    SSALB1 = fltarr(NLYR1)
    PMOM1  = fltarr(NMOM+1,NLYR1)
 
+   ii = 0
    DTAUC1[0]  = DTAUC[0]
    SSALB1[0]  = SSALB[0]
    PMOM1[*,0] = PMOM[*,0]
-   ii = 0
    for i = 1, NLYR1 - 1 do begin
       if (SSALB1[ii] eq SSALB[i]) and array_equal(PMOM1[*,ii], PMOM[*,i]) then begin
            DTAUC1[ii] += DTAUC[i]
       endif else begin
-           ii += 1
+           ii++
            DTAUC1[ii] = DTAUC[i]
            SSALB1[ii] = SSALB[i]
            PMOM1[*,ii] = PMOM[*,i]

@@ -115,6 +115,8 @@
 ;    Baum ice crystal scattering properties must be normalized.
 ; 20/10/16, G McGarragh: Write the svn version and termination timestamp to
 ;    separate files.
+; 21/10/16, G McGarragh: Copy the driver files to the output directory using the
+;    LUT output base name.
 
 
 ; Include the libraries of procedures for reading and writing driver files and
@@ -134,30 +136,35 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
                           no_rayleigh=no_rayleigh, no_screen=no_screen, $
                           NTheta=NTheta, reuse_scat=reuse_scat, $
                           scat_only=scat_only, tmatrix_path=tmatrix_path, $
-                          version=version
+                          version=version, driver=driver
 
 ;  -----------------------------------------------------------------------------
 ;  Test input and output files and directories
 ;  -----------------------------------------------------------------------------
 
    print,'Reading input files...'
+
 ;  Check for the existence of the driver file path and the required files
    ok = file_test(driver_path, /directory, /read, /write)
    if not ok then message, 'Driver_path not found, or is read/write protected'
-;  Expand the miedat path to be absolute: it is assumed that it is passed
-;  relative to the driver_path
-   ok = file_test(miedat, /read)
-   if not ok then message, 'miedat file not readable: '+miedat
-;  Do the same to the lutdat file
-   ok = file_test(lutdat, /read)
-   if not ok then message, 'lutdat file not readable: '+lutdat
-;  And the instrument definition file
+
+;  Instrument definition file
    ok = file_test(instdat, /read)
    if not ok then message, 'instdat file not readable: '+instdat
-;  And the pressure layer file
+
+;  Microphysical definition file
+   ok = file_test(miedat, /read)
+   if not ok then message, 'miedat file not readable: '+miedat
+
+;  LUT grid definition file
+   ok = file_test(lutdat, /read)
+   if not ok then message, 'lutdat file not readable: '+lutdat
+
+;  Pressure profile definition file
    ok = file_test(presdat, /read)
    if not ok then message, 'presdat file not readable: '+presdat
-;  And the gasdat files, if they exist
+
+;  Gas optical depth profile files, if they exist
    ngasdat = n_elements(gasdat)
    if ngasdat gt 0 then begin
       gasdats = driver_path+'/'+gasdat
@@ -166,6 +173,7 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
          if not ok then message, 'gasdat file not readable: '+gasdats[i]
       endfor
    endif
+
 ;  Finally, check that the output directory exists
    ok = file_test(out_path, /directory, /read, /write)
    if not ok then message, 'Out_path not found, or is read/write protected'
@@ -251,6 +259,25 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
 
 ;  Generate the output file name pattern
    lutbase = out_path+'/'+strupcase(inststr.name)+'_'+scatstr.outname
+
+;  Check the size of the channel string needed...
+   Chfmt = '(i0)'
+;  if max(inststr.ChanNum) ge 100 then Chfmt = '(i03)' $
+;  else Chfmt = '(i02)'
+
+
+;  -----------------------------------------------------------------------------
+;  Copy the driver files to the output directory using the LUT output base name.
+;  -----------------------------------------------------------------------------
+   file_copy, driver,  lutbase + '.driver', /overwrite
+   file_copy, instdat, lutbase + '.inst',   /overwrite
+   file_copy, miedat,  lutbase + '.mie',    /overwrite
+   file_copy, lutdat,  lutbase + '.lut',    /overwrite
+   file_copy, presdat, lutbase + '.pres',   /overwrite
+   for i=0,ngasdat-1 do begin
+      ChStrng = 'Ch'+string(inststr.ChanNum[i], format=Chfmt)
+      file_copy, gasdats[i], lutbase + '_' + ChStrng + '.gas', /overwrite
+   endfor
 
 
 ;  -----------------------------------------------------------------------------
@@ -654,11 +681,6 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
 ;  -----------------------------------------------------------------------------
 ;  Output scattering data into ORAC LUTs
 ;  -----------------------------------------------------------------------------
-
-;  Check the size of the channel string needed...
-   Chfmt = '(i0)'
-;  if max(inststr.ChanNum) ge 100 then Chfmt = '(i03)' $
-;  else Chfmt = '(i02)'
 
 ;  Write the Vavg LUT
    lutname = lutbase+verstrng+'_Vavg.sad'

@@ -454,7 +454,7 @@ end
 
 ; procedure read_presdat
 ;
-; Read a meteorological profile definition file.
+; Read a pressure profile definition file.
 ;
 ; The pressure profile driver file simply contains three columns:
 ;    Height (in km, top to bottom of atmosphere)
