@@ -113,6 +113,8 @@
 ;    T-Matrix LUTs was fixed before.
 ; 12/10/16, G McGarragh: The phase functions interpolated from the Baran and
 ;    Baum ice crystal scattering properties must be normalized.
+; 20/10/16, G McGarragh: Write the svn version and termination timestamp to
+;    separate files.
 
 
 ; Include the libraries of procedures for reading and writing driver files and
@@ -137,6 +139,7 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
 ;  -----------------------------------------------------------------------------
 ;  Test input and output files and directories
 ;  -----------------------------------------------------------------------------
+
    print,'Reading input files...'
 ;  Check for the existence of the driver file path and the required files
    ok = file_test(driver_path, /directory, /read, /write)
@@ -327,6 +330,7 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
 ;  Mie or t-matrix or loading 'baum' or 'buran' or ice crystal properties, or by
 ;  reloading properties saved from a previous run.
 ;  -----------------------------------------------------------------------------
+
    if keyword_set(reuse_scat) then begin
 
 ;     **** Read the scattering parameters for the class as a whole for
@@ -1017,6 +1021,19 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
                             logAOD=lutstr.LAOD, logEfR=lutstr.LEfR
       endif
    endfor
+
+
+;  -----------------------------------------------------------------------------
+;  Output svn version and termination timestamp.
+;  -----------------------------------------------------------------------------
+
+   spawn, '; svnversion ' + file_dirname((routine_info('create_orac_lut', $
+          /function, /source)).path) + ' > ' + lutbase + '_svn_version.txt'
+
+   openw, lun, lutbase + '_timestamp.txt', /get_lun
+   printf, lun, strmid(timestamp(/utc), 0, 19) + 'Z'
+   free_lun, lun
+
 
    print,'ORAC LUT generation completed for class '+lutbase+verstrng
 
