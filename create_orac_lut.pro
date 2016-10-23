@@ -267,8 +267,12 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
 
 
 ;  -----------------------------------------------------------------------------
-;  Copy the driver files to the output directory using the LUT output base name.
+;  Output svn version and copy the driver files to the output directory using
+;  the LUT output base name.
 ;  -----------------------------------------------------------------------------
+   spawn, '; svnversion ' + file_dirname((routine_info('create_orac_lut', $
+          /function, /source)).path) + ' > ' + lutbase + '_svn_version.txt'
+
    file_copy, driver,  lutbase + '.driver', /overwrite
    file_copy, instdat, lutbase + '.inst',   /overwrite
    file_copy, miedat,  lutbase + '.mie',    /overwrite
@@ -1046,11 +1050,8 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
 
 
 ;  -----------------------------------------------------------------------------
-;  Output svn version and termination timestamp.
+;  Output termination timestamp.
 ;  -----------------------------------------------------------------------------
-
-   spawn, '; svnversion ' + file_dirname((routine_info('create_orac_lut', $
-          /function, /source)).path) + ' > ' + lutbase + '_svn_version.txt'
 
    openw, lun, lutbase + '_timestamp.txt', /get_lun
    printf, lun, strmid(timestamp(/utc), 0, 19) + 'Z'
