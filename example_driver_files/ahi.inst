@@ -1,7 +1,7 @@
-# AHI/Himawari-8 channel definition for ORAC LUT generation code
+# AHI-Himawari-8 channel definition for ORAC LUT generation code
 # Two header rows are: instrument name and number of channels (in this file)
 # Columns are: channel number, centre wavelength, thermal flag, solar flag
-HI8AHI
+AHI
 16
 01  0.471 0 1
 02  0.510 0 1

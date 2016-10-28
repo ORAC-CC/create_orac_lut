@@ -1,7 +1,7 @@
-# AVHRR/1 channel definition for ORAC LUT generation code
+# AVHRR-1 channel definition for ORAC LUT generation code
 # Two header rows are: instrument name and number of channels (in this file)
 # Columns are: channel number, centre wavelength, thermal flag, solar flag
-AVHRR_1
+AVHRR-1
 4
 01 0.615 0 1
 02 0.862 0 1
