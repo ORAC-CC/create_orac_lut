@@ -285,30 +285,54 @@ pro read_miedat, file, scat
             code = ''
             has_ri = 0      ; Flag for the existence of refractive index
             has_as = 0      ; Flag for the existence of aspect ratio
-            chunks = strsplit(line,' ',/extract)
-            comptype1 = chunks[1]
-            if n_elements(chunks) gt 2 then begin $
-               if strlowcase(comptype1) eq 'user' then begin $
-                  compname1=strjoin(chunks[2:*],' ',/single)
-               endif else begin
-                  compname1=strjoin(chunks[2:2],' ',/single)
-               endelse
-            endif else begin
-               message,'Scattering file components must have at least one ' + $
-                       'field after the component type.'
-            endelse
-            compname21=''
-            if strlowcase(comptype1) eq 'baum' then begin $
-               if n_elements(chunks) eq 4 then begin $
-                  compname21=strjoin(chunks[3:3],' ',/single)
-               endif else begin
-;                 message,"Scattering file component 'baum' must have " + $
-;                         "exactly two fields after the component type."
-               endelse
-            endif else if n_elements(chunks) gt 3 then begin
-               message,"Scattering file component type '" + comptype1 + $
-                       "' requires exactly one field after the component type."
+
+            if n_elements(chunks) eq 1 then begin $
+               message,'Scattering file components must specifiy the component' + $
+                       'type as the second field'
             endif
+            comptype1  = chunks[1]
+
+            case strlowcase(comptype1) of
+               'user': begin
+                  if n_elements(chunks) lt 3 then begin $
+                     message,"Scattering file component type 'user' " + $
+                             "requires a component name as its first+ field."
+                  endif
+                  compname1=strjoin(chunks[2:*],' ',/single)
+               end
+               'opac': begin
+                  if n_elements(chunks) ne 3 then begin $
+                     message,"Scattering file component type 'opac' " + $
+                             "requires an OPAC OptDat file as its first field."
+                  endif
+                  compname1=strjoin(chunks[2:2],' ',/single)
+               end
+               'baran': begin
+                  if n_elements(chunks) ne 3 then begin $
+                     message,"Scattering file component type 'baran' " + $
+                             "requires the path to the directory with the " + $
+                             "optical properties as its first field."
+                  endif
+                  compname1=strjoin(chunks[2:2],' ',/single)
+               end
+               'baum': begin
+                  if n_elements(chunks) ne 3 and n_elements(chunks) ne 4 then begin $
+                     message,"Scattering file component type 'baum' " + $
+                             "requires the path to the generic optical " + $
+                             "properties file as field one optionally " + $
+                             "followed by the path to the imager specific " + $
+                             "file as field 2."
+                  endif
+                  compname1=strjoin(chunks[2:2],' ',/single)
+                  compname21 = ''
+                  if n_elements(chunks) eq 4 then begin $
+                     compname21=strjoin(chunks[3:3],' ',/single)
+                  endif
+               end
+               else: begin
+                  message,'Invalid component type: ' + comptype1
+               end
+            endcase ; End of component data case statement
 
 ;           If the component ID isn't "user" we assume it is an OPAC/GADS
 ;           component and load the data from the database.
@@ -360,7 +384,7 @@ pro read_miedat, file, scat
                         neps[i] = row[1]
                      endfor
                   end
-               endcase ; End of component data case statement
+               endcase ; End of component 'user' data case statement
                if ~eof(lun) then readf,lun,line else break
             endwhile ; End of loop for reading each component
 
