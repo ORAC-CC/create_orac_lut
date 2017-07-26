@@ -447,7 +447,8 @@ pro read_miedat, file, scat
 ;        If we don't recognise the current line, break out of the case
 ;        statement.
          else: begin
-            message,/info, 'Warning: unknown label line found and skipped: ',line
+            message,/info, 'Warning: unknown label line found and skipped: ' + $
+                           line
             readf,lun, line
             break
          end
@@ -583,8 +584,8 @@ pro read_gasdat, files, gasstr
 
       if f eq 0 then gasstr = create_struct(gasstr, 'H', H) $
       else if ~array_equal(H, gasstr.H) then $
-         message, 'Height profile of file '+files[f]+ $
-                  ' is different from '+files[0]
+         message, 'Height profile of file '+files[f]+' is different from ' + $
+                  files[0]
       ChanName = 'C'+string(Chan,format='(i02)')
       Chanstr = {Chan: Chan, Inst: Inst, OPD: OPD}
       gasstr = create_struct(gasstr, ChanName, Chanstr)
