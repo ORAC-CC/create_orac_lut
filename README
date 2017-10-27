@@ -142,10 +142,6 @@ If you would like to report a bug please a include sample case that reproduces
 the bug along with the all the required inputs.
 
 
-Gareth Thomas, 21/06/2013
-Greg McGarragh, 06/09/2016
-
-
 REFERENCES
 ----------
 
@@ -171,9 +167,11 @@ Roy G. Grainger, Jonathan Lucas, Gareth E. Thomas, and Graham B. L. Ewen.
 Calculation of Mie derivatives. Applied Optics, 43(8):5386–5393, October
 2004. doi:10.1364/AO.43.005386.
 
-Gregory R. McGarragh and Others. The Community Cloud Retrieval for Climate
-(CC4CL). Part II: Theory and algorithm. 2016. To be submitted to Atmospheric
-Measurement Techniques.
+Gregory R. McGarragh, Caroline A. Poulsen, Gareth E. Thomas, Adam C. Povey,
+Oliver Sus, Cornelia Schlundt, Stefan Stapelberg, Simon Proud, Matthew W.
+Christensen, Martin Stengel, and Roy G. Grainger. The Community Cloud Retrieval
+for Climate (CC4CL). Part II: The optimal estimation approach. Atmospheric
+Chemistry and Physics, 2017. Submitted.
 
 Knut Stamnes, Si-Chee Tsay, Warren Wiscombe, and Kolf Jayaweera. Numerically
 stable algorithm for discrete-ordinate-method radiative transfer in multiple
