@@ -53,7 +53,7 @@ gcc: FLAGS = -fPIC -Wall # -pedantic
 gcc: OFLAGS = -O0
 gcc: CFLAGS = $(FLAGS) $(OFLAGS) $(INC) $(IDL) $(CPL)
 gcc: FFLAGS = $(FLAGS) $(OFLAGS) $(CPL)
-gcc: LDFLAGS = -shared -lm
+gcc: LDFLAGS = -shared -lm -lgfortran
 
 fujitsu: CC = gcc
 fujitsu: FC = frt
