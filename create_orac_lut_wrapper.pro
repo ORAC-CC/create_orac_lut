@@ -50,12 +50,31 @@
 ;    hander output. Before handling of the error did not indicate which file/
 ;    procedure/line it occurred at. Now the output is the same as that without
 ;    the error handler.
+; 01/03/18, G McGarragh: Add parse_multi_line() (which calls parse_line()) so
+;    string arrays can be put on multiple lines with the continuation operator
+;    '$'.  This is useful for instruments with lots of channels like MODIS.
 
 function parse_line, lun
    line = '#'
-   while (strmid(line,0,1) eq '#') and ~eof(lun) do readf,lun,line
-   if strmid(line,0,1) eq '#' then return, 'null' $
-   else return, (strsplit(line,'#',/extract))[0]
+   while (strmid(line,0,1) eq '#') and ~eof(lun) do begin
+      readf,lun,line
+   endwhile
+   if strmid(line,0,1) eq '#' then begin
+      return, 'null'
+   endif else begin
+      return, (strsplit(line,'#',/extract))[0]
+   endelse
+end
+
+
+function parse_multi_line, lun
+   line = ''
+   line2 = parse_line(lun)
+   while (strpos(line2, '$') ge 0) and ~eof(lun) do begin
+      line = line + (strsplit(line2,'$',/extract))[0]
+      line2 = parse_line(lun)
+   endwhile
+   return, line + line2
 end
 
 
@@ -124,22 +143,22 @@ pro create_orac_lut_wrapper, driver=driver, in_path=k_in_path, $
       out_path = parse_line(lun)
 ;     Now check for keywords
       while ~eof(lun) do begin
-         param = parse_line(lun)
-         words = strsplit(param,'=',/extract)
+         line = parse_multi_line(lun)
+         words = strsplit(line,'=',/extract)
          kw = strsplit(words[0],'/',/extract)
          case strlowcase(kw[0]) of
-            'channels'     : channels        = parse_string_array(words[1])
-            'force_n'      : force_n         = parse_string_array(words[1])
-            'force_k'      : force_k         = parse_string_array(words[1])
-            'gasdat'       : gasdat          = parse_string_array(words[1])
-            'mie'          : mie             = 1
-            'no_rayleigh'  : no_rayleigh     = 1
-            'no_screen'    : no_screen       = 1
-            'ntheta'       : ntheta          = uint(words[1])
-            'scat_only'    : scat_only       = 1
-            'reuse_scat'   : reuse_scat      = 1
-            'tmatrix_path' : tmatrix_path    = parse_string_array(words[1])
-            'version'      : version         = parse_string_array(words[1])
+            'channels'     : channels     = parse_string_array(words[1])
+            'force_n'      : force_n      = parse_string_array(words[1])
+            'force_k'      : force_k      = parse_string_array(words[1])
+            'gasdat'       : gasdat       = parse_string_array(words[1])
+            'mie'          : mie          = 1
+            'no_rayleigh'  : no_rayleigh  = 1
+            'no_screen'    : no_screen    = 1
+            'ntheta'       : ntheta       = uint(words[1])
+            'scat_only'    : scat_only    = 1
+            'reuse_scat'   : reuse_scat   = 1
+            'tmatrix_path' : tmatrix_path = parse_string_array(words[1])
+            'version'      : version      = parse_string_array(words[1])
             'null'         :
             else           : print,'Keyword ',kw[0],' not recognised'
          endcase
