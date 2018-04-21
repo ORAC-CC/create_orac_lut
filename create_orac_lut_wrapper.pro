@@ -23,6 +23,8 @@
 ;    - /no_screen
 ;    - version='20'
 ;
+; ... see the header for function create_orac_lut for the complete list.
+;
 ; See the header for create_orac_lut for a full list of optional parameters.
 ;
 ; INPUT ARGUMENTS:
@@ -53,6 +55,8 @@
 ; 01/03/18, G McGarragh: Add parse_multi_line() (which calls parse_line()) so
 ;    string arrays can be put on multiple lines with the continuation operator
 ;    '$'.  This is useful for instruments with lots of channels like MODIS.
+; 14/04/18, G McGarragh: Add optional inputs n_srf_points and srfdat to support
+;    integration over channel spectral response functions (SRFs).
 
 function parse_line, lun
    line = '#'
@@ -109,9 +113,11 @@ pro create_orac_lut_wrapper, driver=driver, in_path=k_in_path, $
                              force_n=k_force_n, force_k=k_force_k, $
                              gasdat=k_gasdat, mie=k_mie, $
                              no_rayleigh=k_no_rayleigh, $
-                             no_screen=k_no_screen, ntheta=k_ntheta, $
-                             scat_only=k_scat_only, reuse_scat=k_reuse_scat, $
-                             tmatrix_path=k_tmatrix_path, version=k_version
+                             no_screen=k_no_screen, n_theta=k_n_theta, $
+                             n_srf_points=k_n_srf_points, $
+                             reuse_scat=k_reuse_scat, scat_only=k_scat_only, $
+                             srfdat=k_srfdat, tmatrix_path=k_tmatrix_path, $
+                             version=k_version
 
 ;  Set up an error handler
    catch, error_index
@@ -154,9 +160,11 @@ pro create_orac_lut_wrapper, driver=driver, in_path=k_in_path, $
             'mie'          : mie          = 1
             'no_rayleigh'  : no_rayleigh  = 1
             'no_screen'    : no_screen    = 1
-            'ntheta'       : ntheta       = uint(words[1])
-            'scat_only'    : scat_only    = 1
+            'n_srf_points' : n_srf_points = uint(words[1])
+            'n_theta'      : n_theta      = uint(words[1])
             'reuse_scat'   : reuse_scat   = 1
+            'scat_only'    : scat_only    = 1
+            'srfdat'       : srfdat       = parse_string_array(words[1])
             'tmatrix_path' : tmatrix_path = parse_string_array(words[1])
             'version'      : version      = parse_string_array(words[1])
             'null'         :
@@ -182,9 +190,11 @@ pro create_orac_lut_wrapper, driver=driver, in_path=k_in_path, $
    if n_elements(k_mie)          gt 0 then mie=k_mie
    if n_elements(k_no_rayleigh)  gt 0 then no_rayleigh=k_no_rayleigh
    if n_elements(k_no_screen)    gt 0 then no_screen=k_no_screen
-   if n_elements(k_ntheta)       gt 0 then ntheta=k_ntheta
-   if n_elements(k_scat_only)    gt 0 then scat_only=k_scat_only
+   if n_elements(k_n_srf_points) gt 0 then n_srf_points=k_n_srf_points
+   if n_elements(k_n_theta)      gt 0 then n_theta=k_n_theta
    if n_elements(k_reuse_scat)   gt 0 then reuse_scat=k_reuse_scat
+   if n_elements(k_scat_only)    gt 0 then scat_only=k_scat_only
+   if n_elements(k_srfdat)       gt 0 then srfdat=k_srfdat
    if n_elements(k_tmatrix_path) gt 0 then tmatrix_path=k_tmatrix_path
    if n_elements(k_version)      gt 0 then version=k_version
 
@@ -193,8 +203,9 @@ pro create_orac_lut_wrapper, driver=driver, in_path=k_in_path, $
                           out_path, channels=channels, force_n=force_n, $
                           force_k=force_k, gasdat=gasdat, mie=mie, $
                           no_rayleigh=no_rayleigh, no_screen=no_screen, $
-                          ntheta=ntheta, reuse_scat=reuse_scat, $
-                          scat_only=scat_only, tmatrix_path=tmatrix_path, $
+                          n_theta=n_theta, n_srf_points=n_srf_points, $
+                          reuse_scat=reuse_scat, scat_only=scat_only, $
+                          srfdat=srfdat, tmatrix_path=tmatrix_path, $
                           version=version, driver=driver)
 
 ;  Check the output status of create_orac_lut

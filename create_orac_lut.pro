@@ -46,8 +46,10 @@
 ;                      aesthetic reasons): these make a real mess if output is
 ;                      piped to a file. Setting this keyword suppresses these
 ;                      control characters
-; NTheta=integer       Set the number of angles at which to calculate the phase
+; n_theta=integer      Set the number of angles at which to calculate the phase
 ;                      function moments. Defaults to 1000.
+; n_srf_points=integer Set the number of points for the integration across
+;                      spectral response function.
 ; /reuse_scat          Reuse the scattering computations from a previous run
 ;                      stored in the file scatfile.sav created with the IDL
 ;                      save procedure. This file is saved whenever /reuse_scat
@@ -58,6 +60,8 @@
 ;                      file scatfile.sav and the Bext, BextRat, w and g LUTS
 ;                      will be output whereas the reflection, transmission and
 ;                      emission LUTS will not.
+; srfdat=strarr        The files containing the spectral response functions for
+;                      each channel.  Requires option n_srf_points to be set.
 ; tmatrix_path=string  Path to the Dubovik T-Matrix LUT base directory.
 ;                      Required only when T-Matrix calculations are to to be
 ;                      made.
@@ -117,6 +121,8 @@
 ;    separate files.
 ; 21/10/16, G McGarragh: Copy the driver files to the output directory using the
 ;    LUT output base name.
+; 14/04/18, G McGarragh: Add support for integration over channel spectral
+;    response functions (SRFs).
 
 
 ; Include the libraries of procedures for reading and writing driver files and
@@ -134,8 +140,9 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
                           out_path, channels=channels, force_n=force_n, $
                           force_k=force_k, gasdat=gasdat, mie=mie, $
                           no_rayleigh=no_rayleigh, no_screen=no_screen, $
-                          NTheta=NTheta, reuse_scat=reuse_scat, $
-                          scat_only=scat_only, tmatrix_path=tmatrix_path, $
+                          n_theta=n_theta, n_srf_points=n_srf_points, $
+                          reuse_scat=reuse_scat, scat_only=scat_only, $
+                          srfdat=srfdat, tmatrix_path=tmatrix_path, $
                           version=version, driver=driver
 
 ;  -----------------------------------------------------------------------------
@@ -174,6 +181,16 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
       endfor
    endif
 
+;  Channel spectral response functions, if they exist
+   nsrfdat = n_elements(srfdat)
+   if nsrfdat gt 0 then begin
+      srfdats = srfdat
+      for i=0,nsrfdat-1 do begin
+         ok = file_test(srfdats[i], /read)
+         if not ok then message, 'srfdat file not readable: '+srfdats[i]
+      endfor
+   endif
+
 ;  Finally, check that the output directory exists
    ok = file_test(out_path, /directory, /read, /write)
    if not ok then message, 'Out_path not found, or is read/write protected'
@@ -201,13 +218,52 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
          else match[matchch[0]] = 1
       endfor
       matchi = where(match,matchn)
-      inststr = create_struct('name', inststr.name, $
-                              'NChan', matchn, $
+      inststr = create_struct('name',    inststr.name, $
+                              'NChan',   matchn, $
                               'ChanNum', inststr.ChanNum[matchi], $
-                              'ChanWl',  inststr.ChanWl[matchi], $
-                              'ChanEm',  inststr.ChanEm[matchi], $
+                              'ChanWl',  inststr.ChanWl[matchi],  $
+                              'ChanEm',  inststr.ChanEm[matchi],  $
                               'ChanSol', inststr.ChanSol[matchi])
    endif
+
+;  Now set:
+;  NSRF:      Number of SRF integration points
+;  ChanSRFWl: 2-d array (NSRF, matchn) of the wavelengths for each integration
+;             point for each channel
+;  ChanSRF:   2-d array (NSRF, matchn) of the spectral response function values
+;             for each integration point for each channel
+
+;  For the default, when no SRF files are provided, one integration point
+;  (monochomatic) is set.  This will produce results exactly the same as before
+;  this code got SRF support.
+   if nsrfdat eq 0 then begin
+      NSRF = 1
+      ChanSRFWl = reform(inststr.ChanWl, NSRF, matchn)
+      ChanSRF   = replicate(1, 1, matchn)
+;  Now in the case the SRF files are provided but we must check that other
+;  required information is provided.
+   endif else begin
+      if not n_elements(n_srf_points) then begin
+         message, 'Must specify n_srf_points if spectral response files are ' + $
+                  'provided.'
+      endif
+      if n_srf_points mod 2 eq 0 then begin
+         message, 'n_srf_points must be an odd number in order to resolve the ' + $
+                  'central wavelength.'
+      endif
+
+      NSRF = n_srf_points
+      ChanSRFWl = fltarr(NSRF, matchn)
+      ChanSRF   = fltarr(NSRF, matchn)
+      for i=0,matchn-1 do begin
+         read_srfdat, srfdats[i], srfstr
+         ChanWl1 = srfstr.wl[0]
+         ChanWl2 = srfstr.wl[n_elements(srfstr.wl) - 1]
+         ChanSRFWl[*,i] = ChanWl1 + findgen(NSRF) * $
+                          (ChanWl2 - ChanWl1) / (NSRF - 1)
+         ChanSRF  [*,i] = interpol(srfstr.srf, srfstr.wl, ChanSRFWl[*,i])
+      endfor
+   endelse
 
 ;  **** Read the scattering parameters file
    read_miedat, miedat, scatstr
@@ -299,7 +355,7 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
 ;  Interpolate the components refractive index values onto the 0.55 micron
 ;  reference wavelength and the instrument channels.
    AerM550 = complexarr(scatstr.NComp)
-   AerM = complexarr(inststr.NChan, scatstr.NComp)
+   AerM = complexarr(NSRF, inststr.NChan, scatstr.NComp)
 
 ;  Which member of the scatstr structure is the first component with refractive
 ;  index/asymmetry information substructure?
@@ -310,8 +366,8 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
    if scatstr.(scatoffset).code ne '' then begin
       for c=0,scatstr.NComp-1 do begin
          cc = scatoffset + c
-         AerM550[c] = interpol(scatstr.(cc).Cm, scatstr.(cc).wl, 0.55)
-         AerM[*,c]  = interpol(scatstr.(cc).Cm, scatstr.(cc).wl, inststr.ChanWl)
+         AerM550[c]  = interpol(scatstr.(cc).Cm, scatstr.(cc).wl, 0.55)
+         AerM[*,*,c] = interpol(scatstr.(cc).Cm, scatstr.(cc).wl, ChanSRFWl)
       endfor
 
 ;     If the force_n keyword has been specified, replace real RI values with
@@ -327,8 +383,8 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
          for i=0,inststr.NChan-1 do begin
             if force_n[i+1] ne ' ' then begin
                for c=0,scatstr.NComp-1 do begin
-                  AerM[i,c] = AerM[i,c] - complex(float(AerM[i,c]), 0.0) + $
-                              complex(float(force_n[i+1]), 0.0)
+                  AerM[*,i,c] = AerM[*,i,c] - complex(float(AerM[*,i,c]), 0.0) + $
+                                complex(float(force_n[i+1]), 0.0)
                endfor
             endif
          endfor
@@ -347,8 +403,8 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
          for i=0,inststr.NChan-1 do begin
             if force_k[i+1] ne ' ' then begin
                for c=0,scatstr.NComp-1 do begin
-                  AerM[i,c] = AerM[i,c] - complex(0.0,imaginary(AerM[i,c])) + $
-                              complex(0.0,float(force_k[i+1]))
+                  AerM[*,i,c] = AerM[*,i,c] - complex(0.0,imaginary(AerM[*,i,c])) + $
+                                complex(0.0,float(force_k[i+1]))
                endfor
             endif
          endfor
@@ -395,12 +451,12 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
 
 ;     Check if the NMom keyword has been set, if it hasn't we use the default
 ;     value of 1000.
-      if n_elements(NTheta) eq 0 then begin
+      if n_elements(n_theta) eq 0 then begin
          NMom = 1000
 ;        x = 2. * !pi * 240. / .47;
 ;        NMom = fix(2 * (x + 4.05 * x^(1./3.) + 8))
       endif else begin
-         NMom = NTheta
+         NMom = n_theta
       endelse
 
 ;     The quadrature procedure gives us our phase function angles
@@ -424,10 +480,10 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
       Phs550_c  = fltarr(NMom, scatstr.NComp, lutstr.NEfR) ; Phase function
 
       ; At the individual channels
-      Bext_c    = fltarr(inststr.NChan, scatstr.NComp, lutstr.NEfR)
-      w_c       = fltarr(inststr.NChan, scatstr.NComp, lutstr.NEfR)
-      g_c       = fltarr(inststr.NChan, scatstr.NComp, lutstr.NEfR)
-      Phs_c     = fltarr(NMom, inststr.NChan, scatstr.NComp, lutstr.NEfR)
+      Bext_c    = fltarr(NSRF, inststr.NChan, scatstr.NComp, lutstr.NEfR)
+      w_c       = fltarr(NSRF, inststr.NChan, scatstr.NComp, lutstr.NEfR)
+      g_c       = fltarr(NSRF, inststr.NChan, scatstr.NComp, lutstr.NEfR)
+      Phs_c     = fltarr(NMom, NSRF, inststr.NChan, scatstr.NComp, lutstr.NEfR)
 
       for c=0,scatstr.NComp-1 do begin
          if scatstr.comptype[0] eq 'opac' or scatstr.comptype[0] eq 'user' then begin
@@ -443,7 +499,7 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
                calculated = 0
                if r gt 0 then begin
                   if (lut_Rm[c,r] eq lut_Rm[c,r-1]) and $
-                     (Bext_c[0,c,r-1] ne 0) then calculated = 1
+                     (Bext_c[0,0,c,r-1] ne 0) then calculated = 1
                endif
                if calculated then begin
                   Vavg_c[c,r]     = Vavg_c[c,r-1]
@@ -451,10 +507,11 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
                   w550_c[c,r]     = w550_c[c,r-1]
                   g550_c[c,r]     = g550_c[c,r-1]
                   Phs550_c[*,c,r] = Phs550_c[*,c,r-1]
-                  Bext_c[*,c,r]   = Bext_c[*,c,r-1]
-                  w_c[*,c,r]      = w_c[*,c,r-1]
-                  g_c[*,c,r]      = g_c[*,c,r-1]
-                  Phs_c[*,*,c,r]  = Phs_c[*,*,c,r-1]
+
+                  Bext_c[*,*,c,r]  = Bext_c[*,*,c,r-1]
+                  w_c[*,*,c,r]     = w_c[*,*,c,r-1]
+                  g_c[*,*,c,r]     = g_c[*,*,c,r-1]
+                  Phs_c[*,*,*,c,r] = Phs_c[*,*,*,c,r-1]
                endif else begin ; This is a new mode radius, do the calculation
                   if lut_MRat[c,r] gt 0 then begin
                      cc = scatoffset + c
@@ -492,14 +549,14 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
 ;                    parameter) and Phs (phase function) for each instrument
 ;                    channel.
                      create_bwgp, scatstr.distname[c], lut_Rm[c,r], $
-                                  scatstr.S[c], AerM[*,c], inststr.ChanWl, $
+                                  scatstr.S[c], AerM[*,*,c], ChanSRFWl, $
                                   QV, Bext1, w1, g1, Phs1, scode=scode, $
                                   tmatrix_path=tmatrix_path, eps=epsvals, $
                                   neps=nepsvals
-                     Bext_c[*,c,r]  = Bext1
-                     w_c[*,c,r]     = w1
-                     g_c[*,c,r]     = g1
-                     Phs_c[*,*,c,r] = Phs1
+                     Bext_c[*,*,c,r]  = reform(Bext1, NSRF, inststr.NChan)
+                     w_c[*,*,c,r]     = reform(w1,    NSRF, inststr.NChan)
+                     g_c[*,*,c,r]     = reform(g1,    NSRF, inststr.NChan)
+                     Phs_c[*,*,*,c,r] = reform(Phs1,  NMom, NSRF, inststr.NChan)
                   endif
                endelse
             endfor
@@ -525,19 +582,21 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
                Phs550_c[*, c, r] /= total(Phs550_c[*, c, r] * weights) / 2.
             endfor
 
-            read_baran, baran, inststr.ChanWl, lutstr.EfR, Bext1, w1, g1, $
+            read_baran, baran, ChanSRFWl, lutstr.EfR, Bext1, w1, g1, $
                         PTheta * 180. / !pi, Phs1
-            Bext_c[*,c,*]  = Bext1
-            w_c[*,c,*]     = w1
-            g_c[*,c,*]     = g1
-            Phs_c[*,*,c,*] = Phs1
+            Bext_c[*,*,c,*]  = reform(Bext1, NSRF, inststr.NChan, lutstr.NEfR)
+            w_c[*,*,c,*]     = reform(w1,    NSRF, inststr.NChan, lutstr.NEfR)
+            g_c[*,*,c,*]     = reform(g1,    NSRF, inststr.NChan, lutstr.NEfR)
+            Phs_c[*,*,*,c,*] = reform(Phs1,  NMom, NSRF, inststr.NChan, lutstr.NEfR)
 
             g_c[where(g_c eq 0)] = -999.
 
             ; Normalize
             for r=0,lutstr.NEfR-1 do begin
                for l=0,inststr.NChan-1 do begin
-                  Phs_c[*, l, c, r] /= total(Phs_c[*, l, c, r] * weights) / 2.
+                  for m=0,NSRF-1 do begin
+                     Phs_c[*, m, l, c, r] /= total(Phs_c[*, m, l, c, r] * weights) / 2.
+                  endfor
                endfor
             endfor
 
@@ -556,21 +615,23 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
 
             ; Choose between spectral or instrument/channel specific properties
             if scatstr.compname2[c] eq '' then begin
-               read_baum_lambda, scatstr.compname[c], inststr.ChanWl, lutstr.EfR, $
+               read_baum_lambda, scatstr.compname[c], ChanSRFWl, lutstr.EfR, $
                                  Bext1, w1, g1, PTheta * 180. / !pi, Phs1
             endif else begin
                read_baum_channel, scatstr.compname2[c], fix(channels), lutstr.EfR, $
                                   Bext1, w1, g1, PTheta * 180. / !pi, Phs1
             endelse
-            Bext_c[*,c,*]  = Bext1
-            w_c[*,c,*]     = w1
-            g_c[*,c,*]     = g1
-            Phs_c[*,*,c,*] = Phs1
+            Bext_c[*,*,c,*]  = reform(Bext1, NSRF, inststr.NChan, lutstr.NEfR)
+            w_c[*,*,c,*]     = reform(w1,    NSRF, inststr.NChan, lutstr.NEfR)
+            g_c[*,*,c,*]     = reform(g1,    NSRF, inststr.NChan, lutstr.NEfR)
+            Phs_c[*,*,*,c,*] = reform(Phs1,  NMom, NSRF, inststr.NChan, lutstr.NEfR)
 
             ; Normalize
             for r=0,lutstr.NEfR-1 do begin
                for l=0,inststr.NChan-1 do begin
-                  Phs_c[*, l, c, r] /= total(Phs_c[*, l, c, r] * weights) / 2.
+                  for m=0,NSRF-1 do begin
+                     Phs_c[*, m, l, c, r] /= total(Phs_c[*, m, l, c, r] * weights) / 2.
+                  endfor
                endfor
             endfor
          endif
@@ -590,64 +651,66 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
       Vavg    = fltarr(lutstr.NEfR)
 
 ;     At the reference wavelength
-      Bext550 = fltarr(lutstr.NEfR)                      ; Extinction coefficient
-      w550    = fltarr(lutstr.NEfR)                      ; Single scattering albedo
-      g550    = fltarr(lutstr.NEfR)                      ; Asymmetry parameter
-      Phs550  = fltarr(NMom, lutstr.NEfR)                ; Phase function
-      AMom550 = fltarr(NMom, lutstr.NEfR)                ; Legendre moments
+      Bext550 = fltarr(lutstr.NEfR)       ; Extinction coefficient
+      w550    = fltarr(lutstr.NEfR)       ; Single scattering albedo
+      g550    = fltarr(lutstr.NEfR)       ; Asymmetry parameter
+      Phs550  = fltarr(NMom, lutstr.NEfR) ; Phase function
+      AMom550 = fltarr(NMom, lutstr.NEfR) ; Legendre moments
 
 ;     For each channel
-      BextRat = fltarr(inststr.NChan, lutstr.NEfR)       ; Ratio of Bext with that
+      BextRat = fltarr(NSRF, inststr.NChan, lutstr.NEfR) ; Ratio of Bext with that
 ;                                                          at the reference wavelength
-      Bext    = fltarr(inststr.NChan, lutstr.NEfR)       ; Extinction coefficient
-      w       = fltarr(inststr.NChan, lutstr.NEfR)       ; Single scattering albedo
-      g       = fltarr(inststr.NChan, lutstr.NEfR)       ; Asymmetry parameter
-      Phs     = fltarr(NMom, inststr.NChan, lutstr.NEfR) ; Phase function
-      AMom    = fltarr(NMom, inststr.NChan, lutstr.NEfR) ; Legendre moments
+      Bext    = fltarr(NSRF, inststr.NChan, lutstr.NEfR) ; Extinction coefficient
+      w       = fltarr(NSRF, inststr.NChan, lutstr.NEfR) ; Single scattering albedo
+      g       = fltarr(NSRF, inststr.NChan, lutstr.NEfR) ; Asymmetry parameter
+      Phs     = fltarr(NMom, NSRF, inststr.NChan, lutstr.NEfR) ; Phase function
+      AMom    = fltarr(NMom, NSRF, inststr.NChan, lutstr.NEfR) ; Legendre moments
 
       Vavg[*] = Vavg_c[0,*]
 
       for l=0,inststr.NChan-1 do begin
-         for r=0,lutstr.NEfR-1 do begin
-;           Calculate 550 nm extinction coefficient
-            if l eq 0 then begin
+         for m=0,NSRF-1 do begin
+            for r=0,lutstr.NEfR-1 do begin
+;              Calculate 550 nm extinction coefficient
+               if l eq 0 then begin
+;                 Pre-calculate some factors that are used more than once
+                  MratBext   = lut_MRat[*,r] * Bext550_c[*,r]
+                  tMratBext  = total(MratBext)
+                  MratBextw  = MratBext * w550_c[*,r]
+                  tMratBextw = total(MratBextw)
+
+                  Bext550[r] = tMratBext / total(lut_Mrat[*,r])
+                  w550[r]    = tMratBextw / tMratBext
+                  g550[r]    = total(MratBextw * g550_c[*,r]) / tMratBextw
+                  for p=0,NMom-1 do $
+                     Phs550[p,r] = total(MratBextw * Phs550_c[p,*,r]) / tMratBextw
+
+;                 Calculate the Legendre moments for the phase function
+                  legpexp, NMom, QV, weights, Phs550[*,r], Inlc, alc
+                  AMom550[*,r] = alc / (2.0*findgen(NMom)+1.0)
+               endif
+
 ;              Pre-calculate some factors that are used more than once
-               MratBext   = lut_MRat[*,r] * Bext550_c[*,r]
+               MratBext   = lut_MRat[*,r] * Bext_c[m,l,*,r]
                tMratBext  = total(MratBext)
-               MratBextw  = MratBext * w550_c[*,r]
+               MratBextw  = MratBext * w_c[m,l,*,r]
                tMratBextw = total(MratBextw)
 
-               Bext550[r] = tMratBext / total(lut_Mrat[*,r])
-               w550[r]    = tMratBextw / tMratBext
-               g550[r]    = total(MratBextw * g550_c[*,r]) / tMratBextw
+               Bext[m,l,r]  = tMratBext / total(lut_Mrat[*,r])
+               w[m,l,r]     = tMratBextw / tMratBext
+               g[m,l,r]     = total(MratBextw * g_c[m,l,*,r]) / tMratBextw
                for p=0,NMom-1 do $
-                  Phs550[p,r] = total(MratBextw * Phs550_c[p,*,r]) / tMratBextw
+                  Phs[p,m,l,r] = total(MratBextw * Phs_c[p,m,l,*,r]) / tMratBextw
 
 ;              Calculate the Legendre moments for the phase function
-               legpexp, NMom, QV, weights, Phs550[*,r], Inlc, alc
-               AMom550[*,r] = alc / (2.0*findgen(NMom)+1.0)
-            endif
+               legpexp, NMom, QV, weights, Phs[*,m,l,r], Inlc, alc
+               AMom[*,m,l,r] = alc / (2.0*findgen(NMom)+1.0)
 
-;           Pre-calculate some factors that are used more than once
-            MratBext   = lut_MRat[*,r] * Bext_c[l,*,r]
-            tMratBext  = total(MratBext)
-            MratBextw  = MratBext * w_c[l,*,r]
-            tMratBextw = total(MratBextw)
-
-            Bext[l,r]  = tMratBext / total(lut_Mrat[*,r])
-            w[l,r]     = tMratBextw / tMratBext
-            g[l,r]     = total(MratBextw * g_c[l,*,r]) / tMratBextw
-            for p=0,NMom-1 do $
-               Phs[p,l,r]  = total(MratBextw * Phs_c[p,l,*,r]) / tMratBextw
-
-;           Calculate the Legendre moments for the phase function
-            legpexp, NMom, QV, weights, Phs[*,l,r], Inlc, alc
-            AMom[*,l,r] = alc / (2.0*findgen(NMom)+1.0)
-
-;           Calculate the ratio of the extinction coefficient at the current
-;           channel and 0.55 microns, allowing the spectral optical depth to be
-;           calculated from the reference 0.55 micron value.
-            BextRat[l,r] = Bext[l,r]/Bext550[r]
+;              Calculate the ratio of the extinction coefficient at the current
+;              channel and 0.55 microns, allowing the spectral optical depth to be
+;              calculated from the reference 0.55 micron value.
+               BextRat[m,l,r] = Bext[m,l,r]/Bext550[r]
+            endfor
          endfor
       endfor
 
@@ -657,24 +720,24 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
 
 ;  **** Create scattering properties output that can be feed in the RAL LUT
 ;       generation code
-      x = create_struct('Class', scatstr.lutname)
-      tmp1 = fltarr(inststr.NChan+1,lutstr.NEfR)
-      tmp1[0,*] = transpose(Bext550)
-      tmp1[1:*,*] = Bext
-      x = create_struct(x, 'KE', tmp1)
-      tmp1[0,*] = transpose(w550)*transpose(Bext550)
-      tmp1[1:*,*] = w*Bext
-      x = create_struct(x, 'KS', tmp1)
-      tmp1 = fltarr(inststr.NChan+1,lutstr.NEfR,NMom)
-      tmp1[0,*,*] = reform(transpose(AMom550),1,lutstr.NEfR,NMom)
-      tmp1[1:*,*,*] = transpose(AMom,[1,2,0])
-      x = create_struct(x, 'PLM', tmp1)
-      tmp1 = fltarr(inststr.NChan+1,lutstr.NEfR,NMom)
-      tmp1[0,*,*] = reform(transpose(Phs550),1,lutstr.NEfR,NMom)
-      tmp1[1:*,*,*] = transpose(Phs,[1,2,0])
-      x = create_struct(x, 'P', tmp1)
-      x = create_struct(x, 'WLS', [0.55, inststr.ChanWl], 'Re', lutstr.EfR)
-      x = create_struct(x, 'Theta', Ptheta*!radeg)
+;     x = create_struct('Class', scatstr.lutname)
+;     tmp1 = fltarr(inststr.NChan+1,lutstr.NEfR)
+;     tmp1[0,*] = transpose(Bext550)
+;     tmp1[1:*,*] = Bext
+;     x = create_struct(x, 'KE', tmp1)
+;     tmp1[0,*] = transpose(w550)*transpose(Bext550)
+;     tmp1[1:*,*] = w*Bext
+;     x = create_struct(x, 'KS', tmp1)
+;     tmp1 = fltarr(inststr.NChan+1,lutstr.NEfR,NMom)
+;     tmp1[0,*,*] = reform(transpose(AMom550),1,lutstr.NEfR,NMom)
+;     tmp1[1:*,*,*] = transpose(AMom,[1,2,0])
+;     x = create_struct(x, 'PLM', tmp1)
+;     tmp1 = fltarr(inststr.NChan+1,lutstr.NEfR,NMom)
+;     tmp1[0,*,*] = reform(transpose(Phs550),1,lutstr.NEfR,NMom)
+;     tmp1[1:*,*,*] = transpose(Phs,[1,2,0])
+;     x = create_struct(x, 'P', tmp1)
+;     x = create_struct(x, 'WLS', [0.55, inststr.ChanWl], 'Re', lutstr.EfR)
+;     x = create_struct(x, 'Theta', Ptheta*!radeg)
 
 ;     Output this structure using the save procedure
       save, x, filename=out_path+'/'+strupcase(inststr.name)+'_'+ $
@@ -699,13 +762,18 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
    write_orac_lut_2d, lutname, lutstr.AOD, lutstr.EfR, BextRat
 
 ;  The rest of the LUTs are written out per channel
+
+;  We want the center point of the SRF integration which, since the number of
+;  points is odd, will be at the center of the channel's spectral interval.
+   m = NSRF / 2
+
    for l=0,inststr.NChan-1 do begin
       ChStrng = 'Ch'+string(inststr.ChanNum[l], format=Chfmt)
 
 ;     Bext
       lutname = lutbase+'_Bext_'+ChStrng+verstrng+'.sad'
       BextLUT = fltarr(lutstr.NAOD, lutstr.NEfR)
-      for a=0,lutstr.NAOD-1 do BextLUT[a,*] = Bext[l,*]
+      for a=0,lutstr.NAOD-1 do BextLUT[a,*] = Bext[m,l,*]
       write_orac_lut_2d, lutname, lutstr.AOD, lutstr.EfR, BextLUT, $
                          Wl=inststr.ChanWl[l], logAOD=lutstr.LAOD, $
                          logEfR=lutstr.LEfR
@@ -713,14 +781,14 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
 ;     Bext ratio
       lutname = lutbase+'_BextRat_'+ChStrng+verstrng+'.sad'
       BextLUT = fltarr(lutstr.NAOD, lutstr.NEfR)
-      for a=0,lutstr.NAOD-1 do BextLUT[a,*] = BextRat[l,*]
+      for a=0,lutstr.NAOD-1 do BextLUT[a,*] = BextRat[m,l,*]
       write_orac_lut_2d, lutname, lutstr.AOD, lutstr.EfR, BextLUT, $
                          logAOD=lutstr.LAOD, logEfR=lutstr.LEfR
 
 ;     w
       lutname = lutbase+'_w_'+ChStrng+verstrng+'.sad'
       wLUT = fltarr(lutstr.NAOD, lutstr.NEfR)
-      for a=0,lutstr.NAOD-1 do wLUT[a,*] = w[l,*]
+      for a=0,lutstr.NAOD-1 do wLUT[a,*] = w[m,l,*]
       write_orac_lut_2d, lutname, lutstr.AOD, lutstr.EfR, wLUT, $
                          Wl=inststr.ChanWl[l], logAOD=lutstr.LAOD, $
                          logEfR=lutstr.LEfR
@@ -728,7 +796,7 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
 ;     g
       lutname = lutbase+'_g_'+ChStrng+verstrng+'.sad'
       gLUT = fltarr(lutstr.NAOD, lutstr.NEfR)
-      for a=0,lutstr.NAOD-1 do gLUT[a,*] = g[l,*]
+      for a=0,lutstr.NAOD-1 do gLUT[a,*] = g[m,l,*]
       write_orac_lut_2d, lutname, lutstr.AOD, lutstr.EfR, gLUT, $
                          Wl=inststr.ChanWl[l], logAOD=lutstr.LAOD, $
                          logEfR=lutstr.LEfR
@@ -784,210 +852,237 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
 
    store_tau = fltarr(lutstr.NEfR, lutstr.NAOD, inststr.NChan)
 
-   for l=0,inststr.NChan-1 do begin ; Loop around the channels
-      print,'Running DISORT for channel '+strtrim(inststr.ChanNum[l],2)+ $
-            ' (',strtrim(inststr.ChanWl[l],2),'um)'
+   for l=0,inststr.NChan-1 do begin
 
-;     Do we have a Gas optical depth profile for the current channel?
-      if n_elements(gasdat) gt 0 then begin
-         GasIndx = where(tag_names(gasstr) eq $
-                         'C'+string(inststr.Channum[l],format='(I02)'))
-         GasIndx = GasIndx[0]
-      endif else GasIndx = -1
-;     If we don't have gas OPD for this channel,then use zeros (i.e. no gas
-;     absorption). Remember that the gas OPD is defined on the levels between
-;     each atmospheric layer, not on the layers themselves.
-      if GasIndx lt 0 then begin
-         print, '  No gas optical depth profile. Assuming Rayleigh scattering only.'
-         GasLvl = replicate(0.0,presstr.NLevels)
-      endif else GasLvl = gasstr.(GasIndx).OPD
+      for m=0,NSRF-1 do begin
+         print,'Running DISORT for channel '+strtrim(inststr.ChanNum[l],2)+ $
+               ' (',strtrim(inststr.ChanWl[l],2),'um)'
 
-;     Calculate the cumulative Rayleigh optical depth at each level
-      RayLvl = ColumnTauRay[l]*exp(-0.1188*presstr.H - 0.00116*presstr.H^2)
+;        Do we have a Gas optical depth profile for the current channel?
+         if n_elements(gasdat) gt 0 then begin
+            GasIndx = where(tag_names(gasstr) eq $
+                            'C'+string(inststr.Channum[l],format='(I02)'))
+            GasIndx = GasIndx[0]
+         endif else GasIndx = -1
+;        If we don't have gas OPD for this channel,then use zeros (i.e. no gas
+;        absorption). Remember that the gas OPD is defined on the levels between
+;        each atmospheric layer, not on the layers themselves.
+         if GasIndx lt 0 then begin
+            print, 'No gas optical depth profile. Assuming Rayleigh scattering only.'
+            GasLvl = replicate(0.0,presstr.NLevels)
+         endif else GasLvl = gasstr.(GasIndx).OPD
 
-;     The optical depths of each layer from gas absorption and Rayleigh
-;     scattering are defined as the difference between the optical depth at
-;     the adjacent levels.
-      TauGas = GasLvl[lindgen(NLayers)+1] - GasLvl[lindgen(NLayers)]
-      TauRay = RayLvl[lindgen(NLayers)+1] - RayLvl[lindgen(NLayers)]
+;        Calculate the cumulative Rayleigh optical depth at each level
+         RayLvl = ColumnTauRay[l]*exp(-0.1188*presstr.H - 0.00116*presstr.H^2)
 
-      for a=0,lutstr.NAOD-1 do begin
+;        The optical depths of each layer from gas absorption and Rayleigh
+;        scattering are defined as the difference between the optical depth at
+;        the adjacent levels.
+         TauGas = GasLvl[lindgen(NLayers)+1] - GasLvl[lindgen(NLayers)]
+         TauRay = RayLvl[lindgen(NLayers)+1] - RayLvl[lindgen(NLayers)]
 
-         for r=0,lutstr.NEfR-1 do begin
-;           The optical depth from Aerosol is the desired total AODs for the
-;           ORAC LUT * the relative AOD at each layer for this class * the
-;           scaling factor relating AOD at this wavelength back to 550 nm.
-            TauAer = lutstr.AOD[a] * AerRelTau * BextRat[l,r]
-;           The optical depths are additive
-            DTau = TauGas + TauRay + TauAer
-            TotalTau = total(DTau)
+         for a=0,lutstr.NAOD-1 do begin
 
-            store_tau[r,a,l] = TotalTau
+            for r=0,lutstr.NEfR-1 do begin
+;              The optical depth from Aerosol is the desired total AODs for the
+;              ORAC LUT * the relative AOD at each layer for this class * the
+;              scaling factor relating AOD at this wavelength back to 550 nm.
+               TauAer = lutstr.AOD[a] * AerRelTau * BextRat[m,l,r]
+;              The optical depths are additive
+               DTau = TauGas + TauRay + TauAer
+               TotalTau = total(DTau)
 
-;           The single scattering albedo is weighted by optical depth.
-;           NB. SSA for Rayleigh scattering = 1, and is effectively 0 for
-;           gas absorption.
-            SSALB = (TauRay + w[l,r]*TauAer) / DTau
-;           Now check that we have no SSALB values over 1.0 (this can happen in
-;           layers with no absorption due to rounding). DISORT has an internal
-;           check for this and will exit with an error code if it fails.
-            bd = where(SSALB gt 1.0)
-            if bd[0] ge 0 then SSALB[bd] = 1.0;0.999999
+               store_tau[r,a,l] = TotalTau
 
-;           Asymmetry parameter is only non-zero where we actually have aerosol
-            ASYM = fltarr(NLayers)
-            nonzero = where(TauAer gt 0.0)
-            if nonzero[0] ge 0 then ASYM[nonzero] = g[l,r]
+;              The single scattering albedo is weighted by optical depth.
+;              NB. SSA for Rayleigh scattering = 1, and is effectively 0 for
+;              gas absorption.
+               SSALB = (TauRay + w[m,l,r]*TauAer) / DTau
+;              Now check that we have no SSALB values over 1.0 (this can happen in
+;              layers with no absorption due to rounding). DISORT has an internal
+;              check for this and will exit with an error code if it fails.
+               bd = where(SSALB gt 1.0)
+               if bd[0] ge 0 then SSALB[bd] = 1.0;0.999999
 
-;           Now, use the GETMOM procedure (part of DISORT) to generate phase
-;           function moments for the molecular scattering and then combine with
-;           the aerosol moments generated earlier.
-            PMom = fltarr(NMom, NLayers)
-            for h=0,NLayers-1 do begin
-               if ASYM[h] eq 0.0 then GETMOM, 2, 0.0, NMom-1, PM $
-               else begin
-                  GETMOM, 2, 0.0, NMom-1, mPM
-                  PM = (mPM*TauRay[h] + AMom[*,l,r]*w[l,r]*TauAer[h]) / $
-                       (TauRay[h] + w[l,r]*TauAer[h])
-               endelse
-               bd = where(PM gt 1.0)
-               if bd[0] ge 0 then PM[bd] = 1.0
-               PMom[*,h] = PM
-            endfor
+;              Asymmetry parameter is only non-zero where we actually have aerosol
+               ASYM = fltarr(NLayers)
+               nonzero = where(TauAer gt 0.0)
+               if nonzero[0] ge 0 then ASYM[nonzero] = g[m,l,r]
 
-;           We are now ready to call DISORT. Call the fast diffuse calculation
-;           first (errors and problems are more likely to turn up quickly that
-;           way).
-
-            print, 'Doing RT calculation for' + $
-                   ' Channel: ' + string(inststr.ChanNum[l], $
-                   inststr.ChanWl[l],format='(i3," (",f7.4,"um)")') + $
-                   ', AOD: ' + string(lutstr.AOD[a],format='(e14.6)') + $
-                   ', EfR: ' + string(lutstr.EfR[r],format='(f8.4)')
-            print, ''
-
-            print, '---------- DIFFUSE -----------'
-            FBeam =   0.0            ; Direct beam intensity
-            FIsot = 100.0            ; Isotropic illumination intensity
-            UMu0  =  cos(50.0*!dtor) ; A nominal value for beam zenith
-            UTau  = [0.0, TotalTau]  ; Define output layers (in terms of optical
-                                     ; depth)
-;           UMu is calculated to described downwelling as well as upwelling
-;           radiance, as we also need the downwelling values
-            UMu = fltarr(2*lutstr.NSat)
-;           If 90 degrees is included in the list of satellite zeniths, take a
-;           small angle off of it for the DISORT calculations in order to avoid
-;           numerical problems.
-            tmpSat = lutstr.Sat
-            bd = where(tmpSat eq 90.0)
-            if bd[0] ge 0 then tmpSat[bd] = 89.99
-            UMu[0:lutstr.NSat-1] = -1.0* cos(tmpSat*!dtor)
-            UMu[lutstr.NSat:2*lutstr.NSat-1] = $
-               -1.0*UMu[lutstr.NSat-lindgen(lutstr.NSat)-1]
-;           DISORT will spit the dummy if there if abs(UMu)=1
-            bd = where(abs(UMu) eq 1.0)
-            if bd[0] ge 0 then UMu[bd] = 0.99999 * UMu[bd]/abs(UMu[bd])
-
-            call_disort, DTau, SSAlb, PMom, UTau, UMu, lutstr.Azi, $
-                         FBeam, UMu0, FISot, RFlDir, RFlDn, FlUp, $
-                         dFdT, UAvg, UU, AlbMed, TrnMed
-
-;           Generate the diffuse LUT variables
-            RFD[a,r,l] = 100. * FlUp[0] / (FIsot*!pi)
-            TFD[a,r,l] = 100. * RFlDn[1] / (FIsot*!pi)
-;           RD contains the Upwelling intensity
-            RD[a,*,r,l] = UU[2*lutstr.NSat-lindgen(lutstr.NSat)-1,0,0]
-;           TD contains the Downwelling intenisity
-            TD[a,*,r,l] = UU[lindgen(lutstr.NSat),1,0]
-
-            print, ''
-
-;           If the channel has the emission flag set, calculate the
-;           emissivity.
-            if inststr.ChanEm[l] then begin
-               print, '---------- EMISSION ----------'
-;              Elisa's expression for emissivity....
-;              Em[a,*,r,l]  = 100.0*(1.0 - w(l,r)) * $
-;                             (1.0 - exp(TotalTau*(-1.0/cos(lutstr.Sat*!dtor))))
-
-;             Use DISORT - I can't seem to get this to work correctly. For this
-;             we set both beam and diffuse input irradiances to zero and
-;             calculate emission across the window 1% of the nominal wavenumber
-;             (cm-1). Everything else is the same as diffuse calculations.
-              FBeam   = 0.0 ; Direct beam intensity
-              FIsot   = 0.0 ; Isotropic illumination intensity
-              wn      = 1e4 / inststr.ChanWl[l]
-              wnlo    = 0.995*wn
-              wnhi    = 1.005*wn
-              temp    = 250.0
-              incloud = where(TauAer gt 0.0,emnly)
-              emTau   = DTau[incloud]
-              emSSA   = SSAlb[incloud]
-              emPMo   = PMom[*,incloud]
-              emUTau  = [0.0, total(emTau)]
-
-              call_disort, emTau, emSSA, emPMo, emUTau, UMu, lutstr.Azi, $
-                           FBeam, UMu0, FISot, RFlDir, RFlDn, FlUp, dFdT, $
-                           UAvg, UU, AlbMed, TrnMed, /plank, wnlo=wnlo, $
-                           wnhi=wnhi, temp=temp, nlayer=emnly
-
-;              Now we calculate the Plank emission across the wavelength
-;              interval.
-               BBE = PLKAVG(wnlo, wnhi, temp)
-
-;              Finally, combine to produce the emissivity
-               Em[a,*,r,l] = 100.0 * $
-                             UU[2*lutstr.NSat-lindgen(lutstr.NSat)-1,0,0]/BBE
-
-               print, ''
-            endif
-
-;           Now we loop over the solar zenith angles and do the direct beam
-;           calculations. Note that this only needs to be done for channels with
-;           a solar component to their signal.
-            if inststr.ChanSol[l] then begin
-               print, '---------- DIRECT ----------'
-               for s=0,lutstr.NSol-1 do begin
-;                 print, 'SZA: ', lutstr.Sol[s]
-
-                  FBeam = 100.0 ; Direct beam intensity
-                  FIsot =   0.0 ; Isotropic illumination intensity
-
-;                 If a solar zenith angle of 90 degrees has been requested,
-;                 alter it to something slightly smaller to prevent DISORT from
-;                 crashing.
-                  if lutstr.Sol[s] eq 90.0 then tmpSol = 89.99 $
-                  else tmpSol = lutstr.Sol[s]
-                  UMu0  = cos(tmpSol*!dtor)
-
-                  call_disort, DTau, SSAlb, PMom, UTau, UMu, lutstr.Azi, $
-                               FBeam, UMu0, FISot, RFlDir, RFlDn, FlUp, $
-                               dFdT, UAvg, UU, AlbMed, TrnMed
-
-;                 Generate the direct beam LUT variables
-                  TB[a,s,r,l]   = 100. * RFlDir[1] / RFlDir[0]
-                  RFBD[a,s,r,l] = 100. * FlUp[0] / RFlDir[0]
-                  TFBD[a,s,r,l] = 100. * RFlDn[1] / RFlDir[0]
-                  for p=0,lutstr.NAzi-1 do begin
-;                    Bug investigation.... is relative azimuth backwards?
-;                    p2 = lutstr.NAzi - p - 1
-                     p2 = p
-;                    As with the diffuse case, RBD contains the upwelling
-;                    intensity, while TBD contains the downwelling.
-                     RBD[a,*,s,p2,r,l] = $
-                        UU[2*lutstr.NSat-lindgen(lutstr.NSat)-1,0,p] * !pi
-                     TBD[a,*,s,p2,r,l] = UU[lindgen(lutstr.NSat),1,p] * !pi
-                     UUd[a,*,s,p2,r,l] = UU[*,0,p]
-                  endfor
+;              Now, use the GETMOM procedure (part of DISORT) to generate phase
+;              function moments for the molecular scattering and then combine with
+;              the aerosol moments generated earlier.
+               PMom = fltarr(NMom, NLayers)
+               for h=0,NLayers-1 do begin
+                  if ASYM[h] eq 0.0 then GETMOM, 2, 0.0, NMom-1, PM $
+                  else begin
+                     GETMOM, 2, 0.0, NMom-1, mPM
+                     PM = (mPM*TauRay[h] + AMom[*,m,l,r]*w[m,l,r]*TauAer[h]) / $
+                          (TauRay[h] + w[m,l,r]*TauAer[h])
+                  endelse
+                  bd = where(PM gt 1.0)
+                  if bd[0] ge 0 then PM[bd] = 1.0
+                  PMom[*,h] = PM
                endfor
 
-               print, ''
-            endif
-         endfor ; End of EfR loop
-      endfor ; End of AOD loop
-      print,''
+;              We are now ready to call DISORT. Call the fast diffuse calculation
+;              first (errors and problems are more likely to turn up quickly that
+;              way).
 
+               print, 'Doing RT calculation for' + $
+                      ' Channel: ' + string(inststr.ChanNum[l], $
+                      inststr.ChanWl[l],format='(i3," (",f7.4,"um)")') + $
+                      ', Point: ' + string(m,format='(i4)') + $
+                      ', AOD: ' + string(lutstr.AOD[a],format='(e14.6)') + $
+                      ', EfR: ' + string(lutstr.EfR[r],format='(f8.4)')
+               print, ''
+
+               print, '---------- DIFFUSE -----------'
+               FBeam =   0.0           ; Direct beam intensity
+               FIsot = 100.0           ; Isotropic illumination intensity
+               UMu0  = cos(50.0*!dtor) ; A nominal value for beam zenith
+               UTau  = [0.0, TotalTau] ; Define output layers (in terms of optical
+                                       ; depth)
+;              UMu is calculated to described downwelling as well as upwelling
+;              radiance, as we also need the downwelling values
+               UMu = fltarr(2*lutstr.NSat)
+;              If 90 degrees is included in the list of satellite zeniths, take a
+;              small angle off of it for the DISORT calculations in order to avoid
+;              numerical problems.
+               tmpSat = lutstr.Sat
+               bd = where(tmpSat eq 90.0)
+               if bd[0] ge 0 then tmpSat[bd] = 89.99
+               UMu[0:lutstr.NSat-1] = -1.0* cos(tmpSat*!dtor)
+               UMu[lutstr.NSat:2*lutstr.NSat-1] = $
+                  -1.0*UMu[lutstr.NSat-lindgen(lutstr.NSat)-1]
+;              DISORT will spit the dummy if there if abs(UMu)=1
+               bd = where(abs(UMu) eq 1.0)
+               if bd[0] ge 0 then UMu[bd] = 0.99999 * UMu[bd]/abs(UMu[bd])
+
+               call_disort, DTau, SSAlb, PMom, UTau, UMu, lutstr.Azi, $
+                            FBeam, UMu0, FISot, RFlDir, RFlDn, FlUp, $
+                            dFdT, UAvg, UU, AlbMed, TrnMed
+
+;              Generate the diffuse LUT variables
+               RFD[a,r,l] += (100. * FlUp[0]  / (FIsot*!pi)) * ChanSRF[m,l]
+               TFD[a,r,l] += (100. * RFlDn[1] / (FIsot*!pi)) * ChanSRF[m,l]
+;              RD contains the Upwelling intensity
+               RD[a,*,r,l] += $
+                 (UU[2*lutstr.NSat-lindgen(lutstr.NSat)-1,0,0]) * ChanSRF[m,l]
+;              TD contains the Downwelling intenisity
+               TD[a,*,r,l] += $
+                 (UU[              lindgen(lutstr.NSat),  1,0]) * ChanSRF[m,l]
+
+               print, ''
+
+;              If the channel has the emission flag set, calculate the
+;              emissivity.
+               if inststr.ChanEm[l] then begin
+                  print, '---------- EMISSION ----------'
+;                 Elisa's expression for emissivity....
+;                 Em[a,*,r,l]  = 100.0*(1.0 - w(l,r)) * $
+;                                (1.0 - exp(TotalTau*(-1.0/cos(lutstr.Sat*!dtor))))
+
+;                 Use DISORT - I can't seem to get this to work correctly. For
+;                 this we set both beam and diffuse input irradiances to zero
+;                 and calculate emission across the window 1% of the nominal
+;                 wavenumber (cm-1). Everything else is the same as diffuse
+;                 calculations.
+                  FBeam   = 0.0 ; Direct beam intensity
+                  FIsot   = 0.0 ; Isotropic illumination intensity
+                  wn      = 1e4 / inststr.ChanWl[l]
+                  wnlo    = 0.995*wn
+                  wnhi    = 1.005*wn
+                  temp    = 250.0
+                  incloud = where(TauAer gt 0.0,emnly)
+                  emTau   = DTau[incloud]
+                  emSSA   = SSAlb[incloud]
+                  emPMo   = PMom[*,incloud]
+                  emUTau  = [0.0, total(emTau)]
+
+                  call_disort, emTau, emSSA, emPMo, emUTau, UMu, lutstr.Azi, $
+                               FBeam, UMu0, FISot, RFlDir, RFlDn, FlUp, dFdT, $
+                               UAvg, UU, AlbMed, TrnMed, /plank, wnlo=wnlo, $
+                               wnhi=wnhi, temp=temp, nlayer=emnly
+
+;                 Now we calculate the Plank emission across the wavelength
+;                 interval.
+                  BBE = PLKAVG(wnlo, wnhi, temp)
+
+;                 Finally, combine to produce the emissivity
+                  Em[a,*,r,l] += (100.0 * $
+                     UU[2*lutstr.NSat-lindgen(lutstr.NSat)-1,0,0]/BBE) * ChanSRF[m,l]
+
+                  print, ''
+               endif
+
+;              Now we loop over the solar zenith angles and do the direct beam
+;              calculations. Note that this only needs to be done for channels with
+;              a solar component to their signal.
+               if inststr.ChanSol[l] then begin
+                  print, '---------- DIRECT ----------'
+                  for s=0,lutstr.NSol-1 do begin
+;                    print, 'SZA: ', lutstr.Sol[s]
+
+                     FBeam = 100.0 ; Direct beam intensity
+                     FIsot =   0.0 ; Isotropic illumination intensity
+
+;                    If a solar zenith angle of 90 degrees has been requested,
+;                    alter it to something slightly smaller to prevent DISORT from
+;                    crashing.
+                     if lutstr.Sol[s] eq 90.0 then tmpSol = 89.99 $
+                     else tmpSol = lutstr.Sol[s]
+                     UMu0  = cos(tmpSol*!dtor)
+
+                     call_disort, DTau, SSAlb, PMom, UTau, UMu, lutstr.Azi, $
+                                  FBeam, UMu0, FISot, RFlDir, RFlDn, FlUp, $
+                                  dFdT, UAvg, UU, AlbMed, TrnMed
+
+;                    Generate the direct beam LUT variables
+                     TB[a,s,r,l]   += (100. * RFlDir[1] / RFlDir[0]) * ChanSRF[m,l]
+                     RFBD[a,s,r,l] += (100. * FlUp[0]   / RFlDir[0]) * ChanSRF[m,l]
+                     TFBD[a,s,r,l] += (100. * RFlDn[1]  / RFlDir[0]) * ChanSRF[m,l]
+                     for p=0,lutstr.NAzi-1 do begin
+;                       Bug investigation.... is relative azimuth backwards?
+;                       p2 = lutstr.NAzi - p - 1
+                        p2 = p
+;                       As with the diffuse case, RBD contains the upwelling
+;                       intensity, while TBD contains the downwelling.
+                        RBD[a,*,s,p2,r,l] += $
+                           (UU[2*lutstr.NSat-lindgen(lutstr.NSat)-1,0,p] * !pi) * $
+                           ChanSRF[m,l]
+                        TBD[a,*,s,p2,r,l] += $
+                           (UU[              lindgen(lutstr.NSat),  1,p] * !pi) * $
+                           ChanSRF[m,l]
+                        UUd[a,*,s,p2,r,l] = UU[*,0,p]
+                     endfor
+                  endfor
+
+                  print, ''
+               endif
+            endfor ; End of EfR loop
+         endfor ; End of AOD loop
+         print,''
+      endfor ; End of SRF loop
    endfor ; End of channel loop
+
+   ; Normalize the RT operators wrt to the SRF.  Note 'sum' will be unity in
+   ; monochomatic mode (when no SRFs were provided).
+   for l=0,inststr.NChan-1 do begin
+      sum = total(ChanSRF[*,l])
+
+      RFD [*,*,l]       /= sum
+      TFD [*,*,l]       /= sum
+      RD  [*,*,*,l]     /= sum
+      TD  [*,*,*,l]     /= sum
+      TB  [*,*,*,l]     /= sum
+      RFBD[*,*,*,l]     /= sum
+      TFBD[*,*,*,l]     /= sum
+      RBD [*,*,*,*,*,l] /= sum
+      TBD [*,*,*,*,*,l] /= sum
+      Em  [*,*,*,l]     /= sum
+   endfor
+
 
 ;  save,/variables,filename='debug.sav',/compress
 

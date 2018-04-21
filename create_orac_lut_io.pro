@@ -545,6 +545,7 @@ end
 ; None
 ;
 ; OUTPUT ARGUMENTS:
+; gasstr (structure) Structure with gas optical depth profile information.
 ;
 ; HISTORY:
 ; 21/06/13, G Thomas: Original version.
@@ -590,6 +591,46 @@ pro read_gasdat, files, gasstr
       Chanstr = {Chan: Chan, Inst: Inst, OPD: OPD}
       gasstr = create_struct(gasstr, ChanName, Chanstr)
    endfor
+end
+
+
+; procedure read_srfdat
+;
+; Read a channel spectral response function file.
+;
+; Following optional comment lines (starting with '#') this is a file with two
+; columns: wavelength in microns and a relative spectral response as a function
+; of wavelength.
+;
+; INPUT ARGUMENTS:
+; file (string) Path to file.
+;
+; INPUT KEYWORDS:
+; None
+;
+; OUTPUT ARGUMENTS:
+; srfstr (structure) Structure with spectral response function information.
+;
+; HISTORY:
+; 14/04/18, G McGarragh: Original version.
+
+pro read_srfdat, file, srfstr
+
+   line = ''
+   openr, lun, file, /get_lun
+   readf, lun, line
+;  while strmid(line,0,1) eq '#' do readf, lun, line
+   row = fltarr(2)
+   readf, lun, row
+   wl  = row[0]
+   srf = row[1]
+   while ~EOF(lun) do begin
+      readf, lun, row
+      wl  = [wl, row[0]]
+      srf = [srf,row[1]]
+   endwhile
+   free_lun, lun
+   srfstr= { NWls: n_elements(wl), wl: wl, srf: srf }
 end
 
 
@@ -727,4 +768,3 @@ pro write_orac_lut_5d, lutfile, OPD, Sat, Sol, Azi, EfR, Data, Wl=Wl, $
    endif
    free_lun, lun
 end ; write_orac_lut_5d
-
