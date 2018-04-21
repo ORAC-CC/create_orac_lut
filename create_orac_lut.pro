@@ -123,6 +123,7 @@
 ;    LUT output base name.
 ; 14/04/18, G McGarragh: Add support for integration over channel spectral
 ;    response functions (SRFs).
+; 21/04/18, G McGarragh: Change revision output from svn to git.
 
 
 ; Include the libraries of procedures for reading and writing driver files and
@@ -323,11 +324,12 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
 
 
 ;  -----------------------------------------------------------------------------
-;  Output svn version and copy the driver files to the output directory using
+;  Output git revision and copy the driver files to the output directory using
 ;  the LUT output base name.
 ;  -----------------------------------------------------------------------------
-   spawn, '; svnversion ' + file_dirname((routine_info('create_orac_lut', $
-          /function, /source)).path) + ' > ' + lutbase + '_svn_version.txt'
+   spawn, '; git --git-dir=' + file_dirname((routine_info('create_orac_lut', $
+          /function, /source)).path) + '/.git rev-parse HEAD > ' + lutbase + $
+          '_git_revision.txt'
 
    file_copy, driver,  lutbase + '.driver', /overwrite
    file_copy, instdat, lutbase + '.inst',   /overwrite
