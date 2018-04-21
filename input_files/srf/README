@@ -1,0 +1,38 @@
+OVERVIEW
+--------
+
+This directory contains relative spectral response functions (SRFs) for each supported instrument.
+
+The .org directories contain the SRF information that I obtained from the source.  Each .org directory contains a README file with the source of the SRF data.
+
+Non-.org directories contain the SRFs preprocessed for use with the code - two columns: wavelength in microns and relative response.  This step is necessary due to differing formats, wavelength units, etc from each source. 
+
+preproc.py is the general SRF preprocessor.
+
+preproc_modis.py is one specifically for MODIS.
+
+seviri/preproc.py is one specifically for SEVIRI.
+
+I am sure these could be combined but I was not worried about engineering a general code as preprocessing will not have to be done often.  They are just very simple python scripts.
+
+Each non-.org directory contains a file called 'doit' that has the commands I executed to produce the preprocessed SRFs.
+
+All of these SRF's are preprocessed to include a relative response above 0.01.   This is necessary as some SRFs have long insignificant response tails and the LUT code integrates across a user defined number of points.  The code runtime is scaled by the number of points so one wants to minimize the number of points while still resolving features in the SRFs.  Including the tails would require an unnecessary number of points.
+
+
+MISSING SRFs
+------------
+
+The SRFs for AVHRR-NOAA15 bands 3B, 4, and 5 were missing at the source.  For these we created two point SRFs ranging over the channel spectral interval specification for AVHRR-3 and set the response to unity.
+
+
+MULTIPLE DETECTORS
+------------------
+Since MODIS uses multiple detectors per band (10 for 1 km) there is a different SRF for each detector.  Plotting the SRFs for each detector on top of each other for each band shows that the SRFs are relatively similar for each detector per band so for the initial implementation the MODIOS preprocessor just uses the SRF for the first detector.  Ideally, we would average the SRFs for each band as we certainty don't want to have a separate LUT for each detector.  But, interestingly the wavelength points for each SRF are different between detectors so averaging will require defining a common wavelength gird.
+
+VIIRS also has multiple detectors per band but the source of the SRFs provides both detector specific and band averaged SRFs, the latter of which is used here.
+
+
+MULTIPLE BLACKBODYS
+-------------------
+For the SEVIRI thermal channels there are two SRFs, one for each black body temperature, 85 and 95 K, respectively.  The differences in the SRFs are quite small, though, and it is recommended that 95 K be used as it is the one that is most frequently in operation.

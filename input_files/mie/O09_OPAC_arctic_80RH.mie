@@ -1,0 +1,36 @@
+lutname O09_OPAC_arctic_80RH
+outname O09
+lutdescription OPAC arctic aerosol class at 80% RH
+profile
+     10
+     9.500000e+00 0.000000e+00
+     8.500000e+00 0.000000e+00
+     7.500000e+00 0.000000e+00
+     6.500000e+00 0.000000e+00
+     5.500000e+00 0.000000e+00
+     4.500000e+00 0.000000e+00
+     3.500000e+00 0.000000e+00
+     2.500000e+00 0.000000e+00
+     1.500000e+00 9.849627e-01
+     5.000000e-01 9.949622e-01
+component opac ../opac/optdat/inso00
+*scattering code
+     Mie
+*mixing ratio
+     1.514713e-06
+component opac ../opac/optdat/waso80
+*scattering code
+     Mie
+*mixing ratio
+     1.969127e-01
+component opac ../opac/optdat/soot00
+*scattering code
+     Mie
+*mixing ratio
+     8.027980e-01
+component opac ../opac/optdat/ssam80
+*scattering code
+     Mie
+*mixing ratio
+     2.877955e-04
+end

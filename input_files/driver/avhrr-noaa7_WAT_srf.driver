@@ -1,0 +1,16 @@
+# Non-optional arguments:
+../create_orac_lut/input_files
+../create_orac_lut/input_files/inst/avhrr-3.inst
+../create_orac_lut/input_files/mie/WAT.mie
+../create_orac_lut/input_files/lut/wat_for_cloudcci.lut
+../create_orac_lut/input_files/atm/midsatm.dat
+luts/avhrr-noaa7_WAT_srf
+# Optional keyword parameters below:
+channels=['01', '02', '03', '04', '05']
+n_srf_points=11
+srfdat=['../create_orac_lut/input_files/srf/avhrr/NOAA_7_A201C001.srf', $
+        '../create_orac_lut/input_files/srf/avhrr/NOAA_7_A201C002.srf', $
+        '../create_orac_lut/input_files/srf/avhrr/NOAA_7_A201C003.srf', $
+        '../create_orac_lut/input_files/srf/avhrr/NOAA_7_A201C004.srf', $
+        '../create_orac_lut/input_files/srf/avhrr/NOAA_7_A201C005.srf']
+/no_screen

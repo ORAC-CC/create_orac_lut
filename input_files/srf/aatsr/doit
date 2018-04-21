@@ -1,0 +1,7 @@
+../preproc.py ../aatsr.org/aatsr_v555.srf aatsr_v555.srf --min_abs_value .01 --skip_rows 5
+../preproc.py ../aatsr.org/aatsr_v659.srf aatsr_v659.srf --min_abs_value .01 --skip_rows 5
+../preproc.py ../aatsr.org/aatsr_v870.srf aatsr_v870.srf --min_abs_value .01 --skip_rows 5
+../preproc.py ../aatsr.org/aatsr_v16.srf  aatsr_v16.srf  --min_abs_value .01 --skip_rows 5
+../preproc.py ../aatsr.org/aatsr_ir37.srf aatsr_ir37.srf --min_abs_value .01 --skip_rows 5
+../preproc.py ../aatsr.org/aatsr_ir11.srf aatsr_ir11.srf --min_abs_value .01 --skip_rows 5
+../preproc.py ../aatsr.org/aatsr_ir12.srf aatsr_ir12.srf --min_abs_value .01 --skip_rows 5

@@ -1,0 +1,10 @@
+# Non-optional arguments:
+../create_orac_lut/input_files
+../create_orac_lut/input_files/inst/avhrr-2.inst
+../create_orac_lut/input_files/mie/ICE_baum_avhrr-n14.mie
+../create_orac_lut/input_files/lut/ice_for_cloudcci.lut
+../create_orac_lut/input_files/atm/midsatm.dat
+luts/avhrr-noaa14_ICE_baum_imager
+# Optional keyword parameters below:
+channels=['01', '02', '03', '04', '05']
+/no_screen

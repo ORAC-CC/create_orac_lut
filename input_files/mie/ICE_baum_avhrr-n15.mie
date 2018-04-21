@@ -1,0 +1,14 @@
+lutname ICE
+outname ICE
+lutdescription Ice cloud
+profile
+     5
+     5.500000e+00 0.000000e+00
+     4.500000e+00 0.000000e+00
+     3.500000e+00 1.000000e+02
+     2.500000e+00 0.000000e+00
+     1.500000e+00 0.000000e+00
+component baum ../data/baum/GeneralHabitMixture_SeverelyRough_AllWavelengths_FullPhaseMatrix.nc ../data/baum/GHM_SevRough_AVHRR-N15.nc
+*mixing ratio
+     1.000000e+00
+end

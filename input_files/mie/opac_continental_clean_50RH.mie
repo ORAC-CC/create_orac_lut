@@ -1,0 +1,21 @@
+lutname CON_OPAC_continental_clean_50RH
+outname CON
+lutdescription OPAC continental clean aerosol class at 50% RH
+profile
+     5
+     4.5      0.0
+     3.5      0.0
+     2.5      0.0
+     1.5    223.13
+     0.5    606.53
+component opac ../opac/optdat/waso50
+* mixing ratio
+  0.99994
+* scattering code
+  Mie
+component opac ../opac/optdat/inso00
+* mixing ratio
+  5.77e-5
+* scattering code
+  Mie
+end

@@ -1,0 +1,36 @@
+lutname O05_OPAC_desert_80RH
+outname O05
+lutdescription OPAC desert aerosol class at 80% RH
+profile
+     10
+     9.500000e+00 0.000000e+00
+     8.500000e+00 0.000000e+00
+     7.500000e+00 0.000000e+00
+     6.500000e+00 0.000000e+00
+     5.500000e+00 6.392786e-02
+     4.500000e+00 1.053992e-01
+     3.500000e+00 1.737739e-01
+     2.500000e+00 2.865048e-01
+     1.500000e+00 4.723666e-01
+     5.000000e-01 7.788008e-01
+component opac ../opac/optdat/waso80
+*scattering code
+     Mie
+*mixing ratio
+     8.695115e-01
+component opac ../opac/optdat/minm00
+*scattering code
+     Mie
+*mixing ratio
+     1.171667e-01
+component opac ../opac/optdat/miam00
+*scattering code
+     Mie
+*mixing ratio
+     1.326005e-02
+component opac ../opac/optdat/micm00
+*scattering code
+     Mie
+*mixing ratio
+     6.173532e-05
+end

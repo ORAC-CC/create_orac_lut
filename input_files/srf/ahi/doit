@@ -1,0 +1,16 @@
+../preproc.py ../ahi.org/ahi-chan_1.srf ahi-chan_1.srf --min_abs_value .01
+../preproc.py ../ahi.org/ahi-chan_2.srf ahi-chan_2.srf --min_abs_value .01
+../preproc.py ../ahi.org/ahi-chan_3.srf ahi-chan_3.srf --min_abs_value .01
+../preproc.py ../ahi.org/ahi-chan_4.srf ahi-chan_4.srf --min_abs_value .01
+../preproc.py ../ahi.org/ahi-chan_5.srf ahi-chan_5.srf --min_abs_value .01
+../preproc.py ../ahi.org/ahi-chan_6.srf ahi-chan_6.srf --min_abs_value .01
+../preproc.py ../ahi.org/ahi-chan_7.srf ahi-chan_7.srf --min_abs_value .01
+../preproc.py ../ahi.org/ahi-chan_8.srf ahi-chan_8.srf --min_abs_value .01
+../preproc.py ../ahi.org/ahi-chan_9.srf ahi-chan_9.srf --min_abs_value .01
+../preproc.py ../ahi.org/ahi-chan_10.srf ahi-chan_10.srf --min_abs_value .01
+../preproc.py ../ahi.org/ahi-chan_11.srf ahi-chan_11.srf --min_abs_value .01
+../preproc.py ../ahi.org/ahi-chan_12.srf ahi-chan_12.srf --min_abs_value .01
+../preproc.py ../ahi.org/ahi-chan_13.srf ahi-chan_13.srf --min_abs_value .01
+../preproc.py ../ahi.org/ahi-chan_14.srf ahi-chan_14.srf --min_abs_value .01
+../preproc.py ../ahi.org/ahi-chan_15.srf ahi-chan_15.srf --min_abs_value .01
+../preproc.py ../ahi.org/ahi-chan_16.srf ahi-chan_16.srf --min_abs_value .01

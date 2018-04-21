@@ -1,0 +1,18 @@
+# Non-optional arguments:
+../create_orac_lut/input_files
+../create_orac_lut/input_files/inst/aatsr.inst
+../create_orac_lut/input_files/mie/WAT.mie
+../create_orac_lut/input_files/lut/wat_for_cloudcci.lut
+../create_orac_lut/input_files/atm/midsatm.dat
+luts/aatsr_WAT_srf
+# Optional keyword parameters below:
+channels=['01', '02', '03', '04', '05', '06', '07']
+n_srf_points=11
+srfdat=['../create_orac_lut/input_files/srf/aatsr/aatsr_v555.srf', $
+        '../create_orac_lut/input_files/srf/aatsr/aatsr_v659.srf', $
+        '../create_orac_lut/input_files/srf/aatsr/aatsr_v870.srf', $
+        '../create_orac_lut/input_files/srf/aatsr/aatsr_v16.srf', $
+        '../create_orac_lut/input_files/srf/aatsr/aatsr_ir11.srf', $
+        '../create_orac_lut/input_files/srf/aatsr/aatsr_ir12.srf', $
+        '../create_orac_lut/input_files/srf/aatsr/aatsr_ir37.srf']
+/no_screen

@@ -1,0 +1,7 @@
+../preproc.py ../atsr2.org/atsr2_v555.srf atsr2_v555.srf --min_abs_value .01 --skip_rows 5
+../preproc.py ../atsr2.org/atsr2_v659.srf atsr2_v659.srf --min_abs_value .01 --skip_rows 5
+../preproc.py ../atsr2.org/atsr2_v870.srf atsr2_v870.srf --min_abs_value .01 --skip_rows 5
+../preproc.py ../atsr2.org/atsr2_v16.srf  atsr2_v16.srf  --min_abs_value .01 --skip_rows 5
+../preproc.py ../atsr2.org/atsr2_ir37.srf atsr2_ir37.srf --min_abs_value .01 --skip_rows 5
+../preproc.py ../atsr2.org/atsr2_ir11.srf atsr2_ir11.srf --min_abs_value .01 --skip_rows 5
+../preproc.py ../atsr2.org/atsr2_ir12.srf atsr2_ir12.srf --min_abs_value .01 --skip_rows 5

@@ -1,0 +1,36 @@
+../preproc_modis.py ../modis-terra.org/rsr.1.inb.final rsr.1.inb.srf --skip_rows 9 --nm_to_um
+../preproc_modis.py ../modis-terra.org/rsr.2.inb.final rsr.2.inb.srf --skip_rows 9 --nm_to_um
+../preproc_modis.py ../modis-terra.org/rsr.3.inb.final rsr.3.inb.srf --skip_rows 9 --nm_to_um
+../preproc_modis.py ../modis-terra.org/rsr.4.inb.final rsr.4.inb.srf --skip_rows 9 --nm_to_um
+../preproc_modis.py ../modis-terra.org/rsr.5.inb.final rsr.5.inb.srf --skip_rows 9 --nm_to_um
+../preproc_modis.py ../modis-terra.org/rsr.6.inb.final rsr.6.inb.srf --skip_rows 9 --nm_to_um
+../preproc_modis.py ../modis-terra.org/rsr.7.inb.final rsr.7.inb.srf --skip_rows 9 --nm_to_um
+../preproc_modis.py ../modis-terra.org/rsr.8.inb.final rsr.8.inb.srf --skip_rows 9 --nm_to_um
+../preproc_modis.py ../modis-terra.org/rsr.9.inb.final rsr.9.inb.srf --skip_rows 9 --nm_to_um
+../preproc_modis.py ../modis-terra.org/rsr.10.inb.final rsr.10.inb.srf --skip_rows 9 --nm_to_um
+../preproc_modis.py ../modis-terra.org/rsr.11.inb.final rsr.11.inb.srf --skip_rows 9 --nm_to_um
+../preproc_modis.py ../modis-terra.org/rsr.12.inb.final rsr.12.inb.srf --skip_rows 9 --nm_to_um
+../preproc_modis.py ../modis-terra.org/rsr.13.inb.final rsr.13.inb.srf --skip_rows 9 --nm_to_um
+../preproc_modis.py ../modis-terra.org/rsr.14.inb.final rsr.14.inb.srf --skip_rows 9 --nm_to_um
+../preproc_modis.py ../modis-terra.org/rsr.15.inb.final rsr.15.inb.srf --skip_rows 9 --nm_to_um
+../preproc_modis.py ../modis-terra.org/rsr.16.inb.final rsr.16.inb.srf --skip_rows 9 --nm_to_um
+../preproc_modis.py ../modis-terra.org/rsr.17.inb.final rsr.17.inb.srf --skip_rows 9 --nm_to_um
+../preproc_modis.py ../modis-terra.org/rsr.18.inb.final rsr.18.inb.srf --skip_rows 9 --nm_to_um
+../preproc_modis.py ../modis-terra.org/rsr.19.inb.final rsr.19.inb.srf --skip_rows 9 --nm_to_um
+../preproc_modis.py ../modis-terra.org/rsr.20.inb.final rsr.20.inb.srf --skip_rows 9
+../preproc_modis.py ../modis-terra.org/rsr.21.inb.final rsr.21.inb.srf --skip_rows 9
+../preproc_modis.py ../modis-terra.org/rsr.22.inb.final rsr.22.inb.srf --skip_rows 9
+../preproc_modis.py ../modis-terra.org/rsr.23.inb.final rsr.23.inb.srf --skip_rows 9
+../preproc_modis.py ../modis-terra.org/rsr.24.inb.final rsr.24.inb.srf --skip_rows 9
+../preproc_modis.py ../modis-terra.org/rsr.25.inb.final rsr.25.inb.srf --skip_rows 9
+../preproc_modis.py ../modis-terra.org/rsr.26.inb.final rsr.26.inb.srf --skip_rows 9 --nm_to_um
+../preproc_modis.py ../modis-terra.org/rsr.27.inb.final rsr.27.inb.srf --skip_rows 9
+../preproc_modis.py ../modis-terra.org/rsr.28.inb.final rsr.28.inb.srf --skip_rows 9
+../preproc_modis.py ../modis-terra.org/rsr.29.inb.final rsr.29.inb.srf --skip_rows 9
+../preproc_modis.py ../modis-terra.org/rsr.30.inb.final rsr.30.inb.srf --skip_rows 9
+../preproc_modis.py ../modis-terra.org/rsr.31.inb.final rsr.31.inb.srf --skip_rows 9
+../preproc_modis.py ../modis-terra.org/rsr.32.inb.final rsr.32.inb.srf --skip_rows 9
+../preproc_modis.py ../modis-terra.org/rsr.33.inb.final rsr.33.inb.srf --skip_rows 9
+../preproc_modis.py ../modis-terra.org/rsr.34.inb.final rsr.34.inb.srf --skip_rows 9
+../preproc_modis.py ../modis-terra.org/rsr.35.inb.final rsr.35.inb.srf --skip_rows 9
+../preproc_modis.py ../modis-terra.org/rsr.36.inb.final rsr.36.inb.srf --skip_rows 9

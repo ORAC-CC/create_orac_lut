@@ -1,0 +1,39 @@
+lutname Aerosol_CCI_smoke_A79
+outname A79
+lutdescription Smoke using CCI common components
+profile
+     5
+     5.5    0.0
+     4.5    0.0
+     3.5    0.0
+     2.5    472.37
+     1.5    778.80
+component user waf
+*size
+     log_normal
+     0.070000      1.70000
+*scattering code
+     mie
+*mixing ratio
+     0.625000
+*refractive index
+     4
+     0.55    1.40    -0.003
+     0.67    1.40    -0.003
+     0.87    1.40    -0.003
+     1.60    1.40    -0.003
+component user saf
+*size
+     log_normal
+     0.070000      1.70000
+*scattering code
+     mie
+*mixing ratio
+     0.375000
+*refractive index
+     4
+     0.55    1.50    -0.040
+     0.67    1.50    -0.040
+     0.87    1.50    -0.040
+     1.60    1.50    -0.040
+end

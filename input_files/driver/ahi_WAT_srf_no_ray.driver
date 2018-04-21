@@ -1,0 +1,28 @@
+# Non-optional arguments:
+../create_orac_lut/input_files
+../create_orac_lut/input_files/inst/ahi.inst
+../create_orac_lut/input_files/mie/WAT.mie
+../create_orac_lut/input_files/lut/wat_for_cloudcci.lut
+../create_orac_lut/input_files/atm/midsatm.dat
+luts/ahi_WAT_srf_no_ray
+# Optional keyword parameters below:
+channels=['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16']
+n_srf_points=11
+srfdat=['../create_orac_lut/input_files/srf/ahi/ahi-chan_1.srf', $
+        '../create_orac_lut/input_files/srf/ahi/ahi-chan_2.srf', $
+        '../create_orac_lut/input_files/srf/ahi/ahi-chan_3.srf', $
+        '../create_orac_lut/input_files/srf/ahi/ahi-chan_4.srf', $
+        '../create_orac_lut/input_files/srf/ahi/ahi-chan_5.srf', $
+        '../create_orac_lut/input_files/srf/ahi/ahi-chan_6.srf', $
+        '../create_orac_lut/input_files/srf/ahi/ahi-chan_7.srf', $
+        '../create_orac_lut/input_files/srf/ahi/ahi-chan_8.srf', $
+        '../create_orac_lut/input_files/srf/ahi/ahi-chan_9.srf', $
+        '../create_orac_lut/input_files/srf/ahi/ahi-chan_10.srf', $
+        '../create_orac_lut/input_files/srf/ahi/ahi-chan_11.srf', $
+        '../create_orac_lut/input_files/srf/ahi/ahi-chan_12.srf', $
+        '../create_orac_lut/input_files/srf/ahi/ahi-chan_13.srf', $
+        '../create_orac_lut/input_files/srf/ahi/ahi-chan_14.srf', $
+        '../create_orac_lut/input_files/srf/ahi/ahi-chan_15.srf', $
+        '../create_orac_lut/input_files/srf/ahi/ahi-chan_16.srf']
+/no_rayleigh
+/no_screen

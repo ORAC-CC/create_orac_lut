@@ -1,0 +1,24 @@
+# Non-optional arguments:
+../create_orac_lut/input_files
+../create_orac_lut/input_files/inst/seviri.inst
+../create_orac_lut/input_files/mie/WAT.mie
+../create_orac_lut/input_files/lut/wat_for_cloudcci.lut
+../create_orac_lut/input_files/atm/midsatm.dat
+luts/seviri-msg4_WAT_srf_no_ray
+# Optional keyword parameters below:
+channels=['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
+n_srf_points=11
+srfdat=['../create_orac_lut/input_files/srf/seviri/seviri-msg4-chan_1.srf', $
+        '../create_orac_lut/input_files/srf/seviri/seviri-msg4-chan_2.srf', $
+        '../create_orac_lut/input_files/srf/seviri/seviri-msg4-chan_3.srf', $
+        '../create_orac_lut/input_files/srf/seviri/seviri-msg4-chan_4-temp_95.srf', $
+        '../create_orac_lut/input_files/srf/seviri/seviri-msg4-chan_5-temp_95.srf', $
+        '../create_orac_lut/input_files/srf/seviri/seviri-msg4-chan_6-temp_95.srf', $
+        '../create_orac_lut/input_files/srf/seviri/seviri-msg4-chan_7-temp_95.srf', $
+        '../create_orac_lut/input_files/srf/seviri/seviri-msg4-chan_8-temp_95.srf', $
+        '../create_orac_lut/input_files/srf/seviri/seviri-msg4-chan_9-temp_95.srf', $
+        '../create_orac_lut/input_files/srf/seviri/seviri-msg4-chan_10-temp_95.srf', $
+        '../create_orac_lut/input_files/srf/seviri/seviri-msg4-chan_11-temp_95.srf', $
+        '../create_orac_lut/input_files/srf/seviri/seviri-msg4-chan_12.srf']
+/no_rayleigh
+/no_screen

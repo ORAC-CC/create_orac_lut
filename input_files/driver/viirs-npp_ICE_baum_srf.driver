@@ -1,0 +1,27 @@
+# Non-optional arguments:
+../create_orac_lut/input_files
+../create_orac_lut/input_files/inst/viirs-npp.inst
+../create_orac_lut/input_files/mie/ICE_baum.mie
+../create_orac_lut/input_files/lut/ice_for_cloudcci.lut
+../create_orac_lut/input_files/atm/midsatm.dat
+luts/viirs-npp_ICE_baum_srf
+# Optional keyword parameters below:
+channels=['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16']
+n_srf_points=11
+srfdat=['../create_orac_lut/input_files/srf/viirs/NPP_VIIRS_NG_RSR_M1_Fused_Oct2011f_BA.srf', $
+        '../create_orac_lut/input_files/srf/viirs/NPP_VIIRS_NG_RSR_M2_Fused_Oct2011f_BA.srf', $
+        '../create_orac_lut/input_files/srf/viirs/NPP_VIIRS_NG_RSR_M3_Fused_Oct2011f_BA.srf', $
+        '../create_orac_lut/input_files/srf/viirs/NPP_VIIRS_NG_RSR_M4_Fused_Oct2011f_BA.srf', $
+        '../create_orac_lut/input_files/srf/viirs/NPP_VIIRS_NG_RSR_M5_Fused_Oct2011f_BA.srf', $
+        '../create_orac_lut/input_files/srf/viirs/NPP_VIIRS_NG_RSR_M6_Fused_Oct2011f_BA.srf', $
+        '../create_orac_lut/input_files/srf/viirs/NPP_VIIRS_NG_RSR_M7_Fused_Oct2011f_BA.srf', $
+        '../create_orac_lut/input_files/srf/viirs/NPP_VIIRS_NG_RSR_M8_filtered_Oct2011f_BA.srf', $
+        '../create_orac_lut/input_files/srf/viirs/NPP_VIIRS_NG_RSR_M9_filtered_Oct2011f_BA.srf', $
+        '../create_orac_lut/input_files/srf/viirs/NPP_VIIRS_NG_RSR_M10_filtered_Oct2011f_BA.srf', $
+        '../create_orac_lut/input_files/srf/viirs/NPP_VIIRS_NG_RSR_M11_filtered_Oct2011f_BA.srf', $
+        '../create_orac_lut/input_files/srf/viirs/NPP_VIIRS_NG_RSR_M12_filtered_Oct2011f_BA.srf', $
+        '../create_orac_lut/input_files/srf/viirs/NPP_VIIRS_NG_RSR_M13_filtered_Oct2011f_BA.srf', $
+        '../create_orac_lut/input_files/srf/viirs/NPP_VIIRS_NG_RSR_M14_filtered_Oct2011f_BA.srf', $
+        '../create_orac_lut/input_files/srf/viirs/NPP_VIIRS_NG_RSR_M15_filtered_Oct2011f_BA.srf', $
+        '../create_orac_lut/input_files/srf/viirs/NPP_VIIRS_NG_RSR_M16A_filtered_Oct2011f_BA.srf']
+/no_screen

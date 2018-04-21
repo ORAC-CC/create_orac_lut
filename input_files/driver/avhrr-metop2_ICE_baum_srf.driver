@@ -1,0 +1,17 @@
+# Non-optional arguments:
+../create_orac_lut/input_files
+../create_orac_lut/input_files/inst/avhrr-3.inst
+../create_orac_lut/input_files/mie/ICE_baum.mie
+../create_orac_lut/input_files/lut/ice_for_cloudcci.lut
+../create_orac_lut/input_files/atm/midsatm.dat
+luts/avhrr-metop2_ICE_baum_srf
+# Optional keyword parameters below:
+channels=['01', '02', '03', '04', '05', '06']
+n_srf_points=11
+srfdat=['../create_orac_lut/input_files/srf/avhrr/METOPB_A307C001.srf', $
+        '../create_orac_lut/input_files/srf/avhrr/METOPB_A307C002.srf', $
+        '../create_orac_lut/input_files/srf/avhrr/METOPB_A307C03A.srf', $
+        '../create_orac_lut/input_files/srf/avhrr/METOPB_A307C03B.srf', $
+        '../create_orac_lut/input_files/srf/avhrr/METOPB_A307C004.srf', $
+        '../create_orac_lut/input_files/srf/avhrr/METOPB_A307C005.srf']
+/no_screen

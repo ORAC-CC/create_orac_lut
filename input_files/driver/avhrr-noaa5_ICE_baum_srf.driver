@@ -1,0 +1,15 @@
+# Non-optional arguments:
+../create_orac_lut/input_files
+../create_orac_lut/input_files/inst/avhrr-3.inst
+../create_orac_lut/input_files/mie/ICE_baum.mie
+../create_orac_lut/input_files/lut/ice_for_cloudcci.lut
+../create_orac_lut/input_files/atm/midsatm.dat
+luts/avhrr-noaa5_ICE_baum_srf
+# Optional keyword parameters below:
+channels=['01', '02', '03', '04']
+n_srf_points=11
+srfdat=['../create_orac_lut/input_files/srf/avhrr/TIROS_N_PFMC001.srf', $
+        '../create_orac_lut/input_files/srf/avhrr/TIROS_N_PFMC002.srf', $
+        '../create_orac_lut/input_files/srf/avhrr/TIROS_N_PFMC003.srf', $
+        '../create_orac_lut/input_files/srf/avhrr/TIROS_N_APFMC004.srf']
+/no_screen

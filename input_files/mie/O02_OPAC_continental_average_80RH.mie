@@ -1,0 +1,31 @@
+lutname O02_OPAC_continental_average_80RH
+outname O02
+lutdescription OPAC continental average aerosol class at 80% RH
+profile
+     10
+     9.500000e+00 0.000000e+00
+     8.500000e+00 0.000000e+00
+     7.500000e+00 0.000000e+00
+     6.500000e+00 0.000000e+00
+     5.500000e+00 0.000000e+00
+     4.500000e+00 0.000000e+00
+     3.500000e+00 0.000000e+00
+     2.500000e+00 0.000000e+00
+     1.500000e+00 8.290291e-01
+     5.000000e-01 9.394131e-01
+component opac ../opac/optdat/inso00
+*scattering code
+     Mie
+*mixing ratio
+     2.614311e-05
+component opac ../opac/optdat/waso80
+*scattering code
+     Mie
+*mixing ratio
+     4.575044e-01
+component opac ../opac/optdat/soot00
+*scattering code
+     Mie
+*mixing ratio
+     5.424695e-01
+end

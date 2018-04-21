@@ -1,0 +1,11 @@
+# Non-optional arguments:
+../create_orac_lut/input_files
+../create_orac_lut/input_files/inst/seviri.inst
+../create_orac_lut/input_files/mie/CCI_A72.mie
+../create_orac_lut/input_files/lut/aerosol_for_cloudcci.lut
+../create_orac_lut/input_files/atm/midsatm.dat
+luts/seviri_CCI_A72
+# Optional keyword parameters below:
+channels=['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
+/no_screen
+tmatrix_path=../data/dubovik_tmatrix/

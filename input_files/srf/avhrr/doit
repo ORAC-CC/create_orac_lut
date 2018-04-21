@@ -1,0 +1,88 @@
+../preproc.py ../avhrr.org/TIROS_N_PFMC001.txt       TIROS_N_PFMC001.srf --min_abs_value .01 --skip_rows 1 --nm_to_um
+../preproc.py ../avhrr.org/TIROS_N_PFMC002.txt       TIROS_N_PFMC002.srf --min_abs_value .01 --skip_rows 1 --nm_to_um
+../preproc.py ../avhrr.org/TIROS_N_PFMC003.txt       TIROS_N_PFMC003.srf --min_abs_value .01 --skip_rows 1 --nm_to_um
+../preproc.py ../avhrr.org/TIROS_N_APFMC004.txt      TIROS_N_APFMC004.srf --min_abs_value .01 --skip_rows 1 --nm_to_um
+../preproc.py ../avhrr.org/NOAA_6_A103C001.txt       NOAA_6_A103C001.srf --min_abs_value .01 --skip_rows 1 --nm_to_um
+../preproc.py ../avhrr.org/NOAA_6_A103C002.txt       NOAA_6_A103C002.srf --min_abs_value .01 --skip_rows 1 --nm_to_um
+../preproc.py ../avhrr.org/NOAA_6_A103C003.txt       NOAA_6_A103C003.srf --min_abs_value .01 --skip_rows 1 --nm_to_um
+../preproc.py ../avhrr.org/NOAA_6_A103C004.txt       NOAA_6_A103C004.srf --min_abs_value .01 --skip_rows 1 --nm_to_um
+../preproc.py ../avhrr.org/NOAA_7_A201C001.txt       NOAA_7_A201C001.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_7_A201C002.txt       NOAA_7_A201C002.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_7_A201C003.txt       NOAA_7_A201C003.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_7_A201C004.txt       NOAA_7_A201C004.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_7_A201C005.txt       NOAA_7_A201C005.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_8_A102C001.txt       NOAA_8_A102C001.srf --min_abs_value .01 --skip_rows 1 --nm_to_um
+../preproc.py ../avhrr.org/NOAA_8_A102C002.txt       NOAA_8_A102C002.srf --min_abs_value .01 --skip_rows 1 --nm_to_um
+../preproc.py ../avhrr.org/NOAA_8_A102C003.txt       NOAA_8_A102C003.srf --min_abs_value .01 --skip_rows 1 --nm_to_um
+../preproc.py ../avhrr.org/NOAA_8_A102C004.txt       NOAA_8_A102C004.srf --min_abs_value .01 --skip_rows 1 --nm_to_um
+../preproc.py ../avhrr.org/NOAA_9_A202C001.txt       NOAA_9_A202C001.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_9_A202C002.txt       NOAA_9_A202C002.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_9_A202C003.txt       NOAA_9_A202C003.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_9_A202C004.txt       NOAA_9_A202C004.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_9_A202C005.txt       NOAA_9_A202C005.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_10_A101C001.txt      NOAA_10_A101C001.srf --min_abs_value .01 --skip_rows 1 --nm_to_um
+../preproc.py ../avhrr.org/NOAA_10_A101C002.txt      NOAA_10_A101C002.srf --min_abs_value .01 --skip_rows 1 --nm_to_um
+../preproc.py ../avhrr.org/NOAA_10_A101C003.txt      NOAA_10_A101C003.srf --min_abs_value .01 --skip_rows 1 --nm_to_um
+../preproc.py ../avhrr.org/NOAA_10_A101C004.txt      NOAA_10_A101C004.srf --min_abs_value .01 --skip_rows 1 --nm_to_um
+../preproc.py ../avhrr.org/NOAA_11_A203C001.txt      NOAA_11_A203C001.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_11_A203C002.txt      NOAA_11_A203C002.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_11_A203C003.txt      NOAA_11_A203C003.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_11_A203C004.txt      NOAA_11_A203C004.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_11_A203C005.txt      NOAA_11_A203C005.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_12_A205C001.txt      NOAA_12_A205C001.srf --min_abs_value .01 --skip_rows 1 --nm_to_um
+../preproc.py ../avhrr.org/NOAA_12_A205C002.txt      NOAA_12_A205C002.srf --min_abs_value .01 --skip_rows 1 --nm_to_um
+../preproc.py ../avhrr.org/NOAA_12_A205C003.txt      NOAA_12_A205C003.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_12_A205C004.txt      NOAA_12_A205C004.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_12_A205C005.txt      NOAA_12_A205C005.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_13_A206C001.txt      NOAA_13_A206C001.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_13_A206C002.txt      NOAA_13_A206C002.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_13_A206C003.txt      NOAA_13_A206C003.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_13_A206C004.txt      NOAA_13_A206C004.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_13_A206C005.txt      NOAA_13_A206C005.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_14_A204C001.txt      NOAA_14_A204C001.srf --min_abs_value .01 --skip_rows 1 --nm_to_um
+../preproc.py ../avhrr.org/NOAA_14_A204C002.txt      NOAA_14_A204C002.srf --min_abs_value .01 --skip_rows 1 --nm_to_um
+../preproc.py ../avhrr.org/NOAA_14_A204C003.txt      NOAA_14_A204C003.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_14_A204C004.txt      NOAA_14_A204C004.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_14_A204C005.txt      NOAA_14_A204C005.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_15_A302C001.txt      NOAA_15_A302C001.srf --min_abs_value .01 --skip_rows 1 --use_columns 1 2
+../preproc.py ../avhrr.org/NOAA_15_A302C002.txt      NOAA_15_A302C002.srf --min_abs_value .01 --skip_rows 1 --use_columns 1 2 --reverse
+../preproc.py ../avhrr.org/NOAA_15_A302C03A.txt      NOAA_15_A302C03A.srf --min_abs_value .01 --skip_rows 1 --use_columns 1 2 --reverse
+../preproc.py null                                   NOAA_15_A302C03B.srf --min_abs_value .01 --missing 2 3.55 3.93
+../preproc.py null                                   NOAA_15_A302C004.srf --min_abs_value .01 --missing 2 10.3 11.3
+../preproc.py null                                   NOAA_15_A302C005.srf --min_abs_value .01 --missing 2 11.5 12.5
+../preproc.py ../avhrr.org/NOAA_16_A301C001.txt      NOAA_16_A301C001.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_16_A301C002.txt      NOAA_16_A301C002.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_16_A301C03A.txt      NOAA_16_A301C03A.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_16_A301C03B.txt      NOAA_16_A301C03B.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_16_A301C004.txt      NOAA_16_A301C004.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_16_A301C005.txt      NOAA_16_A301C005.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_17_A304C001.txt      NOAA_17_A304C001.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_17_A304C002.txt      NOAA_17_A304C002.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_17_A304C03A.txt      NOAA_17_A304C03A.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_17_A304C03B.txt      NOAA_17_A304C03B.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_17_A304C004.txt      NOAA_17_A304C004.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_17_A304C005.txt      NOAA_17_A304C005.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_18_A306C001.txt      NOAA_18_A306C001.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_18_A306C002.txt      NOAA_18_A306C002.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_18_A306C03A.txt      NOAA_18_A306C03A.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_18_A306C03B.txt      NOAA_18_A306C03B.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_18_A306C004.txt      NOAA_18_A306C004.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_18_A306C005.txt      NOAA_18_A306C005.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_19_A308C001.txt      NOAA_19_A308C001.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_19_A308C002.txt      NOAA_19_A308C002.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_19_A308C03A.txt      NOAA_19_A308C03A.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_19_A308C03B.txt      NOAA_19_A308C03B.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_19_A308C004.txt      NOAA_19_A308C004.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/NOAA_19_A308C005.txt      NOAA_19_A308C005.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/METOP_A_A305C001_revD.txt METOP_A_A305C001_revD.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/METOP_A_A305C002_revD.txt METOP_A_A305C002_revD.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/METOP_A_A305C03A_revD.txt METOP_A_A305C03A_revD.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/METOP_A_A305C03B_revD.txt METOP_A_A305C03B_revD.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/METOP_A_A305C004_revD.txt METOP_A_A305C004_revD.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/METOP_A_A305C005_revD.txt METOP_A_A305C005_revD.srf --min_abs_value .01 --skip_rows 1
+../preproc.py ../avhrr.org/METOPB_A307C001.txt       METOPB_A307C001.srf --min_abs_value .01 --skip_rows 0
+../preproc.py ../avhrr.org/METOPB_A307C002.txt       METOPB_A307C002.srf --min_abs_value .01 --skip_rows 0
+../preproc.py ../avhrr.org/METOPB_A307C03A.txt       METOPB_A307C03A.srf --min_abs_value .01 --skip_rows 0
+../preproc.py ../avhrr.org/METOPB_A307C03B.txt       METOPB_A307C03B.srf --min_abs_value .01 --skip_rows 0
+../preproc.py ../avhrr.org/METOPB_A307C004.txt       METOPB_A307C004.srf --min_abs_value .01 --skip_rows 0
+../preproc.py ../avhrr.org/METOPB_A307C005.txt       METOPB_A307C005.srf --min_abs_value .01 --skip_rows 0

@@ -1,0 +1,12 @@
+# Non-optional arguments:
+../create_orac_lut/input_files/gas
+../create_orac_lut/input_files/inst/slstr.inst
+../create_orac_lut/input_files/mie/CCI_A78.mie
+../create_orac_lut/input_files/lut/aerosolcci_phaseI.lut
+../create_orac_lut/input_files/atm/midsatm.dat
+luts/slstr_CCI_A70-A79
+# Optional keyword parameters below:
+channels=['01', '02', '03', '04', '05', '06', '07']
+gasdat=['ModtranGasOpd_slstr__0-55.gas', 'ModtranGasOpd_slstr__0-66.gas', 'ModtranGasOpd_slstr__0-87.gas', 'ModtranGasOpd_slstr__1-38.gas', 'ModtranGasOpd_slstr__1-61.gas', 'ModtranGasOpd_slstr__2-26.gas', 'ModtranGasOpd_slstr__3-74.gas']
+/no_screen
+tmatrix_path=../data/dubovik_tmatrix/
