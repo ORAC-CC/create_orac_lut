@@ -1,2 +1,2 @@
-IDL_DIR = /usr/local/PACK/idl83/idl
-IFORT_DIR = /usr/local/PACK/composerxe/lib/intel64
+IDL_DIR = /usr/local/idl
+IFORT_LIB_DIR = /usr/local/composerxe/lib/intel64

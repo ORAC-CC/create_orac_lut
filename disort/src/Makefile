@@ -75,8 +75,8 @@ ifort: FFLAGS = -fpic $(FLAGS) $(OFLAGS) $(CPL)
 # Dynamic linking with Fortran libraries
 #ifort: LDFLAGS = -shared -lm -lifcore
 # Static linking with Fortran libraries
-ifort: LDFLAGS = $(IFORT_DIR)/libifcore_pic.a $(IFORT_DIR)/libimf.a \
-                 $(IFORT_DIR)/libirc.a $(IFORT_DIR)/libsvml.a -shared -lm
+ifort: LDFLAGS = $(IFORT_LIB_DIR)/libifcore_pic.a $(IFORT_LIB_DIR)/libimf.a \
+                 $(IFORT_LIB_DIR)/libirc.a $(IFORT_LIB_DIR)/libsvml.a -shared -lm
 
 nag: CC = gcc
 nag: FC = f95
