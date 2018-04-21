@@ -227,6 +227,19 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
                               'ChanSol', inststr.ChanSol[matchi])
    endif
 
+;  Check length of channel specific input arrays
+   ngasdat = n_elements(gasdat)
+   if ngasdat gt 0 then begin
+      if ngasdat ne inststr.NChan then message, $
+         'Number of gas files provided not equal to number of channels to process.
+   endif
+
+   nsrfdat = n_elements(srfdat)
+   if nsrfdat gt 0 then begin
+      if nsrfdat ne inststr.NChan then message, $
+         'Number of SRF files provided not equal to number of channels to process.
+   endif
+
 ;  Now set:
 ;  NSRF:      Number of SRF integration points
 ;  ChanSRFWl: 2-d array (NSRF, matchn) of the wavelengths for each integration
