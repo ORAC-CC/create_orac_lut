@@ -1,12 +1,12 @@
 DESCRIPTION
 ------------
-This is the IDL code required to generate ORAC forward model lookup tables 
-(LUTs).  The main routine is in "create_orac_lut.pro" and there is a wrapper 
-procedure, in "create_orac_lut_wrapper.pro", for running batch jobs.  Besides 
-requiring IDL the code has one external dependency, the so called EODG Mie code 
-[Grainger et al., 2004], a mixture of IDL and Fortran callable through the IDL 
-DLM interface.  The code also calls the original Fortran implementation of 
-DISORT [Stamnes et al., 1988] through a DLM interface.  For details on the LUTs 
+This is the IDL code required to generate ORAC forward model lookup tables
+(LUTs).  The main routine is in "create_orac_lut.pro" and there is a wrapper
+procedure, in "create_orac_lut_wrapper.pro", for running batch jobs.  Besides
+requiring IDL the code has one external dependency, the so called EODG Mie code
+[Grainger et al., 2004], a mixture of IDL and Fortran callable through the IDL
+DLM interface.  The code also calls the original Fortran implementation of
+DISORT [Stamnes et al., 1988] through a DLM interface.  For details on the LUTs
 and the methodology for producing them see McGarragh and Others, 2016.
 
 
@@ -17,102 +17,102 @@ The code requires the EODG Mie code available at:
 
 https://github.com/eodg-code/mie
 
-Please consult the README.txt file in the EODG Mie distribution for 
+Please consult the README.txt file in the EODG Mie distribution for
 instructions on compiling the IDL DLM interface to the Fortran Mie code.
 
-Please consult the README.txt file in the disort/ subdirectory for instructions 
+Please consult the README.txt file in the disort/ subdirectory for instructions
 on compiling the IDL DLM interface to the DISORT code.
 
 
 USAGE
 -----
-In order to use this code the IDL_PATH and IDL_DLM_PATH variables must be set 
-to this directory and the various dependencies (mie/, mie/dlm-code/, 
-create_orac_lut/disort/src/ and create_orac_lut/dubovik/).  These may be set 
+In order to use this code the IDL_PATH and IDL_DLM_PATH variables must be set
+to this directory and the various dependencies (mie/, mie/dlm-code/,
+create_orac_lut/disort/src/ and create_orac_lut/dubovik/).  These may be set
 either as an environmental variable or within IDL with the PREF_SET command.
 
-create_orac_lut may be called directly with the procedure in 
-create_orac_lut.pro.  Please see the extensive documentation in the procedure 
-comment header for a description of the required arguments and keyword 
+create_orac_lut may be called directly with the procedure in
+create_orac_lut.pro.  Please see the extensive documentation in the procedure
+comment header for a description of the required arguments and keyword
 arguments.
 
-create_orac_lut may also be called with the procedure in 
-create_orac_lut_wrapper.pro.  In this case the arguments passed are contained 
-in a driver file given directly to create_orac_lut_wrapper as a keyword or 
-contained in the file equal to the CREATE_ORAC_LUT_DRIVER environmental 
-variable.  Please see the comment header for create_orac_lut_wrapper for more 
+create_orac_lut may also be called with the procedure in
+create_orac_lut_wrapper.pro.  In this case the arguments passed are contained
+in a driver file given directly to create_orac_lut_wrapper as a keyword or
+contained in the file equal to the CREATE_ORAC_LUT_DRIVER environmental
+variable.  Please see the comment header for create_orac_lut_wrapper for more
 details.
 
-create_orac_lut requires several input files.  Several example input files are 
-contained in the example_driver_files directory.  Essentially, there are five 
+create_orac_lut requires several input files.  Several example input files are
+contained in the example_driver_files directory.  Essentially, there are five
 different types of files:
 
-- Instrument definition files: *.inst, which define the channels of a given 
+- Instrument definition files: *.inst, which define the channels of a given
 instrument.
 
-- Pressure profile files: *.dat, which define the atmospheric pressure and 
+- Pressure profile files: *.dat, which define the atmospheric pressure and
 temperature as a function of height.
 
-- Scattering properties files: *.mie, which define the components, height 
+- Scattering properties files: *.mie, which define the components, height
 distribution and microphysical properties of an aerosol or cloud type/class.
 
-- LUT definition files: *.lut, which define the axes/grid of the output lookup 
+- LUT definition files: *.lut, which define the axes/grid of the output lookup
 tables.
 
-- Gas optical depth files: *.gas, which provide the gas extinction profiles 
-(due to molecular absorption) for a given channel of a given instrument.  These 
-may be produced with MODTRAN.  They are optional and required for the ORAC 
-aerosol retrieval but should not be included for LUTs for the ORAC cloud or ash 
+- Gas optical depth files: *.gas, which provide the gas extinction profiles
+(due to molecular absorption) for a given channel of a given instrument.  These
+may be produced with MODTRAN.  They are optional and required for the ORAC
+aerosol retrieval but should not be included for LUTs for the ORAC cloud or ash
 retrievals.
 
-- create_orac_lut_wrapper files: *.driver, which is used to pass arguments of 
-create_orac_lut procedure into the create_orac_lut_wrapper wrapper procedure as 
+- create_orac_lut_wrapper files: *.driver, which is used to pass arguments of
+create_orac_lut procedure into the create_orac_lut_wrapper wrapper procedure as
 mentioned above.
 
-Detailed descriptions of these files are in the comment headers of their 
+Detailed descriptions of these files are in the comment headers of their
 corresponding read procedures in create_orac_lut_io.pro.
 
-In the case of the instrument definition files these can be usually used 
-unchanged but for the other files it is up to the user to use them as templates 
+In the case of the instrument definition files these can be usually used
+unchanged but for the other files it is up to the user to use them as templates
 and modify them according to their requirements.
 
-The set of nine example driver files represent a set of example runs that try 
-to cover all the common code paths and should be used by developers for 
-regression testing.  It is recommended that developers reduce the number of 
-output channels in the driver files and the number of output solar zenith 
-angles in the *.lut files to speed up testing.  Below is a brief description of 
-each driver file.  Though only two instruments, AATSR and MODIS, are covered in 
-these examples/tests, switching instruments is as easy as using a different 
+The set of nine example driver files represent a set of example runs that try
+to cover all the common code paths and should be used by developers for
+regression testing.  It is recommended that developers reduce the number of
+output channels in the driver files and the number of output solar zenith
+angles in the *.lut files to speed up testing.  Below is a brief description of
+each driver file.  Though only two instruments, AATSR and MODIS, are covered in
+these examples/tests, switching instruments is as easy as using a different
 *.inst file and modifying the channel related driver file inputs accordingly.
 
 aatsr_CCI_A70.driver,
 aatsr_CCI_A72.driver,
 aatsr_CCI_A76.driver:
 
-These driver files are a few samples from the full set of 10 driver files for 
-Aerosol CCI retrievals.  A70 contains 3 components, A72 contains 4 components, 
-and A76 contains two components.  A70 and A72 both have a T-matrix components 
-[Dubovik et al., 2006] whereas A76 has only Mie components.  All the components 
-are 'user' defined.  Finally, since these examples are for the ORAC aerosol 
+These driver files are a few samples from the full set of 10 driver files for
+Aerosol CCI retrievals.  A70 contains 3 components, A72 contains 4 components,
+and A76 contains two components.  A70 and A72 both have a T-matrix components
+[Dubovik et al., 2006] whereas A76 has only Mie components.  All the components
+are 'user' defined.  Finally, since these examples are for the ORAC aerosol
 retrieval they include gas absorption.
 
 aatsr_maritime_80rh.driver:
 
-This driver file is of interest as all three components are from OPAC.  Gas 
+This driver file is of interest as all three components are from OPAC.  Gas
 absorption is also included.
 
 aatsr_opac_desert_dust_NSCM.driver:
 
-This driver file example contains 4 components, one that is an OPAC component, 
-two that are user defined Mie components, and one that is a user defined 
+This driver file example contains 4 components, one that is an OPAC component,
+two that are user defined Mie components, and one that is a user defined
 T-matrix component [Dubovik et al., 2006].
 
 modis-aqua_ICE_baum.driver,
 modis-terra_ICE_baum.driver:
 
-These driver file examples contain a single ice crystal component.  The source 
-of the optical properties is that of Baum et al. 2014.  Here there are two 
-driver files to emphasize that fact that these ice crystal properties are 
+These driver file examples contain a single ice crystal component.  The source
+of the optical properties is that of Baum et al. 2014.  Here there are two
+driver files to emphasize that fact that these ice crystal properties are
 platform specific.
 
 modis_EYJ_A81.driver
@@ -121,13 +121,13 @@ This example contains a single user defined log-normal mode.
 
 modis_ICE_baran.driver
 
-This driver file is for a single single ice crystal component the source of 
-which is optical properties from Baran and Havemann, 2004.  Notice that this 
+This driver file is for a single single ice crystal component the source of
+which is optical properties from Baran and Havemann, 2004.  Notice that this
 one is not platform specific.
 
 modis_WAT.driver
 
-This driver file is for a single modified-gamma distribution of liquid water 
+This driver file is for a single modified-gamma distribution of liquid water
 droplets and is what is used for the Cloud CCI retrieval.
 
 Please see the comments in the source files themselves for further information.
@@ -135,45 +135,45 @@ Please see the comments in the source files themselves for further information.
 
 CONTACT
 -------
-For questions, comments, or bug reports please email the ORAC developers email 
+For questions, comments, or bug reports please email the ORAC developers email
 list at: devorac@jiscmail.ac.uk.
 
-If you would like to report a bug please include a sample case that reproduces 
+If you would like to report a bug please include a sample case that reproduces
 the bug along with the all the required inputs.
 
 
 REFERENCES
 ----------
 
-A. J. Baran and S. Havemann. The dependence of retrieved cirrus ice-crystal 
-effective dimension on assumed ice-crystal geometry and size-distribution 
-function at solar wavelengths. Quarterly Journal of the Royal Meteorological 
+A. J. Baran and S. Havemann. The dependence of retrieved cirrus ice-crystal
+effective dimension on assumed ice-crystal geometry and size-distribution
+function at solar wavelengths. Quarterly Journal of the Royal Meteorological
 Society, 130(601):21532167, 2004. doi:10.1256/qj.03.154.
 
-Bryan A. Baum, Ping Yang, Andrew J. Heymsfield, Aaron Bansemer, Benjamin H. 
-Cole, Aronne Merrelli, Carl Schmitt, and Chenxi Wang. Ice cloud 
-single-scattering property models with the full phase matrix at wavelengths 
-from 0.2 to 100 mm. Journal of Quantitative Spectroscopy and Radiative 
+Bryan A. Baum, Ping Yang, Andrew J. Heymsfield, Aaron Bansemer, Benjamin H.
+Cole, Aronne Merrelli, Carl Schmitt, and Chenxi Wang. Ice cloud
+single-scattering property models with the full phase matrix at wavelengths
+from 0.2 to 100 mm. Journal of Quantitative Spectroscopy and Radiative
 Transfer, 146:123–139, 2014.
 
-Oleg Dubovik, Alexander Sinyuk, Tatyana Lapyonok, Brent N. Holben, Michael 
-Mishchenko, Ping Yang, Tom F. Eck, Hester Volten, Olga Munoz, Ben Veihelmann, 
-Wim J. van der Zande, Jean-Francois Leon, Michael Sorokin, , and Ilya Slutsker. 
-Application of spheroid models to account for aerosol particle nonsphericity in 
-remote sensing of desert dust. Journal of Geophysical Research, 111:D11208, 
+Oleg Dubovik, Alexander Sinyuk, Tatyana Lapyonok, Brent N. Holben, Michael
+Mishchenko, Ping Yang, Tom F. Eck, Hester Volten, Olga Munoz, Ben Veihelmann,
+Wim J. van der Zande, Jean-Francois Leon, Michael Sorokin, , and Ilya Slutsker.
+Application of spheroid models to account for aerosol particle nonsphericity in
+remote sensing of desert dust. Journal of Geophysical Research, 111:D11208,
 2006. doi:10.1029/2005JD006619.
 
-Roy G. Grainger, Jonathan Lucas, Gareth E. Thomas, and Graham B. L. Ewen. 
-Calculation of Mie derivatives. Applied Optics, 43(8):5386–5393, October 
+Roy G. Grainger, Jonathan Lucas, Gareth E. Thomas, and Graham B. L. Ewen.
+Calculation of Mie derivatives. Applied Optics, 43(8):5386–5393, October
 2004. doi:10.1364/AO.43.005386.
 
-Gregory R. McGarragh, Caroline A. Poulsen, Gareth E. Thomas, Adam C. Povey, 
-Oliver Sus, Cornelia Schlundt, Stefan Stapelberg, Simon Proud, Matthew W. 
-Christensen, Martin Stengel, and Roy G. Grainger. The Community Cloud Retrieval 
-for Climate (CC4CL). Part II: The optimal estimation approach. Atmospheric 
+Gregory R. McGarragh, Caroline A. Poulsen, Gareth E. Thomas, Adam C. Povey,
+Oliver Sus, Cornelia Schlundt, Stefan Stapelberg, Simon Proud, Matthew W.
+Christensen, Martin Stengel, and Roy G. Grainger. The Community Cloud Retrieval
+for Climate (CC4CL). Part II: The optimal estimation approach. Atmospheric
 Measurement Techniques, 2018. Accepted and in press.
 
-Knut Stamnes, Si-Chee Tsay, Warren Wiscombe, and Kolf Jayaweera. Numerically 
-stable algorithm for discrete-ordinate-method radiative transfer in multiple 
-scattering and emitting layered media. Applied Optics, 27(12):2502–2509, June 
+Knut Stamnes, Si-Chee Tsay, Warren Wiscombe, and Kolf Jayaweera. Numerically
+stable algorithm for discrete-ordinate-method radiative transfer in multiple
+scattering and emitting layered media. Applied Optics, 27(12):2502–2509, June
 1988. doi:10.1364/AO.27.002502.
