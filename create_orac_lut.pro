@@ -836,9 +836,6 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
                  lutstr.NAzi, lutstr.NEfR, inststr.NChan)
    Em   = fltarr(lutstr.NAOD, lutstr.NSat, lutstr.NEfR, inststr.NChan)
 
-   UUd  = fltarr(lutstr.NAOD, lutstr.NSat*2, lutstr.NSol, lutstr.NAzi, $
-                 lutstr.NEfR, inststr.NChan)
-
 ;  **** Loop through the channels (and solar zenith angles) and run DISORT for
 ;       the beam and diffuse cases. Also produce the emissivity for the channels
 ;       that need it.
@@ -851,8 +848,6 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
       ColumnTauRay = (presstr.p[presstr.Nlevels-1] / 1013.0) / $
                      (117.03*inststr.ChanWl^4 - 1.316*inststr.ChanWl^2)
    endelse
-
-   store_tau = fltarr(lutstr.NEfR, lutstr.NAOD, inststr.NChan)
 
    for l=0,inststr.NChan-1 do begin
 
@@ -893,8 +888,6 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
 ;              The optical depths are additive
                DTau = TauGas + TauRay + TauAer
                TotalTau = total(DTau)
-
-               store_tau[r,a,l] = TotalTau
 
 ;              The single scattering albedo is weighted by optical depth.
 ;              NB. SSA for Rayleigh scattering = 1, and is effectively 0 for
@@ -1056,7 +1049,6 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
                         TBD[a,*,s,p2,r,l] += $
                            (UU[              lindgen(lutstr.NSat),  1,p] * !pi) * $
                            ChanSRF[m,l]
-                        UUd[a,*,s,p2,r,l] = UU[*,0,p]
                      endfor
                   endfor
 
@@ -1084,9 +1076,6 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
       TBD [*,*,*,*,*,l] /= sum
       Em  [*,*,*,l]     /= sum
    endfor
-
-
-;  save,/variables,filename='debug.sav',/compress
 
 
 ;  -----------------------------------------------------------------------------
