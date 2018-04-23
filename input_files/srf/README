@@ -28,7 +28,7 @@ The SRFs for AVHRR-NOAA15 bands 3B, 4, and 5 were missing at the source.  For th
 
 MULTIPLE DETECTORS
 ------------------
-Since MODIS uses multiple detectors per band (10 for 1 km) there is a different SRF for each detector.  Plotting the SRFs for each detector on top of each other for each band shows that the SRFs are relatively similar for each detector per band so for the initial implementation the MODIOS preprocessor just uses the SRF for the first detector.  Ideally, we would average the SRFs for each band as we certainty don't want to have a separate LUT for each detector.  But, interestingly the wavelength points for each SRF are different between detectors so averaging will require defining a common wavelength gird.
+Since MODIS uses multiple detectors per band (10 for 1 km) there is a different SRF for each detector.  Plotting the SRFs for each detector on top of each other for each band shows that the SRFs are relatively similar for each detector per band so for the initial implementation the MODIS preprocessor just uses the SRF for the first detector.  Ideally, we would average the SRFs for each band as we certainty don't want to have a separate LUT for each detector.  But, interestingly the wavelength points for each SRF are different between detectors so averaging will require defining a common wavelength gird.
 
 VIIRS also has multiple detectors per band but the source of the SRFs provides both detector specific and band averaged SRFs, the latter of which is used here.
 
