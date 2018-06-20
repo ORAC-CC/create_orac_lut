@@ -186,10 +186,12 @@ end
 ;
 ;    To use Baum ice crystal scattering properties the word "baum" should
 ;       appear after "component" followed by the full path to the NetCDF file:
-;       GeneralHabitMixture_SeverelyRough_AllWavelengths_FullPhaseMatrix.nc
-;       followed by the full path to the instrument specific NetCDF file
-;       containing the optical properties for GeneralHabitMixture/SeverelyRough
-;       for each channel.  In this case no data groups need to be specified.
+;       GeneralHabitMixture_SeverelyRough_AllWavelengths_FullPhaseMatrix.nc,
+;       and, optionally, if the Baum instrument specific scattering properties
+;       are to be used, followed by the full path to the instrument specific
+;       NetCDF file containing the optical properties for GeneralHabitMixture/
+;       SeverelyRough for each channel.  In this case no data groups need to be
+;       specified.
 ;
 ;    For user defined components, the word "user" should follow "component", as
 ;       well as an (optional) component name. In this case the "mixing ratio",
