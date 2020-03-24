@@ -57,6 +57,7 @@
 ;    '$'.  This is useful for instruments with lots of channels like MODIS.
 ; 14/04/18, G McGarragh: Add optional inputs n_srf_points and srfdat to support
 ;    integration over channel spectral response functions (SRFs).
+; 20/03/20, G Thomas: Add optional input opt_prop_luts
 
 function parse_line, lun
    line = '#'
@@ -117,20 +118,21 @@ pro create_orac_lut_wrapper, driver=driver, in_path=k_in_path, $
                              n_srf_points=k_n_srf_points, $
                              reuse_scat=k_reuse_scat, scat_only=k_scat_only, $
                              srfdat=k_srfdat, tmatrix_path=k_tmatrix_path, $
+                             opt_prop_luts=k_opt_prop_luts, $
                              version=k_version
 
 ;  Set up an error handler
-   catch, error_index
-   if error_index ne 0 then begin
-      help, /last_message, output=error_message
-      print, error_message
+;   catch, error_index
+;   if error_index ne 0 then begin
+;      help, /last_message, output=error_message
+;      print, error_message
 
 ;     print, '*** create_orac_lut encountered an error. Index: ', $
 ;            strtrim(error_index,2)
 ;     print, '*** Error message: ', !ERROR_STATE.MSG
-      print, '*** Aborting run'
-      goto, skip_all
-   endif
+;      print, '*** Aborting run'
+;      goto, skip_all
+;   endif
 
 ;  Use the driver keyword for the location of the driver file, if it exists,
 ;  otherwise use the environment variable
@@ -166,6 +168,7 @@ pro create_orac_lut_wrapper, driver=driver, in_path=k_in_path, $
             'scat_only'    : scat_only    = 1
             'srfdat'       : srfdat       = parse_string_array(words[1])
             'tmatrix_path' : tmatrix_path = parse_string_array(words[1])
+            'opt_prop_luts': opt_prop_luts= parse_string_array(words[1])
             'version'      : version      = parse_string_array(words[1])
             'null'         :
             else           : print,'Keyword ',kw[0],' not recognised'
@@ -176,37 +179,39 @@ pro create_orac_lut_wrapper, driver=driver, in_path=k_in_path, $
 
 ;  Now check if any _other_ parameters have been passed by keyword. These values
 ;  will override any driver file settings
-   if n_elements(k_in_path)      gt 0 then in_path=k_in_path
-   if n_elements(k_instdat)      gt 0 then instdat=k_instdat
-   if n_elements(k_miedat)       gt 0 then miedat=k_miedat
-   if n_elements(k_lutdat)       gt 0 then lutdat=k_lutdat
-   if n_elements(k_presdat)      gt 0 then presdat=k_presdat
-   if n_elements(k_out_path)     gt 0 then out_path=k_outpath
+   if n_elements(k_in_path)       gt 0 then in_path=k_in_path
+   if n_elements(k_instdat)       gt 0 then instdat=k_instdat
+   if n_elements(k_miedat)        gt 0 then miedat=k_miedat
+   if n_elements(k_lutdat)        gt 0 then lutdat=k_lutdat
+   if n_elements(k_presdat)       gt 0 then presdat=k_presdat
+   if n_elements(k_out_path)      gt 0 then out_path=k_outpath
 
-   if n_elements(k_channels)     gt 0 then channels=k_channels
-   if n_elements(k_force_n)      gt 0 then force_n=k_force_n
-   if n_elements(k_force_k)      gt 0 then force_k=k_force_k
-   if n_elements(k_gasdat)       gt 0 then gasdat=k_gasdat
-   if n_elements(k_mie)          gt 0 then mie=k_mie
-   if n_elements(k_no_rayleigh)  gt 0 then no_rayleigh=k_no_rayleigh
-   if n_elements(k_no_screen)    gt 0 then no_screen=k_no_screen
-   if n_elements(k_n_srf_points) gt 0 then n_srf_points=k_n_srf_points
-   if n_elements(k_n_theta)      gt 0 then n_theta=k_n_theta
-   if n_elements(k_reuse_scat)   gt 0 then reuse_scat=k_reuse_scat
-   if n_elements(k_scat_only)    gt 0 then scat_only=k_scat_only
-   if n_elements(k_srfdat)       gt 0 then srfdat=k_srfdat
-   if n_elements(k_tmatrix_path) gt 0 then tmatrix_path=k_tmatrix_path
-   if n_elements(k_version)      gt 0 then version=k_version
+   if n_elements(k_channels)      gt 0 then channels=k_channels
+   if n_elements(k_force_n)       gt 0 then force_n=k_force_n
+   if n_elements(k_force_k)       gt 0 then force_k=k_force_k
+   if n_elements(k_gasdat)        gt 0 then gasdat=k_gasdat
+   if n_elements(k_mie)           gt 0 then mie=k_mie
+   if n_elements(k_no_rayleigh)   gt 0 then no_rayleigh=k_no_rayleigh
+   if n_elements(k_no_screen)     gt 0 then no_screen=k_no_screen
+   if n_elements(k_n_srf_points)  gt 0 then n_srf_points=k_n_srf_points
+   if n_elements(k_n_theta)       gt 0 then n_theta=k_n_theta
+   if n_elements(k_reuse_scat)    gt 0 then reuse_scat=k_reuse_scat
+   if n_elements(k_scat_only)     gt 0 then scat_only=k_scat_only
+   if n_elements(k_srfdat)        gt 0 then srfdat=k_srfdat
+   if n_elements(k_tmatrix_path)  gt 0 then tmatrix_path=k_tmatrix_path
+   if n_elements(k_opt_prop_luts) gt 0 then opt_prop_luts=k_opt_prop_luts
+   if n_elements(k_version)       gt 0 then version=k_version
 
 ;  Call the create_orac_lut function itself
-   stat = create_orac_lut(in_path, instdat, miedat, lutdat, presdat, $
-                          out_path, channels=channels, force_n=force_n, $
-                          force_k=force_k, gasdat=gasdat, mie=mie, $
-                          no_rayleigh=no_rayleigh, no_screen=no_screen, $
-                          n_theta=n_theta, n_srf_points=n_srf_points, $
-                          reuse_scat=reuse_scat, scat_only=scat_only, $
-                          srfdat=srfdat, tmatrix_path=tmatrix_path, $
-                          version=version, driver=driver)
+   stat = create_orac_lut(in_path, instdat, miedat, lutdat, presdat,   $
+                          out_path, channels=channels, force_n=force_n,$
+                          force_k=force_k, gasdat=gasdat, mie=mie,     $
+                          no_rayleigh=no_rayleigh, no_screen=no_screen,$
+                          n_theta=n_theta, n_srf_points=n_srf_points,  $
+                          reuse_scat=reuse_scat, scat_only=scat_only,  $
+                          srfdat=srfdat, tmatrix_path=tmatrix_path,    $
+                          opt_prop_luts=opt_prop_luts, version=version,$
+                          driver=driver)
 
 ;  Check the output status of create_orac_lut
    if stat ne 0 then print,'create_orac_lut failed with code: ', strtrim(stat,2)

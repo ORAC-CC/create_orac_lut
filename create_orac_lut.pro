@@ -1,3 +1,4 @@
+;+
 ; function create_orac_lut
 ;
 ; A routine for generating ORAC look-up tables (LUTs) from aerosol/cloud optical
@@ -65,6 +66,8 @@
 ; tmatrix_path=string  Path to the Dubovik T-Matrix LUT base directory.
 ;                      Required only when T-Matrix calculations are to to be
 ;                      made.
+; opt_prop_luts=string Output my NetCDF format optical properties LUTs
+;                      to the path defined by string
 ; version=string       Set a version string to place in the output LUT file
 ;                      names (defaults to nothing).
 ;
@@ -124,7 +127,8 @@
 ; 14/04/18, G McGarragh: Add support for integration over channel spectral
 ;    response functions (SRFs).
 ; 21/04/18, G McGarragh: Change revision output from svn to git.
-
+; 20/03/20, G Thomas: Added optical properties LUTs functionality.
+;-
 
 ; Include the libraries of procedures for reading and writing driver files and
 ; Look-Up Tables; setting up and running the scattering code; and calling the
@@ -137,14 +141,16 @@
 @read_baum.pro
 
 ; Begin the main LUT generation function
-function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
-                          out_path, channels=channels, force_n=force_n, $
-                          force_k=force_k, gasdat=gasdat, mie=mie, $
-                          no_rayleigh=no_rayleigh, no_screen=no_screen, $
-                          n_theta=n_theta, n_srf_points=n_srf_points, $
-                          reuse_scat=reuse_scat, scat_only=scat_only, $
-                          srfdat=srfdat, tmatrix_path=tmatrix_path, $
-                          version=version, driver=driver
+function create_orac_lut, driver_path, instdat, miedat, lutdat,        $
+                          presdat, out_path,                           $
+                          channels=channels, force_n=force_n,          $
+                          force_k=force_k, gasdat=gasdat, mie=mie,     $
+                          no_rayleigh=no_rayleigh, no_screen=no_screen,$
+                          n_theta=n_theta, n_srf_points=n_srf_points,  $
+                          reuse_scat=reuse_scat, scat_only=scat_only,  $
+                          srfdat=srfdat, tmatrix_path=tmatrix_path,    $
+                          opt_prop_luts=opt_prop_luts, version=version,$
+                          driver=driver
 
 ;  -----------------------------------------------------------------------------
 ;  Test input and output files and directories
@@ -225,19 +231,19 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
                               'ChanWl',  inststr.ChanWl[matchi],  $
                               'ChanEm',  inststr.ChanEm[matchi],  $
                               'ChanSol', inststr.ChanSol[matchi])
-   endif
+   endif else matchn = inststr.NChan
 
 ;  Check length of channel specific input arrays
    ngasdat = n_elements(gasdat)
    if ngasdat gt 0 then begin
       if ngasdat ne inststr.NChan then message, $
-         'Number of gas files provided not equal to number of channels to process.
+         'Number of gas files provided not equal to number of channels to process.'
    endif
 
    nsrfdat = n_elements(srfdat)
    if nsrfdat gt 0 then begin
       if nsrfdat ne inststr.NChan then message, $
-         'Number of SRF files provided not equal to number of channels to process.
+         'Number of SRF files provided not equal to number of channels to process.'
    endif
 
 ;  Now set:
@@ -785,6 +791,13 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
    for l=0,inststr.NChan-1 do begin
       ChStrng = 'Ch'+string(inststr.ChanNum[l], format=Chfmt)
 
+;     Bext ratio
+      lutname = lutbase+'_BextRat_'+ChStrng+verstrng+'.sad'
+      BextLUT = fltarr(lutstr.NAOD, lutstr.NEfR)
+      for a=0,lutstr.NAOD-1 do BextLUT[a,*] = BextRat[m,l,*]
+      write_orac_lut_2d, lutname, lutstr.AOD, lutstr.EfR, BextLUT, $
+                         logAOD=lutstr.LAOD, logEfR=lutstr.LEfR
+
 ;     Bext
       lutname = lutbase+'_Bext_'+ChStrng+verstrng+'.sad'
       BextLUT = fltarr(lutstr.NAOD, lutstr.NEfR)
@@ -792,13 +805,6 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
       write_orac_lut_2d, lutname, lutstr.AOD, lutstr.EfR, BextLUT, $
                          Wl=inststr.ChanWl[l], logAOD=lutstr.LAOD, $
                          logEfR=lutstr.LEfR
-
-;     Bext ratio
-      lutname = lutbase+'_BextRat_'+ChStrng+verstrng+'.sad'
-      BextLUT = fltarr(lutstr.NAOD, lutstr.NEfR)
-      for a=0,lutstr.NAOD-1 do BextLUT[a,*] = BextRat[m,l,*]
-      write_orac_lut_2d, lutname, lutstr.AOD, lutstr.EfR, BextLUT, $
-                         logAOD=lutstr.LAOD, logEfR=lutstr.LEfR
 
 ;     w
       lutname = lutbase+'_w_'+ChStrng+verstrng+'.sad'
@@ -822,6 +828,47 @@ function create_orac_lut, driver_path, instdat, miedat, lutdat, presdat, $
 
    print,''
    print,'Scattering parameters calculated for class '+lutbase+verstrng
+
+; If requested generate optical properties luts...
+  if keyword_set(opt_prop_luts) then begin
+;    Add the values for the 550 nm reference to the front of the
+;    output arrays. If we're using spectral response functions,
+;    output the weighted mean scattering parameters for each channel
+     bext_all = fltarr(inststr.NChan+1,lutstr.NEfR)
+     bext_all[0,*] = transpose(Bext550)
+     bext_all[1:*,*] = reform(Bext[m,*,*],[inststr.NChan,lutstr.NEfR])
+     w_all = fltarr(inststr.NChan+1,lutstr.NEfR)
+     w_all[0,*] = transpose(w550)
+     w_all[1:*,*] = reform(w[m,*,*],[inststr.NChan,lutstr.NEfR])
+     g_all = fltarr(inststr.NChan+1,lutstr.NEfR)
+     g_all[0,*] = transpose(g550)
+     g_all[1:*,*] = reform(g[m,*,*],[inststr.NChan,lutstr.NEfR])
+     P_all = fltarr(inststr.NChan+1,lutstr.NEfR,NMom)
+     P_all[0,*,*] = reform(transpose(Phs550),1,lutstr.NEfR,NMom)
+     P_all[1:*,*,*] = transpose(reform(Phs[*,m,*,*],[NMom,inststr.NChan,lutstr.NEfR]),$
+                                [1,2,0])
+     bext_c_all = fltarr(inststr.NChan+1,scatstr.NComp,lutstr.NEfR)
+     bext_c_all[0,*,*] = Bext550_c
+     bext_c_all[1:*,*,*] = reform(Bext_c[m,*,*,*],inststr.NChan,scatstr.NComp,lutstr.NEfR)
+     w_c_all = fltarr(inststr.NChan+1,scatstr.NComp,lutstr.NEfR)
+     w_c_all[0,*,*] = w550_c
+     w_c_all[1:*,*,*] = reform(w_c[m,*,*,*],inststr.NChan,scatstr.NComp,lutstr.NEfR)
+     if size(opt_prop_luts,/type) ne 7 then begin
+        optproppath = '.'
+        message,/info,'Optical properties luts requested with no path. Will write to CWD'
+     endif else optproppath = opt_prop_luts
+     print, ' Writing optical properties luts to directory: ',optproppath
+     optpropname = optproppath+'/'+inststr.name+'_'+scatstr.outname+'_propslut.nc'
+     write_orac_optprop_luts, optpropname, scatstr.outname, lutstr.EfR, $
+                              scatstr.comptype, scatstr.compname, scatstr.compname2, $
+                              scatstr.distname, '', lut_Mrat, lut_Rm, scatstr.S, $
+                              [0.55, inststr.ChanWl], $
+                              [transpose(AerM550),reform(AerM[m,*,*],inststr.NChan,scatstr.NComp)], $
+                              w_all, bext_all, g_all, Ptheta*!radeg, P_all, $
+                              bext_c_all, w_c_all
+  endif
+
+
 
    if keyword_set(scat_only) then begin
       return,0
