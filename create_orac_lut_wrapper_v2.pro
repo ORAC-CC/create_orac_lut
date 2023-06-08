@@ -1,4 +1,4 @@
-; procedure create_orac_lut_wrapper
+; procedure create_orac_lut_wrapper_v2
 ;
 ; A wrapper procedure (plus two I/O functions) for calling the main procedure
 ; create_orac_lut. The create_orac_lut_wrapper procedure accepts no arguments,
@@ -70,7 +70,7 @@ function parse_string_array, word
   return, out
 end
 
-pro create_orac_lut_wrapper, driver        = driver, $
+pro create_orac_lut_wrapper_v2, driver        = driver, $
                              in_path       = k_in_path, $
                              instfile      = k_instfile, $
                              mmfile        = k_mmfile, $
@@ -198,7 +198,7 @@ pro create_orac_lut_wrapper, driver        = driver, $
    if n_elements(k_version)       gt 0 then version       = k_version
 
 ;  Call the create_orac_lut function itself making sure there are no spaces on the directory or file names
-   stat = create_orac_lut(strtrim(in_path,2),    $
+   stat = create_orac_lut_v2(strtrim(in_path,2),    $
                           strtrim(instfile,2),    $
                           strtrim(mmfile,2),     $
                           strtrim(lutfile,2),     $

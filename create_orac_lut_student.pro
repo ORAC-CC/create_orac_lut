@@ -44,10 +44,8 @@
 ;                      control characters
 ; n_theta=integer      Set the number of angles at which to calculate the phase
 ;                      function moments. Defaults to 1000.
-; srf_quad=integer Set the quadrature for the integration across spectral response function.
-;                      0 srf resolution
-;                      1 single wavelength
-;                      2 reduced srf resolution so that integral is accurate to ~ 0.1 %
+; n_srf_points=integer Set the number of points FOR the integration across
+;                      spectral response function.
 ; /reuse_scat          Reuse the scattering computations from a previous run
 ;                      stored in the file scatfile.sav created with the IDL
 ;                      save procedure. This file is saved whenever /reuse_scat
@@ -138,10 +136,8 @@
 @read_baran.pro
 @read_baum.pro
 
-
-
 ; Begin the main LUT generation function
-  function create_orac_lut,in_path,     $
+  function create_orac_lut_student,in_path,     $
                            instfile,     $
                            mmfile,      $
                            lutfile,      $
@@ -155,7 +151,7 @@
                            no_rayleigh   = no_rayleigh,   $
                            no_screen     = no_screen,     $
                            n_theta       = n_theta,       $
-                           srf_quad      = srf_quad,      $
+                           n_srf_points  = n_srf_points,  $
                            reuse_scat    = reuse_scat,    $
                            scat_only     = scat_only,     $
                            tmatrix_path  = tmatrix_path,  $
@@ -247,9 +243,8 @@
    load_lutstr, lutdirfile, inststr.max_sat_zenith, lutstr
    
 ;  **** Read the spectral response functions for the relevant channels and generate integral quantities that depend upon the srf
-   solar_spectrum_filename = in_path+'/sun/Gueymard2018.sssi'
-   IF KEYWORD_SET(srf_quad) THEN QM = srf_quad else QM = 1
-   load_srfstrarr,  inststr, solar_spectrum_filename, srfstrarr, QM, nwvl_max
+   solar_spectrum_filename = in_path+'/sun/Thekaekara1973.sssi'
+   load_srfstrarr,  inststr, solar_spectrum_filename, srfstrarr, nwvl_max, n_srf_points = n_srf_points
    
 ;  **** Read the scattering parameters file
    load_mmdat, mmdirfile, mmstr
@@ -277,8 +272,8 @@
      print,'Single View LUT calculation for substance ',mmstr.substance,' for the ', inststr.instrument,' instrument'   
    print,'Output placed in: '+out_path
    print,atmosphere_model + ' (code = ',Atmospheres, ')'
-   If (Gas_Flag) Then print,'Including gas absorption' else print,'No gas absorption'
-   If (Rayleigh_Flag) Then print,'Including Rayleigh scattering' else print,'No Rayleigh scattering'
+   If (Gas_Flag) Then print,'Including gas absorption'
+   If (Rayleigh_Flag) Then print,'Including Rayleigh scattering'
 
    print,'LUT Dimensions are:'
    print,'           Components ', strtrim(mmstr.NComp,2)
@@ -288,35 +283,24 @@
    print,'         Solar zenith ', strtrim(lutstr.soz_n,2)
    print,'    Instrument zenith ', strtrim(lutstr.saz_n,2)
    print,'     Relative azimuth ', strtrim(lutstr.raa_n,2)
-   print,'SRF quadrature method ', strtrim(QM,2)
-   If (QM Eq 2) Then FOR i = 0,inststr.number_of_nadir_channels-1 DO print,'Channel ', i, ' Number of quadrature points: ',srfstrarr[i].nwvl
-   
 
 ;  -----------------------------------------------------------------------------
 ; Create the output filename. ********** this has to be improved but will do for now
 ;  -----------------------------------------------------------------------------
-  If (QM Eq 1) then MonoOrBand = 'm' else MonoOrBand ='b'
-; substance (generic particle type)
-;  liquid-water
-;  water-ice
-;  aerosol
-;  volcanic-ash
-; atmospheric model code 00 - 99
-;  1X  scattering withing atmosphere including Rayleigh scattering and gasous absorption (generally used for aerosol)
-;      X denotes the atmospheric gaseous model
-;  00  scattering layer that excludes Rayleigh scattering (generally used for bottom level of multilevel cloud)
-;  01  scattering layer that includes Rayleigh scattering for entire atmosphere (generally used for cloud)
-  If KEYWORD_SET(gas) Then $
-    Atmospheric_Model_Code = '1'+Atmospheres $
-  else $
-    If KEYWORD_SET(no_rayleigh) then $
-      Atmospheric_Model_Code = '00' $
-    else $
-      Atmospheric_Model_Code = '01'
-; Particle_model_code 3 digit string set in microphysical model definition file 
-  Versions    = string(Version,Format='(I2.2)')
-  V2_LUT_Filename = out_path+'/'+ strlowcase(inststr.Platform)+'_'+strlowcase(inststr.Instrument)+'_'+MonoOrBand+'_'+strlowcase(mmstr.Substance)+'_a'+Atmospheric_Model_Code+'_p'+strlowcase(mmstr.shortname)+'_v'+versions+'.nc'
  
+  Particle_Model_Code = 1
+  
+  IF mmstr.comptype[0] eq 'baum' then begin
+   CASE strmid(mmstr.compname,17,3) of
+    'GHM': Particle_Model_Code = 11000
+    'Agg': Particle_Model_Code = 11001
+    'Gen': Particle_Model_Code = 11002
+    'Sol': Particle_Model_Code = 11003
+    ENDCASE
+  ENDIF
+  V2_LUT_Filename = out_path+'/'+Make_LUT_Filename( inststr.Platform, inststr.instrument, mmstr.substance, Atmospheres, Particle_Model_Code, Version)
+
+
 ;  -----------------------------------------------------------------------------
 ;  Some miscellaneous setup.
 ;  -----------------------------------------------------------------------------
@@ -334,23 +318,23 @@
 ;  Output git revision and copy the driver files to the output directory using
 ;  the LUT output base name.
 ;  -----------------------------------------------------------------------------
-;   spawn, '; git --git-dir=' + file_dirname((routine_info('create_orac_lut', $     ; removed on switch to bash
-;          /function, /source)).path) + '/.git rev-parse HEAD > ' + out_path + $    ; removed on switch to bash
-;          '/git_revision.txt'                                                      ; removed on switch to bash
+   spawn, '; git --git-dir=' + file_dirname((routine_info('create_orac_lut_student', $
+          /function, /source)).path) + '/.git rev-parse HEAD > ' + out_path + $
+          '/git_revision.txt'
   
    FILE_COPY, driver,   out_path + '/', /OVERWRITE
 
 ;  -----------------------------------------------------------------------------
 ;  Interpolate the aerosol profile layers onto the atmos. pressure and gas OPD
-;  layers, AND THE AEROSOL REFRACTIVE INDEX ONTO THE CHANNEL WAVELENGTHS.
+;  layers, and the aerosol refractive index onto the channel wavelengths.
 ;  -----------------------------------------------------------------------------
 
 ;  Firstly, we have to define the height of the layers, which lie between each
 ;  pressure level...
    nlayers = atmstr.nlevels -1
    hlayers = (atmstr.height[0:nlayers-1] + atmstr.height[1:nlayers]) / 2
-   scatreltau = INTERPOL(mmstr.rext, mmstr.height, hlayers)
-   scatreltau = scatreltau/total(scatreltau)
+   aerreltau = INTERPOL(mmstr.rext, mmstr.height, hlayers)
+   aerreltau = aerreltau/total(aerreltau)
 
 ;  -----------------------------------------------------------------------------
 ;  Generate scattering properties either through calling a scattering code for
@@ -359,14 +343,13 @@
 ;  -----------------------------------------------------------------------------
 
   IF ~KEYWORD_SET(reuse_scat) THEN BEGIN
-    generate_scattering_properties,srfstrarr, scatoffset, nwvl_max, inststr, mmstr, lutstr, nmom, bext550, w550, g550, phs550, amom550, bextrat, bext, w, g, vavg, phs, amom,tmatrix_path=tmatrix_path,no_screen=no_screen
-;   **** write the scattering parameters FOR the class as a whole FOR reuse
+    Generate_scattering_properties,srfstrarr, scatoffset, nwvl_max, inststr, mmstr, lutstr, nmom, bext550, w550, g550, phs550, amom550, bextrat, bext, w, g, vavg, phs, amom,tmatrix_path=tmatrix_path,no_screen=no_screen
     SAVE, FILENAME = out_path + '/scatfile.sav', nmom, bext550, w550, g550, phs550, amom550, bextrat, bext, w, g, vavg, phs, amom
   ENDIF ELSE begin
-;   **** read the scattering parameters for the class as a whole for reuse
+;   **** Read the scattering parameters for the class as a whole for reuse
     RESTORE, out_path + '/scatfile.sav'
   ENDELSE
-  IF KEYWORD_SET(scat_only) THEN RETURN,0 ; end of scattering calulations. stop here if scat_only true, start here if reuse_scat true.
+  IF KEYWORD_SET(scat_only) THEN RETURN,0 ; End of Scattering Calulations. Stop here if scat_only true, start here if reuse_scat true.
    
   
 
@@ -449,11 +432,12 @@
       columntauray = replicate(1.e-6, inststr.number_of_channels) $
     ELSE $
       columntauray = (atmstr.pressure[atmstr.nlevels-1] / 1013.0) / (117.03*srfstrarr[*].wvl_centre ^4 - 1.316*srfstrarr[*].wvl_centre ^2)
-;*****   openw,dlut,'disort.dat',/get_lun ;temporary lines to get disort parameters
+      
+   openw,stid,'scat.out',/get_lun
    FOR l = 0, inststr.number_of_nadir_channels - 1 DO BEGIN
-      print,'Running DISORT for channel '+string(inststr.channelid[l],Format='(I)')+ ' (',strtrim(srfstrarr[l].wvl_centre,2),' um)'
-      FOR m = 0, srfstrarr[l].nwvl - 1 DO BEGIN
- 
+       FOR m = 0, nwvl_max - 1 DO BEGIN
+         print,'Running DISORT for channel '+string(inststr.channelid[l],Format='(I)')+ ' (',strtrim(srfstrarr[l].wvl_centre ,2),'um)'
+
 ;        Do we have a Gas optical depth profile for the current channel?
 ;        If we don't have gas OPD for this channel,then use zeros (i.e. no gas
 ;        absorption). Remember that the gas OPD is defined on the levels between
@@ -475,69 +459,70 @@
 ;        scattering are defined as the difference between the optical depth at
 ;        the adjacent levels.
          TauGas = GasLvl[lindgen(NLayers)+1] - GasLvl[lindgen(NLayers)]
-         TauRay = RayLvl[lindgen(NLayers)+1] - RayLvl[lindgen(NLayers)] 
-
+         TauRay = RayLvl[lindgen(NLayers)+1] - RayLvl[lindgen(NLayers)]
 
          FOR a = 0,lutstr.opd_n-1 DO BEGIN
-           FOR r = 0,lutstr.efr_n-1 DO BEGIN
 
-;              THE OPTICAL DEPTH FROM AEROSOL IS THE DESIRED TOTAL AODS FOR THE
-;              ORAC LUT * THE RELATIVE AOD AT EACH LAYER FOR THIS CLASS * THE
-;              SCALING FACTOR RELATING AOD AT THIS WAVELENGTH BACK TO 550 NM.
-               tauscat = lutstr.opd[a] * scatreltau * bextrat[m,l,r]
+            FOR r = 0,lutstr.efr_n-1 DO BEGIN
+;              The optical depth from aerosol is the desired total aods for the
+;              orac lut * the relative aod at each layer for this class * the
+;              scaling factor relating aod at this wavelength back to 550 nm.
+               tauaer = lutstr.opd[a] * aerreltau * bextrat[m,l,r]
 ;              the optical depths are additive
-               dtau = taugas + tauray + tauscat
+               dtau = taugas + tauray + tauaer
                totaltau = total(dtau)
 
 ;              The single scattering albedo is weighted by optical depth.
 ;              NB. SSA FOR Rayleigh scattering = 1, and is effectively 0 FOR
 ;              gas absorption.
-               SSALB = (TauRay + w[m,l,r]*tauscat) / DTau
+               SSALB = (TauRay + w[m,l,r]*TauAer) / DTau
 ;              Now check that we have no SSALB values over 1.0 (this can happen in
 ;              layers with no absorption due to rounding). DISORT has an internal
 ;              check FOR this and will exit with an error code IF it fails.
                bd = WHERE(SSALB gt 1.0)
                IF bd[0] ge 0 then SSALB[bd] = 1.0;0.999999
 
-;              ASYMMETRY PARAMETER IS ONLY NON-ZERO WHERE WE ACTUALLY HAVE AEROSOL
+;              Asymmetry parameter is only non-zero WHERE we actually have aerosol
                ASYM = FLTARR(NLayers)
-               nonzero = WHERE(tauscat gt 0.0)
+               nonzero = WHERE(TauAer gt 0.0)
                IF nonzero[0] ge 0 then ASYM[nonzero] = g[m,l,r]
 
-;              NOW, USE THE GETMOM PROCEDURE (PART OF DISORT) TO GENERATE PHASE
-;              FUNCTION MOMENTS FOR THE MOLECULAR SCATTERING AND THEN COMBINE WITH
-;              THE AEROSOL MOMENTS GENERATED EARLIER.
+;              Now, use the GETMOM procedure (part of DISORT) to generate phase
+;              function moments FOR the molecular scattering and then combine with
+;              the aerosol moments generated earlier.
                PMom = FLTARR(NMom, NLayers)
                FOR h=0,NLayers-1 do begin
                   IF ASYM[h] eq 0.0 then GETMOM, 2, 0.0, NMom-1, PM $
                   ELSE begin
                      GETMOM, 2, 0.0, NMom-1, mPM
-                     PM = (mPM*TauRay[h] + AMom[*,m,l,r]*w[m,l,r]*tauscat[h]) / $
-                          (TauRay[h] + w[m,l,r]*tauscat[h])
+                     PM = (mPM*TauRay[h] + AMom[*,m,l,r]*w[m,l,r]*TauAer[h]) / $
+                          (TauRay[h] + w[m,l,r]*TauAer[h])
                   endelse
                   bd = WHERE(PM gt 1.0)
                   IF bd[0] ge 0 then PM[bd] = 1.0
                   PMom[*,h] = PM
                ENDFOR
-							 
-;*****							 printf,dlut, inststr.channelid[l],lutstr.opd[a],lutstr.efr[r],DTau, SSAlb, PMom
-;*****							 print, inststr.channelid[l],lutstr.opd[a],lutstr.efr[r],DTau, SSAlb, PMom
-
+if (a eq 0)then begin
+Layer = NLayers-1 ; for aerosol
+;Layer = NLayers-4 ; for cloud
+print,srfstrarr[l].wvl_centre, lutstr.efr[r],ssalb[layer]
+printf,stid,srfstrarr[l].wvl_centre, lutstr.efr[r],ssalb[layer], pmom[*,layer]
+end
 ;              We are now ready to call DISORT. Call the fast diffuse calculation
 ;              first (errors and problems are more likely to turn up quickly that
 ;              way).
 
-               print, 'RT calculation for' + $
-                      ' Channel: ' + string(inststr.channelid[l],Format='(I2)'), string(srfstrarr[l].wvl_centre,format='(" (",f6.3,"um)")') + $
-                   ', SRF Point: ' + string(m,format='(i3)') + $
-                         ', Tau: ' + string(lutstr.opd[a],format='(g10.2)') + $
-                         ', EfR: ' + string(lutstr.efr[r],format='(f5.1)')
+               print, 'Doing RT calculation for' + $
+                      ' Channel: ' + string(inststr.channelid[l],Format='(I)'), string(srfstrarr[l].wvl_centre,format='(" (",f7.3,"um)")') + $
+                   ', SRF Point: ' + string(m,format='(i4)') + $
+                         ', Tau: ' + string(lutstr.opd[a],format='(e14.6)') + $
+                         ', EfR: ' + string(lutstr.efr[r],format='(f8.4)')
  ;              print, ''
 
  ;              print, '---------- DIFFUSE -----------'
                FBeam =   0.0           ; Direct beam intensity
                FIsot = 100.0           ; Isotropic illumination intensity
-               UMu0  = cos(50.0*!dtor) ; A nominal value for beam zenith
+               UMu0  = cos(50.0*!dtor) ; A nominal value FOR beam zenith
                UTau  = [0.0, TotalTau] ; Define output layers (in terms of optical
                                        ; depth)
 ;              UMu is calculated to described downwelling as well as upwelling
@@ -565,20 +550,15 @@
                TFD[l, r, a] += (100. * RFlDn[1] / (FIsot*!pi)) * srfstrarr[l].val[m]
 ;              RD contains the Upwelling intensity
                RD[l, r, a, *] += (UU[2*lutstr.saz_n-lindgen(lutstr.saz_n)-1,0,0]) * srfstrarr[l].val[m]
-;              TD contains the Downwelling intensity without the direct beam
-
-; V7 vs V8
-              IF inststr.Solar_Channel_Flag[l] then $
-						    TD[l, r, a, *] += (UU[lindgen(lutstr.saz_n),  1,0] -100*exp(totaltau/UMu[0:lutstr.saz_n-1])) * srfstrarr[l].val[m] $
-							Else $
-  							TD[l, r, a, *] += (UU[lindgen(lutstr.saz_n),  1,0]) * srfstrarr[l].val[m]
+;              TD contains the Downwelling intenisity
+               TD[l, r, a, *] += (UU[              lindgen(lutstr.saz_n),  1,0]) * srfstrarr[l].val[m]
 
 ;               print, ''
 
 ;              IF the channel has the emission flag set, calculate the
 ;              emissivity.
                IF inststr.Thermal_Channel_Flag[l] then begin
-;                  print, '---------- EMISSION ----------'
+ ;                 print, '---------- EMISSION ----------'
 ;                 Elisa's expression FOR emissivity....
 ;                 Em[l, r, a, *]  = 100.0*(1.0 - w(l,r)) * $
 ;                                (1.0 - exp(TotalTau*(-1.0/cos(lutstr.saz*!dtor))))
@@ -594,7 +574,7 @@
                   wnlo    = 0.995*wn
                   wnhi    = 1.005*wn
                   temp    = 250.0
-                  incloud = WHERE(tauscat gt 0.0,emnly)
+                  incloud = WHERE(TauAer gt 0.0,emnly)
                   emTau   = DTau[incloud]
                   emSSA   = SSAlb[incloud]
                   emPMo   = PMom[*,incloud]
@@ -619,7 +599,7 @@
 ;              calculations. Note that this only needs to be done FOR channels with
 ;              a solar component to their signal.
                IF inststr.Solar_Channel_Flag[l] then begin
- ;                print, '---------- DIRECT ----------'
+;                  print, '---------- DIRECT ----------'
                   FOR s=0,lutstr.soz_n-1 do begin
 ;                    print, 'SZA: ', lutstr.soz[s]
 
@@ -643,24 +623,21 @@
                      tfbd[l,r,a,s] += (100. * rfldn[1]  / rfldir[0]) * srfstrarr[l].val[m]
                      FOR p=0,lutstr.raa_n-1 do begin
 ;                       Reverse azimuth to ORAC convention
-                        p2 = lutstr.raa_n - p - 1 ; WARNING this means raa must be evenly spaced from 0 to 180 otherwise the reversal doesn't make sense                        
+                        p2 = lutstr.raa_n - p - 1
+                  
 ;                       As with the diffuse case, RBD contains the upwelling
 ;                       intensity, while TBD contains the downwelling.
                         rbd[l, r, a, s, *, p2] += (uu[2*lutstr.saz_n-lindgen(lutstr.saz_n)-1,0,p] * !pi) * srfstrarr[l].val[m]
                      ENDFOR
-										 
                   ENDFOR
 
  ;                 print, ''
                ENDIF
-            ENDFOR ; End of EfR loop						
+            ENDFOR ; End of EfR loop
          ENDFOR ; End of AOD loop
  ;        print,''
-       ENDFOR ; End of SRF loop  	
-	 
+       ENDFOR ; End of SRF loop    
    ENDFOR ; End of channel loop
-	
-;*****close,dlut
 
 ; Normalize the RT operators wrt to the SRF.  Note 'sum' will be unity in
 ; monochomatic mode (when no SRFs were provided).
@@ -679,48 +656,31 @@
  
 ; Replicate nadir view to forward view (ie as though instrument has twice the number of channels)
   If ( inststr.View Gt 0) then begin              
-    FOR l=0, inststr.number_of_nadir_channels - 1 do begin
-      RFD [inststr.number_of_nadir_channels +l ,*,*]       = RFD [l,*,*]
-      TFD [inststr.number_of_nadir_channels +l,*,*]       = TFD [l,*,*] 
-      RD  [inststr.number_of_nadir_channels +l,*,*,*]     = RD  [l,*,*,*] 
-      TD  [inststr.number_of_nadir_channels +l,*,*,*]     = TD  [l,*,*,*]  
-      TB  [inststr.number_of_nadir_channels +l,*,*,*]     = TB  [l,*,*,*]
-      RFBD[inststr.number_of_nadir_channels +l,*,*,*]     = RFBD[l,*,*,*]
-      TFBD[inststr.number_of_nadir_channels +l,*,*,*]     = TFBD[l,*,*,*]
-      RBD [inststr.number_of_nadir_channels +l,*,*,*,*,*] = RBD [l,*,*,*,*,*]
-      Em  [inststr.number_of_nadir_channels +l,*,*,*]     = Em  [l,*,*,*]
+    FOR l=0,inststr.Number_of_nadir_Channels-1 do begin
+      RFD [2*l,*,*]       = RFD [l,*,*]
+      TFD [2*l,*,*]       = TFD [l,*,*] 
+      RD  [2*l,*,*,*]     = RD  [l,*,*,*] 
+      TD  [2*l,*,*,*]     = TD  [l,*,*,*]  
+      TB  [2*l,*,*,*]     = TB  [l,*,*,*]
+      RFBD[2*l,*,*,*]     = RFBD[l,*,*,*]
+      TFBD[2*l,*,*,*]     = TFBD[l,*,*,*]
+      RBD [2*l,*,*,*,*,*] = RBD [l,*,*,*,*,*]
+      Em  [2*l,*,*,*]     = Em  [l,*,*,*]
     ENDFOR
-;   Rebuild instrument structure to account for slant channels  Note that all dual instrument devices
-;   have on-board callibration so use (rua, rub and ruc) not (rgu and rou) 
-    inststr = {  instrument_filename: inststr.instrument_filename, $
-                           platform : inststr.platform,$
+; Rebuild instrument structure to account for slant channels    
+    inststr = {            platform : inststr.platform,$
                          instrument : inststr.instrument,$
-			     instrument_version : inststr.instrument_version, $
                      max_sat_zenith : inststr.max_sat_zenith,$    
                  Number_of_Channels : inststr.Number_of_Channels,$
-                          ChannelID : [inststr.ChannelID           , inststr.ChannelID + inststr.view],$                        
-                 Solar_Channel_Flag : [inststr.Solar_Channel_Flag  , inststr.Solar_Channel_Flag],$
-                 Mixed_Channel_Flag : [inststr.Mixed_Channel_Flag  , inststr.Mixed_Channel_Flag],$
-               Thermal_Channel_Flag : [inststr.Thermal_Channel_Flag, inststr.Thermal_Channel_Flag],$
+                          ChannelID : [inststr.ChannelID           , inststr.ChannelID + inststr.view],$
                            srf_file : [inststr.srf_file            , inststr.srf_file],$
-                              oldf0 : [inststr.oldf0               , inststr.oldf0],$                         
-                              oldf1 : [inststr.oldf1               , inststr.oldf1],$                         
-                            oldnefr : [inststr.oldnefr             , inststr.oldnefr],$                         
-                             oldwvn : [inststr.oldwvn              , inststr.oldwvn],$                         
-                              oldb1 : [inststr.oldb1               , inststr.oldb1],$                         
-                              oldb2 : [inststr.oldb2               , inststr.oldb2],$                         
-                              oldt1 : [inststr.oldt1               , inststr.oldt1],$                         
-                              oldt2 : [inststr.oldt2               , inststr.oldt2],$                         
-                            oldnebt : [inststr.oldnebt             , inststr.oldnebt],$ 
-                                rua : [inststr.rua                 , inststr.rua],$
-                                rub : [inststr.rub                 , inststr.rub],$
-                                ruc : [inststr.ruc                 , inststr.ruc],$
-                              refbt : [inststr.refbt               , inststr.refbt],$
-                               nedt : [inststr.nedt                , inststr.nedt] }
-;   extend srfstrarr to cover slant channels   
+                 Solar_Channel_Flag : [inststr.Solar_Channel_Flag  , inststr.Solar_Channel_Flag],$
+               Thermal_Channel_Flag : [inststr.Thermal_Channel_Flag, inststr.Thermal_Channel_Flag],$
+                        uncertainty : [inststr.uncertainty         , inststr.uncertainty] }
+; extend srfstrarr to cover slant channels   
     srfstrarr = [srfstrarr,srfstrarr] 
   EndIf
- 
+   close,stid
  
 ; -----------------------------------------------------------------------------
 ; Create LUT.
@@ -728,7 +688,7 @@
 
   IF (File_Test(V2_LUT_Filename)) then print,'Info: Over-writing ' + V2_LUT_Filename else  print,'Info: Creating ' + V2_LUT_Filename
 
-  write_v2_lut, V2_LUT_Filename, lutstr, inststr, srfstrarr, Vavg, bextout, bextratout, SSAOUT, GOUT, TD, TfD, RD, RfD, RBD = RBD, RfBD = RfBD, TfBD = TfBd, TB = TB, EM = EM
+ ; write_lut, V2_LUT_Filename, lutstr, inststr, srfstrarr, Vavg, bextout, bextratout, SSAOUT, GOUT, TD, TfD, RD, RfD, RBD = RBD, RfBD = RfBD, TfBD = TfBd, TB = TB, EM = EM
 
 ;  -----------------------------------------------------------------------------
 ;  Output termination timestamp.

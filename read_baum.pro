@@ -8,7 +8,7 @@
 ; 146:123–139, 2014.
 ;
 ; The ice cloud optical property data is available at:
-;    https://www.ssec.wisc.edu/ice_models/
+;  http://stc-se.com/data/bbaum/Ice_Models/index.html
 ;
 ; History:
 ; ??/??/15, G. McGarragh: Initial implementation.
