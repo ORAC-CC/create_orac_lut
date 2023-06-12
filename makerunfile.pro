@@ -75,6 +75,13 @@ MM = ['aerosol_a70',$
         'water-ice_ghm',$
         'water-ice_src']
 MM = ['liquid-water_old', 'water-ice_ghm']  
+  MM = ['liquid-water_stg',$
+        'liquid-water_ap02',$
+        'liquid-water_ap04',$
+        'liquid-water_ap06',$
+        'liquid-water_ap08',$
+        'liquid-water_ap10']
+
 
   platform = 'ers1'
   instrument = 'atsr'
@@ -98,9 +105,7 @@ MM = ['liquid-water_old', 'water-ice_ghm']
   instrument = 'seviri'
   
 
-
-  platform = 'himawari-8'
-  instrument = 'ahi'   
+  
   
     platform = 'aqua'
   instrument = 'modis' 
@@ -133,8 +138,12 @@ MM = ['liquid-water_old', 'water-ice_ghm']
      platform = 'sentinel-3b'
   instrument = 'slstr'
   
+  
+  platform = 'himawari-8'
+  instrument = 'ahi' 
+  
   Test = 0
-  Versions = '13'
+  Versions = '12'
   
   file = platform+'_'+instrument+'_run'
   openw,lun,file,/get_lun
@@ -184,13 +193,13 @@ MM = ['liquid-water_old', 'water-ice_ghm']
         'water-ice'     : lutinstruction = ",lutfile='ice-cloud"          
       EndCase    
       
- ;     If (Test) Then $
- ;       lutinstruction = lutinstruction+"_test.lut'" $
- ;      Else $
- ;       lutinstruction = lutinstruction+".lut'"
+      If (Test) Then $
+        lutinstruction = lutinstruction+"_test.lut'" $
+       Else $
+        lutinstruction = lutinstruction+".lut'"
 		
 		; XXXXXXXXXXXXXXXXXXXXXXTEMPXXXXXXXXXXXXXXXXXXXXXXX
-        lutinstruction = lutinstruction+"-2R.lut'"
+ ;       lutinstruction = lutinstruction+"-2R.lut'"
             
       printf,lun,'idl -e "create_orac_lut_wrapper,srf_quad='+string(srf_quad,format='(I1)')+mminstruction+lutinstruction+",tmatrix_path='/network/group/aopp/eodg/shared/dubovik_tmatrix/',version="+versions+'"'
 ;      if (material eq 'liquid-water' or mm(m) eq 'volcanic-ash_htha') then printf,lun,'idl -e "create_orac_lut_wrapper,srf_quad='+string(srf_quad,format='(I1)')+mminstruction+lutinstruction+ ",no_rayleigh=1,reuse_scat=1,tmatrix_path='/network/group/aopp/eodg/shared/dubovik_tmatrix/',version="+versions+'"'
