@@ -1,0 +1,16 @@
+README:  DISORT version 2.0 (beta release)
+
+This new version of DISORT is being released as a beta version.  While we have
+every confidence that it is working correctly, and while it passes all the
+test problems, there may still be subtle problems that we would appreciate
+hearing about (our e-mail addresses are in DISORT.doc).
+
+The major changes from version 1.2 are:
+
+* Nakajima intensity corrections, allowing use of many fewer streams (NSTR) to
+obtain the same intensity accuracy
+
+* a proper lower-boundary bidirectional reflectance option
+
+A version 2.1, incorporating LAPACK replacements for LINPACK, may be issued
+soon.

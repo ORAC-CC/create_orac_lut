@@ -1,0 +1,36 @@
+From lex@spectral.comWed Nov  6 10:43:13 1996
+Date: Wed, 6 Nov 1996 10:29:44 -0500
+From: Lex Berk <lex@spectral.com>
+To: vail@pldac.plh.af.mil
+Subject: MOD3.5 and HYPERMOD updates
+
+Dear Julia,
+
+     Gail was correct when she suggested late yesterday that my geometry
+was probably wrong and that FDBETA was probably correct.  Let us try the
+new geoinp.f which calls FTRANG.  You will need to add FTRANG to the
+makefile (it does not include PARAM.LST).  Also, I added debug write
+statements in lower case to FDBETA yesterday; please remove them.
+
+     Below I include the FTRANG routine, the new GEOINP routine and all
+other routines that have been modified since OCT 15 (PHASEF, DPRFPA,
+BMOD, SOLZEN and LOOP).  The ICLD check was removed from PHASEF, a numerical
+discrepancy was corrected in DPRFPA, a correction for frequency 0. cm-1
+was added to BMOD, an indexing problem was correct in SOLZEN, and I do
+not remember off hand what the change to LOOP is.
+
+     I hope to send corrections to HYPERMOD later today.  It will include
+a new read file along with the option to into solar geometry parameters
+at H2.  My TO DO list as of this morning included the following:
+
+          (1)  Add LSTREC to GTSTRT argument list.                DONE
+	  (2)  Add LSTREC to BAND MODEL FILE header.              DONE
+	  (3)  Correct record length message from MOLBMP.f        DONE
+	  (4)  Correct problem going past last frequency
+	       in the BMP96_15.BIN file.                          DONE
+	  (5)  Break up the LONG WRITE/READ in CKBIN.f/rdcork.f   DONE
+	  (6)  Check for TRN1=0. in BMCORK.                       DONE
+	  (7)  Incorporate 15cm-1 CFC data.                       TO BE DONE
+	  (8)  Validate, Validate, Validate                       TO BE DONE
+
+If there are any other problems, please let me know ASAP.

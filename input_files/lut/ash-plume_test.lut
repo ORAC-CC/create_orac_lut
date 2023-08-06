@@ -1,0 +1,11 @@
+# This file defines the LUT tables for an ash plume
+2 Uneven_logarithmic # 17 Optical depth values
+1e-03 2
+2 uneven_linear # 2 Effective radius values, should be interpolated as is
+.5 2
+2 linear # 2 Satellite zenith angles, the maximum value is overwritten by the maximum satellite zenith angle
+0 89
+2 linear # 2 Solar zenith angles
+0 89
+2 linear # 2 Relative azimuth angles
+0 180

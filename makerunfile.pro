@@ -81,7 +81,7 @@ MM = ['liquid-water_old', 'water-ice_ghm']
         'liquid-water_ap06',$
         'liquid-water_ap08',$
         'liquid-water_ap10']
-
+MM = ['liquid-water_old']  
 
   platform = 'ers1'
   instrument = 'atsr'
@@ -112,9 +112,7 @@ MM = ['liquid-water_old', 'water-ice_ghm']
   
    platform = 'terra'
   instrument = 'modis'  
- 
-  platform = 'envisat'
-  instrument = 'aatsr'  	
+	
 
   platform = 'noaa-5'
   instrument = 'avhrr'
@@ -137,10 +135,13 @@ MM = ['liquid-water_old', 'water-ice_ghm']
 
      platform = 'sentinel-3b'
   instrument = 'slstr'
-  
+   
+  platform = 'envisat'
+  instrument = 'aatsr'  
   
   platform = 'himawari-8'
   instrument = 'ahi' 
+ 
   
   Test = 0
   Versions = '12'

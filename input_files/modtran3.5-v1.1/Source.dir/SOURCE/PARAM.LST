@@ -1,0 +1,46 @@
+C                                                                       PRM 0001
+C     MODTRAN INCLUDE PARAMETERS FILE.                                  PRM 0002
+C                                                                       PRM 0003
+C     LAYER PARAMETERS:                                                 PRM 0004
+C       LAYDIM   MAXIMUM NUMBER OF LAYER BOUNDARY.                      PRM 0005
+C       LAYTWO   TWICE LAYDIM.                                          PRM 0006
+C       LATTHR   THREE TIMES LAYDIM.                                    PRM 0007
+      INTEGER LAYDIM,LAYTWO,LAYTHR                                      PRM 0008
+      PARAMETER(LAYDIM=61,LAYTWO=2*LAYDIM,LAYTHR=3*LAYDIM)              PRM 0009
+C                                                                       PRM 0010
+C     MAXIMUM SPECIES NUMBER PARAMETERS:                                PRM 0011
+C       MMOL     MAXIMUM NUMBER OF MODTRAN MOLECULAR BAND MODEL         PRM 0012
+C                PARAMETER SPECIES.                                     PRM 0013
+C       MMOLX    MAXIMUM NUMBER OF TEMPERATURE-DEPENDENT                PRM 0014
+C                CROSS-SECTION SPECIES.                                 PRM 0015
+C       MMOLT    MMOL PLUS MMOLX.                                       PRM 0016
+C       MMOLT2   TWICE MMOLT.                                           PRM 0017
+      INTEGER MMOL,MMOLX,MMOLT,MMOLT2                                   PRM 0018
+      PARAMETER(MMOL=12,MMOLX=18,MMOLT=MMOL+MMOLX,MMOLT2=2*MMOLT)       PRM 0019
+C                                                                       PRM 0020
+C     PARAMETERS FOR THE BAND MODEL EXTERNAL FILES:                     PRM 0021
+C       NSPC     ACTUAL NUMBER OF MODTRAN MOLECULAR BAND MODEL          PRM 0022
+C                PARAMETER SPECIES (MOLBMP96.ASC FILE).                 PRM 0023
+C       NSPCX    ACTUAL NUMBER OF TEMPERATURE-DEPENDENT                 PRM 0024
+C                CROSS-SECTION SPECIES (CFCBMP96.ASC FILE).             PRM 0025
+C       NSPECT   NSPC PLUS NSPCX.                                       PRM 0026
+C       MXTEMP   MAXIMUM NUMBER OF BAND MODEL PARAMETER TEMPERATURES.   PRM 0027
+      INTEGER NSPC,NSPECX,NSPECT,MXTEMP                                 PRM 0028
+      PARAMETER(NSPC=12,NSPECX=13,NSPECT=NSPC+NSPECX,MXTEMP=6)          PRM 0029
+C                                                                       PRM 0030
+C     CLOUD/RAIN/AEROSOL PARAMETERS:                                    PRM 0031
+C       NZCLD    NUMBER OF CLOUD/RAIN LAYER BOUNDARIES.                 PRM 0032
+C       KMAX     NUMBER OF MODTRAN SPECIES (EXTINCTION SOURCES).        PRM 0033
+C       NAER     NUMBER OF AEROSOL/CLOUD PROFILES.                      PRM 0034
+C       NWAVLN   NUMBER OF WAVELENGTHS IN BUILT-IN SPECTRAL DATA.       PRM 0035
+C       MXWVLN   MAXIMUM NUMBER OF USER-DEFINED SPECTRAL DATA POINTS.   PRM 0036
+      INTEGER NZCLD,KMAX,NAER,NWAVLN,MXWVLN                             PRM 0037
+      PARAMETER(NZCLD=16,KMAX=67,NAER=7,NWAVLN=47,MXWVLN=101)           PRM 0038
+C                                                                       PRM 0039
+C     CORRELATED-K APPROACH PARAMETERS:                                 PRM 0040
+C       NKSUB    NUMBER OF K-DISTRIBUTION SPECTRAL BIN SUB-INTERVALS.   PRM 0041
+C       NGAMD    NUMBER OF DOPPLER HALF-WIDTH BOUNDARY VALUES.          PRM 0042
+C       NGAML    NUMBER OF LORENTZ HALF-WIDTH BOUNDARY VALUES.          PRM 0043
+C       NUML     NUMBER OF EFFECTIVE NUMBER OF LINES BOUNDARY VALUES.   PRM 0044
+      INTEGER NKSUB,NGAMD,NGAML,NUML                                    PRM 0045
+      PARAMETER(NKSUB=33,NGAMD=23,NGAML=36,NUML=14)                     PRM 0046

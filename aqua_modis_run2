@@ -1,0 +1,17 @@
+#!/bin/csh
+source initpath
+# monochromatic calculation
+
+# aerosol section
+
+setenv CREATE_ORAC_LUT_DRIVER 'input_files/driver/aqua_modis_aerosol.driver'
+echo "making ..." $CREATE_ORAC_LUT_DRIVER
+idl -e "create_orac_lut_wrapper,srf_quad=1,mmfile='aerosol_a76.mm',lutfile='aerosol.lut',tmatrix_path='/network/group/aopp/eodg/shared/dubovik_tmatrix/',version=11"
+
+setenv CREATE_ORAC_LUT_DRIVER 'input_files/driver/aqua_modis_aerosol.driver'
+echo "making ..." $CREATE_ORAC_LUT_DRIVER
+idl -e "create_orac_lut_wrapper,srf_quad=1,mmfile='aerosol_a77.mm',lutfile='aerosol.lut',tmatrix_path='/network/group/aopp/eodg/shared/dubovik_tmatrix/',version=11"
+
+setenv CREATE_ORAC_LUT_DRIVER 'input_files/driver/aqua_modis_aerosol.driver'
+echo "making ..." $CREATE_ORAC_LUT_DRIVER
+idl -e "create_orac_lut_wrapper,srf_quad=1,mmfile='aerosol_a79.mm',lutfile='aerosol.lut',tmatrix_path='/network/group/aopp/eodg/shared/dubovik_tmatrix/',version=11"

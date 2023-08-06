@@ -1,0 +1,16 @@
+============= changes-v1.1 for MODTRAN 3.5 1/97 ==========================
+
+--------------------- flayz.f ------------------------------------------
+cjv 1/10/97  Lex fix. 'If a ground altitude between 0 and 6 km is used along
+cjv          with one of the model atmospheres, the atmosphere was layered 
+cjv          erroneously.  This simple fix eliminates the problem.'
+c
+cjv          DO 60 I=1,6                                                   FLA 0085
+          DO 60 I=6,1,-1                                                   FLA 0085
+cjv ^
+
+----------------------- driver.f -----------------------------------------------
+-- The version number and date are updated.
+
+     1  '1','*****  MODTRAN 3.5 Version 1.1   Jan 97  *****'            DRV 0175
+

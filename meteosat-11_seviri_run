@@ -1,0 +1,10 @@
+#!/bin/bash
+source initpath.bash
+# monochromatic calculation
+# liquid-water section
+export CREATE_ORAC_LUT_DRIVER="input_files/driver/meteosat-11_seviri_aerosol.driver"
+echo "making ..." $CREATE_ORAC_LUT_DRIVER
+idl -e "create_orac_lut_wrapper,srf_quad=1,mmfile='aerosol_a77.mm',lutfile='liquid-water-cloud-old.lut',tmatrix_path='/network/group/aopp/eodg/shared/dubovik_tmatrix/',version=99"
+#export CREATE_ORAC_LUT_DRIVER="input_files/driver/meteosat-11_seviri_cloud.driver"
+#echo "making ..." $CREATE_ORAC_LUT_DRIVER
+#idl -e "create_orac_lut_wrapper,srf_quad=1,mmfile='liquid-water_old.mm',lutfile='liquid-water-cloud-old.lut',tmatrix_path='/network/group/aopp/eodg/shared/dubovik_tmatrix/',version=99"

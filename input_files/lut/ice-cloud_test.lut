@@ -1,0 +1,10 @@
+2 uneven_logarithmic #  Optical depth values
+7.8125e-03  2.5000e-01 
+2 linear #  Effective radius values
+24 40
+2 linear #  Satellite zenith angles
+0.000000E+00 0.890000E+02
+2 linear #  Solar zenith angles
+0.000000E+00  0.890000E+02
+2 linear #  Relative azimuth angles
+0.000000E+00 1.800000E+02

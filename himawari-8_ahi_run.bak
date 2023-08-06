@@ -1,0 +1,28 @@
+#!/bin/bash
+source initpath.bash
+# monochromatic calculation
+# liquid-water section
+export CREATE_ORAC_LUT_DRIVER="input_files/driver/himawari-8_ahi_cloud.driver"
+echo "making ..." $CREATE_ORAC_LUT_DRIVER
+idl -e "create_orac_lut_wrapper,srf_quad=1,mmfile='liquid-water_stg.mm',lutfile='liquid-water-cloud.lut',tmatrix_path='/network/group/aopp/eodg/shared/dubovik_tmatrix/',version=12"
+
+export CREATE_ORAC_LUT_DRIVER="input_files/driver/himawari-8_ahi_cloud.driver"
+echo "making ..." $CREATE_ORAC_LUT_DRIVER
+idl -e "create_orac_lut_wrapper,srf_quad=1,mmfile='liquid-water_ap02.mm',lutfile='liquid-water-cloud.lut',tmatrix_path='/network/group/aopp/eodg/shared/dubovik_tmatrix/',version=12"
+
+export CREATE_ORAC_LUT_DRIVER="input_files/driver/himawari-8_ahi_cloud.driver"
+echo "making ..." $CREATE_ORAC_LUT_DRIVER
+idl -e "create_orac_lut_wrapper,srf_quad=1,mmfile='liquid-water_ap04.mm',lutfile='liquid-water-cloud.lut',tmatrix_path='/network/group/aopp/eodg/shared/dubovik_tmatrix/',version=12"
+
+export CREATE_ORAC_LUT_DRIVER="input_files/driver/himawari-8_ahi_cloud.driver"
+echo "making ..." $CREATE_ORAC_LUT_DRIVER
+idl -e "create_orac_lut_wrapper,srf_quad=1,mmfile='liquid-water_ap06.mm',lutfile='liquid-water-cloud.lut',tmatrix_path='/network/group/aopp/eodg/shared/dubovik_tmatrix/',version=12"
+
+export CREATE_ORAC_LUT_DRIVER="input_files/driver/himawari-8_ahi_cloud.driver"
+echo "making ..." $CREATE_ORAC_LUT_DRIVER
+idl -e "create_orac_lut_wrapper,srf_quad=1,mmfile='liquid-water_ap08.mm',lutfile='liquid-water-cloud.lut',tmatrix_path='/network/group/aopp/eodg/shared/dubovik_tmatrix/',version=12"
+
+export CREATE_ORAC_LUT_DRIVER="input_files/driver/himawari-8_ahi_cloud.driver"
+echo "making ..." $CREATE_ORAC_LUT_DRIVER
+idl -e "create_orac_lut_wrapper,srf_quad=1,mmfile='liquid-water_ap10.mm',lutfile='liquid-water-cloud.lut',tmatrix_path='/network/group/aopp/eodg/shared/dubovik_tmatrix/',version=12"
+

@@ -1,0 +1,13 @@
+#!/bin/bash
+source initpath.bash
+# monochromatic calculation
+
+
+export CREATE_ORAC_LUT_DRIVER="input_files/driver/terra_modis_cloud.driver"
+echo "making ..." $CREATE_ORAC_LUT_DRIVER
+idl -e "create_orac_lut_wrapper,srf_quad=1,mmfile='water-ice_ghm.mm',lutfile='ice-cloud.lut',tmatrix_path='/network/group/aopp/eodg/shared/dubovik_tmatrix/',version=11"
+
+export CREATE_ORAC_LUT_DRIVER="input_files/driver/terra_modis_cloud.driver"
+echo "making ..." $CREATE_ORAC_LUT_DRIVER
+idl -e "create_orac_lut_wrapper,srf_quad=1,mmfile='water-ice_src.mm',lutfile='ice-cloud.lut',tmatrix_path='/network/group/aopp/eodg/shared/dubovik_tmatrix/',version=11"
+

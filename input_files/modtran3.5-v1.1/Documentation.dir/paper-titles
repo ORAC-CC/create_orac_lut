@@ -1,0 +1,35 @@
+------------------------ cloud (.asc, .ps, .wp51, .wp6): ---------------------------
+
+UPGRADE TO THE MODTRAN LAYER CLOUD/RAIN MODELS
+A. Berk and G. P.  Anderson, 1996
+
+------------------------ disort.doc: -----------------------------------------------
+
+     Documentation File for 'DISORT', A Discrete Ordinates Radiative
+   Transfer Fortran77 Program for a Multi-Layered Plane-Parallel Medium
+                        Version 1.1, Jan 1993
+
+------------------------ m3.5-upgrade (.asc, .ps, .wp51, .wp6): --------------------
+
+                     UPGRADING TO MODTRAN 3.5
+Lists changes from MODTRAN 3.0 to MODTRAN 3.5.
+
+------------------------ m3.0-upgrade.asc: -----------------------------------------
+
+                     UPGRADING TO MODTRAN 3.0
+Lists changes from MODTRAN 2.0 to MODTRAN 3.0.
+
+------------------------ modtrn3 (.wp6.ps, .wp6): ----------------------------------
+
+MODTRAN 3 user Instructions   1996
+
+------------------------ paper (.ps, .wp6) and figures (.ps, .wp6): ----------------
+
+FASCODE/ MODTRAN/ LOWTRAN: Past/ Present/ Future
+18th Annual Review Conference on Atmospheric Transmittion Models June 1995
+
+------------------------ refbkg.doc: ------------------------------------------------
+
+Reflectivity/Emissivity Files in MODTRAN
+
+

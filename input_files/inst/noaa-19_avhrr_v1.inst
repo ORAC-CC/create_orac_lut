@@ -1,0 +1,109 @@
+# AVHRR instrument definition for ORAC code
+
+
+# Format
+# or * indicate a comment, can have blank lines. An = separates the constant and its value.
+
+# constants
+# + may be in any order
+# + are case insensitive (will be translated to lower case)
+# + may include spaces (they are ignored) 
+# e.g. Solar Channels is equivalent to solarchannels
+
+# uncertainty in albedo for solar channels and NedT for thermal and mixed thermal/solar channels
+
+# quantities specific to a channel can be indicated using the nadir channelid (as a number) in []
+platform = noaa-19
+instrument = avhrr
+instrument version = 3
+
+# 0: single or N: dual view where N represents the channel offset of the slant view wrt the nadir view
+view = 0
+
+# specify instrument channels available as some instrument channels may be inapplicable, failed, too noisy etc
+available channels  = 1 2 3 4 5 6
+
+# specify which of the channels measure reflected solar radiation (includes channels around 4 um which have both a solar and emitted component)
+solar channels  = 1 2 3 4
+
+# specify which of the channels measure emitted thermal radiation (includes channels around 4 um which have both a solar and emitted component)
+thermal channels  =   4 5 6
+
+# Figure below captures the maximum value (55.37) with a little tolerance 
+maximum satellite zenith = 56
+
+# spectral response functions
+# taken from RTTOV spectral response function archive: https://www.nwpsaf.eu/site/software/rttov/download/coefficients/spectral-response-functions/
+# channels follow ORAC (ie OSCAR) order except atsr, atsr-2 and aatsr which are reversed
+ srf [1] = rtcoef_noaa_19_avhrr_srf_ch01.txt
+ srf [2] = rtcoef_noaa_19_avhrr_srf_ch02.txt
+ srf [3] = rtcoef_noaa_19_avhrr_srf_ch03.txt
+ srf [4] = rtcoef_noaa_19_avhrr_srf_ch04.txt
+ srf [5] = rtcoef_noaa_19_avhrr_srf_ch05.txt
+ srf [6] = rtcoef_noaa_19_avhrr_srf_ch06.txt
+
+
+# TEMPORARY 
+# Old SAD values from  /network/aopp/apres/ORAC_LUTS/avhrr/NOAA19/
+# carried through for back compatibility 
+# REMOVE when new error calculation implemented
+# F1 is multiple of F0 so calculated
+
+oldf0[1] = 18.25
+oldf0[2] = 18.25
+oldf0[3] = 18.25
+oldf0[4] =  5.39
+
+oldnefr[1] = 0.005
+oldnefr[2] = 0.005
+oldnefr[3] = 0.005
+oldnefr[4] = 0.0
+
+oldwvn[4] = 2664.02
+oldwvn[5] = 925.792
+oldwvn[6] = 829.708
+
+oldb1[4]  = 226709.42
+oldb1[5]  = 9546.4671
+oldb1[6]  = 6857.2371
+
+oldb2[4]  = 3841.6841
+oldb2[5]  = 1336.532
+oldb2[6]  = 1196.9652
+
+oldt1[4]  = 1.67396
+oldt1[5]  = 0.53959
+oldt1[6]  = 0.36064
+
+oldt2[4]  = 0.997364
+oldt2[5]  = 0.998534
+oldt2[6]  = 0.998913
+
+oldnebt[4] = 0.25
+oldnebt[5] = 0.2
+oldnebt[6] = 0.2
+
+# channel random noise in percentage for solar channels and NEdT (K) for the thermal channels
+# currently fill values of 0
+ rua[1] =0
+ rua[2] =0
+ rua[3] =0
+ rua[4] =0
+
+ rub[1] =0
+ rub[2] =0
+ rub[3] =0
+ rub[4] =0
+
+ ruc[1] =0
+ ruc[2] =0
+ ruc[3] =0
+ ruc[4] =0
+
+ refbt  [4] = 0
+ refbt  [5] = 0
+ refbt  [6] = 0
+ 
+ nedt   [4] = 0
+ nedt   [5] = 0
+ nedt   [6] = 0

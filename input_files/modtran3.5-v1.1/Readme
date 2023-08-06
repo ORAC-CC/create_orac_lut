@@ -1,0 +1,325 @@
+         MODTRAN 3.5 VERSION 1.1 USER INSTRUCTIONS & COMMENTS  (1/97)
+
+	MODTRAN (all versions) is patented software that may not be sold or 
+used in commercial software without prior arrangements with the U.S. government 
+regarding licensing procedures. MODTRAN (all versions) may only be 
+released by Phillips Laboratory in order to assure continuing contact with the 
+user community.
+
+	A signed copy of the MODTRAN 3.5 Non-Disclosure Agreement in file 
+m3.5-non-disclosure needs to be faxed to Gail Anderson at "ganderson@plh.af.mil". 
+You will receive instructions for ftping the code from the pasword ftp site. The 
+password for the ftp site is changed each Monday. 
+
+	Upgrades to MODTRAN 3.5 will be put on the anonymous ftp site in directory 
+mod3.5-changes. Check the anonymous ftp site at the beginning of the month for 
+upgrades. Users will receive notice of major upgrades. The anonymous ftp site will 
+have the latest Readme file and a complete Documentation.dir, Changes.dir, and 
+Case.dir. Only the modified source files will be in Source.dir/SOURCE, as opposed
+to the full source code which is only available on the password ftp site. The
+bandmodel in DATA will not be on the anonymous ftp site.
+
+	Questions or other communications can be sent to:
+	Gail Anderson - 'ganderson@plh.af.mil', 1st query and CC's of all questions
+	Jim Chetwynd - 'chetwynd@plh.af.mil' , user implementation, templates, PC, etc.
+	Julia Vail - 'vail@pldac.plh.af.mil', installation, platform conversions, etc.
+	Lex Berk - 'lex@spectral.com', MOD3.5 specifics (band model & clouds, etc.)
+  
+	For each new version of MODTRAN 3.5, there will be two files listing changes in 
+the subdirectory 'Changes.dir'. 'code-*.*' will list the coding changes with the 
+'*.*' referring to the version number. 'updates-*.*' will specify general changes 
+similar to this information . Any significant changes to the 'Readme' file will 
+also be noted in the 'updates*.*' file.
+
+	Subdirectory Documentation.dir contains user instructions, 
+'refbkg.doc' which describes how to add user defined backgrounds to refbkg, 
+and the paper 'FASCODE/MODTRAN.LOWTRAN: Past/Present/Future' with the text in 
+'paper.*' and the figures in 'figures.*' The files 'cloud.*' contains user 
+instructions for the new cloud models supplementing the MODTRAN 3.0 user 
+instructions in files 'modtrn3.wp6*'. Here is a listing of the paper titles.
+
+------------------------ cloud (.asc, .ps, .wp51, .wp6): ---------------------------
+
+UPGRADE TO THE MODTRAN LAYER CLOUD/RAIN MODELS
+A. Berk and G. P.  Anderson, 1996
+
+------------------------ disort.doc: -----------------------------------------------
+
+     Documentation File for 'DISORT', A Discrete Ordinates Radiative
+   Transfer Fortran77 Program for a Multi-Layered Plane-Parallel Medium
+                        Version 1.1, Jan 1993
+
+------------------------ m3.5-upgrade (.asc, .ps, .wp51, .wp6): --------------------
+
+                     UPGRADING TO MODTRAN 3.5
+Lists changes from MODTRAN 3.0 to MODTRAN 3.5.
+
+------------------------ m3.0-upgrade.asc: -----------------------------------------
+
+                     UPGRADING TO MODTRAN 3.0
+Lists changes from MODTRAN 2.0 to MODTRAN 3.0.
+
+------------------------ modtrn3 (.wp6.ps, .wp6): ----------------------------------
+
+MODTRAN 3 user Instructions   1996
+
+------------------------ paper (.ps, .wp6) and figures (.ps, .wp6): ----------------
+
+FASCODE/ MODTRAN/ LOWTRAN: Past/ Present/ Future
+18th Annual Review Conference on Atmospheric Transmittion Models June 1995
+
+------------------------ refbkg.doc: ------------------------------------------------
+
+Reflectivity/Emissivity Files in MODTRAN
+
+ 
+	In subdirectory 'Documentation.dir' the 'm3.5-upgrade.*' files itemize the 
+upgrades between MODTRAN 3 and MODTRAN 3.5 and 'm3.0-upgrade' itemizes the 
+upgrades between MODTRAN 2 and MODTRAN 3.0. 
+
+        A compressed version of MODTRAN 3.5 is in the directory
+'mod3.5-compress*' parallel to the uncompressed 'modtran3.5' directory. The
+directory 'mod3.5-compress*' has two files, 'uncompress-instructions' and
+'modtran3.5-v*.*.tar.gz' which has the entire directory compressed with the
+gnu free software 'gzip'. Binary mode of ftp needs to be used when
+getting the compressed file 'modtran3.5-v*.*.tar.gz'.
+
+
+		MAKING THE BAND MODEL FILE 'MOLBMP96.BIN' 
+
+	The two files, 'molbmp.f' and 'MOLBMP96.ASC', in subdirectory 'DATA' are 
+needed for making the binary band model file 'MOLBMP96.BIN'. The file 
+'molbmp.f' is compiled independently of the other code, and the executable 
+should be run once to produce the 'MOLBMP96.BIN' file before the main 
+MODTRAN 3.5 code is compiled. 'molbmp.f' tests for the minimum record length 
+size, then states the correct number for 'RECL' to be used in 
+'Source.dir/SOURCE/bmdata.f' where '"MOLBMP96.BIN' is opened to be read by the 
+main MODTRAN 3.5 code.
+
+	'molbmp.f' prompts the user for the names of the files to be read and 
+written. The binary file name, 'MOLBMP96.BIN', is imbedded in the MODTRAN 3.5 
+source file in 'bmdata.f', but can be changed. 'molbmp.f' offers the option 
+of reading binary and writing ascii as well as the standard reading ascii and 
+writing binary. 
+
+	'molbmp.out' is an example of the output information that can be 
+compared with the with the output produced when making 'MOLBMP96.BIN'. No 
+compiler flags are needed. The old ascii band model tape UFTAPE.ASC is not 
+compatible with MODTRAN 3.5. More information about the band model changes are 
+listed in 'Documentation.dir/m3.5-upgrade.*'.
+
+
+		COMPILING THE CODE & MACHINE SPECIFIC PARAMETERS
+
+	The 'makefile' to be used with the UNIX 'make' utility is structured to be 
+run in a directory with two subdirectories, 'SOURCE' and 'OBJECTS'. The 
+subdirectory 'SOURCE' contains each subroutine as an independent file. The 
+'makefile' puts the object files in subdirectory 'OBJECTS'. Local variables 
+no longer need to be saved when compiling by using the machine dependent save 
+option. The only compile options used are '-O' to optimize and '-c' to 
+suppress linking and produce an object file from each source file.
+
+	The subroutine loop.f does not have the optimization flag in the makefile. 
+The solar single scattering calculation is slightly off when the Hp optimizes loop.f,
+but the Sun and SGI optimizers are fine. If you choose to optimize loop.f ,check 
+the solar single scattering numbers in tape6 for case1 against the numbers in case1.tp6.
+
+	On the SGI subroutine driver.f the '-O' flag gives the warning:
+
+uopt: Warning: driver_: this procedure not optimized because it
+      exceeds size threshold; to optimize this procedure, use -Olimit option
+      with value >= 1209.
+
+This is not a problem in that the code compiles and runs; driver.f is simply not 
+optimized. driver.f can be optimized by changing the '-O' flag to '-Olimit 1209'. 
+
+	There are a couple of machine dependent parameters in the code.  
+The file 'd1mach.f' contains double precision machine constants used 
+in the DISORT multiple scattering section. The comments in 'd1mach.f' 
+explain what appropriate changes need to be made.
+
+	The record length, 'RECL', used for reading and writing the binary band 
+model file 'MOLBMP96.BIN' is machine dependent and  needs to be put into
+the open statement for 'MOLBMP96.BIN' in 'Source.dir/SOURCE/bmdata.f'. The 
+correct number for the record length size, 'RECL', is determined when the 
+binary file 'MOLBMP96.BIN' is written by 'molbmp.f' in subdirectory 'DATA'. RECL is 60 
+for the Hp and Sun and is 15 for the SGI and DAC Alpha. It is important to make the 
+binary band model tape before compiling the main MODTRAN 3.5 executable.
+
+	The file 'PARAM.LST' contains the list of parameters used 
+to change the number of layers. This file is incorporated into the 
+MODTRAN 3.5 code with "include" statements.
+
+	The files that are compiled and linked together in 'Source.dir/SOURCE' for 
+the MODTRAN 3.5 executable are:
+
+Modtrn.f   c4dta.f    desatt.f   flxadd.f   msthml.f   ratio.f    stdmdl.f
+PARAM.LST  c6dta.f    dgbco.f    fndpth.f   newh2.f    rdexa.f    subsol.f
+ab.f       check.f    dgbfa.f    frn296.f   newsrc.f   rdnsm.f    sunbd.f 
+abcd.f     chekin.f   dgbsl.f    frq5dt.f   no2xs.f    rdsun.f    surfac.f
+abcdta.f   cirr18.f   dgeco.f    gamfog.f   nunit.f    reduce.f   svsola.f
+aerext.f   cirrus.f   dgefa.f    geo.f      o2cont.f   rhoeps.f   tab.f   
+aernsm.f   ckd.f      dgesl.f    geoinp.f   o2int.f    rnscat.f   tanht.f 
+aerprf.f   cldprf.f   disbbf.f   gmrain.f   o3chap.f   rtbis.f    terpev.f
+aertmp.f   cmpint.f   disort.f   gtstrt.f   o3hht0.f   schrun.f   terpso.f
+aitk.f     compar.f   dop.f      h2src.f    o3hht1.f   sctang.f   title.f 
+albtrn.f   convrt.f   dpandx.f   hengns.f   o3hht2.f   setdis.f   tnrain.f
+altrin.f   cph2o.f    dpexnt.f   hertda.f   o3int.f    setmtx.f   trans.f 
+asymtx.f   cpo3.f     dpfill.f   hno3.f     o3uv.f     sf260.f    trlay.f 
+atmcon.f   cptrcg.f   dpfish.f   idamax.f   o3uvfd.f   sf296.f    tstbad.f
+bbfn.f     cpumix.f   dpfnmn.f   indx.f     pf.f       shade.f    upbeam.f
+betabs.f   crdriv.f   dplayr.f   interp.f   phasef.f   shumg.f    upisot.f
+bfh2o.f    crmerg.f   dprarf.f   irfxn.f    phsdta.f   sint.f     usrint.f
+bmdata.f   crprof.f   dprfpa.f   jou.f      plkavg.f   slf260.f   vsa.f
+bmerfu.f   crspec.f   dpscht.f   lay5dt.f   praltr.f   slf296.f   vsansm.f
+bmflux.f   cruprf.f   dref.f     laycld.f   pravin.f   slftst.f   watvap.f
+bmload.f   cruspc.f   driver.f   layvsa.f   prfdta.f   smgeo.f    wrtbad.f
+bmod.f     cxdta.f    dscal.f    lepoly.f   prtinp.f   smprep.f   wrtdim.f
+bmtran.f   d1mach.f   dstdta.f   locate.f   prtint.f   so2xs.f    wvbnrg.f
+bmwids.f   dasum.f    dswap.f    loop.f     psi.f      soleig.f   xintrp.f
+bmxld.f    daxpy.f    errmsg.f   mapms.f    psieca.f   solve0.f   xmlatm.f
+bo2c.f     dbltx.f    exabin.f   mardta.f   pslct.f    solve1.f   xprofl.f
+bo3hh0.f   dchdc.f    expint.f   marine.f   qgausn.f   solzen.f   xsectb.f
+bo3hh1.f   ddot.f     extdta.f   mdta.f     rain.f     source.f   xterp.f 
+bo3hh2.f   debye.f    fdbeta.f   mlatmb.f   random.f   spaltr.f   zeroal.f
+bs.f       defalt.f   flayz.f    msrad.f    ranfun.f   ssgeo.f    zeroit.f
+c4d.f      del.f      fluxes.f   mssolr.f   ranset.f   ssrad.f
+
+
+		RUNNING THE MODTRAN 3.5 EXECUTABLE
+
+	There are four files that need to be in the path of the executable 
+MODTRAN 3.5 in directory 'DATA': 'MOLBMP96.BIN', 'CFCBMP96.ASC', 'sun_kur.dat' 
+and 'refbkg'. 'MOLBMP96.BIN' is the binary band model file.  'CFCBMP96.ASC', the 
+band model tape for the CFC's, is sufficiently small as not to require being 
+converted into binary from ascii format. 'sun_kur.dat' contains the 1 cm-1 
+"binned" solar irradiance data, and 'refbkg' contains the surface albedos for 
+ten background types: fresh snow cover, forest, farm, desert, ocean, cloud 
+deck, maple leaf and 3 grass models.
+
+ 	MODTRAN 3.5 is not an interactive code. It reads the input parameters 
+from a file named 'tape5' and writes output to the files 'tape6', 'tape7', 
+and the optional 'tape8' and 'plot.dat'. There are test cases in the directory 
+'Case.dir'. Use each ***.tp5 file as a test input tape5 and compare the tape6 
+with the given ***.tp6 file. A new test case, 'cld1.tp5', is an example of 
+how to use the new cloud parameters.
+
+		TAPE5 INPUT CARD CHANGES
+
+	The tape5 format for MODTRAN 3.0 without clouds should be compatible 
+with MODTRAN 3.5. 'Documentation.dir/cloud.*' describes the input changes for 
+cloud specifications. 
+
+	The modifications to the SUN1 and ISUN parameters in card 1b are descibed 
+in 'Documentation.dir/m3.5-upgrade.*'. 
+
+	(Q) SOLAR SPECTRUM
+	    The use of the solar irradiance function inputs SUN1 and ISUN (CARD1A) 
+	    has been modified.
+
+	    If SUN1 is .FALSE.,
+        	 solar irradiances are obtained from a block data containing
+         	KURUCZ data degraded to 5 cm-1 (FWHM triangular slit) resolution
+         	and tabulated each cm-1.
+
+	    If SUN1 is .TRUE.,
+        	 KURUCZ data from the file sun_kur.dat (formerly "sun2") is
+        	 degraded to |ISUN| cm-1 (FWHM triangular slit) resolution and
+        	 tabulated each cm-1.  If ISUN is negative, the resulting data
+        	 is output to file "sun####.dat", where #### is the resolution.
+
+
+
+	A new output file for plotting, 'plot.dat' that can be requested and defined 
+on card 4 is also described in 'Documentation.dir/m3.5-upgrade.*'.
+
+	(P) PLOT OUTPUT FILE
+	    MODTRAN 3.5 allows the user to create a plot (x vs y) output file, 
+	"plot.dat".
+	This file is defined using three new CARD 4 inputs, YFLAG, XFLAG and DLIMIT
+
+	    READ(IPR,'(4I10,2A1,A8)')IV1,IV2,IDV,IFWHM,YFLAG,XFLAG,DLIMIT
+
+	    If YFLAG is 'T' or 't', transmittances are output;
+	    If YFLAG is 'R' or 'r', radiances are output 
+		(irradiances if IEMSCT=3);   
+	    Otherwise, no plot.dat file is created.
+
+	    If XFLAG is 'M' or 'm', wavelengths are in um and radiances are in 
+		W SR-1 CM-2 / um;
+	    If XFLAG is 'N' or 'n', wavelengths are in NM and radiances are in 
+		uW SR-1 CM-2 / NM;
+	    Otherwise, frequencies are in CM-1 and radiances are in 
+		W SR-1 CM-2 / CM-1.
+    
+	    DLIMIT is the delimiter written between MODTRAN runs (IRPT>0).
+
+	If DLIMIT is blank, no separation is inserted between MODTRAN runs.  If a
+	delimiter is used, then the minimum and maximum transmittance/radiance is
+	written on the delimiter line.
+
+
+		LIST OF FILES & DIRECTORIES FOR THE COMPLETE 
+		MODTRAN 3.5 CODE ON THE PASSWORD FTP SITE
+
+        The directory is about 25741 Kbytes.
+
+Readme
+
+Case.dir:
+case1.tp5   case12.tp5  case2.tp5   case5.tp5   case9.tp5   ms2.tp5
+case1.tp6   case12.tp6  case2.tp6   case5.tp6   case9.tp6   ms2.tp6
+case10.tp5  case13.tp5  case3.tp5   case6.tp5   cld1.tp5
+case10.tp6  case13.tp6  case3.tp6   case6.tp6   cld1.tp6
+case11.tp5  case14.tp5  case4.tp5   case8.tp5   ms1.tp5
+case11.tp6  case14.tp6  case4.tp6   case8.tp6   ms1.tp6
+
+Changes.dir:
+changes-from-beta-v1.0-to-release-v1.0    code-v1.1     upgrade-v1.1
+
+DATA:
+CFCBMP96.ASC  MOLBMP96.ASC  molbmp.f      refbkg        sun_kur.dat
+
+Documentation.dir:
+cloud.asc          figures.ps         m3.5-upgrade.wp51  paper.ps
+cloud.ps           figures.wp6        m3.5-upgrade.wp6   paper.wp6
+cloud.wp51         m3.0-upgrade.asc   modtrn3.wp6        refbkg.doc
+cloud.wp6          m3.5-upgrade.asc   modtrn3.wp6.ps
+disort.doc         m3.5-upgrade.ps    paper-titles
+
+Source.dir:
+OBJECTS     SOURCE      make-notes  makefile
+
+Source.dir/SOURCE:
+Modtrn.f   c4dta.f    desatt.f   flxadd.f   msthml.f   ratio.f    stdmdl.f
+PARAM.LST  c6dta.f    dgbco.f    fndpth.f   newh2.f    rdexa.f    subsol.f
+ab.f       check.f    dgbfa.f    frn296.f   newsrc.f   rdnsm.f    sunbd.f 
+abcd.f     chekin.f   dgbsl.f    frq5dt.f   no2xs.f    rdsun.f    surfac.f
+abcdta.f   cirr18.f   dgeco.f    gamfog.f   nunit.f    reduce.f   svsola.f
+aerext.f   cirrus.f   dgefa.f    geo.f      o2cont.f   rhoeps.f   tab.f   
+aernsm.f   ckd.f      dgesl.f    geoinp.f   o2int.f    rnscat.f   tanht.f 
+aerprf.f   cldprf.f   disbbf.f   gmrain.f   o3chap.f   rtbis.f    terpev.f
+aertmp.f   cmpint.f   disort.f   gtstrt.f   o3hht0.f   schrun.f   terpso.f
+aitk.f     compar.f   dop.f      h2src.f    o3hht1.f   sctang.f   title.f 
+albtrn.f   convrt.f   dpandx.f   hengns.f   o3hht2.f   setdis.f   tnrain.f
+altrin.f   cph2o.f    dpexnt.f   hertda.f   o3int.f    setmtx.f   trans.f 
+asymtx.f   cpo3.f     dpfill.f   hno3.f     o3uv.f     sf260.f    trlay.f 
+atmcon.f   cptrcg.f   dpfish.f   idamax.f   o3uvfd.f   sf296.f    tstbad.f
+bbfn.f     cpumix.f   dpfnmn.f   indx.f     pf.f       shade.f    upbeam.f
+betabs.f   crdriv.f   dplayr.f   interp.f   phasef.f   shumg.f    upisot.f
+bfh2o.f    crmerg.f   dprarf.f   irfxn.f    phsdta.f   sint.f     usrint.f
+bmdata.f   crprof.f   dprfpa.f   jou.f      plkavg.f   slf260.f   vsa.f
+bmerfu.f   crspec.f   dpscht.f   lay5dt.f   praltr.f   slf296.f   vsansm.f
+bmflux.f   cruprf.f   dref.f     laycld.f   pravin.f   slftst.f   watvap.f
+bmload.f   cruspc.f   driver.f   layvsa.f   prfdta.f   smgeo.f    wrtbad.f
+bmod.f     cxdta.f    dscal.f    lepoly.f   prtinp.f   smprep.f   wrtdim.f
+bmtran.f   d1mach.f   dstdta.f   locate.f   prtint.f   so2xs.f    wvbnrg.f
+bmwids.f   dasum.f    dswap.f    loop.f     psi.f      soleig.f   xintrp.f
+bmxld.f    daxpy.f    errmsg.f   mapms.f    psieca.f   solve0.f   xmlatm.f
+bo2c.f     dbltx.f    exabin.f   mardta.f   pslct.f    solve1.f   xprofl.f
+bo3hh0.f   dchdc.f    expint.f   marine.f   qgausn.f   solzen.f   xsectb.f
+bo3hh1.f   ddot.f     extdta.f   mdta.f     rain.f     source.f   xterp.f 
+bo3hh2.f   debye.f    fdbeta.f   mlatmb.f   random.f   spaltr.f   zeroal.f
+bs.f       defalt.f   flayz.f    msrad.f    ranfun.f   ssgeo.f    zeroit.f
+c4d.f      del.f      fluxes.f   mssolr.f   ranset.f   ssrad.f
+

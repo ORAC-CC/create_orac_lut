@@ -1,0 +1,81 @@
+# Fengyun-4a AGRI  instrument definition for ORAC code
+# Channels 1-14 
+
+# Format
+# or * indicate a comment, can have blank lines. An = separates the constant and its value.
+
+# constants
+# + may be in any order
+# + are case insensitive (will be translated to lower case)
+# + may include spaces (they are ignored) 
+# e.g. Solar Channels is equivalent to solarchannels
+
+# uncertainty in albedo for solar channels and NedT for thermal and mixed thermal/solar channels
+
+# quantities specific to a channel can be indicated using the nadir channelid (as a number) in []
+platform = fengyun-4a
+instrument = agri
+instrument version = unknown
+
+# 0: single or N: dual view where N represents the channel offset of the slant view wrt the nadir view
+view = 0
+
+# specify instrument channels available as some instrument channels may be inapplicable, failed, too noisy etc
+available channels  = 1 2 3 4 5 6 7 8 9 10 11 12 13 14
+
+# specify which of the channels measure reflected solar radiation (includes channels around 4 um which have both a solar and emitted component)
+solar channels  = 1 2 3 4 5 6 7 8
+
+# specify which of the channels measure emitted thermal radiation (includes channels around 4 um which have both a solar and emitted component)
+thermal channels  = 7 8 9 10 11 12 13 14
+
+# Figure below captures the maximum value  
+maximum satellite zenith = 90
+
+# spectral response functions
+# taken from RTTOV spectral response function archive: https://www.nwpsaf.eu/site/software/rttov/download/coefficients/spectral-response-functions/
+# channels follow ORAC (ie OSCAR) order except atsr, atsr-2 and aatsr which are reversed. Note channel 7 & 8 have same srf
+ srf  [1] = rtcoef_fy4_1_agri_srf_ch01.txt
+ srf  [2] = rtcoef_fy4_1_agri_srf_ch02.txt
+ srf  [3] = rtcoef_fy4_1_agri_srf_ch03.txt
+ srf  [4] = rtcoef_fy4_1_agri_srf_ch04.txt
+ srf  [5] = rtcoef_fy4_1_agri_srf_ch05.txt
+ srf  [6] = rtcoef_fy4_1_agri_srf_ch06.txt
+ srf  [7] = rtcoef_fy4_1_agri_srf_ch07.txt
+ srf  [8] = rtcoef_fy4_1_agri_srf_ch07.txt
+ srf  [9] = rtcoef_fy4_1_agri_srf_ch08.txt
+ srf [10] = rtcoef_fy4_1_agri_srf_ch09.txt
+ srf [11] = rtcoef_fy4_1_agri_srf_ch10.txt
+ srf [12] = rtcoef_fy4_1_agri_srf_ch11.txt
+ srf [13] = rtcoef_fy4_1_agri_srf_ch12.txt
+ srf [14] = rtcoef_fy4_1_agri_srf_ch13.txt
+
+
+# Values from INTRODUCING THE NEW GENERATION OF CHINESE GEOSTATIONARY WEATHER SATELLITES, FENGYUN-4, Yang et al 2017.
+# channel random noise in percentage for solar channels and NEdT (K) for the thermal channels
+
+ snr [1] = 90
+ snr [2] = 150
+ snr [3] = 200
+ snr [4] = 150
+ snr [5] = 200
+ snr [6] = 200
+
+ refbt  [7] = 300
+ refbt  [8] = 300
+ refbt  [9] = 260
+ refbt [10] = 260
+ refbt [11] = 300
+ refbt [12] = 300
+ refbt [13] = 300
+ refbt [14] = 300
+
+ nedt   [7] = 0.7
+ nedt   [8] = 0.2
+ nedt   [9] = 0.3
+ nedt  [10] = 0.3
+ nedt  [11] = 0.2
+ nedt  [12] = 0.2
+ nedt  [13] = 0.2
+ nedt  [14] = 0.5
+

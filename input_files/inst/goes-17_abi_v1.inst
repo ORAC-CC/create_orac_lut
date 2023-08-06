@@ -1,0 +1,186 @@
+# GOES-17 instrument definition for ORAC code
+# Channels 1-16 
+
+# Format
+# or * indicate a comment, can have blank lines. An = separates the constant and its value.
+
+# constants
+# + may be in any order
+# + are case insensitive (will be translated to lower case)
+# + may include spaces (they are ignored) 
+# e.g. Solar Channels is equivalent to solarchannels
+
+# uncertainty in albedo for solar channels and NedT for thermal and mixed thermal/solar channels
+
+# quantities specific to a channel can be indicated using the nadir channelid (as a number) in []
+platform = goes-17
+instrument = abi
+instrument version = unknown
+
+# 0: single or N: dual view where N represents the channel offset of the slant view wrt the nadir view
+view = 0
+
+# specify instrument channels available as some instrument channels may be inapplicable, failed, too noisy etc
+available channels  = 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
+
+# specify which of the channels measure reflected solar radiation (includes channels around 4 um which have both a solar and emitted component)
+solar channels  = 1 2 3 4 5 6 7
+
+# specify which of the channels measure emitted thermal radiation (includes channels around 4 um which have both a solar and emitted component)
+thermal channels  = 7 8 9 10 11 12 13 14 15 16 
+
+# Figure below captures the maximum value  
+maximum satellite zenith = 90
+
+# spectral response functions
+# taken from RTTOV spectral response function archive: https://www.nwpsaf.eu/site/software/rttov/download/coefficients/spectral-response-functions/
+# channels follow ORAC (ie OSCAR) order except atsr, atsr-2 and aatsr which are reversed
+ srf  [1] = rtcoef_goes_17_abi_srf_ch01.txt
+ srf  [2] = rtcoef_goes_17_abi_srf_ch02.txt
+ srf  [3] = rtcoef_goes_17_abi_srf_ch03.txt
+ srf  [4] = rtcoef_goes_17_abi_srf_ch04.txt
+ srf  [5] = rtcoef_goes_17_abi_srf_ch05.txt
+ srf  [6] = rtcoef_goes_17_abi_srf_ch06.txt
+ srf  [7] = rtcoef_goes_17_abi_srf_ch07.txt
+ srf  [8] = rtcoef_goes_17_abi_srf_ch08.txt
+ srf  [9] = rtcoef_goes_17_abi_srf_ch09.txt
+ srf [10] = rtcoef_goes_17_abi_srf_ch10.txt
+ srf [11] = rtcoef_goes_17_abi_srf_ch11.txt
+ srf [12] = rtcoef_goes_17_abi_srf_ch12.txt
+ srf [13] = rtcoef_goes_17_abi_srf_ch13.txt
+ srf [14] = rtcoef_goes_17_abi_srf_ch14.txt
+ srf [15] = rtcoef_goes_17_abi_srf_ch15.txt
+ srf [16] = rtcoef_goes_17_abi_srf_ch16.txt
+
+
+# TEMPORARY 
+# Old SAD values N?A 
+# REMOVE when new error calculation implemented
+# oldF0 is the pre-launch in band solar radiance (W/(m^2 um)) for the solar channels
+ oldf0[1] = -999
+ oldf0[2] = -999
+ oldf0[3] = -999
+ oldf0[4] = -999
+ oldf0[5] = -999
+ oldf0[6] = -999
+ oldf0[7] = -999
+ 
+oldnefr[1] = -999 
+oldnefr[2] = -999 
+oldnefr[3] = -999
+oldnefr[4] = -999
+oldnefr[5] = -999
+oldnefr[6] = -999
+
+oldwvn[7]  = -999
+oldwvn[8]  = -999
+oldwvn[9]  = -999
+oldwvn[10] = -999
+oldwvn[11] = -999
+oldwvn[12] = -999
+oldwvn[13] = -999
+oldwvn[14] = -999 
+oldwvn[15] = -999 
+oldwvn[16] = -999
+
+oldb1[7]  = -999
+oldb1[8]  = -999
+oldb1[9]  = -999
+oldb1[10] = -999
+oldb1[11] = -999
+oldb1[12] = -999
+oldb1[13] = -999
+oldb1[14] = -999
+oldb1[15] = -999
+oldb1[16] = -999
+
+oldb2[7]  = -999
+oldb2[8]  = -999
+oldb2[9]  = -999
+oldb2[10] = -999
+oldb2[11] = -999
+oldb2[12] = -999
+oldb2[13] = -999
+oldb2[14] = -999
+oldb2[15] = -999
+oldb2[16] = -999
+
+oldt1[7]  = -999
+oldt1[8]  = -999
+oldt1[9]  = -999
+oldt1[10] = -999
+oldt1[11] = -999
+oldt1[12] = -999
+oldt1[13] = -999
+oldt1[14] = -999
+oldt1[15] = -999
+oldt1[16] = -999
+
+oldt2[7]  = -999
+oldt2[8]  = -999
+oldt2[9]  = -999
+oldt2[10] = -999
+oldt2[11] = -999
+oldt2[12] = -999
+oldt2[13] = -999
+oldt2[14] = -999
+oldt2[15] = -999
+oldt2[16] = -999
+
+oldnebt[7]  = -999
+oldnebt[8]  = -999
+oldnebt[9]  = -999
+oldnebt[10] = -999
+oldnebt[11] = -999
+oldnebt[12] = -999
+oldnebt[13] = -999 
+oldnebt[14] = -999
+oldnebt[15] = -999
+oldnebt[16] = -999
+
+# rgu radiance gain (W/(m^2 sr um count)) uncertainty for the solar channels
+# rou radiance offset (W/(m^2 sr um)) uncertainty for the solar channels
+# refbt (K) reference brightness temperature for the thermal channels
+# NEdT (K) noise equivalent delta T 
+# Values from https://www.ncdc.noaa.gov/sites/default/files/attachments/GOES-16_ABI-L1b-CMI_Full-Validation_ProductPerformanceGuide_v2.pdf
+
+# rgu [1] = 0.0004356
+# rgu [2] = 0.0002373
+# rgu [3] = 0.00005225
+# rgu [4] = 0.00003712
+# rgu [5] = 0.00001632
+# rgu [6] = 0.000008943
+# rou [1] = 0.2282
+# rou [2] = 0.2456
+# rou [3] = 0.4109
+# rou [4] = 0.2690
+# rou [5] = 0.02166
+# rou [6] = 0.008989
+
+snr [1] = 1135
+snr [2] = 412
+snr [3] = 751
+snr [4] = 1019
+snr [5] = 605
+snr [6] = 1043
+
+ refbt  [7] = 300
+ refbt  [8] = 300
+ refbt  [9] = 300
+ refbt [10] = 300
+ refbt [11] = 300
+ refbt [12] = 300
+ refbt [13] = 300
+ refbt [14] = 300
+ refbt [15] = 300
+ refbt [16] = 300
+ nedt   [7] = 0.086
+ nedt   [8] = 0.022
+ nedt   [9] = 0.022
+ nedt  [10] = 0.043
+ nedt  [11] = 0.022
+ nedt  [12] = 0.111
+ nedt  [13] = 0.039
+ nedt  [14] = 0.033
+ nedt  [15] = 0.109
+ nedt  [16] = 0.402

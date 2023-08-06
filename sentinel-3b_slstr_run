@@ -1,0 +1,13 @@
+#!/bin/bash
+source initpath.bash
+# monochromatic calculation
+# liquid-water section
+export CREATE_ORAC_LUT_DRIVER="input_files/driver/sentinel-3b_slstr_cloud.driver"
+echo "making ..." $CREATE_ORAC_LUT_DRIVER
+idl -e "create_orac_lut_wrapper,srf_quad=1,mmfile='liquid-water_old.mm',lutfile='liquid-water-cloud-2R.lut',tmatrix_path='/network/group/aopp/eodg/shared/dubovik_tmatrix/',version=13"
+
+# water-ice section
+export CREATE_ORAC_LUT_DRIVER="input_files/driver/sentinel-3b_slstr_cloud.driver"
+echo "making ..." $CREATE_ORAC_LUT_DRIVER
+idl -e "create_orac_lut_wrapper,srf_quad=1,mmfile='water-ice_ghm.mm',lutfile='ice-cloud-2R.lut',tmatrix_path='/network/group/aopp/eodg/shared/dubovik_tmatrix/',version=13"
+

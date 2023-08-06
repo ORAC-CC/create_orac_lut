@@ -1,0 +1,113 @@
+# AATSR instrument definition for ORAC code
+# Channels 1-7 are nadir 8-14 slant view 
+# slant channels are assumed to have same spectral response and noise as nadir channel with channelid 
+
+# Format
+# or * indicate a comment, can have blank lines. An = separates the constant and its value.
+
+# constants
+# + may be in any order
+# + are case insensitive (will be translated to lower case)
+# + may include spaces (they are ignored) 
+# e.g. Solar Channels is equivalent to solarchannels
+
+# uncertainty in albedo for solar channels and NedT for thermal and mixed thermal/solar channels
+
+# quantities specific to a channel can be indicated using the nadir channelid (as a number) in []
+platform = envisat
+instrument = aatsr
+instrument version = unknown
+
+# 0: single or N: dual view where N represents the number of channels in first view
+view = 7
+
+# specify instrument channels available as some instrument channels may be inapplicable, failed, too noisy etc
+available channels  = 1 2 3 4 5 6 7
+
+# specify which of the channels measure reflected solar radiation (includes channels around 4 um which have both a solar and emitted component)
+solar channels  = 1 2 3 4 5 
+
+# specify which of the channels measure emitted thermal radiation (includes channels around 4 um which have both a solar and emitted component)
+thermal channels  = 5 6 7 
+
+# Figure below captures the maximum value (55.8) with a little tolerance 
+maximum satellite zenith = 56
+
+# spectral response functions
+# taken from RTTOV spectral response function archive: https://www.nwpsaf.eu/site/software/rttov/download/coefficients/spectral-response-functions/
+# channels follow ORAC (ie OSCAR) order except atsr, atsr-2 and aatsr which are reversed
+ srf [1] = rtcoef_envisat_1_atsr-shifted_srf_ch07.txt
+ srf [2] = rtcoef_envisat_1_atsr-shifted_srf_ch06.txt
+ srf [3] = rtcoef_envisat_1_atsr-shifted_srf_ch05.txt
+ srf [4] = rtcoef_envisat_1_atsr-shifted_srf_ch04.txt
+ srf [5] = rtcoef_envisat_1_atsr-shifted_srf_ch03.txt
+ srf [6] = rtcoef_envisat_1_atsr-shifted_srf_ch02.txt
+ srf [7] = rtcoef_envisat_1_atsr-shifted_srf_ch01.txt
+
+# TEMPORARY 
+# Old SAD values from  /network/aopp/apres/ORAC_LUTS/aatsr/ENVISAT/
+# carried through for back compatibility 
+# REMOVE when new error calculation implemented
+# F1 is multiple of F0 so calculated
+
+oldf0[1] = 18.25
+oldf0[2] = 18.25
+oldf0[3] = 18.25
+oldf0[4] = 18.25
+oldf0[5] =  5.39
+
+oldnefr[1] = 0.005
+oldnefr[2] = 0.005
+oldnefr[3] = 0.005
+oldnefr[4] = 0.005
+
+oldwvn[5] = 2675.15
+oldwvn[6] = 921.61
+oldwvn[7] = 830.462
+
+oldb1[5]  = 228023.02
+oldb1[6]  = 9323.4507
+oldb1[7]  = 6821.7295
+
+oldb2[5]  = 3849.0896
+oldb2[6]  = 1326.0422
+oldb2[7]  = 1194.8956
+
+oldt1[5]  = 1.7269503
+oldt1[6]  = 0.1033266
+oldt1[7]  = 0.055009452
+
+oldt2[5]  = 0.99634349
+oldt2[6]  = 0.999253
+oldt2[7]  = 0.99928154
+
+oldnebt[5] = 0.25
+oldnebt[6] = 0.1
+oldnebt[7] = 0.1
+
+# channel random noise in percentage for solar channels and NEdT (K) for the thermal channels
+# SW calibration from https://doi.org/10.1016/S0273-1177(01)00273-3
+# IR calibration from https://earth.esa.int/sppa-reports/envisat/aatsr/cyclic/2009-04-06/AATSR_CR_78_090406_090511.pdf
+
+ rua[1] =0.025
+ rua[2] =0.031
+ rua[3] =0.020
+ rua[4] =0.031
+ 
+ rub[1] =0.00016
+ rub[2] =0.000088
+ rub[3] =0.00017
+ rub[4] =0.000044
+ 
+ ruc[1] =0.00016
+ ruc[2] =0.000088
+ ruc[3] =0.00017
+ ruc[4] =0.000044
+ 
+ refbt  [5] = 263.29
+ refbt  [6] = 263.29
+ refbt  [7] = 263.29
+ 
+ nedt   [5] = 0.0743
+ nedt   [6] = 0.0323
+ nedt   [7] = 0.0332

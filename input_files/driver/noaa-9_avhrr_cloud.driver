@@ -1,0 +1,14 @@
+# Non-optional arguments:
+input_files
+noaa-9_avhrr_v1.inst
+default.mm
+default.lut
+#   1  = 'Tropical Atmosphere'
+#   2  = 'Midlatitude Summer'
+#   3  = 'Midlatitude Winter'
+#   4  = 'Subarctic Summer'
+#   5  = 'Subarctic Winter'
+#   6  = '1976 US Standard'
+2                           # atmospheric gas model based on MODTRAN codes
+# Optional keyword parameters below:
+channelid=[1,2,3,4,5]

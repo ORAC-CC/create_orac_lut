@@ -1,0 +1,12 @@
+#DISTRIBUTEDBY = ???
+#SAMPLEFORM= ???
+#DESCRIPTION=???
+#REFERENCE = ???
+#COMMENT = From ORAC dust A75 mie file. god knows what it is.
+#SOURCE =???
+#SUBSTANCE = SSC
+#FORMAT = WAVL N K
+     0.55    1.40    0.0
+     0.67    1.40    0.0
+     0.87    1.40    0.0
+     1.60    1.40    0.0

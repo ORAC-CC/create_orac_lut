@@ -1,0 +1,13 @@
+#DISTRIBUTEDBY =
+#SAMPLEFORM= NotKnown
+#DESCRIPTION=Biomass burning from indonesian fire, aeronet 2015-2019
+#REFERENCE = 
+#COMMENT = from Elisa Carboni
+#SOURCE =
+#SUBSTANCE = Biomass
+#FORMAT = WAVL N K
+     0.440   1.483   0.0032
+     0.675   1.482   0.0027
+     0.870   1.485   0.0028
+     1.020   1.482   0.0028
+     15.00   1.482   0.0028

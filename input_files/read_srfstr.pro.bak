@@ -1,0 +1,48 @@
+
+;+
+; This proceedure reads in instrument spectral response functions in
+; the format used by RTTOV. See
+; https://www.nwpsaf.eu/site/software/rttov/download/coefficients/spectral-response-functions/
+; for files in this format for most satellite instruments.
+; The format is two columns (space delimited):
+; Wavenumber (cm^-1) | Fractional response, normalised so max=1
+; The files include a 4 line header consisting of:
+;   (i) Channel number (note this is backwards for atsr, atsr-2 and aatsr
+;  (ii) The text "Number of data points:"
+; (iii) Integer giving the number of lines of data
+;  (iv) Column headers: "Wavenumber (cm-1)" and "Filter response"
+; INPUT ARGUMENTS
+; filename   Filename to read
+; OUTPUT ARGUMENTS
+; srfstr     structure containing spectral response function
+; HISTORY
+; 2018/02/09 Gareth Thomas: Modified from the verison of the code that
+;       has been kicking about on the AOPP systems since about 2000.
+; 2018/02/22 Gareth Thomas: Updated to read the standardised RTTOV
+;       formatted SRF files
+; 2020/08/18 RGG Rewrite
+pro read_srfstr, filename, srfstr
+  openr,fID,filename,/GET_LUN
+    line=''
+    nrows=0l
+    for i=0,1 do readf,fID,line   ; Read first two header lines
+    readf,fID,nrows               ; Read number of data lines
+    readf,fID,line                ; Read final header line
+    data=fltarr(2,nrows)
+    readf,fID,data                ; Read data
+  free_lun,fID
+  wvn = reform(data[0,*])
+  srf = reform(data[1,*])  
+  wvl = 1E4/wvn 
+  
+  wvl_centre  = integrate_trapeziodal(wvl,srf*wvl)/integrate_trapeziodal(wvl,srf)
+  wvn_centre  = integrate_trapeziodal(wvn,srf*wvn)/integrate_trapeziodal(wvn,srf)
+ 
+  srfstr= {filename: file_basename(filename), $
+           NWvl: n_elements(wvl), $
+            wvl: wvl, $
+            wvn: wvn, $            
+            srf: srf, $  
+     wvl_centre: wvl_centre, $
+     wvn_centre: wvn_centre}    
+END

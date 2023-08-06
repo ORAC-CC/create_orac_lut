@@ -1,0 +1,18 @@
+#DISTRIBUTEDBY = ???
+#SAMPLEFORM= ???
+#DESCRIPTION=???
+#REFERENCE = ???
+#COMMENT = From ORAC dust A70 mie file. god knows what it is.
+#SOURCE =???
+#SUBSTANCE = MDC
+#FORMAT = WAVL N K
+     0.340	1.56    0.0055
+     0.380   	1.56    0.0045
+     0.440   	1.56    0.0029
+     0.470	1.56	0.0025
+     0.550	1.56	0.0018
+     0.670	1.56	0.0013
+     0.865	1.56	0.0010
+     1.020	1.56	0.0010
+     1.600	1.56	0.0007
+     2.150	1.56	0.0007

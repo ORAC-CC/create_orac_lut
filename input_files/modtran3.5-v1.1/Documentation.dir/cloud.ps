@@ -1,0 +1,3786 @@
+%!PS-Adobe
+%%BeginProlog
+/wpdict 300 dict def
+wpdict begin
+/d{bind def}bind def/l{load def}d/ec{exec def}d/cp/closepath l/cup/currentpoint l/cs/currentscreen l
+/cv/curveto l/drx{dtransform round x round x}d/f/eofill l/g/setgray l/gr/grestore l
+/gs/gsave l/ife{ifelse}d/ix/index l/li/lineto l/lc/setlinecap l
+/lj/setlinejoin l/m/moveto l/mx/matrix l/mcm{mx currentmatrix}d/sm/setmatrix l
+/np/newpath l/p/pop l/re/rotate l/rh/readhexstring l/rl/rlineto l/rm/rmoveto l/rs/restore l
+/setfl{dup 1 le{p 1 setflat}{setflat}ife}def/languagelevel where{p languagelevel}{1}ife
+2 lt{/sf{bzcnt 70 div setfl}d/fpath{bzcnt 4 div setflat}d}{/sf{}d/fpath{}d}ife
+/cf currentflat def/s{fpath flattenpath stroke}d/sc/scale l
+/sd/setdash l/ss/setscreen l/sv/save l/tr/translate l
+/w/setlinewidth l/x/exch l/xd{x def}d/c{3{255 div 3 1 roll}repeat setrgbcolor}d
+/bF false def/bF2 false def/bf 0 def/ds{gs 1 lc s gr}d/gd{255 div g}d
+/h{0 rm}d
+/lp{px li}d/mp{px m}d/nb 50 string def/osv 0 def/icl/initclip l/pf{gs f gr}def
+/pff{gs fill gr}def/pl{{px li}repeat}d/ps{gs s gr}def/plen 0 def/pwid 0 def
+/px{transform .25 sub round .25 add x .25 sub round .25 add x itransform}d
+/pxd{drx idtransform}d/rlp{pxd rl}d/rmp{pxd rm}d/_g{g}d/_lr{rlp}d/_s{s}d
+/_w{w}d/_m{mp}d/_rmxy{rmp}d/bzcnt 0 def/bzct{/bzcnt xd}def
+/bzcl{/bzcnt 0 def cf setflat}def/rF false def/sF false def/pth 0 def/ptw 0 def/pths 0 def/ptws 0 def/PColor 0 def
+/instpat 0 def/cm 0 def/slan 0 def/hscl 0 def/psz 0 def/xres 0 def/yres 0 def/pstr 0 def/lutb 0 def
+/rot 0 def/mir 0 def/HTd 0 def/WDd 0 def/ury 0 def/llx 0 def/lly 0 def/exstr 0 def/HTs 0 def/WDs 0 def
+/Hs 0 def/Ws 0 def/imc 0 def/Bdep 0 def/clu 0 def/curx 0 def/cury 0 def/Sx 0 def/Sy 0 def/xpos 0 def
+/ypos 0 def/lw 0 def/DUy 0 def/DUx 0 def/Ux 0 def/Uy 0 def/cml 0 def
+/cp3{3 copy}d/cp4{4 copy}d/cp6{6 copy}d/aosh{cp3 -4 -4 rm gs ashow gr
+cp3 4 0 rm gs ashow gr cp3 4 0 rm gs ashow gr cp3 0 4 rm gs ashow gr
+cp3 0 4 rm gs ashow gr cp3 -4 0 rm gs ashow gr cp3 -4 0 rm gs ashow gr
+cp3 0 -4 rm gs ashow gr currentrgbcolor 6 3 roll 1 g 4 0 rm ashow setrgbcolor}d
+/wosh{cp4 -4 -4 rm gs widthshow gr
+cp4 4 0 rm gs widthshow gr cp4 4 0 rm gs widthshow gr cp4 0 4 rm gs widthshow gr
+cp4 0 4 rm gs widthshow gr cp4 -4 0 rm gs widthshow gr cp4 -4 0 rm gs widthshow gr
+cp4 0 -4 rm gs widthshow gr currentrgbcolor 7 3 roll 1 g 4 0 rm widthshow setrgbcolor}d
+/awosh{cp6 -4 -4 rm gs awidthshow gr
+cp6 4 0 rm gs awidthshow gr cp6 4 0 rm gs awidthshow gr cp6 0 4 rm gs awidthshow gr
+cp6 0 4 rm gs awidthshow gr cp6 -4 0 rm gs awidthshow gr cp6 -4 0 rm gs awidthshow gr
+cp6 0 -4 rm gs awidthshow gr currentrgbcolor 9 3 roll 1 g 4 0 rm awidthshow setrgbcolor}d
+/assh{sv gs psz 20 div dup neg rm 4 1 roll cp3 ashow 4 -1 roll gr cp3 sv x currentfont/PaintType known
+{bf setfont}if 1 g ashow rs currentfont/PaintType known{currentfont mo setfont ashow}{aosh}ife cup 3 -1 roll rs m}d
+/wssh{sv gs psz 20 div dup neg rm 5 1 roll cp4 widthshow gr cp4 sv currentfont/PaintType known{bf setfont}if
+1 g 5 1 roll widthshow rs currentfont/PaintType known{currentfont mo setfont widthshow}{wosh}ife cup 3 -1 roll rs m}d
+/awssh{sv gs psz 20 div dup neg rm 7 1 roll cp6 awidthshow gr cp6 sv x currentfont/PaintType known{bf setfont}if
+1 g 7 1 roll awidthshow rs currentfont/PaintType known{currentfont mo setfont awidthshow}{awosh}ife cup 3 -1 roll rs m}d
+/B{/bF true def sF not{/S/bsh l/bF2 true def}if}d
+/b{/bF false def bF2{/S/show l/bF2 false def}if}d
+/bd{sv}d/bp{sv .06 .06 sc 0 0 m}d/bsh{gs psz 30 div 0 rm dup show gr show}d
+/clr{rF{6 3 roll p p p}{eq3{p p gd}{c}ife}ife}d/co{/pwid xd/plen xd
+osv 1 eq{0 pwid tr -90 re}if osv 2 eq{pwid plen tr 180 re}if
+osv 3 eq{plen 0 tr 90 re}if dup 1 eq{pwid 0 tr 90 re}if
+dup 2 eq{pwid plen tr 180 re}if dup 3 eq{0 plen tr -90 re}if/osv xd}d
+/cw{s initclip m 0 2 ix rl 0 rl 0 x neg rl clip np}d
+/DU{cup/DUy xd/DUx xd}d/du{gs sv 12 w cup -24 add m DUx DUy -24 add li s rs
+12 w cup -48 add m DUx DUy -48 add li s gr}d/ed{rs}d/ep{rs showpage 0 0 m}d
+/eq3{3 copy 2 ix eq{eq{true}{false}ife}{p p false}ife}d
+/ff{x rc x 3 div dup/psz xd scalefont dup/bf xd setfont}d
+/ffs{/slan x 10 div def/hscl x 1000 div def/psz x 3 div def
+[psz hscl mul 0 slan dup sin x cos div psz mul psz 0 0]
+x rc x makefont dup/bf xd setfont}d/fr{72 0 rmtx defaultmatrix dtransform
+/yres xd/xres xd xres dup mul yres dup mul add sqrt}d
+/is{sv 4 1 roll dup/pstr x 7 add 8 idiv string def
+3 1 roll tr dup 1 sc dup 1 1[5 -1 roll 0 0 1 0 0]{currentfile pstr rh p}
+cml 0 eq{image}{false 3 colorimage}ife rs}d/cexp{exstr 0 lutb 3 copy 7 -1 roll
+{get putinterval x 3 add x 3 copy}forall p p p p p}d/bwexp{dup 0 lutb 3 copy 7 -1 roll
+{get put x 1 add x 3 copy}forall p p p p p}d/NOM 0 def/INX 1 def/INY 2 def
+/p1x 0 def/p1y 0 def/p2x 0 def/p2y 0 def/p3x 0 def/p3y 0 def
+/idef{/p3y xd/p3x xd/p2y xd/p2x xd/p1y xd/p1x xd
+/rot xd/mir xd p3x p1x sub 1 add dup mul p1y p3y sub 1 add
+dup mul add sqrt/HTd xd p2y p1y sub 1 add dup mul p2x p1x
+sub 1 add dup mul add sqrt/WDd xd}def
+/mirror{mir NOM eq{Ws Hs sc}{mir INX eq{Ws neg Hs sc}
+{mir INY eq{Ws Hs neg sc}{Ws neg Hs neg sc}ife}ife}ife}def
+/ic{sv 6 1 roll tr 2 ix 2 ix sc[3 ix 0 0 5 ix neg 0 7 ix]
+2 1 roll true 3 1 roll imagemask rs}d/ieps{/ury xd/urx xd/lly xd/llx xd idef
+ury lly sub/HTs xd urx llx sub/WDs xd
+WDd WDs div/Ws xd HTd HTs div/Hs xd
+p3x p3y tr rot re mirror llx neg lly neg tr}def
+/im{sv 15 1 roll dup/pstr x string def/exstr x 3 mul string def
+/HTs xd/WDs xd/imc xd/Bdep xd/clu xd
+idef p1x p1y m cup transform/cury xd/curx xd rot re
+/Ws WDd def/Hs HTd def mirror curx cury itransform tr WDs HTs Bdep
+[WDs 0 0 HTs neg 0 0]{currentfile pstr rh p
+clu 1 eq{cexp}if clu 2 eq{bwexp}if}
+imc 0 eq{image}{false 3 colorimage}ife rs}d
+/kp{initclip clip np}d/l1{cup osv plen pwid 6 -1 roll rs sv}d
+/l2{bp 7 2 roll co m}d/osh{dup -4 -4 rm gs show gr
+dup 4 0 rm gs show gr dup 4 0 rm gs show gr dup 0 4 rm gs show gr
+dup 0 4 rm gs show gr dup -4 0 rm gs show gr dup -4 0 rm gs show gr
+dup 0 -4 rm gs show gr currentrgbcolor 4 3 roll 1 g 4 0 rm show setrgbcolor}d
+/mo{dup/OutlineFlag known not{dup dup length 2 add dict begin
+{1 ix/FID ne{def}{p p}ife}forall/UniqueID known{/UniqueID UniqueID 10000 add def}if
+/PaintType PaintType 0 eq{2}{PaintType}ife def/StrokeWidth 15 def/OutlineFlag true def
+/OutlineFont currentdict end definefont}if}d/O{currentfont/PaintType known{currentfont mo setfont}{/S/osh l}ife}d
+/o{currentfont/PaintType known{bf setfont}{/S/show l}ife}d/R{/rF true def currentrgbcolor 1 .25 .25 setrgbcolor}d
+/r{/rF false def eq3{1 sub neg gd p p}{setrgbcolor}ife}d/rc{dup FontDirectory x known{findfont}
+{dup nb cvs dup length 1 sub get 82 eq{dup nb cvs dup length 1 sub 0 x getinterval
+findfont begin currentdict dup length dict begin
+{1 ix/FID ne{def}{p p}ife}forall/FontName xd/Encoding WPen def
+currentdict dup end end/FontName get x definefont}
+{findfont}ife}ife}d/rmtx mx def/S/show l/A/ashow l/W/widthshow l/AW/awidthshow l/sg{neg 100 add 100 div g}d/SH{bF2{/bF2 false def}if/S/ssh l/A/assh l/W/wssh l/AW/awssh l/sF true def}d
+/sh{/S/show l/A/ashow l/W/widthshow l/AW/awidthshow l/sF false def bF{B}if}d/sp{gs s gr}d/ssh{sv x gs psz 20 div dup neg rm dup show gr dup sv x
+currentfont/PaintType known{bf setfont}if 1 g show rs currentfont/PaintType known{currentfont mo setfont show}{osh}ife
+cup 3 -1 roll rs m}d/ST{cup/Sy xd/Sx xd}d
+/st{gs cup psz 4 div add mp Sx Sy psz 4 div add lp 10 w s gr}d
+/U{cup/Uy xd/Ux xd}d/u{gs cup -24 add m Ux Uy -24 add li 12 w s gr}d
+/ul{cup osv plen pwid 7 -2 roll rs rs bp 6 1 roll co m}d/WPen StandardEncoding 256 array copy def 0
+[127/Aacute/Acircumflex/Adieresis/Agrave/Aring/Atilde/Ccedilla
+/Delta/Eacute/Ecircumflex/Edieresis/Egrave/Eth/Gamma/Iacute/Icircumflex/Idieresis/Igrave/Lambda/Ntilde/Oacute
+/Ocircumflex/Odieresis/Ograve/Omega/Otilde/Phi/Pi/Psi/Scaron/Sigma/TeXtext32/Theta/Thorn
+176/Pts
+181/dbar
+190/Hbar
+192/hbar
+201/Ldot
+204/ldot
+209/Uacute/Ucircumflex/Udieresis/Ugrave/Upsilon/Xi/Yacute
+/Ydieresis/Zcaron/aacute/acircumflex/adieresis/agrave/aring/atilde/brokenbar
+226/approxequal
+228/ccedilla/copyright/degree/divide
+236/dotlessj/eacute/ecircumflex/edieresis/egrave
+242/eth/ff/ffi
+246/ffl/iacute
+252/icircumflex/idieresis/igrave/logicalnot
+1/minus/mu/multiply/ntilde/oacute/ocircumflex/odieresis/ograve/onehalf/onequarter/onesuperior/otilde/plusminus
+/registered/scaron/thorn/threequarters/threesuperior/trademark/twosuperior/uacute/ucircumflex/udieresis
+/ugrave/yacute/ydieresis/zcaron/IJ/ij/Eng/eng
+]{dup type/nametype eq{WPen 2 ix 2 ix put p 1 add}{x
+p}ife}forall p/URy 0 def/URx	0 def/LLy 0 def/LLx	0 def/dxcg 0 def/dx1 0 def/dx2 0 def/dx3 0 def
+/cgray	0 def/curstep -1 def/dis 0 def/steps 0 def/gsteps 0 def/grot 0 def/gtype 0 def/ry 0 def
+/rx 0 def/botg	0 def/topg 0 def/bgc 0 def/tgc	0 def/cgc 0 def
+/extents{fpath flattenpath pathbbox/URy xd/URx xd/LLy xd/LLx xd}def
+/dxcolor{cml 0 eq{cgray dxcg sub dup/cgray xd curstep -1 eq{g}
+{/curstep curstep 1 sub def curstep 1 eq{p botg gd}{g}ife}ife}
+{cgc aload p dx3 sub 3 1 roll dx2 sub 3 1 roll
+dx1 sub 3 1 roll 3 array astore/cgc xd
+cgc aload p setrgbcolor}ife}d/box{LLx LLy m URx LLy li URx URy li LLx URy li cp s}def
+/calcdx{sub gsteps 1 sub div 255 div}def
+/computegdx{topg botg calcdx/dxcg xd}def/computeRGBdx{mark tgc aload p bgc aload p
+3 ix 1 ix calcdx/dx3 xd 4 ix 2 ix calcdx/dx2 xd
+5 ix 3 ix calcdx/dx1 xd cleartomark}def
+/ccdx{cml 0 eq{computegdx}{computeRGBdx}ife}def/stclr{cml 0 eq{topg gd/cgray currentgray def}
+{tgc aload p c currentrgbcolor 3 array astore/cgc xd}ife}def/lgf{/steps gsteps def
+ry 1 ne{stclr/gf{add}def/top URy LLy sub ry mul LLy add def
+/lw URy top sub steps .5 sub div def lgfdo}if
+stclr/gf{sub}def
+ry 1 ne{/lw top LLy sub steps .5 sub div def}if lgfdo}def
+/lgfdo{ry 1 ne{/center top def lw 2 div w
+LLx center lw 4 div gf m URx center lw 4 div gf li s
+/center center lw gf def LLx center m dxcolor}
+{/lw URy LLy sub steps div def/top URy lw 2 div sub def
+/center top def LLx top m/steps steps 1 add def}ife
+lw w steps 1 sub dup/curstep xd{URx center li s center lw gf/center xd
+LLx center m dxcolor}repeat/curstep -1 def}def/sgf{/steps gsteps .5 sub def
+/midx URx LLx sub 1 rx sub mul def/midy URy LLy sub ry mul def
+/width URx LLx sub def/dx width midx sub steps div def
+/height URy LLy sub def/dy height midy sub steps div def
+/dw width steps div def/dl height steps div def
+width w stclr/xpos LLx def/ypos URy def/lw width def/lh height def
+gsteps{xpos lw 2 div add ypos m xpos lw 2 div add ypos
+lh sub li s/lw lw dw sub def/lh lh dl sub def/xpos xpos dx add def/ypos ypos dy sub def
+lw w dxcolor}repeat/curstep -1 def}def
+/dfc{dup mul x dup mul add sqrt dup dis gt{/dis xd}{p}ife}def
+/fdis{URx LLx sub rx mul LLx add/midx xd
+URy LLy sub ry mul LLy add/midy xd
+/width URx LLx sub def/gcx width rx mul def/height URy LLy sub def/gcy height ry mul def
+gcx gcy dfc width gcx sub gcy dfc
+width gcx sub height gcy sub dfc gcx height gcy sub dfc}def/rgf{/steps gsteps def
+fdis/lw dis steps .5 sub div def/radius lw def lw 2 div w stclr
+midx lw 2 div sub midy m midx midy radius 2 div 0 361 arc s lw w
+steps 1 sub
+dup/curstep xd/curstep curstep 1 add def
+{dxcolor midx midy radius 0 361 arc s/radius radius lw add def}repeat/curstep -1 def}def
+/gf{fpath flattenpath/gsteps xd/grot xd/gtype xd/ry x 100 div def/rx x 100 div def
+cml 0 eq{gtype 1 eq{x}if/botg xd/topg xd}{gtype 1 eq{6 3 roll}if
+3 array astore/bgc xd
+3 array astore/tgc xd}ife
+sv[]0 sd eoclip gsteps 1 eq
+{stclr f}{mcm 3 get 0 gt{/grot grot 180 add def}if grot re extents
+gsteps 0 eq{csteps}if
+ccdx gtype 0 eq
+{lgf}{gtype 1 eq{sgf}{rgf}ife}ife}ife rs}d/csteps{fdis dis 72 div fr mul	cs p p dup xres
+eq{p p/gsteps xres def}{div/gsteps x round cvi dup 1 le{p 2}if def}ife}def
+/ssf{dup 0 eq{p}{cs 3 ix 3 1 roll ss p p}ife}d/ssa{cs 4 1 roll p 1 ix 4 -1 roll ss p}d
+/invalidcolortable? true def
+/PATsc{aload length dup 1 eq{p dup null eq{p}{gd}ife}{p c}ife}d
+/PATtcalc{gs x concat mcm x 2 ne{dup 4 get x dup 5 get x
+XStep 0 drx XStep div x XStep div x 0 YStep drx YStep div x YStep div x
+7 -3 roll astore}if gr}d
+/PATmp{x dup length 7 add dict copy begin TilingType PATtcalc
+/cm xd currentdict/Multi known not{/Multi 1 def}if/FontType 3 def/Encoding 256 array def
+3 string 0 1 255{Encoding x dup 3 ix cvs cvn put}for p
+/FontMatrix mx def/FontBBox BBox def/BuildChar{mark 3 1 roll x begin
+Multi 1 ne{PaintData x get}{p}ife PaintType 2 eq Multi 1 ne or
+{XStep 0 FontBBox aload p setcachedevice}{XStep 0 setcharwidth}ife currentdict/PaintProc load
+end gs false PATredef exec true PATredef gr
+cleartomark}d currentdict end/foo x definefont}d
+/PATpcalc{PATDict/CurrentPattern get begin gs
+cm sm BBox aload p p p tr pathbbox
+gr YStep div ceiling 4 1 roll XStep div ceiling 4 1 roll
+YStep div floor 4 1 roll XStep div floor 4 1 roll
+2 ix sub cvi abs x 3 ix sub cvi abs x
+4 2 roll YStep mul x XStep mul x end}d/PATfill{sv 5 1 roll PATDict/CurrentPattern get dup begin
+setfont cm sm PaintType 2 eq{PATDict/PColor get PATsc}if
+3 ix string 0 1 Multi 1 sub{3 ix 3 ix m
+Multi 1 ne{dup PaintColors x get PATsc}if
+0 1 7 ix 1 sub{2 ix x 2 ix put}for p
+3 ix{cup 2 ix show YStep add m}repeat}for
+5{p}repeat end rs}d/oldeofill/eofill l
+/oldfill/fill l/oldstroke/stroke l/oldshow/show l/oldwidthshow/widthshow l/PATredef{userdict begin
+{/eofill{/eoclip load PATdraw np}d/fill{/clip load PATdraw np}d
+/stroke{PATstroke}d/show{0 0 null 0 0 6 -1 roll PATawidthshow}d
+/widthshow{0 0 3 -1 roll PATawidthshow}d}{/eofill{oldeofill}d
+/fill{oldfill}d/stroke{oldstroke}d/show{oldshow}d/widthshow{oldwidthshow}d}ife end}d
+false PATredef
+/PATdraw{PATpcalc gs 5 -1 roll exec np PATfill gr}d
+/PATstroke{{cup strokepath m PATpcalc gs clip np PATfill gr np}stopped
+{0.1 g oldstroke (Path is too complex, filling with light gray)=}if}d
+/PATsstr 1 string def/PATawidthshow{{dup PATsstr dup 0 4 -1 roll put
+false charpath/clip load PATdraw cup np m
+3 ix eq{4 ix 4 ix rm}if 2 copy rm}forall
+p p p p p cup np m}d/PATDict 3 dict def/PATsp{true PATredef PATDict begin/CurrentPattern xd
+CurrentPattern/PaintType get 2 eq{/PColor xd}if/CColor[currentrgbcolor]def end}d
+/PATusp{false PATredef PATDict begin CColor aload p c end p}d
+/pdictt 20 dict def
+pdictt begin/dummy null def/PaintType 1 def/PatternType 1 def/TilingType 2 def/BBox[0 0 1 1]def
+/XStep 1 def/YStep 1 def/Multi 2 def/PaintData[{0 0 m 0 1 rl 1 0 rl 0 -1 rl cp
+PaintColors 0 get aload p null ne{f}if p p}
+{ptw pth true[ptw 0 0 pth neg 0 ptw]{Bitmap}imagemask}]def
+/PaintProc{begin exec end}d end/makedict{pdictt 20 dict copy dup begin
+x/Bitmap xd x/PaintColors xd gs initmatrix 1 1 drx idtransform sc
+[ptws 0 0 pths 0 0]PATmp gr end}d
+/setpat{/pth xd/ptw xd/pths xd/ptws xd makedict/instpat xd instpat PATsp}d/unsetpat{instpat PATusp}d
+/snl{{/noload sv def}if}d/enl{{noload rs}if}d/nc 1 def
+/colorimage where{p true}{false}ife{/nc 0
+statusdict begin/processcolors where{p p processcolors}
+{/deviceinfo where{p deviceinfo/Colors known
+{p{deviceinfo/Colors get}}if}if}ife end def
+nc 0 ne{systemdict/colorimage known
+systemdict/setcolortransfer known
+systemdict/currentcolortransfer known
+systemdict/currentcmykcolor known
+and and and not{/nc 0 def}if}if}if
+nc dup 1 ne x dup 3 ne x 4 ne and and{/nc 0 def}if
+nc 1 eq dup dup not snl{
+/expandbw{expandfactor mul round cvi bwclut x get 255 div}d
+/doclutimage{p/bwclut xd bpc dup 8 eq{p 255}{4 eq{15}{3}ife}ife
+/expandfactor xd[/expandbw load/exec load dup currenttransfer x]
+cvx bind settransfer
+iw ih bpc[1 0 0 -1 0 ih]setupimageproc
+image}d}if
+not enl
+nc dup 3 eq x 4 eq or
+dup dup not snl{/nullproc{{}}def
+/concatutil{/exec load 7 -1 roll/exec load}d/defsubclut{1 add getinterval def}d
+/spconcattransfer{/Dclut x def/Cclut x def/Bclut x def/Aclut x def/ncompute x l
+currentcolortransfer[{Aclut ncompute}concatutil]cvx[{Bclut ncompute}concatutil]cvx
+[{Cclut ncompute}concatutil]cvx[{Dclut ncompute}concatutil]cvx
+setcolortransfer}d/setuprgbcluts{/bit3x rgbclut length 3 sub def
+/bit1x bit3x 3 idiv def/rclut rgbclut def/gclut rclut 1 bit3x defsubclut
+/bclut rclut 2 bit3x defsubclut}d}if not enl
+nc 3 eq dup dup not snl{/3compute{x bit3x mul round cvi get 255 div}d
+/doclutimage{/rgbclut xd p setuprgbcluts/3compute rclut gclut bclut dup
+spconcattransfer iw ih bpc[1 0 0 -1 0 ih][setupimageproc/exec load/dup load dup]cvx
+nullproc nullproc true 3 colorimage}d}if not enl
+nc 4 eq
+dup dup not snl{/stuffclut{cmykindex 3 -1 roll put}d
+/ftoint{1 x sub 255 mul round cvi}d/4compute{x bit4x mul round cvi get 255 div}d
+/computecmykclut{setuprgbcluts/bit4x rgbclut length 3 idiv 4 mul 4 sub def
+/cmykclut bit4x 4 add string def/cclut cmykclut def
+/mclut cclut 1 bit4x defsubclut/yclut cclut 2 bit4x defsubclut
+/kclut cclut 3 bit4x defsubclut/cmykindex 0 def
+0 1 bit1x{dup/cmykindex x
+bit1x x sub 4 mul def 3 mul dup rclut x get 255 div
+x dup gclut x get 255 div x bclut x get 255 div
+setrgbcolor currentcmykcolor ftoint kclut stuffclut
+ftoint yclut stuffclut ftoint mclut stuffclut
+ftoint cclut stuffclut}for}d/doclutimage{/rgbclut xd p invalidcolortable?
+{computecmykclut}if/4compute cclut mclut yclut kclut spconcattransfer
+iw ih bpc[1 0 0 -1 0 ih][setupimageproc/exec load/dup load dup dup]cvx
+nullproc nullproc nullproc true 4 colorimage}d}if not enl
+nc 0 eq dup dup not
+snl{/las{3 mul 3 getinterval putinterval x
+3 add x 3 copy}d/8lookup/las l/4lookup{/byte 1 ix def -4 bitshift
+las byte 15 and las}d
+/2lookup{/byte 1 ix def -6 bitshift las
+byte -4 bitshift 3 and las byte -2 bitshift
+3 and las byte 3 and las}d/colorexpand{mystringexp 0 rgbclut
+3 copy 7 -1 roll/mylookup load forall p p p p p}d
+/createexpandstr{/mystringexp x mystring length mul string def}d
+/doclutimage{/rgbclut xd p/mylookup bpc 8 eq
+{3 createexpandstr/8lookup}{bpc 4 eq{6 createexpandstr/4lookup}{12 createexpandstr
+/2lookup}ife}ife l iw ih bpc[1 0 0 -1 0 ih]
+[setupimageproc/exec load/colorexpand load/exec load]cvx
+false 3 colorimage}d}if not enl
+/colorimage where{p true}{false}ife dup{/do24image{iw ih 8[1 0 0 -1 0 ih]
+setupimageproc false 3 colorimage}d}if
+dup dup snl not{/rgbtogray{/str xd/len str length def/smlen len 3 idiv def
+/rstr str def/gstr str 1 len 1 sub getinterval def/bstr str 2 len 2 sub getinterval def
+str dup 0 1 smlen 1 sub{dup 3 mul rstr 1 ix get .3 mul
+gstr 2 ix get .59 mul add bstr 3 -1 roll get .11 mul add
+round cvi put dup}for p 0 smlen getinterval}d/do24image{iw ih 8[1 0 0 -1 0 ih]
+[setupimageproc/exec load/rgbtogray load/exec load]cvx bind
+image}d}if enl/doimage{iw ih 8[1 0 0 -1 0 ih]setupimageproc image}d
+/setup1asciiproc{[currentfile mystring/rh cvx/p cvx]cvx bind}d
+/setup1binaryproc{[currentfile mystring/readstring cvx/p cvx]cvx bind}d
+/iw 0 def/ih 0 def/im_save 0 def/setupimageproc 0 def/polarity 0 def
+/smoothflag 0 def/mystring 0 def/bpc 0 def/beginimage{/im_save sv def dup 0 eq
+{p/setup1binaryproc}{1 eq{/setup1asciiproc}
+{(error, can't use level2 data acquisition procs for level1)print flush}ife}ife
+/setupimageproc x l/polarity xd/smoothflag xd tr sc/mystring x string def/bpc xd/ih xd/iw xd}d
+/endimage{im_save rs np}d/1bitbwcopyimage{1 g 0 0 m 0 1 rl 1 0 rl 0 -1 rl cp fill
+0 g iw ih polarity[1 0 0 -1 0 ih]setupimageproc imagemask}d/1bitcopyimage{setrgbcolor
+0 0 m 0 1 rl 1 0 rl 0 -1 rl cp fill
+setrgbcolor iw ih polarity[1 0 0 -1 0 ih]setupimageproc
+imagemask}d/1bitmaskimage{setrgbcolor
+iw ih polarity[1 0 0 -1 0 ih]setupimageproc
+imagemask}d
+/BeginEPSF{end
+userdict begin/showpage{}def
+/b4 sv def/d_cnt countdictstack def/op_cnt count 1 sub def
+0 setgray 0 setlinecap 1 setlinewidth 0 setlinejoin
+10 setmiterlimit[]0 setdash newpath/languagelevel where{p languagelevel 1 ne
+{false setstrokeadjust false setoverprint}if}if}d
+end
+userdict begin/EndEPSF{count op_cnt sub{pop}repeat
+countdictstack d_cnt sub{end}repeat b4 end restore wpdict begin}bind def end
+%%EndProlog
+ /#copies 1 def wpdict begin
+bd
+/cml 1 def
+letter 
+%%Page: 1 1 
+
+bp
+0 13200 10200 co
+/CourierR 600 ff
+0 13200 10200 co
+mcm
+1200 12000 tr
+1 -1 sc np 32 32 m
+7765 32 li 7765 10597 li 32 10597 li cp
+229 255 div g
+[] 0 sd 0 w 0 lj 0 lc fill np 32 32 m
+45 32 li 45 10597 li 32 10597 li cp
+0 255 div g
+13 w fill np 32 32 m
+7765 32 li 7765 45 li 32 45 li cp
+0 255 div g
+fill np 7752 32 m
+7765 32 li 7765 10597 li 7752 10597 li cp
+0 255 div g
+fill np 32 10584 m
+7765 10584 li 7765 10597 li 32 10597 li cp
+0 255 div g
+fill np 0 0 m
+13 0 li 13 10629 li 0 10629 li cp
+0 255 div g
+fill np 0 0 m
+7797 0 li 7797 13 li 0 13 li cp
+0 255 div g
+fill np 7784 0 m
+7797 0 li 7797 10629 li 7784 10629 li cp
+0 255 div g
+fill np 0 10616 m
+7797 10616 li 7797 10629 li 0 10629 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+7922 11289 m
+/Times-RomanR 600 ff
+0 255 div g
+(SSI-TR-267)S
+3697 9192 m
+17  0 32 (UPGRADE TO THE MODTRAN)W
+3675 8959 m
+17  0 32 (LAYER CLOUD/RAIN MODELS)W
+4611 7561 m
+17  0 32 (Prepared by)W
+4775 7095 m
+17  0 32 (A. Berk)W
+4182 6862 m
+17  0 32 (Spectral Sciences, inc.)W
+3946 6629 m
+17  0 32 (99 South Bedford Street, #7)W
+3930 6396 m
+17  0 32 (Burlington, MA 01803-5169)W
+4433 5231 m
+17  0 32 (G. P.  Anderson)W
+4088 4998 m
+17  0 32 (Phillips Laboratory/GPO)W
+4333 4765 m
+17  0 32 (29 Randolph Road)W
+3758 4532 m
+17  0 32 (Hanscom AFB, MA 01731-3010)W
+3510 3367 m
+17  0 32 (Under Contract No F19628-91-C-0130)W
+ep
+
+%%Page: 2 2 
+
+bp
+/CourierR 600 ff
+0 13200 10200 co
+5072 688 m
+/Times-RomanR 600 ff
+(i)S
+1200 11377 m
+2718 h /Times-BoldR 648 ff
+18  0 32 (TABLE OF CONTENTS)W
+/Times-RomanR 600 ff
+1200 10707 m
+1596 10707 m
+1200 10707 m
+17  0 32 (1.  INTRODUCTION)W
+3072 10707 m
+67  0 (.................................................)A
+2992 10707 m
+5908 h 17  0 32 (1)W
+1200 10274 m
+1596 10274 m
+1200 10274 m
+17  0 32 (2.  USERS INSTRUCTIONS)W
+3774 10274 m
+67  0 (...........................................)A
+3614 10274 m
+5286 h 17  0 32 (3)W
+1200 10041 m
+1596 10041 m
+2004 10041 m
+1596 10041 m
+17  0 32 (2.1  CARD 2A)W
+2955 10041 m
+67  0 (..................................................)A
+2845 10041 m
+6055 h 17  0 32 (4)W
+1200 9808 m
+1596 9808 m
+2004 9808 m
+1596 9808 m
+17  0 32 (2.2  CARD 2E1)W
+3072 9808 m
+67  0 (................................................)A
+2923 9808 m
+5877 h 17  0 32 (10)W
+1200 9575 m
+1596 9575 m
+2004 9575 m
+1596 9575 m
+17  0 32 (2.3  CARD 2E2)W
+3072 9575 m
+67  0 (................................................)A
+2923 9575 m
+5877 h 17  0 32 (11)W
+1200 9142 m
+1596 9142 m
+1200 9142 m
+17  0 32 (3.  CODE MODIFICATIONS)W
+3774 9142 m
+67  0 (..........................................)A
+3670 9142 m
+5130 h 17  0 32 (14)W
+4206 7965 m
+/Times-BoldR 648 ff
+18  0 32 (LIST OF TABLES)W
+/Times-RomanR 600 ff
+1200 7262 m
+17  0 32 (1.  Properties of the MODTRAN Cumulus and Stratus Type Model Clouds)W
+7518 7262 m
+67  0 (...........)A
+7391 7262 m
+1442 h 17  0 32 ( 5)W
+1200 6796 m
+17  0 32 (2.  New and Modified MODTRAN Common Blocks)W
+5646 6796 m
+67  0 (..........................)A
+5541 6796 m
+3192 h 17  0 32 ( 14)W
+1200 6330 m
+17  0 32 (3.  Modified MODTRAN Routines and their Changes)W
+5763 6330 m
+67  0 (.........................)A
+5632 6330 m
+3101 h 17  0 32 ( 16)W
+ep
+
+%%Page: 3 3 
+
+bp
+/Times-RomanR 600 ff
+0 13200 10200 co
+5050 688 m
+(1)S
+1200 11843 m
+/Times-RomanR 648 ff
+2931 h 18  0 32 (1.  INTRODUCTION)W
+1200 11133 m
+/Times-RomanR 600 ff
+1500 11133 m
+1  0 (Th)A
+(e)S
+21  0 32 ( MODTRAN layer cloud/rain models have been upgraded, making them both easier to)W
+1200 10784 m
+-3  0 (modify)A
+16  0 32 -3  0 ( and more flexible.  The )AW
+17  0 32 -3  0 (cloud models affected are all the cumulus and stratus type clouds,)AW
+1200 10435 m
+1  0 (both)A
+23  0 32 ( with and without rain i.e., cloud/rain models 1 through 10 \(the only change to the cirrus)W
+1200 10086 m
+17  0 32 (models is the introduction of improved layering\).  Upgrades to these models include:)W
+1200 9388 m
+1500 9388 m
+(\267)S
+1800 9388 m
+17  0 32 (adjustable cloud parameters:)W
+1200 9155 m
+1500 9155 m
+1800 9155 m
+(-)S
+2100 9155 m
+17  0 32 (thickness, )W
+1200 8922 m
+1500 8922 m
+1800 8922 m
+(-)S
+2100 8922 m
+17  0 32 (altitude, )W
+1200 8689 m
+1500 8689 m
+1800 8689 m
+(-)S
+2100 8689 m
+17  0 32 (vertical extinction, )W
+1200 8456 m
+1500 8456 m
+1800 8456 m
+(-)S
+2100 8456 m
+17  0 32 (column amounts, )W
+1200 8223 m
+1500 8223 m
+1800 8223 m
+(-)S
+2100 8223 m
+17  0 32 (humidity, and )W
+1200 7990 m
+1500 7990 m
+1800 7990 m
+(-)S
+2100 7990 m
+17  0 32 (scattering phase functions;)W
+1200 7524 m
+1500 7524 m
+(\267)S
+1800 7524 m
+17  0 32 (decoupling of the clouds from aerosols;)W
+1200 7058 m
+1500 7058 m
+(\267)S
+1800 7058 m
+17  0 32 (introduction of ice particles;)W
+1200 6592 m
+1500 6592 m
+(\267)S
+1800 6592 m
+17  0 32 (user-defined water droplet, ice particle and rain rate profiles;)W
+1200 6126 m
+1500 6126 m
+(\267)S
+1800 6126 m
+17  0 32 (user-defined cloud spectral properties; and)W
+1200 5660 m
+1500 5660 m
+(\267)S
+1800 5660 m
+17  0 32 (output of cloud/rain profiles and spectral data to tape6 \(NOPRT = -1\).)W
+1200 5078 m
+1500 5078 m
+17  0 32 -1  0 (The decoupling of the cloud and aerosol mod)AW
+17  0 32 (els has a number of implications.  Clouds and)W
+1200 4729 m
+1  0 (aerosols)A
+34  0 32 1  0 ( c)AW
+34  0 32 (an co-exist at a single altitude, or clouds can be modeled with no aerosol profiles)W
+1200 4380 m
+(included.)S
+18  0 32 (  When clouds and aerosols co-exist, the cloud water droplets, )W
+17  0 32 (cloud ice particles and)W
+1200 4031 m
+1  0 (aerosol)A
+41  0 32 ( particles may all have different scattering phase functions.  The single scatter solar)W
+1200 3682 m
+17  0 32 -1  0 (contribution of each component )AW
+17  0 32 (is properly combined \(for multiple scattering a single effective)W
+1200 3333 m
+(phase)S
+1 h 53  0 32 ( function is defined based on a scattering optical depth weighted Henyey-Greenstein)W
+1200 2984 m
+(asymmetry)S
+18  0 32 ( factor; )W
+17  0 32 (this is the same approach that is used to combine the aerosol and molecular)W
+1200 2635 m
+17  0 32 (scattering contributions\).)W
+1200 2286 m
+1500 2286 m
+1  0 (Clo)A
+(ud)S
+65  0 32 ( profiles are merged with the other atmospheric profiles \(pressure, temperature,)W
+1200 1937 m
+-1  0 (molecular)A
+16  0 32 -1  0 ( constituent and aerosol\) by combining )AW
+17  0 32 -1  0 (and adding layer boundaries.  Any cloud layer)AW
+1200 1588 m
+1  0 (boundary)A
+18  0 32 1  0 ( wi)AW
+18  0 32 (thin half a meter of an atmospheric boundary layer is translated to make the layer)W
+1200 1239 m
+-2  0 (altitudes)A
+13  0 32 -2  0 ( coincide; new )AW
+14  0 32 -2  0 (atmospheric layer boundaries are defined to accommodate the other cloud)AW
+ep
+
+%%Page: 4 4 
+
+bp
+/Times-RomanR 600 ff
+0 13200 10200 co
+5050 688 m
+(2)S
+1200 11855 m
+1  0 (laye)A
+(r)S
+26  0 32 ( boundaries.  If the total number of required layer boundaries increases above parameter)W
+1200 11506 m
+-2  0 (LAYDIM)A
+13  0 32 -2  0 ( \(defined in PARAM.LST\), a fatal error message is output indicating the required value)AW
+1200 11157 m
+-1  0 (of)A
+14  0 32 -1  0 ( LAYDIM.  )AW
+15  0 32 -1  0 (Cloud water droplet densities, ice particle densities and rain rates are all modeled)AW
+1200 10808 m
+17  0 32 (as varying linearly with altitude.)W
+1200 10459 m
+1500 10459 m
+17  0 32 -1  0 (Implementation of the cloud/rain model upgrades required changes to a lar)AW
+17  0 32 (ge number of the)W
+1200 10110 m
+17  0 32 (MODTRAN3 routines.  In addition, six new subroutines have been developed:)W
+1200 9412 m
+1500 9412 m
+17  0 32 (crdriv.f:  )W
+2400 9412 m
+17  0 32 (Drives set up of the cloud/rain models.)W
+1200 8946 m
+1500 8946 m
+17  0 32 (crprof.f: )W
+2400 8946 m
+17  0 32 -1  0 (Defines)AW
+10  0 32 -1  0 ( cloud water droplet and ice particle density profiles and )AW
+11  0 32 -1  0 (rain rate profiles.)AW
+1200 8480 m
+1500 8480 m
+17  0 32 (cruprf.f: )W
+2400 8480 m
+17  0 32 1  0 (Reads)AW
+24  0 32 1  0 ( i)AW
+24  0 32 (n user-defined profiles for cloud water droplet and ice particle densities)W
+2400 8247 m
+17  0 32 (and for rain rates.)W
+1200 7781 m
+1500 7781 m
+(crmerg.f:)S
+2400 7781 m
+17  0 32 (Merges cloud layer boundaries into the overall atmospheric layer boundaries.)W
+1200 7315 m
+1500 7315 m
+(crspec.f:)S
+2400 7315 m
+17  0 32 -1  0 (Defines water droplet )AW
+17  0 32 (and ice particle spectral extinction coefficients, absorption)W
+2400 7082 m
+17  0 32 (coefficients and asymmetry factors.)W
+1200 6616 m
+1500 6616 m
+(cruspc.f:)S
+2400 6616 m
+1  0 (Rea)A
+(ds)S
+104  0 32 ( in user-defined water droplet and ice particle spectral extinction)W
+2400 6383 m
+17  0 32 (coefficients, absorption coefficients, and asymmetry factors.)W
+1200 5801 m
+1  0 (Modification)A
+(s)S
+30  0 32 ( to the users instructions are described in Section 2.  Changes to MODTRAN3)W
+1200 5452 m
+17  0 32 (routines are detailed in Section 3.)W
+ep
+
+%%Page: 5 5 
+
+bp
+/Times-RomanR 600 ff
+0 13200 10200 co
+5050 688 m
+(3)S
+1200 11843 m
+/Times-RomanR 648 ff
+2595 h 18  0 32 (2.  USERS INSTRUCTIONS)W
+1200 11133 m
+/Times-RomanR 600 ff
+1500 11133 m
+(The)S
+1 h 75  0 32 ( use of some of the original MODTRAN input variables has been modified to)W
+1200 10784 m
+1  0 (accommo)A
+(date)S
+32  0 32 ( the cloud/rain model upgrades.  Setting the CARD 1 input NOPRT to -1 now)W
+1200 10435 m
+1  0 (prod)A
+(uces)S
+22  0 32 ( output of cloud/rain profile and spectral data.  The MODTRAN interpretation of the)W
+1200 10086 m
+-2  0 (CARD)A
+1 h 17  0 32 -2  0 ( 2 input IHAZE has been expanded.  Previously, the CARD 2 variable ICLD was ignored)AW
+1200 9737 m
+-2  0 (unless)A
+15  0 32 -2  0 ( a haze model was selected \(IHAZE  = 1-10\); now if ICLD equals 1-10, a cloud )AW
+16  0 32 -2  0 (is defined)AW
+1200 9388 m
+(with)S
+18  0 32 ( no aerosols if IHAZE )W
+17  0 32 (is negative.  Furthermore, if a haze model is selected \(IHAZE > 0\))W
+1200 9039 m
+1  0 (and)A
+55  0 32 ( ICLD is 1-10, the aerosol profiles are defined for a cloud-free atmosphere \(ICLD is)W
+1200 8690 m
+-1  0 (temporarily)A
+12  0 32 -1  0 ( set to 0\); after the aerosol model has been set up, a separate cloud model )AW
+13  0 32 -1  0 (is defined.)AW
+1200 8341 m
+1  0 (As)A
+18  0 32 1  0 ( b)AW
+18  0 32 (efore, if IHAZE is set to 0, no aerosol and cloud profiles are included in the MODTRAN)W
+1200 7992 m
+1  0 (calcu)A
+(lations.)S
+22  0 32 (  The CARD 3A2 input G has also been modified.  Previously, if solar scattering)W
+1200 7643 m
+1  0 (calculati)A
+(ons)S
+39  0 32 ( were performed with CARD 3A1 input IPH set equal to 0, G was used as the)W
+1200 7294 m
+1  0 (Henyey)A
+(-Greenstein)S
+68  0 32 ( scattering phase function asymmetry factor in the single scatter solar)W
+1200 6945 m
+-1  0 (calculations)A
+14  0 32 -1  0 ( for all aerosols and clouds.  Now )AW
+15  0 32 -1  0 (the CARD 3A2 input G is only used for aerosols,)AW
+1200 6596 m
+(and)S
+18  0 32 ( it )W
+17  0 32 (is used to describe the aerosol phase functions in both the single and multiple scattering)W
+1200 6247 m
+1  0 (calcu)A
+(lations.)S
+22  0 32 (  \(Previously, the multiple scattering calculation ignored the input value of G and)W
+1200 5898 m
+17  0 32 (simply used the internal model data.\))W
+1200 5549 m
+1500 5549 m
+17  0 32 -1  0 (If a cirrus cloud model is selected, i.e., ICLD equals 18, 19 or 20, CARD 2A inp)AW
+17  0 32 (uts remain)W
+1200 5200 m
+-1  0 (unchanged;)A
+17  0 32 ( however, the format has been modified for consistency with the liquid water cloud)W
+1200 4851 m
+(models:)S
+1200 4502 m
+U 17  0 32 (If ICLD = 18, 19 or 20)W
+u 1200 4153 m
+1500 4153 m
+17  0 32 (CARD 2A:)W
+3000 4153 m
+17  0 32 (CTHIK, CALT, CEXT, ISEED )W
+1200 3920 m
+1500 3920 m
+1800 3920 m
+2400 3920 m
+3000 3920 m
+(FORMAT\(3F8.3,I4\))S
+1200 3338 m
+-1  0 (As)A
+16  0 32 -1  0 ( always, an input of 0 for CTHIK, )AW
+17  0 32 -1  0 (CALT or CEXT yields the default value.  Now, assigning)AW
+1200 2989 m
+17  0 32 (a negative value to any of these CARD 2A variables also yields the default value.)W
+ep
+9 dict begin/FontType 3 def/FontMatrix[1 0 0 1 0 0]def
+/FontBBox[0 0 0 0]def
+/Encoding 256 array def
+0 1 255{Encoding x/.notdef put}for/Widths 256 array def
+0 1 255{Widths x 0 put}for/CharProcs 256 dict def
+CharProcs begin/.notdef{}def end
+/BuildChar{exch begin dup Widths exch get{}forall setcachedevice
+Encoding exch get CharProcs exch get end exec}def
+currentdict end/6000 x definefont p
+/6000 findfont begin CharProcs begin/24 {32 25 true
+[ 0.25 0 0 -0.25 -4 29 ]{<FFFFFF80FFFFFF80FFFFFF80E0000380E0000380E0000380E0000380E0000380E0000380E0000380E0000380E0000380E0000380E0000380E0000380E0000380E0000380E0000380E0000380E0000380E0000380E0000380FFFFFF80FFFFFF80FFFFFF80>}
+imagemask}def end
+Encoding 24 /24 put Widths 24 [132.0 0 16.0 16.0 144.0 116.0 ]put end
+
+%%Page: 6 6 
+
+bp
+/Times-RomanR 600 ff
+0 13200 10200 co
+5050 688 m
+(4)S
+1200 11855 m
+1500 11855 m
+1  0 (The)A
+36  0 32 1  0 ( new )AW
+36  0 32 (cloud/rain data are input through an expanded CARD 2A and new input lines,)W
+1200 11506 m
+17  0 32 (CARDS 2E1 and 2E2:)W
+1200 11157 m
+U 17  0 32 (If ICLD = 1 - 10)W
+u 1200 10808 m
+1500 10808 m
+17  0 32 (CARD 2A:)W
+3000 10808 m
+17  0 32 1  0 (CTHI)AW
+17  0 32 (K,)W
+65  0 32 ( CALT, CEXT, NCRALT, NCRSPC, CWAVLN, CCOLWD,)W
+1200 10575 m
+1500 10575 m
+1800 10575 m
+2400 10575 m
+3000 10575 m
+17  0 32 (CCOLIP, CHUMID, ASYMWD, ASYMIP )W
+1200 10342 m
+1500 10342 m
+1800 10342 m
+2400 10342 m
+3000 10342 m
+(FORMAT\(3F8.3,2I4,6F8.3\))S
+1200 9876 m
+U 17  0 32 (If ICLD = 1 - 10 and NCRALT )W
+u /Symbol 600 ff
+U 11  0 32 (\263)W
+u /Times-RomanR 600 ff
+U 17  0 32 ( 3)W
+u 1200 9527 m
+1500 9527 m
+17  0 32 (CARD 2E1:)W
+3000 9527 m
+17  0 32 (\(ZCLD\(I,0\), CLD\(I,0\), CLDICE\(I,0\), RR\(I,0\), I = 1, NCRALT\))W
+1200 9294 m
+1500 9294 m
+1800 9294 m
+2400 9294 m
+3000 9294 m
+(FORMAT\(4F10.5\))S
+1200 8828 m
+U 17  0 32 (If ICLD = 1 - 10 and NCRSPC )W
+u /Symbol 600 ff
+U 11  0 32 (\263)W
+u /Times-RomanR 600 ff
+U 17  0 32 ( 2)W
+u 1200 8479 m
+1500 8479 m
+17  0 32 (CARD 2E2:)W
+3000 8479 m
+17  0 32 (\(WAVLEN\(I\), EXTC\(6,I\), ABSC\(6,I\), ASYM\(6,I\),)W
+1200 8246 m
+1500 8246 m
+1800 8246 m
+2400 8246 m
+3000 8246 m
+17  0 32 (EXTC\(7,I\), ABSC\(7,I\), ASYM\(7,I\), I = 1, NCRSPC\))W
+1200 8013 m
+1500 8013 m
+1800 8013 m
+2400 8013 m
+3000 8013 m
+(FORMAT\(7F10.5\))S
+1200 7431 m
+17  0 32 (The meaning of each of these inputs is described in detail in the following sections.)W
+1200 6733 m
+/Times-BoldR 600 ff
+17  0 32 (2.1  )W
+U 17  0 32 (CARD 2A)W
+u /Times-RomanR 600 ff
+17  0 32 (:)W
+3000 6733 m
+17  0 32 1  0 (CTHI)AW
+17  0 32 (K,)W
+65  0 32 ( CALT, CEXT, NCRALT, NCRSPC, CWAVLN, CCOLWD,)W
+3000 6500 m
+17  0 32 (CCOLIP, CHUMID, ASYMWD, ASYMIP  [If ICLD =  1, 2, ..., 10] )W
+/Times-BoldR 600 ff
+1200 6267 m
+/Times-RomanR 600 ff
+1500 6267 m
+1800 6267 m
+2400 6267 m
+3000 6267 m
+(FORMAT\(3F8.3,2I4,6F8.3\))S
+1200 5685 m
+1500 5685 m
+1  0 (Defau)A
+(lt)S
+20  0 32 ( values can be assigned to any of the CARD 2A variables by setting them equal to)W
+1200 5336 m
+17  0 32 (negative nine.  All CARD 2A variables are set to their default value with the input line)W
+1200 4638 m
+/6000 findfont setfont/psz 200 def
+-4  0 (\030\030)A
+/Times-RomanR 600 ff
+-4  0 (-9.000)A
+/6000 findfont setfont/psz 200 def
+-4  0 (\030\030)A
+/Times-RomanR 600 ff
+-4  0 (-9.000)A
+/6000 findfont setfont/psz 200 def
+-4  0 (\030\030)A
+/Times-RomanR 600 ff
+-4  0 (-9.)A
+(000)S
+/6000 findfont setfont/psz 200 def
+(\030\030)S
+/Times-RomanR 600 ff
+(-9)S
+/6000 findfont setfont/psz 200 def
+(\030\030)S
+/Times-RomanR 600 ff
+(-9)S
+/6000 findfont setfont/psz 200 def
+(\030\030)S
+/Times-RomanR 600 ff
+(-9.000)S
+/6000 findfont setfont/psz 200 def
+(\030\030)S
+/Times-RomanR 600 ff
+(-9.000)S
+/6000 findfont setfont/psz 200 def
+(\030\030)S
+/Times-RomanR 600 ff
+(-9.000)S
+/6000 findfont setfont/psz 200 def
+(\030\030)S
+/Times-RomanR 600 ff
+(-9.000)S
+/6000 findfont setfont/psz 200 def
+(\030\030)S
+/Times-RomanR 600 ff
+(-9.000)S
+/6000 findfont setfont/psz 200 def
+(\030\030)S
+/Times-RomanR 600 ff
+(-9.000)S
+1200 3940 m
+(Note,)S
+18  0 32 ( a blank line will not generate the default values.  )W
+17  0 32 (In fact, setting all CARD 2A inputs to)W
+1200 3591 m
+17  0 32 (zero would produce an isotropic scattering ground-level cloud. )W
+1200 3242 m
+1500 3242 m
+17  0 32 (The variable )W
+/Times-BoldR 600 ff
+17  0 32 (CTHIK)W
+/Times-RomanR 600 ff
+17  0 32 ( is the cloud vertical thickness:)W
+1200 2544 m
+1500 2544 m
+1800 2544 m
+17  0 32 (CTHIK > 0.)W
+3000 2544 m
+3600 2544 m
+17  0 32 (Cloud vertical thickness [km])W
+1200 2195 m
+1500 2195 m
+1800 2195 m
+17  0 32 (CTHIK )W
+/Symbol 600 ff
+11  0 32 (\243)W
+/Times-RomanR 600 ff
+17  0 32 ( 0.)W
+3000 2195 m
+3600 2195 m
+17  0 32 (Use default cloud thickness)W
+1200 1497 m
+-1  0 (The)A
+16  0 32 -1  0 ( cloud vertical thickness is defined as the altitude difference )AW
+17  0 32 -1  0 (between the highest and lowest)AW
+1200 1148 m
+17  0 32 -1  0 (cloud profile boundary altitude for which either water droplet or ice particle density )AW
+17  0 32 (is positive.)W
+ep
+9 dict begin/FontType 3 def/FontMatrix[1 0 0 1 0 0]def
+/FontBBox[0 0 0 0]def
+/Encoding 256 array def
+0 1 255{Encoding x/.notdef put}for/Widths 256 array def
+0 1 255{Widths x 0 put}for/CharProcs 256 dict def
+CharProcs begin/.notdef{}def end
+/BuildChar{exch begin dup Widths exch get{}forall setcachedevice
+Encoding exch get CharProcs exch get end exec}def
+currentdict end/6001 x definefont p
+/6001 findfont begin CharProcs begin/37 {32 31 true
+[ 0.25 0 0 -0.25 0 22 ]{<006000C00060018000E0018000C0018000C0038001C003000180030001800300018007000380060003000E0003000E0007001C0007001C0006003C0006002C000E0068100E00D8300F01D8201F0398401B8F1D8019FC1F001870080038000000300000003000000070000000700000006000000060000000E0000000>}
+imagemask}def end
+Encoding 37 /37 put Widths 37 [120.0 0 0.0 -36.0 128.0 124.0 ]put end
+
+%%Page: 7 7 
+
+bp
+/Times-RomanR 600 ff
+0 13200 10200 co
+mcm
+1201 4913 tr
+1 -1 sc sm
+icl
+mcm
+1201 4913 tr
+1 -1 sc np 32 32 m
+709 32 li 709 509 li 32 509 li cp
+229 255 div g
+0 lc fill np 32 32 m
+45 32 li 45 509 li 32 509 li cp
+0 255 div g
+13 w fill np 32 32 m
+709 32 li 709 45 li 32 45 li cp
+0 255 div g
+fill np 32 496 m
+709 496 li 709 509 li 32 509 li cp
+0 255 div g
+fill np 0 0 m
+13 0 li 13 541 li 0 541 li cp
+0 255 div g
+fill np 0 0 m
+709 0 li 709 13 li 0 13 li cp
+0 255 div g
+fill np 0 528 m
+709 528 li 709 541 li 0 541 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+mcm
+1913 4913 tr
+1 -1 sc np 0 32 m
+1953 32 li 1953 509 li 0 509 li cp
+229 255 div g
+0 lc fill np 0 32 m
+13 32 li 13 509 li 0 509 li cp
+0 255 div g
+13 w fill np 0 32 m
+1953 32 li 1953 45 li 0 45 li cp
+0 255 div g
+fill np 0 496 m
+1953 496 li 1953 509 li 0 509 li cp
+0 255 div g
+fill np 0 0 m
+1953 0 li 1953 13 li 0 13 li cp
+0 255 div g
+fill np 0 528 m
+1953 528 li 1953 541 li 0 541 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+mcm
+3869 4913 tr
+1 -1 sc np 0 32 m
+1221 32 li 1221 509 li 0 509 li cp
+229 255 div g
+0 lc fill np 0 32 m
+13 32 li 13 509 li 0 509 li cp
+0 255 div g
+13 w fill np 0 32 m
+1221 32 li 1221 45 li 0 45 li cp
+0 255 div g
+fill np 0 496 m
+1221 496 li 1221 509 li 0 509 li cp
+0 255 div g
+fill np 0 0 m
+1221 0 li 1221 13 li 0 13 li cp
+0 255 div g
+fill np 0 528 m
+1221 528 li 1221 541 li 0 541 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+mcm
+5093 4913 tr
+1 -1 sc np 0 32 m
+1185 32 li 1185 509 li 0 509 li cp
+229 255 div g
+0 lc fill np 0 32 m
+13 32 li 13 509 li 0 509 li cp
+0 255 div g
+13 w fill np 0 32 m
+1185 32 li 1185 45 li 0 45 li cp
+0 255 div g
+fill np 0 496 m
+1185 496 li 1185 509 li 0 509 li cp
+0 255 div g
+fill np 0 0 m
+1185 0 li 1185 13 li 0 13 li cp
+0 255 div g
+fill np 0 528 m
+1185 528 li 1185 541 li 0 541 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+mcm
+6281 4913 tr
+1 -1 sc np 0 32 m
+1189 32 li 1189 509 li 0 509 li cp
+229 255 div g
+0 lc fill np 0 32 m
+13 32 li 13 509 li 0 509 li cp
+0 255 div g
+13 w fill np 0 32 m
+1189 32 li 1189 45 li 0 45 li cp
+0 255 div g
+fill np 0 496 m
+1189 496 li 1189 509 li 0 509 li cp
+0 255 div g
+fill np 0 0 m
+1189 0 li 1189 13 li 0 13 li cp
+0 255 div g
+fill np 0 528 m
+1189 528 li 1189 541 li 0 541 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+mcm
+7473 4913 tr
+1 -1 sc np 0 32 m
+1493 32 li 1493 509 li 0 509 li cp
+229 255 div g
+0 lc fill np 0 32 m
+13 32 li 13 509 li 0 509 li cp
+0 255 div g
+13 w fill np 0 32 m
+1493 32 li 1493 45 li 0 45 li cp
+0 255 div g
+fill np 1480 32 m
+1493 32 li 1493 509 li 1480 509 li cp
+0 255 div g
+fill np 0 496 m
+1493 496 li 1493 509 li 0 509 li cp
+0 255 div g
+fill np 0 0 m
+1525 0 li 1525 13 li 0 13 li cp
+0 255 div g
+fill np 1512 0 m
+1525 0 li 1525 541 li 1512 541 li cp
+0 255 div g
+fill np 0 528 m
+1525 528 li 1525 541 li 0 541 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+mcm
+1201 4369 tr
+1 -1 sc np 32 0 m
+45 0 li 45 345 li 32 345 li cp
+0 255 div g
+13 w 0 lc fill np 0 0 m
+13 0 li 13 345 li 0 345 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+mcm
+1913 4369 tr
+1 -1 sc np 0 0 m
+13 0 li 13 345 li 0 345 li cp
+0 255 div g
+13 w 0 lc fill 0 w 0 lc sm
+icl
+mcm
+3869 4369 tr
+1 -1 sc np 0 0 m
+13 0 li 13 345 li 0 345 li cp
+0 255 div g
+13 w 0 lc fill 0 w 0 lc sm
+icl
+mcm
+5093 4369 tr
+1 -1 sc np 0 0 m
+13 0 li 13 345 li 0 345 li cp
+0 255 div g
+13 w 0 lc fill 0 w 0 lc sm
+icl
+mcm
+6281 4369 tr
+1 -1 sc np 0 0 m
+13 0 li 13 345 li 0 345 li cp
+0 255 div g
+13 w 0 lc fill 0 w 0 lc sm
+icl
+mcm
+7473 4369 tr
+1 -1 sc np 0 0 m
+13 0 li 13 345 li 0 345 li cp
+0 255 div g
+13 w 0 lc fill np 1480 0 m
+1493 0 li 1493 345 li 1480 345 li cp
+0 255 div g
+fill np 1512 0 m
+1525 0 li 1525 345 li 1512 345 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+mcm
+1201 4021 tr
+1 -1 sc np 32 0 m
+45 0 li 45 345 li 32 345 li cp
+0 255 div g
+13 w 0 lc fill np 32 0 m
+709 0 li 709 13 li 32 13 li cp
+0 255 div g
+fill np 0 0 m
+13 0 li 13 345 li 0 345 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+mcm
+1913 4021 tr
+1 -1 sc np 0 0 m
+13 0 li 13 345 li 0 345 li cp
+0 255 div g
+13 w 0 lc fill np 0 0 m
+1953 0 li 1953 13 li 0 13 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+mcm
+3869 4021 tr
+1 -1 sc np 0 0 m
+13 0 li 13 345 li 0 345 li cp
+0 255 div g
+13 w 0 lc fill np 0 0 m
+1221 0 li 1221 13 li 0 13 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+mcm
+5093 4021 tr
+1 -1 sc np 0 0 m
+13 0 li 13 345 li 0 345 li cp
+0 255 div g
+13 w 0 lc fill np 0 0 m
+1185 0 li 1185 13 li 0 13 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+mcm
+6281 4021 tr
+1 -1 sc np 0 0 m
+13 0 li 13 345 li 0 345 li cp
+0 255 div g
+13 w 0 lc fill np 0 0 m
+1189 0 li 1189 13 li 0 13 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+mcm
+7473 4021 tr
+1 -1 sc np 0 0 m
+13 0 li 13 345 li 0 345 li cp
+0 255 div g
+13 w 0 lc fill np 0 0 m
+1493 0 li 1493 13 li 0 13 li cp
+0 255 div g
+fill np 1480 0 m
+1493 0 li 1493 345 li 1480 345 li cp
+0 255 div g
+fill np 1512 0 m
+1525 0 li 1525 345 li 1512 345 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+mcm
+1201 3673 tr
+1 -1 sc np 32 0 m
+45 0 li 45 345 li 32 345 li cp
+0 255 div g
+13 w 0 lc fill np 32 0 m
+709 0 li 709 13 li 32 13 li cp
+0 255 div g
+fill np 0 0 m
+13 0 li 13 345 li 0 345 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+mcm
+1913 3673 tr
+1 -1 sc np 0 0 m
+13 0 li 13 345 li 0 345 li cp
+0 255 div g
+13 w 0 lc fill np 0 0 m
+1953 0 li 1953 13 li 0 13 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+mcm
+3869 3673 tr
+1 -1 sc np 0 0 m
+13 0 li 13 345 li 0 345 li cp
+0 255 div g
+13 w 0 lc fill np 0 0 m
+1221 0 li 1221 13 li 0 13 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+mcm
+5093 3673 tr
+1 -1 sc np 0 0 m
+13 0 li 13 345 li 0 345 li cp
+0 255 div g
+13 w 0 lc fill np 0 0 m
+1185 0 li 1185 13 li 0 13 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+mcm
+6281 3673 tr
+1 -1 sc np 0 0 m
+13 0 li 13 345 li 0 345 li cp
+0 255 div g
+13 w 0 lc fill np 0 0 m
+1189 0 li 1189 13 li 0 13 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+mcm
+7473 3673 tr
+1 -1 sc np 0 0 m
+13 0 li 13 345 li 0 345 li cp
+0 255 div g
+13 w 0 lc fill np 0 0 m
+1493 0 li 1493 13 li 0 13 li cp
+0 255 div g
+fill np 1480 0 m
+1493 0 li 1493 345 li 1480 345 li cp
+0 255 div g
+fill np 1512 0 m
+1525 0 li 1525 345 li 1512 345 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+mcm
+1201 3325 tr
+1 -1 sc np 32 0 m
+45 0 li 45 341 li 32 341 li cp
+0 255 div g
+13 w 0 lc fill np 32 0 m
+709 0 li 709 13 li 32 13 li cp
+0 255 div g
+fill np 0 0 m
+13 0 li 13 341 li 0 341 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+mcm
+1913 3325 tr
+1 -1 sc np 0 0 m
+13 0 li 13 341 li 0 341 li cp
+0 255 div g
+13 w 0 lc fill np 0 0 m
+1953 0 li 1953 13 li 0 13 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+mcm
+3869 3325 tr
+1 -1 sc np 0 0 m
+13 0 li 13 341 li 0 341 li cp
+0 255 div g
+13 w 0 lc fill np 0 0 m
+1221 0 li 1221 13 li 0 13 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+mcm
+5093 3325 tr
+1 -1 sc np 0 0 m
+13 0 li 13 341 li 0 341 li cp
+0 255 div g
+13 w 0 lc fill np 0 0 m
+1185 0 li 1185 13 li 0 13 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+mcm
+6281 3325 tr
+1 -1 sc np 0 0 m
+13 0 li 13 341 li 0 341 li cp
+0 255 div g
+13 w 0 lc fill np 0 0 m
+1189 0 li 1189 13 li 0 13 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+mcm
+7473 3325 tr
+1 -1 sc np 0 0 m
+13 0 li 13 341 li 0 341 li cp
+0 255 div g
+13 w 0 lc fill np 0 0 m
+1493 0 li 1493 13 li 0 13 li cp
+0 255 div g
+fill np 1480 0 m
+1493 0 li 1493 341 li 1480 341 li cp
+0 255 div g
+fill np 1512 0 m
+1525 0 li 1525 341 li 1512 341 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+mcm
+1201 2981 tr
+1 -1 sc np 32 0 m
+45 0 li 45 313 li 32 313 li cp
+0 255 div g
+13 w 0 lc fill np 32 0 m
+709 0 li 709 13 li 32 13 li cp
+0 255 div g
+fill np 32 300 m
+709 300 li 709 313 li 32 313 li cp
+0 255 div g
+fill np 0 0 m
+13 0 li 13 345 li 0 345 li cp
+0 255 div g
+fill np 0 332 m
+709 332 li 709 345 li 0 345 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+mcm
+1913 2981 tr
+1 -1 sc np 0 0 m
+13 0 li 13 313 li 0 313 li cp
+0 255 div g
+13 w 0 lc fill np 0 0 m
+1953 0 li 1953 13 li 0 13 li cp
+0 255 div g
+fill np 0 300 m
+1953 300 li 1953 313 li 0 313 li cp
+0 255 div g
+fill np 0 332 m
+1953 332 li 1953 345 li 0 345 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+mcm
+3869 2981 tr
+1 -1 sc np 0 0 m
+13 0 li 13 313 li 0 313 li cp
+0 255 div g
+13 w 0 lc fill np 0 0 m
+1221 0 li 1221 13 li 0 13 li cp
+0 255 div g
+fill np 0 300 m
+1221 300 li 1221 313 li 0 313 li cp
+0 255 div g
+fill np 0 332 m
+1221 332 li 1221 345 li 0 345 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+mcm
+5093 2981 tr
+1 -1 sc np 0 0 m
+13 0 li 13 313 li 0 313 li cp
+0 255 div g
+13 w 0 lc fill np 0 0 m
+1185 0 li 1185 13 li 0 13 li cp
+0 255 div g
+fill np 0 300 m
+1185 300 li 1185 313 li 0 313 li cp
+0 255 div g
+fill np 0 332 m
+1185 332 li 1185 345 li 0 345 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+mcm
+6281 2981 tr
+1 -1 sc np 0 0 m
+13 0 li 13 313 li 0 313 li cp
+0 255 div g
+13 w 0 lc fill np 0 0 m
+1189 0 li 1189 13 li 0 13 li cp
+0 255 div g
+fill np 0 300 m
+1189 300 li 1189 313 li 0 313 li cp
+0 255 div g
+fill np 0 332 m
+1189 332 li 1189 345 li 0 345 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+mcm
+7473 2981 tr
+1 -1 sc np 0 0 m
+13 0 li 13 313 li 0 313 li cp
+0 255 div g
+13 w 0 lc fill np 0 0 m
+1493 0 li 1493 13 li 0 13 li cp
+0 255 div g
+fill np 1480 0 m
+1493 0 li 1493 313 li 1480 313 li cp
+0 255 div g
+fill np 0 300 m
+1493 300 li 1493 313 li 0 313 li cp
+0 255 div g
+fill np 1512 0 m
+1525 0 li 1525 345 li 1512 345 li cp
+0 255 div g
+fill np 0 332 m
+1525 332 li 1525 345 li 0 345 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+5050 688 m
+0 255 div g
+(5)S
+1364 4493 m
+/Times-RomanR 498 ff
+(ICLD)S
+2372 4493 m
+13  0 32 (CLOUD TYPE)W
+4027 4692 m
+(THICKNESS)S
+4294 4493 m
+(\(KM\))S
+5477 4692 m
+(BASE)S
+5500 4493 m
+(\(KM\))S
+6424 4692 m
+13  0 32 (.55 )W
+/6001 findfont setfont/psz 200 def
+(%)S
+/Times-RomanR 498 ff
+13  0 32 (M EXT)W
+6638 4493 m
+(\(KM)S
+/Times-RomanR 373 ff
+41 h ()S
+62 h ()S
+/Times-RomanR 498 ff
+(\))S
+6961 4561 m
+/Times-RomanR 373 ff
+(-1)S
+/Times-RomanR 498 ff
+7666 4692 m
+13  0 32 (COLUMN AMT)W
+7705 4493 m
+13  0 32 (\(KM GM / M)W
+/Times-RomanR 373 ff
+62 h 10  0 32 ()W
+/Times-RomanR 498 ff
+13  0 32 (\))W
+8655 4561 m
+/Times-RomanR 373 ff
+(3)S
+/Times-RomanR 498 ff
+1516 4146 m
+(1)S
+2014 4146 m
+(Cumulus)S
+4338 4146 m
+(2.34)S
+5543 4146 m
+(0.66)S
+6733 4146 m
+(92.6)S
+8010 4146 m
+(1.6640)S
+1516 3799 m
+(2)S
+2014 3799 m
+(Altostratus)S
+4338 3799 m
+(0.60)S
+5543 3799 m
+(2.40)S
+6692 3799 m
+(128.1)S
+8010 3799 m
+(0.3450)S
+1516 3452 m
+(3)S
+2014 3452 m
+(Stratus)S
+4338 3452 m
+(0.67)S
+5543 3452 m
+(0.33)S
+6733 3452 m
+(56.9)S
+8010 3452 m
+(0.2010)S
+1516 3105 m
+(4)S
+2014 3105 m
+(Stratus/Strato-Cumulus)S
+4338 3105 m
+(1.34)S
+5543 3105 m
+(0.66)S
+6733 3105 m
+(38.7)S
+8010 3105 m
+(0.2165)S
+1516 2758 m
+(5)S
+2014 2758 m
+(Nimbostratus)S
+4338 2758 m
+(0.50)S
+5543 2758 m
+(0.16)S
+6733 2758 m
+(92.0)S
+8010 2758 m
+(0.3460)S
+/CourierR 600 ff
+1990 5027 m
+/Times-BoldR 549 ff
+15  0 32 (Table 1)W
+/Times-RomanR 549 ff
+15  0 32 (.  Properties of the MODTRAN Cumulus and Stratus Type Model Clouds.)W
+/CourierR 600 ff
+1200 11855 m
+/Times-RomanR 600 ff
+(This)S
+54  0 32 ( definition can be a little confusing.  Consider, for example, the MODTRAN default)W
+1200 11506 m
+-1  0 (altostratus)A
+13  0 32 -1  0 ( cloud.  The default thickness for this cloud is 0.6 km, with a )AW
+14  0 32 -1  0 (2.4 km base and 3.0 km)AW
+1200 11157 m
+-1  0 (top.)A
+14  0 32 -1  0 (  That is, the lowest cloud altitude with a positive liquid )AW
+15  0 32 -1  0 (water droplet density is 2.4 km and)AW
+1200 10808 m
+-1  0 (the)A
+13  0 32 -1  0 ( highest cloud profile altitude with a positive )AW
+14  0 32 -1  0 (liquid water droplet density is 3.0 km.  But, the)AW
+1200 10459 m
+1  0 (wa)A
+(ter)S
+19  0 32 ( droplet density for the altostratus cloud is actually positive between 2.0 and 3.5 km; 2.0)W
+1200 10110 m
+1  0 (km)A
+19  0 32 1  0 ( is the )AW
+19  0 32 (cloud profile altitude just below 2.4 km and 3.5 km is the cloud profile altitude just)W
+1200 9761 m
+1  0 (above)A
+29  0 32 ( 3.0 km \(more typical would be to have sharper boundaries for the model clouds, with)W
+1200 9412 m
+17  0 32 (densities falling to zero within tens of meters\).)W
+1200 9063 m
+1500 9063 m
+(If)S
+18  0 32 ( the altostratus cloud thickness is doubled by setting CTHIK to )W
+17  0 32 (1.2 km \(the default value)W
+1200 8714 m
+-2  0 (is)A
+16  0 32 -2  0 ( 0.6 km\) and a new cloud base is not entered \(see CALT below\), the cloud )AW
+17  0 32 -2  0 (base would be kept)AW
+1200 8365 m
+-2  0 (at)A
+14  0 32 -2  0 ( 2.4 km, but its top would be )AW
+15  0 32 -2  0 (increased to 3.6 km.  In fact, the entire cloud would be stretched.)AW
+1200 8016 m
+(New)S
+19  0 32 ( zero liquid water droplet density boundary altitudes would be defined at 1.6 and 4.6 km.)W
+1200 7667 m
+(The)S
+28  0 32 ( final effect would be to exactly double the vertical cloud particle column densities.  For)W
+1200 7318 m
+17  0 32 -1  0 (clouds with rain \(ICLD = 6-10\), the rain profiles above cloud bottom \(i.e. withi)AW
+17  0 32 (n the cloud\) are)W
+1200 6969 m
+17  0 32 -1  0 (stretched/compressed proportional to the change in cloud thickness.  If the stretching of a)AW
+17  0 32 ( cloud)W
+1200 6620 m
+-2  0 (is)A
+15  0 32 -2  0 ( so great that the zero water particle density boundary )AW
+16  0 32 -2  0 (is predicted to extend below ground, this)AW
+1200 6271 m
+17  0 32 -1  0 (boundary is brought up to the ground; in this case, the in)AW
+17  0 32 (crease in column densities is less than)W
+1200 5922 m
+(proportional.)S
+24  0 32 (  The 10 MODTRAN cloud/rain models are derived from 5 distinct clouds.  The)W
+1200 5573 m
+17  0 32 (default thicknesses for these clouds are listed in Table 1.)W
+ep
+
+%%Page: 8 8 
+
+bp
+/Times-RomanR 600 ff
+0 13200 10200 co
+5050 688 m
+(6)S
+1200 11855 m
+1500 11855 m
+17  0 32 -1  0 (For cloud/rain models \(ICLD = 1-10\), the input )AW
+/Times-BoldR 600 ff
+17  0 32 -1  0 (CALT)AW
+/Times-RomanR 600 ff
+17  0 32 -1  0 ( is t)AW
+17  0 32 (he cloud base altitude relative to)W
+1200 11506 m
+17  0 32 (ground level:)W
+1200 10808 m
+1500 10808 m
+1800 10808 m
+17  0 32 (CALT )W
+/Symbol 600 ff
+11  0 32 (\263)W
+/Times-RomanR 600 ff
+17  0 32 ( 0.)W
+3000 10808 m
+3600 10808 m
+17  0 32 (Cloud base altitude relative to ground level [km])W
+1200 10459 m
+1500 10459 m
+1800 10459 m
+17  0 32 (CALT < 0.)W
+3000 10459 m
+3600 10459 m
+17  0 32 (Use default cloud base altitude)W
+1200 9761 m
+-2  0 (This)A
+16  0 32 -2  0 ( differs from the meaning of CALT in the cirrus cloud models \(ICLD = 18, 19 )AW
+17  0 32 -2  0 (or 20\) which)AW
+1200 9412 m
+17  0 32 -1  0 (define base altitude relative to sea level.  Note that a value of zero translates the cloud )AW
+17  0 32 (down to)W
+1200 9063 m
+-1  0 (the)A
+16  0 32 -1  0 ( ground; the user must enter a negative altitude to have the )AW
+17  0 32 -1  0 (cloud automatically placed at the)AW
+1200 8714 m
+-1  0 (default)A
+15  0 32 -1  0 ( altitude.  As )AW
+16  0 32 -1  0 (noted above, base altitude is defined as the lowest cloud profile altitude for)AW
+1200 8365 m
+17  0 32 (which either the water droplet or ice particle density is positive.)W
+1200 8016 m
+1500 8016 m
+17  0 32 -1  0 (If there is a non-constan)AW
+17  0 32 (t rain profile below a cloud, that profile is stretched or compressed)W
+1200 7667 m
+-2  0 (depending)A
+-1 h 16  0 32 -2  0 ( upon whether the base altitude is increased or decreased.  If the cloud base is lowered)AW
+1200 7318 m
+-2  0 (too)A
+12  0 32 -2  0 ( much, )AW
+13  0 32 -2  0 (the predicted zero water particle altitude can drop below ground.  In this case, the zero)AW
+1200 6969 m
+17  0 32 -1  0 (water particle altitude is)AW
+17  0 32 ( defined to be the ground, and the rain rate is assumed to vary linearly)W
+1200 6620 m
+17  0 32 -1  0 (altitude from ground level to cloud base.  The default cloud base for each of the 5 MO)AW
+17  0 32 (DTRAN)W
+1200 6271 m
+17  0 32 (water droplet cloud models is listed in Table 1.)W
+1200 5922 m
+1500 5922 m
+17  0 32 (The input )W
+/Times-BoldR 600 ff
+17  0 32 (CEXT)W
+/Times-RomanR 600 ff
+17  0 32 ( is the cloud liquid water droplet and ice particle vertical extinction:)W
+1200 5224 m
+1500 5224 m
+1800 5224 m
+17  0 32 (CEXT > 0.)W
+3000 5224 m
+3600 5224 m
+17  0 32 (Cloud water particle vertical extinction [km)W
+/Times-RomanR 450 ff
+50 h 12  0 32 ()W
+75 h 12  0 32 ()W
+/Times-RomanR 600 ff
+17  0 32 (])W
+7198 5306 m
+/Times-RomanR 450 ff
+(-1)S
+/Times-RomanR 600 ff
+1200 4875 m
+1500 4875 m
+1800 4875 m
+17  0 32 (CEXT )W
+/Symbol 600 ff
+11  0 32 (\243)W
+/Times-RomanR 600 ff
+17  0 32 ( 0.)W
+3000 4875 m
+3600 4875 m
+17  0 32 (Do not scale extinction coefficients)W
+1200 4177 m
+1  0 (The)A
+32  0 32 1  0 ( vert)AW
+32  0 32 (ical cloud optical depth is defined as the product of CEXT and CTHIK.  For cirrus)W
+1200 3828 m
+1  0 (clouds,)A
+35  0 32 1  0 ( )AW
+35  0 32 (CEXT is always referenced to the center of the visible spectrum, 0.55 \002m.  For the)W
+1200 3479 m
+-2  0 (cloud/rain)A
+12  0 32 -2  0 ( models, ICLD = 1-10, CEXT is defined for wavelength )AW
+13  0 32 -2  0 (CWAVLN \(see below\).  Thus,)AW
+1200 3130 m
+-3  0 (if)A
+16  0 32 -3  0 ( you )AW
+17  0 32 -3  0 (are studying long-wave cloud spectra, you can now directly input the long-wave extinction.)AW
+1200 2781 m
+1500 2781 m
+1  0 (With)A
+(in)S
+21  0 32 ( the code, CEXT is used to scale the extinction \(and absorption\) coefficient curves.)W
+1200 2432 m
+-2  0 (The)A
+12  0 32 -2  0 ( ratio of the )AW
+13  0 32 -2  0 (input optical depth \(CEXT * CTHIK\) to the calculated optical depth \(the product)AW
+1200 2083 m
+-2  0 (of)A
+10  0 32 -2  0 ( column )AW
+11  0 32 -2  0 (density and extinction coefficient at CWAVLN, summed for both liquid water droplets)AW
+1200 1734 m
+-1  0 (and)A
+10  0 32 -1  0 ( ice particles\) is determined.  The extinction and )AW
+11  0 32 -1  0 (absorption coefficients at all frequencies are)AW
+ep
+
+%%Page: 9 9 
+
+bp
+/Times-RomanR 600 ff
+0 13200 10200 co
+5050 688 m
+(7)S
+1200 11855 m
+17  0 32 -1  0 (multiplied by this ratio.  The default cloud extinction at 0)AW
+17  0 32 (.55 \002m for each of the 5 MODTRAN)W
+1200 11506 m
+17  0 32 (liquid water droplet model clouds is listed in Table 1.)W
+1200 11157 m
+1500 11157 m
+1  0 (The)A
+20  0 32 ( input )W
+/Times-BoldR 600 ff
+20  0 32 (NCRALT)W
+/Times-RomanR 600 ff
+20  0 32 ( is the number of layer boundary altitudes if a user-defined cloud/rain)W
+1200 10808 m
+17  0 32 (profile is being input:)W
+1200 10110 m
+1500 10110 m
+1800 10110 m
+17  0 32 (NCRALT )W
+/Symbol 600 ff
+11  0 32 (\263)W
+/Times-RomanR 600 ff
+17  0 32 ( 3)W
+3600 10110 m
+17  0 32 1  0 (Number)AW
+59  0 32 ( of layer boundary altitudes in user-defined cloud/rain)W
+3600 9877 m
+17  0 32 (profile \(READ CARDS 2E1\))W
+1200 9411 m
+1500 9411 m
+1800 9411 m
+17  0 32 (NCRALT < 3)W
+3600 9411 m
+17  0 32 (Use default cloud profile for ICLD)W
+1200 8829 m
+-2  0 (The)A
+14  0 32 -2  0 ( maximum allowed )AW
+15  0 32 -2  0 (value for NCRALT is 16, parameter NZCLD in PARAM.LST; this value)AW
+1200 8480 m
+(c)S
+-1 h 17  0 32 (an be increased, but this change requires some modification of block data MDTA.  NCRALT)W
+1200 8131 m
+17  0 32 -1  0 (must be at least 3 to define the cloud base, the clo)AW
+17  0 32 (ud top, and the highest boundary altitude for)W
+1200 7782 m
+1  0 (which)A
+19  0 32 1  0 ( the )AW
+19  0 32 (water droplet and ice particle densities must be zero.   It is generally recommended)W
+1200 7433 m
+1  0 (that)A
+18  0 32 1  0 ( the altit)AW
+18  0 32 (ude below which cloud densities are zero also be included in the cloud profile.  If)W
+1200 7084 m
+1  0 (thi)A
+(s)S
+22  0 32 ( altitude is not entered, MODTRAN assumes that the cloud densities drop to zero 1 meter)W
+1200 6735 m
+17  0 32 (below the cloud base.)W
+1200 6386 m
+1500 6386 m
+17  0 32 (If user-defined cloud spectral data is input, )W
+/Times-BoldR 600 ff
+17  0 32 (NCRSPC)W
+/Times-RomanR 600 ff
+17  0 32 ( is the number of wavelength entries:)W
+1200 5688 m
+1500 5688 m
+1800 5688 m
+17  0 32 (NCRSPC )W
+/Symbol 600 ff
+11  0 32 (\263)W
+/Times-RomanR 600 ff
+17  0 32 ( 2)W
+3600 5688 m
+17  0 32 1  0 (Num)AW
+17  0 32 (ber)W
+65  0 32 ( of wavelength at which cloud spectral data is being)W
+3600 5455 m
+17  0 32 (entered \(READ CARDS 2E2\))W
+1200 4989 m
+1500 4989 m
+1800 4989 m
+17  0 32 (NCRSPC < 2)W
+3600 4989 m
+17  0 32 (Use default spectral data for ICLD)W
+1200 4407 m
+1  0 (NCRSPC)A
+25  0 32 1  0 ( m)AW
+25  0 32 (ust be at least 2 so the minimum and maximum wavelengths do not coincide.  A)W
+1200 4058 m
+-1  0 (maximum)A
+16  0 32 -1  0 ( of )AW
+17  0 32 -1  0 (101 wavelengths \(parameter MXWVLN in PARAM.LST\) may be input; this limit)AW
+1200 3709 m
+17  0 32 (may be increased by simply increasing MXWVLN and re-compiling the code.)W
+1200 3360 m
+1500 3360 m
+1  0 (As)A
+31  0 32 ( noted above, the )W
+/Times-BoldR 600 ff
+31  0 32 (CWAVLN)W
+/Times-RomanR 600 ff
+31  0 32 ( input is the reference wavelength used in defining cloud)W
+1200 3011 m
+17  0 32 (vertical extinction:)W
+1200 2313 m
+1500 2313 m
+1800 2313 m
+17  0 32 (CWAVLN )W
+/Symbol 600 ff
+11  0 32 (\263)W
+/Times-RomanR 600 ff
+17  0 32 ( 0.2 and)W
+3600 2313 m
+4200 2313 m
+17  0 32 (Reference wavelength for defining)W
+1200 1964 m
+1500 1964 m
+1800 1964 m
+17  0 32 (CWAVLN )W
+/Symbol 600 ff
+11  0 32 (\243)W
+/Times-RomanR 600 ff
+17  0 32 ( 200.0)W
+3600 1964 m
+4200 1964 m
+17  0 32 (cloud vertical extinction [)W
+/6001 findfont setfont/psz 200 def
+(%)S
+/Times-RomanR 600 ff
+17  0 32 (m])W
+ep
+
+%%Page: 10 10 
+
+bp
+/Times-RomanR 600 ff
+0 13200 10200 co
+5050 688 m
+(8)S
+1200 11855 m
+1500 11855 m
+1800 11855 m
+17  0 32 (CWAVLN < 0.2 or)W
+3600 11855 m
+4200 11855 m
+17  0 32 (The reference wavelength for defining)W
+1200 11506 m
+1500 11506 m
+1800 11506 m
+17  0 32 (CWAVLN > 200.0)W
+3600 11506 m
+4200 11506 m
+17  0 32 (cloud vertical extinction is 0.55 )W
+/6001 findfont setfont/psz 200 def
+(%)S
+/Times-RomanR 600 ff
+17  0 32 (m)W
+1200 10808 m
+1  0 (The)A
+31  0 32 1  0 ( var)AW
+31  0 32 (iable CWAVLN is only used if a positive value for CEXT is input.  Furthermore, if)W
+1200 10459 m
+-1  0 (CWAVLN)A
+13  0 32 -1  0 ( is )AW
+14  0 32 -1  0 (outside the spectral range of user-defined cloud spectral data \(CARD 2E2\), a fatal)AW
+1200 10110 m
+17  0 32 (error message is logged and execution terminated.)W
+1200 9761 m
+1500 9761 m
+17  0 32 (The input )W
+/Times-BoldR 600 ff
+17  0 32 (CCOLWD)W
+/Times-RomanR 600 ff
+17  0 32 ( is the water droplet \(WD\) cloud vertical column density:)W
+1200 9063 m
+1500 9063 m
+1800 9063 m
+17  0 32 (CCOLWD )W
+/Symbol 600 ff
+11  0 32 (\263)W
+/Times-RomanR 600 ff
+17  0 32 ( 0.)W
+3600 9063 m
+17  0 32 (Cloud liquid water droplet vertical column density or)W
+1200 8830 m
+1500 8830 m
+1800 8830 m
+2400 8830 m
+3600 8830 m
+17  0 32 (amount [KM GM / M)W
+/Times-RomanR 450 ff
+75 h 12  0 32 ()W
+/Times-RomanR 600 ff
+17  0 32 (])W
+5414 8912 m
+/Times-RomanR 450 ff
+(3)S
+/Times-RomanR 600 ff
+1200 8364 m
+1500 8364 m
+1800 8364 m
+17  0 32 (CCOLWD < 0.)W
+3600 8364 m
+17  0 32 (Do not scale the water droplet densities)W
+1200 7782 m
+-2  0 (MODTRAN)A
+11  0 32 -2  0 ( determines the ratio of )AW
+12  0 32 -2  0 (the input water droplet vertical column density to the column)AW
+1200 7433 m
+(density)S
+1 h 20  0 32 ( calculated from the input cloud base and thickness, and from the default water droplet)W
+1200 7084 m
+-1  0 (densities.)A
+12  0 32 -1  0 (  Then )AW
+13  0 32 -1  0 (all the water droplet densities are scaled by this ratio so that the desired column)AW
+1200 6735 m
+17  0 32 (amount results.)W
+1200 6386 m
+1500 6386 m
+-1  0 (It)A
+12  0 32 -1  0 ( should be noted that if the cloud being modeled only has )AW
+13  0 32 -1  0 (liquid water and a positive cloud)AW
+1200 6037 m
+1  0 (vertica)A
+(l)S
+44  0 32 ( extinction, CEXT, is input, then the MODTRAN predicted path transmittances and)W
+1200 5688 m
+1  0 (radiances)A
+26  0 32 ( are independent of CCOLWD.  An increase in liquid water droplet column amount)W
+1200 5339 m
+(simply)S
+1 h 54  0 32 ( produces a proportional decrease in spectral extinction and absorption coefficients.)W
+1200 4990 m
+1  0 (How)A
+(ever,)S
+52  0 32 ( if the spectral data are not being scaled to give a particular vertical extinction,)W
+1200 4641 m
+(increasing)S
+1 h 33  0 32 ( column density will decrease transmission through the cloud.  Furthermore, if the)W
+1200 4292 m
+-3  0 (cloud)A
+16  0 32 -3  0 ( consists of )AW
+17  0 32 -3  0 (both liquid water droplets and ice particles, CCOLWD can be used to customize)AW
+1200 3943 m
+(the)S
+24  0 32 ( relative contribution from the two particle types.  The default cloud water droplet column)W
+1200 3594 m
+17  0 32 (densities for the 5 MODTRAN liquid water clouds are listed in Table 1.)W
+1200 3245 m
+1500 3245 m
+17  0 32 (The input )W
+/Times-BoldR 600 ff
+17  0 32 (CCOLIP)W
+/Times-RomanR 600 ff
+17  0 32 ( is the ice particle \(IP\) cloud vertical column density:)W
+1200 2547 m
+1500 2547 m
+1800 2547 m
+17  0 32 (CCOLIP )W
+/Symbol 600 ff
+11  0 32 (\263)W
+/Times-RomanR 600 ff
+17  0 32 ( 0.)W
+3600 2547 m
+17  0 32 (Cloud ice particle vertical column density or)W
+1200 2314 m
+1500 2314 m
+1800 2314 m
+2400 2314 m
+3600 2314 m
+17  0 32 (amount [KM GM / M)W
+/Times-RomanR 450 ff
+75 h 12  0 32 ()W
+/Times-RomanR 600 ff
+17  0 32 (])W
+5414 2396 m
+/Times-RomanR 450 ff
+(3)S
+/Times-RomanR 600 ff
+1200 1848 m
+1500 1848 m
+1800 1848 m
+17  0 32 (CCOLIP < 0.)W
+3600 1848 m
+17  0 32 (Do not scale the ice particle densities)W
+ep
+9 dict begin/FontType 3 def/FontMatrix[1 0 0 1 0 0]def
+/FontBBox[0 0 0 0]def
+/Encoding 256 array def
+0 1 255{Encoding x/.notdef put}for/Widths 256 array def
+0 1 255{Widths x 0 put}for/CharProcs 256 dict def
+CharProcs begin/.notdef{}def end
+/BuildChar{exch begin dup Widths exch get{}forall setcachedevice
+Encoding exch get CharProcs exch get end exec}def
+currentdict end/6002 x definefont p
+/6002 findfont begin CharProcs begin/9 {8 59 true
+[ 0.25 0 0 -0.25 -14 44 ]{<E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0E0>}
+imagemask}def end
+Encoding 9 /9 put Widths 9 [120.0 0 56.0 -60.0 88.0 236.0 ]put end
+
+%%Page: 11 11 
+
+bp
+/Times-RomanR 600 ff
+0 13200 10200 co
+5050 688 m
+(9)S
+1200 11855 m
+-2  0 (Generally,)A
+15  0 32 -2  0 ( CCOLIP is used to scale ice particle )AW
+16  0 32 -2  0 (density the same way CCOLWD is used to scale)AW
+1200 11506 m
+-1  0 (water)A
+11  0 32 -1  0 ( droplet )AW
+12  0 32 -1  0 (density.  However, two points should be noted:  \(1\) The MODTRAN cumulus and)AW
+1200 11157 m
+1  0 (strat)A
+(us)S
+20  0 32 ( type clouds \(ICLD = 1 - 10\) do not contain ice particles; thus, only user-defined cloud)W
+1200 10808 m
+1  0 (profiles)A
+42  0 32 1  0 ( \(se)AW
+42  0 32 (e CARD 2E1 below\) can be scaled using CCOLIP.  \(2\) If both CCOLWD and)W
+1200 10459 m
+1  0 (CCOLIP)A
+23  0 32 1  0 ( ar)AW
+23  0 32 (e zero, they are both reset to -1; it does not make sense to define a cloud with no)W
+1200 10110 m
+17  0 32 (liquid water droplets or ice particles.)W
+1200 9761 m
+1500 9761 m
+-2  0 (The)A
+11  0 32 -2  0 ( input )AW
+/Times-BoldR 600 ff
+12  0 32 -2  0 (CHUMID)AW
+/Times-RomanR 600 ff
+12  0 32 -2  0 ( is the relative humidity at all layer boundaries with either a positive rain)AW
+1200 9412 m
+17  0 32 (rate or a positive cloud density:)W
+1200 8714 m
+1500 8714 m
+1800 8714 m
+17  0 32 (CHUMID > 0. and)W
+3600 8714 m
+4200 8714 m
+17  0 32 (Cloud/rain relative humidity [%])W
+1200 8365 m
+1500 8365 m
+1800 8365 m
+17  0 32 (CHUMID )W
+/Symbol 600 ff
+11  0 32 (\243)W
+/Times-RomanR 600 ff
+17  0 32 ( 105.)W
+1200 7667 m
+1500 7667 m
+1800 7667 m
+17  0 32 (CHUMID )W
+/Symbol 600 ff
+11  0 32 (\243)W
+/Times-RomanR 600 ff
+17  0 32 ( 0. or)W
+3600 7667 m
+4200 7667 m
+17  0 32 (Assume 100% relative humidity at cloud/rain)W
+1200 7318 m
+1500 7318 m
+1800 7318 m
+17  0 32 (CHUMID > 105.)W
+3600 7318 m
+4200 7318 m
+17  0 32 (layer boundaries)W
+1200 6620 m
+1  0 (As)A
+58  0 32 1  0 ( )AW
+58  0 32 (much as 5% super saturation is permitted, and clouds with 0% relative humidity are)W
+1200 6271 m
+(forbidden.)S
+1200 5922 m
+1500 5922 m
+1  0 (Th)A
+(e)S
+69  0 32 ( input )W
+/Times-BoldR 600 ff
+69  0 32 (ASYMWD)W
+/Times-RomanR 600 ff
+69  0 32 ( is the Henyey-Greenstein phase function asymmetry factor for)W
+1200 5573 m
+17  0 32 (scattering by cloud liquid water droplets:)W
+1200 4875 m
+1500 4875 m
+1800 4875 m
+/6002 findfont setfont/psz 200 def
+(\011)S
+/Times-RomanR 600 ff
+(ASYMWD)S
+/6002 findfont setfont/psz 200 def
+(\011)S
+/Times-RomanR 600 ff
+17  0 32 ( < 1.)W
+3600 4875 m
+4200 4875 m
+17  0 32 -4  0 (Water droplet)AW
+17  0 32 ( Henyey-Greenstein scattering phase function)W
+1200 4642 m
+1500 4642 m
+1800 4642 m
+2400 4642 m
+3600 4642 m
+4200 4642 m
+17  0 32 (asymmetry factor at all wavelengths)W
+1200 4176 m
+1500 4176 m
+1800 4176 m
+/6002 findfont setfont/psz 200 def
+(\011)S
+/Times-RomanR 600 ff
+(ASYMWD)S
+/6002 findfont setfont/psz 200 def
+(\011)S
+/Times-RomanR 600 ff
+17  0 32 ( )W
+/Symbol 600 ff
+11  0 32 (\263)W
+/Times-RomanR 600 ff
+17  0 32 ( 1.)W
+3600 4176 m
+4200 4176 m
+17  0 32 (Use user-defined or model spectral asymmetry factors)W
+1200 3943 m
+1500 3943 m
+1800 3943 m
+2400 3943 m
+3600 3943 m
+4200 3943 m
+17  0 32 (for scattering by cloud liquid water droplets)W
+1200 3361 m
+(Even)S
+32  0 32 ( if the user inputs spectral asymmetry factors using CARDS 2E2, MODTRAN uses the)W
+1200 3012 m
+1  0 (ASYMWD)A
+19  0 32 1  0 ( value if)AW
+19  0 32 ( its absolute value is less than one.  In general, it is recommended that the)W
+1200 2663 m
+17  0 32 (model asymmetry factors be used.)W
+1200 2314 m
+1500 2314 m
+-2  0 (The)A
+16  0 32 -2  0 ( input )AW
+/Times-BoldR 600 ff
+16  0 32 -2  0 (ASYMIP)AW
+/Times-RomanR 600 ff
+16  0 32 -2  0 ( is the )AW
+17  0 32 -2  0 (Henyey-Greenstein phase function asymmetry factor for scattering)AW
+1200 1965 m
+17  0 32 (by cloud ice particles:)W
+ep
+
+%%Page: 12 12 
+
+bp
+/Times-RomanR 600 ff
+0 13200 10200 co
+5000 688 m
+(10)S
+1200 11855 m
+1500 11855 m
+1800 11855 m
+/6002 findfont setfont/psz 200 def
+(\011)S
+/Times-RomanR 600 ff
+(ASYMIP)S
+/6002 findfont setfont/psz 200 def
+(\011)S
+/Times-RomanR 600 ff
+17  0 32 ( < 1.)W
+3600 11855 m
+4200 11855 m
+17  0 32 (Ice particle Henyey-Greenstein scattering phase function)W
+1200 11622 m
+1500 11622 m
+1800 11622 m
+2400 11622 m
+3600 11622 m
+4200 11622 m
+17  0 32 (asymmetry factor at all wavelengths)W
+1200 11156 m
+1500 11156 m
+1800 11156 m
+/6002 findfont setfont/psz 200 def
+(\011)S
+/Times-RomanR 600 ff
+(ASYMIP)S
+/6002 findfont setfont/psz 200 def
+(\011)S
+/Times-RomanR 600 ff
+17  0 32 ( )W
+/Symbol 600 ff
+11  0 32 (\263)W
+/Times-RomanR 600 ff
+17  0 32 ( 1.)W
+3600 11156 m
+4200 11156 m
+17  0 32 (Use user-defined or model spectral asymmetry factors)W
+1200 10923 m
+1500 10923 m
+1800 10923 m
+2400 10923 m
+3600 10923 m
+4200 10923 m
+17  0 32 (for scattering by ice particles)W
+1200 10457 m
+-2  0 (In)A
+13  0 32 -2  0 ( general, it is recommended that the )AW
+14  0 32 -2  0 (default model \(standard cirrus\) asymmetry factors be used.)AW
+1200 9991 m
+/Times-BoldR 600 ff
+(2.2)S
+1 h 17  0 32 (  )W
+U 17  0 32 (CARD 2E1)W
+u /Times-RomanR 600 ff
+17  0 32 (:)W
+3600 9991 m
+17  0 32 (\(ZCLD\(I,0\),)W
+37  0 32 ( CLD\(I,0\), CLDICE\(I,0\), RR\(I,0\), I = 1, NCRALT\))W
+3600 9758 m
+17  0 32 ([ICLD = 1 - 10, NCRALT > 2])W
+/Times-BoldR 600 ff
+1200 9176 m
+/Times-RomanR 600 ff
+1500 9176 m
+-1  0 (The)A
+16  0 32 -1  0 ( CARD 2E1 inputs are used to )AW
+17  0 32 -1  0 (set up user-defined cloud/rain profiles.  If the CARD 2A)AW
+1200 8827 m
+1  0 (inpu)A
+(ts)S
+25  0 32 ( CTHIK, CALT, CCOLWD and CCOLIP are all assigned negative values, MODTRAN)W
+1200 8478 m
+-1  0 (calculations)A
+13  0 32 -1  0 ( are performed using the user-defined cloud/rain )AW
+14  0 32 -1  0 (profiles exactly as input.  However,)AW
+1200 8129 m
+-1  0 (the)A
+16  0 32 -1  0 ( CARD 2A variables can be used to study the effect of changing the input )AW
+17  0 32 -1  0 (cloud's thickness,)AW
+1200 7780 m
+1  0 (al)A
+(titude)S
+20  0 32 ( or column amounts.  One could perform the identical sensitivity analysis by explicitly)W
+1200 7431 m
+1  0 (alter)A
+(ing)S
+26  0 32 ( the user-defined profiles, but it is clearly convenient to be able to simply modify the)W
+1200 7082 m
+17  0 32 (CARD 2A inputs.)W
+1200 6733 m
+1500 6733 m
+17  0 32 (The cloud/rain layer boundary altitudes are entered into array )W
+/Times-BoldR 600 ff
+17  0 32 (ZCLD)W
+/Times-RomanR 600 ff
+17  0 32 (:)W
+1200 6035 m
+1500 6035 m
+1800 6035 m
+(ZCLD\(I,0\))S
+3600 6035 m
+4200 6035 m
+(Altitude)S
+1 h 43  0 32 ( above ground level of layer boundary I for the)W
+4200 5802 m
+17  0 32 (user-defined cloud/rain profile [KM])W
+1200 5220 m
+17  0 32 -2  0 (ZCLD\(1,0\) can be 0., and this is necessary if it is raining on the ground.  The model also allows)AW
+1200 4871 m
+17  0 32 -1  0 (the cloud to actually sit on the )AW
+17  0 32 (ground.  The ZCLD must monotonically increase.  Also, a fatal)W
+1200 4522 m
+1  0 (er)A
+(ror)S
+52  0 32 ( will result if the highest cloud altitude, ZCLD\(NCRALT,0\), is above the top of the)W
+1200 4173 m
+17  0 32 (MODTRAN atmosphere \(100 km above sea-level for the model atmospheres\).)W
+1200 3824 m
+1500 3824 m
+17  0 32 (Liquid water droplet densities are entered into array )W
+/Times-BoldR 600 ff
+17  0 32 (CLD)W
+/Times-RomanR 600 ff
+17  0 32 (:)W
+1200 3126 m
+1500 3126 m
+1800 3126 m
+(CLD\(I,0\))S
+3600 3126 m
+4200 3126 m
+-3  0 (Liquid)A
+16  0 32 -3  0 ( water )AW
+17  0 32 -3  0 (droplet density at altitude ZCLD\(I,0\) [GM/M)AW
+/Times-RomanR 450 ff
+72 h 12  0 32 -3  0 ()AW
+/Times-RomanR 600 ff
+-3 h 17  0 32 -3  0 (])AW
+8867 3208 m
+/Times-RomanR 450 ff
+-3  0 (3)A
+/Times-RomanR 600 ff
+1200 2428 m
+1  0 (The)A
+38  0 32 1  0 ( liqu)AW
+38  0 32 (id water droplet densities cannot be negative.  MODTRAN models the densities as)W
+1200 2079 m
+1  0 (varying)A
+26  0 32 1  0 ( line)AW
+26  0 32 (arly between altitudes.  The entire CLD array is scaled if the CARD 2A variable)W
+1200 1730 m
+17  0 32 (CCOLWD is assigned a non-negative value.)W
+1200 1381 m
+1500 1381 m
+17  0 32 (Ice particle densities are entered into array )W
+/Times-BoldR 600 ff
+17  0 32 (CLDICE)W
+/Times-RomanR 600 ff
+17  0 32 (:)W
+ep
+
+%%Page: 13 13 
+
+bp
+/Times-RomanR 600 ff
+0 13200 10200 co
+5000 688 m
+(11)S
+1200 11855 m
+1500 11855 m
+1800 11855 m
+(CLDICE\(I,0\))S
+3600 11855 m
+4200 11855 m
+17  0 32 (Ice particle density at altitude ZCLD\(I,0\) [GM / M)W
+/Times-RomanR 450 ff
+75 h 12  0 32 ()W
+/Times-RomanR 600 ff
+17  0 32 (])W
+8404 11937 m
+/Times-RomanR 450 ff
+(3)S
+/Times-RomanR 600 ff
+1200 11157 m
+1  0 (Th)A
+(e)S
+41  0 32 ( ice particle densities cannot be negative.  MODTRAN models the densities as varying)W
+1200 10808 m
+-2  0 (linearly)A
+11  0 32 -2  0 ( between altitudes.  The entire CLDICE array is scaled if the )AW
+12  0 32 -2  0 (CARD 2A variable CCOLIP)AW
+1200 10459 m
+17  0 32 (is assigned a non-negative value.)W
+1200 10110 m
+1500 10110 m
+17  0 32 (Rain rates are entered into array )W
+/Times-BoldR 600 ff
+17  0 32 (RR)W
+/Times-RomanR 600 ff
+17  0 32 (:)W
+1200 9412 m
+1500 9412 m
+1800 9412 m
+(RR\(I,0\))S
+3600 9412 m
+4200 9412 m
+17  0 32 (Rain rate at altitude ZCLD\(I,0\) [MM/HR])W
+1200 8714 m
+-2  0 (The)A
+12  0 32 -2  0 ( rain rates can not be )AW
+13  0 32 -2  0 (negative.  If a rain rate is entered through CARD 2 \(variable RAINRT\),)AW
+1200 8365 m
+17  0 32 -1  0 (that constant rain rate supersedes the user-defined rain rate profile.  Thus)AW
+17  0 32 (, if a user-defined rain)W
+1200 8016 m
+17  0 32 (rate profile is desired, variable RAINRT must not be positive.)W
+1200 7318 m
+/Times-BoldR 600 ff
+17  0 32 (2.3  )W
+U 17  0 32 (CARD 2E2)W
+u /Times-RomanR 600 ff
+17  0 32 (:)W
+3600 7318 m
+17  0 32 (\(WAVLEN\(I\), EXTC\(6,I\), ABSC\(6,I\), ASYM\(6,I\),)W
+/Times-BoldR 600 ff
+1200 7085 m
+/Times-RomanR 600 ff
+1500 7085 m
+1800 7085 m
+2400 7085 m
+3600 7085 m
+17  0 32 (EXTC\(7,I\), ABSC\(7,I\), ASYM\(7,I\), I = 1, NCRSPC\))W
+1200 6852 m
+1500 6852 m
+1800 6852 m
+2400 6852 m
+3600 6852 m
+17  0 32 ([ICLD = 1 - 10, NCRSPC > 1])W
+1200 6270 m
+1500 6270 m
+(The)S
+1 h 18  0 32 ( CARD 2E2 variables are used to input user-defined cloud spectral data.  If the CARD)W
+1200 5921 m
+-3  0 (2A)A
+15  0 32 -3  0 ( inputs CEXT, ASYMWD and ASYMIP are all )AW
+16  0 32 -3  0 (outside their accepted range, MODTRAN uses)AW
+1200 5572 m
+(the)S
+27  0 32 ( spectral data exactly as input.  However, if a positive vertical cloud extinction, CEXT, is)W
+1200 5223 m
+17  0 32 (input, the extinction and absorption coefficients curves are scaled.  Similarly, if the CARD 2A)W
+1200 4874 m
+1  0 (asym)A
+(metry)S
+18  0 32 ( factors ASYMWD and ASYMIP have magnitude less than one, they supersede the)W
+1200 4525 m
+17  0 32 (ASYM\(6,I\) and ASYM\(7,I\) values, respectively.)W
+1200 4176 m
+1500 4176 m
+17  0 32 (The wavelength grid for the spectral data is input into array )W
+/Times-BoldR 600 ff
+17  0 32 (WAVLEN)W
+/Times-RomanR 600 ff
+17  0 32 (:)W
+1200 3478 m
+1500 3478 m
+1800 3478 m
+(WAVLEN\(I\))S
+3600 3478 m
+4200 3478 m
+17  0 32 (Wavelength I in the spectral grid [)W
+/6001 findfont setfont/psz 200 def
+(%)S
+/Times-RomanR 600 ff
+17  0 32 (m])W
+1200 2780 m
+-4  0 (The)A
+13  0 32 -4  0 ( first wavelength, WAVLEN\(1\), can be as low as 0.0 )AW
+/6001 findfont setfont/psz 200 def
+-4  0 (%)A
+/Times-RomanR 600 ff
+17  0 32 -4  0 (m, and the wavelengths must be entered)AW
+1200 2431 m
+-2  0 (in)A
+11  0 32 -2  0 ( increasing order. )AW
+12  0 32 -2  0 ( Although MODTRAN transmittance and radiance calculations are performed)AW
+1200 2082 m
+4  0 (on)A
+23  0 32 4  0 ( )AW
+23  0 32 (a constant frequency [CM-1] grid, wavelength [)W
+/6001 findfont setfont/psz 200 def
+6  0 32 (%)W
+/Times-RomanR 600 ff
+23  0 32 (m] interpolation is always used for cloud)W
+1200 1733 m
+-2  0 (spectral)A
+-1 h 15  0 32 -2  0 ( data.  If a positive vertical cloud extinction \(CEXT\) is input on CARD 2A, the reference)AW
+ep
+9 dict begin/FontType 3 def/FontMatrix[1 0 0 1 0 0]def
+/FontBBox[0 0 0 0]def
+/Encoding 256 array def
+0 1 255{Encoding x/.notdef put}for/Widths 256 array def
+0 1 255{Widths x 0 put}for/CharProcs 256 dict def
+CharProcs begin/.notdef{}def end
+/BuildChar{exch begin dup Widths exch get{}forall setcachedevice
+Encoding exch get CharProcs exch get end exec}def
+currentdict end/6003 x definefont p
+/6003 findfont begin CharProcs begin/51 {32 25 true
+[ 0.25 0 0 -0.25 -5 25 ]{<0040020001C0038007E007E00F8001F01F0000F83E00007C3C00003C7C00003E7800001E7800001EF803C01FF803C01FF803C01FF803C01FF803C01FF803C01F7803C01E7803C01E7C03C03E3C03C03C3C07E07C1E07E0780F0E70F007FC3FE000F00F00>}
+imagemask}def end
+Encoding 51 /51 put Widths 51 [168.0 0 20.0 0.0 148.0 100.0 ]put end
+
+%%Page: 14 14 
+
+bp
+/Times-RomanR 600 ff
+0 13200 10200 co
+5000 688 m
+(12)S
+1200 11855 m
+1  0 (wavele)A
+(ngth)S
+19  0 32 ( \(CWAVLN or 0.55 \002m\) must be between WAVLEN\(1\) and WAVLEN\(NCRSPC\))W
+1200 11506 m
+17  0 32 (inclusive, or else MODTRAN execution will be terminated with a fatal error message.)W
+1200 11157 m
+1500 11157 m
+17  0 32 (The liquid water droplet extinction coefficients are input into )W
+/Times-BoldR 600 ff
+17  0 32 (EXTC\(6,I\))W
+/Times-RomanR 600 ff
+17  0 32 (:)W
+1200 10459 m
+1500 10459 m
+1800 10459 m
+(EXTC\(6,I\))S
+3600 10459 m
+4200 10459 m
+1  0 (Liq)A
+(uid)S
+37  0 32 ( water droplet extinction coefficient at wavelength)W
+4200 10226 m
+17  0 32 (WAVLEN\(I\)  [KM)W
+/Times-RomanR 450 ff
+50 h 12  0 32 ()W
+75 h 12  0 32 ()W
+/Times-RomanR 600 ff
+17  0 32 ( M)W
+/Times-RomanR 450 ff
+75 h 12  0 32 ()W
+/Times-RomanR 600 ff
+17  0 32 ( / GM])W
+5789 10308 m
+/Times-RomanR 450 ff
+(-1)S
+/Times-RomanR 600 ff
+67 h 17  0 32 ()W
+178 h 17  0 32 ()W
+/Times-RomanR 450 ff
+12  0 32 (3)W
+/Times-RomanR 600 ff
+1200 9644 m
+1  0 (If)A
+53  0 32 1  0 ( a neg)AW
+53  0 32 (ative value is input, EXTC\(6,I\) is assigned the wavelength interpolated extinction)W
+1200 9295 m
+17  0 32 (coefficient from the default data for cloud model ICLD.)W
+1200 8946 m
+1500 8946 m
+17  0 32 (The liquid water droplet absorption coefficients are input into )W
+/Times-BoldR 600 ff
+17  0 32 (ABSC\(6,I\))W
+/Times-RomanR 600 ff
+17  0 32 (:)W
+1200 8248 m
+1500 8248 m
+1800 8248 m
+(ABSC\(6,I\))S
+3600 8248 m
+4200 8248 m
+U 17  0 32 (If positive:)W
+u 5400 8248 m
+U u 17  0 32 -1  0 (liquid)AW
+13  0 32 -1  0 ( water droplet absorption )AW
+14  0 32 -1  0 (coefficient at)AW
+4200 8015 m
+4800 8015 m
+5400 8015 m
+-1  0 (wav)A
+17  0 32 (elength WAVLEN\(I\)  [KM)W
+/Times-RomanR 450 ff
+50 h 12  0 32 ()W
+75 h 12  0 32 ()W
+/Times-RomanR 600 ff
+17  0 32 ( M)W
+/Times-RomanR 450 ff
+75 h 12  0 32 ()W
+/Times-RomanR 600 ff
+17  0 32 ( / GM])W
+7976 8097 m
+/Times-RomanR 450 ff
+(-1)S
+/Times-RomanR 600 ff
+67 h 17  0 32 ()W
+178 h 17  0 32 ()W
+/Times-RomanR 450 ff
+12  0 32 (3)W
+/Times-RomanR 600 ff
+1200 7782 m
+1500 7782 m
+1800 7782 m
+2400 7782 m
+3600 7782 m
+4200 7782 m
+U 17  0 32 (If negative:)W
+u 5400 7782 m
+U u 17  0 32 -1  0 (liquid water droplet)AW
+17  0 32 ( scattering albedo minus)W
+4200 7549 m
+4800 7549 m
+5400 7549 m
+17  0 32 (1 at wavelength WAVLEN\(I\))W
+1200 7083 m
+1  0 (If)A
+34  0 32 1  0 ( the i)AW
+34  0 32 (nput value for ABSC\(6,I\) is less than -1 or if it exceeds the extinction coefficient at)W
+1200 6734 m
+1  0 (WAVLEN\()A
+(I\),)S
+19  0 32 ( ABSC\(6,I\) is calculated by first determining the default absorption to extinction)W
+1200 6385 m
+1  0 (ratio)A
+20  0 32 1  0 ( for c)AW
+20  0 32 (loud model ICLD, and then multiplying EXTC\(6,I\) by this ratio.  This is equivalent)W
+1200 6036 m
+(to)S
+1 h 43  0 32 ( assuming that the liquid water model cloud single scatter albedo \()W
+/6003 findfont setfont/psz 200 def
+26  0 32 (3)W
+/Times-RomanR 600 ff
+43  0 32 (\) should be used to)W
+1200 5687 m
+-1  0 (determ)A
+17  0 32 (ine the absorption coefficient.  A negative value for ABSC\(6,I\) not less than -1 is taken)W
+1200 5338 m
+17  0 32 (to be the negative of one minus the liquid water droplet scattering albedo, -\(1-)W
+/6003 findfont setfont/psz 200 def
+(3)S
+/Times-RomanR 600 ff
+17  0 32 (\).)W
+1200 4989 m
+1500 4989 m
+-1  0 (The)A
+15  0 32 -1  0 ( liquid water droplet Henyey-Greenstein )AW
+16  0 32 -1  0 (scattering phase function asymmetry factors are)AW
+1200 4640 m
+17  0 32 (input into )W
+/Times-BoldR 600 ff
+17  0 32 (ASYM\(6,I\))W
+/Times-RomanR 600 ff
+17  0 32 (:)W
+1200 4058 m
+1500 4058 m
+1800 4058 m
+(ASYM\(6,I\))S
+3600 4058 m
+4200 4058 m
+(Liquid)S
+42  0 32 ( water droplet Henyey-Greenstein scattering phase)W
+4200 3825 m
+17  0 32 (function asymmetry factor at wavelength WAVLEN\(I\))W
+1200 3243 m
+1  0 (These)A
+18  0 32 ( inputs are ignored if the magnitude of the CARD 2A input ASYMWD is less than one.)W
+1200 2894 m
+-1  0 (If)A
+12  0 32 -1  0 ( ASYM\(6,I\) is also not between -1. and 1., ASYM\(6,I\) is assigned the wavelength interpolated)AW
+1200 2545 m
+17  0 32 (value from cloud model ICLD.)W
+1200 2196 m
+1500 2196 m
+17  0 32 (The ice particle extinction coefficients are input into )W
+/Times-BoldR 600 ff
+17  0 32 (EXTC\(7,I\))W
+/Times-RomanR 600 ff
+17  0 32 (:)W
+1200 1498 m
+1500 1498 m
+1800 1498 m
+(EXTC\(7,I\))S
+3600 1498 m
+4200 1498 m
+(Ice)S
+195  0 32 ( particle extinction coefficient at wavelength)W
+4200 1265 m
+17  0 32 (WAVLEN\(I\)  [KM)W
+/Times-RomanR 450 ff
+50 h 12  0 32 ()W
+75 h 12  0 32 ()W
+/Times-RomanR 600 ff
+17  0 32 ( M)W
+/Times-RomanR 450 ff
+75 h 12  0 32 ()W
+/Times-RomanR 600 ff
+17  0 32 ( / GM])W
+5789 1347 m
+/Times-RomanR 450 ff
+(-1)S
+/Times-RomanR 600 ff
+67 h 17  0 32 ()W
+178 h 17  0 32 ()W
+/Times-RomanR 450 ff
+12  0 32 (3)W
+/Times-RomanR 600 ff
+ep
+
+%%Page: 15 15 
+
+bp
+/Times-RomanR 600 ff
+0 13200 10200 co
+5000 688 m
+(13)S
+1200 11855 m
+1  0 (If)A
+53  0 32 1  0 ( a neg)AW
+53  0 32 (ative value is input, EXTC\(7,I\) is assigned the wavelength interpolated extinction)W
+1200 11622 m
+17  0 32 (coefficient from the standard cirrus cloud model \(ICLD=18\).)W
+1200 11389 m
+1500 11389 m
+17  0 32 (The ice particle absorption coefficients are input into )W
+/Times-BoldR 600 ff
+17  0 32 (ABSC\(7,I\))W
+/Times-RomanR 600 ff
+17  0 32 (:)W
+1200 10923 m
+1500 10923 m
+1800 10923 m
+(ABSC\(7,I\))S
+3600 10923 m
+4200 10923 m
+U 17  0 32 (If positive:)W
+u 5400 10923 m
+U u 17  0 32 1  0 (ic)AW
+17  0 32 (e)W
+174  0 32 ( particle absorption coefficient at)W
+4200 10690 m
+17  0 32 (wavelength WAVLEN\(I\)  [KM-1 M)W
+/Times-RomanR 450 ff
+75 h 12  0 32 ()W
+/Times-RomanR 600 ff
+17  0 32 ( / GM])W
+7191 10772 m
+/Times-RomanR 450 ff
+(3)S
+/Times-RomanR 600 ff
+1200 10457 m
+1500 10457 m
+1800 10457 m
+2400 10457 m
+3600 10457 m
+4200 10457 m
+U 17  0 32 (If negative:)W
+u 5400 10457 m
+U u 17  0 32 1  0 (ic)AW
+17  0 32 (e)W
+66  0 32 ( particle scattering albedo minus 1 at)W
+4200 10224 m
+17  0 32 (wavelength WAVLEN\(I\))W
+1200 9642 m
+1  0 (If)A
+34  0 32 1  0 ( the i)AW
+34  0 32 (nput value for ABSC\(7,I\) is less than -1 or if it exceeds the extinction coefficient at)W
+1200 9293 m
+1  0 (WAVLEN\()A
+(I\),)S
+19  0 32 ( ABSC\(7,I\) is calculated by first determining the default absorption to extinction)W
+1200 8944 m
+(ratio)S
+1 h 25  0 32 ( for the standard cirrus cloud model \(ICLD=18\), and then multiplying EXTC\(7,I\) by this)W
+1200 8595 m
+17  0 32 -1  0 (ratio.  This is equivalent to assuming that)AW
+17  0 32 ( the standard cirrus cloud model single scatter albedo)W
+1200 8246 m
+-4  0 (\()A
+/6003 findfont setfont/psz 200 def
+-4  0 (3)A
+/Times-RomanR 600 ff
+17  0 32 -4  0 (\) should be used to determine the absorpt)AW
+17  0 32 (ion coefficient.  A negative value for ABSC\(7,I\) not)W
+1200 7897 m
+17  0 32 (less than -1 is taken to be the negative of one minus the ice particle scattering albedo, -\(1-)W
+/6003 findfont setfont/psz 200 def
+(3)S
+/Times-RomanR 600 ff
+17  0 32 (\).)W
+1200 7548 m
+1500 7548 m
+17  0 32 (The ice particle Henyey-Greenstein asymmetry factors are input into )W
+/Times-BoldR 600 ff
+17  0 32 (ASYM\(7,I\))W
+/Times-RomanR 600 ff
+17  0 32 (:)W
+1200 6850 m
+1500 6850 m
+1800 6850 m
+(ASYM\(7,I\))S
+3600 6850 m
+4200 6850 m
+1  0 (Ic)A
+(e)S
+48  0 32 ( particle Henyey-Greenstein scattering phase function)W
+4200 6501 m
+17  0 32 (asymmetry factor at wavelength WAVLEN\(I\))W
+1200 5803 m
+17  0 32 -1  0 (These inputs are ignored if the magnitude of the CARD 2A input ASYMIP is le)AW
+17  0 32 (ss than one.  If)W
+1200 5454 m
+1  0 (ASYM\(7,I\))A
+19  0 32 1  0 ( i)AW
+19  0 32 (s also not between -1. and 1., ASYM\(7,I\) is assigned the wavelength interpolated)W
+1200 5105 m
+17  0 32 (value from the standard cirrus cloud model \(ICLD=18\).)W
+ep
+
+%%Page: 16 16 
+
+bp
+/Times-RomanR 600 ff
+0 13200 10200 co
+5000 688 m
+(14)S
+1200 11843 m
+/Times-RomanR 648 ff
+2565 h 18  0 32 (3.  CODE MODIFICATIONS)W
+1200 11133 m
+/Times-RomanR 600 ff
+1500 11133 m
+1  0 (Five)A
+20  0 32 1  0 ( new p)AW
+20  0 32 (arameters were introduced into the PARAM.LST file to facilitate integration of)W
+1200 10784 m
+17  0 32 (the cloud/rain model upgrades \(default values are in brackets\):)W
+1200 10086 m
+1500 10086 m
+(\267)S
+1875 10086 m
+(NZCLD,)S
+3000 10086 m
+17  0 32 (the number of built-in cloud/rain layer boundaries [16],)W
+1200 9737 m
+1500 9737 m
+(\267)S
+1875 9737 m
+(KMAX,)S
+3000 9737 m
+17  0 32 (the number of MODTRAN species \(extinction sources\) [67],)W
+1200 9388 m
+1500 9388 m
+(\267)S
+1875 9388 m
+(NAER,)S
+3000 9388 m
+17  0 32 (the number of aerosol/cloud profiles [7],)W
+1200 9039 m
+1500 9039 m
+(\267)S
+1875 9039 m
+(NWAVLN,)S
+3000 9039 m
+17  0 32 (the number of wavelengths in built-in spectral data [47], and)W
+1200 8690 m
+1500 8690 m
+(\267)S
+1875 8690 m
+(MXWVLN,)S
+3000 8690 m
+1  0 (the)A
+37  0 32 1  0 ( m)AW
+37  0 32 (aximum number of user-defined wavelength points for cloud/rain)W
+3000 8457 m
+17  0 32 (spectral data [101].)W
+1200 7875 m
+-1  0 (NZCLD)A
+11  0 32 -1  0 ( is also the )AW
+12  0 32 -1  0 (maximum number of profile layer boundaries allowed for user-defined cloud)AW
+1200 7526 m
+-3  0 (profiles.)A
+15  0 32 -3  0 (  KMAX was removed from common /CNTRL/ and increased to 67; liquid )AW
+16  0 32 -3  0 (water droplets)AW
+1200 7177 m
+17  0 32 (are species 66 and ice particles are species 67.  The seven aerosol/cloud profiles are the )W
+1200 6828 m
+1500 6828 m
+(1.)S
+1800 6828 m
+17  0 32 (boundary layer aerosol, )W
+1200 6362 m
+1500 6362 m
+(2.)S
+1800 6362 m
+17  0 32 (tropospheric aerosol,)W
+1200 5896 m
+1500 5896 m
+(3.)S
+1800 5896 m
+17  0 32 (stratospheric aerosol,)W
+1200 5430 m
+1500 5430 m
+(4.)S
+1800 5430 m
+17  0 32 (mesospheric aerosol, )W
+1200 4964 m
+1500 4964 m
+(5.)S
+1800 4964 m
+17  0 32 (cirrus clouds, )W
+1200 4498 m
+1500 4498 m
+(6.)S
+1800 4498 m
+17  0 32 (liquid water droplet clouds, and)W
+1200 4032 m
+1500 4032 m
+(7.)S
+1800 4032 m
+17  0 32 (ice particle clouds.)W
+1200 3566 m
+1  0 (The)A
+26  0 32 1  0 ( NWAVL)AW
+26  0 32 (N wavelengths are defined in block data EXTDTA.  CARD 2A input NCRSPC)W
+1200 3217 m
+1  0 (ca)A
+(nnot)S
+21  0 32 ( exceed parameter MXWVLN, but MXVWLN can be increased simply by increasing it)W
+1200 2868 m
+17  0 32 (value in the PARAM.LST file and re-compiling the CODE.)W
+1200 2519 m
+1500 2519 m
+-1  0 (Many)A
+15  0 32 -1  0 ( changes were made to MODTRAN common blocks.  The modified and new common)AW
+1200 2170 m
+1  0 (bloc)A
+(ks)S
+18  0 32 ( are listed in Table 2.  Introduction of the new parameters affected many of the original)W
+1200 1821 m
+-1  0 (MODTRAN)A
+10  0 32 -1  0 ( common )AW
+11  0 32 -1  0 (blocks.  Generally, the same variable names were used in each occurrence)AW
+1200 1472 m
+17  0 32 (of the modified common blocks.  These changes are:)W
+ep
+
+%%Page: 17 17 
+
+bp
+/Times-RomanR 600 ff
+0 13200 10200 co
+mcm
+1200 7313 tr
+1 -1 sc np 32 32 m
+45 32 li 45 5861 li 32 5861 li cp
+0 255 div g
+13 w 0 lc fill np 32 32 m
+7765 32 li 7765 45 li 32 45 li cp
+0 255 div g
+fill np 7752 32 m
+7765 32 li 7765 5861 li 7752 5861 li cp
+0 255 div g
+fill np 32 5848 m
+7765 5848 li 7765 5861 li 32 5861 li cp
+0 255 div g
+fill np 0 0 m
+13 0 li 13 5893 li 0 5893 li cp
+0 255 div g
+fill np 0 0 m
+7797 0 li 7797 13 li 0 13 li cp
+0 255 div g
+fill np 7784 0 m
+7797 0 li 7797 5893 li 7784 5893 li cp
+0 255 div g
+fill np 0 5880 m
+7797 5880 li 7797 5893 li 0 5893 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+5000 688 m
+0 255 div g
+(15)S
+1348 7055 m
+/CourierR 480 ff
+(REAL EXTV,ABSV,ASYV)S
+1348 6895 m
+1948 6895 m
+( COMMON/AER/EXTV\(NAER\),ABSV\(NAER\),ASYV\(NAER\))S
+1348 6575 m
+1948 6575 m
+( REAL TAER)S
+1348 6415 m
+1948 6415 m
+( COMMON/AERTM/TAER\(NAER\))S
+1348 6095 m
+1948 6095 m
+( INTEGER KPOINT)S
+1348 5935 m
+1948 5935 m
+( REAL WAVLEN,EXTC,ABSC,ASYM,AWCCON,TX,W,RELHUM,PATM,TBBY,WPATH)S
+1348 5775 m
+1948 5775 m
+( COMMON/BASE/WAVELEN\(MXWVLN\),EXTC\(NAER,MXWVLN\),ABSC\(NAER,MXWVLN\),)S
+1348 5615 m
+1948 5615 m
+(1  ASYM\(NAER,MXWVLN\),AWCCON\(NAER\),KPOINT\(NSPC\),TX\(KMAX\),W\(KMAX\),)S
+1348 5455 m
+1948 5455 m
+(2  RELHUM\(LAYDIM\),PATM\(LAYTHR\),TBBY\(LAYTHR\),WPATH\(LAYTHR,KMAX\))S
+1348 5135 m
+1948 5135 m
+( INTEGER NCRALT,NCRSPC)S
+1348 4975 m
+1948 4975 m
+( REAL CTHIK,CALT,CEXT,CWAVLN,CCOLWD,CCOLIP,CHUMID,ASYMWD,ASYMIP)S
+1348 4815 m
+1948 4815 m
+( COMMON/CARD2A/CTHIK,CALT,CEXT,NCRALT,NCRSPC,)S
+1348 4655 m
+1948 4655 m
+(1  CWAVLN,CCOLWD,CCOLIP,CHUMID,ASYMWD,ASYMIP)S
+1348 4335 m
+1948 4335 m
+( INTEGER IPH)S
+1348 4175 m
+1948 4175 m
+( REAL G)S
+1348 4015 m
+1948 4015 m
+( COMMON/CARD3A/IPH,G)S
+1348 3695 m
+1948 3695 m
+( REAL CI64XT,CI64AB,CI64G,CIR4XT,CIR4AB,CIR4G)S
+1348 3535 m
+1948 3535 m
+( COMMON/CIRR/CI64XT\(NWAVLN\),CI64AB\(NWAVLN\),CI64G\(NWAVLN\),)S
+1348 3375 m
+1948 3375 m
+(1  CIR4XT\(NWAVLN\),CIR4AB\(NWAVLN\),CIR4G\(NWAVLN\))S
+1348 3055 m
+1948 3055 m
+( INTEGER NBND)S
+1348 2895 m
+1948 2895 m
+( REAL ZCLDRN\(NZCLD\),DRPWAT\(NZCLD\),PRTICE\(NZCLD\),RNPROF\(NZCLD\))S
+1348 2735 m
+1948 2735 m
+( COMMON/CLDRN/NBND,ZCLDRN,DRPWAT,PRTICE,RNPROF)S
+1348 2415 m
+1948 2415 m
+( REAL ZCLD,CLD,CLDICE,RR)S
+1348 2255 m
+1948 2255 m
+( COMMON/CLDRR/ZCLD\(1:NZCLD\),CLD\(1:NZCLD,0:5\),)S
+1348 2095 m
+1948 2095 m
+(1  CLDICE\(1:NZCLD,0:1\),RR\(1:NZCLD,0:5\))S
+1348 1775 m
+1948 1775 m
+( INTEGER,IKMAX,ML,ISSGEO,IMULT)S
+1348 1615 m
+1948 1615 m
+( COMMON/CNTRL/,IKMAX,ML,ISSGEO,IMULT )S
+/CourierR 600 ff
+2835 7427 m
+/Times-BoldR 549 ff
+15  0 32 (Table 2)W
+/Times-RomanR 549 ff
+15  0 32 (.  New and Modified MODTRAN Common Blocks.)W
+/CourierR 600 ff
+1200 11855 m
+/Times-RomanR 600 ff
+1500 11855 m
+(\267)S
+1800 11855 m
+17  0 32 (The MODTRAN unlabeled common was named common block /BASE/.)W
+1200 11389 m
+1500 11389 m
+(\267)S
+1800 11389 m
+17  0 32 (The new CARD 2A inputs were added to the /CARD2A/.)W
+1200 10923 m
+1500 10923 m
+(\267)S
+1800 10923 m
+17  0 32 -1  0 (A /CARD3A/ common block)AW
+17  0 32 ( was introduced to pass the aerosol asymmetry factor G to)W
+1800 10690 m
+17  0 32 (routine AEREXT.)W
+1200 10224 m
+1500 10224 m
+(\267)S
+1800 10224 m
+17  0 32 (Dimensioning corrections were made to /DEAMT/.)W
+1200 9758 m
+1500 9758 m
+(\267)S
+1800 9758 m
+17  0 32 -1  0 (Common block /CLDRN/ was introduced to pass cloud/rain p)AW
+17  0 32 (rofile data among the new)W
+1800 9525 m
+17  0 32 (cloud model routines.)W
+1200 9059 m
+1500 9059 m
+(\267)S
+1800 9059 m
+-2  0 (The)A
+18  0 32 -2  0 ( /LAY5/ )AW
+17  0 32 -2  0 (arrays were enlarged to include water droplet and ice particle optical depths.)AW
+1200 8593 m
+1500 8593 m
+(\267)S
+1800 8593 m
+17  0 32 -1  0 (And, finally, phase function vectors PR\(LAYTWO\) and PA\(LAYTWO\) in /SOLS/)AW
+17  0 32 ( were)W
+1800 8360 m
+1  0 (replace)A
+(d)S
+27  0 32 ( by array PHASFN\(LAYTWO,4\); the four scattering sources are \(1\) Rayleigh)W
+1800 8127 m
+17  0 32 (\(molecular\), \(2\) aerosols, \(3\) liquid water droplets, and \(4\) ice particles.)W
+ep
+
+%%Page: 18 18 
+
+bp
+/Times-RomanR 600 ff
+0 13200 10200 co
+mcm
+1200 11753 tr
+1 -1 sc np 32 32 m
+45 32 li 45 6701 li 32 6701 li cp
+0 255 div g
+13 w 0 lc fill np 32 32 m
+7765 32 li 7765 45 li 32 45 li cp
+0 255 div g
+fill np 7752 32 m
+7765 32 li 7765 6701 li 7752 6701 li cp
+0 255 div g
+fill np 32 6688 m
+7765 6688 li 7765 6701 li 32 6701 li cp
+0 255 div g
+fill np 0 0 m
+13 0 li 13 6733 li 0 6733 li cp
+0 255 div g
+fill np 0 0 m
+7797 0 li 7797 13 li 0 13 li cp
+0 255 div g
+fill np 7784 0 m
+7797 0 li 7797 6733 li 7784 6733 li cp
+0 255 div g
+fill np 0 6720 m
+7797 6720 li 7797 6733 li 0 6733 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+5000 688 m
+0 255 div g
+(16)S
+1348 11495 m
+/CourierR 480 ff
+1948 11495 m
+( REAL DENM,DENP)S
+1348 11335 m
+1948 11335 m
+( COMMON/DEAMT/DENM\(35,LAYTWO\),DENP\(35,LAYTHR+1\))S
+1348 11015 m
+1948 11015 m
+( REAL DSEXT,DSABS,DSASYM)S
+1348 10855 m
+1948 10855 m
+( COMMON/DESAER/DSEXT\(NWAVLN,4\),DSABS\(NWAVLN,4\),DSASYM\(NWAVLN,4\))S
+1348 10535 m
+1948 10535 m
+( REAL VX0,)S
+1348 10375 m
+1948 10375 m
+(1  RUREXT,RURABS,RURSYM,URBEXT,URBABS,URBSYM,OCNEXT,OCNABS,OCNSYM,)S
+1348 10215 m
+1948 10215 m
+(2  TROEXT,TROABS,TROSYM,FG1EXT,FG1ABS,FG1SYM,FG2EXT,FG2ABS,FG2SYM,)S
+1348 10055 m
+1948 10055 m
+(3  BSTEXT,BSTABS,BSTSYM,AVOEXT,AVOABS,AVOSYM,FVOEXT,FVOABS,FVOSYM,)S
+1348 9895 m
+1948 9895 m
+(4  DMEEXT,DMEABS,DMESYM,CCUEXT,CCUABS,CCUSYM,CALEXT,CALABS,CALSYM,)S
+1348 9735 m
+1948 9735 m
+(5  CSTEXT,CSTABS,CSTSYM,CSCEXT,CSCABS,CSCSYM,CNIEXT,CNIABS,CNISYM)S
+1348 9575 m
+1948 9575 m
+(   COMMON/EXTD/VX0\(NWAVLN\),)S
+1348 9415 m
+1948 9415 m
+(1  RUREXT\(NWAVLN,4\),RURABS\(NWAVLN,4\),RURSYM\(NWAVLN,4\),)S
+1348 9255 m
+1948 9255 m
+(2  URBEXT\(NWAVLN,4\),URBABS\(NWAVLN,4\),URBSYM\(NWAVLN,4\),)S
+1348 9095 m
+1948 9095 m
+(3  OCNEXT\(NWAVLN,4\),OCNABS\(NWAVLN,4\),OCNSYM\(NWAVLN,4\),)S
+1348 8935 m
+1948 8935 m
+(4  TROEXT\(NWAVLN,4\),TROABS\(NWAVLN,4\),TROSYM\(NWAVLN,4\),)S
+1348 8775 m
+1948 8775 m
+(5  FG1EXT\(NWAVLN\),FG1ABS\(NWAVLN\),FG1SYM\(NWAVLN\),)S
+1348 8615 m
+1948 8615 m
+(6  FG2EXT\(NWAVLN\),FG2ABS\(NWAVLN\),FG2SYM\(NWAVLN\),)S
+1348 8455 m
+1948 8455 m
+(7  BSTEXT\(NWAVLN\),BSTABS\(NWAVLN\),BSTSYM\(NWAVLN\),)S
+1348 8295 m
+1948 8295 m
+(8  AVOEXT\(NWAVLN\),AVOABS\(NWAVLN\),AVOSYM\(NWAVLN\),)S
+1348 8135 m
+1948 8135 m
+(9  FVOEXT\(NWAVLN\),FVOABS\(NWAVLN\),FVOSYM\(NWAVLN\),)S
+1348 7975 m
+1948 7975 m
+(&  DMEEXT\(NWAVLN\),DMEABS\(NWAVLN\),DMESYM\(NWAVLN\),)S
+1348 7815 m
+1948 7815 m
+(1  CCUEXT\(NWAVLN\),CCUABS\(NWAVLN\),CCUSYM\(NWAVLN\),)S
+1348 7655 m
+1948 7655 m
+(2  CALEXT\(NWAVLN\),CALABS\(NWAVLN\),CALSYM\(NWAVLN\),)S
+1348 7495 m
+1948 7495 m
+(3  CSTEXT\(NWAVLN\),CSTABS\(NWAVLN\),CSTSYM\(NWAVLN\),)S
+1348 7335 m
+1948 7335 m
+(4  CSCEXT\(NWAVLN\),CSCABS\(NWAVLN\),CSCSYM\(NWAVLN\),)S
+1348 7175 m
+1948 7175 m
+(5  CNIEXT\(NWAVLN\),CNIABS\(NWAVLN\),CNISYM\(NWAVLN\))S
+1348 6855 m
+1948 6855 m
+( REAL TXNEW,TXOLD)S
+1348 6695 m
+1948 6695 m
+( COMMON/LAY5/TXNEW\(20,LAYTHR,3\),TXOLD\(20,LAYTHR,3\))S
+1348 6215 m
+1948 6215 m
+( REAL ZM,PM,TM,RFNDX,DENSTY)S
+1348 6055 m
+1948 6055 m
+( COMMON/MODEL/ZM\(LAYDIM\),PM\(LAYDIM\),TM\(LAYDIM\),)S
+1348 5895 m
+1948 5895 m
+(1  RFNDX\(LAYDIM\),DENSTY\(KMAX,LAYDIM\))S
+1348 5575 m
+1948 5575 m
+(COMMON/SOLS/JTURN,LJ\(LAYTWO+1\),ATHETA\(LAYDIM+1\),ADBETA\(LAYDIM+1\),)S
+1348 5415 m
+1948 5415 m
+(1  PHASFN\(LAYTWO,4\),CSZEN\(LAYTWO\),AH1\(LAYTWO\),ARH\(LAYTWO\),)S
+1348 5228 m
+1948 5228 m
+(2  ANGSUN,TBBYS\(LAYTHR,12\),PATMS\(LAYTHR,12\),WPATHS\(LAYTHR,KMAX)S
+/CourierR 600 ff
+(\))S
+2601 11867 m
+/Times-BoldR 549 ff
+15  0 32 (Table 2)W
+/Times-RomanR 549 ff
+15  0 32 (.  New and Modified MODTRAN Common Block \(Cont.\))W
+/CourierR 600 ff
+1200 4283 m
+/Times-RomanR 600 ff
+1500 4283 m
+17  0 32 -1  0 (Over 60 MODTRAN routines were)AW
+17  0 32 ( modified.  Almost half of these routines were modified)W
+1200 3934 m
+17  0 32 -1  0 (only because of changes in )AW
+17  0 32 (the common blocks, introduction of the new parameters, and/or the)W
+1200 3585 m
+17  0 32 (updates to comment cards.  The routines with these minor changes are:)W
+1200 3236 m
+1500 3236 m
+(ABCDTA)S
+2700 3236 m
+(ATMCON)S
+3900 3236 m
+(BMDATA)S
+5100 3236 m
+(BMFLUX)S
+6300 3236 m
+(BMLDX)S
+7500 3236 m
+(BMLOAD)S
+1200 2887 m
+1500 2887 m
+(BMTRAN)S
+2700 2887 m
+(CIRR18)S
+3900 2887 m
+(CIRRUS)S
+5100 2887 m
+(CONVRT)S
+6300 2887 m
+(DEFALT)S
+7500 2887 m
+(DESATT)S
+1200 2538 m
+1500 2538 m
+(DSTDTA)S
+2700 2538 m
+(EXABIN)S
+3900 2538 m
+(EXTDTA)S
+5100 2538 m
+(FLXADD)S
+6300 2538 m
+(IRFXN)S
+7500 2538 m
+(MAPMS)S
+1200 2189 m
+1500 2189 m
+(MARINE)S
+2700 2189 m
+(MSRAD)S
+3900 2189 m
+(RAIN)S
+5100 2189 m
+(RDEXA)S
+6300 2189 m
+(RDNSM)S
+7500 2189 m
+(SHADE)S
+1200 1840 m
+1500 1840 m
+(RHOEPS)S
+2700 1840 m
+(TANHT)S
+3900 1840 m
+(VSANSM)S
+5100 1840 m
+(XINTRP)S
+6300 1840 m
+(XMLATM)S
+7500 1840 m
+(XPROF)S
+ep
+
+%%Page: 19 19 
+
+bp
+/Times-RomanR 600 ff
+0 13200 10200 co
+mcm
+1729 10433 tr
+1 -1 sc np 32 32 m
+45 32 li 45 7605 li 32 7605 li cp
+0 255 div g
+13 w 0 lc fill np 32 32 m
+6709 32 li 6709 45 li 32 45 li cp
+0 255 div g
+fill np 6696 32 m
+6709 32 li 6709 7605 li 6696 7605 li cp
+0 255 div g
+fill np 32 7592 m
+6709 7592 li 6709 7605 li 32 7605 li cp
+0 255 div g
+fill np 0 0 m
+13 0 li 13 7637 li 0 7637 li cp
+0 255 div g
+fill np 0 0 m
+6741 0 li 6741 13 li 0 13 li cp
+0 255 div g
+fill np 6728 0 m
+6741 0 li 6741 7637 li 6728 7637 li cp
+0 255 div g
+fill np 0 7624 m
+6741 7624 li 6741 7637 li 0 7637 li cp
+0 255 div g
+fill 0 w 0 lc sm
+icl
+5000 688 m
+0 255 div g
+(17)S
+1877 10152 m
+/CourierR 600 ff
+2477 10152 m
+/Times-RomanR 549 ff
+U (ROUTINE)S
+u 3473 10152 m
+U u 3881 10152 m
+U (MODIFICATION)S
+u 1877 9936 m
+2477 9936 m
+(AERNSM)S
+3473 9936 m
+3881 9936 m
+15  0 32 (Added HAZECZ to CLDPRF call.)W
+1877 9720 m
+2477 9720 m
+(BMOD)S
+3473 9720 m
+3881 9720 m
+15  0 32 (Corrected calculation of Curtis-Godson sum.)W
+1877 9504 m
+2477 9504 m
+(CLDPRF)S
+3473 9504 m
+3881 9504 m
+15  0 32 (Added HAZECZ to argument list.)W
+1877 9288 m
+2477 9288 m
+(COMPAR)S
+3473 9288 m
+3881 9288 m
+15  0 32 (Added asymmetry factor G to check list.)W
+1877 9072 m
+2477 9072 m
+(DPFILL)S
+3473 9072 m
+3881 9072 m
+15  0 32 (Added linear interpolation of cloud density profiles.)W
+1877 8856 m
+2477 8856 m
+(DPLAYR)S
+3473 8856 m
+3881 8856 m
+15  0 32 (Added cloud density column amount calculations.)W
+1877 8640 m
+2477 8640 m
+(DPRFPA)S
+3473 8640 m
+3881 8640 m
+15  0 32 (Corrected do loop limits.)W
+1877 8424 m
+2477 8424 m
+(DRIVER)S
+3473 8424 m
+3881 8424 m
+15  0 32 (Added /CARD3A/.)W
+1877 8208 m
+2477 8208 m
+3077 8208 m
+3473 8208 m
+3881 8208 m
+15  0 32 (Incorporated negative IHAZE inputs.)W
+1877 7992 m
+2477 7992 m
+3077 7992 m
+3473 7992 m
+3881 7992 m
+15  0 32 (Modified CARD 2A I/O.)W
+1877 7776 m
+2477 7776 m
+3077 7776 m
+3473 7776 m
+3881 7776 m
+15  0 32 (Added asymmetry factor to SVSOLA and COMPAR calls.)W
+1877 7560 m
+2477 7560 m
+3077 7560 m
+3473 7560 m
+3881 7560 m
+15  0 32 (Added call to CRDRIV.)W
+1877 7344 m
+2477 7344 m
+3077 7344 m
+3473 7344 m
+3881 7344 m
+15  0 32 (Eliminated call to EQULWC.)W
+1877 7128 m
+2477 7128 m
+(FLAYZ)S
+3473 7128 m
+3881 7128 m
+15  0 32 (Corrected cirrus cloud layering errors.)W
+1877 6912 m
+2477 6912 m
+(GEO)S
+3077 6912 m
+3473 6912 m
+3881 6912 m
+15  0 32 (Changed EXPINT from subroutine to function call.)W
+1877 6696 m
+2477 6696 m
+3077 6696 m
+3473 6696 m
+3881 6696 m
+15  0 32 (Modified tape6 output.)W
+1877 6480 m
+2477 6480 m
+(LAY5DT)S
+3473 6480 m
+3881 6480 m
+15  0 32 (Modified and introduced new optical depth sums.)W
+1877 6264 m
+2477 6264 m
+(LOOP)S
+3077 6264 m
+3473 6264 m
+3881 6264 m
+15  0 32 (Integrated cloud scattering optical depth terms.)W
+1877 6048 m
+2477 6048 m
+3077 6048 m
+3473 6048 m
+3881 6048 m
+15  0 32 (Combined UV/Vis and IR contributions for NO2 and SO2.)W
+1877 5832 m
+2477 5832 m
+(O3HHT1)S
+3473 5832 m
+3881 5832 m
+15  0 32 (Corrected length of /O2HH1/)W
+1877 5616 m
+2477 5616 m
+(O3HHT2)S
+3473 5616 m
+3881 5616 m
+15  0 32 (Corrected length of /O2HH2/)W
+1877 5400 m
+2477 5400 m
+(PHASEF)S
+3473 5400 m
+3881 5400 m
+15  0 32 (Changed from subroutine to function.)W
+1877 5184 m
+2477 5184 m
+3077 5184 m
+3473 5184 m
+3881 5184 m
+15  0 32 (Changed HENGNS from subroutine to function call.)W
+1877 4968 m
+2477 4968 m
+(PSI)S
+3077 4968 m
+3473 4968 m
+3881 4968 m
+15  0 32 (Insured that function value is always returned.)W
+1877 4752 m
+2477 4752 m
+(RATCSZ)S
+3473 4752 m
+3881 4752 m
+15  0 32 (Added ISCRCH to /IFIL/.)W
+1877 4536 m
+2477 4536 m
+(SSGEO)S
+3473 4536 m
+3881 4536 m
+15  0 32 (Added calls to function HENGNS.)W
+1877 4320 m
+2477 4320 m
+3077 4320 m
+3473 4320 m
+3881 4320 m
+15  0 32 (Defined cloud phase function information.)W
+1877 4104 m
+2477 4104 m
+(SSRAD)S
+3473 4104 m
+3881 4104 m
+15  0 32 (Integrated cloud contributions.)W
+1877 3888 m
+2477 3888 m
+3077 3888 m
+3473 3888 m
+3881 3888 m
+15  0 32 (Changed PHASEF from subroutine to function call.)W
+1877 3672 m
+2477 3672 m
+(STDMDL)S
+3473 3672 m
+3881 3672 m
+15  0 32 (Corrected N2 continuum)W
+1877 3456 m
+2477 3456 m
+3077 3456 m
+3473 3456 m
+3881 3456 m
+15  0 32 (Modified tape6 output.)W
+1877 3240 m
+2477 3240 m
+(SVSOLA)S
+3473 3240 m
+3881 3240 m
+15  0 32 (Added asymmetry factor)W
+1877 3024 m
+2477 3024 m
+(TRANS)S
+3473 3024 m
+3881 3024 m
+15  0 32 (Eliminated transmission products for NO2 and SO2.)W
+/CourierR 600 ff
+2795 10547 m
+/Times-BoldR 549 ff
+15  0 32 (Table 3)W
+/Times-RomanR 549 ff
+15  0 32 (.  Modified MODTRAN Routines and their Changes.)W
+/CourierR 600 ff
+1200 11855 m
+/Times-RomanR 600 ff
+-2  0 (Additional)A
+13  0 32 -2  0 ( minor changes )AW
+14  0 32 -2  0 (to other routines are listed with a terse description of the modifications)AW
+1200 11506 m
+17  0 32 -1  0 (in Table 3.  Subrou)AW
+17  0 32 (tine EQULWC was completely dropped since all it did was define an array)W
+1200 11157 m
+17  0 32 (that was never used.)W
+1200 2083 m
+1500 2083 m
+-1  0 (Nine)A
+13  0 32 -1  0 ( routines were completely re-written.  New versions of \(1\) AEREXT, \(2\) AERTMP, \(3\))AW
+1200 1734 m
+1  0 (LAY)A
+(CLD,)S
+48  0 32 ( and \(4\) MDTA were required for the integration of the cloud model upgrades.)W
+1200 1385 m
+17  0 32 -1  0 (Routines \(5\) EXPINT and \(6\) HENGNS were changed from subrout)AW
+17  0 32 (ines to real functions.  The)W
+ep
+
+%%Page: 20 20 
+
+bp
+/Times-RomanR 600 ff
+0 13200 10200 co
+5000 688 m
+(18)S
+1200 11855 m
+1  0 (rem)A
+(aining)S
+22  0 32 ( three routines, \(7\) BMERFU, \(8\) DBLTX, and \(9\) SMGEO, were all replaced with)W
+1200 11506 m
+17  0 32 (more accurate versions.)W
+1200 11157 m
+1500 11157 m
+1  0 (These)A
+40  0 32 1  0 ( mod)AW
+40  0 32 (ified MODTRAN routines are in only five of the MODTRAN bundled files:)W
+1200 10808 m
+1  0 (PARAM.LS)A
+(T,)S
+37  0 32 ( driver.f modtran3.f, bmtran.f and stdmdl.f.  In addition, the 6 new cloud/rain)W
+1200 10459 m
+(routines)S
+51  0 32 ( have been bundled into a file designated clouds.f; this file must be added to the)W
+1200 10110 m
+17  0 32 -1  0 (MODTRAN m)AW
+17  0 32 (akefile.  With these new files, the user can run the upgraded MODTRAN cloud)W
+1200 9761 m
+(models.)S
+ep
+ed end
+

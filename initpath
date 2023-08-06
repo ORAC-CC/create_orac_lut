@@ -1,0 +1,3 @@
+setenv IDL_PATH '<IDL_DEFAULT>:+/home/g/grainger/project-oraclut'
+setenv IDL_DLM_PATH '<IDL_DEFAULT>:+/home/g/grainger/project-oraclut'
+echo "IDL_PATH & IDL_DLM_PATH established"

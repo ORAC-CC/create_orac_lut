@@ -593,7 +593,7 @@
                   wn      = 1e4 / srfstrarr[L].wvl_centre
                   wnlo    = 0.995*wn
                   wnhi    = 1.005*wn
-                  temp    = 250.0
+                  temp    = 270.0 ; hack from 250
                   incloud = WHERE(tauscat gt 0.0,emnly)
                   emTau   = DTau[incloud]
                   emSSA   = SSAlb[incloud]

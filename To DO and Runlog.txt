@@ -1,0 +1,23 @@
+To Do & Run log
+
+To Do
+optimise quadrature
+optimise range - where in state space is being used?
+new barran values
+new water refractive indices
+aerosol table/fm change to atmosphere + surface
+gas transmission spectral
+
+  
+RUN LOG
+V7 fixed bug in B1, B2, T1, T2 (using old subroutine)
+
+V11 fixed bug in netcdg string output, added MODIS channel 26
+
+V00 conversion of old tables to new format
+
+Notes 
+
+Greg's translations that don't quite work:
+https://github.com/ORAC-CC/orac/blob/master/src/FMRoutines.F90
+ 

@@ -485,6 +485,8 @@
 ;              ORAC LUT * THE RELATIVE AOD AT EACH LAYER FOR THIS CLASS * THE
 ;              SCALING FACTOR RELATING AOD AT THIS WAVELENGTH BACK TO 550 NM.
                tauscat = lutstr.opd[a] * scatreltau * bextrat[m,l,r]
+               bextval = 100*bext[m,l,r]*1e-6
+			   
 ;              the optical depths are additive
                dtau = taugas + tauray + tauscat
                totaltau = total(dtau)
@@ -599,7 +601,7 @@
                   emSSA   = SSAlb[incloud]
                   emPMo   = PMom[*,incloud]
                   emUTau  = [0.0, total(emTau)]
-stop
+print,[emtau,bextval, emtau/bextval *1e3 ]
                   call_disort, emTau, emSSA, emPMo, emUTau, UMu, lutstr.raa, $
                                FBeam, UMu0, FISot, RFlDir, RFlDn, FlUp, dFdT, $
                                UAvg, UU, AlbMed, TrnMed, /plank, wnlo=wnlo, $
@@ -679,22 +681,23 @@ stop
  
 ; Replicate nadir view to forward view (ie as though instrument has twice the number of channels)
   If ( inststr.View Gt 0) then begin              
-    FOR l=0,inststr.Number_of_nadir_Channels-1 do begin
-      RFD [2*l,*,*]       = RFD [l,*,*]
-      TFD [2*l,*,*]       = TFD [l,*,*] 
-      RD  [2*l,*,*,*]     = RD  [l,*,*,*] 
-      TD  [2*l,*,*,*]     = TD  [l,*,*,*]  
-      TB  [2*l,*,*,*]     = TB  [l,*,*,*]
-      RFBD[2*l,*,*,*]     = RFBD[l,*,*,*]
-      TFBD[2*l,*,*,*]     = TFBD[l,*,*,*]
-      RBD [2*l,*,*,*,*,*] = RBD [l,*,*,*,*,*]
-      Em  [2*l,*,*,*]     = Em  [l,*,*,*]
+    FOR l=0, inststr.number_of_nadir_channels - 1 do begin
+      RFD [inststr.number_of_nadir_channels +l ,*,*]       = RFD [l,*,*]
+      TFD [inststr.number_of_nadir_channels +l,*,*]       = TFD [l,*,*] 
+      RD  [inststr.number_of_nadir_channels +l,*,*,*]     = RD  [l,*,*,*] 
+      TD  [inststr.number_of_nadir_channels +l,*,*,*]     = TD  [l,*,*,*]  
+      TB  [inststr.number_of_nadir_channels +l,*,*,*]     = TB  [l,*,*,*]
+      RFBD[inststr.number_of_nadir_channels +l,*,*,*]     = RFBD[l,*,*,*]
+      TFBD[inststr.number_of_nadir_channels +l,*,*,*]     = TFBD[l,*,*,*]
+      RBD [inststr.number_of_nadir_channels +l,*,*,*,*,*] = RBD [l,*,*,*,*,*]
+      Em  [inststr.number_of_nadir_channels +l,*,*,*]     = Em  [l,*,*,*]
     ENDFOR
 ;   Rebuild instrument structure to account for slant channels  Note that all dual instrument devices
 ;   have on-board callibration so use (rua, rub and ruc) not (rgu and rou) 
-    inststr = {  instrument_filename: inststr.instrument_filename      , $
+    inststr = {  instrument_filename: inststr.instrument_filename, $
                            platform : inststr.platform,$
                          instrument : inststr.instrument,$
+			     instrument_version : inststr.instrument_version, $
                      max_sat_zenith : inststr.max_sat_zenith,$    
                  Number_of_Channels : inststr.Number_of_Channels,$
                           ChannelID : [inststr.ChannelID           , inststr.ChannelID + inststr.view],$                        
@@ -703,6 +706,7 @@ stop
                Thermal_Channel_Flag : [inststr.Thermal_Channel_Flag, inststr.Thermal_Channel_Flag],$
                            srf_file : [inststr.srf_file            , inststr.srf_file],$
                               oldf0 : [inststr.oldf0               , inststr.oldf0],$                         
+                              oldf1 : [inststr.oldf1               , inststr.oldf1],$                         
                             oldnefr : [inststr.oldnefr             , inststr.oldnefr],$                         
                              oldwvn : [inststr.oldwvn              , inststr.oldwvn],$                         
                               oldb1 : [inststr.oldb1               , inststr.oldb1],$                         
@@ -726,7 +730,7 @@ stop
 
   IF (File_Test(V2_LUT_Filename)) then print,'Info: Over-writing ' + V2_LUT_Filename else  print,'Info: Creating ' + V2_LUT_Filename
 
-  write_lut, V2_LUT_Filename, lutstr, inststr, srfstrarr, Vavg, bextout, bextratout, SSAOUT, GOUT, TD, TfD, RD, RfD, RBD = RBD, RfBD = RfBD, TfBD = TfBd, TB = TB, EM = EM
+  write_v2_lut, V2_LUT_Filename, lutstr, inststr, srfstrarr, Vavg, bextout, bextratout, SSAOUT, GOUT, TD, TfD, RD, RfD, RBD = RBD, RfBD = RfBD, TfBD = TfBd, TB = TB, EM = EM
 
 ;  -----------------------------------------------------------------------------
 ;  Output termination timestamp.

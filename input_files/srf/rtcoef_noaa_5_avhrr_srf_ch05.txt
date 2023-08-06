@@ -1,0 +1,9 @@
+05  , Filter noaa_05_avhrr_05.flt
+Number of data points:
+5
+Wavenumber (cm-1)   Filter response
+      800.000000       0.000000
+      801.000000       0.500000
+      802.000000       1.000000
+      803.000000       0.500000
+      804.000000       0.000000

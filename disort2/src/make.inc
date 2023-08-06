@@ -1,0 +1,5 @@
+# Locations of IDL and ifort at EODG
+IDL_DIR = /network/software/linux-x86_64/idl/870/idl
+IFORT_DIR = /opt/intel/composerxe
+
+
