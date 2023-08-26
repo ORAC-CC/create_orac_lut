@@ -72,18 +72,18 @@ pro load_lutstr, file, max_sat_zenith, LUTstr
   Soz_Spacing = strlowcase(Words[1])
   Soz = lut_quadrature(Soz_N,Soz_spacing,float(strsplit(lines(5),' ',/extract)) )
 
-; Next two data lines should be effective radius values
+; Next two data lines should be satellite  zenith angle  values
   Words = strsplit(lines(6),' ',/extract)
   Saz_N = fix(Words[0])
   Saz_Spacing = strlowcase(Words[1])
-  Saz = lut_quadrature(  Saz_N,Saz_spacing,float(strsplit(lines(7),' ',/extract)),max_val=max_sat_zenith) 
+  Saz = lut_quadrature(Saz_N,Saz_spacing,float(strsplit(lines(7),' ',/extract)),max_val=max_sat_zenith) 
 
 ; Next two data lines should be effective radius values
   Words = strsplit(lines(8),' ',/extract)
   Raa_N = fix(Words[0])
   Raa_Spacing = strlowcase(Words[1])
   If (Raa_Spacing Ne 'linear') Then stop,'Relative azimuth spacing must be linear' 
-  Raa = lut_quadrature(  Raa_N,Raa_spacing,float(strsplit(lines(9),' ',/extract)) )
+  Raa = lut_quadrature(Raa_N,Raa_spacing,float(strsplit(lines(9),' ',/extract)) )
 
 ;  Build the output structure
    LUTstr = { Opd_N      : Opd_N      , Efr_N:       Efr_N      , Soz_N       : Soz_N      , Saz_N      : Saz_N      , Raa_N      : Raa_N, $

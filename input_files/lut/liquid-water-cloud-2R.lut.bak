@@ -1,11 +1,11 @@
-# This file defines the LUT tables for water Cloud
-17 Uneven_logarithmic # 18 Optical depth values, should be interpolated in log(OpD)
-1.0000e-10 7.8125e-03 1.5625e-02 3.1250e-02 6.2500e-02 1.2500e-01 2.5000e-01 5.0000e-01 1.0000e+00 2.0000e+00 4.0000e+00 8.0000e+00 1.6000e+01 3.2000e+01 6.4000e+01 1.2800e+02 2.5600e+02
-20 linear # 20 Effective radius values, should be interpolated as is
+# This file defines the LUT tables for water Cloud in 2 normal resolution
+33 Uneven_logarithmic # 18 Optical depth values, should be interpolated in log(OpD)
+1.0000e-10   0.00781250    0.0109257    0.0152795    0.0213683    0.0298833    0.0417916    0.0584451    0.0817350     0.114306     0.159855     0.223556     0.312641     0.437226     0.611457     0.855117      1.19587      1.67242      2.33886      3.27088      4.57429      6.39711      8.94630     12.5113      17.4970      24.4694      34.2202      47.8566      66.9270      93.5969      130.894      183.055      256.000
+40 linear # 20 Effective radius values, should be interpolated as is
 1 39
-10 linear # 10 Satellite zenith angles, the maximum value is overwritten by the maximum satellite zenith angle
+20 linear # 10 Satellite zenith angles, the maximum value is overwritten by the maximum satellite zenith angle
 0 90
-10 linear # 10 Solar zenith angles
+20 linear # 10 Solar zenith angles
 0 90
-11 linear # 11 Relative azimuth angles
+22 linear # 11 Relative azimuth angles
 0 180

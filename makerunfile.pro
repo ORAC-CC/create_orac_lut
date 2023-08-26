@@ -82,6 +82,7 @@ MM = ['liquid-water_old', 'water-ice_ghm']
         'liquid-water_ap08',$
         'liquid-water_ap10']
 MM = ['liquid-water_old']  
+MM = ['biomass_australia_minus', 'biomass_australia','biomass_australia_plus']
 
   platform = 'ers1'
   instrument = 'atsr'
@@ -144,7 +145,7 @@ MM = ['liquid-water_old']
  
   
   Test = 0
-  Versions = '12'
+  Versions = '13'
   
   file = platform+'_'+instrument+'_run'
   openw,lun,file,/get_lun

@@ -3,9 +3,9 @@
 1.0000e-10   0.00781250    0.0109257    0.0152795    0.0213683    0.0298833    0.0417916    0.0584451    0.0817350     0.114306     0.159855     0.223556     0.312641     0.437226     0.611457     0.855117      1.19587      1.67242      2.33886      3.27088      4.57429      6.39711      8.94630     12.5113      17.4970      24.4694      34.2202      47.8566      66.9270      93.5969      130.894      183.055      256.000
 48 linear # 23 Effective radius values
 1 93
-20 linear # 10 Satellite zenith angles, the maximum value is overwritten by the maximum satellite zenith angle
-0 90
 20 linear # 10 Solar zenith angles
+0 90
+20 linear # 10 Satellite zenith angles, the maximum value is overwritten by the maximum satellite zenith angle
 0 90
 22 linear # 11 Relative azimuth angles
 0 180

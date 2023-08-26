@@ -33,6 +33,7 @@
         If srfstr.wvl_centre gt 3  then begin
 ;         Calcuate solar constant for channel (only matters for joint ir/solar channels)  
           wvn=1d4/sssi.wvl
+		  print,F0[J]
           F0[J] =  (simpson(srfstr.wvn,interpol(1d8*sssi.val/wvn^2,wvn, srfstr.wvn) *srfstr.srf)/  simpson(srfstr.wvn,srfstr.srf))/!pi
         endif  
       Endfor
