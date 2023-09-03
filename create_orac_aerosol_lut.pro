@@ -1,5 +1,5 @@
 ;+
-; function create_orac_lut
+; function create_orac_aerosol_lut
 ;
 ; A routine FOR generating ORAC look-up tables (LUTs) from aerosol/cloud optical
 ; properties. The code does the following steps:
@@ -127,7 +127,7 @@
 ; V2 Notes:  
 ; 1) *** Implicitly assumes there are less than 256 channels (need to add warning).
 ; 2) Creates LUT directory that mirrors driver file name.
-;-
+; 26/08/23, RGG: Seperated aerosol & cloud LUT creation 
 
 ; Include the libraries of procedures FOR reading and writing driver files and
 ; Look-Up Tables; setting up and running the scattering code; and calling the
@@ -139,7 +139,7 @@
 
 
 ; Begin the main LUT generation function
-  function create_orac_lut,in_path,     $
+  function create_orac_aerosol_lut,in_path,     $
                            instfile,     $
                            mmfile,      $
                            lutfile,      $
@@ -242,7 +242,7 @@
    load_inststr, instdirfile, inststr, RequestedChannelID = ChannelID
    
 ;  **** Read the LUT parameters file
-   load_lutstr, lutdirfile, inststr.max_sat_zenith, lutstr
+   load_lutstr, lutdirfile, inststr.max_sat_zenith, lutstr,/include_pressure
    
 ;  **** Read the spectral response functions for the relevant channels and generate integral quantities that depend upon the srf
    solar_spectrum_filename = in_path+'/sun/Gueymard2018.sssi'
@@ -286,6 +286,7 @@
    print,'         Solar zenith ', strtrim(lutstr.soz_n,2)
    print,'    Instrument zenith ', strtrim(lutstr.saz_n,2)
    print,'     Relative azimuth ', strtrim(lutstr.raa_n,2)
+   print,'            Pressures ', strtrim(lutstr.prs_n,2)
    print,'SRF quadrature method ', strtrim(QM,2)
    If (QM Eq 2) Then FOR i = 0,inststr.number_of_nadir_channels-1 DO print,'Channel ', i, ' Number of quadrature points: ',srfstrarr[i].nwvl
    
@@ -428,28 +429,28 @@
    setup_disort, 60, NLayers, lutstr.saz_n, lutstr.raa_n, NMom
 
 ;  **** Define the LUT table output variables themselves
-   RFD  = FLTARR(inststr.Number_of_Channels, lutstr.efr_n, lutstr.opd_n)
-   TFD  = FLTARR(inststr.Number_of_Channels, lutstr.efr_n, lutstr.opd_n)
-   RD   = FLTARR(inststr.Number_of_Channels, lutstr.efr_n, lutstr.opd_n, lutstr.saz_n)
-   TD   = FLTARR(inststr.Number_of_Channels, lutstr.efr_n, lutstr.opd_n, lutstr.saz_n)
-   TB   = FLTARR(inststr.Number_of_Channels, lutstr.efr_n, lutstr.opd_n, lutstr.soz_n)
-   RFBD = FLTARR(inststr.Number_of_Channels, lutstr.efr_n, lutstr.opd_n, lutstr.soz_n)
-   TFBD = FLTARR(inststr.Number_of_Channels, lutstr.efr_n, lutstr.opd_n, lutstr.soz_n)
-   RBD  = FLTARR(inststr.Number_of_Channels, lutstr.efr_n, lutstr.opd_n, lutstr.soz_n, lutstr.saz_n, lutstr.raa_n)
-   Em   = FLTARR(inststr.Number_of_Channels, lutstr.efr_n, lutstr.opd_n, lutstr.saz_n)
+   RFD  = FLTARR(inststr.Number_of_Channels, lutstr.prs_n, lutstr.efr_n, lutstr.opd_n)
+   TFD  = FLTARR(inststr.Number_of_Channels, lutstr.prs_n, lutstr.efr_n, lutstr.opd_n)
+   RD   = FLTARR(inststr.Number_of_Channels, lutstr.prs_n, lutstr.efr_n, lutstr.opd_n, lutstr.saz_n)
+   TD   = FLTARR(inststr.Number_of_Channels, lutstr.prs_n, lutstr.efr_n, lutstr.opd_n, lutstr.saz_n)
+   TB   = FLTARR(inststr.Number_of_Channels, lutstr.prs_n, lutstr.efr_n, lutstr.opd_n, lutstr.soz_n)
+   RFBD = FLTARR(inststr.Number_of_Channels, lutstr.prs_n, lutstr.efr_n, lutstr.opd_n, lutstr.soz_n)
+   TFBD = FLTARR(inststr.Number_of_Channels, lutstr.prs_n, lutstr.efr_n, lutstr.opd_n, lutstr.soz_n)
+   RBD  = FLTARR(inststr.Number_of_Channels, lutstr.prs_n, lutstr.efr_n, lutstr.opd_n, lutstr.soz_n, lutstr.saz_n, lutstr.raa_n)
+   Em   = FLTARR(inststr.Number_of_Channels, lutstr.prs_n, lutstr.efr_n, lutstr.opd_n, lutstr.saz_n)
 
 ;  **** Loop through the channels (and solar zenith angles) and run DISORT FOR
 ;       the beam and diffuse cases. Also produce the emissivity FOR the channels
 ;       that need it.
 
-;  Define the Rayleigh scattering optical depth in each channel
-   IF KEYWORD_SET(no_rayleigh) THEN $
-      columntauray = replicate(1.e-6, inststr.number_of_channels) $
-    ELSE $
-      columntauray = (atmstr.pressure[atmstr.nlevels-1] / 1013.0) / (117.03*srfstrarr[*].wvl_centre ^4 - 1.316*srfstrarr[*].wvl_centre ^2)
-;*****   openw,dlut,'disort.dat',/get_lun ;temporary lines to get disort parameters
    FOR l = 0, inststr.number_of_nadir_channels - 1 DO BEGIN
       print,'Running DISORT for channel '+string(inststr.channelid[l],Format='(I)')+ ' (',strtrim(srfstrarr[l].wvl_centre,2),' um)'
+      FOR k = 0,lutstr.prs_n-1 DO BEGIN	 
+;     Define the Rayleigh scattering optical depth in each channel
+      IF KEYWORD_SET(no_rayleigh) THEN $
+        columntauray = replicate(1.e-6, inststr.number_of_channels) $
+      ELSE $
+        columntauray = (atmstr.pressure[atmstr.nlevels-1] / lutstr.prs(k)) / (117.03*srfstrarr[*].wvl_centre ^4 - 1.316*srfstrarr[*].wvl_centre ^2)	  
       FOR m = 0, srfstrarr[l].nwvl - 1 DO BEGIN
  
 ;        Do we have a Gas optical depth profile for the current channel?
@@ -559,17 +560,17 @@
                             dFdT, UAvg, UU, AlbMed, TrnMed
 
 ;              Generate the diffuse LUT variables
-               RFD[l, r, a] += (100. * FlUp[0]  / (FIsot*!pi)) * srfstrarr[l].val[m]
-               TFD[l, r, a] += (100. * RFlDn[1] / (FIsot*!pi)) * srfstrarr[l].val[m]
+               RFD[l, k,  r, a] += (100. * FlUp[0]  / (FIsot*!pi)) * srfstrarr[l].val[m]
+               TFD[l, k,  r, a] += (100. * RFlDn[1] / (FIsot*!pi)) * srfstrarr[l].val[m]
 ;              RD contains the Upwelling intensity
-               RD[l, r, a, *] += (UU[2*lutstr.saz_n-lindgen(lutstr.saz_n)-1,0,0]) * srfstrarr[l].val[m]
+               RD[l, k,  r, a, *] += (UU[2*lutstr.saz_n-lindgen(lutstr.saz_n)-1,0,0]) * srfstrarr[l].val[m]
 ;              TD contains the Downwelling intensity without the direct beam
 
 ; V7 vs V8
               IF inststr.Solar_Channel_Flag[l] then $
-						    TD[l, r, a, *] += (UU[lindgen(lutstr.saz_n),  1,0] -100*exp(totaltau/UMu[0:lutstr.saz_n-1])) * srfstrarr[l].val[m] $
+						    TD[l, k,  r, a, *] += (UU[lindgen(lutstr.saz_n),  1,0] -100*exp(totaltau/UMu[0:lutstr.saz_n-1])) * srfstrarr[l].val[m] $
 							Else $
-  							TD[l, r, a, *] += (UU[lindgen(lutstr.saz_n),  1,0]) * srfstrarr[l].val[m]
+  							TD[l, k,  r, a, *] += (UU[lindgen(lutstr.saz_n),  1,0]) * srfstrarr[l].val[m]
 
 ;               print, ''
 
@@ -578,7 +579,7 @@
                IF inststr.Thermal_Channel_Flag[l] then begin
 ;                  print, '---------- EMISSION ----------'
 ;                 Elisa's expression FOR emissivity....
-;                 Em[l, r, a, *]  = 100.0*(1.0 - w(l,r)) * $
+;                 Em[l, k,  r, a, *]  = 100.0*(1.0 - w(l,r)) * $
 ;                                (1.0 - exp(TotalTau*(-1.0/cos(lutstr.saz*!dtor))))
 
 ;                 Use DISORT - I can't seem to get this to work correctly. FOR
@@ -600,15 +601,15 @@
 
                   call_disort, emTau, emSSA, emPMo, emUTau, UMu, lutstr.raa, $
                                FBeam, UMu0, FISot, RFlDir, RFlDn, FlUp, dFdT, $
-                               UAvg, UU, AlbMed, TrnMed, /planck, wnlo=wnlo, $
+                               UAvg, UU, AlbMed, TrnMed, /plank, wnlo=wnlo, $
                                wnhi=wnhi, temp=temp, nlayer=emnly
 
-;                 Now we calculate the Planck emission across the wavelength
+;                 Now we calculate the Plank emission across the wavelength
 ;                 interval.
                   BBE = PLKAVG(wnlo, wnhi, temp)
 
 ;                 Finally, combine to produce the emissivity
-                  Em[l, r, a, *] += (100.0 *  UU[2*lutstr.saz_n-lindgen(lutstr.saz_n)-1,0,0]/BBE) * srfstrarr[l].val[m]
+                  Em[l, k,  r, a, *] += (100.0 *  UU[2*lutstr.saz_n-lindgen(lutstr.saz_n)-1,0,0]/BBE) * srfstrarr[l].val[m]
 
 ;                  print, ''
                ENDIF
@@ -636,15 +637,15 @@
                                   dfdt, uavg, uu, albmed, trnmed
 
 ;                    Generate the direct beam LUT variables
-                     tb[l,r,a,s]   += (100. * rfldir[1] / rfldir[0]) * srfstrarr[l].val[m]
-                     rfbd[l,r,a,s] += (100. * flup[0]   / rfldir[0]) * srfstrarr[l].val[m]
-                     tfbd[l,r,a,s] += (100. * rfldn[1]  / rfldir[0]) * srfstrarr[l].val[m]
+                     tb[l, k, r,a,s]   += (100. * rfldir[1] / rfldir[0]) * srfstrarr[l].val[m]
+                     rfbd[l, k, r,a,s] += (100. * flup[0]   / rfldir[0]) * srfstrarr[l].val[m]
+                     tfbd[l, k, r,a,s] += (100. * rfldn[1]  / rfldir[0]) * srfstrarr[l].val[m]
                      FOR p=0,lutstr.raa_n-1 do begin
 ;                       Reverse azimuth to ORAC convention
                         p2 = lutstr.raa_n - p - 1 ; WARNING this means raa must be evenly spaced from 0 to 180 otherwise the reversal doesn't make sense                        
 ;                       As with the diffuse case, RBD contains the upwelling
 ;                       intensity, while TBD contains the downwelling.
-                        rbd[l, r, a, s, *, p2] += (uu[2*lutstr.saz_n-lindgen(lutstr.saz_n)-1,0,p] * !pi) * srfstrarr[l].val[m]
+                        rbd[l, k,  r, a, s, *, p2] += (uu[2*lutstr.saz_n-lindgen(lutstr.saz_n)-1,0,p] * !pi) * srfstrarr[l].val[m]
                      ENDFOR
 										 
                   ENDFOR
@@ -655,7 +656,7 @@
          ENDFOR ; End of AOD loop
  ;        print,''
        ENDFOR ; End of SRF loop  	
-	 
+     ENDFOR ; End of pressure loop 	 
    ENDFOR ; End of channel loop
 	
 ;*****close,dlut
@@ -664,29 +665,29 @@
 ; monochomatic mode (when no SRFs were provided).
   FOR l=0,inststr.Number_of_nadir_Channels-1 do begin
       sum = total(srfstrarr[l].val[*])
-      RFD [l,*,*]       /= sum
-      TFD [l,*,*]       /= sum
-      RD  [l,*,*,*]     /= sum
-      TD  [l,*,*,*]     /= sum
-      TB  [l,*,*,*]     /= sum
-      RFBD[l,*,*,*]     /= sum
-      TFBD[l,*,*,*]     /= sum
-      RBD [l,*,*,*,*,*] /= sum
-      Em  [l,*,*,*]     /= sum
+      RFD [l,*,*,*]       /= sum
+      TFD [l,*,*,*]       /= sum
+      RD  [l,*,*,*,*]     /= sum
+      TD  [l,*,*,*,*]     /= sum
+      TB  [l,*,*,*,*]     /= sum
+      RFBD[l,*,*,*,*]     /= sum
+      TFBD[l,*,*,*,*]     /= sum
+      RBD [l,*,*,*,*,*,*] /= sum
+      Em  [l,*,*,*,*]     /= sum
   ENDFOR
  
 ; Replicate nadir view to forward view (ie as though instrument has twice the number of channels)
   If ( inststr.View Gt 0) then begin              
     FOR l=0, inststr.number_of_nadir_channels - 1 do begin
-      RFD [inststr.number_of_nadir_channels +l ,*,*]       = RFD [l,*,*]
-      TFD [inststr.number_of_nadir_channels +l,*,*]       = TFD [l,*,*] 
-      RD  [inststr.number_of_nadir_channels +l,*,*,*]     = RD  [l,*,*,*] 
-      TD  [inststr.number_of_nadir_channels +l,*,*,*]     = TD  [l,*,*,*]  
-      TB  [inststr.number_of_nadir_channels +l,*,*,*]     = TB  [l,*,*,*]
-      RFBD[inststr.number_of_nadir_channels +l,*,*,*]     = RFBD[l,*,*,*]
-      TFBD[inststr.number_of_nadir_channels +l,*,*,*]     = TFBD[l,*,*,*]
-      RBD [inststr.number_of_nadir_channels +l,*,*,*,*,*] = RBD [l,*,*,*,*,*]
-      Em  [inststr.number_of_nadir_channels +l,*,*,*]     = Em  [l,*,*,*]
+      RFD [inststr.number_of_nadir_channels +l,*,*,*]       = RFD [l,*,*,*]
+      TFD [inststr.number_of_nadir_channels +l,*,*,*]       = TFD [l,*,*,*] 
+      RD  [inststr.number_of_nadir_channels +l,*,*,*,*]     = RD  [l,*,*,*,*] 
+      TD  [inststr.number_of_nadir_channels +l,*,*,*,*]     = TD  [l,*,*,*,*]  
+      TB  [inststr.number_of_nadir_channels +l,*,*,*,*]     = TB  [l,*,*,*,*]
+      RFBD[inststr.number_of_nadir_channels +l,*,*,*,*]     = RFBD[l,*,*,*,*]
+      TFBD[inststr.number_of_nadir_channels +l,*,*,*,*]     = TFBD[l,*,*,*,*]
+      RBD [inststr.number_of_nadir_channels +l,*,*,*,*,*,*] = RBD [l,*,*,*,*,*,*]
+      Em  [inststr.number_of_nadir_channels +l,*,*,*,*]     = Em  [l,*,*,*,*]
     ENDFOR
 ;   Rebuild instrument structure to account for slant channels  Note that all dual instrument devices
 ;   have on-board callibration so use (rua, rub and ruc) not (rgu and rou) 
@@ -726,7 +727,7 @@
 
   IF (File_Test(V2_LUT_Filename)) then print,'Info: Over-writing ' + V2_LUT_Filename else  print,'Info: Creating ' + V2_LUT_Filename
 
-  write_v2_lut, V2_LUT_Filename, lutstr, inststr, srfstrarr, Vavg, bextout, bextratout, SSAOUT, GOUT, TD, TfD, RD, RfD, RBD = RBD, RfBD = RfBD, TfBD = TfBd, TB = TB, EM = EM
+  write_v2_lut, V2_LUT_Filename, lutstr, inststr, srfstrarr, Vavg, bextout, bextratout, SSAOUT, GOUT, TD, TfD, RD, RfD, RBD = RBD, RfBD = RfBD, TfBD = TfBd, TB = TB, EM = EM,/include_pressure
 
 ;  -----------------------------------------------------------------------------
 ;  Output termination timestamp.

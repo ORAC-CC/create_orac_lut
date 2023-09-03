@@ -85,18 +85,6 @@ pro create_bwgp, distname, Rm, S, RI, wl, Dqv, Bext, w, g, Phi, scode=scode, tma
 ;       We're not using T-Matrix, so call the normal Mie scattering code
         mie_size_dist_new, distname, 1.0, [Rm, S, 0.001, 100.0], wn[i], RI[i], Dqv=Dqv, /dlm, xres=0.4, Bexttmp, Bscatmp, wtmp, gtmp, SPM, Vavg=Vavg
         Phi[*,i] = SPM[0,*]
-	;	Bexttmp2=Bexttmp
-	;	Bscatmp2=Bscatmp
-	;	wtmp2=wtmp
-	;	gtmp2=gtmp
-	;	SPM2=SPM
-	;	Vavg2=Vavg
-   ; mie_size_dist_new, distname, 1.0, [Rm, S, 0.001, 100.0], wn[i], RI[i], Dqv=Dqv, /dlm, xres=0.4, Bexttmp2, Bscatmp2, wtmp2, gtmp2, SPM2, Vavg=Vavg2
-	;	print,Bexttmp,Bexttmp2
-	;	print,Bscatmp,Bscatmp2
-	;	print,wtmp,wtmp2
-	;	print,gtmp,gtmp2
-	;	print,Vavg,Vavg2
       ENDELSE
     Bext[i] = Bexttmp
     w[i] = wtmp

@@ -1,5 +1,5 @@
 ;+
-; function create_orac_lut
+; function create_orac_cloud_lut
 ;
 ; A routine FOR generating ORAC look-up tables (LUTs) from aerosol/cloud optical
 ; properties. The code does the following steps:
@@ -139,7 +139,7 @@
 
 
 ; Begin the main LUT generation function
-  function create_orac_lut,in_path,     $
+  function create_orac_cloud_lut,in_path,     $
                            instfile,     $
                            mmfile,      $
                            lutfile,      $
@@ -336,7 +336,7 @@
 ;          /function, /source)).path) + '/.git rev-parse HEAD > ' + out_path + $    ; removed on switch to bash
 ;          '/git_revision.txt'                                                      ; removed on switch to bash
   
-   FILE_COPY, driver,   out_path + '/', /OVERWRITE
+   FILE_COPY, driver,   out_path + '/', /OVERWRITE ; this doesn't account for input switches and should be changed
 
 ;  -----------------------------------------------------------------------------
 ;  Interpolate the aerosol profile layers onto the atmos. pressure and gas OPD
@@ -377,48 +377,8 @@
     SSAOUT = reform(w[m,*,*])
     GOUT = reform(g[m,*,*])
 
-
    print,''
    print,'Scattering parameters calculated FOR class '+out_path+verstrng
-
-; IF requested generate optical properties luts...
-  IF keyword_set(opt_prop_luts) then begin
-;    Add the values FOR the 550 nm reference to the front of the
-;    output arrays. IF we're using spectral response functions,
-;    output the weighted mean scattering parameters FOR each channel
-     bext_all = FLTARR(inststr.number_of_nadir_channels+1,lutstr.efr_n)
-     bext_all[0,*] = transpose(Bext550)
-     bext_all[1:*,*] = reform(Bext[m,*,*],[inststr.number_of_nadir_channels,lutstr.efr_n])
-     w_all = FLTARR(inststr.number_of_nadir_channels+1,lutstr.efr_n)
-     w_all[0,*] = transpose(w550)
-     w_all[1:*,*] = reform(w[m,*,*],[inststr.number_of_nadir_channels,lutstr.efr_n])
-     g_all = FLTARR(inststr.number_of_nadir_channels+1,lutstr.efr_n)
-     g_all[0,*] = transpose(g550)
-     g_all[1:*,*] = reform(g[m,*,*],[inststr.number_of_nadir_channels,lutstr.efr_n])
-     P_all = FLTARR(inststr.number_of_nadir_channels+1,lutstr.efr_n,NMom)
-     P_all[0,*,*] = reform(transpose(Phs550),1,lutstr.efr_n,NMom)
-     P_all[1:*,*,*] = transpose(reform(Phs[*,m,*,*],[NMom,inststr.number_of_nadir_channels,lutstr.efr_n]),$
-                                [1,2,0])
-     bext_c_all = FLTARR(inststr.number_of_nadir_channels+1,mmstr.NComp,lutstr.efr_n)
-     bext_c_all[0,*,*] = Bext550_c
-     bext_c_all[1:*,*,*] = reform(Bext_c[m,*,*,*],inststr.number_of_nadir_channels,mmstr.NComp,lutstr.efr_n)
-     w_c_all = FLTARR(inststr.number_of_nadir_channels+1,mmstr.NComp,lutstr.efr_n)
-     w_c_all[0,*,*] = w550_c
-     w_c_all[1:*,*,*] = reform(w_c[m,*,*,*],inststr.number_of_nadir_channels,mmstr.NComp,lutstr.efr_n)
-     IF size(opt_prop_luts,/type) ne 7 then begin
-        optproppath = '.'
-        message,/info,'Optical properties luts requested with no path. Will write to CWD'
-     ENDIF ELSE optproppath = opt_prop_luts
-     print, ' Writing optical properties luts to directory: ',optproppath
-     optpropname = optproppath+'/'+inststr.instrument+'_'+mmstr.outname+'_propslut.nc'
-;OLD*    write_orac_optprop_luts, optpropname, mmstr.outname, lutstr.EfR, $
-;OLD*                              mmstr.comptype, mmstr.compname, mmstr.compname2, $
-;OLD*                              mmstr.distname, '', lut_Mrat, lut_Rm, mmstr.S, $
-;OLD*                              [0.55, SRF_Nwvl], $
-;OLD*                              [transpose(AerM550),reform(AerM[m,*,*],inststr.number_of_nadir_channels,mmstr.NComp)], $
-;OLD*                              w_all, bext_all, g_all, Ptheta*!radeg, P_all, $
-;OLD*                              bext_c_all, w_c_all
-  ENDIF
 
 ;  -----------------------------------------------------------------------------
 ;  Run DISORT
@@ -478,6 +438,10 @@
 
          FOR a = 0,lutstr.opd_n-1 DO BEGIN
            FOR r = 0,lutstr.efr_n-1 DO BEGIN
+		   
+		     pcd =  lutstr.opd[a]/(bext550[r]*1E6) ; this isn't correct as MP model assume a drop concentration of 1
+			 pcd = 2000 ; m
+		     print,'Cloud Physical Depth:', PCD,' m'
 
 ;              THE OPTICAL DEPTH FROM AEROSOL IS THE DESIRED TOTAL AODS FOR THE
 ;              ORAC LUT * THE RELATIVE AOD AT EACH LAYER FOR THIS CLASS * THE
@@ -593,6 +557,7 @@
                   wnhi    = 1.005*wn
                   temp    = 270.0 ; hack from 250
                   incloud = WHERE(tauscat gt 0.0,emnly)
+; OLD				  	  
                   emTau   = DTau[incloud]
                   emSSA   = SSAlb[incloud]
                   emPMo   = PMom[*,incloud]
@@ -602,13 +567,35 @@
                                FBeam, UMu0, FISot, RFlDir, RFlDn, FlUp, dFdT, $
                                UAvg, UU, AlbMed, TrnMed, /planck, wnlo=wnlo, $
                                wnhi=wnhi, temp=temp, nlayer=emnly
-
-;                 Now we calculate the Planck emission across the wavelength
+;                 Now we calculate the Plank emission across the wavelength
 ;                 interval.
                   BBE = PLKAVG(wnlo, wnhi, temp)
 
 ;                 Finally, combine to produce the emissivity
-                  Em[l, r, a, *] += (100.0 *  UU[2*lutstr.saz_n-lindgen(lutstr.saz_n)-1,0,0]/BBE) * srfstrarr[l].val[m]
+;                 Em[l, r, a, *] += (100.0 *  UU[2*lutstr.saz_n-lindgen(lutstr.saz_n)-1,0,0]/BBE) * srfstrarr[l].val[m]				
+; NEW
+				  If emnly ne 1 then stop ; we're buggered need to think harder
+                  Ext = DTau[incloud]/PCD ; extintion in 1/m
+;                 Assume lapse rate of 7 K /km
+                  LR = 7/1000.  ; .007 K per m
+;                 Place tau at every 1 deg change 
+                  emnly2 = round(PCD * LR) 
+                  emTau2   = replicate(emTau/emnly2,emnly2)
+                  emSSA2   = replicate(emSSA,emnly2)
+                  emPMo2   = emPMo#replicate(1,emnly2)
+                  Temp2    = 270. + LR* findgen(emnly2) * PCD/(emnly2-1)     				  
+
+
+                  call_disort, emTau2, emSSA2, emPMo2, emUTau, UMu, lutstr.raa, $
+                               FBeam, UMu0, FISot, RFlDir, RFlDn, FlUp, dFdT, $
+                               UAvg, UU, AlbMed, TrnMed, /planck, wnlo=wnlo, $
+                               wnhi=wnhi, temp=temp2, nlayer=emnly2
+							   
+		
+	              Em[l, r, a, *] += (100.0 *  UU[2*lutstr.saz_n-lindgen(lutstr.saz_n)-1,0,0]/BBE) * srfstrarr[l].val[m]							   
+	;	stop					   
+			
+
 
 ;                  print, ''
                ENDIF
