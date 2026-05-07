@@ -1,2 +1,0 @@
-IDL_DIR = /usr/local/idl
-IFORT_LIB_DIR = /usr/local/composerxe/lib/intel64
