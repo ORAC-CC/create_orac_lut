@@ -1,0 +1,81 @@
+# Meteosat-12 MTG1 FCI  instrument definition for ORAC code
+# Channels 1-12 
+
+# Format
+# or * indicate a comment, can have blank lines. An = separates the constant and its value.
+
+# constants
+# + may be in any order
+# + are case insensitive (will be translated to lower case)
+# + may include spaces (they are ignored) 
+# e.g. Solar Channels is equivalent to solarchannels
+
+# uncertainty in albedo for solar channels and NedT for thermal and mixed thermal/solar channels
+
+# quantities specific to a channel can be indicated using the nadir channelid (as a number) in []
+platform = meteosat-12
+instrument = fci
+instrument version = unknown
+
+# 0: single or N: dual view where N represents the channel offset of the slant view wrt the nadir view
+view = 0
+
+# specify instrument channels available as some instrument channels may be inapplicable, failed, too noisy etc
+available channels  = 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
+
+# specify which of the channels measure reflected solar radiation (includes channels around 4 um which have both a solar and emitted component)
+solar channels  = 1 2 3 4 5 6 7 8 9
+
+# specify which of the channels measure emitted thermal radiation (includes channels around 4 um which have both a solar and emitted component)
+thermal channels  = 9 10 11 12 13 14 15 16
+
+# Figure below captures the maximum value  
+maximum satellite zenith = 90
+
+# spectral response functions
+# taken from RTTOV spectral response function archive: https://www.nwpsaf.eu/site/software/rttov/download/coefficients/spectral-response-functions/
+# channels follow ORAC (ie OSCAR) order except atsr, atsr-2 and aatsr which are reversed
+ srf  [1] = rtcoef_mtg_1_fci_srf_ch01.txt
+ srf  [2] = rtcoef_mtg_1_fci_srf_ch02.txt
+ srf  [3] = rtcoef_mtg_1_fci_srf_ch03.txt
+ srf  [4] = rtcoef_mtg_1_fci_srf_ch04.txt
+ srf  [5] = rtcoef_mtg_1_fci_srf_ch05.txt
+ srf  [6] = rtcoef_mtg_1_fci_srf_ch06.txt
+ srf  [7] = rtcoef_mtg_1_fci_srf_ch07.txt
+ srf  [8] = rtcoef_mtg_1_fci_srf_ch08.txt
+ srf  [9] = rtcoef_mtg_1_fci_srf_ch09.txt
+ srf [10] = rtcoef_mtg_1_fci_srf_ch10.txt
+ srf [11] = rtcoef_mtg_1_fci_srf_ch11.txt
+ srf [12] = rtcoef_mtg_1_fci_srf_ch12.txt
+ srf [13] = rtcoef_mtg_1_fci_srf_ch13.txt
+ srf [14] = rtcoef_mtg_1_fci_srf_ch14.txt
+ srf [15] = rtcoef_mtg_1_fci_srf_ch15.txt
+ srf [16] = rtcoef_mtg_1_fci_srf_ch16.txt
+
+# Values from https://www-cdn.eumetsat.int/files/2020-07/pdf_mtg_fci_l1_pug.pdf
+snr [1] =  25
+snr [2] =  25 
+snr [3] =  30 
+snr [4] =  21 
+snr [5] =  12 
+snr [6] =  40 
+snr [7] =  30 
+snr [8] =  25 
+
+ refbt  [9] = 300
+ refbt [10] = 250
+ refbt [11] = 250
+ refbt [12] = 300
+ refbt [13] = 250
+ refbt [14] = 300
+ refbt [15] = 300
+ refbt [16] = 270
+
+ nedt   [9] = 0.1
+ nedt  [10] = 0.3
+ nedt  [11] = 0.3
+ nedt  [12] = 0.1 
+ nedt  [13] = 0.3
+ nedt  [14] = 0.1
+ nedt  [15] = 0.2
+ nedt  [16] = 0.2

@@ -5,7 +5,7 @@
 ;  endif
 ;end
 
-pro write_v2_lut, V2_LUT_Filename, lutstr, inststr, srfstrarr, Vavg, BextOut, BextRatOut, SSAOUT, GOUT, TD, TfD, RD, RfD, RBD = RBD, RfBD= RfBD, TfBD = TfBd, TB = TB, EM = EM
+pro write_v2_lut, V2_LUT_Filename, lutstr, inststr, srfstrarr, Vavg, BextOut, BextRatOut, SSAOUT, GOUT, TD, TfD, RD, RfD, RBD = RBD, RfBD= RfBD, TfBD = TfBd, TB = TB, EM = EM, include_pressure=include_pressure
 
   NumberofSolarChannels = Total(inststr.Solar_Channel_Flag)
   Solar_Channels_Exist  = boolean(NumberofSolarChannels)
@@ -39,6 +39,7 @@ pro write_v2_lut, V2_LUT_Filename, lutstr, inststr, srfstrarr, Vavg, BextOut, Be
   saz_dim = ncdf_dimdef(file_id, 'satellite_zenith', lutstr.saz_n)
   soz_dim = ncdf_dimdef(file_id, 'solar_zenith'    , lutstr.soz_n)
   raa_dim = ncdf_dimdef(file_id, 'relative_azimuth', lutstr.raa_n)
+  if (keyword_set(include_pressure)) then prs_dim = ncdf_dimdef(file_id, 'surface_pressure', lutstr.prs_n)
   chn_dim = ncdf_dimdef(file_id, 'channels'        , inststr.Number_of_Channels)
   str_dim = NCDF_DIMDEF(file_id, 'length'          , MAX(STRLEN(inststr.srf_file)))
   st1_dim = ncdf_dimdef(file_id, 'st1'             , STRLEN(inststr.instrument_filename))
@@ -139,10 +140,10 @@ pro write_v2_lut, V2_LUT_Filename, lutstr, inststr, srfstrarr, Vavg, BextOut, Be
         ncdf_attput, file_id, rua_id,'units','dimensionless'
       rub_id = ncdf_vardef(file_id,'rub', [soc_dim],/float)
         ncdf_attput, file_id, rub_id,'long_name','radiance uncertainty coefficient b'
-        ncdf_attput, file_id, rub_id,'units','W/(m^2 sr um)'
+        ncdf_attput, file_id, rub_id,'units','[W/(m^2 sr um)]^(1/2)'
       ruc_id = ncdf_vardef(file_id,'ruc', [soc_dim],/float)
         ncdf_attput, file_id, ruc_id,'long_name','radiance uncertainty coefficient c'
-        ncdf_attput, file_id, ruc_id,'units','[W/(m^2 sr um)]^2'   
+        ncdf_attput, file_id, ruc_id,'units','[W/(m^2 sr um)]'   
        end
     EndCase
 ; ***** TEMPORARY FOR BACK COMPATIBILITY ******  
@@ -256,47 +257,81 @@ pro write_v2_lut, V2_LUT_Filename, lutstr, inststr, srfstrarr, Vavg, BextOut, Be
     ncdf_attput, file_id, raa_id,'spacing',lutstr.raa_spacing 
     ncdf_attput, file_id, raa_id,'units','degrees'
     ncdf_attput, file_id, raa_id,'valid_range',[0.0, 180.0]
+  if (keyword_set(include_pressure)) then begin
+    prs_id = ncdf_vardef(file_id,'surface_pressure', [prs_dim],/float)
+      ncdf_attput, file_id, prs_id,'long_name','surface pressure'
+      ncdf_attput, file_id, prs_id,'spacing',lutstr.prs_spacing 
+      ncdf_attput, file_id, prs_id,'units','hPa'
+      ncdf_attput, file_id, prs_id,'valid_range',[900., 1100.]
+  endif
 
 
 
 ; LUT Not 100% sure on the long names nor the valid range.  I think some of these can be bigger than 1
-   TDid = ncdf_vardef(file_id,'T_dv',  [chn_dim, efr_dim, opd_dim, saz_dim],/float) ; IT_dv = ITd 
-     ncdf_attput, file_id, TDid,'long_name','diffuse transmission of direct light'
-     ncdf_attput, file_id, TDid,'units','dimensionless'
-     ncdf_attput, file_id, TDid,'valid_range',[0.0, 1.0]
-  TfDid = ncdf_vardef(file_id,'T_dd',  [chn_dim, efr_dim, opd_dim],/float)          ; IT_dd = ITfd 
-     ncdf_attput, file_id, TfDid,'long_name','diffuse transmission'
-     ncdf_attput, file_id, TfDid,'units','dimensionless'
-     ncdf_attput, file_id, TfDid,'valid_range',[0.0, 1.0]
-   RDid = ncdf_vardef(file_id,'R_dv',  [chn_dim, efr_dim, opd_dim, saz_dim],/float) ; IR_dv = IRd
-     ncdf_attput, file_id, RDid,'long_name','direct reflection of diffuse light'
-     ncdf_attput, file_id, RDid,'units','dimensionless'
-     ncdf_attput, file_id, RDid,'valid_range',[0.0, 1.0]
-  RFDid = ncdf_vardef(file_id,'R_dd',  [chn_dim, efr_dim, opd_dim],/float)          ; IR_dd = IRfd
-     ncdf_attput, file_id, RFDid,'long_name','diffuse reflection of diffuse light'
-     ncdf_attput, file_id, RFDid,'units','dimensionless'
-     ncdf_attput, file_id, RFDid,'valid_range',[0.0, 1.0]
+  if (keyword_set(include_pressure)) then $
+    TDid = ncdf_vardef(file_id,'T_dv',  [chn_dim, prs_dim, efr_dim, opd_dim, saz_dim],/float) $; IT_dv = ITd 
+  else $
+    TDid = ncdf_vardef(file_id,'T_dv',  [chn_dim, efr_dim, opd_dim, saz_dim],/float) ; IT_dv = ITd  
+      ncdf_attput, file_id, TDid,'long_name','diffuse transmission of direct light'
+      ncdf_attput, file_id, TDid,'units','dimensionless'
+      ncdf_attput, file_id, TDid,'valid_range',[0.0, 1.0]
+  if (keyword_set(include_pressure)) then $
+    TfDid = ncdf_vardef(file_id,'T_dd',  [chn_dim, prs_dim, efr_dim, opd_dim],/float)  $        ; IT_dd = ITfd 
+  else $
+    TfDid = ncdf_vardef(file_id,'T_dd',  [chn_dim, efr_dim, opd_dim],/float)          ; IT_dd = ITfd 
+      ncdf_attput, file_id, TfDid,'long_name','diffuse transmission'
+      ncdf_attput, file_id, TfDid,'units','dimensionless'
+      ncdf_attput, file_id, TfDid,'valid_range',[0.0, 1.0]
+  if (keyword_set(include_pressure)) then $
+    RDid = ncdf_vardef(file_id,'R_dv',  [chn_dim, prs_dim, efr_dim, opd_dim, saz_dim],/float) $; IR_dv = IRd
+  else $
+    RDid = ncdf_vardef(file_id,'R_dv',  [chn_dim, efr_dim, opd_dim, saz_dim],/float) ; IR_dv = IRd
+      ncdf_attput, file_id, RDid,'long_name','direct reflection of diffuse light'
+      ncdf_attput, file_id, RDid,'units','dimensionless'
+      ncdf_attput, file_id, RDid,'valid_range',[0.0, 1.0]
+  if (keyword_set(include_pressure)) then $
+    RFDid = ncdf_vardef(file_id,'R_dd',  [chn_dim, prs_dim, efr_dim, opd_dim],/float)  $        ; IR_dd = IRfd
+  else $
+    RFDid = ncdf_vardef(file_id,'R_dd',  [chn_dim, efr_dim, opd_dim],/float)          ; IR_dd = IRfd
+      ncdf_attput, file_id, RFDid,'long_name','diffuse reflection of diffuse light'
+      ncdf_attput, file_id, RFDid,'units','dimensionless'
+      ncdf_attput, file_id, RFDid,'valid_range',[0.0, 1.0]
   IF (Solar_Channels_Exist) THEN begin
-     RBDid = ncdf_vardef(file_id,'R_0v', [soc_dim, efr_dim, opd_dim, soz_dim, saz_dim, raa_dim],/float) ; IR_0v = IRbd
+    if (keyword_set(include_pressure)) then $
+      RBDid = ncdf_vardef(file_id,'R_0v', [soc_dim, prs_dim, efr_dim, opd_dim, soz_dim, saz_dim, raa_dim],/float) $; IR_0v = IRbd
+    else $
+      RBDid = ncdf_vardef(file_id,'R_0v', [soc_dim, efr_dim, opd_dim, soz_dim, saz_dim, raa_dim],/float) ; IR_0v = IRbd
        ncdf_attput, file_id, RBDid,'long_name','bi-directional reflectance'
        ncdf_attput, file_id, RBDid,'units','dimensionless'
        ncdf_attput, file_id, RBDid,'valid_range',[0.0, 1.0]
-     RFBDid = ncdf_vardef(file_id,'R_0d', [soc_dim, efr_dim, opd_dim, soz_dim],/float)                   ; IR_0d = IRfbd
+    if (keyword_set(include_pressure)) then $
+      RFBDid = ncdf_vardef(file_id,'R_0d', [soc_dim, prs_dim, efr_dim, opd_dim, soz_dim],/float)    $               ; IR_0d = IRfbd
+    else $
+      RFBDid = ncdf_vardef(file_id,'R_0d', [soc_dim, efr_dim, opd_dim, soz_dim],/float)                   ; IR_0d = IRfbd
        ncdf_attput, file_id, RFBDid,'long_name','diffuse reflectance of direct beam'
        ncdf_attput, file_id, RFBDid,'units','dimensionless'
        ncdf_attput, file_id, RFBDid,'valid_range',[0.0, 1.0]
-     TFBDid = ncdf_vardef(file_id,'T_0d', [soc_dim, efr_dim, opd_dim, soz_dim],/float)                   ; IT_0d = ITfbd
+    if (keyword_set(include_pressure)) then $
+      TFBDid = ncdf_vardef(file_id,'T_0d', [soc_dim, prs_dim, efr_dim, opd_dim, soz_dim],/float)  $                 ; IT_0d = ITfbd
+    else $
+      TFBDid = ncdf_vardef(file_id,'T_0d', [soc_dim, efr_dim, opd_dim, soz_dim],/float)                   ; IT_0d = ITfbd
        ncdf_attput, file_id, TFBDid,'long_name','diffuse transmission of diffuse light'
        ncdf_attput, file_id, TFBDid,'units','dimensionless'
        ncdf_attput, file_id, TFBDid,'valid_range',[0.0, 1.0] 
-     TBid = ncdf_vardef(file_id,'T_00', [soc_dim, efr_dim, opd_dim, soz_dim],/float)                     ; IT_00 = ITb
+    if (keyword_set(include_pressure)) then $
+      TBid = ncdf_vardef(file_id,'T_00', [soc_dim, prs_dim, efr_dim, opd_dim, soz_dim],/float)  $                   ; IT_00 = ITb
+    else $
+      TBid = ncdf_vardef(file_id,'T_00', [soc_dim, efr_dim, opd_dim, soz_dim],/float)                     ; IT_00 = ITb
        ncdf_attput, file_id, TBid,'long_name','direct transmission'
        ncdf_attput, file_id, TBid,'units','dimensionless'
        ncdf_attput, file_id, TBid,'valid_range',[0.0, 1.0]
   ENDIF  
      
   IF (Thermal_Channels_Exist) THEN BEGIN
-    EMid = ncdf_vardef(file_id,'E_md',   [thc_dim, efr_dim, opd_dim, saz_dim],/float) 
+    if (keyword_set(include_pressure)) then $
+      EMid = ncdf_vardef(file_id,'E_md',   [thc_dim, prs_dim, efr_dim, opd_dim, saz_dim],/float) $
+    else $
+      EMid = ncdf_vardef(file_id,'E_md',   [thc_dim, efr_dim, opd_dim, saz_dim],/float) 
      ncdf_attput, file_id, EMid,'long_name','diffuse emissivity'
      ncdf_attput, file_id, EMid,'units','dimensionless'
      ncdf_attput, file_id, EMid,'valid_range',[0.0, 1.0]
@@ -310,6 +345,7 @@ pro write_v2_lut, V2_LUT_Filename, lutstr, inststr, srfstrarr, Vavg, BextOut, Be
   ncdf_varput, file_id, saz_id, lutstr.saz
   ncdf_varput, file_id, soz_id, lutstr.soz
   ncdf_varput, file_id, raa_id, lutstr.raa
+  if (keyword_set(include_pressure)) then ncdf_varput, file_id, prs_id, lutstr.prs
  
  ; instrument properties    
   ncdf_varput, file_id, instrument_filename_id, inststr.instrument_filename
@@ -376,13 +412,24 @@ pro write_v2_lut, V2_LUT_Filename, lutstr, inststr, srfstrarr, Vavg, BextOut, Be
   ncdf_varput, file_id,   RDid, RD /100
   ncdf_varput, file_id,  RfDid, RfD/100
   IF (Solar_Channels_Exist) THEN begin
-    ncdf_varput, file_id,  RBDid,  RBD[Solar_Index,*,*,*,*,*]/100
-    ncdf_varput, file_id, RfBDid, RfBD[Solar_Index,*,*,*]    /100
-    ncdf_varput, file_id, TfBDid, TfBD[Solar_Index,*,*,*]    /100
-    ncdf_varput, file_id,   TBid,   TB[Solar_Index,*,*,*]    /100
+    if (keyword_set(include_pressure)) then begin
+      ncdf_varput, file_id,  RBDid,  RBD[Solar_Index,*,*,*,*,*,*]/100
+      ncdf_varput, file_id, RfBDid, RfBD[Solar_Index,*,*,*,*]    /100
+      ncdf_varput, file_id, TfBDid, TfBD[Solar_Index,*,*,*,*]    /100
+      ncdf_varput, file_id,   TBid,   TB[Solar_Index,*,*,*,*]    /100
+	endif else begin
+      ncdf_varput, file_id,  RBDid,  RBD[Solar_Index,*,*,*,*,*]/100
+      ncdf_varput, file_id, RfBDid, RfBD[Solar_Index,*,*,*]    /100
+      ncdf_varput, file_id, TfBDid, TfBD[Solar_Index,*,*,*]    /100
+      ncdf_varput, file_id,   TBid,   TB[Solar_Index,*,*,*]    /100	
+	endelse
   ENDIF
   IF (Thermal_Channels_Exist) THEN $
-    ncdf_varput, file_id,   EMid,   EM[Thermal_Index,*,*,*]/100
+    if (keyword_set(include_pressure)) then $
+      ncdf_varput, file_id,   EMid,   EM[Thermal_Index,*,*,*,*]/100 $
+	else  $
+      ncdf_varput, file_id,   EMid,   EM[Thermal_Index,*,*,*]/100 
+	
   
 ;  -----------------------------------------------------------------------------
 ;  Output scattering data into ORAC LUT

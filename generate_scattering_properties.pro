@@ -33,45 +33,6 @@ pro generate_scattering_properties,srfstrarr,scatoffset, nwvl_max,  inststr, mms
 ;         print, AerM550[c],AerM[*,*,c]
       ENDFOR
 
-;     IF the force_n keyword has been specified, replace real RI values with
-;     those given in force_n.
-      IF N_ELEMENTS(force_n) gt 0 then begin
-         IF force_n[0] ne ' ' then begin
-            FOR c=0,mmstr.NComp-1 do begin
-               AerM550[c] = AerM550[c] - complex(float(AerM550[c]), 0.0) + $
-                            complex(float(force_n[0]), 0.0)
-            ENDFOR
-         ENDIF
-
-         FOR i=0,inststr.Number_of_nadir_Channels-1 do begin
-            IF force_n[i+1] ne ' ' then begin
-               FOR c=0,mmstr.NComp-1 do begin
-                  AerM[*,i,c] = AerM[*,i,c] - complex(float(AerM[*,i,c]), 0.0) + $
-                                complex(float(force_n[i+1]), 0.0)
-               ENDFOR
-            ENDIF
-         ENDFOR
-      ENDIF
-
-;     IF the force_k keyword has been specified, replace imaginary RI values
-;     with those given in force_k.
-      IF N_ELEMENTS(force_k) gt 0 then begin
-         IF force_k[0] ne ' ' then begin
-            FOR c=0,mmstr.NComp-1 do begin
-               AerM550[c] = AerM550[c] - complex(0.0,imaginary(AerM550[c])) + $
-                            complex(0.0,float(force_k[0]))
-            ENDFOR
-         ENDIF
-
-         FOR i=0,inststr.Number_of_nadir_Channels-1 do begin
-            IF force_k[i+1] ne ' ' then begin
-               FOR c=0,mmstr.NComp-1 do begin
-                  AerM[*,i,c] = AerM[*,i,c] - complex(0.0,imaginary(AerM[*,i,c])) + $
-                                complex(0.0,float(force_k[i+1]))
-               ENDFOR
-            ENDIF
-         ENDFOR
-      ENDIF
    ENDIF
 
 
@@ -93,19 +54,10 @@ pro generate_scattering_properties,srfstrarr,scatoffset, nwvl_max,  inststr, mms
          lut_MRat[0,*] = mmstr.MRat
     ENDELSE
 
-
-
 ;     **** Generate the quadrature points FOR the scattering phase function
 
-;     Check IF the NMom keyword has been set, IF it hasn't we use the default
-;     value of 1000.
-      IF N_ELEMENTS(n_theta) eq 0 then begin
-         NMom = 1000
-;        x = 2. * !pi * 240. / .47;
-;        NMom = fix(2 * (x + 4.05 * x^(1./3.) + 8))
-      ENDIF ELSE begin
-         NMom = n_theta
-      endelse
+;     Use the default value of 1000.
+       NMom = 1000
 
 ;     The quadrature procedure gives us our phase function angles
       quadrature, 'g', NMom, Abscissas, Weights
@@ -161,11 +113,7 @@ pro generate_scattering_properties,srfstrarr,scatoffset, nwvl_max,  inststr, mms
                ENDIF ELSE begin ; This is a new mode radius, do the calculation
                   IF lut_MRat[c,r] gt 0 then begin
                      cc = scatoffset + c
-
-;                    IF the Mie keyword has been set, we use Mie scattering FOR
-;                    all components, regardless of the driver settings.
-                     IF keyword_set(mie) then scode = 'mie' $
-                     ELSE scode = mmstr.(cc).code
+                     scode = mmstr.(cc).code
 
 ;                    Set up the values of eps and neps, which only exist in the
 ;                    mmstr structure IF tmatrix scattering is to be used.

@@ -9,3 +9,7 @@
 0 90
 11 linear # 11 Relative azimuth angles from 0 to 180
 0 180
+#4 uneven_Linear # 4 Surface pressure values
+#450 750 1013 1050
+1 uneven_Linear # 1 Surface pressure values
+1013

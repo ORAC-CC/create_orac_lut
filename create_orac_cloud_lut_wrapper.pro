@@ -57,8 +57,8 @@
 ;    '$'.  This is useful for instruments with lots of channels like MODIS.
 ; 14/04/18, G McGarragh: Add optional inputs srf_quad and srfdat to support
 ;    integration over channel spectral response functions (SRFs).
-; 20/03/20, G Thomas: Add optional input opt_prop_luts
 ; 17/02/21, RGG: Rewritten. Added gas keyword, Channle ID now an integer not string to be consistent with instrument definition file
+; 07/05/26  RGG: Removed keywords that were passed but never implemented in the creation code
 ;                     
 
 function parse_string_array, word
@@ -70,7 +70,7 @@ function parse_string_array, word
   return, out
 end
 
-pro create_orac_cloud_lut_wrapper, driver        = driver, $
+pro create_orac_cloud_lut_wrapper, driver  = driver, $
                              in_path       = k_in_path, $
                              instfile      = k_instfile, $
                              mmfile        = k_mmfile, $
@@ -78,19 +78,13 @@ pro create_orac_cloud_lut_wrapper, driver        = driver, $
                              out_path      = k_out_path, $
                              atmospheres   = k_atmospheres, $
                              channelID     = k_ChannelID, $
-                             force_n       = k_force_n, $
-                             force_k       = k_force_k, $
-                             mie           = k_mie, $
                              gas           = k_gas, $
                              no_rayleigh   = k_no_rayleigh, $
                              no_screen     = k_no_screen, $
-                             n_theta       = k_n_theta, $
                              srf_quad      = k_srf_quad, $  
                              reuse_scat    = k_reuse_scat, $
                              scat_only     = k_scat_only, $
-                             srfdat        = k_srfdat, $
                              tmatrix_path  = k_tmatrix_path, $
-                             opt_prop_luts = k_opt_prop_luts, $
                              version       = k_version
 
 ; Use the driver keyword for the location of the driver file, if it exists,
@@ -153,19 +147,13 @@ pro create_orac_cloud_lut_wrapper, driver        = driver, $
     first_word = strlowcase(words[0])
     case first_word of
       'channelid'    : channelID    = fix(parse_string_array(words[1]))
-      'force_n'      : force_n      = float(words[1])
-      'force_k'      : force_k      = float(words[1])          
-      'mie'          : mie          = 1
       'gas'          : gas          = 1
       'no_rayleigh'  : no_rayleigh  = 1
       'no_screen'    : no_screen    = 1
       'srf_quad'     : srf_quad     = fix(words[1])
-      'n_theta'      : n_theta      = fix(words[1])
       'reuse_scat'   : reuse_scat   = 1
       'scat_only'    : scat_only    = 1
-      'srfdat'       : srfdat       = words[1]
       'tmatrix_path' : tmatrix_path = words[1]
-      'opt_prop_luts': opt_prop_luts= words[1]
       'version'      : version      = fix(words[1])
       'null'         :
       else           : print,'Keyword ',first_word,' not recognised'
@@ -175,26 +163,20 @@ pro create_orac_cloud_lut_wrapper, driver        = driver, $
 ;  Now check if any _other_ parameters have been passed by keyword. These values
 ;  will override any driver file settings
    if n_elements(k_in_path)       gt 0 then in_path     = k_in_path
-   if n_elements(k_instfile)       gt 0 then instfile     = k_instfile
+   if n_elements(k_instfile)      gt 0 then instfile    = k_instfile
    if n_elements(k_mmfile)        gt 0 then mmfile      = k_mmfile
-   if n_elements(k_lutfile)        gt 0 then lutfile      = k_lutfile
-   if n_elements(k_out_path)      gt 0 then out_path    = k_outpath
+   if n_elements(k_lutfile)       gt 0 then lutfile     = k_lutfile
+   if n_elements(k_out_path)      gt 0 then out_path    = k_out_path
    if n_elements(k_atmospheres)   gt 0 then atmospheres = k_atmospheres
 
    if n_elements(k_ChannelID)     gt 0 then channelID     = k_ChannelID
-   if n_elements(k_force_n)       gt 0 then force_n       = k_force_n
-   if n_elements(k_force_k)       gt 0 then force_k       = k_force_k
-   if n_elements(k_mie)           gt 0 then mie           = k_mie
    if n_elements(k_gas)           gt 0 then gas           = k_gas
    if n_elements(k_no_rayleigh)   gt 0 then no_rayleigh   = k_no_rayleigh
    if n_elements(k_no_screen)     gt 0 then no_screen     = k_no_screen
    if n_elements(k_srf_quad)      gt 0 then srf_quad      = k_srf_quad
-   if n_elements(k_n_theta)       gt 0 then n_theta       = k_n_theta
    if n_elements(k_reuse_scat)    gt 0 then reuse_scat    = k_reuse_scat
    if n_elements(k_scat_only)     gt 0 then scat_only     = k_scat_only
-   if n_elements(k_srfdat)        gt 0 then srfdat        = k_srfdat
    if n_elements(k_tmatrix_path)  gt 0 then tmatrix_path  = k_tmatrix_path
-   if n_elements(k_opt_prop_luts) gt 0 then opt_prop_luts = k_opt_prop_luts
    if n_elements(k_version)       gt 0 then version       = k_version
 
 ;  Call the create_orac_lut function itself making sure there are no spaces on the directory or file names
@@ -205,18 +187,13 @@ pro create_orac_cloud_lut_wrapper, driver        = driver, $
                           strtrim(out_path,2),   $
                           strtrim(atmospheres,2),$                   
                           channelID     = channelID,     $
-                          force_n       = force_n,       $
-                          force_k       = force_k,       $
-                          mie           = mie,           $
                           gas           = gas,           $
                           no_rayleigh   = no_rayleigh,   $
                           no_screen     = no_screen,     $
-                          n_theta       = n_theta,       $
                           srf_quad      = srf_quad,      $
                           reuse_scat    = reuse_scat,    $
                           scat_only     = scat_only,     $
                           tmatrix_path  = tmatrix_path,  $
-                          opt_prop_luts = opt_prop_luts, $
                           version       = version,       $
                           driver        = driver)
                           

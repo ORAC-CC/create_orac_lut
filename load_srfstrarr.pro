@@ -34,15 +34,15 @@ pro load_srfstrarr, inststr,  solar_spectrum_filename, srfstrarr, QM, nwvl_max
   load_solar_spectrum,solar_spectrum_filename,sssi
    
   srfstrarr = Replicate({nwvl: 0L , $
-                    wvl_centre: 0.0, $
-                    wvn_centre: 0.0, $
-                            F0: 0.0, $     
-                            B1: 0.0, $
-                            B2: 0.0, $
-                            T1: 0.0, $
-                            T2: 0.0, $
-                           wvl: FltARR(nwvl_max) , $
-                           val: FltARR(nwvl_max)}, inststr.number_of_nadir_channels)
+                   wvl_centre: 0.0, $
+                   wvn_centre: 0.0, $
+                           F0: 0.0, $     
+                           B1: 0.0, $
+                           B2: 0.0, $
+                           T1: 0.0, $
+                           T2: 0.0, $
+                          wvl: FltARR(nwvl_max) , $
+                          val: FltARR(nwvl_max)}, inststr.number_of_nadir_channels)
                            
   FOR i = 0,inststr.number_of_nadir_channels-1 DO BEGIN
 
@@ -52,27 +52,14 @@ pro load_srfstrarr, inststr,  solar_spectrum_filename, srfstrarr, QM, nwvl_max
     srfstrarr[i].wvl_centre  = srfstr.wvl_centre
     srfstrarr[i].wvn_centre  = srfstr.wvn_centre
 
-;   Calcuate solar constant for channel (only matters for joint ir/solar channels)  
-    wvn=1d4/sssi.wvl
-    srfstrarr[i].F0 =  (int_tabulated(srfstr.wvn,interpol(1d8*sssi.val/wvn^2,wvn, srfstr.wvn) *srfstr.srf)/  int_tabulated(srfstr.wvn,srfstr.srf))/!pi 
-
- ;   print, srfstrarr[i].wvl_centre,srfstrarr[i].wvn_centre,srfstrarr[i].F0
- ;   oldsolconstants,inststr.srf_file[i], wvl_centre,wvn_centre,F0
- ;   srfstrarr[i].wvl_centre=wvl_centre
- ;   srfstrarr[i].wvn_centre=wvn_centre
- ;   srfstrarr[i].F0=F0
- ;   print, srfstrarr[i].wvl_centre,srfstrarr[i].wvn_centre,srfstrarr[i].F0
-;	print,'using old vis constants'
-
-;   Load planck function fit for channel    (only matters for IR channels ) 
-    bbconstants,srfstr.filename,b1,b2,t1,t2
-;	print, srfstr.filename,b1,b2,t1,t2
- ;   oldbbconstants,srfstr.filename,b1,b2,t1,t2
- ;	print, srfstr.filename,b1,b2,t1,t2
-;	print,'using old ir constants'
-	
-	
-	
+;   Calcuate solar constant for channel (note different units for SW and thermal channels)  
+    if (srfstr.wvl_centre Gt 3) then begin
+      wvn=1d4/sssi.wvl
+      srfstrarr[i].F0 =  (simpson_integral(srfstr.wvn,interpol(1d8*sssi.val/wvn^2,wvn, srfstr.wvn) *srfstr.srf)/  simpson_integral(srfstr.wvn,srfstr.srf))/!pi
+    endif else $
+      srfstrarr[i].F0 =  (simpson_integral(srfstr.wvl,interpol(sssi.val*10,sssi.wvl, srfstr.wvl) *srfstr.srf)/  simpson_integral(srfstr.wvl,srfstr.srf))/!pi
+      
+    bbconstants,srfstr.filename,b1,b2,t1,t2	
     srfstrarr[i].B1 = b1
     srfstrarr[i].B2 = b2
     srfstrarr[i].T1 = t1

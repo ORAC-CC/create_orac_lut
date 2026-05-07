@@ -24,26 +24,12 @@
 ;                      These must be a subset of the channelIDs listed in
 ;                      the instfile file. (By default the code will produce LUTs
 ;                      FOR all the channels defined in instfile).
-; force_n=strarr       Allows the user to set a fixed value FOR the real part
-;                      of the refractive index FOR 0.55um (element 0) and FOR
-;                      each channel (elements 1 to n channels). As an array of
-;                      strings IF the value FOR a particular channel is ' '
-;                      then the value is not changed FOR that channel.
-; force_k=strarr       Allows the user to set a fixed value FOR the imaginary
-;                      part of the refractive index FOR 0.55um (element 0) and
-;                      FOR each channel (elements 1 to n channels). As an array
-;                      of strings IF the value FOR a particular channel is ' '
-;                      then the value is not changed FOR that channel.
-; /mie                 Force Mie calculation, overriding specification in
-;                      mmfile.
 ; /no_rayleigh         Do not include Rayleigh scattering.
 ; /no_screen           By default the code uses string(13b) to prevent new-
 ;                      lines at the end of print-to-screen commands (FOR
 ;                      aesthetic reasons): these make a real mess IF output is
 ;                      piped to a file. Setting this keyword suppresses these
 ;                      control characters
-; n_theta=integer      Set the number of angles at which to calculate the phase
-;                      function moments. Defaults to 1000.
 ; srf_quad=integer Set the quadrature for the integration across spectral response function.
 ;                      0 srf resolution
 ;                      1 single wavelength
@@ -61,8 +47,6 @@
 ; tmatrix_path=string  Path to the Dubovik T-Matrix LUT base directory.
 ;                      Required only when T-Matrix calculations are to to be
 ;                      made.
-; opt_prop_luts=string Output my NetCDF format optical properties LUTs
-;                      to the path defined by string
 ; version=string       Set a version string to place in the output LUT file
 ;                      names (defaults to nothing).
 ;
@@ -124,6 +108,7 @@
 ; 21/04/18, G McGarragh: Change revision output from svn to git.
 ; 20/03/20, G Thomas: Added optical properties LUTs functionality.
 ; 20/07/20, RGG: Create V2 cdhf LUTS, 
+; 07/05/26  RGG: Removed keywords that were passed but never implemented 
 ; V2 Notes:  
 ; 1) *** Implicitly assumes there are less than 256 channels (need to add warning).
 ; 2) Creates LUT directory that mirrors driver file name.
@@ -146,18 +131,13 @@
                            out_path,    $
                            atmospheres, $                   
                            channelID     = channelID,     $
-                           force_n       = force_n,       $
-                           force_k       = force_k,       $
-                           mie           = mie,           $
                            gas           = gas,           $
                            no_rayleigh   = no_rayleigh,   $
                            no_screen     = no_screen,     $
-                           n_theta       = n_theta,       $
                            srf_quad      = srf_quad,      $
                            reuse_scat    = reuse_scat,    $
                            scat_only     = scat_only,     $
                            tmatrix_path  = tmatrix_path,  $
-                           opt_prop_luts = opt_prop_luts, $
                            version       = version,       $
                            driver        = driver
 
@@ -311,18 +291,17 @@
       Atmospheric_Model_Code = '00' $
     else $
       Atmospheric_Model_Code = '01'
-; Particle_model_code 3 digit string set in microphysical model definition file 
-  Versions    = string(Version,Format='(I2.2)')
-  V2_LUT_Filename = out_path+'/'+ strlowcase(inststr.Platform)+'_'+strlowcase(inststr.Instrument)+'_'+MonoOrBand+'_'+strlowcase(mmstr.Substance)+'_a'+Atmospheric_Model_Code+'_p'+strlowcase(mmstr.shortname)+'_v'+versions+'.nc'
- 
+
 ;  -----------------------------------------------------------------------------
 ;  Some miscellaneous setup.
 ;  -----------------------------------------------------------------------------
 
-;  IF we have a version number, incorporate it into the output filenames
-   IF N_ELEMENTS(version) gt 0 then verstrng = '_v'+string(version,format='(i0)') $
-   ELSE verstrng = ''
+;  Particle_model_code 3 digit string set in microphysical model definition file 
 
+   Versions = '00'
+   IF N_ELEMENTS(version) gt 0 then Versions    = string(Version,Format='(I2.2)')
+   V2_LUT_Filename = out_path+'/'+ strlowcase(inststr.Platform)+'_'+strlowcase(inststr.Instrument)+'_'+MonoOrBand+'_'+strlowcase(mmstr.Substance)+'_a'+Atmospheric_Model_Code+'_p'+strlowcase(mmstr.shortname)+'_v'+versions+'.nc'
+ 
 ;  Check the size of the channel string needed...
    Chfmt = '(i0)'
 ;  IF max(inststr.ChannelID) ge 100 then Chfmt = '(i03)' $
@@ -378,7 +357,7 @@
     GOUT = reform(g[m,*,*])
 
    print,''
-   print,'Scattering parameters calculated FOR class '+out_path+verstrng
+   print,'Scattering parameters calculated FOR class '+out_path+' Version: '+Versions
 
 ;  -----------------------------------------------------------------------------
 ;  Run DISORT
@@ -418,7 +397,8 @@
 ;        each atmospheric layer, not on the layers themselves.
  
          IF N_ELEMENTS(gasstr) gt 0 then begin
-            GasIndx = (WHERE(Gasstr[*].ChannelID eq inststr.ChannelID[l])) [0] 
+            GasIndx = (WHERE(Fix(Gasstr[*].ChannelID) eq inststr.ChannelID[l], Count)) [0] 
+			If (Count Eq 0) Then Stop, 'Gas absorption channel mismatch'
             GasLvl = gasstr[GasIndx].Tau_Gas
          endif ELSE begin         
            print, 'No gas optical depth profile.'
@@ -441,7 +421,7 @@
 		   
 		     pcd =  lutstr.opd[a]/(bext550[r]*1E6) ; this isn't correct as MP model assume a drop concentration of 1
 			 pcd = 2000 ; m
-		     print,'Cloud Physical Depth:', PCD,' m'
+	;	     print,'Cloud Physical Depth:', PCD,' m'
 
 ;              THE OPTICAL DEPTH FROM AEROSOL IS THE DESIRED TOTAL AODS FOR THE
 ;              ORAC LUT * THE RELATIVE AOD AT EACH LAYER FOR THIS CLASS * THE
@@ -458,32 +438,35 @@
 ;              Now check that we have no SSALB values over 1.0 (this can happen in
 ;              layers with no absorption due to rounding). DISORT has an internal
 ;              check FOR this and will exit with an error code IF it fails.
-               bd = WHERE(SSALB gt 1.0)
-               IF bd[0] ge 0 then SSALB[bd] = 1.0;0.999999
+               bd = WHERE(SSALB gt 1.0,CountW)
+               IF CountW gt 0 then SSALB[bd] = 1.0
 
 ;              ASYMMETRY PARAMETER IS ONLY NON-ZERO WHERE WE ACTUALLY HAVE AEROSOL
                ASYM = FLTARR(NLayers)
-               nonzero = WHERE(tauscat gt 0.0)
-               IF nonzero[0] ge 0 then ASYM[nonzero] = g[m,l,r]
+               nonzero = WHERE(tauscat gt 0.0,CountT)
+               IF CountT gt 0 then ASYM[nonzero] = g[m,l,r]
 
 ;              NOW, USE THE GETMOM PROCEDURE (PART OF DISORT) TO GENERATE PHASE
 ;              FUNCTION MOMENTS FOR THE MOLECULAR SCATTERING AND THEN COMBINE WITH
 ;              THE AEROSOL MOMENTS GENERATED EARLIER.
                PMom = FLTARR(NMom, NLayers)
                FOR h=0,NLayers-1 do begin
-                  IF ASYM[h] eq 0.0 then GETMOM, 2, 0.0, NMom-1, PM $
+                  IF ASYM[h] eq 0.0 then $
+				     GETMOM, 2, 0.0, NMom-1, PM $   ; Rayleigh scattering only
                   ELSE begin
                      GETMOM, 2, 0.0, NMom-1, mPM
                      PM = (mPM*TauRay[h] + AMom[*,m,l,r]*w[m,l,r]*tauscat[h]) / $
                           (TauRay[h] + w[m,l,r]*tauscat[h])
                   endelse
-                  bd = WHERE(PM gt 1.0)
-                  IF bd[0] ge 0 then PM[bd] = 1.0
+
+                  bd = WHERE(PM gt 1.0,CountP)
+                  IF CountP gt 0 then begin
+				    PM[bd] = 1.0
+				    print, 'Unusual warning: phase moment  gt 1'
+				  endif
                   PMom[*,h] = PM
                ENDFOR
-							 
-;*****							 printf,dlut, inststr.channelid[l],lutstr.opd[a],lutstr.efr[r],DTau, SSAlb, PMom
-;*****							 print, inststr.channelid[l],lutstr.opd[a],lutstr.efr[r],DTau, SSAlb, PMom
+							
 
 ;              We are now ready to call DISORT. Call the fast diffuse calculation
 ;              first (errors and problems are more likely to turn up quickly that
@@ -555,9 +538,9 @@
                   wn      = 1e4 / srfstrarr[L].wvl_centre
                   wnlo    = 0.995*wn
                   wnhi    = 1.005*wn
-                  temp    = 270.0 ; hack from 250
+                  temp    = 250.0
                   incloud = WHERE(tauscat gt 0.0,emnly)
-; OLD				  	  
+				  				  	  
                   emTau   = DTau[incloud]
                   emSSA   = SSAlb[incloud]
                   emPMo   = PMom[*,incloud]
@@ -565,39 +548,13 @@
 
                   call_disort, emTau, emSSA, emPMo, emUTau, UMu, lutstr.raa, $
                                FBeam, UMu0, FISot, RFlDir, RFlDn, FlUp, dFdT, $
-                               UAvg, UU, AlbMed, TrnMed, /planck, wnlo=wnlo, $
-                               wnhi=wnhi, temp=temp, nlayer=emnly
+                               UAvg, UU, AlbMed, TrnMed, /plank, wnlo=wnlo, $
+                               wnhi=wnhi, temp=replicate(temp,emnly+1), nlayer=emnly
 ;                 Now we calculate the Plank emission across the wavelength
 ;                 interval.
                   BBE = PLKAVG(wnlo, wnhi, temp)
-
 ;                 Finally, combine to produce the emissivity
-;                 Em[l, r, a, *] += (100.0 *  UU[2*lutstr.saz_n-lindgen(lutstr.saz_n)-1,0,0]/BBE) * srfstrarr[l].val[m]				
-; NEW
-				  If emnly ne 1 then stop ; we're buggered need to think harder
-                  Ext = DTau[incloud]/PCD ; extintion in 1/m
-;                 Assume lapse rate of 7 K /km
-                  LR = 7/1000.  ; .007 K per m
-;                 Place tau at every 1 deg change 
-                  emnly2 = round(PCD * LR) 
-                  emTau2   = replicate(emTau/emnly2,emnly2)
-                  emSSA2   = replicate(emSSA,emnly2)
-                  emPMo2   = emPMo#replicate(1,emnly2)
-                  Temp2    = 270. + LR* findgen(emnly2) * PCD/(emnly2-1)     				  
-
-
-                  call_disort, emTau2, emSSA2, emPMo2, emUTau, UMu, lutstr.raa, $
-                               FBeam, UMu0, FISot, RFlDir, RFlDn, FlUp, dFdT, $
-                               UAvg, UU, AlbMed, TrnMed, /planck, wnlo=wnlo, $
-                               wnhi=wnhi, temp=temp2, nlayer=emnly2
-							   
-		
-	              Em[l, r, a, *] += (100.0 *  UU[2*lutstr.saz_n-lindgen(lutstr.saz_n)-1,0,0]/BBE) * srfstrarr[l].val[m]							   
-	;	stop					   
-			
-
-
-;                  print, ''
+                 Em[l, r, a, *] += (100.0 *  UU[2*lutstr.saz_n-lindgen(lutstr.saz_n)-1,0,0]/BBE) * srfstrarr[l].val[m]				
                ENDIF
 
 ;              Now we loop over the solar zenith angles and do the direct beam

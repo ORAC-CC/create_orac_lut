@@ -24,26 +24,12 @@
 ;                      These must be a subset of the channelIDs listed in
 ;                      the instfile file. (By default the code will produce LUTs
 ;                      FOR all the channels defined in instfile).
-; force_n=strarr       Allows the user to set a fixed value FOR the real part
-;                      of the refractive index FOR 0.55um (element 0) and FOR
-;                      each channel (elements 1 to n channels). As an array of
-;                      strings IF the value FOR a particular channel is ' '
-;                      then the value is not changed FOR that channel.
-; force_k=strarr       Allows the user to set a fixed value FOR the imaginary
-;                      part of the refractive index FOR 0.55um (element 0) and
-;                      FOR each channel (elements 1 to n channels). As an array
-;                      of strings IF the value FOR a particular channel is ' '
-;                      then the value is not changed FOR that channel.
-; /mie                 Force Mie calculation, overriding specification in
-;                      mmfile.
 ; /no_rayleigh         Do not include Rayleigh scattering.
 ; /no_screen           By default the code uses string(13b) to prevent new-
 ;                      lines at the end of print-to-screen commands (FOR
 ;                      aesthetic reasons): these make a real mess IF output is
 ;                      piped to a file. Setting this keyword suppresses these
 ;                      control characters
-; n_theta=integer      Set the number of angles at which to calculate the phase
-;                      function moments. Defaults to 1000.
 ; srf_quad=integer Set the quadrature for the integration across spectral response function.
 ;                      0 srf resolution
 ;                      1 single wavelength
@@ -61,8 +47,6 @@
 ; tmatrix_path=string  Path to the Dubovik T-Matrix LUT base directory.
 ;                      Required only when T-Matrix calculations are to to be
 ;                      made.
-; opt_prop_luts=string Output my NetCDF format optical properties LUTs
-;                      to the path defined by string
 ; version=string       Set a version string to place in the output LUT file
 ;                      names (defaults to nothing).
 ;
@@ -128,15 +112,7 @@
 ; 1) *** Implicitly assumes there are less than 256 channels (need to add warning).
 ; 2) Creates LUT directory that mirrors driver file name.
 ; 26/08/23, RGG: Seperated aerosol & cloud LUT creation 
-
-; Include the libraries of procedures FOR reading and writing driver files and
-; Look-Up Tables; setting up and running the scattering code; and calling the
-; DISORT DLM.
-; NOTE: These are assumed to be in the same directory as the main function.
-@read_baran.pro
-@read_baum.pro
-
-
+; 07/05/26  RGG: Removed keywords that were passed but never implemented 
 
 ; Begin the main LUT generation function
   function create_orac_aerosol_lut,in_path,     $
@@ -146,18 +122,13 @@
                            out_path,    $
                            atmospheres, $                   
                            channelID     = channelID,     $
-                           force_n       = force_n,       $
-                           force_k       = force_k,       $
-                           mie           = mie,           $
                            gas           = gas,           $
                            no_rayleigh   = no_rayleigh,   $
                            no_screen     = no_screen,     $
-                           n_theta       = n_theta,       $
                            srf_quad      = srf_quad,      $
                            reuse_scat    = reuse_scat,    $
                            scat_only     = scat_only,     $
                            tmatrix_path  = tmatrix_path,  $
-                           opt_prop_luts = opt_prop_luts, $
                            version       = version,       $
                            driver        = driver
 
@@ -224,8 +195,6 @@
    ok = file_test(out_path, /directory, /read, /write)
    IF NOT ok then print, 'out_path: '+out_path+ ' creating ..'
    FILE_MKDIR, out_path
-   
- 
    
 ;  -----------------------------------------------------------------------------
 ;  Convert Keywords to flags 
@@ -312,18 +281,16 @@
       Atmospheric_Model_Code = '00' $
     else $
       Atmospheric_Model_Code = '01'
-; Particle_model_code 3 digit string set in microphysical model definition file 
-  Versions    = string(Version,Format='(I2.2)')
-  V2_LUT_Filename = out_path+'/'+ strlowcase(inststr.Platform)+'_'+strlowcase(inststr.Instrument)+'_'+MonoOrBand+'_'+strlowcase(mmstr.Substance)+'_a'+Atmospheric_Model_Code+'_p'+strlowcase(mmstr.shortname)+'_v'+versions+'.nc'
- 
+
 ;  -----------------------------------------------------------------------------
 ;  Some miscellaneous setup.
 ;  -----------------------------------------------------------------------------
 
-;  IF we have a version number, incorporate it into the output filenames
-   IF N_ELEMENTS(version) gt 0 then verstrng = '_v'+string(version,format='(i0)') $
-   ELSE verstrng = ''
-
+; Particle_model_code 3 digit string set in microphysical model definition file 
+  Versions = '00'
+  IF N_ELEMENTS(version) gt 0 then Versions    = string(Version,Format='(I2.2)')
+  V2_LUT_Filename = out_path+'/'+ strlowcase(inststr.Platform)+'_'+strlowcase(inststr.Instrument)+'_'+MonoOrBand+'_'+strlowcase(mmstr.Substance)+'_a'+Atmospheric_Model_Code+'_p'+strlowcase(mmstr.shortname)+'_v'+versions+'.nc'
+ 
 ;  Check the size of the channel string needed...
    Chfmt = '(i0)'
 ;  IF max(inststr.ChannelID) ge 100 then Chfmt = '(i03)' $
@@ -380,46 +347,7 @@
 
 
    print,''
-   print,'Scattering parameters calculated FOR class '+out_path+verstrng
-
-; IF requested generate optical properties luts...
-  IF keyword_set(opt_prop_luts) then begin
-;    Add the values FOR the 550 nm reference to the front of the
-;    output arrays. IF we're using spectral response functions,
-;    output the weighted mean scattering parameters FOR each channel
-     bext_all = FLTARR(inststr.number_of_nadir_channels+1,lutstr.efr_n)
-     bext_all[0,*] = transpose(Bext550)
-     bext_all[1:*,*] = reform(Bext[m,*,*],[inststr.number_of_nadir_channels,lutstr.efr_n])
-     w_all = FLTARR(inststr.number_of_nadir_channels+1,lutstr.efr_n)
-     w_all[0,*] = transpose(w550)
-     w_all[1:*,*] = reform(w[m,*,*],[inststr.number_of_nadir_channels,lutstr.efr_n])
-     g_all = FLTARR(inststr.number_of_nadir_channels+1,lutstr.efr_n)
-     g_all[0,*] = transpose(g550)
-     g_all[1:*,*] = reform(g[m,*,*],[inststr.number_of_nadir_channels,lutstr.efr_n])
-     P_all = FLTARR(inststr.number_of_nadir_channels+1,lutstr.efr_n,NMom)
-     P_all[0,*,*] = reform(transpose(Phs550),1,lutstr.efr_n,NMom)
-     P_all[1:*,*,*] = transpose(reform(Phs[*,m,*,*],[NMom,inststr.number_of_nadir_channels,lutstr.efr_n]),$
-                                [1,2,0])
-     bext_c_all = FLTARR(inststr.number_of_nadir_channels+1,mmstr.NComp,lutstr.efr_n)
-     bext_c_all[0,*,*] = Bext550_c
-     bext_c_all[1:*,*,*] = reform(Bext_c[m,*,*,*],inststr.number_of_nadir_channels,mmstr.NComp,lutstr.efr_n)
-     w_c_all = FLTARR(inststr.number_of_nadir_channels+1,mmstr.NComp,lutstr.efr_n)
-     w_c_all[0,*,*] = w550_c
-     w_c_all[1:*,*,*] = reform(w_c[m,*,*,*],inststr.number_of_nadir_channels,mmstr.NComp,lutstr.efr_n)
-     IF size(opt_prop_luts,/type) ne 7 then begin
-        optproppath = '.'
-        message,/info,'Optical properties luts requested with no path. Will write to CWD'
-     ENDIF ELSE optproppath = opt_prop_luts
-     print, ' Writing optical properties luts to directory: ',optproppath
-     optpropname = optproppath+'/'+inststr.instrument+'_'+mmstr.outname+'_propslut.nc'
-;OLD*    write_orac_optprop_luts, optpropname, mmstr.outname, lutstr.EfR, $
-;OLD*                              mmstr.comptype, mmstr.compname, mmstr.compname2, $
-;OLD*                              mmstr.distname, '', lut_Mrat, lut_Rm, mmstr.S, $
-;OLD*                              [0.55, SRF_Nwvl], $
-;OLD*                              [transpose(AerM550),reform(AerM[m,*,*],inststr.number_of_nadir_channels,mmstr.NComp)], $
-;OLD*                              w_all, bext_all, g_all, Ptheta*!radeg, P_all, $
-;OLD*                              bext_c_all, w_c_all
-  ENDIF
+   print,'Scattering parameters calculated FOR class '+out_path+' Version: '+Versions
 
 ;  -----------------------------------------------------------------------------
 ;  Run DISORT
@@ -459,7 +387,8 @@
 ;        each atmospheric layer, not on the layers themselves.
  
          IF N_ELEMENTS(gasstr) gt 0 then begin
-            GasIndx = (WHERE(Gasstr[*].ChannelID eq inststr.ChannelID[l])) [0] 
+            GasIndx = (WHERE(Fix(Gasstr[*].ChannelID) eq inststr.ChannelID[l],Count)) [0] 
+			If (Count Eq 0) Then Stop, 'Gas absorption channel mismatch'
             GasLvl = gasstr[GasIndx].Tau_Gas
          endif ELSE begin         
            print, 'No gas optical depth profile.'
@@ -602,7 +531,7 @@
                   call_disort, emTau, emSSA, emPMo, emUTau, UMu, lutstr.raa, $
                                FBeam, UMu0, FISot, RFlDir, RFlDn, FlUp, dFdT, $
                                UAvg, UU, AlbMed, TrnMed, /plank, wnlo=wnlo, $
-                               wnhi=wnhi, temp=temp, nlayer=emnly
+                               wnhi=wnhi,temp=replicate(temp,emnly+1), nlayer=emnly
 
 ;                 Now we calculate the Plank emission across the wavelength
 ;                 interval.

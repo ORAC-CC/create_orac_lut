@@ -1,5 +1,26 @@
 pro bbconstants,filename,b1,b2,t1,t2
   case filename of
+'rtcoef_earthcare_1_msi_srf_ch01.txt': begin
+    b1=     0.00000 & b2=     0.00000 & t1=     0.00000 & t2=     0.00000
+end
+'rtcoef_earthcare_1_msi_srf_ch02.txt': begin
+    b1=     0.00000 & b2=     0.00000 & t1=     0.00000 & t2=     0.00000
+end
+'rtcoef_earthcare_1_msi_srf_ch03.txt': begin
+    b1=     0.00000 & b2=     0.00000 & t1=     0.00000 & t2=     0.00000
+end
+'rtcoef_earthcare_1_msi_srf_ch04.txt': begin
+    b1=     0.00000 & b2=     0.00000 & t1=     0.00000 & t2=     0.00000
+end
+'rtcoef_earthcare_1_msi_srf_ch05.txt': begin
+    b1=     17714.6 & b2=     1642.33 & t1=    0.731030 & t2=    0.998313
+end
+'rtcoef_earthcare_1_msi_srf_ch06.txt': begin
+    b1=     9648.77 & b2=     1341.25 & t1=    0.601138 & t2=    0.998367
+end
+'rtcoef_earthcare_1_msi_srf_ch07.txt': begin
+    b1=     6964.17 & b2=     1203.12 & t1=    0.410940 & t2=    0.998767
+end
 'rtcoef_envisat_1_atsr-shifted_srf_ch01.txt': begin
     b1=     6807.49 & b2=     1194.02 & t1=    0.470343 & t2=    0.998579
 end
@@ -1211,6 +1232,54 @@ end
 end
 'rtcoef_msg_4_seviri_srf_ch12.txt': begin
     b1=     0.00000 & b2=     0.00000 & t1=     0.00000 & t2=     0.00000
+end
+'rtcoef_mtg_1_fci_srf_ch01.txt': begin
+    b1=     0.00000 & b2=     0.00000 & t1=     0.00000 & t2=     0.00000
+end
+'rtcoef_mtg_1_fci_srf_ch02.txt': begin
+    b1=     0.00000 & b2=     0.00000 & t1=     0.00000 & t2=     0.00000
+end
+'rtcoef_mtg_1_fci_srf_ch03.txt': begin
+    b1=     0.00000 & b2=     0.00000 & t1=     0.00000 & t2=     0.00000
+end
+'rtcoef_mtg_1_fci_srf_ch04.txt': begin
+    b1=     0.00000 & b2=     0.00000 & t1=     0.00000 & t2=     0.00000
+end
+'rtcoef_mtg_1_fci_srf_ch05.txt': begin
+    b1=     0.00000 & b2=     0.00000 & t1=     0.00000 & t2=     0.00000
+end
+'rtcoef_mtg_1_fci_srf_ch06.txt': begin
+    b1=     0.00000 & b2=     0.00000 & t1=     0.00000 & t2=     0.00000
+end
+'rtcoef_mtg_1_fci_srf_ch07.txt': begin
+    b1=     0.00000 & b2=     0.00000 & t1=     0.00000 & t2=     0.00000
+end
+'rtcoef_mtg_1_fci_srf_ch08.txt': begin
+    b1=     0.00000 & b2=     0.00000 & t1=     0.00000 & t2=     0.00000
+end
+'rtcoef_mtg_1_fci_srf_ch09.txt': begin
+    b1=     218729. & b2=     3795.94 & t1=     1.98033 & t2=    0.995824
+end
+'rtcoef_mtg_1_fci_srf_ch10.txt': begin
+    b1=     49305.9 & b2=     2310.21 & t1=     3.55786 & t2=    0.993999
+end
+'rtcoef_mtg_1_fci_srf_ch11.txt': begin
+    b1=     29264.4 & b2=     1941.47 & t1=    0.412727 & t2=    0.999114
+end
+'rtcoef_mtg_1_fci_srf_ch12.txt': begin
+    b1=     17798.2 & b2=     1644.91 & t1=    0.125267 & t2=    0.999548
+end
+'rtcoef_mtg_1_fci_srf_ch13.txt': begin
+    b1=     13201.6 & b2=     1489.00 & t1=  0.00582537 & t2=    0.999869
+end
+'rtcoef_mtg_1_fci_srf_ch14.txt': begin
+    b1=     10210.2 & b2=     1366.77 & t1=    0.361479 & t2=    0.999038
+end
+'rtcoef_mtg_1_fci_srf_ch15.txt': begin
+    b1=     6399.53 & b2=     1169.68 & t1=    0.110205 & t2=    0.999623
+end
+'rtcoef_mtg_1_fci_srf_ch16.txt': begin
+    b1=     5088.11 & b2=     1083.60 & t1=    0.119181 & t2=    0.999572
 end
 'rtcoef_noaa_10_avhrr_srf_ch01.txt': begin
     b1=     0.00000 & b2=     0.00000 & t1=     0.00000 & t2=     0.00000

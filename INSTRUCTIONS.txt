@@ -1,0 +1,6 @@
+
+
+1) Open makerunfile.pro and select the instrument and microphysical models (mm) you want to use.  The type of LUT depends upon the mm choosen.  This is suboptimal and should be changed.
+
+*** YOU MUST BE IN THE make_orac_lut DIRECTORY when you run makerunfile.pro ***
+2) Use IDL to run makerunfile.pro.  This creates a script <platform>_<instrument>_run. Make sure it has execute privledge. Run the script to create the LUT.

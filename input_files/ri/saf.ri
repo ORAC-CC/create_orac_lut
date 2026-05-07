@@ -2,11 +2,12 @@
 #SAMPLEFORM= ???
 #DESCRIPTION=???
 #REFERENCE = ???
-#COMMENT = From ORAC dust A70 mie file. god knows what it is.
+#COMMENT = From ORAC dust A70 mie file. god knows what it is. Final point is to extend into IR for  Elisa May 24
 #SOURCE =???
 #SUBSTANCE = SAF
 #FORMAT = WAVL N K
-          0.55    1.50    0.040
+     0.55    1.50    0.040
      0.67    1.50    0.040
      0.87    1.50    0.040
      1.60    1.50    0.040
+	 20      1.50    0.040

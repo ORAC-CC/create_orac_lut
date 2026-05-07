@@ -17,7 +17,6 @@ c                     calling the DISORT DLM.
 c 09/08/16, G McGarragh: Fixes to the above change for gfortran that
 c                        were all cases of unstandard Fortran that ifort
 c                        lets happen anyway.
-c 13/08/21 RGG Changed name to DISORT2 so can run parallel to new version
 
       INTEGER FUNCTION GETMOM ( IPHAS, GG, NMOM, PMOM )
 

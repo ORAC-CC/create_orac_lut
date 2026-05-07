@@ -1,161 +1,125 @@
 ; make run file to create multiple luts
 
 ; THIS IS THE MASTER LIST DO NOT DELETE
-  MM = ['aerosol_a70',$
-        'aerosol_a75',$
-        'aerosol_a76',$
-        'aerosol_a77',$
-        'aerosol_a79',$  
-        'biomass_a',$
-        'biomass_b',$
-        'biomass_c',$
-        'biomass_d',$
-        'biomass_australia',$
-        'biomass_indonesia',$
-        'liquid-water_old',$
-        'liquid-water_stg',$
-        'liquid-water_240',$
-        'liquid-water_253',$
-        'liquid-water_263',$
-        'liquid-water_273',$
-        'sulphuric-acid_300',$  	
-        'volcanic-ash_ctn',$
-        'volcanic-ash_ey1',$
-        'volcanic-ash_spr', $
-        'water-ice_sph',$
-        'water-ice_agg',$
-        'water-ice_ghm',$
-        'water-ice_src']
-
-
-	
- ; 
-
-;MM = ['sulphuric-acid_htha','volcanic-ash_htha'] ; Himawari only
-
-;  MM = ['biomass_australia_minus','biomass_australia_plus']
-
-; aerosol only	
-MM = ['aerosol_a70',$
-        'aerosol_a75',$
-        'aerosol_a76',$
-        'aerosol_a77',$
-        'aerosol_a79',$  
-        'biomass_a',$
-        'biomass_b',$
-        'biomass_c',$
-        'biomass_d',$
-        'biomass_australia',$
-        'biomass_indonesia']
-
-
-MM = ['aerosol_a70',$
-        'aerosol_a75',$
-        'aerosol_a76',$
-        'aerosol_a77',$
-        'aerosol_a79'] 
-
-
-	
-; cloud only		
-  MM = ['liquid-water_old',$
-        'liquid-water_stg',$
-        'liquid-water_240',$
-        'liquid-water_253',$
-        'liquid-water_263',$
-        'liquid-water_273',$
-        'water-ice_sph',$
-        'water-ice_agg',$
-        'water-ice_ghm',$
-        'water-ice_src']
-
-; ice only		
-  MM = ['water-ice_sph',$
-        'water-ice_agg',$
-        'water-ice_ghm',$
-        'water-ice_src']
-MM = ['liquid-water_old', 'water-ice_ghm']  
-  MM = ['liquid-water_stg',$
-        'liquid-water_ap02',$
-        'liquid-water_ap04',$
-        'liquid-water_ap06',$
-        'liquid-water_ap08',$
-        'liquid-water_ap10']
-MM = ['liquid-water_old']  
-MM = ['biomass_australia_minus', 'biomass_australia','biomass_australia_plus']
-
-  platform = 'ers1'
-  instrument = 'atsr'
-  
-  platform = 'ers2'
-  ;instrument = 'atsr2'
+  ; MM = ['aerosol_a70',$
+        ; 'aerosol_a75',$
+        ; 'aerosol_a76',$
+        ; 'aerosol_a77',$
+        ; 'aerosol_a78',$  
+        ; 'aerosol_a79',$  
+        ; 'biomass_a',$
+        ; 'biomass_b',$
+        ; 'biomass_c',$
+        ; 'biomass_d',$
+        ; 'biomass_australia',$
+        ; 'biomass_indonesia',$
+        ; 'liquid-water_old',$
+        ; 'liquid-water_stg',$
+        ; 'liquid-water_240',$
+        ; 'liquid-water_253',$
+        ; 'liquid-water_263',$
+        ; 'liquid-water_273',$
+        ; 'sulphuric-acid_300',$  	
+        ; 'volcanic-ash_ctn',$
+        ; 'volcanic-ash_ey1',$
+        ; 'volcanic-ash_spr', $
+        ; 'water-ice_sph',$
+        ; 'water-ice_agg',$
+        ; 'water-ice_ghm',$
+        ; 'water-ice_src']
  
-  platform = 'fengyun-4a'
-  instrument = 'agri'
- 
-  platform = 'goes-16'
-  instrument = 'abi'
+  ; platform = 'ers1'
+  ; instrument = 'atsr'
   
-  platform = 'meteosat-8'
-  instrument = 'seviri'
+  ; platform = 'ers2'
+  ; instrument = 'atsr2'
+ 
+  ; platform = 'fengyun-4a'
+  ; instrument = 'agri'
+  
+  ; platform = 'meteosat-8'
+  ; instrument = 'seviri'
 
-  platform = 'meteosat-9'
-  instrument = 'seviri'
+  ; platform = 'meteosat-9'
+  ; instrument = 'seviri'
    
-  platform = 'meteosat-10'
-  instrument = 'seviri'
+  ; platform = 'meteosat-10'
+  ; instrument = 'seviri'
   
-
+  ; platform = 'aqua'
+  ; instrument = 'modis' 
   
-  
-    platform = 'aqua'
-  instrument = 'modis' 
-  
-   platform = 'terra'
-  instrument = 'modis'  
+  ; platform = 'terra'
+  ; instrument = 'modis'  
 	
-
-  platform = 'noaa-5'
-  instrument = 'avhrr'
+  ; platform = 'himawari-8'
+  ; instrument = 'ahi' 
   
-  platform = 'noaa-6'
-  instrument = 'avhrr'
+  ; platform = 'noaa-5'
+  ; instrument = 'avhrr'
   
-  platform = 'noaa-19'
-  instrument = 'avhrr'
-
-  platform = 'meteosat-11'
-  instrument = 'seviri'
-
+  ; platform = 'noaa-6'
+  ; instrument = 'avhrr'
   
-   platform = 'envisat'
-  instrument = 'aatsr'  	
-     
-    platform = 'sentinel-3a'
-  instrument = 'slstr'
+  ; platform = 'noaa-19'
+  ; instrument = 'avhrr'
 
-     platform = 'sentinel-3b'
-  instrument = 'slstr'
+  ; platform = 'meteosat-11'
+  ; instrument = 'seviri'
+
+  ; platform = 'envisat'
+  ; instrument = 'aatsr'   
    
-  platform = 'envisat'
-  instrument = 'aatsr'  
+  ; platform = 'earthcare'
+  ; instrument = 'msi'
+
+  ; platform = 'sentinel-3b'
+  ; instrument = 'slstr'  
+   
+  ; platform = 'goes-16'
+  ; instrument = 'abi'
   
-  platform = 'himawari-8'
-  instrument = 'ahi' 
- 
+  ; platform = 'himawari-9'
+  ; instrument = 'ahi' 
+    
+  ; platform = 'meteosat-12'
+  ; instrument = 'fci'  
   
-  Test = 0
-  Versions = '13'
+  ; platform = 'meteosat-10'
+  ; instrument = 'seviri'  
+
+  ; platform = 'noaa-20'
+  ; instrument = 'viirs'
+  
+MM = ['aerosol_a70', 'water-ice_sph']
+
+  platform = 'sentinel-3a'
+  instrument = 'slstr'    
+  
+  Test = 1
+  Versions = '21'
   
   file = platform+'_'+instrument+'_run'
   openw,lun,file,/get_lun
   
-
   printf,lun,'#!/bin/bash'
-  printf,lun,'source initpath.bash'
 
-  If (Test) Then printf,lun,'#*** TEST RUN ***'
-  
+  If (Test) Then Begin
+   printf,lun,'#*** WARN USER THAT THIS IS A TEST RUN ***'
+   printf,lun,'echo'
+   printf,lun,'echo'
+   printf,lun,'echo'
+   printf,lun,'echo "****************************************"'
+   printf,lun,'echo "*** TEST TEST TEST TEST TEST TEST ***"'
+   printf,lun,'echo "*** THIS IS A TEST LUT GENERATION  ***"'
+   printf,lun,'echo "****************************************"'
+   printf,lun,'echo'
+   printf,lun,'echo'
+   printf,lun,'echo'
+  EndIf
+  printf,lun,'source setup_oraclut_env.sh'
+  printf,lun,'echo'
+  printf,lun,'echo'
   Old_Material=''
   
   For srf_quad= 1,1 do begin  
@@ -170,25 +134,31 @@ MM = ['biomass_australia_minus', 'biomass_australia','biomass_australia_plus']
         printf,lun,'# '+material + ' section'
         old_material = material
       endif
+
       case material of
         'aerosol'       : FM = 'aerosol'
-;        'biomass'       : FM = 'aerosol'
         'biomass'       : FM = 'cloud'
         'liquid-water'  : FM = 'cloud'
         'sulphuric-acid': FM = 'cloud'
         'volcanic-ash'  : FM = 'cloud'
         'water-ice'     : FM = 'cloud' 
       EndCase
-
-      printf,lun,'export CREATE_ORAC_LUT_DRIVER="input_files/driver/'+platform+'_'+instrument+'_'+FM+'.driver"'
-      printf,lun,'echo "making ..." $CREATE_ORAC_LUT_DRIVER'
+  
+	  Case FM of
+	  'aerosol': printf,lun,'export CREATE_ORAC_AEROSOL_LUT_DRIVER="input_files/driver/'+platform+'_'+instrument+'_'+FM+'.driver"'
+	  'cloud': printf,lun,'export CREATE_ORAC_CLOUD_LUT_DRIVER="input_files/driver/'+platform+'_'+instrument+'_'+FM+'.driver"'
+	  EndCase 	  
+	  Case FM of
+	  'aerosol': printf,lun,'echo "using ..." $CREATE_ORAC_AEROSOL_LUT_DRIVER'
+	  'cloud':   printf,lun,'echo "using ..." $CREATE_ORAC_CLOUD_LUT_DRIVER'
+	  EndCase 
       
-      
+           
       mminstruction = ",mmfile='"+mm(m)+".mm'"
       
       case material of
         'aerosol'       : lutinstruction = ",lutfile='aerosol"
-        'biomass'       : lutinstruction = ",lutfile='biomass-plume"
+        'biomass'       : lutinstruction = ",lutfile='biomass-cloud"
         'liquid-water'  : lutinstruction = ",lutfile='liquid-water-cloud" 
         'sulphuric-acid': lutinstruction = ",lutfile='sulphuric-acid-cloud"
         'volcanic-ash'  : lutinstruction = ",lutfile='ash-plume"
@@ -200,12 +170,13 @@ MM = ['biomass_australia_minus', 'biomass_australia','biomass_australia_plus']
        Else $
         lutinstruction = lutinstruction+".lut'"
 		
-		; XXXXXXXXXXXXXXXXXXXXXXTEMPXXXXXXXXXXXXXXXXXXXXXXX
- ;       lutinstruction = lutinstruction+"-2R.lut'"
-            
-      printf,lun,'idl -e "create_orac_lut_wrapper,srf_quad='+string(srf_quad,format='(I1)')+mminstruction+lutinstruction+",tmatrix_path='/network/group/aopp/eodg/shared/dubovik_tmatrix/',version="+versions+'"'
-;      if (material eq 'liquid-water' or mm(m) eq 'volcanic-ash_htha') then printf,lun,'idl -e "create_orac_lut_wrapper,srf_quad='+string(srf_quad,format='(I1)')+mminstruction+lutinstruction+ ",no_rayleigh=1,reuse_scat=1,tmatrix_path='/network/group/aopp/eodg/shared/dubovik_tmatrix/',version="+versions+'"'
-      printf,lun
+	  Case FM of        
+       'aerosol':  printf,lun,'idl -e "create_orac_aerosol_lut_wrapper,srf_quad='+string(srf_quad,format='(I1)')+mminstruction+lutinstruction+",tmatrix_path='/network/aopp/matin/eodg/shared/dubovik_tmatrix/',atmospheres=2,gas=1,version="+versions+'"'
+      'cloud': begin
+         printf,lun,'idl -e "create_orac_cloud_lut_wrapper,srf_quad='+string(srf_quad,format='(I1)')+mminstruction+lutinstruction+",tmatrix_path='/network/group/aopp/eodg/shared/dubovik_tmatrix/',version="+versions+'"'
+        end
+       endcase	   
+       printf,lun
     EndFor
   EndFor 
   close,lun

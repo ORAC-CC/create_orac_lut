@@ -49,9 +49,8 @@ maximum satellite zenith = 56
  srf [8] = rtcoef_sentinel3_1_slstr_srf_ch08.txt
  srf [9] = rtcoef_sentinel3_1_slstr_srf_ch09.txt
  
- 
- 
- # TEMPORARY 
+
+# TEMPORARY 
 # Old SAD values from  /network/aopp/apres/ORAC_LUTS/slstr/SENTINEL3A/
 # carried through for back compatibility 
 # REMOVE when new error calculation implemented
@@ -72,7 +71,6 @@ oldf1[4] = 0.7688
 oldf1[5] = 0.6590
 oldf1[6] = 0.4157
 oldf1[7] = 0.1774 
-
 
 oldnefr[1] = 0.005
 oldnefr[2] = 0.005
@@ -106,11 +104,9 @@ oldnebt[7] =0.2
 oldnebt[8] =0.2 
 oldnebt[9] =0.2
  
-
 # channel random noise in percentage for solar channels and NEdT (K) for the thermal channels
 # calibration from https://sentinels.copernicus.eu/documents/247904/4069145/Sentinel-3-MPC-RAL-SLSTR-Cyclic-Report-065-046.pdf
 #  noise is given as a function of time/calibration target.  Here worst case up until the end of 2020 is used.
-
 
  snr [1] = 241
  snr [2] = 250

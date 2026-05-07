@@ -6,12 +6,14 @@
 ; file (string) input file.
 ;
 ; INPUT KEYWORDS:
-; Channelid defines which channels to load otherwise load all.
+; Channelid defines which cha:nnels to load otherwise load all.
 ;
 ; OUTPUT ARGUMENTS:
 ; inststr (structure) Structure with instrument information.
 ;
 ; HISTORY:
+; 07/05/26  RGG: Latent bug: Fixed incorrect use of count in WHERE(...)
+;                Bug: channelid (string) being compared to available_channelid (integer)
 ; 20/07/20, RGG: Created
 
 pro load_inststr, file, inststr, RequestedChannelID = RequestedChannelID
@@ -82,23 +84,23 @@ pro load_inststr, file, inststr, RequestedChannelID = RequestedChannelID
   Thermal_Channel_Flag = replicate(0,number_of_nadir_channels)
   FOR I = 0,N_Elements(solar_channelid) - 1 do begin
     J = Where(solar_channelid(I) Eq available_channelid, Count)
-    IF (Count Eq -1) then $        
+    IF (Count Eq 0) then $        
       Stop, 'Solar channel not included in available channels'        $
     Else $     
       Solar_Channel_Flag[J] = 1 
   ENDFOR
   FOR I = 0,N_Elements(Thermal_ChannelID) - 1 do begin
     J = where (Thermal_ChannelID(I) eq available_channelid, Count)
-    IF (Count Eq -1) then $
+    IF (Count Eq 0) then $
       Stop, 'Thermal channel not included in available channels' $
     Else $
       Thermal_Channel_Flag[J] = 1
   ENDFOR
 
   FOR i = 0, multiples - 1 do begin
-    channelid  = string(fix(strmid(LHS[NQ[I]],LSB[NQ[I]]+1,RSB[NQ[I]]-LSB[NQ[I]]-1)),FORMAT='(I2.2)')
+    channelid  = fix(strmid(LHS[NQ[I]],LSB[NQ[I]]+1,RSB[NQ[I]]-LSB[NQ[I]]-1))
     J = where (channelid eq available_channelid, Count)
-    IF (Count Eq -1) then $
+    IF (Count Eq 0) then $
       Stop, 'channel not included in available channels' $
     Else begin
       Case strlowcase(strcompress(strmid(LHS[NQ[I]],0,LSB[NQ[I]]),/remove_all)) of
