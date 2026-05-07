@@ -1,0 +1,9 @@
+# Generated LUT output
+luts/
+
+# NFS temporary files
+.nfs*
+
+# Misc temporary/editor files
+*~
+#*#
