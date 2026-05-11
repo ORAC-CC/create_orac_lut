@@ -7,7 +7,7 @@
 ;
 ; Andy Smith (smith@atm.ox.ac.uk)
 ;-
-
+print, base_path
     n = n_elements(eps)
     nt= n_elements(dqv)
 

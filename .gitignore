@@ -9,3 +9,6 @@ luts/
 #*#
 
 attic/
+
+# Large Baum optical property tables
+input_files/baum/

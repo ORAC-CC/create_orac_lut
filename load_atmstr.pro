@@ -63,7 +63,7 @@ end
 
 pro load_atmstr, file, atmospheres, atmstr
 
-  If (Atmospheres Eq 0) Then begin
+  If (Atmospheres Eq 'midsatm.dat') Then begin
     read_presdat, file, atmstr
     
   EndIf Else Begin

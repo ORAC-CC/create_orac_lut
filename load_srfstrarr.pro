@@ -20,8 +20,8 @@ pro load_srfstrarr, inststr,  solar_spectrum_filename, srfstrarr, QM, nwvl_max
     read_srfstr, 'input_files/srf/'+ inststr.srf_file[i], srfstr
 
     Case QM OF
-      0: nwvl  = srfstr.nwvl
-      1: nwvl = 1 
+      0: nwvl = 1     
+      1: nwvl  = srfstr.nwvl
       2: BEGIN
           fe = 0.001  ; ie integrals must agree to better than .1 %
           segment,srfstr.wvl,srfstr.srf,x,y,fe,minn=12
@@ -67,15 +67,16 @@ pro load_srfstrarr, inststr,  solar_spectrum_filename, srfstrarr, QM, nwvl_max
 
     Case QM OF
       0:BEGIN
+         srfstrarr[i].nwvl = 1 
+         srfstrarr[i].wvl[0] = srfstrarr[i].wvl_centre
+         srfstrarr[i].val[0] = 1 
+        END      
+      1:BEGIN
          srfstrarr[i].nwvl  = srfstr.nwvl
          srfstrarr[i].wvl[0:srfstr.nwvl-1] = srfstr.wvl
          srfstrarr[i].val[0:srfstr.nwvl-1] = srfstr.srf
         END
-      1:BEGIN
-         srfstrarr[i].nwvl = 1 
-         srfstrarr[i].wvl[0] = srfstrarr[i].wvl_centre
-         srfstrarr[i].val[0] = 1 
-        END
+
       2:BEGIN
          fe = 0.001  ; ie integrals must agree to better than .1 %
          segment,srfstr.wvl,srfstr.srf,x,y,fe,minn=12

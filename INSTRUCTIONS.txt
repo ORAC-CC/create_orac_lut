@@ -1,6 +1,19 @@
+Where variables are set depends upon how often they are modifies.
 
+makerunfile.pro  <= Most Frequent
+^^^^^^^^^^^^^^^
 
-1) Open makerunfile.pro and select the instrument and microphysical models (mm) you want to use.  The type of LUT depends upon the mm choosen.  This is suboptimal and should be changed.
+Edit this file to select
+
+- platform and instrument
+- forward model
+- microphysical model
+- lut structure
+
+Plus two otional parameters that let you choose to only build the microphysics or only execute the multiple scattering GAS RAYLEIGH
+
+1) Open  and select the instrument and microphysical models (mm) you want to use.  The type of LUT depends upon the mm choosen.  This is suboptimal and should be changed.
 
 *** YOU MUST BE IN THE make_orac_lut DIRECTORY when you run makerunfile.pro ***
 2) Use IDL to run makerunfile.pro.  This creates a script <platform>_<instrument>_run. Make sure it has execute privledge. Run the script to create the LUT.
+
