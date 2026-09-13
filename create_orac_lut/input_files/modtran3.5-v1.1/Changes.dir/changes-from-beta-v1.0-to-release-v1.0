@@ -1,0 +1,13 @@
+
+The subroutine dtrdi.f has been removed from the source code.
+
+The files with changes are:
+
+          d1mach.f  dpfish.f  flxadd.f  lay5dt.f  newsrc.f  shade.f   tanht.f
+aerext.f  debye.f   dpfnmn.f  fndpth.f  laycld.f  phasef.f  smgeo.f   tnrain.f
+aernsm.f  del.f     dplayr.f  frq5dt.f  loop.f    psi.f     smprep.f  trans.f 
+atmcon.f  disbbf.f  dprarf.f  geo.f     mapms.f   rain.f    solzen.f  watvap.f
+bbfn.f    disort.f  dprfpa.f  geoinp.f  marine.f  reduce.f  ssgeo.f
+bmflux.f  dpandx.f  driver.f  hengns.f  msrad.f   rtbis.f   ssrad.f
+bmtran.f  dpfill.f  fdbeta.f  hertda.f  newh2.f   sctang.f  stdmdl.f
+

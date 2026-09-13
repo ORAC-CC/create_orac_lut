@@ -1,0 +1,68 @@
+substance aerosol
+shortname a75
+description northern background aerosol
+profile
+     5
+     5.5    0.0
+     4.5    0.0
+     3.5    0.0
+     2.5    472.37
+     1.5    778.80
+component user waf
+*size
+     log_normal
+     0.070000      1.70000
+*scattering code
+     mie
+*mixing ratio
+     0.995000
+*refractive index
+waf.ri
+component user ssc
+*size
+     log_normal
+     0.788000      1.82200
+*scattering code
+     mie
+*mixing ratio
+     0.00375000
+*refractive index
+ssc.ri
+component user mdc
+*size
+     log_normal
+     0.788      1.822
+*scattering code
+     tmatrix
+*mixing ratio
+     0.00125000
+*refractive index
+mdc.ri
+*aspect ratio
+    25
+   3.3489999E-01   6.6184998E-02
+   3.6690000E-01   6.5025002E-02
+   4.0189999E-01   6.3634999E-02
+   4.4029999E-01   6.2050000E-02
+   4.8230001E-01   5.8720000E-02
+   5.2829999E-01   5.3350002E-02
+   5.7870001E-01   4.7761999E-02
+   6.3389999E-01   4.2952999E-02
+   6.9440001E-01   4.0321000E-02
+   7.6069999E-01   0.0000000E+00
+   8.3329999E-01   0.0000000E+00
+   9.1289997E-01   0.0000000E+00
+   1.0000000E+00   0.0000000E+00
+   1.0954000E+00   0.0000000E+00
+   1.2000000E+00   0.0000000E+00
+   1.3145000E+00   0.0000000E+00
+   1.4400001E+00   4.0321000E-02
+   1.5774000E+00   4.2952999E-02
+   1.7280000E+00   4.7761999E-02
+   1.8929000E+00   5.3350002E-02
+   2.0736001E+00   5.8720000E-02
+   2.2715001E+00   6.2050000E-02
+   2.4883001E+00   6.3634999E-02
+   2.7258000E+00   6.5025002E-02
+   2.9860001E+00   6.6184998E-02
+end

@@ -1,0 +1,13 @@
+#DISTRIBUTEDBY = ???
+#SAMPLEFORM= ???
+#DESCRIPTION=???
+#REFERENCE = ???
+#COMMENT = From ORAC CCI mie files. god knows what it is. Final point is to extend into IR for  Elisa May 24
+#SOURCE =???
+#SUBSTANCE = WAF
+#FORMAT = WAVL N K
+0.55    1.40    0.003
+0.67    1.40    0.003
+0.87    1.40    0.003
+1.60    1.40    0.003
+20.0    1.40    0.003

@@ -1,0 +1,147 @@
+# Meteosat-10 MSG3 SEVERI  instrument definition for ORAC code
+# Channels 1-12 
+
+# Format
+# or * indicate a comment, can have blank lines. An = separates the constant and its value.
+
+# constants
+# + may be in any order
+# + are case insensitive (will be translated to lower case)
+# + may include spaces (they are ignored) 
+# e.g. Solar Channels is equivalent to solarchannels
+
+# uncertainty in albedo for solar channels and NedT for thermal and mixed thermal/solar channels
+
+# quantities specific to a channel can be indicated using the nadir channelid (as a number) in []
+platform = meteosat-10
+instrument = seviri
+instrument version = unknown
+
+# 0: single or N: dual view where N represents the channel offset of the slant view wrt the nadir view
+view = 0
+
+# specify instrument channels available as some instrument channels may be inapplicable, failed, too noisy etc
+#available channels  = 1 2 3 4 5 6 7 8 9 10 11 12 
+available channels  = 1 2 3 4 5 6 7 8 9 10 11 
+
+# specify which of the channels measure reflected solar radiation (includes channels around 4 um which have both a solar and emitted component)
+#solar channels  = 1 2 3 4 12
+solar channels  = 1 2 3 4 
+
+# specify which of the channels measure emitted thermal radiation (includes channels around 4 um which have both a solar and emitted component)
+thermal channels  = 4 5 6 7 8 9 10 11 
+
+# Figure below captures the maximum value  
+maximum satellite zenith = 90
+
+# spectral response functions
+# taken from RTTOV spectral response function archive: https://www.nwpsaf.eu/site/software/rttov/download/coefficients/spectral-response-functions/
+# channels follow ORAC (ie OSCAR) order except atsr, atsr-2 and aatsr which are reversed
+ srf  [1] = rtcoef_msg_3_seviri_srf_ch01.txt
+ srf  [2] = rtcoef_msg_3_seviri_srf_ch02.txt
+ srf  [3] = rtcoef_msg_3_seviri_srf_ch03.txt
+ srf  [4] = rtcoef_msg_3_seviri_srf_ch04.txt
+ srf  [5] = rtcoef_msg_3_seviri_srf_ch05.txt
+ srf  [6] = rtcoef_msg_3_seviri_srf_ch06.txt
+ srf  [7] = rtcoef_msg_3_seviri_srf_ch07.txt
+ srf  [8] = rtcoef_msg_3_seviri_srf_ch08.txt
+ srf  [9] = rtcoef_msg_3_seviri_srf_ch09.txt
+ srf [10] = rtcoef_msg_3_seviri_srf_ch10.txt
+ srf [11] = rtcoef_msg_3_seviri_srf_ch11.txt
+# srf [12] = rtcoef_msg_3_seviri_srf_ch12.txt
+
+# TEMPORARY 
+# Old SAD values from  /network/aopp/apres/ORAC_LUTS/seviri/MSG3 carried through for back compatibility 
+# REMOVE when new error calculation implemented
+# F1 is multiple of F0 so calculated
+
+oldf0[1] = 21.136
+oldf0[2] = 23.124
+oldf0[3] = 19.639
+oldf0[4] =  4.6265
+
+oldf1[1] = 0.69327
+oldf1[2] = 0.75847 
+oldf1[3] = 0.64416
+oldf1[4] = 0.15175
+
+oldnefr[1] = 0.000274 
+oldnefr[2] = 0.000385 
+oldnefr[3] = 0.000904
+
+oldwvn[4] = 2555.73 
+oldwvn[5] = 1588.79
+oldwvn[6] = 1359.93
+oldwvn[7] = 1148.28
+oldwvn[8] = 1034.05
+oldwvn[9] =  927.76
+oldwvn[10] = 837.82
+oldwvn[11] = 749.7
+
+oldb1[4]  = 198829.45
+oldb1[5]  =  47767.805
+oldb1[6]  =  29956.113
+oldb1[7]  =  18033.465
+oldb1[8]  =  13169.231
+oldb1[9]  =   9511.3623
+oldb1[10] =   7004.6745
+oldb1[11] =   5018.7819
+
+oldb2[4]  = 3677.2687
+oldb2[5]  = 2286.0035
+oldb2[6]  = 1956.7122
+oldb2[7]  = 1652.1832
+oldb2[8]  = 1487.8253
+oldb2[9]  = 1334.8917
+oldb2[10] = 1205.4831
+oldb2[11] = 1078.6931
+
+oldt1[4]  = 0
+oldt1[5]  = 0
+oldt1[6]  = 0
+oldt1[7]  = 0
+oldt1[8]  = 0
+oldt1[9]  = 0
+oldt1[10] = 0
+oldt1[11] = 0
+
+oldt2[4]  = 1
+oldt2[5]  = 1
+oldt2[6]  = 1
+oldt2[7]  = 1
+oldt2[8]  = 1
+oldt2[9]  = 1
+oldt2[10] = 1
+oldt2[11] = 1
+
+oldnebt[4] = 0.25 
+oldnebt[5] = 0.40000001
+oldnebt[6] = 0.40000001
+oldnebt[7] = 0.15000001
+oldnebt[8] = 0.11
+oldnebt[9] = 0.20999999
+oldnebt[10]= 0.23
+oldnebt[11]= 0.34999999
+
+# Values from 'Typical Radiometric Noise, Calibration Bias and Stability for Meteosat-8, -9, -10 and -11 SEVIRI', EUM/OPS/TEN/07/0314, 3 June 2019
+snr [1] = 48.80 
+snr [2] = 29.72 
+snr [3] = 11.04 
+
+ refbt  [4] = 300
+ refbt  [5] = 250
+ refbt  [6] = 250
+ refbt  [7] = 300
+ refbt  [8] = 255
+ refbt  [9] = 300
+ refbt [10] = 300
+ refbt [11] = 270
+
+ nedt   [4] = 0.1 
+ nedt   [5] = 0.04
+ nedt   [6] = 0.06
+ nedt   [7] = 0.06
+ nedt   [8] = 0.09
+ nedt   [9] = 0.06
+ nedt  [10] = 0.11
+ nedt  [11] = 0.22

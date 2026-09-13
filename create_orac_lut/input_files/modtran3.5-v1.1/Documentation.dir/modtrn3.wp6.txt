@@ -1,0 +1,1043 @@
+
+
+1
+
+APPENDIX MODTRAN 3 User Instructions This description is based on Section 3 from the original LOWTRAN 7 Users Manual; plus the "Readme" files on the MODTRAN  3 "ftp" site and the MODTRAN report:
+
+Users Guide to LOWTRAN 7 AFGL-TR-88-0177 16 August 1988
+
+MODTRAN: A Moderate Resolution Model LOWTRAN 7 GL-TR-89-0122 30 April 1989
+
+The scientific differences between the codes will be outlined in the Scientific Report due for publication in early 1996.
+
+3.  INSTRUCTIONS FOR  USING MODTRAN 3
+
+The instructions for using MODTRAN 3 are similar to those for the earlier LOWTRAN 7 version.  However, some new parameters have been added, necessitating the addition of one new card, and minor modifications to two other cards. The new parameters (appearing on required CARD 1A), are principally required to govern: (1) a second multiple scattering option (based on the multiple stream DISORT algorithm, after Stamnes et al. 1988);  (2) a new high resolution solar irradiance (based on a full calculated irradiance, after Kurucz 1995) with an optional triangular smoothing function; and (3) a "one-step" update to the CO  mixing ratio.  This last option is offered because, for2 historic calibration studies, the 330 ppmv for CO  has been preserved in the code.  However, CO2 2 increases by approximately 1/2 % per year, and is currently 355-360 ppmv.      The most important altered card is the vital CARD 4 from the LOWTRAN sequence, governing the beginning and ending frequencies, the frequency step size on output, and spectral resolution (based on a triangular slit function). The format for these variables has changed from real to integer values.  In addition, MODTRAN performs all of its calculations at 1 cm  intervals (for frequencies between 0-1 22000 cm ), independent of the choice of output step size and triangular resolution.  The new-1 MODTRAN 1 cm  band models, the primary upgrade from LOWTRAN, provide much improved-1 spectral accuracy and will still run very rapidly. For frequencies beyond the current band model upper limit (22000 - 50000 cm ), MODTRAN uses a fixed 5 cm  step size, with the transition occurring-1 -1 automatically.  Note that the option to "incorrectly" request an un-smoothed large step size, particularly as used in the solar regime, is no longer available.
+
+2
+
+     The second "altered" card involves two new provisions on  CARD 1.  First, the SALB parameter now provides access to spectral vectors (wavelength, emissivity, and reflectivity) from a selection of default options stored on a file called "refbkg'.  Negative values from -1 through -16 (with  values of -7 through -12 available for user- specification) will pick up any of an assortment of surface properties, including snow, forest, farm, desert, ocean, cloud deck and 4 sample grass models.  The size of these vectors is variable and the format is in ASCII.  (Ref. Robertson, SSI).      Second, the MDEF value on CARD 1 was previously limited to a value of 1, selecting the single set of prestored molecular  profiles for species for which MODEL (1...6) do not pertain (O2, NO, SO2, NO2, NH3 and HNO3) .  Now, when MDEF=2, the user will be allowed to specify the profiles for the new heavy molecules for which cross-sections have been specified.  These include nine chloro-fluorocarbons (CFC's), plus CLONO2, HNO4, CCL4, and N2O5, with the databases stored in 'UFTAPX.asc'.  The specification of user-defined profiles is modeled after the MODEL=7 option in LOWTRAN, but only one set of units can be used for the whole set of heavy species.  The "default" profiles for these heavy molecules are stored in BLOCK DATA XMLATM and are based on 1990 photochemical predictions (after M. Allen, JPL).  Since some of the CFC's have increased by as much as 8%/year, the user might well wish to redefine these values.  Note that both CFC11 and CFC12 are now as much as 80% larger than the default profiles.      In general, for standard atmospheric models, six input cards are now required to run MODTRAN for a given problem. For any specific problem a combination of several of the fifteen additional optional control cards are possible. The formats for the six main cards, fifteen optional cards, and definitions of the input parameters are given below. Because of the similarity between the MODTRAN and LOWTRAN instructions, the changes will be highlighted and the numbering scheme will be altered.
+
+3.1  Input Data and Formats
+
+The use of the word 'CARD' is equivalent to editing with 80 columns. The program is activated by submission of a six (or more) card sequence as follows: CARD 1: LMODTRN, MODEL, ITYPE, IEMSCT, IMULT, M1, M2, M3, M4, M5,
+
+M6. MDEF, IM, NOPRT, TBOUND, SALB FORMAT (L1, I4, 12I5, F8.3, F7.2) CARD1A: LDISORT, ISTRM, LSUN1, ISUN, CO2MIX
+
+FORMAT (L1, I4, L1, I4, F10.3) CARD 2: IHAZE, ISEASN, IVULCN, ICSTL, ICLD, IVSA, VIS, WSS, WHH,
+
+3
+
+RAINRT, GNDALT FORMAT (6I5, 5F10.3) OPTIONAL CARDS
+
+CARD 2A: CTHIK, CALT, CEXT, ISEED (If ICLD=18, 19, or 20)
+
+FORMAT (3F10.3, I10) CARD 2B: ZCVSA, ZTVSA, ZINVSA (If IVSA=1)
+
+FORMAT (3F10.3) CARD 2C: ML, IRD1, IRD2, TITLE (If MODEL=0 or 7, and IM=1)
+
+FORMAT(3I5, 18A4) CARDS 2C1 through 2C3 (as required) repeated ML times.
+
+CARD 2C1: ZMDL, P, T, WMOL(1), WMOL(2), WMOL(3),
+
+JCHAR, JCHARX FORMAT (F10.3, 5E10.3, 15A1, 1X, A1) CARD 2C2: (WMOL(J), J=4, 12) (If IRD1=1)
+
+FORMAT (8E10.3) CARD 2C2X: (XMOL(J), J=1,13) (If MDEF=2)
+
+FORMAT (8E10.3) CARD 2C3: AHAZE, EQLWCZ, RRATZ, IHA1, ICLD1, IVUL1,
+
+ISEA1, ICHR1 (If IRD2=1) FORMAT (10X, 3F10.3, 5I5) CARD 2D: IREG (1 TO 4)        (If IHAZE=7 or ICLD=11)
+
+FORMAT (4I5) CARD 2D1:  AWCCON, TITLE 
+
+FORMAT (E10.3, 18A4) CARD 2D2: (VX(I), EXTC(N,I), ABSC(N,I), ASYM(N,I), I=l, 47)
+
+(If IHAZE=7 or ICLD=11) FORMAT (3(F6.2, 2F7.5, F6.4)) CARD 3: H1, H2, ANGLE, RANGE, BETA, RO, LEN
+
+FORMAT (6F10.3,I5)
+
+4
+
+ALTERNATE CARD 3:  H1, H2, ANGLE, IDAY, RO, ISOURC, ANGLEM (If IEMSCT=3)
+
+FORMAT (3F10.3, I5, 5X, F10.3, I5, F10.3) OPTIONAL CARDS:
+
+CARD 3A1: IPARM, IPH, IDAY, ISOURC (IEMSCT=2)
+
+FORMAT (4I5) CARD 3A2: PARM1, PARM2, PARM3, PARM4, TIME, PSIPO,
+
+ANGLEM, G FORMAT (8F10.3) (If IEMSCT=2)
+
+CARD 3B1: NANGLS (If IPH=1)
+
+FORMAT (15)
+
+CARD 3B2(1 TO NANGLS): (If IPH=1) 
+
+(ANGF (I), F(1,I), F(2,I), F(3,I), F(4,I), I=l, NANGLS) FORMAT (5E10.3)
+
+CARD4: IV1, IV2, IDV, IRES
+
+FORMAT (4I10)
+
+CARD 5: IRPT
+
+FORMAT (15)
+
+Definitions of these quantities will be discussed in Section 3.2. 3.2  Basic Instructions
+
+The various quantities to be specified on each of the six control cards along with the fifteen optional cards (summarized in Section 3.1) will be discussed in this section.
+
+3.2.1  CARD 1: LMODTRN, MODEL, ITYPE, IEMSCT, IMULT, M1, M2, M3,
+
+M4, M5, M6, MDEF, IM, NOPRT, TBOUND, SALB FORMAT (L1, I4, 12I5, F8.3, F7.2)
+
+LMODTRN  selects MODTRAN or LOWTRAN run options; LMODTRN  =  "T" runs MODTRAN, LMODTRN = "F" or blank runs LOWTRAN.
+
+      LMODTRN   =     "logical" T or F. MODEL selects one of the six geographical-seasonal model atmospheres or specifies that user-defined meteorological data are to be used.
+
+MODEL = 0 If meteorological data are specified (horizontal path only)
+
+1 Tropical Atmosphere 2 Midlatitude Summer 3 Midlatitude Winter
+
+5
+
+4 Subarctic Summer 5 Subarctic Winter 6 1976 US Standard 7 If a new model atmosphere (e.g. radiosonde data) is to be read in or IRD1z'0 or
+
+MDEF=2. (NOTE: MODEL = 0 Used for horizontal path only) ITYPE Indicates the type of atmospheric path.
+
+ITYPE = 1 For a horizontal (constant-pressure) path
+
+2 Vertical or slant path between two altitudes 3 For a vertical or slant path to space IEMSCT Determines the mode of execution of the program.    IEMSCT = 0 Program execution in transmittance mode
+
+1 Program execution in thermal radiance mode 2 Program execution in radiance mode with solar/lunar single scattered radiance
+
+included 3 Program calculates directly transmitted solar irradiance IMULT Determines execution with multiple scattering
+
+IMULT = 0 Program executed without multiple scattering
+
+1 Program executed with multiple scattering (NOTE: IEMSCT must equal 1 or 2 for multiple scattering) M1, M2, M3, M4, M5, and M6 are used to modify or supplement the altitude profiles of temperature and pressure, water vapor, ozone, methane, nitrous oxide and carbon monoxide from the atmospheric models stored in the program. MDEF  Uses the default (U.S. Standard)  profiles for the remaining species if, and only if, MDEF=0, "b", or 1.   If MDEF  =2 the user will be allowed to specify the profiles for the new heavy molecules  for  which cross-sections  have been specified.   These include nine chloro-fluorocarbons (CFC's), plus ClONO ,  HNO ,  CCl , and N O , with the  cross sections2 4 4  2 5 stored in 'UFTAPX.asc'.  The specification of  user-defined  profiles is  modeled after the  MODEL=7 option in LOWTRAN, but  only one  unit definition (see JCHAR definitions  for CARD  2C1) can be used for the whole  set of heavy species.  The  "default" profiles for these   heavy molecules  are stored in BLOCK DATA  XMLATM and  are based  on 1990 photochemical predictions (after M. Allen, JPL).  Since some of the CFC's have  increased by as much as 8%/year, the user might well wish to  redefine these values.   Note that both
+
+6
+
+CFC11 and CFC12 are now as much as 80% larger than the default profiles. For normal operation of program (MODEL 1 to 6) Set M1=M2=M3=0, M4=M5=M6=MDEF=0 These parameters are reset to default values by MODEL (1 to 6) when they are equal to zero
+
+When M1 = 0     M1 reset to 'MODEL' When M2 = 0     M2 reset to 'MODEL' When M3 = 0     M3 reset to 'MODEL' When M4 = 0     M4 reset to 'MODEL' When M5 = 0     M5 reset to 'MODEL' When M6 = 0     M6 reset to 'MODEL' When MDEF = 0 MDEF reset to 1 for all remaining species (not needed with MODEL 1 to 6). If MODEL=0 or 7 and if:
+
+a. M1 through M6 are zero then the JCHAR parameter on card 2C.1 should be utilized to
+
+supply the necessary amounts. or
+
+b. M1 through M6 are non-zero then the chosen default profiles will be utilized provided the
+
+specific JCHAR option is blank.
+
+M1 = 1 to 6 Default temperature and pressure to specified model atmosphere M2 = 1 to 6 Default H O to specified model atmosphere2 M3 = 1 to 6 Default O  to specified model atmosphere3 M4 = 1 to 6 Default CH  to specified model atmosphere4 M5 = 1 to 6 Default N O to specified model atmosphere2 M6 = 1 to 6 Default CO to specified model atmosphere MDEF = 1 Use default profiles for CO , O , NO, SO , NO , NH , HNO , (not2 2 2 2 3 3
+
+needed with MODEL 1 to 6). or
+
+MDEF = 2 User-defined control of heavy molecules 
+
+(CFC's will be updated; requires MODEL= 0 or 7) If MODEL=0 or MODEL=7, the program expects to read user supplied atmospheric profiles.  Set: IM=1 for first run.  To then rerun the same user-atmosphere for a series of cases set IM=0; MODTRAN will reuse the previously read data.
+
+IM  =  0 For normal operation of program or when subsequent calculations are to be run
+
+with the MODEL data set last read in.
+
+7
+
+=  1 When user input data are to be read initially. NOPRT =  0 For normal operation of program.  Controls TAPE6 output
+
+=  1 To minimize printing of transmittance or radiance table and atmospheric profiles = -1 Controls Tape 8 output (see subsequent options) TBOUND = Boundary Temperature (*K), used in the radiation mode (if IEMSCT=1 or 2) for
+
+slant paths that intersect the earth or terminate at a grey boundary (for example, cloud, target).  If TBOUND is left blank and the path intersects the Earth, the program will use the temperature of the first atmospheric level as the boundary temperature. SALB  = Surface albedo of the Earth at the location and average frequency of the
+
+calculation (0.0 to 1.0).  If SALB is left blank the program assumes the surface is a blackbody (with emissivity equal to 1; for example, SALB=0) or
+
+SALB < 0 Negative values allow the user ot access prestored spectrally variable surface
+
+albedos. The choices for negative SALB include:  -1 = fresh snow, -2 = forest, -3 = farm, -4 = desert, -5 = ocean, -6 = cloud deck, -7 = old grass, -8 = decayed grass, -9 = maple leaf, and -10 = burnt grass.   These are only meant to be representative of the types of options available; the user is encouraged to add to the set or replace the existing ones.  Separate REFBKG file instructions (Robertson, private communication) are stored at the 'ftp' site (Documentation.dir/refbkg.doc).  It is important to ensure that the wavelength limits on the surface properties match or exceed the spectral range specified for the MODTRAN run. Table 7 summarizes the use of the eight control parameters LMODTRN,  MODEL,  ITYPE,  IEMSCT,  IMULT,  MDEF,  NOPRT and SALB on CARD 1.
+
+8
+
+Table 7.  MODTRAN CARD 1 Input Parameters: LMODTRAN, MODEL, ITYPE, IEMSCT,
+
+IMULT, MDEF, NOPRT and SALB
+
+CARD 1 LMODTRN, MODEL, ITYPE, IEMSCT, IMULT, M1, M2, M3, M4, M5, M6, MDEF, IM, NOPRT, TBOUND, SALB
+
+FORMAT (L1, I4, 12I5, F8.3, F7.2)
+
+LMODTRN
+
+(COL 1)
+
+   MODEL
+
+(COL 2)
+
+   ITYPE
+
+(COL 6)
+
+    IEMSCT
+
+(COL 11)
+
+IMULT (COL 16)
+
+MDEF  (COL 51)
+
+  NOPRT (COL 61)
+
+SALB (COL 74)
+
+T MODTRAN
+
+run
+
+  0 User   defined*
+
+1 Horizontal    path
+
+0 Transmittance
+
+0  Without    Multiple    Scattering
+
+1 for MODEL=0,7   Default for      minor species**
+
+-1 TAPE8   Output -1 snow
+
+F LOWTRAN
+
+run 1 Tropical 2 Slant path
+
+  H1 to H2
+
+1 Radiance
+
+1  With     Multiple    Scattering 
+
+2 for MODEL=0,7    User control of      heavy                  molecules     
+
+ 0  TAPE6      Normal     Output
+
+-2 forest 
+
+b LOWTRAN
+
+run 2 Midlatitude
+
+   summer
+
+3 Slant path    to space
+
+2 Radiance with
+
+   solar/lunar    scattering
+
+ 1  TAPE6     Short     Output
+
+-3 farm
+
+3 Midlatitude    winter
+
+3  Transmitted     solar                  irradiance
+
+-4 desert
+
+4 Subarctic    summer
+
+-5 ocean
+
+-6 cloud    deck      
+
+5 Subarctic   winter
+
+-7 old            grass
+
+6 1976 U.S.    Standard
+
+-8 decayed       grass
+
+7 User-           defined*
+
+-9 maple          leaf
+
+-10 burnt          grass
+
+  M1, M2, M3, M4, M5, M6, MDEF, IM, TBOUND, SALB are left blank for standard cases.   *Options for non-standard models.      **CO , O , NO, SO , NO , NH , HNO2 2 2 2 3 3.
+
+9
+
+3.2.1B       CARD 1A LDISORT, ISTRM, LSUN, ISUN, CO2MIX LDISORT,  ISTRM, LSUN1, ISUN, and  CO2MIX are principally required to govern:  (1) a second multiple scattering option (based on the multiple stream DISORT  algorithm,  after Stamnes et al.  1988);  (2) a new high resolution  solar irradiance (based on  a full calculated irradiance, after Kurucz, 1995) with an optional triangular smoothing function; and (3) a "one-step"  update to the CO2 mixing ratio.   This last option is offered because, for historic calibration studies, the 330 ppmv  for  CO2  has  been preserved in  the code.  However, CO2 increases by approximately  1/2 % per year, and is currently  355-360 ppmv.
+
+LDISORT = "logical" T or F;  requires that  IMULT  =  1,  "T" will activate  DISORT
+
+multiple scattering algorithm.                          "F" will continue with original Isaacs  two-stream.
+
+ISTRM = 2, 4, 8,  16 streams,  the number of streams to  be used by  DISORT. 
+
+This  is a time-intensive operation,  so if ISRTM=2, run  Isaacs model.  ISTRM=  8 is recommended at this time, but  improvement  in accuracy is NOT guaranteed.
+
+LSUN1 =  "logical" Tor F; F uses "default  solar irradiance, as embedded  in
+
+MODTRAN Block  Data; T  reads 1 cm-1 binned  solar irradiance from the file "sun2" and requires the ISUN scanning definition.   Both irradiances  are based  on work of R. Kurucz,  Harvard-Smithsonian Astrophysical Observatory.ISUN   >  2;  will run  a triangular smoothing filter over  the  SUN vector, in
+
+wavenumber.
+
+CO2MIX =    replacement  CO2 mixing ratio; default value is 330 ppmv; current
+
+recommended values (1995) are  355-360 ppmv.  Units must be in ppmv.
+
+3.2.2 CARD 2: IHAZE, ISEASN,  IVULCN, ICSTL, ICLD,  IVSA, VIS,  WSS,WHH, RAINRT, GNDALT
+
+FORMAT (615,  5F10.3) IHAZE, ISEASN, IVULCN, and VIS select the altitude and seasonal-dependent aerosol profiles and aerosol extinction coefficients.  IHAZE specifies the aerosol model used for the boundary-layer (0 to 2 km) and a default-surface meteorological range.  The relative humidity dependence of the boundary-layer aerosol extinction coefficients is based on the water vapor content of the model atmosphere selected by MODEL.  ISEASN selects the seasonal dependence of the profiles for both the tropospheric (2 to 10 km) and stratospheric (10 to 30 km) aerosols.  IVULCN is used to select
+
+10
+
+both the profile and extinction type for the stratospheric aerosols and to determine transition profiles above the stratosphere to 100 km.  VIS, the meteorological range, when specified, will supersede the default meteorological range in the boundary-layer aerosol profile set by IHAZE.
+
+     IHAZE selects the type of extinction and a default meteorological range for the boundary-layer aerosol models only.  If VIS is also specified, it will override the default IHAZE value.  Interpolation of the extinction coefficients based on relative humidity is performed only for the RURAL, MARITIME, URBAN, and TROPOSPHERIC coefficients used in the boundary layer (0 to 2 km altitude).
+
+     IHAZE = 0 no aerosol attenuation included in the calculation
+
+= 1 RURAL extinction, default VIS = 23 km = 2 RURAL extinction, default VIS = 5 km = 3 NAVY MARITIME extinction, sets own VIS (wind and relative humidity
+
+dependent) = 4 MARITIME extinction, default VIS = 23 km (LOWTRAN model) = 5 URBAN extinction, default VIS = 5 km = 6 TROPOSPHERIC extinction, default VIS = 50 km = 7 User defined aerosol extinction coefficients.  Triggers reading cards 2D, 2Dl and
+
+2D2 for up to 4 altitude regions of user defined extinction, absorption and asymmetry parameters. = 8 FOG1 (Advective Fog) extinction, 0.2-km VIS = 9 FOG2 (Radiative Fog) extinction, 0.5-km VIS = 10 DESERT extinction, sets own visibility from wind speed (WSS) ISEASN selects the appropriate seasonal aerosol profile for both the tropospheric and stratospheric aerosols.  Only the tropospheric aerosol extinction coefficients are used with the 2 to 10 km profiles.    ISEASN = 0 season determined by the value of MODEL;
+
+SPRING-SUMMER for MODEL = 0, 1, 2, 4, 6, 7 FALL-WINTER for MODEL = 3, 5                = 1 SPRING-SUMMER                = 2 FALL-WINTER
+
+The parameter IVULCN controls both the selection of the aerosol profile as well as the type of extinction for the stratospheric aerosols.  It also selects appropriate transition profiles above the
+
+11
+
+stratosphere to 100 km.  Meteoric dust extinction coefficients are always used for altitudes from 30 to 100 km.   IVULCN = 0,1 BACKGROUND STRATOSPHERIC profile and extinction    = 2 MODERATE VOLCANIC profile and AGED VOLCANIC extinction    = 3 HIGH VOLCANIC profile and FRESH VOLCANIC extinction   = 4 HIGH VOLCANIC profile and AGED VOLCANIC extinction   = 5 MODERATE VOLCANIC profile and FRESH VOLCANIC extinction
+
+= 6 MODERATE VOLCANIC profile and BACKGROUND STRATOSPHERIC
+
+extinction = 7 HIGH VOLCANIC profile and BACKGROUND STRATOSPHERIC extinction = 8 EXTREME VOLCANIC profile and FRESH VOLCANIC extinction Table 8 shows the value of IVULCN corresponding to the different choices of extinction coefficient model and the vertical distribution profile.
+
+12 EXTINCTION  MODEL
+
+Table 8.  MODTRAN CARD 2 Input Parameter:  IVULCN
+
+                            VERTICAL DISTRIBUTION  BACKGROUND STRATOSPHERIC
+
+  MODERATE    VOLCANIC
+
+      HIGH   VOLCANIC
+
+   EXTREME   VOLCANIC
+
+                                 BACKGROUND
+
+  STRATOSPHERIC
+
+           0,1           6            7           -
+
+         AGED        VOLCANIC
+
+            -           2           4           -
+
+         FRESH       VOLCANIC
+
+            -           5           3           8
+
+ICSTL is the air mass character (1 to 10), only used with the Navy maritime model (IHAZE = 3). Default value is 3.
+
+ICSTL = 1 open ocean
+
+. . . 10 strong continental influence
+
+13
+
+ICLD specifies the cloud models and rain models used.
+
+The rain profiles decrease linearly from the ground to the top of the associated cloud model. The program cuts off the rain at the cloud top.    ICLD = 0 No clouds or rain         = 1 Cumulus cloud; base 0.66 km, top 3.0 km
+
+= 2 Altostratus cloud; base 2.4 km, top 3.0 km = 3 Stratus cloud: base 0.33 km, top 1.0 km = 4 Stratus/Strato Cu; base 0.66 km, top 2.0 km = 5 Nimbostratus cloud: base 0.16 km, top 0.66 km = 6 2.0 mm/hr Drizzle (modeled with cloud 3)
+
+rain 2.0 mm/hr at 0 km to 0.22 mm/hr at 1.5 km = 7 5.0 mm/hr Light rain (modeled with cloud 5)
+
+rain 5.0 mm/hr at 0 km to 0.2 mm/hr at 2.0 km = 8 12.5 mm/hr Moderate rain (modeled with cloud 5)
+
+rain 12.5 mm/hr at 0 km to 0.2 mm/hr at 2.0 km = 9 25.0 mm/hr Heavy rain (modeled with cloud 1)
+
+rain 25.0 mm/hr at 0 km to 0.2 mm/hr at 3.0 km = 10 75.0 mm/hr Extreme rain (modeled with cloud 1)
+
+rain 75.0 mm/hr at 0 km to 0.2 mm/hr at 3.5 km = 11 Read in user defined cloud extinction and absorption.  Triggers reading Cards
+
+2D, 2D1 and 2D2 for up to 4 altitude regions of user defined extinction, absorption, and asymmetry parameters = 18 Standard Cirrus model = 19 Sub-visual Cirrus model = 20 NOAA Cirrus model (LOWTRAN 6 Model)
+
+IVSA selects the use of the Army Vertical Structure Algorithm (VSA) for aerosols in the boundary layer.
+
+     IVSA = 0 not used
+
+= 1 Vertical structure algorithm VIS specifies the surface meteorological range   (km) overriding the default value associated*36,37,38 with the boundary layer chosen by IHAZE.  If set to zero uses default value specified by IHAZE.
+
+VIS  > 0 user specified surface meteorological range (km)14
+
+       = 0 uses the default meteorological range set by IHAZE (See Table 10), WSS specifies the current wind speed for use with the Navy maritime and desert aerosol models.
+
+WSS = current wind speed (m/s). Used with the Navy maritime model (IHAZE=3) or the
+
+DESERT model (IHAZE=10). WHH specifies the 24 hour average wind speed for use with the Navy maritime model.
+
+WHH = 24-hr average wind speed (m/s).  Only used with the Navy maritime model (IHAZE=3) For the Navy Maritime model if WSS=WHH=0, default wind speeds are set according to the value of MODEL, see Table 9.  For the Desert aerosol model (IHAZE=10), if WSS<0, the default wind speed is 10 m/s.
+
+15
+
+Table 9.  Default Wind Speeds for Different Model Atmospheres Used with the Navy Maritime
+
+Model (IHAZE=3)
+
+  MODEL        Model Atmosphere
+
+           WSS and WHH      Default Wind Speed (m/s)
+
+      0       1       2       3       4       5       6       7
+
+User-defined (Horizontal Path) Tropical Midlatitude summer Midlatitude winter Subartic summer Subartic winter U. S. Standard User-defined
+
+                    6.9                     4.1                     4.1                   10.29                    6.69                   12.35                     7.2                     6.9
+
+RAINRT Specifies the rain rate
+
+RAINRT = Rain rate (mm/hr) default value is zero.
+
+Used to top of cloud when cloud is present; When no clouds rain rate used to 6km GNDALT specifies the altitude of the surface relative to sea level
+
+GNDALT = Altitude of surface relative to sea level (km)
+
+Used to modify aerosol profiles below 6 km altitudes Table 10 summarizes the use of the control parameters IHAZE, ISEASN, and IVULCN on card 2 and Table 11 summarizes the use of the parameter ICLD.
+
+16
+
+Table 10.  MODTRAN CARD 2 Input Parameters: IHAZE, ISEASN. VULCN, VIS. Card   2
+
+     IHAZE, ISEASN, IVULCN, ICSTL, ICLD,      IVSA, VIS, WSS, WHH, RAINRT, GNDALT             FORMAT (615, 5F10.3)
+
+                IHAZE       ISEASN                                    IVULCN COL   5
+
+VIS* (KM) EXTINCTION
+
+COL    10 SEASON
+
+COL   15
+
+  SEASON
+
+    PROFILE EXTINCTION
+
+PROFILE/ EXTINCTION
+
+  0
+
+  1   23
+
+    RURAL
+
+  0
+
+   Set by    model
+
+ Set by   model
+
+ 
+
+    Meteoric        dust     extinction
+
+  2    5   1
+
+ Spring summer
+
+ Spring summer
+
+     3   **
+
+      Navy    maritime   2
+
+    Fall   winter
+
+     Fall    winter
+
+     4   23
+
+   LOWTRAN     maritime
+
+   Tropospheric        profile/     tropospheric       extinction
+
+   0    1
+
+  Background
+
+  stratospheric
+
+  Background   stratospheric
+
+      Normal    atmospheric       profile
+
+  5    5     URBAN    2
+
+    Moderate     volcanic
+
+     Aged    volcanic
+
+    Transition       profiles     - volcanic     to normal
+
+  6   50  Tropospheric    3
+
+      High     volcanic
+
+     Fresh    volcanic
+
+  7   23   User-defined    4
+
+      High     volcanic
+
+     Aged    volcanic
+
+  8   0.2      Fog 1    5
+
+   Moderate     volcanic
+
+    Fresh    volcanic
+
+  9   0.5      Fog 2    6
+
+   Moderate     volcanic
+
+ Background  stratospheric
+
+ 10   **      Desert    7
+
+      High     volcanic
+
+  Background   stratospheric
+
+   8
+
+    Extreme     Volcanic
+
+      Fresh     Volcanic
+
+          0 to 2 km    2 to 10 km                                    10 to 30 km 30 to 100 km    * Default VIS, can be overridden by VIS > 0 on CARD 2   ** Sets own default VIS
+
+17
+
+Table 11.  MODTRAN CARD 2 Input Parameter: ICLD  CARD 2
+
+      IHAZE, ISEASN, IVULCN, ICSTL, ICLD, IVSA,       VIS, WSS, WHH, RAINRT, GNDALT                 FORMAT (615, 5F10.3)
+
+   ICLD                           FOR CLOUD AND OR RAIN OPTION       0       1       2       3       4       5       6       7       8       9      10      11      18      19      20
+
+    NO CLOUDS OR RAIN     CUMULUS CLOUD     ALTOSTRATUS CLOUD     STRATUS CLOUD     STRATUS/STRATO CUMULUS     NIMBOSTRATUS CLOUD     2.0 MM/HR     DRIZZLE                (MODELED WITH CLOUD 3)     2.0 MM/HR     LIGHT RAIN           (MODELED WITH CLOUD 5)     12.5 MM/HR    MODERATE RAIN   (MODELED WITH COULD 5)     25.0 MM/HR    HEAVY RAIN         (MODELED WITH CLOUD 1)     75.0 MM/HR    EXTREME RAIN      (MODELED WITH CLOUD 1)               USER DEFINED CLOUD EXTINCTION AND ABSORPTION     STANDARD CIRRUS MODEL     SUB VISUAL CIRRUS MODEL     NOAA CIRRUS MODEL (LOWTRAN 6 MODEL)
+
+18
+
+3.2.2.1 Optional Cards Following CARD 2
+
+Optional input cards after CARD 2 selected by the parameters ICLD, IVSA, MODEL, and IHAZE on CARDS 1 and 2.
+
+CARD 2A CTHIK, CALT, CEXT, ISEED (If ICLD=18, 19 or 20)
+
+FORMAT (3F10.3, I10) Input card for cirrus altitude profile subroutine when ICLD = 18, 19, or 20 CTHIK is the cirrus thickness (km)
+
+If CTHIK = 0 use thickness statistics
+
+> 0 user defined thickness CALT is the cirrus base altitude (km)
+
+CALT = 0 use calculated value
+
+> 0 user defined base altitude CEXT is the extinction coefficient (km ) at 0.55 um-1   CEXT = 0 use 0.14* CTHIK
+
+> 0 user defined extinction coefficient ISEED is the random number initializing flag.
+
+ISEED = 0 use default mean values for cirrus.
+
+> 0 initial value of seed for random number generator, function RANF
+
+(SEED), (different values of SEED produce different random number sequences).  This provides for statistical determination of cirrus base altitude (CALT) and thickness (CTHIK).               NOTE: Random number generator is system dependent.
+
+CARD 2B ZCVSA, ZTVSA, ZINVSA (If IVSA = 1)
+
+FORMAT (3F10.3) Input card for Army VSA subroutine when IVSA = 1.  The case is determined by the parameters VIS, ZCVSA, ZTVSA, and ZINVSA.
+
+CASE 1: cloud/fog at the surface; increasing extinction with height from cloud/fog base to
+
+cloud/fog top.  Selected by VIS <= 0.5 km and ZCVSA >= 0. Use case 2 or 2' below cloud and case 1 inside it. CASE 2: hazy/light fog; increasing extinction with height up to the cloudbase. Selected by 0.5 <
+
+VIS <= 10 km, ZCVSA >= 0.
+
+19
+
+CASE 2': clear/hazy; increasing extinction with height, but less so than case 2, up to the cloudbase.
+
+Selected by VIS > 10 km, ZCVSA >= 0. CASE 3: no cloud ceiling but a radiation fog or an inversion or boundary layer present; decreasing
+
+extinction with height up to the height of the fog or layer. Selected by ZCVSA < 0 ZINVSA >= 0. CASE 4: no cloud ceiling or inversion layer; constant extinction with height. Selected by ZCVSA
+
+< 0 and ZINVSA < 0. ZCVSA is the cloud ceiling height (km): If ZCVSA > 0.0 the known cloud ceiling height;
+
+= 0.0 height unknown: the program will calculate one for case 2, and
+
+default is 1.8 km for case 2'; or < 0.0 no cloud ceiling (cases 3 and 4). ZTVSA is the thickness of the cloud (case 2) or the thickness of the fog at the surface (case 1) (km): If ZTVSA > 0.0 the known value of the cloud thickness;
+
+= 0.0 thickness unknown; default is 0.2 km. ZINVSA is the height of the inversion or boundary layer (km): If ZINVSA > 0.0 the known height of the inversion layer;   = 0.0 height unknown: default is 2 km, 0.2 km for fog;
+
+< 0.0 no inversion layer (case 4, if ZCVSA < 0.0 also).
+
+OPTIONAL USER INPUT CARDS 2C, 2C1, 2C2 and 2C3
+
+If the value of MDEF has been  set to 2, then the  user has declared that  a "user-specified" set  of CFC's will be supplied.  This will be accompanied by the setting of MODEL to 0  or  7 and usually will be  accompanied by an  IRD1=1, the specification of "user-defined" molecular species.   Instructions and formats for the CFC's  follow the same rules as  the following discussion.   A  new  parameter,  JCHARX,  governs  the units for all CFC's. The following cards handle user input data.
+
+Cards 2C and 2C1 are always read for MODEL 0 or 7. CARD 2C ML, IRD1, IRD2, TITLE (MODEL=0/7, IM=1)
+
+FORMAT (315, 18A4) Additional atmospheric model (MODEL 0/7)
+
+20
+
+New model atmospheric data can be inserted provided the parameters 'MODEL' and 'IM' are set equal to 0/7 and 1 respectively on card 1. ML = Number of atmospheric levels to be inserted (Maximum of 34) IRD1 Controls reading WN20, WCO... and WNH3, WHNO3 (CARD 2C2)
+
+IRD1=0  No read IRD1=1   Read CARD 2C2 IRD2 Controls reading AHAZE, EQLWCZ, ... (CARD 2C3)
+
+IRD2=0  No read IRD2=1   Read CARD 2C3
+
+TITLE = Identification of new model atmosphere CARD 2C1 ZMDL, P, T, WMOL(1), WMOL(2). WMOL(3), (JCHAR(J), J=1, 14), JCHARX
+
+FORMAT (F10.3, 5E10.3, 15A1, 1X, A1) CARD 2C2 (WMOL(J),  J=4, 12)
+
+FORMAT (8E10.3) CARD 2CX (XMOL(J), J=1, 13)
+
+FORMAT (8E10.3) ZMDL = Altitude of layer boundary (km) P = Pressure of layer boundary T = Temperature of layer boundary WMOL(1-12) = Individual molecular species (see Table 11A for species) JCHAR(1-14) = Control variable on units selection for profile input (P, T and molecular
+
+constituents, see Table 11A.) JCHARX = Single control variable for selection of units for entire set of CFC's and
+
+other heavy molecules.  (See Table 11B or order and identification of these species.)
+
+By utilizing a choice of values for the JCHAR(J) control variable (where J = 1,14) the user can designate specific units or accept defaults for the various molecular species and for the temperature and pressure.  If JCHAR(J) is left blank the program will default to the values chosen by M1, M2, M3, M4, M5, M6 and MDEF when the given amount is zero.  If the amount is non-zero and the JCHAR(J) is blank, the code assumes the first option on units:  mb for pressure, K for temperature,
+
+21
+
+and ppmv on constituents.  The single unit option, JCHARX, follows the same rules, and for each altitude specified on card 2C1, the code will expect to find a full set (2 card images) containing values for the 13 species in the order specified by Table 11B.  These values are required only if MDEF=2.
+
+For JCHAR(1)       A     indicates Pressure in (mb)       B     indicates Pressure in (atm)       C     indicates Pressure in (torr)       1-6   will default to specified atmospheric value
+
+Table 11A. The Association of the JCHAR(J) Index (J=1,14)
+
+with the Variables P, T and WMOL
+
+        J           VARIABLE                 SPECIES         1         2         3         4         5         6         7         8         9        10        11        12        13        14
+
+                P                 T          WMOL(1)          WMOL(2)          WMOL(3)          WMOL(4)          WMOL(5)          WMOL(6)          WMOL(7)          WMOL(8)          WMOL(9)          WMOL(10)          WMOL(11)          WMOL(12)
+
+     pressure      temperature      water vapor (H O)2      carbon dioxide (CO )2      ozone (O )3      nitrous oxide (N O)2      carbon monoxide (CO)      methane (CH )4      oxygen (O )2      nitric oxide (NO)      sulphur dioxide (SO )2      nitrogen dioxide (NO )2      ammonia (NH )3      nitric acid (HNO )3        
+
+22
+
+For JCHAR(2)
+
+A indicates Ambient temperature in deg (K) B indicates Ambient temperature in deg (C) 1-6 will default to specified atmospheric value
+
+     Table 11B.  The New Heavy Molecules,  (XMOL(J), J=1,13)  Nomenclature
+
+(1)    (2) (3) 1 CFC-11    F11 CCl F3 2 CFC-12    F12 CCl F2 2 3 CFC-13    F14 CClF3 4 CFC-14    F14 CF4 5 CFC-22    F22 CHClF2 6 CFC-113    F113 C Cl F2 3 3 7 CFC-114    F114 C Cl F2 2 4 8 CFC-115    F115 C ClF2 5 9 ClONO2 10 HNO4 11 CHCl F2 12 CCl4 13 N O2 5        
+
+For JCHAR(3-14)
+
+A indicates Volume mixing ratio (ppmv) B indicates Number density (cm )-3 C indicates Mass mixing ratio (gm/kg) D indicates Mass density (gm/m )3 E indicates Partial pressure (mb) F indicates Dew point temp (TD in T (K)) - H O only2 G indicates Dew point temp (TD in T (C)) - H O only2
+
+23
+
+H indicates Relative humidity (RH in percent) - H O only2 I is available for user definition 1-6 will default to specified model atmosphere CARD 2C3 is read when IRD2 is set to 1 on CARD 2C. CARD 2C3 AHAZE, EQLWCZ, RRATZ, IHA1, ICLD1, IVUL1, ISEA1, ICHR1              FORMAT (10X, 3F10.3, 515)
+
+AHAZE Aerosol or cloud scaling factor (equal to the visible [wavelength of 0.55 %m]
+
+extinction coefficient [km ] at altitude ZMDL)-1 [NOTE: only one of AHAZE or EQLWCZ is allowed] EQLWCZ Equivalent liquid water content (gm/m ) at altitude ZMDL for the aerosol,3
+
+cloud or fog models RRATZ Rain rate (mm/hr) at altitude ZMDL Only one of IHA1, ICLD1 or IVUL1 is allowed
+
+IHA1 Aerosol model extinction and meteorological range control for the altitude,                  ZMDL. See IHAZE (CARD 2) for options ICLD1 Cloud extinction control for the altitude, ZMDL, See ICLD (Card 2) for
+
+options.  When using ICLD1 it is necessary to set ICLD (CARD 2) to the same value as the initial input of ICLD1. IVUL1 Stratospheric aerosol profile and extinction control for the altitude ZMDL, see
+
+IVULCN (CARD 2) for options The precedent order of these parameters (IHA1, ICLD1 and IVUL1) is as follows:
+
+If (IHA1>0) then others ignored If (IHA1=0) and (ICLD1>0) then use ICLD1 If (IHA1=0) and (ICLD1=0) then use IVUL1 If AHAZE and EQLWCZ are both zero, default profile loaded from IHA1, ICLD1, IVUL1
+
+ISEA1 Aerosol season control for the altitude, ZMDL, see ISEASN (CARD 2) for options. ICHR1 Used to indicate a boundary change between 2 or more adjacent user defined
+
+aerosol or cloud regions at altitude ZMDL (required for IHAZE=7 or ICLD=11). ICHR1 =0 no boundary change in user defined aerosol or cloud regions (regions are
+
+not adjacent). =1 signifies the boundary change in adjacent user defined aerosol or cloud
+
+regions.
+
+24
+
+NOTE: ICHR1 internally defaults to 0 if (IHA1z'7) or (ICLD1z'11). OPTIONAL CARDS 2D, 2D1, 2D2
+
+The following cards allow the user to specify their own attenuation coefficients for any or all four of the aerosol regions. They are only read if IHAZE=7 or ICLD=11 are specified on card 2 (pages 24 and 26).
+
+CARD 2D (IREG (II), II=1,4) (IHAZE=7 or ICLD=11 input)
+
+FORMAT (415) IREG Specifies which of the four altitude regions a user defined aerosol or cloud model
+
+is used (IHAZE=7/ICLD=11) (NOTE: Regions default to 0-2, 3-10, 11-30, 35-100 km and can be overridden with 'IHA1' settings in MODEL 7)
+
+IREG (II) = 0  Use default values for region II IREG (II) = 1  Read extinction, absorption, and asymmetry for a region CARD 2D1 AWCCON, TITLE
+
+FORMAT (E10.3, 18A4) AWCCON is a conversion factor from equivalent liquid water content (gm/m ) to3
+
+extinction coefficient (km ).  It is numerically equal to the equivalent liquid-1 water content corresponding to an extinction coefficient of 1.0 km , at a-1 wavelength of 0.55 %m.  AWCCON has units of (km O/ gm O/ m ).-3 TITLE for an aerosol or cloud region (up to 72 characters) CARD 2D2 (VX(I), EXTC(N, I), ABSC(N, I), ASYM(N, I), I=1,47)
+
+FORMAT (3(F6.2, 2F7.5, F6.4)) Where N=II when IREG(II)=1 for up to 4 altitude regions. User defined aerosol or cloud extinction and absorption coefficients when IHAZE=7 or ICLD=11
+
+VX(I) = Wavelengths for the aerosol or cloud coefficients (not used by program but
+
+should be the same as the wavelengths defined in array VX2 in subroutine EXTDTA, see Table 12) EXTC(N, I) = Aerosol or cloud extinction coefficients, normalized so that EXTC for a
+
+wavelength of 0.55 %m (I=4) is 1.0 km-1 ABSC(N, I) = Aerosol or cloud absorption coefficient, normalized so that EXTC for a
+
+wavelength of 0.55 %m (I=4) is 1.0 km-1 ASYM(N, I) = Aerosol or cloud asymmetry parameter
+
+25
+
+3.2.3 CARD 3: H1, H2, ANGLE, RANGE, BETA, RO, LEN 
+
+FORMAT (6F10,3, 15)
+
+CARD 3 is used to define the geometrical path parameters for a given problem.
+
+H1 = initial altitude (km) H2 = final altitude (km) (for ITYPE = 2) H2 = tangent height(km) (for ITYPE = 3) It is important to emphasize here that in the radiance mode of program execution (IEMSCT = 1 or 2), H1, the initial altitude, always defines the position of the observer (or sensor).  H1 and H2 cannot be used interchangeably as in the transmittance mode.
+
+ANGLE = initial zenith angle (degrees) as measured from H1 RANGE = path length (km) BETA = earth center angle subtended by H1 and H2 (degrees) RO = radius of the earth (km) at the particular latitude at which the calculation
+
+is to be performed. If RO is left blank, the program will use the midlatitude value of 6371.23 km if MODEL is set equal to 7.  Otherwise, the earth radius for the appropriate standard model atmosphere (specified by MODEL) will be used as shown in Table 13. For an ITYPE = 2 path for which H1 > H2 (and by necessity, ANGLE > 90*), two paths are possible: the long path from H1 through a tangent height to H2 and the short path from H1 to H2.  LEN selects the type of path in these cases.
+
+LEN = 0  short path (default)
+
+= 1  long path through the tangent height.
+
+26
+
+Table 12.  The VX Array with the Required Wavelengths for the
+
+ Multiply Read Card 2D2
+
+    INDEX
+
+    WAVELENGTH
+
+     INDEX
+
+     WAVELENGTH
+
+ 1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
+
+            .2000             .3000             .3371             .5500             .6943           1.0600           1.5360           2.0000           2.2500           2.5000           2.7000           3.0000           3.3923           3.7500           4.5000           5.0000           5.5000           6.0000           6.2000           6.5000           7.2000           7.9000           8.2000           8.7000
+
+        25         26         27         28         29         30         31         32         33         34         35         36         37         38         39         40         41         42         43         44         45         46         47
+
+           9.0000            9.2000          10.0000          10.5910          11.0000          11.5000          12.5000          14.8000          15.0000          16.4000          17.2000          18.5000          21.3000          25.0000          30.0000          40.0000          50.0000          60.0000          80.0000         100.0000         150.0000         200.0000         300.0000
+
+Table 13. Default Values of the Earth Radius for Different Model Atmospheres    MODEL
+
+                                                              Model Atmosphere
+
+  Earth Radius, RO                    (km)
+
+             1
+
+2 3 4 5 6 7
+
+  User-defined (Horizontal Path)   Tropical   Midlatitude summer   Midlatitude winter   Subarctic summer   Subarctic winter   U. S. Standard   User-defined
+
+            Not used             6,378.39             6,371.23             6,371.23             6,356.91             6,356.91             6,371.23             6,371.23
+
+27
+
+It is not necessary to specify every variable on CARD 3; only those that adequately describe the problem according to the parameter ITYPE (as described below). (See Table 14).
+
+(1) Horizontal Paths (ITYPE = 1)
+
+(a) Specify H1, RANGE (b) If non-standard meteorological data are to be used, that is, if MODEL = 0 on
+
+CARD 1, then refer to Section 3.3 for a detailed explanation. (2) Slant Paths Between Two Altitudes (ITYPE = 2)
+
+(a) specify H1, H2, and ANGLE (b) specify H1, ANGLE, and RANGE (c) specify H1, H2, and RANGE (d) specify H1, H2, and BETA (3) Slant Paths to Space (ITYPE = 3)
+
+(a) specify H1 and ANGLE (b) specify H1 and H2 (for limb-viewing problem where H2 is the tangent height or
+
+minimum altitude of the path trajectory). For case 2(b), the program will calculate H2, assuming no refraction; then proceed as for case 2(a).  The actual slant path range will differ from the input value.  This method of defining the problem should be used when refraction effects are not important; for example, for ranges of a few tens of km at zenith angles less than 80*.  For case 2(c), the program will calculate BETA and then proceed as for case 2(d).  For case 2(d), the program will determine the proper value of ANGLE (including the effects of refraction) through an iterative procedure.  This method can be used when the geometrical configuration of the source and receiver is known accurately, but the initial zenith angle is not known precisely due to atmospheric refraction effects.  Beta is most frequently determined by the user from ground range information.
+
+Table 14 lists the options on CARD 3 provided to the user for the different types of atmospheric paths.
+
+28
+
+Table 14.  Allowable Combinations of Slant Path Parameters  Case ITYPE         H1            H2        ANGLE        RANGE        BETA        LEN
+
+                                                                                               (Optional)
+
+2a  2b  2c  2d  3a 3b 
+
+(1) (2) (3) (4)
+
+(5)
+
+ 2  2  2  2  2  2
+
+     *              *              *                                                (*)      *                              *               *      *              *                               *      *              *                                                 *      *                              *      *              *
+
+      (1)          LEN option is available only when H1 > H2 and ANGLE > 90*.  Otherwise, LEN is set                     in the program.
+
+      (2)          H2 calculated assuming no refraction.  Calculated RANGE will differ from the input value.       (3)          BETA calculated assuming no refraction.       (4)          Exact ANGLE is calculated by iteration of the path calculation.       (5)          H2 is interpreted as the tangent height.  If H2 and ANGLE are both zero, Case 3a is assumed                     with ANGLE = 0 (that is vertical path).  For a path tangent at the earth's surface, read in a                     small number for H2, for example, 0.001 km.
+
+3.2.3.1 Alternate CARD 3 for Transmitted Solar or Lunar Irradiance
+
+(IEMSCT = 3)
+
+For calculating directly transmitted solar or lunar irradiance, an ITYPE = 3 path is assumed and CARD 3 has the following form:
+
+ALTERNATE CARD 3 H1, H2, ANGLE, IDAY, RO, ISOURC, ANGLEM FORMAT (3F10.3, 15, 5X, F10.3, 15, F10.3)
+
+H1 = altitude of the observer H2   = tangent height of path to sun or moon ANGLE  = apparent solar or lunar zenith angle at H1 IDAY =  day of the year, used to correct for variation in the earth-to-sun
+
+distance RO =  radius of earth (default according to MODEL) ISOURC =  0 extraterrestrial source is the sun
+
+=  1 extraterrestrial source is the moon
+
+29
+
+ANGLEM  = phase angle of the moon, that is, the angle formed by the sun,
+
+moon, and earth (required if ISOURC = 1) Either H2 or ANGLE should be specified. If both are given as zero, then a vertical path (ANGLE = 0*) is assumed.  If IDAY is not specified, then the mean earth to sun distance is assumed.
+
+If the apparent solar zenith angle is not known for a particular case, then the solar scattering option (IEMSCT = 2) may be used along with, for instance, the observers location, day of the year and time of day to determine the solar zenith angle (see section 3.2.3.2 of the user instructions).  Note that the apparent solar zenith angle is zenith angle at H1 of the refracted path to the sun and is less than the astronomical solar zenith angle.  The difference between the two angles is negligible for angles less than 80*.
+
+3.2.3.2 Optional Cards Following CARD  3 Optional input cards after CARD 3 are selected by parameters IEMSCT on CARD 1 and IPH on CARD 3A1.
+
+CARD3A1 IPARM, IPH, IDAY, ISOURC (if IEMSCT = 2)
+
+FORMAT (415) Input card for solar/lunar scattered radiation when IEMSCT = 2. IPARM = 0, 1, 2 controls the method of specifying the solar/lunar geometry on
+
+CARD 3A2. IPH = 0 Henyey-Greenstein aerosol phase function (see CARD 3A2)
+
+= 1 user-supplied aerosol phase function (see CARD 3B) = 2 MIE-generated internal database of aerosol phase functions for the
+
+MODTRAN models     IDAY = day of the year, that is, from 1 to 365 used to specify the earth to sun
+
+distance and (if lPARM = 1) to specify the sun's location in the sky. (Default value is the mean earth to sun distance, IDAY=93). ISOURC = 0 extraterrestrial source is the sun
+
+= 1 extraterrestrial source is the moon CARD 3A2 PARM1, PARM2, PARM3, PARM4, TIME, PSIPO, ANGLEM, G
+
+(IEMSCT = 2) FORMAT (8F10.3)
+
+30
+
+Input card for solar/lunar scattered radiation when IEMSCT = 2.  Definitions of PARM1, PARM2, PARM3, PARM4 determined by value of IPARM on CARD 3A1, (See Table 14A.).
+
+For IPARM = 0 PARM1 = observer latitude (-90o to +90o)
+
+(Note that if ABS(PARM1) is greater than 89.5* the observer is assumed to be at either the north or south pole.  In this case the path azimuth is undefined.  The direction of line-of-sight must be specified as the longitude along which the path lies.  This quantity rather than the usual azimuth is read in.) PARM2  = observer longitude (0o to 360o, west of Greenwich) PARM3 = source (sun or moon) latitude PARM4 = source (sun or moon) longitude
+
+For IPARM = 1 NOTE:  The parameters IDAY and TIME must be specified.  This option cannot be used with ISOURC = 1.
+
+PARM1 = observer latitude (-90o to +90o) PARM2 = observer longitude (0o to 360o, west of Greenwich) PARM3, PARM4 are not required
+
+(Note that the calculated apparent solar zenith angle is the zenith angle at H1 of the refracted path to the sun and is less than the astronomical solar zenith angle.  The difference between the two angles is negligible for angles less than 80 degrees.)
+
+For IPARM = 2 PARM1 = azimuthal angle between the observers line-of-sight and the observer-to-sun
+
+path, measured from the line of sight, positive east of north, between -180o and 180o PARM2 = the sun's zenith angle PARM3, PARM4 are not required
+
+31
+
+Table 14A. Card 3A2; Options for Different Choices of IPARM           IPARM=
+
+0 1 2
+
+PARM1
+
+Observer Latitude (-90o to +90o)
+
+Observer Latitude (-90o to +90o)
+
+Azimuth Angle Between Observer LOS & Observer to Sun Path
+
+PARM2
+
+Observer Longitude (0o to 360o West of Greenwich)
+
+Observer Longitude (0o to 360o West of Greenwich)
+
+Solar Zenith Angle
+
+PARM3 Source Latitude
+
+                                \Phi                  \Phi 
+
+PARM4 Source Longitude                 \Phi                  \Phi  TIME                \Phi 
+
+Greenwich Time (Decimal Hours)                 \Phi 
+
+PSIPO
+
+Path Azimuth Angle (degrees East of Due North)
+
+Path Azimuth Angle (degrees East of Due North)
+
+                \Phi 
+
+         ANGLEM (only if ISOURC=1)
+
+Lunar Phase Angle                 \Phi  Lunar Phase Angle
+
+    G (only if IPH=0)
+
+Asymmetry Parameter (-1 to +1) for use with HenyeyGreenstein Phase Function
+
+Asymmetry Parameter (-1 to +1) for use with HenyeyGreenstein Phase Function
+
+Asymmetry Parameter (-1 to +1) for use with HenyeyGreenstein Phase Function
+
+32
+
+REMAINING CONTROL PARAMETERS
+
+TIME = Greenwich time in decimal hours, that is, 8:45 am is 8.75, 5:20 pm is 17.33
+
+etc. (used with IPARM = 1) PSIPO = path azimuth (degrees east of north, that is, due north is 0.0o due east is
+
+90.0o etc. (used with IPARM = 0 or 1)        ANGLEM = phase angle of the moon, that is, the angle formed by the sun, moon, and
+
+earth (required only if ISOURC = 1) G = asymmetry factor for use with Henyey-Greenstein phase function (only used
+
+with IPH = 0), e.g., +1 for complete forward scattering, 0 for isotropic or symmetric scattering, and -1 for complete backscattering. CARD 3B1 NANGLS (Only if IPH = 1 on card 3A1)
+
+FORMAT (15) Input card for user-defined phase functions when IPH = 1.
+
+NANGLS = number of angles for the user-defined phase functions (maximum of 50) CARD 3B2 (1 to NANGLS)
+
+(ANGF(I), F(1,I), F(2,I), F(3,I), F(4,I), I = l, NANGLS) FORMAT (5E10.3) Input card for user-defined phase functions when IPH = 1.
+
+ANGF(I) = scattering angle in decimal degrees (0.0o to 180.0o) F(1,I) = user-defined phase function at ANGF(I), boundary layer (0 to 2
+
+km default altitude region) F(2,I) = user-defined phase function at ANGF(I), troposphere (2 to 10 km
+
+default altitude region) F(3,I) = user-defined phase function at ANGF(I), stratosphere (10 to 30 km
+
+default altitude region) F(4,I) = user-defined phase function at ANGF(I), mesosphere (30 to 100
+
+km default altitude region) The default altitude regions may be overridden by the parameters IHA1, ICLD1 or IVUL1.
+
+33
+
+3.2.4 CARD 4: IV1, IV2, IDV, IRES
+
+FORMAT (4I10)
+
+The spectral range and increment of the calculation.
+
+IV1 = initial frequency in integer wavenumber (cm )-1 IV2 = final frequency in integer wavenumber (cm ), where V2 > V-1 IDV = frequency increment or step size (cm ), maximum = 50 cm-1 -1
+
+(Note that oe = 10 /%, where oe is the frequency in cm  and % is the wavelength4 -1 in %m, and that DV can only take on integer cm values.-1  IRES= triangular slit function; minimum of 2 will insure proper sampling, max = 50.
+
+3.2.5 CARD 5: IRPT
+
+FORMAT (15)
+
+The control parameter IRPT causes the program to recycle. so that a series of problems can be run with one submission of MODTRAN.
+
+IRPT = 0 to end program
+
+= 1 to read all new data cards (1, 2, 3, 4, 5) = 2 not used = 3 read new CARD 3 (the geometry card) and CARD 5 = 4 read new CARD 4 (frequency) and CARD 5 > 4 or IRPT = 2 will cause program to STOP Thus, if for the same model atmosphere and type of atmospheric path the reader wishes to make further transmittance calculations in different spectral intervals V1' to V2' etc., and for a different step size (DV etc.), then IRPT is set equal to 4.  In this case, the card sequence is asfollows and can be repeated as many times as required.
+
+CARD 5 IRPT = 4 CARD 6 IV1',  IV2',  IDV', IRES' CARD 7 IRPT = 4 CARD 8 IV1", IV2", IDV", IRES" CARD 9 IRPT = 0 The final IRPT card should always be a blank or zero.  When using the IRPT option, the wavelength dependence of the refractive index is not changed (use the IRPT = 1 option if this is
+
+34
+
+required).
+
+Table 15 summarizes the user-control parameters on CARD 4 and CARD 5.
+
+Table 15.  MODTRAN CARD 4 and CARD 5 Input Parameters: IV1, IV2, IDV, IRES. CARD 4    IV1, IV2, IDV, IRES
+
+   Format (4I10)
+
+IV1 (cm )-1    IV2 (cm )-1      IDV (cm )-1     IRES (cm )-1 CARD 5    IRPT
+
+   Format (I5)
+
+COL5                                                             IRPT    0     1     2     3     4
+
+   End of program.    Read new CARDS 1,  2, 3, 4, and  5.    Not used  (stops program).    Read new CARDS 3  and 5.    Read new CARDS 4  and 5.
+
+NOTE: IRPT=3 cannot be used when running multiple scattering cases or solar single scattering.
+
+Use IRPT=1.
+
+3.3   Non-Standard Conditions
+
+Several options and combination of choices are available if atmospheric transmittance/radiance calculations are required for non-standard conditions.  Here non-standard refers to conditions other than those specified by the parameters MODEL, IHAZE, and ICLD on CARDS 1 and 2.  These options enable the user to insert:
+
+(1) An additional atmospheric model (MODEL = 7), which can be in the form of
+
+radiosonde or other source data.  It is not necessary to duplicate the altitudes used in MODTRAN 3. 
+
+(2) Meteorological conditions for a given horizontal path calculation (MODEL = 0) (3) A combination of any or all of the 12 gases can be input for each layer boundary with
+
+default choices interleaved with user supplied data.
+
+(4) Aerosol vertical distributions can be input at specified altitudes by the use of AHAZE,
+
+EQLWCZ, and/or IHA1 on CARD 2C3 when IRD2 is set to 1 on CARD 2C.
+
+(5) Cloud liquid water contents and or rain rates can be input at specified altitudes by the
+
+use of EQLWCZ, RRATZ and/or ICLD1 on CARD 2C3 when IRD2 is set to 1 on CARD 2C.
+
+35
+
+(6) Any combination of the one to four Aerosol altitude regions can be replaced by reading
+
+in specific values of extinction and absorption coefficients and asymmetry parameters for specific regions by utilizing CARDS 2D, 2D1 and 2D2.  The parameters can be for aerosols and for clouds.
+
+3.3.1  ADDITIONAL  ATMOSPHERIC MODEL (MODEL  = 7) A new model atmosphere can be inserted by the use of CARD 2C and the required multiples of card 2C1, provided the parameters MODEL and IM are set to 7 and I respectively on CARD 1.  The number of atmospheric levels to be inserted (ML) must also be specified on CARD 2C.
+
+The appropriate meteorological parameters and the format are given below: CARD 2C ML, IRD1, IRD2, TITLE
+
+FORMAT (3I5, 18A4) CARD 2C1 ZMDL, P, T, WMOL(1), WMOL(2), WMOL(3), (JCHAR(J), J = 1,14), JCHARX
+
+FORMAT (F10.3, 5E10.3, 15A1, 1X, A1) See section 3.2.2.1 above for a detailed description of each variable.
+
+3.3.2  HORIZONTAL PATHS  (MODEL = 0) If known meteorological data are to be used for horizontal path atmospheric transmittance/radiance calculations, then set MODEL = 0 and IM = 1 on CARD 1.  Proceed to read the meteorological conditions utilizing CARDS 2C and 2C1 as described above.  In this instance the parameter ML must be set to 1.
+
+3.3.3 USER INSERTED VALUES FOR ATMOSPHERIC GASES(MODEL  0 OR 7) The user may wish to enter specific values of any or all of the atmospheric gases.  This can be accomplished by utilizing CARDS 2C, 2C1 and 2C2.  On CARD 2C set IRD1 = 1.  The specific gas amounts for individual gases can be entered on CARDS 2C1 and 2C2 and by utilizing the parameter JCHAR on CARD 2C1.  The user has a choice of entering data in several different sets of units (eg. volume mixing ratio, number density, . . . etc.), or defaulting to one of the model atmospheric gases at the specified altitude.
+
+36
+
+3.3.4  USER  INSERTED VALUES FOR  AEROSOL  VERTICAL DISTRIBUTION                   (MODEL  = 0 OR  7)
+
+The capability exists for the user to be able to replace aerosol distributions at specific altitudes.  In order to accomplish this the user must set IRD2 to 1 on CARD 2C.  Then specify the altitudes on CARDS 2C1 along with the variables, defaults and or units by utilizing the parameters as explained in section 3.2.2.1
+
+On CARD 2C3 the aerosol scaling factor for a given altitude can be entered by using the variable AHAZE, or an appropriate value for EQLWCZ, or defaulted by using the variable IHA1.
+
+3.3.5  USER  INSERTED VALUES FOR  CLOUD AND OR RAIN RATES                  (MODEL  = 0 OR  7) The same capability exists permitting the user to replace cloud liquid water contents and or rain rates at specific altitudes as described in the above section.  This is accomplished by setting IRD2 to 1 on CARD 2C.  Then the specific altitudes may be entered on CARDS 2C1 along with the variables, defaults and or unit selection by using the remaining parameters of CARD 2C1 as described earlier.
+
+On CARD 2C3 the variables EQLWCZ and/or RRATZ can be used to enter the intended value of equivalent liquid water content of a cloud and/or the rain rate at the specified altitude, or the cloud attenuation can be specified by using AHAZE, The user may default at the specified altitude to one of the built-in cloud and/or rain model values by using ICLD1.
+
+3.3.6  REPLACEMENT OF AEROSOL OR CLOUD ATTENUATION MODELS                  (IHAZE =  7 AND/OR ICLD = 11) The aerosols or cloud model utilized in any or all of the four altitude regions may be replaced by a user input model, The built-in regions are 0-2 km, > 2-10 km, > 10-30 km and > 30-100 km.  These regions may be modified by the use of the parameters IHA1, ICLD1 or IVUL1.  This option is initialized by setting IHAZE = 7 or ICLD = 11.
+
+On CARD 2D the variable IREG (1, 4) determines which of the altitude regions will have replacement values read in.  The user is required to enter a conversion factor, AWCCON (km O/ gm O/ m ), on card 2D1, which converts aerosol or cloud profiles specified in terms of equivalent liquid-3 water content, EQLWCZ (gm O/ m ), to an extinction coefficient (km ).  This conversion factor-3 -1
+
+37
+
+(AWCCON) is only used if the aerosol or cloud concentration are specified by EQLWCZ instead of by the visible extinction, AHAZE.  The LOWTRAN values for this variable are stored as DATA statements in subroutine EXABIN.  (See DATA statements ELWCR, ELWCM, ELWCU, ELWCT, AFLWC, RFLWC, CULWC, ASLWC, STLWC, SCLWC, SNLWC, BSLWC, FVLWC, AVLWC, and MDLWC.)
+
+The multiply read CARDS 2D2 (13 cards) consist of four variables, VX, EXTC, ABSC and ASYM.  The first variable VX is the wavelength of the data points which should correspond to the wavelengths used in the program (defined in array VX2 in Subroutine EXTDTA, see table 12).  The next three variables EXTC, ABSC, and ASYM are the aerosol or cloud extinction, absorption coefficients and the asymmetry parameters respectively.  As stated previously the variable IREG (1-4) will determine if the user is reading in 1, 2, 3, or 4 sets of CARDS 2D1-2D2.  Additionally, by utilizing the variables IVUL1 and ISEA1 the user can substitute for stratospheric aerosol profiles and can change the seasonal profile values.
+
+The values of EXTC(N,I) and ABSC(N,I) should be normalized so that EXTC(N,4) = 1.0 (i.e., the extinction for wavelength 0.55 %m is normalized to 1.0).

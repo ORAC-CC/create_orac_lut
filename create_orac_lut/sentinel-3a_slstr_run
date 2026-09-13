@@ -1,0 +1,6 @@
+#!/bin/bash
+source setup_oraclut_env.sh
+echo
+export ORAC_LUT_DRIVER_FILE="${ORAC_LUT_INPUT_ROOT_DIR}/driver/sentinel-3a_slstr_aerosol.driver"
+idl -e "create_orac_lut_aerosol, 0, 'aerosol_a70', 'aerosol_test', '21'"
+echo

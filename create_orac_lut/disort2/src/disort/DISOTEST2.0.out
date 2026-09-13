@@ -1,0 +1,3533 @@
+Mon Mar 27 16:37:45 EST 2000
+rundis revision 2.0, normal precision, attempted run number 1
+RCS/DISOTEST.f,v  -->  DISOTEST.f
+revision 2.0
+done
+RCS/DISORT.f,v  -->  DISORT.f
+revision 2.0
+done
+RCS/ErrPack.f,v  -->  ErrPack.f
+revision 2.0
+done
+RCS/R1MACH.f,v  -->  R1MACH.f
+revision 2.0
+done
+RCS/D1MACH.f,v  -->  D1MACH.f
+revision 2.0
+done
+RCS/LINPAK.f,v  -->  LINPAK.f
+revision 2.0
+done
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 1a:  Isotropic Scattering, Ref. VH1, Table 12:  b =  0.03125, a = 0.20                                           
+ ****************************************************************************************************
+
+ No. streams =  16     No. computational layers =   1
+   2 User optical depths :    0.0000    0.0313
+   6 User polar angle cosines : -1.00000 -0.50000 -0.10000  0.10000  0.50000  1.00000
+   1 User azimuthal angles :     0.00
+ No thermal emission
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  3.142E+01 and polar angle cosine =  0.10000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  0.000E+00
+    Bottom albedo (Lambertian) =  0.0000
+ Uses delta-M method
+ Uses TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor
+   1    0.0313    0.0313   0.20000     0.00000    0.0313    0.0313   0.20000   0.0000
+
+ Number of Phase Function Moments =    17
+ Layer   Phase Function Moments
+     1   1.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+         0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     3.1416E+00     0.0000E+00     7.9945E-02     2.5407E+01
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     0.0313     2.2984E+00     7.9411E-02    -2.8982E-09     1.8653E+01
+               (   1.0000)    (   1.0000)    (*********)    (   1.0000)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine       0.0
+
+     0.000  -1.000    0.0000E+00
+                     (   1.0000)
+            -0.500    0.0000E+00
+                     (   1.0000)
+            -0.100    0.0000E+00
+                     (   1.0000)
+             0.100    1.1777E-01
+                     (   1.0000)
+             0.500    2.6417E-02
+                     (   1.0000)
+             1.000    1.3404E-02
+                     (   1.0000)
+
+     0.031  -1.000    1.3383E-02
+                     (   1.0000)
+            -0.500    2.6332E-02
+                     (   1.0000)
+            -0.100    1.1590E-01
+                     (   1.0000)
+             0.100    0.0000E+00
+                     (   1.0000)
+             0.500    0.0000E+00
+                     (   1.0000)
+             1.000    0.0000E+00
+                     (   1.0000)
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 1b:  Isotropic Scattering, Ref. VH1, Table 12:  b =  0.03125, a = 1.00                                           
+ ****************************************************************************************************
+
+ No. streams =  16     No. computational layers =   1
+   2 User optical depths :    0.0000    0.0313
+   6 User polar angle cosines : -1.00000 -0.50000 -0.10000  0.10000  0.50000  1.00000
+   1 User azimuthal angles :     0.00
+ No thermal emission
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  3.142E+01 and polar angle cosine =  0.10000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  0.000E+00
+    Bottom albedo (Lambertian) =  0.0000
+ Uses delta-M method
+ Uses TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor
+   1    0.0313    0.0313   1.00000     0.00000    0.0313    0.0313   1.00000   0.0000
+
+ Number of Phase Function Moments =    17
+ Layer   Phase Function Moments
+     1   1.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+         0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     3.1416E+00     5.5075E-05     4.2297E-01     3.9609E-05
+               (   1.0000)    (*********)    (   1.0001)    (*********)
+     0.0313     2.2984E+00     4.2029E-01     3.1102E-06     2.9495E-05
+               (   1.0000)    (   1.0001)    (*********)    (*********)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine       0.0
+
+     0.000  -1.000    0.0000E+00
+                     (   1.0000)
+            -0.500    0.0000E+00
+                     (   1.0000)
+            -0.100    0.0000E+00
+                     (   1.0000)
+             0.100    6.2288E-01
+                     (   1.0000)
+             0.500    1.3976E-01
+                     (   1.0000)
+             1.000    7.0916E-02
+                     (   0.9999)
+
+     0.031  -1.000    7.0815E-02
+                     (   1.0001)
+            -0.500    1.3934E-01
+                     (   1.0000)
+            -0.100    6.1346E-01
+                     (   1.0000)
+             0.100    0.0000E+00
+                     (   1.0000)
+             0.500    0.0000E+00
+                     (   1.0000)
+             1.000    0.0000E+00
+                     (   1.0000)
+
+
+ =============================================
+ ====     3  SERIOUSLY NON-UNIT RATIOS    ====
+ =============================================
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 1c:  Isotropic Scattering, Ref. VH1, Table 12:  b =  0.03125, a = 0.99                                           
+ ****************************************************************************************************
+
+ No. streams =  16     No. computational layers =   1
+   2 User optical depths :    0.0000    0.0313
+   6 User polar angle cosines : -1.00000 -0.50000 -0.10000  0.10000  0.50000  1.00000
+   1 User azimuthal angles :     0.00
+ No thermal emission
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  0.000E+00 and polar angle cosine =  0.10000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  1.000E+00
+    Bottom albedo (Lambertian) =  0.0000
+ Uses delta-M method
+ Does not use TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor
+   1    0.0313    0.0313   0.99000     0.00000    0.0313    0.0313   0.99000   0.0000
+
+ Number of Phase Function Moments =    17
+ Layer   Phase Function Moments
+     1   1.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+         0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     0.0000E+00     3.1416E+00     9.0656E-02     6.6687E-02
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     0.0313     0.0000E+00     3.0490E+00     1.8926E-07     5.8894E-02
+               (   1.0000)    (   1.0000)    (*********)    (   1.0000)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine       0.0
+
+     0.000  -1.000    1.0000E+00
+                     (   1.0000)
+            -0.500    1.0000E+00
+                     (   1.0000)
+            -0.100    1.0000E+00
+                     (   1.0000)
+             0.100    1.3318E-01
+                     (   1.0000)
+             0.500    2.9988E-02
+                     (   1.0000)
+             1.000    1.5223E-02
+                     (   1.0000)
+
+     0.031  -1.000    9.8445E-01
+                     (   1.0000)
+            -0.500    9.6936E-01
+                     (   1.0000)
+            -0.100    8.6395E-01
+                     (   1.0000)
+             0.100    0.0000E+00
+                     (   1.0000)
+             0.500    0.0000E+00
+                     (   1.0000)
+             1.000    0.0000E+00
+                     (   1.0000)
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 1d:  Isotropic Scattering, Ref. VH1, Table 12:  b = 32.00000, a = 0.20                                           
+ ****************************************************************************************************
+
+ No. streams =  16     No. computational layers =   1
+   2 User optical depths :    0.0000   32.0000
+   6 User polar angle cosines : -1.00000 -0.50000 -0.10000  0.10000  0.50000  1.00000
+   1 User azimuthal angles :     0.00
+ No thermal emission
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  3.142E+01 and polar angle cosine =  0.10000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  0.000E+00
+    Bottom albedo (Lambertian) =  0.0000
+ Uses delta-M method
+ Uses TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor
+   1   32.0000   32.0000   0.20000     0.00000   32.0000   32.0000   0.20000   0.0000
+
+ Number of Phase Function Moments =    17
+ Layer   Phase Function Moments
+     1   1.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+         0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     3.1416E+00     0.0000E+00     2.5969E-01     2.5777E+01
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+    32.0000     0.0000E+00     3.3252E-16     6.1753E-27     3.0317E-16
+               (   1.0000)    (*********)    (*********)    (*********)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine       0.0
+
+     0.000  -1.000    0.0000E+00
+                     (   1.0000)
+            -0.500    0.0000E+00
+                     (   1.0000)
+            -0.100    0.0000E+00
+                     (   1.0000)
+             0.100    2.6297E-01
+                     (   1.0000)
+             0.500    9.0697E-02
+                     (   1.0000)
+             1.000    5.0285E-02
+                     (   1.0000)
+
+    32.000  -1.000    1.2298E-15
+                     (   1.0000)
+            -0.500    1.3070E-17
+                     (   1.0000)
+            -0.100    6.8884E-18
+                     (   1.0000)
+             0.100    0.0000E+00
+                     (   1.0000)
+             0.500    0.0000E+00
+                     (   1.0000)
+             1.000    0.0000E+00
+                     (   1.0000)
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 1e:  Isotropic Scattering, Ref. VH1, Table 12:  b = 32.00000, a = 1.00                                           
+ ****************************************************************************************************
+
+ No. streams =  16     No. computational layers =   1
+   2 User optical depths :    0.0000   32.0000
+   6 User polar angle cosines : -1.00000 -0.50000 -0.10000  0.10000  0.50000  1.00000
+   1 User azimuthal angles :     0.00
+ No thermal emission
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  3.142E+01 and polar angle cosine =  0.10000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  0.000E+00
+    Bottom albedo (Lambertian) =  0.0000
+ Uses delta-M method
+ Uses TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor
+   1   32.0000   32.0000   1.00000     0.00000   32.0000   32.0000   1.00000   0.0000
+
+ Number of Phase Function Moments =    17
+ Layer   Phase Function Moments
+     1   1.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+         0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     3.1416E+00    -1.1921E-06     3.0738E+00     4.6574E-05
+               (   1.0000)    (*********)    (   1.0000)    (*********)
+    32.0000     0.0000E+00     6.7649E-02    -1.8307E-06     1.3968E-07
+               (   1.0000)    (   0.9993)    (*********)    (*********)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine       0.0
+
+     0.000  -1.000    0.0000E+00
+                     (   1.0000)
+            -0.500    0.0000E+00
+                     (   1.0000)
+            -0.100    0.0000E+00
+                     (   1.0000)
+             0.100    1.9332E+00
+                     (   1.0000)
+             0.500    1.0273E+00
+                     (   1.0000)
+             1.000    7.9716E-01
+                     (   1.0000)
+
+    32.000  -1.000    2.7113E-02
+                     (   0.9993)
+            -0.500    1.8767E-02
+                     (   0.9993)
+            -0.100    1.1631E-02
+                     (   0.9993)
+             0.100    0.0000E+00
+                     (   1.0000)
+             0.500    0.0000E+00
+                     (   1.0000)
+             1.000    0.0000E+00
+                     (   1.0000)
+
+
+ =============================================
+ ====     1  SERIOUSLY NON-UNIT RATIOS    ====
+ =============================================
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 1f:  Isotropic Scattering, Ref. VH1, Table 12:  b = 32.00000, a = 0.99                                           
+ ****************************************************************************************************
+
+ No. streams =  16     No. computational layers =   1
+   2 User optical depths :    0.0000   32.0000
+   6 User polar angle cosines : -1.00000 -0.50000 -0.10000  0.10000  0.50000  1.00000
+   1 User azimuthal angles :     0.00
+ No thermal emission
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  0.000E+00 and polar angle cosine =  0.10000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  1.000E+00
+    Bottom albedo (Lambertian) =  0.0000
+ Uses delta-M method
+ Does not use TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor
+   1   32.0000   32.0000   0.99000     0.00000   32.0000   32.0000   0.99000   0.0000
+
+ Number of Phase Function Moments =    17
+ Layer   Phase Function Moments
+     1   1.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+         0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     0.0000E+00     3.1416E+00     2.4962E+00     1.1424E-01
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+    32.0000     0.0000E+00     4.6005E-03     1.0712E-09     7.9364E-05
+               (   1.0000)    (   1.0000)    (*********)    (   1.0000)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine       0.0
+
+     0.000  -1.000    1.0000E+00
+                     (   1.0000)
+            -0.500    1.0000E+00
+                     (   1.0000)
+            -0.100    1.0000E+00
+                     (   1.0000)
+             0.100    8.7751E-01
+                     (   1.0000)
+             0.500    8.1514E-01
+                     (   1.0000)
+             1.000    7.5272E-01
+                     (   1.0000)
+
+    32.000  -1.000    1.8684E-03
+                     (   1.0000)
+            -0.500    1.2649E-03
+                     (   1.0000)
+            -0.100    7.7929E-04
+                     (   1.0000)
+             0.100    0.0000E+00
+                     (   1.0000)
+             0.500    0.0000E+00
+                     (   1.0000)
+             1.000    0.0000E+00
+                     (   1.0000)
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 2a, Rayleigh Scattering, Ref. SW, Table 1:  tau = 0.20, mu0 = 0.080442, ss-albedo =0.50                          
+ ****************************************************************************************************
+
+ No. streams =  16     No. computational layers =   1
+   2 User optical depths :    0.0000    0.2000
+   6 User polar angle cosines : -0.98199 -0.53826 -0.01801  0.01801  0.53826  0.98199
+   1 User azimuthal angles :     0.00
+ No thermal emission
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  3.142E+00 and polar angle cosine =  0.08044  and azimuth angle =   0.00
+    plus isotropic incident intensity =  0.000E+00
+    Bottom albedo (Lambertian) =  0.0000
+ Uses delta-M method
+ Uses TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor
+   1    0.2000    0.2000   0.50000     0.00000    0.2000    0.2000   0.50000   0.0000
+
+ Number of Phase Function Moments =    17
+ Layer   Phase Function Moments
+     1   1.000000   0.000000   0.100000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+         0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     2.5272E-01     0.0000E+00     5.3506E-02     1.6657E+00
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     0.2000     2.1031E-02     4.4179E-02     6.3229E-10     1.8985E-01
+               (   1.0000)    (   1.0000)    (*********)    (   1.0000)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine       0.0
+
+     0.000  -0.982    0.0000E+00
+                     (   1.0000)
+            -0.538    0.0000E+00
+                     (   1.0000)
+            -0.018    0.0000E+00
+                     (   1.0000)
+             0.018    1.6180E-01
+                     (   1.0000)
+             0.538    2.1150E-02
+                     (   1.0000)
+             0.982    7.8671E-03
+                     (   1.0000)
+
+     0.200  -0.982    7.7190E-03
+                     (   1.0000)
+            -0.538    2.0078E-02
+                     (   1.0000)
+            -0.018    2.5768E-02
+                     (   1.0000)
+             0.018    0.0000E+00
+                     (   1.0000)
+             0.538    0.0000E+00
+                     (   1.0000)
+             0.982    0.0000E+00
+                     (   1.0000)
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 2b, Rayleigh Scattering, Ref. SW, Table 1:  tau = 0.20, mu0 = 0.080442, ss-albedo =1.00                          
+ ****************************************************************************************************
+
+ No. streams =  16     No. computational layers =   1
+   2 User optical depths :    0.0000    0.2000
+   6 User polar angle cosines : -0.98199 -0.53826 -0.01801  0.01801  0.53826  0.98199
+   1 User azimuthal angles :     0.00
+ No thermal emission
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  3.142E+00 and polar angle cosine =  0.08044  and azimuth angle =   0.00
+    plus isotropic incident intensity =  0.000E+00
+    Bottom albedo (Lambertian) =  0.0000
+ Uses delta-M method
+ Uses TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor
+   1    0.2000    0.2000   1.00000     0.00000    0.2000    0.2000   1.00000   0.0000
+
+ Number of Phase Function Moments =    17
+ Layer   Phase Function Moments
+     1   1.000000   0.000000   0.100000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+         0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     2.5272E-01    -4.0233E-06     1.2556E-01     4.2650E-06
+               (   1.0000)    (*********)    (   1.0000)    (*********)
+     0.2000     2.1031E-02     1.0612E-01    -3.4159E-06     6.5426E-07
+               (   1.0000)    (   1.0000)    (*********)    (*********)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine       0.0
+
+     0.000  -0.982    0.0000E+00
+                     (   1.0000)
+            -0.538    0.0000E+00
+                     (   1.0000)
+            -0.018    0.0000E+00
+                     (   1.0000)
+             0.018    3.4768E-01
+                     (   1.0000)
+             0.538    4.8712E-02
+                     (   1.0000)
+             0.982    1.8939E-02
+                     (   1.0000)
+
+     0.200  -0.982    1.8602E-02
+                     (   1.0000)
+            -0.538    4.6406E-02
+                     (   1.0000)
+            -0.018    6.7759E-02
+                     (   1.0000)
+             0.018    0.0000E+00
+                     (   1.0000)
+             0.538    0.0000E+00
+                     (   1.0000)
+             0.982    0.0000E+00
+                     (   1.0000)
+
+
+ =============================================
+ ====     4  SERIOUSLY NON-UNIT RATIOS    ====
+ =============================================
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 2c, Rayleigh Scattering, Ref. SW, Table 1:  tau = 5.00, mu0 = 0.080442, ss-albedo =0.50                          
+ ****************************************************************************************************
+
+ No. streams =  16     No. computational layers =   1
+   2 User optical depths :    0.0000    5.0000
+   6 User polar angle cosines : -0.98199 -0.53826 -0.01801  0.01801  0.53826  0.98199
+   1 User azimuthal angles :     0.00
+ No thermal emission
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  3.142E+00 and polar angle cosine =  0.08044  and azimuth angle =   0.00
+    plus isotropic incident intensity =  0.000E+00
+    Bottom albedo (Lambertian) =  0.0000
+ Uses delta-M method
+ Uses TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor
+   1    5.0000    5.0000   0.50000     0.00000    5.0000    5.0000   0.50000   0.0000
+
+ Number of Phase Function Moments =    17
+ Layer   Phase Function Moments
+     1   1.000000   0.000000   0.100000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+         0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     2.5272E-01     0.0000E+00     6.2473E-02     1.6746E+00
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     5.0000     2.5608E-28     2.5168E-04    -1.2547E-12     1.7546E-04
+               (   1.0000)    (   1.0000)    (*********)    (   1.0000)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine       0.0
+
+     0.000  -0.982    0.0000E+00
+                     (   1.0000)
+            -0.538    0.0000E+00
+                     (   1.0000)
+            -0.018    0.0000E+00
+                     (   1.0000)
+             0.018    1.6257E-01
+                     (   1.0000)
+             0.538    2.4579E-02
+                     (   1.0000)
+             0.982    1.0150E-02
+                     (   1.0000)
+
+     5.000  -0.982    1.7000E-04
+                     (   1.0000)
+            -0.538    3.9717E-05
+                     (   1.0000)
+            -0.018    1.3247E-05
+                     (   1.0000)
+             0.018    0.0000E+00
+                     (   1.0000)
+             0.538    0.0000E+00
+                     (   1.0000)
+             0.982    0.0000E+00
+                     (   1.0000)
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 2d, Rayleigh Scattering, Ref. SW, Table 1:  tau = 5.00, mu0 = 0.080442, ss-albedo =1.00                          
+ ****************************************************************************************************
+
+ No. streams =  16     No. computational layers =   1
+   2 User optical depths :    0.0000    5.0000
+   6 User polar angle cosines : -0.98199 -0.53826 -0.01801  0.01801  0.53826  0.98199
+   1 User azimuthal angles :     0.00
+ No thermal emission
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  3.142E+00 and polar angle cosine =  0.08044  and azimuth angle =   0.00
+    plus isotropic incident intensity =  0.000E+00
+    Bottom albedo (Lambertian) =  0.0000
+ Uses delta-M method
+ Uses TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor
+   1    5.0000    5.0000   1.00000     0.00000    5.0000    5.0000   1.00000   0.0000
+
+ Number of Phase Function Moments =    17
+ Layer   Phase Function Moments
+     1   1.000000   0.000000   0.100000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+         0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     2.5272E-01     2.9802E-07     2.2591E-01     4.4946E-06
+               (   1.0000)    (*********)    (   1.0000)    (*********)
+     5.0000     2.5608E-28     2.6800E-02     6.3698E-08     5.5175E-08
+               (*********)    (   1.0000)    (*********)    (*********)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine       0.0
+
+     0.000  -0.982    0.0000E+00
+                     (   1.0000)
+            -0.538    0.0000E+00
+                     (   1.0000)
+            -0.018    0.0000E+00
+                     (   1.0000)
+             0.018    3.6401E-01
+                     (   1.0000)
+             0.538    8.2699E-02
+                     (   1.0000)
+             0.982    4.9237E-02
+                     (   1.0000)
+
+     5.000  -0.982    1.0595E-02
+                     (   1.0000)
+            -0.538    7.6934E-03
+                     (   1.0000)
+            -0.018    3.7927E-03
+                     (   1.0000)
+             0.018    0.0000E+00
+                     (   1.0000)
+             0.538    0.0000E+00
+                     (   1.0000)
+             0.982    0.0000E+00
+                     (   1.0000)
+
+
+ =============================================
+ ====     2  SERIOUSLY NON-UNIT RATIOS    ====
+ =============================================
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 3a, Henyey-Greenstein Scattering, Ref. VH2, Table 37, g = 0.75, b =  1.00000, a = 1.00                           
+ ****************************************************************************************************
+
+ No. streams =  16     No. computational layers =   1
+   2 User optical depths :    0.0000    1.0000
+   6 User polar angle cosines : -1.00000 -0.50000 -0.10000  0.10000  0.50000  1.00000
+   1 User azimuthal angles :     0.00
+ No thermal emission
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  3.142E+00 and polar angle cosine =  1.00000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  0.000E+00
+    Bottom albedo (Lambertian) =  0.0000
+ Uses delta-M method
+ Uses TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor
+   1    1.0000    1.0000   1.00000     0.01002    0.9900    0.9900   1.00000   0.7500
+
+ Number of Phase Function Moments =    33
+ Layer   Phase Function Moments
+     1   1.000000   0.750000   0.562500   0.421875   0.316406   0.237305   0.177979   0.133484   0.100113   0.075085
+         0.056314   0.042235   0.031676   0.023757   0.017818   0.013363   0.010023   0.007517   0.005638   0.004228
+         0.003171   0.002378   0.001784   0.001338   0.001003   0.000753   0.000564   0.000423   0.000317   0.000238
+         0.000179   0.000134   0.000100
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     3.1416E+00     3.8385E-05     2.4737E-01     4.5007E-06
+               (   1.0000)    (*********)    (   1.0000)    (*********)
+     1.0000     1.1557E+00     1.7385E+00    -3.2707E-05     4.4455E-06
+               (   1.0000)    (   1.0000)    (*********)    (*********)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine       0.0
+
+     0.000  -1.000    0.0000E+00
+                     (   1.0000)
+            -0.500    0.0000E+00
+                     (   1.0000)
+            -0.100    0.0000E+00
+                     (   1.0000)
+             0.100    1.5117E-01
+                     (   1.0001)
+             0.500    1.0113E-01
+                     (   1.0003)
+             1.000    3.9546E-02
+                     (   1.0000)
+
+     1.000  -1.000    3.0586E+00
+                     (   1.0000)
+            -0.500    2.6666E-01
+                     (   1.0000)
+            -0.100    2.1377E-01
+                     (   1.0001)
+             0.100    0.0000E+00
+                     (   1.0000)
+             0.500    0.0000E+00
+                     (   1.0000)
+             1.000    0.0000E+00
+                     (   1.0000)
+
+
+ =============================================
+ ====     4  SERIOUSLY NON-UNIT RATIOS    ====
+ =============================================
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 3b, Henyey-Greenstein Scattering, Ref. VH2, Table 37, g = 0.75, b =  8.00000, a = 1.00                           
+ ****************************************************************************************************
+
+ No. streams =  16     No. computational layers =   1
+   2 User optical depths :    0.0000    8.0000
+   6 User polar angle cosines : -1.00000 -0.50000 -0.10000  0.10000  0.50000  1.00000
+   1 User azimuthal angles :     0.00
+ No thermal emission
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  3.142E+00 and polar angle cosine =  1.00000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  0.000E+00
+    Bottom albedo (Lambertian) =  0.0000
+ Uses delta-M method
+ Uses TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor
+   1    8.0000    8.0000   1.00000     0.01002    7.9198    7.9198   1.00000   0.7500
+
+ Number of Phase Function Moments =    33
+ Layer   Phase Function Moments
+     1   1.000000   0.750000   0.562500   0.421875   0.316406   0.237305   0.177979   0.133484   0.100113   0.075085
+         0.056314   0.042235   0.031676   0.023757   0.017818   0.013363   0.010023   0.007517   0.005638   0.004228
+         0.003171   0.002378   0.001784   0.001338   0.001003   0.000753   0.000564   0.000423   0.000317   0.000238
+         0.000179   0.000134   0.000100
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     3.1416E+00     3.1948E-05     1.5910E+00     7.3400E-06
+               (   1.0000)    (*********)    (   1.0000)    (*********)
+     8.0000     1.0539E-03     1.5496E+00     2.8959E-05     3.1363E-06
+               (   1.0000)    (   1.0000)    (*********)    (*********)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine       0.0
+
+     0.000  -1.000    0.0000E+00
+                     (   1.0000)
+            -0.500    0.0000E+00
+                     (   1.0000)
+            -0.100    0.0000E+00
+                     (   1.0000)
+             0.100    3.7975E-01
+                     (   1.0000)
+             0.500    5.1961E-01
+                     (   1.0000)
+             1.000    4.9331E-01
+                     (   1.0000)
+
+     8.000  -1.000    6.6958E-01
+                     (   1.0000)
+            -0.500    4.2235E-01
+                     (   1.0000)
+            -0.100    2.3637E-01
+                     (   1.0000)
+             0.100    0.0000E+00
+                     (   1.0000)
+             0.500    0.0000E+00
+                     (   1.0000)
+             1.000    0.0000E+00
+                     (   1.0000)
+
+
+ =============================================
+ ====     3  SERIOUSLY NON-UNIT RATIOS    ====
+ =============================================
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 4a, Haze-L Scattering, Ref. GS, Table  12                                                                        
+ ****************************************************************************************************
+
+ No. streams =  32     No. computational layers =   1
+   3 User optical depths :    0.0000    0.5000    1.0000
+   6 User polar angle cosines : -1.00000 -0.50000 -0.10000  0.10000  0.50000  1.00000
+   1 User azimuthal angles :     0.00
+ No thermal emission
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  3.142E+00 and polar angle cosine =  1.00000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  0.000E+00
+    Bottom albedo (Lambertian) =  0.0000
+ Uses delta-M method
+ Uses TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor
+   1    1.0000    1.0000   1.00000     0.00026    0.9997    0.9997   1.00000   0.8042
+
+ Number of Phase Function Moments =    33
+ Layer   Phase Function Moments
+     1   1.000000   0.804200   0.646094   0.481851   0.359056   0.263045   0.191995   0.140907   0.102831   0.076154
+         0.056054   0.042019   0.031295   0.023746   0.017919   0.013730   0.010512   0.008100   0.006302   0.004862
+         0.003851   0.002963   0.002392   0.001829   0.001506   0.001143   0.000960   0.000722   0.000618   0.000461
+         0.000402   0.000297   0.000263
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     3.1416E+00    -2.0742E-05     1.7324E-01     4.2449E-06
+               (   1.0000)    (*********)    (   1.0001)    (*********)
+     0.5000     1.9055E+00     1.1740E+00     1.1112E-01     4.6398E-06
+               (   1.0000)    (   1.0000)    (   1.0000)    (*********)
+     1.0000     1.1557E+00     1.8126E+00     9.4317E-06     4.3662E-06
+               (   1.0000)    (   1.0000)    (*********)    (*********)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine       0.0
+
+     0.000  -1.000    0.0000E+00
+                     (   1.0000)
+            -0.500    0.0000E+00
+                     (   1.0000)
+            -0.100    0.0000E+00
+                     (   1.0000)
+             0.100    9.2694E-02
+                     (   1.0001)
+             0.500    6.5965E-02
+                     (   1.0001)
+             1.000    3.6462E-02
+                     (   0.9996)
+
+     0.500  -1.000    2.5161E+00
+                     (   1.0000)
+            -0.500    1.1930E-01
+                     (   1.0001)
+            -0.100    1.3498E-01
+                     (   1.0001)
+             0.100    1.2388E-01
+                     (   0.9999)
+             0.500    4.0200E-02
+                     (   0.9999)
+             1.000    1.7772E-02
+                     (   0.9999)
+
+     1.000  -1.000    3.3730E+00
+                     (   1.0000)
+            -0.500    2.1982E-01
+                     (   1.0000)
+            -0.100    1.5691E-01
+                     (   1.0001)
+             0.100    0.0000E+00
+                     (   1.0000)
+             0.500    0.0000E+00
+                     (   1.0000)
+             1.000    0.0000E+00
+                     (   1.0000)
+
+
+ =============================================
+ ====     5  SERIOUSLY NON-UNIT RATIOS    ====
+ =============================================
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 4b, Haze-L Scattering, Ref. GS, Table  13                                                                        
+ ****************************************************************************************************
+
+ No. streams =  32     No. computational layers =   1
+   3 User optical depths :    0.0000    0.5000    1.0000
+   6 User polar angle cosines : -1.00000 -0.50000 -0.10000  0.10000  0.50000  1.00000
+   1 User azimuthal angles :     0.00
+ No thermal emission
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  3.142E+00 and polar angle cosine =  1.00000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  0.000E+00
+    Bottom albedo (Lambertian) =  0.0000
+ Uses delta-M method
+ Uses TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor
+   1    1.0000    1.0000   0.90000     0.00026    0.9998    0.9998   0.89998   0.8042
+
+ Number of Phase Function Moments =    33
+ Layer   Phase Function Moments
+     1   1.000000   0.804200   0.646094   0.481851   0.359056   0.263045   0.191995   0.140907   0.102831   0.076154
+         0.056054   0.042019   0.031295   0.023746   0.017919   0.013730   0.010512   0.008100   0.006302   0.004862
+         0.003851   0.002963   0.002392   0.001829   0.001506   0.001143   0.000960   0.000722   0.000618   0.000461
+         0.000402   0.000297   0.000263
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     3.1416E+00    -7.1526E-07     1.2367E-01     3.4372E-01
+               (   1.0000)    (*********)    (   1.0000)    (   1.0000)
+     0.5000     1.9055E+00     1.0152E+00     7.8869E-02     3.5239E-01
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     1.0000     1.1557E+00     1.5155E+00     3.9171E-08     3.1945E-01
+               (   1.0000)    (   1.0000)    (*********)    (   1.0000)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine       0.0
+
+     0.000  -1.000    0.0000E+00
+                     (   1.0000)
+            -0.500    0.0000E+00
+                     (   1.0000)
+            -0.100    0.0000E+00
+                     (   1.0000)
+             0.100    6.5305E-02
+                     (   1.0000)
+             0.500    4.5514E-02
+                     (   1.0000)
+             1.000    2.8269E-02
+                     (   1.0000)
+
+     0.500  -1.000    2.2426E+00
+                     (   1.0000)
+            -0.500    9.6605E-02
+                     (   1.0000)
+            -0.100    9.6133E-02
+                     (   1.0000)
+             0.100    8.4328E-02
+                     (   1.0000)
+             0.500    2.7947E-02
+                     (   1.0000)
+             1.000    1.3883E-02
+                     (   1.0000)
+
+     1.000  -1.000    2.9706E+00
+                     (   1.0000)
+            -0.500    1.6770E-01
+                     (   1.0000)
+            -0.100    1.0811E-01
+                     (   1.0000)
+             0.100    0.0000E+00
+                     (   1.0000)
+             0.500    0.0000E+00
+                     (   1.0000)
+             1.000    0.0000E+00
+                     (   1.0000)
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 4c, Haze-L Scattering, Ref. GS, Table  14-16                                                                     
+ ****************************************************************************************************
+
+ No. streams =  32     No. computational layers =   1
+   3 User optical depths :    0.0000    0.5000    1.0000
+   6 User polar angle cosines : -1.00000 -0.50000 -0.10000  0.10000  0.50000  1.00000
+   3 User azimuthal angles :     0.00    90.00   180.00
+ No thermal emission
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  3.142E+00 and polar angle cosine =  0.50000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  0.000E+00
+    Bottom albedo (Lambertian) =  0.0000
+ Uses delta-M method
+ Uses TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor
+   1    1.0000    1.0000   0.90000     0.00026    0.9998    0.9998   0.89998   0.8042
+
+ Number of Phase Function Moments =    33
+ Layer   Phase Function Moments
+     1   1.000000   0.804200   0.646094   0.481851   0.359056   0.263045   0.191995   0.140907   0.102831   0.076154
+         0.056054   0.042019   0.031295   0.023746   0.017919   0.013730   0.010512   0.008100   0.006302   0.004862
+         0.003851   0.002963   0.002392   0.001829   0.001506   0.001143   0.000960   0.000722   0.000618   0.000461
+         0.000402   0.000297   0.000263
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     1.5708E+00     4.7684E-07     2.2549E-01     3.8500E-01
+               (   1.0000)    (*********)    (   1.0000)    (   1.0000)
+     0.5000     5.7786E-01     7.0276E-01     1.2385E-01     3.3732E-01
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     1.0000     2.1258E-01     8.0329E-01    -5.0575E-08     2.1640E-01
+               (   1.0000)    (   1.0000)    (*********)    (   1.0000)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine       0.0          90.0         180.0
+
+     0.000  -1.000    0.0000E+00    0.0000E+00    0.0000E+00
+                     (   1.0000)   (   1.0000)   (   1.0000)
+            -0.500    0.0000E+00    0.0000E+00    0.0000E+00
+                     (   1.0000)   (   1.0000)   (   1.0000)
+            -0.100    0.0000E+00    0.0000E+00    0.0000E+00
+                     (   1.0000)   (   1.0000)   (   1.0000)
+             0.100    8.7081E-01    8.8812E-02    6.9824E-02
+                     (   1.0000)   (   1.0000)   (   1.0000)
+             0.500    2.2496E-01    5.7741E-02    5.0287E-02
+                     (   1.0000)   (   1.0000)   (   1.0000)
+             1.000    2.2757E-02    2.2757E-02    2.2757E-02
+                     (   1.0000)   (   1.0000)   (   1.0000)
+
+     0.500  -1.000    4.7702E-02    4.7702E-02    4.7702E-02
+                     (   1.0000)   (   1.0000)   (   1.0000)
+            -0.500    3.0263E+00    5.8102E-02    2.5846E-02
+                     (   1.0000)   (   1.0001)   (   0.9997)
+            -0.100    1.4120E+00    1.0450E-01    6.2595E-02
+                     (   1.0000)   (   1.0000)   (   1.0000)
+             0.100    6.9769E-01    9.1607E-02    5.9128E-02
+                     (   1.0000)   (   1.0000)   (   1.0000)
+             0.500    1.0913E-01    2.9584E-02    2.4770E-02
+                     (   1.0000)   (   1.0000)   (   1.0000)
+             1.000    9.3286E-03    9.3286E-03    9.3286E-03
+                     (   1.0000)   (   1.0000)   (   1.0000)
+
+     1.000  -1.000    8.3849E-02    8.3849E-02    8.3849E-02
+                     (   1.0000)   (   1.0000)   (   1.0000)
+            -0.500    2.7054E+00    9.4216E-02    3.9939E-02
+                     (   1.0000)   (   1.0000)   (   1.0000)
+            -0.100    8.7652E-01    8.9545E-02    4.6716E-02
+                     (   1.0000)   (   1.0000)   (   1.0000)
+             0.100    0.0000E+00    0.0000E+00    0.0000E+00
+                     (   1.0000)   (   1.0000)   (   1.0000)
+             0.500    0.0000E+00    0.0000E+00    0.0000E+00
+                     (   1.0000)   (   1.0000)   (   1.0000)
+             1.000    0.0000E+00    0.0000E+00    0.0000E+00
+                     (   1.0000)   (   1.0000)   (   1.0000)
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 5a, Cloud C.1 Scattering, Ref. GS, Table  19                                                                     
+ ****************************************************************************************************
+
+ No. streams =  48     No. computational layers =   1
+   3 User optical depths :    0.0000   32.0000   64.0000
+   6 User polar angle cosines : -1.00000 -0.50000 -0.10000  0.10000  0.50000  1.00000
+   1 User azimuthal angles :     0.00
+ No thermal emission
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  3.142E+00 and polar angle cosine =  1.00000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  0.000E+00
+    Bottom albedo (Lambertian) =  0.0000
+ Uses delta-M method
+ Uses TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor
+   1   64.0000   64.0000   1.00000     0.20938   50.5996   50.5996   1.00000   0.8480
+
+ Number of Phase Function Moments =   300
+ Layer   Phase Function Moments
+     1   1.000000   0.848000   0.776600   0.652571   0.581667   0.535182   0.496692   0.478467   0.462294   0.447053
+         0.442190   0.428522   0.424600   0.415889   0.408655   0.403323   0.395697   0.389314   0.384027   0.375897
+         0.371488   0.363744   0.358356   0.351894   0.345592   0.339706   0.333453   0.327255   0.321561   0.315051
+         0.309590   0.303222   0.297615   0.291597   0.285812   0.280056   0.274301   0.268600   0.263000   0.257342
+         0.251864   0.246313   0.240906   0.235506   0.230146   0.224912   0.219645   0.214547   0.209381   0.204404
+         0.199366   0.194524   0.189610   0.184907   0.180110   0.175550   0.170894   0.166478   0.161957   0.157681
+         0.153314   0.149171   0.144952   0.140953   0.136891   0.133038   0.129128   0.125415   0.121664   0.118094
+         0.114496   0.111070   0.107628   0.104340   0.101060   0.097907   0.094778   0.091774   0.088796   0.085925
+         0.083093   0.080356   0.077673   0.075066   0.072527   0.070047   0.067647   0.065297   0.063028   0.060804
+         0.058663   0.056557   0.054541   0.052551   0.050656   0.048785   0.047005   0.045241   0.043574   0.041910
+         0.040348   0.038788   0.037327   0.035865   0.034502   0.033128   0.031854   0.030572   0.029387   0.028187
+         0.027086   0.025964   0.024942   0.023894   0.022948   0.021970   0.021094   0.020187   0.019376   0.018531
+         0.017780   0.016996   0.016302   0.015575   0.014936   0.014263   0.013672   0.013047   0.012506   0.011931
+         0.011429   0.010897   0.010438   0.009948   0.009524   0.009074   0.008689   0.008269   0.007917   0.007534
+         0.007206   0.006855   0.006558   0.006237   0.005962   0.005667   0.005420   0.005146   0.004919   0.004672
+         0.004465   0.004238   0.004049   0.003840   0.003670   0.003479   0.003323   0.003149   0.003009   0.002850
+         0.002720   0.002576   0.002458   0.002330   0.002222   0.002103   0.002006   0.001899   0.001810   0.001714
+         0.001633   0.001545   0.001472   0.001392   0.001327   0.001254   0.001195   0.001130   0.001076   0.001014
+         0.000967   0.000912   0.000868   0.000820   0.000780   0.000736   0.000702   0.000661   0.000631   0.000594
+         0.000564   0.000533   0.000506   0.000478   0.000455   0.000427   0.000407   0.000382   0.000365   0.000343
+         0.000327   0.000308   0.000291   0.000275   0.000262   0.000246   0.000235   0.000219   0.000209   0.000196
+         0.000188   0.000175   0.000167   0.000157   0.000149   0.000139   0.000132   0.000124   0.000119   0.000112
+         0.000107   0.000099   0.000094   0.000087   0.000085   0.000078   0.000075   0.000070   0.000066   0.000063
+         0.000059   0.000056   0.000052   0.000049   0.000047   0.000045   0.000042   0.000038   0.000038   0.000035
+         0.000033   0.000031   0.000029   0.000027   0.000027   0.000024   0.000022   0.000022   0.000020   0.000018
+         0.000018   0.000016   0.000016   0.000016   0.000014   0.000014   0.000012   0.000012   0.000012   0.000010
+         0.000010   0.000010   0.000010   0.000008   0.000008   0.000008   0.000008   0.000006   0.000006   0.000006
+         0.000006   0.000006   0.000006   0.000004   0.000004   0.000004   0.000004   0.000004   0.000004   0.000004
+         0.000004   0.000004   0.000002   0.000002   0.000002   0.000002   0.000002   0.000002   0.000002   0.000002
+         0.000002   0.000002   0.000002   0.000002   0.000002   0.000002   0.000002   0.000002   0.000002   0.000000
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     3.1416E+00     4.7684E-07     2.6614E+00     9.2949E-06
+               (   1.0000)    (*********)    (   0.9999)    (*********)
+    32.0000     3.9786E-14     2.2469E+00     1.7671E+00     9.5699E-06
+               (   1.0000)    (   0.9996)    (   0.9996)    (*********)
+    64.0000     5.0385E-28     4.7960E-01     1.6262E-06     9.6938E-07
+               (   1.0000)    (   0.9995)    (*********)    (*********)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine       0.0
+
+     0.000  -1.000    0.0000E+00
+                     (   1.0000)
+            -0.500    0.0000E+00
+                     (   1.0000)
+            -0.100    0.0000E+00
+                     (   1.0000)
+             0.100    4.5887E-01
+                     (   0.9999)
+             0.500    7.7288E-01
+                     (   0.9999)
+             1.000    1.0718E+00
+                     (   0.9999)
+
+    32.000  -1.000    7.5341E-01
+                     (   0.9997)
+            -0.500    6.9610E-01
+                     (   0.9996)
+            -0.100    6.5029E-01
+                     (   0.9996)
+             0.100    6.2738E-01
+                     (   0.9996)
+             0.500    5.8157E-01
+                     (   0.9996)
+             1.000    5.2431E-01
+                     (   0.9996)
+
+    64.000  -1.000    1.9513E-01
+                     (   0.9995)
+            -0.500    1.3192E-01
+                     (   0.9995)
+            -0.100    7.2030E-02
+                     (   0.9995)
+             0.100    0.0000E+00
+                     (   1.0000)
+             0.500    0.0000E+00
+                     (   1.0000)
+             1.000    0.0000E+00
+                     (   1.0000)
+
+
+ =============================================
+ ====     2  SERIOUSLY NON-UNIT RATIOS    ====
+ =============================================
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 5b, Cloud C.1 Scattering, Ref. GS, Table  20                                                                     
+ ****************************************************************************************************
+
+ No. streams =  48     No. computational layers =   1
+   3 User optical depths :    3.2000   12.8000   48.0000
+   6 User polar angle cosines : -1.00000 -0.50000 -0.10000  0.10000  0.50000  1.00000
+   1 User azimuthal angles :     0.00
+ No thermal emission
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  3.142E+00 and polar angle cosine =  1.00000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  0.000E+00
+    Bottom albedo (Lambertian) =  0.0000
+ Uses delta-M method
+ Uses TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor
+   1   64.0000   64.0000   0.90000     0.20938   51.9396   51.9396   0.87678   0.8480
+
+ Number of Phase Function Moments =   300
+ Layer   Phase Function Moments
+     1   1.000000   0.848000   0.776600   0.652571   0.581667   0.535182   0.496692   0.478467   0.462294   0.447053
+         0.442190   0.428522   0.424600   0.415889   0.408655   0.403323   0.395697   0.389314   0.384027   0.375897
+         0.371488   0.363744   0.358356   0.351894   0.345592   0.339706   0.333453   0.327255   0.321561   0.315051
+         0.309590   0.303222   0.297615   0.291597   0.285812   0.280056   0.274301   0.268600   0.263000   0.257342
+         0.251864   0.246313   0.240906   0.235506   0.230146   0.224912   0.219645   0.214547   0.209381   0.204404
+         0.199366   0.194524   0.189610   0.184907   0.180110   0.175550   0.170894   0.166478   0.161957   0.157681
+         0.153314   0.149171   0.144952   0.140953   0.136891   0.133038   0.129128   0.125415   0.121664   0.118094
+         0.114496   0.111070   0.107628   0.104340   0.101060   0.097907   0.094778   0.091774   0.088796   0.085925
+         0.083093   0.080356   0.077673   0.075066   0.072527   0.070047   0.067647   0.065297   0.063028   0.060804
+         0.058663   0.056557   0.054541   0.052551   0.050656   0.048785   0.047005   0.045241   0.043574   0.041910
+         0.040348   0.038788   0.037327   0.035865   0.034502   0.033128   0.031854   0.030572   0.029387   0.028187
+         0.027086   0.025964   0.024942   0.023894   0.022948   0.021970   0.021094   0.020187   0.019376   0.018531
+         0.017780   0.016996   0.016302   0.015575   0.014936   0.014263   0.013672   0.013047   0.012506   0.011931
+         0.011429   0.010897   0.010438   0.009948   0.009524   0.009074   0.008689   0.008269   0.007917   0.007534
+         0.007206   0.006855   0.006558   0.006237   0.005962   0.005667   0.005420   0.005146   0.004919   0.004672
+         0.004465   0.004238   0.004049   0.003840   0.003670   0.003479   0.003323   0.003149   0.003009   0.002850
+         0.002720   0.002576   0.002458   0.002330   0.002222   0.002103   0.002006   0.001899   0.001810   0.001714
+         0.001633   0.001545   0.001472   0.001392   0.001327   0.001254   0.001195   0.001130   0.001076   0.001014
+         0.000967   0.000912   0.000868   0.000820   0.000780   0.000736   0.000702   0.000661   0.000631   0.000594
+         0.000564   0.000533   0.000506   0.000478   0.000455   0.000427   0.000407   0.000382   0.000365   0.000343
+         0.000327   0.000308   0.000291   0.000275   0.000262   0.000246   0.000235   0.000219   0.000209   0.000196
+         0.000188   0.000175   0.000167   0.000157   0.000149   0.000139   0.000132   0.000124   0.000119   0.000112
+         0.000107   0.000099   0.000094   0.000087   0.000085   0.000078   0.000075   0.000070   0.000066   0.000063
+         0.000059   0.000056   0.000052   0.000049   0.000047   0.000045   0.000042   0.000038   0.000038   0.000035
+         0.000033   0.000031   0.000029   0.000027   0.000027   0.000024   0.000022   0.000022   0.000020   0.000018
+         0.000018   0.000016   0.000016   0.000016   0.000014   0.000014   0.000012   0.000012   0.000012   0.000010
+         0.000010   0.000010   0.000010   0.000008   0.000008   0.000008   0.000008   0.000006   0.000006   0.000006
+         0.000006   0.000006   0.000006   0.000004   0.000004   0.000004   0.000004   0.000004   0.000004   0.000004
+         0.000004   0.000004   0.000002   0.000002   0.000002   0.000002   0.000002   0.000002   0.000002   0.000002
+         0.000002   0.000002   0.000002   0.000002   0.000002   0.000002   0.000002   0.000002   0.000002   0.000000
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     3.2000     1.2806E-01     1.7477E+00     2.7049E-01     3.1013E-01
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+    12.8000     8.6732E-06     2.3398E-01     3.7426E-02     4.5267E-02
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+    48.0000     4.4773E-21     6.3835E-05     1.0290E-05     1.2502E-05
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine       0.0
+
+     3.200  -1.000    6.7962E+01
+                     (   1.0000)
+            -0.500    2.2103E-01
+                     (   1.0000)
+            -0.100    1.3662E-01
+                     (   1.0000)
+             0.100    1.1408E-01
+                     (   1.0000)
+             0.500    8.7388E-02
+                     (   1.0000)
+             1.000    8.8164E-02
+                     (   1.0000)
+
+    12.800  -1.000    2.0571E-01
+                     (   1.0000)
+            -0.500    4.9274E-02
+                     (   1.0000)
+            -0.100    2.6545E-02
+                     (   1.0000)
+             0.100    2.0216E-02
+                     (   1.0000)
+             0.500    1.2966E-02
+                     (   1.0000)
+             1.000    9.5135E-03
+                     (   1.0000)
+
+    48.000  -1.000    3.4129E-05
+                     (   1.0000)
+            -0.500    1.3992E-05
+                     (   1.0000)
+            -0.100    7.4705E-06
+                     (   1.0000)
+             0.100    5.6561E-06
+                     (   1.0000)
+             0.500    3.5825E-06
+                     (   1.0000)
+             1.000    2.5786E-06
+                     (   1.0000)
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 6a: No Scattering; Source = Beam ; Bottom Albedo = 0                                                             
+ ****************************************************************************************************
+
+ No. streams =  16     No. computational layers =   1
+   2 User optical depths :    0.0000    0.0000
+   4 User polar angle cosines : -1.00000 -0.10000  0.10000  1.00000
+   1 User azimuthal angles :    90.00
+ No thermal emission
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  2.000E+02 and polar angle cosine =  0.50000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  0.000E+00
+    Bottom albedo (Lambertian) =  0.0000
+ Uses delta-M method
+ Does not use TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor
+   1    0.0000    0.0000   0.00000     0.39570    0.0000    0.0000   0.00000   0.8480
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     1.0000E+02     0.0000E+00     0.0000E+00     2.0000E+02
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     0.0000     1.0000E+02     0.0000E+00     0.0000E+00     2.0000E+02
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+
+ ******* WARNING >>>>>>  PRTFIN--all intensities zero or negative
+
+
+ ******* WARNING >>>>>>  PRTFIN--all intensities near underflowing
+
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine      90.0
+
+     0.000  -1.000    0.0000E+00
+                     (   1.0000)
+            -0.100    0.0000E+00
+                     (   1.0000)
+             0.100    0.0000E+00
+                     (   1.0000)
+             1.000    0.0000E+00
+                     (   1.0000)
+
+     0.000  -1.000    0.0000E+00
+                     (   1.0000)
+            -0.100    0.0000E+00
+                     (   1.0000)
+             0.100    0.0000E+00
+                     (   1.0000)
+             1.000    0.0000E+00
+                     (   1.0000)
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 6b: No Scattering; Source = Beam ; Bottom Albedo = 0                                                             
+ ****************************************************************************************************
+
+ No. streams =  16     No. computational layers =   1
+   3 User optical depths :    0.0000    0.5000    1.0000
+   4 User polar angle cosines : -1.00000 -0.10000  0.10000  1.00000
+   1 User azimuthal angles :    90.00
+ No thermal emission
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  2.000E+02 and polar angle cosine =  0.50000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  0.000E+00
+    Bottom albedo (Lambertian) =  0.0000
+ Uses delta-M method
+ Does not use TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor
+   1    1.0000    1.0000   0.00000     0.39570    1.0000    1.0000   0.00000   0.8480
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     1.0000E+02     0.0000E+00     0.0000E+00     2.0000E+02
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     0.5000     3.6788E+01     0.0000E+00     0.0000E+00     7.3576E+01
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     1.0000     1.3534E+01     0.0000E+00     0.0000E+00     2.7067E+01
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+
+ ******* WARNING >>>>>>  PRTFIN--all intensities zero or negative
+
+
+ ******* WARNING >>>>>>  PRTFIN--all intensities near underflowing
+
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine      90.0
+
+     0.000  -1.000    0.0000E+00
+                     (   1.0000)
+            -0.100    0.0000E+00
+                     (   1.0000)
+             0.100    0.0000E+00
+                     (   1.0000)
+             1.000    0.0000E+00
+                     (   1.0000)
+
+     0.500  -1.000    0.0000E+00
+                     (   1.0000)
+            -0.100    0.0000E+00
+                     (   1.0000)
+             0.100    0.0000E+00
+                     (   1.0000)
+             1.000    0.0000E+00
+                     (   1.0000)
+
+     1.000  -1.000    0.0000E+00
+                     (   1.0000)
+            -0.100    0.0000E+00
+                     (   1.0000)
+             0.100    0.0000E+00
+                     (   1.0000)
+             1.000    0.0000E+00
+                     (   1.0000)
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 6c: No Scattering; Source = Beam ; Bottom Albedo=0.5 Lambert                                                     
+ ****************************************************************************************************
+
+ No. streams =  16     No. computational layers =   1
+   3 User optical depths :    0.0000    0.5000    1.0000
+   4 User polar angle cosines : -1.00000 -0.10000  0.10000  1.00000
+   1 User azimuthal angles :    90.00
+ No thermal emission
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  2.000E+02 and polar angle cosine =  0.50000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  0.000E+00
+    Bottom albedo (Lambertian) =  0.5000
+ Uses delta-M method
+ Does not use TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor
+   1    1.0000    1.0000   0.00000     0.39570    1.0000    1.0000   0.00000   0.8480
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     1.0000E+02     0.0000E+00     1.4845E+00     2.0201E+02
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     0.5000     3.6788E+01     0.0000E+00     2.9991E+00     7.7996E+01
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     1.0000     1.3534E+01     0.0000E+00     6.7668E+00     4.0601E+01
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine      90.0
+
+     0.000  -1.000    0.0000E+00
+                     (   1.0000)
+            -0.100    0.0000E+00
+                     (   1.0000)
+             0.100    9.7788E-05
+                     (   1.0000)
+             1.000    7.9239E-01
+                     (   1.0000)
+
+     0.500  -1.000    0.0000E+00
+                     (   1.0000)
+            -0.100    0.0000E+00
+                     (   1.0000)
+             0.100    1.4513E-02
+                     (   1.0000)
+             1.000    1.3064E+00
+                     (   1.0000)
+
+     1.000  -1.000    0.0000E+00
+                     (   1.0000)
+            -0.100    0.0000E+00
+                     (   1.0000)
+             0.100    2.1539E+00
+                     (   1.0000)
+             1.000    2.1539E+00
+                     (   1.0000)
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 6d: No Scattering; Source = Beam ; Bottom Albedo = Non-Lambert                                                   
+ ****************************************************************************************************
+
+ No. streams =  16     No. computational layers =   1
+   3 User optical depths :    0.0000    0.5000    1.0000
+   4 User polar angle cosines : -1.00000 -0.10000  0.10000  1.00000
+   1 User azimuthal angles :    90.00
+ No thermal emission
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  2.000E+02 and polar angle cosine =  0.50000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  0.000E+00
+    Bidirectional reflectivity at bottom
+ Uses delta-M method
+ Does not use TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor
+   1    1.0000    1.0000   0.00000     0.39570    1.0000    1.0000   0.00000   0.8480
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     1.0000E+02     0.0000E+00     6.7078E-01     2.0094E+02
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     0.5000     3.6788E+01     0.0000E+00     1.3908E+00     7.5719E+01
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     1.0000     1.3534E+01     0.0000E+00     3.3166E+00     3.4532E+01
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine      90.0
+
+     0.000  -1.000    0.0000E+00
+                     (   1.0000)
+            -0.100    0.0000E+00
+                     (   1.0000)
+             0.100    6.8007E-05
+                     (   1.0000)
+             1.000    3.1544E-01
+                     (   1.0000)
+
+     0.500  -1.000    0.0000E+00
+                     (   1.0000)
+            -0.100    0.0000E+00
+                     (   1.0000)
+             0.100    1.0093E-02
+                     (   1.0000)
+             1.000    5.2007E-01
+                     (   1.0000)
+
+     1.000  -1.000    0.0000E+00
+                     (   1.0000)
+            -0.100    0.0000E+00
+                     (   1.0000)
+             0.100    1.4980E+00
+                     (   1.0000)
+             1.000    8.5746E-01
+                     (   1.0000)
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 6e: No Scattering; Source = Beam , Bottom Emission; Bott Alb = Non-Lambert                                       
+ ****************************************************************************************************
+
+ No. streams =  16     No. computational layers =   1
+   3 User optical depths :    0.0000    0.5000    1.0000
+   4 User polar angle cosines : -1.00000 -0.10000  0.10000  1.00000
+   1 User azimuthal angles :    90.00
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  2.000E+02 and polar angle cosine =  0.50000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  0.000E+00
+    Bidirectional reflectivity at bottom
+    Thermal emission in wavenumber interval :        0.0000    50000.0000
+    Bottom temperature =    300.00    Top temperature =      0.00    Top emissivity =  1.0000
+ Uses delta-M method
+ Does not use TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor   Temperature
+   1    1.0000    1.0000   0.00000     0.39570    1.0000    1.0000   0.00000   0.8480         0.000
+                                                                                              0.000
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     1.0000E+02     0.0000E+00     7.9546E+01     3.0708E+02
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     0.5000     3.6788E+01     0.0000E+00     1.5990E+02     3.0711E+02
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     1.0000     1.3534E+01     0.0000E+00     3.5641E+02     7.1747E+02
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine      90.0
+
+     0.000  -1.000    0.0000E+00
+                     (   1.0000)
+            -0.100    0.0000E+00
+                     (   1.0000)
+             0.100    4.5379E-03
+                     (   1.0000)
+             1.000    4.3377E+01
+                     (   1.0000)
+
+     0.500  -1.000    0.0000E+00
+                     (   1.0000)
+            -0.100    0.0000E+00
+                     (   1.0000)
+             0.100    6.7348E-01
+                     (   1.0000)
+             1.000    7.1517E+01
+                     (   1.0000)
+
+     1.000  -1.000    0.0000E+00
+                     (   1.0000)
+            -0.100    0.0000E+00
+                     (   1.0000)
+             0.100    9.9954E+01
+                     (   1.0000)
+             1.000    1.1791E+02
+                     (   1.0000)
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 6f: No Scattering; Source = Beam , Bottom+Top Emission; Bott Alb = Non-Lambert                                   
+ ****************************************************************************************************
+
+ No. streams =  16     No. computational layers =   1
+   3 User optical depths :    0.0000    0.5000    1.0000
+   4 User polar angle cosines : -1.00000 -0.10000  0.10000  1.00000
+   1 User azimuthal angles :    90.00
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  2.000E+02 and polar angle cosine =  0.50000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  3.183E+01
+    Bidirectional reflectivity at bottom
+    Thermal emission in wavenumber interval :        0.0000    50000.0000
+    Bottom temperature =    300.00    Top temperature =    250.00    Top emissivity =  1.0000
+ Uses delta-M method
+ Does not use TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor   Temperature
+   1    1.0000    1.0000   0.00000     0.39570    1.0000    1.0000   0.00000   0.8480         0.000
+                                                                                              0.000
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     1.0000E+02     3.2150E+02     8.2792E+01     9.5452E+02
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     0.5000     3.6788E+01     1.4249E+02     1.6653E+02     5.2709E+02
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     1.0000     1.3534E+01     7.0531E+01     3.7174E+02     8.4534E+02
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine      90.0
+
+     0.000  -1.000    1.0234E+02
+                     (   1.0000)
+            -0.100    1.0234E+02
+                     (   1.0000)
+             0.100    4.8053E-03
+                     (   1.0000)
+             1.000    4.5017E+01
+                     (   1.0000)
+
+     0.500  -1.000    6.2070E+01
+                     (   1.0000)
+            -0.100    6.8953E-01
+                     (   1.0000)
+             0.100    7.1317E-01
+                     (   1.0000)
+             1.000    7.4220E+01
+                     (   1.0000)
+
+     1.000  -1.000    3.7647E+01
+                     (   1.0000)
+            -0.100    4.6460E-03
+                     (   1.0000)
+             0.100    1.0584E+02
+                     (   1.0000)
+             1.000    1.2237E+02
+                     (   1.0000)
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 6g: No Scattering; Source = Beam , Bottom+Top+Internal Emission; Bott Alb = Non-Lambert                          
+ ****************************************************************************************************
+
+ ******* WARNING >>>>>>  CHEKIN--vertical temperature step may be too large for good accuracy
+
+
+ No. streams =  16     No. computational layers =   1
+   3 User optical depths :    0.0000    0.5000    1.0000
+   4 User polar angle cosines : -1.00000 -0.10000  0.10000  1.00000
+   1 User azimuthal angles :    90.00
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  2.000E+02 and polar angle cosine =  0.50000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  3.183E+01
+    Bidirectional reflectivity at bottom
+    Thermal emission in wavenumber interval :        0.0000    50000.0000
+    Bottom temperature =    300.00    Top temperature =    250.00    Top emissivity =  1.0000
+ Uses delta-M method
+ Does not use TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor   Temperature
+   1    1.0000    1.0000   0.00000     0.39570    1.0000    1.0000   0.00000   0.8480       250.000
+                                                                                            300.000
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     1.0000E+02     3.2150E+02     3.3529E+02     5.8039E+02
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     0.5000     3.6788E+01     3.0477E+02     4.1254E+02     1.2712E+02
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     1.0000     1.3534E+01     3.6363E+02     4.4112E+02    -1.6800E+02
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine      90.0
+
+     0.000  -1.000    1.0234E+02
+                     (   1.0000)
+            -0.100    1.0234E+02
+                     (   1.0000)
+             0.100    7.8073E+01
+                     (   1.0000)
+             1.000    1.1643E+02
+                     (   1.0000)
+
+     0.500  -1.000    9.7875E+01
+                     (   1.0000)
+            -0.100    1.0105E+02
+                     (   1.0000)
+             0.100    1.1582E+02
+                     (   1.0000)
+             1.000    1.3497E+02
+                     (   1.0000)
+
+     1.000  -1.000    1.1006E+02
+                     (   1.0000)
+            -0.100    1.3863E+02
+                     (   1.0000)
+             0.100    1.3869E+02
+                     (   1.0000)
+             1.000    1.4097E+02
+                     (   1.0000)
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 6h: No Scattering; Source = Beam , Bottom+Top+Internal Emission; Bott Alb = Non-Lambert                          
+ ****************************************************************************************************
+
+ ******* WARNING >>>>>>  CHEKIN--vertical temperature step may be too large for good accuracy
+
+
+ No. streams =  16     No. computational layers =   1
+   3 User optical depths :    0.0000    1.0000   10.0000
+   4 User polar angle cosines : -1.00000 -0.10000  0.10000  1.00000
+   1 User azimuthal angles :    90.00
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  2.000E+02 and polar angle cosine =  0.50000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  3.183E+01
+    Bidirectional reflectivity at bottom
+    Thermal emission in wavenumber interval :        0.0000    50000.0000
+    Bottom temperature =    300.00    Top temperature =    250.00    Top emissivity =  1.0000
+ Uses delta-M method
+ Does not use TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor   Temperature
+   1   10.0000   10.0000   0.00000     0.39570   10.0000   10.0000   0.00000   0.8480       250.000
+                                                                                            300.000
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     1.0000E+02     3.2150E+02     2.3735E+02     4.2378E+02
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     1.0000     1.3534E+01     2.5545E+02     2.6113E+02     6.1983E+01
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+    10.0000     2.0612E-07     4.4344E+02     4.5586E+02    -3.1166E+01
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine      90.0
+
+     0.000  -1.000    1.0234E+02
+                     (   1.0000)
+            -0.100    1.0234E+02
+                     (   1.0000)
+             0.100    7.1262E+01
+                     (   1.0000)
+             1.000    7.8074E+01
+                     (   1.0000)
+
+     1.000  -1.000    8.4999E+01
+                     (   1.0000)
+            -0.100    7.7319E+01
+                     (   1.0000)
+             0.100    7.8831E+01
+                     (   1.0000)
+             1.000    8.5642E+01
+                     (   1.0000)
+
+    10.000  -1.000    1.3863E+02
+                     (   1.0000)
+            -0.100    1.4544E+02
+                     (   1.0000)
+             0.100    1.4479E+02
+                     (   1.0000)
+             1.000    1.4516E+02
+                     (   1.0000)
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 7a : Absorption + Scattering, Internal Thermal Sources; Ref. KS, Table I, tau = 1.0, a = 0.1, g = 0.05           
+ ****************************************************************************************************
+
+ ******* WARNING >>>>>>  CHEKIN--vertical temperature step may be too large for good accuracy
+
+
+ No. streams =  16     No. computational layers =   1
+   2 User optical depths :    0.0000    1.0000
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  0.000E+00 and polar angle cosine =  0.50000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  0.000E+00
+    Bottom albedo (Lambertian) =  0.0000
+    Thermal emission in wavenumber interval :      300.0000      800.0000
+    Bottom temperature =      0.00    Top temperature =      0.00    Top emissivity =  1.0000
+ Uses delta-M method
+ Does not use TMS/IMS method
+ Calculate fluxes only
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor   Temperature
+   1    1.0000    1.0000   0.10000     0.00000    1.0000    1.0000   0.10000   0.0500       200.000
+                                                                                            300.000
+
+ Number of Phase Function Moments =    17
+ Layer   Phase Function Moments
+     1   1.000000   0.050000   0.002500   0.000125   0.000006   0.000000   0.000000   0.000000   0.000000   0.000000
+         0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     0.0000E+00     8.4751E-06     8.6294E+01    -5.1373E+01
+               (   1.0000)    (*********)    (   1.0000)    (   1.0000)
+     1.0000     0.0000E+00     1.2120E+02     1.0683E-06    -5.4104E+02
+               (   1.0000)    (   1.0000)    (*********)    (   1.0000)
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 7b : Absorption + Scattering, Internal Thermal Sources; Ref. KS, Table II, tau = 100.0, a = 0.95, g = 0.75       
+ ****************************************************************************************************
+
+ ******* WARNING >>>>>>  CHEKIN--vertical temperature step may be too large for good accuracy
+
+
+ No. streams =  16     No. computational layers =   1
+   2 User optical depths :    0.0000  100.0000
+   2 User polar angle cosines : -1.00000  1.00000
+   1 User azimuthal angles :     0.00
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  0.000E+00 and polar angle cosine =  0.50000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  0.000E+00
+    Bottom albedo (Lambertian) =  0.0000
+    Thermal emission in wavenumber interval :     2702.9900     2703.0100
+    Bottom temperature =      0.00    Top temperature =      0.00    Top emissivity =  1.0000
+ Uses delta-M method
+ Does not use TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor   Temperature
+   1  100.0000  100.0000   0.95000     0.01002   99.0479   99.0479   0.94952   0.7500       200.000
+                                                                                            300.000
+
+ Number of Phase Function Moments =    17
+ Layer   Phase Function Moments
+     1   1.000000   0.750000   0.562500   0.421875   0.316406   0.237305   0.177979   0.133484   0.100113   0.075085
+         0.056314   0.042235   0.031676   0.023757   0.017818   0.013363   0.010023
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     0.0000E+00    -3.0421E-14     1.1031E-06     8.1849E-08
+               (   1.0000)    (*********)    (   0.9942)    (   0.9943)
+   100.0000     0.0000E+00     2.0659E-05     3.5878E-12    -5.0355E-06
+               (   1.0000)    (   0.9943)    (*********)    (   0.9942)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine       0.0
+
+     0.000  -1.000    0.0000E+00
+                     (   1.0000)
+             1.000    4.6307E-07
+                     (   0.9943)
+
+   100.000  -1.000    7.4798E-06
+                     (   0.9942)
+             1.000    0.0000E+00
+                     (   1.0000)
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 7c : Absorption + Henyey-Greenstein Scattering, All Sources, Bottom Albedo = 0                                   
+ ****************************************************************************************************
+
+ ******* WARNING >>>>>>  CHEKIN--vertical temperature step may be too large for good accuracy
+
+
+ No. streams =  12     No. computational layers =   1
+   3 User optical depths :    0.0000    0.5000    1.0000
+   4 User polar angle cosines : -1.00000 -0.10000  0.10000  1.00000
+   2 User azimuthal angles :     0.00    90.00
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  2.000E+02 and polar angle cosine =  0.50000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  1.000E+02
+    Bottom albedo (Lambertian) =  0.0000
+    Thermal emission in wavenumber interval :        0.0000    50000.0000
+    Bottom temperature =    320.00    Top temperature =    100.00    Top emissivity =  1.0000
+ Uses delta-M method
+ Uses TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor   Temperature
+   1    1.0000    1.0000   0.50000     0.06872    0.9656    0.9656   0.48221   0.8000       300.000
+                                                                                            200.000
+
+ Number of Phase Function Moments =    13
+ Layer   Phase Function Moments
+     1   1.000000   0.800000   0.640000   0.512000   0.409600   0.327680   0.262144   0.209715   0.167772   0.134218
+         0.107374   0.085899   0.068720
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     1.0000E+02     3.1983E+02     4.2957E+02    -8.0427E+01
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     0.5000     3.6788E+01     3.5410E+02     4.4702E+02     2.5159E+02
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     1.0000     1.3534E+01     3.0133E+02     5.9458E+02     7.1596E+02
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine       0.0          90.0
+
+     0.000  -1.000    1.0180E+02    1.0180E+02
+                     (   1.0000)   (   1.0000)
+            -0.100    1.0180E+02    1.0180E+02
+                     (   1.0000)   (   1.0000)
+             0.100    1.4677E+02    1.2964E+02
+                     (   1.0000)   (   1.0000)
+             1.000    1.4903E+02    1.4903E+02
+                     (   1.0000)   (   1.0000)
+
+     0.500  -1.000    1.0658E+02    1.0658E+02
+                     (   1.0000)   (   1.0000)
+            -0.100    1.2856E+02    1.0641E+02
+                     (   1.0000)   (   1.0000)
+             0.100    1.0446E+02    9.4842E+01
+                     (   1.0000)   (   1.0000)
+             1.000    1.5905E+02    1.5905E+02
+                     (   1.0000)   (   1.0000)
+
+     1.000  -1.000    9.6652E+01    9.6652E+01
+                     (   1.0000)   (   1.0000)
+            -0.100    8.6585E+01    7.4931E+01
+                     (   1.0000)   (   1.0000)
+             0.100    1.8926E+02    1.8926E+02
+                     (   1.0000)   (   1.0000)
+             1.000    1.8926E+02    1.8926E+02
+                     (   1.0000)   (   1.0000)
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 7d : Absorption + Henyey-Greenstein Scattering, All Sources, Bottom Albedo = 1                                   
+ ****************************************************************************************************
+
+ ******* WARNING >>>>>>  CHEKIN--vertical temperature step may be too large for good accuracy
+
+
+ No. streams =  12     No. computational layers =   1
+   3 User optical depths :    0.0000    0.5000    1.0000
+   4 User polar angle cosines : -1.00000 -0.10000  0.10000  1.00000
+   2 User azimuthal angles :     0.00    90.00
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  2.000E+02 and polar angle cosine =  0.50000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  1.000E+02
+    Bottom albedo (Lambertian) =  1.0000
+    Thermal emission in wavenumber interval :        0.0000    50000.0000
+    Bottom temperature =    320.00    Top temperature =    100.00    Top emissivity =  1.0000
+ Uses delta-M method
+ Uses TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor   Temperature
+   1    1.0000    1.0000   0.50000     0.06872    0.9656    0.9656   0.48221   0.8000       300.000
+                                                                                            200.000
+
+ Number of Phase Function Moments =    13
+ Layer   Phase Function Moments
+     1   1.000000   0.800000   0.640000   0.512000   0.409600   0.327680   0.262144   0.209715   0.167772   0.134218
+         0.107374   0.085899   0.068720
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     1.0000E+02     3.1983E+02     3.1256E+02    -1.6836E+02
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     0.5000     3.6788E+01     3.5055E+02     2.6813E+02     1.0125E+02
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     1.0000     1.3534E+01     2.9206E+02     3.0560E+02     4.0933E+02
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine       0.0          90.0
+
+     0.000  -1.000    1.0180E+02    1.0180E+02
+                     (   1.0000)   (   1.0000)
+            -0.100    1.0180E+02    1.0180E+02
+                     (   1.0000)   (   1.0000)
+             0.100    1.4098E+02    1.2384E+02
+                     (   1.0000)   (   1.0000)
+             1.000    9.6276E+01    9.6276E+01
+                     (   1.0000)   (   1.0000)
+
+     0.500  -1.000    1.0620E+02    1.0620E+02
+                     (   1.0000)   (   1.0000)
+            -0.100    1.2313E+02    1.0097E+02
+                     (   1.0000)   (   1.0000)
+             0.100    9.1954E+01    8.2332E+01
+                     (   1.0000)   (   1.0000)
+             1.000    8.8953E+01    8.8953E+01
+                     (   1.0000)   (   1.0000)
+
+     1.000  -1.000    9.5601E+01    9.5601E+01
+                     (   1.0000)   (   1.0000)
+            -0.100    7.2558E+01    6.0903E+01
+                     (   1.0000)   (   1.0000)
+             0.100    9.7274E+01    9.7274E+01
+                     (   1.0000)   (   1.0000)
+             1.000    9.7274E+01    9.7274E+01
+                     (   1.0000)   (   1.0000)
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 7e : Absorption + Henyey-Greenstein Scattering, All Sources, Bottom Albedo = BDR Function                        
+ ****************************************************************************************************
+
+ ******* WARNING >>>>>>  CHEKIN--vertical temperature step may be too large for good accuracy
+
+
+ No. streams =  12     No. computational layers =   1
+   3 User optical depths :    0.0000    0.5000    1.0000
+   4 User polar angle cosines : -1.00000 -0.10000  0.10000  1.00000
+   2 User azimuthal angles :     0.00    90.00
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  2.000E+02 and polar angle cosine =  0.50000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  1.000E+02
+    Bidirectional reflectivity at bottom
+    Thermal emission in wavenumber interval :        0.0000    50000.0000
+    Bottom temperature =    320.00    Top temperature =    100.00    Top emissivity =  1.0000
+ Uses delta-M method
+ Uses TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor   Temperature
+   1    1.0000    1.0000   0.50000     0.06872    0.9656    0.9656   0.48221   0.8000       300.000
+                                                                                            200.000
+
+ Number of Phase Function Moments =    13
+ Layer   Phase Function Moments
+     1   1.000000   0.800000   0.640000   0.512000   0.409600   0.327680   0.262144   0.209715   0.167772   0.134218
+         0.107374   0.085899   0.068720
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     1.0000E+02     3.1983E+02     4.0430E+02    -9.9857E+01
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     0.5000     3.6788E+01     3.5327E+02     4.0784E+02     2.1739E+02
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     1.0000     1.3534E+01     2.9900E+02     5.2925E+02     6.3846E+02
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine       0.0          90.0
+
+     0.000  -1.000    1.0180E+02    1.0180E+02
+                     (   1.0000)   (   1.0000)
+            -0.100    1.0180E+02    1.0180E+02
+                     (   1.0000)   (   1.0000)
+             0.100    1.4545E+02    1.2828E+02
+                     (   1.0000)   (   1.0000)
+             1.000    1.3855E+02    1.3855E+02
+                     (   1.0000)   (   1.0000)
+
+     0.500  -1.000    1.0650E+02    1.0650E+02
+                     (   1.0000)   (   1.0000)
+            -0.100    1.2730E+02    1.0511E+02
+                     (   1.0000)   (   1.0000)
+             0.100    1.0139E+02    9.1673E+01
+                     (   1.0000)   (   1.0000)
+             1.000    1.4523E+02    1.4523E+02
+                     (   1.0000)   (   1.0000)
+
+     1.000  -1.000    9.6399E+01    9.6399E+01
+                     (   1.0000)   (   1.0000)
+            -0.100    8.2901E+01    7.1125E+01
+                     (   1.0000)   (   1.0000)
+             0.100    1.6073E+02    1.5929E+02
+                     (   1.0000)   (   1.0000)
+             1.000    1.7131E+02    1.7131E+02
+                     (   1.0000)   (   1.0000)
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 8a:  Ref. OS, Table 1, Line 4 (Two Inhomogeneous Layers)                                                         
+ ****************************************************************************************************
+
+ No. streams =   8     No. computational layers =   2
+   3 User optical depths :    0.0000    0.2500    0.5000
+   4 User polar angle cosines : -1.00000 -0.20000  0.20000  1.00000
+   1 User azimuthal angles :    60.00
+ No thermal emission
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  0.000E+00 and polar angle cosine =  0.50000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  3.183E-01
+    Bottom albedo (Lambertian) =  0.0000
+ Uses delta-M method
+ Does not use TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor
+   1    0.2500    0.2500   0.50000     0.00000    0.2500    0.2500   0.50000   0.0000
+   2    0.2500    0.5000   0.30000     0.00000    0.2500    0.5000   0.30000   0.0000
+
+ Number of Phase Function Moments =     9
+ Layer   Phase Function Moments
+     1   1.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+     2   1.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     0.0000E+00     1.0000E+00     9.2963E-02     1.1247E+00
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     0.2500     0.0000E+00     7.2224E-01     2.7895E-02     6.5182E-01
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     0.5000     0.0000E+00     5.1313E-01     2.1986E-10     5.6336E-01
+               (   1.0000)    (   1.0000)    (*********)    (   1.0000)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine      60.0
+
+     0.000  -1.000    3.1831E-01
+                     (   1.0000)
+            -0.200    3.1831E-01
+                     (   1.0000)
+             0.200    5.6257E-02
+                     (   1.0000)
+             1.000    1.9442E-02
+                     (   1.0000)
+
+     0.250  -1.000    2.6271E-01
+                     (   1.0000)
+            -0.200    1.3695E-01
+                     (   1.0000)
+             0.200    1.8491E-02
+                     (   1.0000)
+             1.000    5.5219E-03
+                     (   1.0000)
+
+     0.500  -1.000    2.1001E-01
+                     (   1.0000)
+            -0.200    5.6038E-02
+                     (   1.0000)
+             0.200    0.0000E+00
+                     (   1.0000)
+             1.000    0.0000E+00
+                     (   1.0000)
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 8b:  Ref. OS, Table 1, Line 1 (Two Inhomogeneous Layers)                                                         
+ ****************************************************************************************************
+
+ No. streams =   8     No. computational layers =   2
+   3 User optical depths :    0.0000    0.2500    0.5000
+   4 User polar angle cosines : -1.00000 -0.20000  0.20000  1.00000
+   1 User azimuthal angles :    60.00
+ No thermal emission
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  0.000E+00 and polar angle cosine =  0.50000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  3.183E-01
+    Bottom albedo (Lambertian) =  0.0000
+ Uses delta-M method
+ Does not use TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor
+   1    0.2500    0.2500   0.80000     0.00000    0.2500    0.2500   0.80000   0.0000
+   2    0.2500    0.5000   0.95000     0.00000    0.2500    0.5000   0.95000   0.0000
+
+ Number of Phase Function Moments =     9
+ Layer   Phase Function Moments
+     1   1.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+     2   1.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     0.0000E+00     1.0000E+00     2.2514E-01     5.1269E-01
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     0.2500     0.0000E+00     7.9533E-01     1.2635E-01     3.5665E-01
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     0.5000     0.0000E+00     6.5042E-01    -8.5670E-08     5.6810E-02
+               (   1.0000)    (   1.0000)    (*********)    (   1.0000)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine      60.0
+
+     0.000  -1.000    3.1831E-01
+                     (   1.0000)
+            -0.200    3.1831E-01
+                     (   1.0000)
+             0.200    1.2369E-01
+                     (   1.0000)
+             1.000    4.9558E-02
+                     (   1.0000)
+
+     0.250  -1.000    2.7750E-01
+                     (   1.0000)
+            -0.200    1.8395E-01
+                     (   1.0000)
+             0.200    8.3570E-02
+                     (   1.0000)
+             1.000    2.5057E-02
+                     (   1.0000)
+
+     0.500  -1.000    2.4073E-01
+                     (   1.0000)
+            -0.200    1.2929E-01
+                     (   1.0000)
+             0.200    0.0000E+00
+                     (   1.0000)
+             1.000    0.0000E+00
+                     (   1.0000)
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 8c:  Ref. OS, Table 1, Line 13 (Two Inhomogeneous Layers)                                                        
+ ****************************************************************************************************
+
+ No. streams =   8     No. computational layers =   2
+   3 User optical depths :    0.0000    1.0000    3.0000
+   4 User polar angle cosines : -1.00000 -0.20000  0.20000  1.00000
+   1 User azimuthal angles :    60.00
+ No thermal emission
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  0.000E+00 and polar angle cosine =  0.50000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  3.183E-01
+    Bottom albedo (Lambertian) =  0.0000
+ Uses delta-M method
+ Does not use TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor
+   1    1.0000    1.0000   0.80000     0.00000    1.0000    1.0000   0.80000   0.0000
+   2    2.0000    3.0000   0.95000     0.00000    2.0000    3.0000   0.95000   0.0000
+
+ Number of Phase Function Moments =     9
+ Layer   Phase Function Moments
+     1   1.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+     2   1.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     0.0000E+00     1.0000E+00     3.7858E-01     5.6509E-01
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     1.0000     0.0000E+00     4.8616E-01     2.4340E-01     2.7670E-01
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     3.0000     0.0000E+00     1.5998E-01     1.1863E-09     1.3568E-02
+               (   1.0000)    (   1.0000)    (*********)    (   1.0000)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine      60.0
+
+     0.000  -1.000    3.1831E-01
+                     (   1.0000)
+            -0.200    3.1831E-01
+                     (   1.0000)
+             0.200    1.4933E-01
+                     (   1.0000)
+             1.000    1.0477E-01
+                     (   1.0000)
+
+     1.000  -1.000    1.8902E-01
+                     (   1.0000)
+            -0.200    9.8816E-02
+                     (   1.0000)
+             0.200    9.6519E-02
+                     (   1.0000)
+             1.000    6.5445E-02
+                     (   1.0000)
+
+     3.000  -1.000    6.8476E-02
+                     (   1.0000)
+            -0.200    2.9670E-02
+                     (   1.0000)
+             0.200    0.0000E+00
+                     (   1.0000)
+             1.000    0.0000E+00
+                     (   1.0000)
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 9a:  Ref. DGIS, Tables VI-VII, beta=l=0 (multiple inhomogeneous layers)                                          
+ ****************************************************************************************************
+
+ No. streams =   8     No. computational layers =   6
+   5 User optical depths :    0.0000    1.0500    2.1000    6.0000   21.0000
+   4 User polar angle cosines : -1.00000 -0.20000  0.20000  1.00000
+   1 User azimuthal angles :    60.00
+ No thermal emission
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  0.000E+00 and polar angle cosine =  0.50000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  3.183E-01
+    Bottom albedo (Lambertian) =  0.0000
+ Uses delta-M method
+ Does not use TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor
+   1    1.0000    1.0000   0.65000     0.00000    1.0000    1.0000   0.65000   0.0000
+   2    2.0000    3.0000   0.70000     0.00000    2.0000    3.0000   0.70000   0.0000
+   3    3.0000    6.0000   0.75000     0.00000    3.0000    6.0000   0.75000   0.0000
+   4    4.0000   10.0000   0.80000     0.00000    4.0000   10.0000   0.80000   0.0000
+   5    5.0000   15.0000   0.85000     0.00000    5.0000   15.0000   0.85000   0.0000
+   6    6.0000   21.0000   0.90000     0.00000    6.0000   21.0000   0.90000   0.0000
+
+ Number of Phase Function Moments =     9
+ Layer   Phase Function Moments
+     1   1.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+     2   1.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+     3   1.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+     4   1.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+     5   1.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+     6   1.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     0.0000E+00     1.0000E+00     2.2797E-01     8.8212E-01
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     1.0500     0.0000E+00     3.5515E-01     8.7510E-02     2.3237E-01
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     2.1000     0.0000E+00     1.4427E-01     3.6182E-02     9.3344E-02
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     6.0000     0.0000E+00     6.7145E-03     2.1929E-03     3.9278E-03
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+    21.0000     0.0000E+00     6.1697E-07     9.3618E-15     1.0250E-07
+               (   1.0000)    (   1.0000)    (*********)    (   1.0000)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine      60.0
+
+     0.000  -1.000    3.1831E-01
+                     (   1.0000)
+            -0.200    3.1831E-01
+                     (   1.0000)
+             0.200    9.9892E-02
+                     (   1.0000)
+             1.000    5.9134E-02
+                     (   1.0000)
+
+     1.050  -1.000    1.5351E-01
+                     (   1.0000)
+            -0.200    5.0953E-02
+                     (   1.0000)
+             0.200    3.6701E-02
+                     (   1.0000)
+             1.000    2.3190E-02
+                     (   1.0000)
+
+     2.100  -1.000    7.0661E-02
+                     (   1.0000)
+            -0.200    2.0912E-02
+                     (   1.0000)
+             0.200    1.4854E-02
+                     (   1.0000)
+             1.000    9.7231E-03
+                     (   1.0000)
+
+     6.000  -1.000    3.7278E-03
+                     (   1.0000)
+            -0.200    1.0882E-03
+                     (   1.0000)
+             0.200    8.8332E-04
+                     (   1.0000)
+             1.000    5.9474E-04
+                     (   1.0000)
+
+    21.000  -1.000    2.8766E-07
+                     (   1.0000)
+            -0.200    1.0592E-07
+                     (   1.0000)
+             0.200    0.0000E+00
+                     (   1.0000)
+             1.000    0.0000E+00
+                     (   1.0000)
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 9b:  Ref. DGIS, Tables VI-VII, beta=0,l=8 (multiple inhomogeneous layers)                                        
+ ****************************************************************************************************
+
+ No. streams =   8     No. computational layers =   6
+   5 User optical depths :    0.0000    1.0500    2.1000    6.0000   21.0000
+   4 User polar angle cosines : -1.00000 -0.20000  0.20000  1.00000
+   1 User azimuthal angles :    60.00
+ No thermal emission
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  0.000E+00 and polar angle cosine =  0.50000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  3.183E-01
+    Bottom albedo (Lambertian) =  0.0000
+ Uses delta-M method
+ Does not use TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor
+   1    1.0000    1.0000   0.65000     0.00000    1.0000    1.0000   0.65000   0.6697
+   2    2.0000    3.0000   0.70000     0.00000    2.0000    3.0000   0.70000   0.6697
+   3    3.0000    6.0000   0.75000     0.00000    3.0000    6.0000   0.75000   0.6697
+   4    4.0000   10.0000   0.80000     0.00000    4.0000   10.0000   0.80000   0.6697
+   5    5.0000   15.0000   0.85000     0.00000    5.0000   15.0000   0.85000   0.6697
+   6    6.0000   21.0000   0.90000     0.00000    6.0000   21.0000   0.90000   0.6697
+
+ Number of Phase Function Moments =     9
+ Layer   Phase Function Moments
+     1   1.000000   0.669720   0.312678   0.096296   0.024683   0.004295   0.000516   0.000045   0.000003
+     2   1.000000   0.669720   0.312678   0.096296   0.024683   0.004295   0.000516   0.000045   0.000003
+     3   1.000000   0.669720   0.312678   0.096296   0.024683   0.004295   0.000516   0.000045   0.000003
+     4   1.000000   0.669720   0.312678   0.096296   0.024683   0.004295   0.000516   0.000045   0.000003
+     5   1.000000   0.669720   0.312678   0.096296   0.024683   0.004295   0.000516   0.000045   0.000003
+     6   1.000000   0.669720   0.312678   0.096296   0.024683   0.004295   0.000516   0.000045   0.000003
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     0.0000E+00     1.0000E+00     1.0008E-01     8.0458E-01
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     1.0500     0.0000E+00     4.5236E-01     4.5201E-02     2.5533E-01
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     2.1000     0.0000E+00     2.3647E-01     2.4194E-02     1.3098E-01
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     6.0000     0.0000E+00     2.7648E-02     4.1602E-03     1.3623E-02
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+    21.0000     0.0000E+00     7.4185E-05    -4.9076E-12     1.2202E-05
+               (   1.0000)    (   1.0000)    (*********)    (   1.0000)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine      60.0
+
+     0.000  -1.000    3.1831E-01
+                     (   1.0000)
+            -0.200    3.1831E-01
+                     (   1.0000)
+             0.200    7.3920E-02
+                     (   1.0000)
+             1.000    1.3277E-02
+                     (   1.0000)
+
+     1.050  -1.000    1.9661E-01
+                     (   1.0000)
+            -0.200    5.9237E-02
+                     (   1.0000)
+             0.200    3.0023E-02
+                     (   1.0000)
+             1.000    7.0557E-03
+                     (   1.0000)
+
+     2.100  -1.000    1.1548E-01
+                     (   1.0000)
+            -0.200    3.0181E-02
+                     (   1.0000)
+             0.200    1.5267E-02
+                     (   1.0000)
+             1.000    4.0693E-03
+                     (   1.0000)
+
+     6.000  -1.000    1.4618E-02
+                     (   1.0000)
+            -0.200    3.8559E-03
+                     (   1.0000)
+             0.200    2.3830E-03
+                     (   1.0000)
+             1.000    7.7789E-04
+                     (   1.0000)
+
+    21.000  -1.000    3.3774E-05
+                     (   1.0000)
+            -0.200    1.2086E-05
+                     (   1.0000)
+             0.200    0.0000E+00
+                     (   1.0000)
+             1.000    0.0000E+00
+                     (   1.0000)
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 9c:  Generalization of 9A to include all possible complexity                                                     
+ ****************************************************************************************************
+
+ No. streams =   8     No. computational layers =   6
+   5 User optical depths :    0.0000    1.0500    2.1000    6.0000   21.0000
+   4 User polar angle cosines : -1.00000 -0.20000  0.20000  1.00000
+   3 User azimuthal angles :    60.00   120.00   180.00
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  3.142E+00 and polar angle cosine =  0.50000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  1.000E+00
+    Bottom albedo (Lambertian) =  0.5000
+    Thermal emission in wavenumber interval :      999.0000     1000.0000
+    Bottom temperature =    700.00    Top temperature =    550.00    Top emissivity =  1.0000
+ Uses delta-M method
+ Uses TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor   Temperature
+   1    1.0000    1.0000   0.65000     0.00000    1.0000    1.0000   0.65000   0.1429       600.000
+   2    2.0000    3.0000   0.70000     0.00004    1.9999    2.9999   0.69999   0.2857       610.000
+   3    3.0000    6.0000   0.75000     0.00114    2.9974    5.9974   0.74979   0.4286       620.000
+   4    4.0000   10.0000   0.80000     0.01137    3.9636    9.9610   0.79816   0.5714       630.000
+   5    5.0000   15.0000   0.85000     0.06776    4.7120   14.6730   0.84083   0.7143       640.000
+   6    6.0000   21.0000   0.90000     0.29136    4.4267   19.0997   0.86446   0.8571       650.000
+                                                                                            660.000
+
+ Number of Phase Function Moments =     9
+ Layer   Phase Function Moments
+     1   1.000000   0.142857   0.020408   0.002915   0.000416   0.000059   0.000008   0.000001   0.000000
+     2   1.000000   0.285714   0.081633   0.023324   0.006664   0.001904   0.000544   0.000155   0.000044
+     3   1.000000   0.428571   0.183673   0.078717   0.033736   0.014458   0.006196   0.002656   0.001138
+     4   1.000000   0.571429   0.326531   0.186589   0.106622   0.060927   0.034815   0.019895   0.011368
+     5   1.000000   0.714286   0.510204   0.364432   0.260308   0.185934   0.132810   0.094865   0.067760
+     6   1.000000   0.857143   0.734694   0.629738   0.539775   0.462664   0.396569   0.339917   0.291357
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     1.5708E+00     6.0921E+00     4.6840E+00     3.4959E+00
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0001)
+     1.0500     1.9235E-01     4.9727E+00     4.2437E+00     8.8110E-01
+               (   1.0000)    (   1.0000)    (   1.0000)    (   0.9999)
+     2.1000     2.3555E-02     4.4661E+00     4.1693E+00     3.5001E-01
+               (   1.0000)    (   1.0000)    (   1.0000)    (   0.9999)
+     6.0000     9.6513E-06     4.2270E+00     4.3064E+00     1.9447E-02
+               (   1.0000)    (   0.9999)    (   0.9999)    (   1.0052)
+    21.0000     9.0313E-19     4.7374E+00     5.1148E+00     7.1503E-02
+               (   1.0000)    (   1.0000)    (   0.9999)    (   0.9996)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine      60.0         120.0         180.0
+
+     0.000  -1.000    1.9392E+00    1.9392E+00    1.9392E+00
+                     (   1.0000)   (   1.0000)   (   1.0000)
+            -0.200    1.9392E+00    1.9392E+00    1.9392E+00
+                     (   1.0000)   (   1.0000)   (   1.0000)
+             0.200    1.6185E+00    1.5789E+00    1.5655E+00
+                     (   1.0000)   (   1.0000)   (   1.0000)
+             1.000    1.4387E+00    1.4387E+00    1.4387E+00
+                     (   1.0000)   (   1.0000)   (   1.0000)
+
+     1.050  -1.000    1.6676E+00    1.6676E+00    1.6676E+00
+                     (   1.0000)   (   1.0000)   (   1.0000)
+            -0.200    1.4445E+00    1.4292E+00    1.4244E+00
+                     (   1.0000)   (   1.0000)   (   1.0000)
+             0.200    1.3834E+00    1.3732E+00    1.3703E+00
+                     (   1.0000)   (   1.0000)   (   1.0000)
+             1.000    1.3389E+00    1.3389E+00    1.3389E+00
+                     (   1.0000)   (   1.0000)   (   1.0000)
+
+     2.100  -1.000    1.4851E+00    1.4851E+00    1.4851E+00
+                     (   1.0000)   (   1.0000)   (   1.0000)
+            -0.200    1.3501E+00    1.3458E+00    1.3447E+00
+                     (   1.0000)   (   1.0000)   (   1.0000)
+             0.200    1.3308E+00    1.3292E+00    1.3287E+00
+                     (   1.0000)   (   1.0000)   (   1.0000)
+             1.000    1.3279E+00    1.3279E+00    1.3279E+00
+                     (   1.0000)   (   1.0000)   (   1.0000)
+
+     6.000  -1.000    1.3451E+00    1.3451E+00    1.3451E+00
+                     (   0.9999)   (   0.9999)   (   0.9999)
+            -0.200    1.3512E+00    1.3512E+00    1.3512E+00
+                     (   0.9999)   (   0.9999)   (   0.9999)
+             0.200    1.3597E+00    1.3597E+00    1.3597E+00
+                     (   0.9999)   (   0.9999)   (   0.9999)
+             1.000    1.3791E+00    1.3791E+00    1.3791E+00
+                     (   0.9999)   (   0.9999)   (   0.9999)
+
+    21.000  -1.000    1.4892E+00    1.4892E+00    1.4892E+00
+                     (   1.0000)   (   1.0000)   (   1.0000)
+            -0.200    1.5426E+00    1.5426E+00    1.5426E+00
+                     (   0.9999)   (   0.9999)   (   0.9999)
+             0.200    1.6281E+00    1.6281E+00    1.6281E+00
+                     (   0.9999)   (   0.9999)   (   0.9999)
+             1.000    1.6281E+00    1.6281E+00    1.6281E+00
+                     (   0.9999)   (   0.9999)   (   0.9999)
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 10a:  like 9c, USRANG = True                                                                                     
+ ****************************************************************************************************
+
+ No. streams =   4     No. computational layers =   6
+   3 User optical depths :    0.0000    2.1000   21.0000
+   4 User polar angle cosines : -0.78868 -0.21132  0.21132  0.78868
+   2 User azimuthal angles :    60.00   120.00
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  3.142E+00 and polar angle cosine =  0.50000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  1.000E+00
+    Bottom albedo (Lambertian) =  0.5000
+    Thermal emission in wavenumber interval :      999.0000     1000.0000
+    Bottom temperature =    700.00    Top temperature =    550.00    Top emissivity =  1.0000
+ Uses delta-M method
+ Uses TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor   Temperature
+   1    1.0000    1.0000   0.65000     0.00042    0.9997    0.9997   0.64991   0.1429       600.000
+   2    2.0000    3.0000   0.70000     0.00666    1.9907    2.9904   0.69859   0.2857       610.000
+   3    3.0000    6.0000   0.75000     0.03374    2.9241    5.9145   0.74351   0.4286       620.000
+   4    4.0000   10.0000   0.80000     0.10662    3.6588    9.5733   0.78135   0.5714       630.000
+   5    5.0000   15.0000   0.85000     0.26031    3.8937   13.4670   0.80738   0.7143       640.000
+   6    6.0000   21.0000   0.90000     0.53978    3.0852   16.5522   0.80552   0.8571       650.000
+                                                                                            660.000
+
+ Number of Phase Function Moments =     5
+ Layer   Phase Function Moments
+     1   1.000000   0.142857   0.020408   0.002915   0.000416
+     2   1.000000   0.285714   0.081633   0.023324   0.006664
+     3   1.000000   0.428571   0.183673   0.078717   0.033736
+     4   1.000000   0.571429   0.326531   0.186589   0.106622
+     5   1.000000   0.714286   0.510204   0.364432   0.260308
+     6   1.000000   0.857143   0.734694   0.629738   0.539775
+
+
+                     <----------------------- FLUXES ----------------------->
+   Optical  Compu    Downward    Downward    Downward      Upward                    Mean      Planck   d(Net Flux)
+     Depth  Layer      Direct     Diffuse       Total     Diffuse         Net   Intensity      Source   / d(Op Dep)
+
+    0.0000      1   1.571E+00   6.092E+00   7.663E+00   4.688E+00   2.975E+00   1.985E+00   1.191E+00     3.495E+00
+    2.1000      2   2.356E-02   4.470E+00   4.493E+00   4.170E+00   3.233E-01   1.366E+00   1.273E+00     3.512E-01
+   21.0000      6   9.031E-19   4.738E+00   4.738E+00   5.115E+00  -3.769E-01   1.574E+00   1.518E+00     7.131E-02
+
+
+ *********  I N T E N S I T I E S  *********
+
+             Polar   Azimuth angles (degrees)
+   Optical   Angle
+    Depth   Cosine
+
+                        60.00     120.00
+    0.0000 -0.7887  1.939E+00  1.939E+00
+           -0.2113  1.939E+00  1.939E+00
+            0.2113  1.615E+00  1.576E+00
+            0.7887  1.469E+00  1.458E+00
+
+                        60.00     120.00
+    2.1000 -0.7887  1.446E+00  1.438E+00
+           -0.2113  1.351E+00  1.347E+00
+            0.2113  1.331E+00  1.329E+00
+            0.7887  1.327E+00  1.326E+00
+
+                        60.00     120.00
+   21.0000 -0.7887  1.499E+00  1.499E+00
+           -0.2113  1.541E+00  1.541E+00
+            0.2113  1.628E+00  1.628E+00
+            0.7887  1.628E+00  1.628E+00
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 10b:  like 9C, USRANG = False                                                                                    
+ ****************************************************************************************************
+
+ No. streams =   4     No. computational layers =   6
+   3 User optical depths :    0.0000    2.1000   21.0000
+   4 User polar angle cosines : -0.78868 -0.21132  0.21132  0.78868
+   2 User azimuthal angles :    60.00   120.00
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  3.142E+00 and polar angle cosine =  0.50000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  1.000E+00
+    Bottom albedo (Lambertian) =  0.5000
+    Thermal emission in wavenumber interval :      999.0000     1000.0000
+    Bottom temperature =    700.00    Top temperature =    550.00    Top emissivity =  1.0000
+ Uses delta-M method
+ Uses TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor   Temperature
+   1    1.0000    1.0000   0.65000     0.00042    0.9997    0.9997   0.64991   0.1429       600.000
+   2    2.0000    3.0000   0.70000     0.00666    1.9907    2.9904   0.69859   0.2857       610.000
+   3    3.0000    6.0000   0.75000     0.03374    2.9241    5.9145   0.74351   0.4286       620.000
+   4    4.0000   10.0000   0.80000     0.10662    3.6588    9.5733   0.78135   0.5714       630.000
+   5    5.0000   15.0000   0.85000     0.26031    3.8937   13.4670   0.80738   0.7143       640.000
+   6    6.0000   21.0000   0.90000     0.53978    3.0852   16.5522   0.80552   0.8571       650.000
+                                                                                            660.000
+
+ Number of Phase Function Moments =     5
+ Layer   Phase Function Moments
+     1   1.000000   0.142857   0.020408   0.002915   0.000416
+     2   1.000000   0.285714   0.081633   0.023324   0.006664
+     3   1.000000   0.428571   0.183673   0.078717   0.033736
+     4   1.000000   0.571429   0.326531   0.186589   0.106622
+     5   1.000000   0.714286   0.510204   0.364432   0.260308
+     6   1.000000   0.857143   0.734694   0.629738   0.539775
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     1.5708E+00     6.0921E+00     4.6883E+00     3.4946E+00
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     2.1000     2.3555E-02     4.4699E+00     4.1702E+00     3.5123E-01
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+    21.0000     9.0313E-19     4.7383E+00     5.1153E+00     7.1307E-02
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine      60.0         120.0
+
+     0.000  -0.789    1.9392E+00    1.9392E+00
+                     (   1.0000)   (   1.0000)
+            -0.211    1.9392E+00    1.9392E+00
+                     (   1.0000)   (   1.0000)
+             0.211    1.6150E+00    1.5763E+00
+                     (   1.0000)   (   1.0000)
+             0.789    1.4692E+00    1.4576E+00
+                     (   1.0000)   (   1.0000)
+
+     2.100  -0.789    1.4457E+00    1.4379E+00
+                     (   1.0000)   (   1.0000)
+            -0.211    1.3511E+00    1.3468E+00
+                     (   1.0000)   (   1.0000)
+             0.211    1.3307E+00    1.3292E+00
+                     (   1.0000)   (   1.0000)
+             0.789    1.3269E+00    1.3265E+00
+                     (   1.0000)   (   1.0000)
+
+    21.000  -0.789    1.4994E+00    1.4994E+00
+                     (   1.0000)   (   1.0000)
+            -0.211    1.5412E+00    1.5412E+00
+                     (   1.0000)   (   1.0000)
+             0.211    1.6282E+00    1.6282E+00
+                     (   1.0000)   (   1.0000)
+             0.789    1.6282E+00    1.6282E+00
+                     (   1.0000)   (   1.0000)
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 11a: One Isotropic-Scattering Layer                                                                              
+ ****************************************************************************************************
+
+ No. streams =  16     No. computational layers =   1
+   4 User optical depths :    0.0000    0.0500    0.5000    1.0000
+   4 User polar angle cosines : -1.00000 -0.10000  0.10000  1.00000
+   2 User azimuthal angles :     0.00    90.00
+ No thermal emission
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  1.000E+00 and polar angle cosine =  0.50000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  1.592E-01
+    Bottom albedo (Lambertian) =  0.5000
+ Uses delta-M method
+ Uses TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor
+   1    1.0000    1.0000   0.90000     0.00000    1.0000    1.0000   0.90000   0.0000
+
+ Number of Phase Function Moments =    17
+ Layer   Phase Function Moments
+     1   1.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+         0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+
+
+                     <----------------------- FLUXES ----------------------->
+   Optical  Compu    Downward    Downward    Downward      Upward                    Mean      Planck   d(Net Flux)
+     Depth  Layer      Direct     Diffuse       Total     Diffuse         Net   Intensity      Source   / d(Op Dep)
+
+    0.0000      1   5.000E-01   5.000E-01   1.000E+00   5.014E-01   4.986E-01   2.457E-01   0.000E+00     3.088E-01
+    0.0500      1   4.524E-01   5.170E-01   9.694E-01   4.861E-01   4.833E-01   2.407E-01   0.000E+00     3.025E-01
+    0.5000      1   1.839E-01   5.465E-01   7.304E-01   3.653E-01   3.651E-01   1.788E-01   0.000E+00     2.247E-01
+    1.0000      1   6.767E-02   4.724E-01   5.400E-01   2.700E-01   2.700E-01   1.256E-01   0.000E+00     1.578E-01
+
+
+ *********  I N T E N S I T I E S  *********
+
+             Polar   Azimuth angles (degrees)
+   Optical   Angle
+    Depth   Cosine
+
+                         0.00      90.00
+    0.0000 -1.0000  1.592E-01  1.592E-01
+           -0.1000  1.592E-01  1.592E-01
+            0.1000  2.100E-01  2.100E-01
+            1.0000  1.409E-01  1.409E-01
+
+                         0.00      90.00
+    0.0500 -1.0000  1.621E-01  1.621E-01
+           -0.1000  1.827E-01  1.827E-01
+            0.1000  2.040E-01  2.040E-01
+            1.0000  1.368E-01  1.368E-01
+
+                         0.00      90.00
+    0.5000 -1.0000  1.708E-01  1.708E-01
+           -0.1000  1.721E-01  1.721E-01
+            0.1000  1.505E-01  1.505E-01
+            1.0000  1.065E-01  1.065E-01
+
+                         0.00      90.00
+    1.0000 -1.0000  1.564E-01  1.564E-01
+           -0.1000  1.224E-01  1.224E-01
+            0.1000  8.595E-02  8.595E-02
+            1.0000  8.595E-02  8.595E-02
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 11b: Same as 11a but treated as multiple layers                                                                  
+ ****************************************************************************************************
+
+ No. streams =  16     No. computational layers =   3
+   4 User optical depths :    0.0000    0.0500    0.5000    1.0000
+   4 User polar angle cosines : -1.00000 -0.10000  0.10000  1.00000
+   2 User azimuthal angles :     0.00    90.00
+ No thermal emission
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  1.000E+00 and polar angle cosine =  0.50000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  1.592E-01
+    Bottom albedo (Lambertian) =  0.5000
+ Uses delta-M method
+ Uses TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor
+   1    0.0500    0.0500   0.90000     0.00000    0.0500    0.0500   0.90000   0.0000
+   2    0.4500    0.5000   0.90000     0.00000    0.4500    0.5000   0.90000   0.0000
+   3    0.5000    1.0000   0.90000     0.00000    0.5000    1.0000   0.90000   0.0000
+
+ Number of Phase Function Moments =    17
+ Layer   Phase Function Moments
+     1   1.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+         0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+     2   1.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+         0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+     3   1.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+         0.000000   0.000000   0.000000   0.000000   0.000000   0.000000   0.000000
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     5.0000E-01     5.0000E-01     5.0138E-01     3.0876E-01
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     0.0500     4.5242E-01     5.1698E-01     4.8608E-01     3.0247E-01
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     0.5000     1.8394E-01     5.4647E-01     3.6529E-01     2.2469E-01
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+     1.0000     6.7668E-02     4.7236E-01     2.7002E-01     1.5778E-01
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine       0.0          90.0
+
+     0.000  -1.000    1.5915E-01    1.5915E-01
+                     (   1.0000)   (   1.0000)
+            -0.100    1.5915E-01    1.5915E-01
+                     (   1.0000)   (   1.0000)
+             0.100    2.1004E-01    2.1004E-01
+                     (   1.0000)   (   1.0000)
+             1.000    1.4086E-01    1.4086E-01
+                     (   1.0000)   (   1.0000)
+
+     0.050  -1.000    1.6208E-01    1.6208E-01
+                     (   1.0000)   (   1.0000)
+            -0.100    1.8270E-01    1.8270E-01
+                     (   1.0000)   (   1.0000)
+             0.100    2.0398E-01    2.0398E-01
+                     (   1.0000)   (   1.0000)
+             1.000    1.3684E-01    1.3684E-01
+                     (   1.0000)   (   1.0000)
+
+     0.500  -1.000    1.7076E-01    1.7076E-01
+                     (   1.0000)   (   1.0000)
+            -0.100    1.7214E-01    1.7214E-01
+                     (   1.0000)   (   1.0000)
+             0.100    1.5049E-01    1.5049E-01
+                     (   1.0000)   (   1.0000)
+             1.000    1.0650E-01    1.0650E-01
+                     (   1.0000)   (   1.0000)
+
+     1.000  -1.000    1.5640E-01    1.5640E-01
+                     (   1.0000)   (   1.0000)
+            -0.100    1.2236E-01    1.2236E-01
+                     (   1.0000)   (   1.0000)
+             0.100    8.5949E-02    8.5949E-02
+                     (   1.0000)   (   1.0000)
+             1.000    8.5949E-02    8.5949E-02
+                     (   1.0000)   (   1.0000)
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 12a:  Overhead Beam Striking Absorbing/Scattering Medium                                                         
+ ****************************************************************************************************
+
+ No. streams =  20     No. computational layers =   1
+   4 User optical depths :    0.0000   10.0000   19.9000   20.1000
+   4 User polar angle cosines : -1.00000 -0.10000  0.10000  1.00000
+   1 User azimuthal angles :     0.00
+ No thermal emission
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  1.000E+00 and polar angle cosine =  1.00000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  0.000E+00
+    Bottom albedo (Lambertian) =  1.0000
+ Uses delta-M method
+ Uses TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor
+   1   20.1000   20.1000   0.50000     0.12158   18.8782   18.8782   0.46764   0.9000
+
+ Number of Phase Function Moments =    21
+ Layer   Phase Function Moments
+     1   1.000000   0.900000   0.810000   0.729000   0.656100   0.590490   0.531441   0.478297   0.430467   0.387420
+         0.348678   0.313810   0.282429   0.254186   0.228768   0.205891   0.185302   0.166772   0.150095   0.135085
+         0.121577
+
+
+                     <----------------------- FLUXES ----------------------->
+   Optical  Compu    Downward    Downward    Downward      Upward                    Mean      Planck   d(Net Flux)
+     Depth  Layer      Direct     Diffuse       Total     Diffuse         Net   Intensity      Source   / d(Op Dep)
+
+    0.0000      1   1.000E+00  -4.768E-07   1.000E+00   6.484E-03   9.935E-01   8.089E-02   0.000E+00     5.083E-01
+   10.0000      1   4.540E-05   3.170E-03   3.216E-03   2.756E-05   3.188E-03   3.063E-04   0.000E+00     1.925E-03
+   19.9000      1   2.278E-09   7.453E-06   7.455E-06   5.476E-06   1.980E-06   1.491E-06   0.000E+00     9.368E-06
+   20.1000      1   1.865E-09   6.628E-06   6.630E-06   6.630E-06   1.364E-12   1.720E-06   0.000E+00     1.081E-05
+
+
+ *********  I N T E N S I T I E S  *********
+
+             Polar   Azimuth angles (degrees)
+   Optical   Angle
+    Depth   Cosine
+
+                         0.00
+    0.0000 -1.0000  0.000E+00
+           -0.1000  0.000E+00
+            0.1000  1.052E-02
+            1.0000  5.282E-02
+
+                         0.00
+   10.0000 -1.0000  8.905E-03
+           -0.1000  3.905E-05
+            0.1000  2.475E-05
+            1.0000  9.442E-06
+
+                         0.00
+   19.9000 -1.0000  1.122E-05
+           -0.1000  2.315E-07
+            0.1000  7.381E-07
+            1.0000  1.906E-06
+
+                         0.00
+   20.1000 -1.0000  9.862E-06
+           -0.1000  3.129E-07
+            0.1000  2.110E-06
+            1.0000  2.110E-06
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 12b: Same as 12a but uses shortcut for absorption optical depth .GT. 10                                          
+ ****************************************************************************************************
+
+ No. streams =  20     No. computational layers =   3
+   4 User optical depths :    0.0000   10.0000   19.9000   20.1000
+   4 User polar angle cosines : -1.00000 -0.10000  0.10000  1.00000
+   1 User azimuthal angles :     0.00
+ No thermal emission
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  1.000E+00 and polar angle cosine =  1.00000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  0.000E+00
+    Bottom albedo (Lambertian) =  1.0000
+ Uses delta-M method
+ Uses TMS/IMS method
+ Calculate fluxes and intensities
+ Relative convergence criterion for azimuth series =   0.00E+00
+ Sets radiation = 0 below absorption optical depth 10
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor
+   1   10.0000   10.0000   0.50000     0.12158    9.3921    9.3921   0.46764   0.9000
+   2    9.9000   19.9000   0.50000     0.12158    9.2982   18.6903   0.46764   0.9000
+   3    0.2000   20.1000   0.50000     0.12158    0.1878   18.8782   0.46764   0.9000
+
+ Number of Phase Function Moments =    21
+ Layer   Phase Function Moments
+     1   1.000000   0.900000   0.810000   0.729000   0.656100   0.590490   0.531441   0.478297   0.430467   0.387420
+         0.348678   0.313810   0.282429   0.254186   0.228768   0.205891   0.185302   0.166772   0.150095   0.135085
+         0.121577
+     2   1.000000   0.900000   0.810000   0.729000   0.656100   0.590490   0.531441   0.478297   0.430467   0.387420
+         0.348678   0.313810   0.282429   0.254186   0.228768   0.205891   0.185302   0.166772   0.150095   0.135085
+         0.121577
+     3   1.000000   0.900000   0.810000   0.729000   0.656100   0.590490   0.531441   0.478297   0.430467   0.387420
+         0.348678   0.313810   0.282429   0.254186   0.228768   0.205891   0.185302   0.166772   0.150095   0.135085
+         0.121577
+
+
+                  <-------------- FLUXES -------------->
+    Optical       Downward       Downward         Upward    d(Net Flux)
+      Depth         Direct        Diffuse        Diffuse    / d(Op Dep)
+     0.0000     1.0000E+00    -4.7684E-07     6.4843E-03     5.0826E-01
+               (   1.0000)    (   1.0000)    (   1.0000)    (   1.0000)
+    10.0000     4.5400E-05     3.1704E-03     2.7556E-05     1.9247E-03
+               (   1.0000)    (   1.0000)    (   0.9998)    (   1.0000)
+    19.9000     2.2779E-09     7.3673E-06     2.1269E-08     4.4821E-06
+               (   1.0000)    (   0.9885)    (   0.0039)    (   0.4785)
+    20.1000     1.8650E-09     6.5067E-06    -5.0360E-15     3.9147E-06
+               (   1.0000)    (   0.9817)    (   0.0000)    (   0.3621)
+
+
+ ********  I N T E N S I T I E S  *********
+
+             Polar   Azimuthal Angles (Degrees)
+   Optical   Angle
+     Depth  Cosine       0.0
+
+     0.000  -1.000    0.0000E+00
+                     (   1.0000)
+            -0.100    0.0000E+00
+                     (   1.0000)
+             0.100    1.0517E-02
+                     (   1.0000)
+             1.000    5.2816E-02
+                     (   1.0000)
+
+    10.000  -1.000    8.9048E-03
+                     (   1.0000)
+            -0.100    3.9049E-05
+                     (   1.0000)
+             0.100    2.4753E-05
+                     (   1.0000)
+             1.000    9.4360E-06
+                     (   0.9993)
+
+    19.900  -1.000    1.1213E-05
+                     (   0.9990)
+            -0.100    1.0263E-07
+                     (   0.4434)
+             0.100    4.5384E-08
+                     (   0.0615)
+             1.000    2.3246E-09
+                     (   0.0012)
+
+    20.100  -1.000    9.6920E-06
+                     (   0.9827)
+            -0.100    8.8482E-08
+                     (   0.2828)
+             0.100    0.0000E+00
+                     (   0.0000)
+             1.000    0.0000E+00
+                     (   0.0000)
+
+
+ =============================================
+ ====     7  SERIOUSLY NON-UNIT RATIOS    ====
+ =============================================
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 13a:  Albedo and Transmissivity from Shortcut, Single Layer                                                      
+ ****************************************************************************************************
+
+ No. streams =  16     No. computational layers =   1
+   2 User polar angle cosines : -0.50000  0.50000
+ No thermal emission
+ Boundary condition flag: IBCND = 1
+    Isotropic illumination from top and bottom
+    Bottom albedo (Lambertian) =  0.5000
+ Uses delta-M method
+ Uses TMS/IMS method
+ Calculate albedo and transmissivity of medium vs. incident beam angle
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor
+   1    1.0000    1.0000   0.99000     0.02815    0.9721    0.9721   0.98971   0.8000
+
+ Number of Phase Function Moments =    17
+ Layer   Phase Function Moments
+     1   1.000000   0.800000   0.640000   0.512000   0.409600   0.327680   0.262144   0.209715   0.167772   0.134218
+         0.107374   0.085899   0.068720   0.054976   0.043980   0.035184   0.028148
+
+
+
+ *******  Flux Albedo and/or Transmissivity of entire medium  ********
+
+ Beam Zen Ang   cos(Beam Zen Ang)      Albedo   Transmissivity
+      60.0000            0.500000     0.54526       8.4500E-01
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 13b:  Albedo and Transmissivity by Regular Method, Single Layer                                                  
+ ****************************************************************************************************
+
+ No. streams =  16     No. computational layers =   1
+   2 User optical depths :    0.0000    1.0000
+ No thermal emission
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  2.000E+00 and polar angle cosine =  0.50000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  0.000E+00
+    Bottom albedo (Lambertian) =  0.5000
+ Uses delta-M method
+ Does not use TMS/IMS method
+ Calculate fluxes only
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor
+   1    1.0000    1.0000   0.99000     0.02815    0.9721    0.9721   0.98971   0.8000
+
+ Number of Phase Function Moments =    17
+ Layer   Phase Function Moments
+     1   1.000000   0.800000   0.640000   0.512000   0.409600   0.327680   0.262144   0.209715   0.167772   0.134218
+         0.107374   0.085899   0.068720   0.054976   0.043980   0.035184   0.028148
+
+
+                     <----------------------- FLUXES ----------------------->
+   Optical  Compu    Downward    Downward    Downward      Upward                    Mean      Planck   d(Net Flux)
+     Depth  Layer      Direct     Diffuse       Total     Diffuse         Net   Intensity      Source   / d(Op Dep)
+
+    0.0000      1   1.000E+00   2.384E-07   1.000E+00   5.453E-01   4.547E-01   2.546E-01   0.000E+00     3.199E-02
+    1.0000      1   1.353E-01   7.097E-01   8.450E-01   4.225E-01   4.225E-01   2.190E-01   0.000E+00     2.752E-02
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 13c:  Albedo and Transmissivity from Shortcut, Multiple Layer                                                    
+ ****************************************************************************************************
+
+ No. streams =  16     No. computational layers =   2
+ No thermal emission
+ Boundary condition flag: IBCND = 1
+    Isotropic illumination from top and bottom
+    Bottom albedo (Lambertian) =  0.5000
+ Uses delta-M method
+ Does not use TMS/IMS method
+ Calculate albedo and transmissivity of medium vs. incident beam angle
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor
+   1    0.5000    0.5000   0.99000     0.02815    0.4861    0.4861   0.98971   0.8000
+   2    0.5000    1.0000   0.50000     0.02815    0.4930    0.9790   0.49286   0.8000
+
+ Number of Phase Function Moments =    17
+ Layer   Phase Function Moments
+     1   1.000000   0.800000   0.640000   0.512000   0.409600   0.327680   0.262144   0.209715   0.167772   0.134218
+         0.107374   0.085899   0.068720   0.054976   0.043980   0.035184   0.028148
+     2   1.000000   0.800000   0.640000   0.512000   0.409600   0.327680   0.262144   0.209715   0.167772   0.134218
+         0.107374   0.085899   0.068720   0.054976   0.043980   0.035184   0.028148
+
+
+
+ *******  Flux Albedo and/or Transmissivity of entire medium  ********
+
+ Beam Zen Ang   cos(Beam Zen Ang)      Albedo   Transmissivity
+      60.0000            0.500000     0.27620       5.0332E-01
+
+
+ ****************************************************************************************************
+ DISORT: Test Case No. 13d:  Albedo and Transmissivity by Regular Method, Multiple Layer                                                
+ ****************************************************************************************************
+
+ No. streams =  16     No. computational layers =   2
+   2 User optical depths :    0.0000    1.0000
+ No thermal emission
+ Boundary condition flag: IBCND = 0
+    Incident beam with intensity =  2.000E+00 and polar angle cosine =  0.50000  and azimuth angle =   0.00
+    plus isotropic incident intensity =  0.000E+00
+    Bottom albedo (Lambertian) =  0.5000
+ Uses delta-M method
+ Does not use TMS/IMS method
+ Calculate fluxes only
+ Relative convergence criterion for azimuth series =   0.00E+00
+
+                                     <------------- Delta-M --------------->
+                   Total    Single                           Total    Single
+       Optical   Optical   Scatter   Separated   Optical   Optical   Scatter    Asymm
+         Depth     Depth    Albedo    Fraction     Depth     Depth    Albedo   Factor
+   1    0.5000    0.5000   0.99000     0.02815    0.4861    0.4861   0.98971   0.8000
+   2    0.5000    1.0000   0.50000     0.02815    0.4930    0.9790   0.49286   0.8000
+
+ Number of Phase Function Moments =    17
+ Layer   Phase Function Moments
+     1   1.000000   0.800000   0.640000   0.512000   0.409600   0.327680   0.262144   0.209715   0.167772   0.134218
+         0.107374   0.085899   0.068720   0.054976   0.043980   0.035184   0.028148
+     2   1.000000   0.800000   0.640000   0.512000   0.409600   0.327680   0.262144   0.209715   0.167772   0.134218
+         0.107374   0.085899   0.068720   0.054976   0.043980   0.035184   0.028148
+
+
+                     <----------------------- FLUXES ----------------------->
+   Optical  Compu    Downward    Downward    Downward      Upward                    Mean      Planck   d(Net Flux)
+     Depth  Layer      Direct     Diffuse       Total     Diffuse         Net   Intensity      Source   / d(Op Dep)
+
+    0.0000      1   1.000E+00   1.192E-07   1.000E+00   2.762E-01   7.238E-01   2.133E-01   0.000E+00     2.681E-02
+    1.0000      2   1.353E-01   3.680E-01   5.033E-01   2.517E-01   2.517E-01   1.210E-01   0.000E+00     7.604E-01

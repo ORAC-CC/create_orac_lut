@@ -1,0 +1,214 @@
+1                    *****  MODTRAN 3.5 Version 1.1   Jan 97  *****
+0 CARD 1  *****t0  7    2    0    0    0    0    0    0    0    0    0    1    0    .000    .00
+0 CARD 1B *****F   0F   0   330.000
+0 CARD 2  *****    1    0    0    0    0    0    .00000    .00000    .00000    .00000   1.50000
+0   GNDALT =   1.50000
+0 CARD 2C *****    4    0    0TEST "DENVER" CASE (
+
+
+ MODEL ATMOSPHERE NO.     7 ICLD =    0
+
+
+
+           MODEL 0 / 7 USER INPUT DATA 
+
+
+     1.500 8.453E+02 2.784E+02 5.043E+01  .000E+00  .000E+00          AAH666666666666 
+     2.000 7.950E+02 2.752E+02 5.201E+01  .000E+00  .000E+00          AAH666666666666 
+     4.000 6.166E+02 2.622E+02 5.010E+01  .000E+00  .000E+00          AAH666666666666 
+     6.000 4.722E+02 2.492E+02 4.923E+01  .000E+00  .000E+00          AAH666666666666 
+1
+
+      Z         P        T     REL H    H2O     CLD AMT   RAIN RATE                      AEROSOL
+     (KM)      (MB)     (K)     (%)   (GM M-3)  (GM M-3)  (MM HR-1) TYPE                 PROFILE
+     1.500   845.300  278.40   50.43 3.483E+00  .000E+00  .000E+00 RURAL               RURAL                                   
+     2.000   795.000  275.20   52.01 2.900E+00  .000E+00  .000E+00 RURAL               RURAL                                   
+     4.000   616.600  262.20   50.10 1.100E+00  .000E+00  .000E+00 TROPOSPHERIC        TROPOSPHERIC        SPRING-SUMMER       
+     6.000   472.200  249.20   49.23 3.800E-01  .000E+00  .000E+00 TROPOSPHERIC        TROPOSPHERIC        SPRING-SUMMER       
+0 CARD 3  *****   1.50000   6.00000    .00000    .00000    .00000    .00000    0
+0 CARD 4  *****      1000      1005         1         2
+0 PROGRAM WILL COMPUTE TRANSMITTANCE           
+0 ATMOSPHERIC MODEL
+          TEMPERATURE =    7     TEST "DENVER" CASE (
+          WATER VAPOR =    7     TEST "DENVER" CASE (
+          OZONE       =    7     TEST "DENVER" CASE (
+                      M4 =     0 M5 =     0 M6 =     0 MDEF =     0
+0 SLANT PATH, H1 TO H2
+          H1    =    1.50000 KM
+          H2    =    6.00000 KM
+          ANGLE =     .00000 DEG
+          RANGE =     .00000 KM
+          BETA  =     .00000 DEG
+          LENN  =      0
+ FREQUENCY RANGE
+             IV1 =      1000 CM-1  (     10.00 MICRONS)
+             IV2 =      1005 CM-1  (      9.95 MICRONS)
+             IDV =         1 CM-1
+           IFWHM =         2 CM-1
+1
+  ATMOSPHERIC PROFILES
+
+   I     Z       P       T        N2       CNTMSLF   CNTMFRN MOL SCAT     N-1     O3 (UV)   O2 (UV)   WAT DROP  ICE PART  RAIN RATE
+        (KM)    (MB)    (K)               (  MOL/CM2 KM  )      (-)       (-)    (  ATM CM/KM  )       (GM/M3)   (GM/M3)   (MM/HR)
+
+   1   1.5000  845.300  278.4  6.144E-01 5.468E+19 1.027E+22 8.185E-01 2.352E-04 2.532E-03 2.871E+04      .000      .000      .000
+   2   2.0000  795.000  275.2  5.562E-01 3.790E+19 8.143E+21 7.788E-01 2.238E-04 2.519E-03 2.678E+04      .000      .000      .000
+   3   4.0000  616.600  262.2  3.686E-01 5.454E+18 2.521E+21 6.340E-01 1.823E-04 2.146E-03 2.021E+04      .000      .000      .000
+   4   6.0000  472.200  249.2  2.393E-01 6.508E+17 7.025E+20 5.108E-01 1.469E-04 2.099E-03 1.519E+04      .000      .000      .000
+1
+  ATMOSPHERIC PROFILES
+
+   I     Z       P       T      AEROSOL 1 AEROSOL 2 AEROSOL 3 AEROSOL 4  AER1*RH   CIRRUS      RH     WAT DROP  ICE PART
+        (KM)    (MB)    (K)       (-)       (-)       (-)       (-)        (-)      (-)     (PERCNT)  (550nm VIS [KM-1])
+
+   1   1.5000  845.300  278.4  1.580E-01  .000E+00  .000E+00  .000E+00 6.167E-01  .000E+00  50.43001    .00000    .00000
+   2   2.0000  795.000  275.2  1.158E-01  .000E+00  .000E+00  .000E+00 4.482E-01  .000E+00  52.01002    .00000    .00000
+   3   4.0000  616.600  262.2   .000E+00 2.808E-02  .000E+00  .000E+00  .000E+00  .000E+00  50.09999    .00000    .00000
+   4   6.0000  472.200  249.2   .000E+00 7.710E-03  .000E+00  .000E+00  .000E+00  .000E+00  49.22999    .00000    .00000
+1
+  ATMOSPHERIC PROFILES
+
+   I      Z       P       H2O      O3       CO2      CO       CH4      N2O      O2       NH3      NO       NO2      SO2      HNO3
+         (KM)    (MB)  (                                            ATM CM/KM                                                     )
+   1   1.5000  845.300  4.33E+02 2.53E-03 2.70E+01 1.17E-02 1.39E-01 2.62E-02 1.71E+04 3.98E-05 2.45E-05 1.88E-06 2.10E-05 5.27E-06
+   2   2.0000  795.000  3.61E+02 2.52E-03 2.57E+01 1.09E-02 1.32E-01 2.49E-02 1.63E+04 3.60E-05 2.33E-05 1.79E-06 1.84E-05 5.40E-06
+   3   4.0000  616.600  1.37E+02 2.15E-03 2.09E+01 8.31E-03 1.08E-01 2.03E-02 1.32E+04 1.82E-05 1.90E-05 1.46E-06 9.25E-06 5.62E-06
+   4   6.0000  472.200  4.73E+01 2.10E-03 1.68E+01 6.57E-03 8.68E-02 1.63E-02 1.07E+04 7.45E-06 1.53E-05 1.17E-06 4.96E-06 5.67E-06
+1
+  ATMOSPHERIC PROFILES
+
+   I      Z     CFC-11   CFC-12   CFC-13   CFC-14   CFC-22   CFC-113  CFC-114  CFC-115  CLONO2    HNO4    CHCL2F    CCL4     N2O5  
+         (KM)   (                                                  ATM CM/KM                                                  )
+   1   1.5000   .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00
+   2   2.0000   .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00
+   3   4.0000   .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00
+   4   6.0000   .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00
+
+
+ CASE 2A:  GIVEN H1, H2 AND ANGLE
+
+
+ SLANT PATH PARAMETERS IN STANDARD FORM
+
+          H1      =    1.50000 KM
+          H2      =    6.00000 KM
+          ANGLE   =     .00000 DEG
+          PHI     =  180.00000 DEG
+          HMIN    =    1.50000 KM
+          LENN    =          0
+
+1CALCULATION OF THE REFRACTED PATH THROUGH THE ATMOSPHERE
+
+
+  I START ALT   END ALT     THETA    DRANGE     RANGE     DBETA      BETA       PHI     DBEND   BENDING       PBAR    TBAR    RHOBAR
+       (KM)      (KM)       (DEG)     (KM)       (KM)     (DEG)     (DEG)     (DEG)     (DEG)    (DEG)        (MB)     (K)  (GM/CM3)
+          H1 TO H2
+
+  1   1.50000   2.00000    .00000    .50000    .50000    .00000    .00000 180.00000    .00000    .00000  820.10154  276.81 1.032E-03
+  2   2.00000   4.00000    .00000   2.00000   2.50000    .00000    .00000 180.00000    .00000    .00000  705.08186  268.87 9.096E-04
+  3   4.00000   6.00000    .00000   2.00000   4.50000    .00000    .00000 180.00000    .00000    .00000  543.78928  255.88 7.368E-04
+
+
+
+
+1  LAYER ABSORBER AMOUNTS FOR THE PATH SEGMENT ENDING AT Z
+
+  J      Z        TBAR       HNO3         O3 UV     CNTMSLF1     CNTMSLF2      CNTMFRN        O2         WAT DROP     ICE PART
+       (KM)        (K)     (ATM CM)     (ATM CM)   (MOL CM-2)   (MOL CM-2)   (MOL CM-2)   (MOL CM-2)   (KM GM/M3)   (KM GM/M3)
+
+  1    2.0000   276.81    2.668E-06    1.263E-03    2.289E+19    1.220E+19    4.583E+21    1.387E+04     .0000000     .0000000
+  2    4.0000   268.87    1.102E-05    4.655E-03    3.348E+19    2.523E+19    9.590E+21    4.668E+04     .0000000     .0000000
+  3    6.0000   255.88    1.129E-05    4.245E-03    4.519E+18    5.036E+18    2.846E+21    3.516E+04     .0000000     .0000000
+
+
+
+1 J      Z        N2 CONT     MOL SCAT        AER 1        AER 2        AER 3        AER 4        CIRRUS     WAT DROP     ICE PART
+        (KM)                                                                                                (550 NM OPTICAL DEPTH)
+
+  1    2.0000     .2924226     .3992359     .0678981     .0000000     .0000000     .0000000     .0000000     .0000000     .0000000
+  2    4.0000     .9119688    1.4077481     .1157769     .0280846     .0000000     .0000000     .0000000     .0000000     .0000000
+  3    6.0000     .5986193    1.1403354     .0000000     .0315225     .0000000     .0000000     .0000000     .0000000     .0000000
+
+
+
+1    J    Z       H2O       O3        CO2       CO        CH4       N2O       O2        NH3       NO        NO2       SO2
+        (KM)    (                                                      ATM CM                                             )
+
+   1    2.0000  1.98E+02  1.26E-03  1.32E+01  5.63E-03  6.78E-02  1.28E-02  8.34E+03  1.89E-05  1.20E-05  9.18E-07  9.82E-06
+   2    4.0000  4.62E+02  4.65E-03  4.64E+01  1.91E-02  2.39E-01  4.50E-02  2.94E+04  5.23E-05  4.22E-05  3.24E-06  2.66E-05
+   3    6.0000  1.69E+02  4.24E-03  3.76E+01  1.48E-02  1.94E-01  3.65E-02  2.38E+04  2.41E-05  3.42E-05  2.62E-06  1.38E-05
+
+
+
+1  J      Z     CFC-11   CFC-12   CFC-13   CFC-14   CFC-22   CFC-113  CFC-114  CFC-115  CLONO2    HNO4    CHCL2F    CCL4     N2O5  
+        (KM)    (                                                     ATM CM                                                     )
+   1    2.0000  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00
+   2    4.0000  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00
+   3    6.0000  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00  .00E+00
+
+
+0SUMMARY OF THE GEOMETRY CALCULATION
+
+          H1      =    1.50000 KM
+          H2      =    6.00000 KM
+          ANGLE   =     .00000 DEG
+          RANGE   =    4.50000 KM
+          BETA    =     .00000 DEG
+          PHI     =  180.00000 DEG
+          HMIN    =    1.50000 KM
+          BENDING =     .00000 DEG
+          LENN    =          0
+
+
+
+
+1  EQUIVALENT SEA LEVEL TOTAL ABSORBER AMOUNTS
+
+                 HNO3      O3 UV      CNTMSLF1    CNTMSLF2    CNTMFRN     N2 CONT     MOL SCAT
+               (ATM CM)   (ATM CM)   (MOL CM-2)  (MOL CM-2)  (MOL CM-2)
+
+            2.4981E-05  1.0162E-02  6.0885E+19  4.2465E+19  1.7019E+22  1.8030E+00  2.9473E+00
+
+
+                AER 1       AER 2       AER 3       AER 4      CIRRUS     WAT DROP    ICE PART   MEAN AER RH
+                                                                         (KM GM/M3)  (KM GM/M3)    (PRCNT)
+
+               .183675     .059607     .000000     .000000     .000000     .000000     .000000       51.71
+
+
+                H2O         O3          CO2         CO          CH4         N2O
+             (                                   ATM CM                                   )
+
+            8.2861E+02  1.0162E-02  9.7194E+01  3.9534E-02  5.0070E-01  9.4249E-02
+
+
+                O2          NH3         NO          NO2         SO2
+               (                      ATM CM                      )
+
+            6.1556E+04  9.5328E-05  8.8359E-05  6.7742E-06  5.0161E-05
+
+
+             CFC-11      CFC-12      CFC-13      CFC-14      CFC-22      CFC-113     CFC-114
+             (                                    ATM CM                                    )
+
+             .0000E+00   .0000E+00   .0000E+00   .0000E+00   .0000E+00   .0000E+00   .0000E+00
+
+
+             CFC-115     CLONO2       HNO4       CHCL2F       CCL4        N2O5      
+             (                                    ATM CM                                    )
+
+             .0000E+00   .0000E+00   .0000E+00   .0000E+00   .0000E+00   .0000E+00
+1
+   FREQ WAVELENGTH  TOTAL     H2O     CO2+     OZONE    TRACE  N2 CONT  H2O CONT MOL SCAT  AER-HYD  HNO3    AER-HYD  INTEGRATED
+   1/CM  MICRONS    TRANS    TRANS    TRANS    TRANS    TRANS   TRANS    TRANS    TRANS     TRANS   TRANS   TAU-ABS  ABSORPTION
+
+   1000.  10.000    .9356    .9798    .9998    .9897   1.0000   1.0000    .9822   1.0000    .9825   1.0000    .9917        .032
+   1001.   9.990    .9445    .9911    .9997    .9879   1.0000   1.0000    .9823   1.0000    .9824   1.0000    .9916        .088
+   1002.   9.980    .9498    .9983    .9997    .9863   1.0000   1.0000    .9824   1.0000    .9823   1.0000    .9915        .138
+   1003.   9.970    .9422    .9908    .9998    .9858   1.0000   1.0000    .9825   1.0000    .9822   1.0000    .9914        .196
+   1004.   9.960    .9334    .9828    .9997    .9844   1.0000   1.0000    .9826   1.0000    .9821   1.0000    .9913        .262
+   1005.   9.950    .9387    .9912    .9997    .9817   1.0000   1.0000    .9827   1.0000    .9820   1.0000    .9912        .293
+0INTEGRATED ABSORPTION FROM  1000 TO  1005 CM-1 =       .29 CM-1
+ AVERAGE TRANSMITTANCE = .9414
+
+0 CARD 5 *****    0

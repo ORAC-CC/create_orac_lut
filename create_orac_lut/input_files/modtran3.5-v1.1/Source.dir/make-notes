@@ -1,0 +1,44 @@
+(These notes are extracted from the Readme file)
+
+                COMPILING THE CODE & MACHINE SPECIFIC PARAMETERS
+
+        The 'makefile' to be used with the UNIX 'make' utility is structured to be
+run in a directory with two subdirectories, 'SOURCE' and 'OBJECTS'. The  
+subdirectory 'SOURCE' contains each subroutine as an independent file. The
+'makefile' puts the object files in subdirectory 'OBJECTS'. Local variables
+no longer need to be saved when compiling by using the machine dependent save
+option. The only compile options used are '-O' to optimize and '-c' to
+suppress linking and produce an object file from each source file.
+
+        The subroutine loop.f does not have the optimization flag in the makefile.
+The solar single scattering calculation is slightly off when the Hp optimizes loop.f,
+but the Sun and SGI optimizers are fine. If you choose to optimize loop.f ,check
+the solar single scattering numbers in tape6 for case1 against the numbers in case1.tp6.
+        
+        On the SGI subroutine driver.f the '-O' flag gives the warning:
+
+uopt: Warning: driver_: this procedure not optimized because it
+      exceeds size threshold; to optimize this procedure, use -Olimit option
+      with value >= 1209.
+
+This is not a problem in that the code compiles and runs; driver.f is simply not
+optimized. driver.f can be optimized by changing the '-O' flag to '-Olimit 1209'.
+
+        There are a couple of machine dependent parameters in the code.  
+The file 'd1mach.f' contains double precision machine constants used
+in the DISORT multiple scattering section. The comments in 'd1mach.f'
+explain what appropriate changes need to be made.
+
+        The record length, 'RECL', used for reading and writing the binary band   
+model file 'MOLBMP96.BIN' is machine dependent and  needs to be put into 
+the open statement for 'MOLBMP96.BIN' in 'Source.dir/SOURCE/bmdata.f'. The
+correct number for the record length size, 'RECL', is determined when the  
+binary file 'MOLBMP96.BIN' is written by 'molbmp.f' in subdirectory 'DATA'. RECL is 60
+for the Hp and Sun and is 15 for the SGI. It is important to make the binary band model
+tape before compiling the main MODTRAN 3.5 executable.
+
+        The file 'PARAM.LST' contains the list of parameters used
+to change the number of layers. This file is incorporated into the
+MODTRAN 3.5 code with "include" statements.
+
+

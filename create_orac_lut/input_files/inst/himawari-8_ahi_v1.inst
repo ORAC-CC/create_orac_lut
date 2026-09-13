@@ -1,0 +1,186 @@
+# Himawari instrument definition for ORAC code
+# Channels 1-16 
+
+# Format
+# or * indicate a comment, can have blank lines. An = separates the constant and its value.
+
+# constants
+# + may be in any order
+# + are case insensitive (will be translated to lower case)
+# + may include spaces (they are ignored) 
+# e.g. Solar Channels is equivalent to solarchannels
+
+# uncertainty in albedo for solar channels and NedT for thermal and mixed thermal/solar channels
+
+# quantities specific to a channel can be indicated using the nadir channelid (as a number) in []
+platform = himawari-8
+instrument = ahi
+instrument version = unknown
+
+# 0: single or N: dual view where N represents the channel offset of the slant view wrt the nadir view
+view = 0
+
+# specify instrument channels available as some instrument channels may be inapplicable, failed, too noisy etc
+available channels  = 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
+
+# specify which of the channels measure reflected solar radiation (includes channels around 4 um which have both a solar and emitted component)
+solar channels  = 1 2 3 4 5 6 7
+
+# specify which of the channels measure emitted thermal radiation (includes channels around 4 um which have both a solar and emitted component)
+thermal channels  = 7 8 9 10 11 12 13 14 15 16 
+
+# Figure below captures the maximum value  
+maximum satellite zenith = 90
+
+# spectral response functions
+# taken from RTTOV spectral response function archive: https://www.nwpsaf.eu/site/software/rttov/download/coefficients/spectral-response-functions/
+# channels follow ORAC (ie OSCAR) order except atsr, atsr-2 and aatsr which are reversed
+ srf  [1] = rtcoef_himawari_8_ahi_srf_ch01.txt
+ srf  [2] = rtcoef_himawari_8_ahi_srf_ch02.txt
+ srf  [3] = rtcoef_himawari_8_ahi_srf_ch03.txt
+ srf  [4] = rtcoef_himawari_8_ahi_srf_ch04.txt
+ srf  [5] = rtcoef_himawari_8_ahi_srf_ch05.txt
+ srf  [6] = rtcoef_himawari_8_ahi_srf_ch06.txt
+ srf  [7] = rtcoef_himawari_8_ahi_srf_ch07.txt
+ srf  [8] = rtcoef_himawari_8_ahi_srf_ch08.txt
+ srf  [9] = rtcoef_himawari_8_ahi_srf_ch09.txt
+ srf [10] = rtcoef_himawari_8_ahi_srf_ch10.txt
+ srf [11] = rtcoef_himawari_8_ahi_srf_ch11.txt
+ srf [12] = rtcoef_himawari_8_ahi_srf_ch12.txt
+ srf [13] = rtcoef_himawari_8_ahi_srf_ch13.txt
+ srf [14] = rtcoef_himawari_8_ahi_srf_ch14.txt
+ srf [15] = rtcoef_himawari_8_ahi_srf_ch15.txt
+ srf [16] = rtcoef_himawari_8_ahi_srf_ch16.txt
+
+
+# TEMPORARY 
+# Old SAD values from  /network/aopp/apres/ORAC_LUTS/seviri/MSG4 carried through for back compatibility 
+# REMOVE when new error calculation implemented
+# oldF0 is the pre-launch in band solar radiance (W/(m^2 um)) for the solar channels
+ oldf0[1] = 641.5
+ oldf0[2] = 602
+ oldf0[3] = 519.3
+ oldf0[4] = 309.4
+ oldf0[5] =  77.14
+ oldf0[6] =  23.92
+ oldf0[7] =   5.39
+ 
+oldnefr[1] = 0.005 
+oldnefr[2] = 0.005 
+oldnefr[3] = 0.005
+oldnefr[4] = 0.005
+oldnefr[5] = 0.005
+oldnefr[6] = 0.005
+
+oldwvn[7]  = 2575.767
+oldwvn[8]  = 1609.241
+oldwvn[9]  = 1442.079
+oldwvn[10] = 1361.387
+oldwvn[11] = 1164.443
+oldwvn[12] = 1038.108
+oldwvn[13] =  961.333
+oldwvn[14] =  890.741 
+oldwvn[15] =  809.242 
+oldwvn[16] =  753.369
+
+oldb1[7]  = 203538.712950034
+oldb1[8]  = 49635.3083177212
+oldb1[9]  = 35718.6269473266
+oldb1[10] = 30051.8996995261
+oldb1[11] = 18805.3830190942
+oldb1[12] = 13324.6380875744
+oldb1[13] = 10581.5272935496
+oldb1[14] =  8417.4668365172 
+oldb1[15] =  6311.9308127141 
+oldb1[16] =  5092.7287481447 
+
+oldb2[7]  = 3705.9490532006
+oldb2[8]  = 2315.3359298362
+oldb2[9]  = 2074.8276261534
+oldb2[10] = 1958.7292715884
+oldb2[11] = 1675.3716586107
+oldb2[12] = 1493.6043758019
+oldb2[13] = 1383.1413194783
+oldb2[14] = 1281.5756326475
+oldb2[15] = 1164.3168427389
+oldb2[16] = 1083.9284573648
+
+oldt1[7]  = 4.65E-001
+oldt1[8]  = 1.60E+000
+oldt1[9]  = 2.98E-001
+oldt1[10] = 5.48E-002
+oldt1[11] = 1.31E-001
+oldt1[12] = 8.70E-002
+oldt1[13] = 8.51E-002
+oldt1[14] = 1.69E-001
+oldt1[15] = 2.26E-001 
+oldt1[16] = 5.33E-002
+
+oldt2[7]  = 9.99E-001
+oldt2[8]  = 9.97E-001
+oldt2[9]  = 9.99E-001
+oldt2[10] = 1.00E+000
+oldt2[11] = 1.00E+000 
+oldt2[12] = 1.00E+000
+oldt2[13] = 1.00E+000 
+oldt2[14] = 9.99E-001 
+oldt2[15] = 9.99E-001 
+oldt2[16] = 1.00E+000
+
+oldnebt[7]  = 0.25 
+oldnebt[8]  = 0.25
+oldnebt[9]  = 0.25
+oldnebt[10] = 0.25
+oldnebt[11] = 0.25
+oldnebt[12] = 0.25
+oldnebt[13] = 0.25 
+oldnebt[14] = 0.25
+oldnebt[15] = 0.25
+oldnebt[16] = 0.25
+
+# rgu radiance gain (W/(m^2 sr um count)) uncertainty for the solar channels
+# rou radiance offset (W/(m^2 sr um)) uncertainty for the solar channels
+# refbt (K) reference brightness temperature for the thermal channels
+# NEdT (K) noise equivalent delta T 
+# Values from Okuyama et al 2018 DOI:10.2151/jmsj.2018-033
+
+# rgu [1] = 0.0004356
+# rgu [2] = 0.0002373
+# rgu [3] = 0.00005225
+# rgu [4] = 0.00003712
+# rgu [5] = 0.00001632
+# rgu [6] = 0.000008943
+# rou [1] = 0.2282
+# rou [2] = 0.2456
+# rou [3] = 0.4109
+# rou [4] = 0.2690
+# rou [5] = 0.02166
+# rou [6] = 0.008989
+
+snr [1] = 585 
+snr [2] = 645 
+snr [3] = 459
+snr [4] = 420
+snr [5] = 912
+snr [6] = 688
+
+ refbt  [7] = 300
+ refbt  [8] = 240
+ refbt  [9] = 300
+ refbt [10] = 240
+ refbt [11] = 300
+ refbt [12] = 300
+ refbt [13] = 300
+ refbt [14] = 300
+ refbt [15] = 300
+ refbt [16] = 300
+ nedt   [7] = 0.21
+ nedt   [8] = 0.13
+ nedt   [9] = 0.039
+ nedt  [10] = 0.13
+ nedt  [11] = 0.042
+ nedt  [12] = 0.052
+ nedt  [13] = 0.077
+ nedt  [14] = 0.063
+ nedt  [15] = 0.087
+ nedt  [16] = 0.22

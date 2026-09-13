@@ -1,0 +1,134 @@
+# MODIS instrument definition for ORAC code
+# Note that EOS-2 was renamed aqua
+
+# Format
+# or * indicate a comment, can have blank lines. An = separates the constant and its value.
+
+# constants
+# + may be in any order
+# + are case insensitive (will be translated to lower case)
+# + may include spaces (they are ignored) 
+# e.g. Solar Channels is equivalent to solarchannels
+
+# uncertainty in albedo for solar channels and NedT for thermal and mixed thermal/solar channels
+
+# quantities specific to a channel can be indicated using the nadir channelid (as a number) in []
+platform = aqua
+instrument = modis
+instrument version = unknown
+
+# 0: single or N: dual view where N represents the channel offset of the slant view wrt the nadir view
+view = 0
+
+# specify instrument channels available as some instrument channels may be inapplicable, failed, too noisy etc
+available channels  = 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 
+
+# specify which of the channels measure reflected solar radiation (includes channels around 4 um which have both a solar and emitted component)
+solar channels  = 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26
+
+# specify which of the channels measure emitted thermal radiation (includes channels around 4 um which have both a solar and emitted component)
+thermal channels  =  20 21 22 23 24 25 27 28 29 30 31 32 33 34 35 36  
+
+# Figure below captures the maximum value (64.X) with a little tolerance 
+maximum satellite zenith = 65
+
+# spectral response functions
+# taken from RTTOV spectral response function archive: https://www.nwpsaf.eu/site/software/rttov/download/coefficients/spectral-response-functions/
+# channels follow ORAC (ie OSCAR) order except atsr, atsr-2 and aatsr which are reversed
+ srf [1] = rtcoef_eos_2_modis-shifted_srf_ch01.txt
+ srf [2] = rtcoef_eos_2_modis-shifted_srf_ch02.txt
+ srf [3] = rtcoef_eos_2_modis-shifted_srf_ch03.txt
+ srf [4] = rtcoef_eos_2_modis-shifted_srf_ch04.txt
+ srf [5] = rtcoef_eos_2_modis-shifted_srf_ch05.txt
+ srf [6] = rtcoef_eos_2_modis-shifted_srf_ch06.txt
+ srf [7] = rtcoef_eos_2_modis-shifted_srf_ch07.txt
+ srf [8] = rtcoef_eos_2_modis-shifted_srf_ch08.txt
+ srf [9] = rtcoef_eos_2_modis-shifted_srf_ch09.txt
+ srf [10] = rtcoef_eos_2_modis-shifted_srf_ch10.txt
+ srf [11] = rtcoef_eos_2_modis-shifted_srf_ch11.txt
+ srf [12] = rtcoef_eos_2_modis-shifted_srf_ch12.txt
+ srf [13] = rtcoef_eos_2_modis-shifted_srf_ch13.txt
+ srf [14] = rtcoef_eos_2_modis-shifted_srf_ch14.txt
+ srf [15] = rtcoef_eos_2_modis-shifted_srf_ch15.txt
+ srf [16] = rtcoef_eos_2_modis-shifted_srf_ch16.txt
+ srf [17] = rtcoef_eos_2_modis-shifted_srf_ch17.txt
+ srf [18] = rtcoef_eos_2_modis-shifted_srf_ch18.txt
+ srf [19] = rtcoef_eos_2_modis-shifted_srf_ch19.txt
+ srf [20] = rtcoef_eos_2_modis-shifted_srf_ch20.txt
+ srf [21] = rtcoef_eos_2_modis-shifted_srf_ch21.txt
+ srf [22] = rtcoef_eos_2_modis-shifted_srf_ch22.txt
+ srf [23] = rtcoef_eos_2_modis-shifted_srf_ch23.txt
+ srf [24] = rtcoef_eos_2_modis-shifted_srf_ch24.txt
+ srf [25] = rtcoef_eos_2_modis-shifted_srf_ch25.txt
+ srf [26] = rtcoef_eos_2_modis-shifted_srf_ch26.txt
+ srf [27] = rtcoef_eos_2_modis-shifted_srf_ch27.txt
+ srf [28] = rtcoef_eos_2_modis-shifted_srf_ch28.txt
+ srf [29] = rtcoef_eos_2_modis-shifted_srf_ch29.txt
+ srf [30] = rtcoef_eos_2_modis-shifted_srf_ch30.txt
+ srf [31] = rtcoef_eos_2_modis-shifted_srf_ch31.txt
+ srf [32] = rtcoef_eos_2_modis-shifted_srf_ch32.txt
+ srf [33] = rtcoef_eos_2_modis-shifted_srf_ch33.txt
+ srf [34] = rtcoef_eos_2_modis-shifted_srf_ch34.txt
+ srf [35] = rtcoef_eos_2_modis-shifted_srf_ch35.txt
+ srf [36] = rtcoef_eos_2_modis-shifted_srf_ch36.txt
+ 
+
+# channel random noise in percentage for solar channels and NEdT (K) for the thermal channels
+# SW (2007) calibration from https://doi.org/10.1117/1.JRS.9.094092 
+# IR calibration (2010) from https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7430258/
+
+ snr[1] = 203
+ snr[2] = 527
+ snr[3] = 301
+ snr[4] = 321
+ snr[5] = 146
+ snr[6] = 474
+ snr[7] = 155
+ snr[8] = 941
+ snr[9] = 1423
+ snr[10] = 1488
+ snr[11] = 1729
+ snr[12] = 1506
+ snr[13] = 1472
+ snr[14] = 1595
+ snr[15] = 1581
+ snr[16] = 1487
+ snr[17] = 365
+ snr[18] = 91
+ snr[19] = 512
+ snr[26] = 283
+
+ refbt  [20] = 290.
+ refbt  [21] = 290.
+ refbt  [22] = 290.
+ refbt  [23] = 290.
+ refbt  [24] = 290.
+ refbt  [25] = 290.
+ refbt  [27] = 290.
+ refbt  [28] = 290.
+ refbt  [29] = 290.
+ refbt  [30] = 290.
+ refbt  [31] = 290.
+ refbt  [32] = 290.
+ refbt  [33] = 290.
+ refbt  [34] = 290.
+ refbt  [35] = 290.
+ refbt  [36] = 290.
+
+ nedt  [20] = .03
+ nedt  [21] = .16
+ nedt  [22] = .03
+ nedt  [23] = .02
+ nedt  [24] = .13
+ nedt  [25] = .05
+ nedt  [27] = .13
+ nedt  [28] = .09
+ nedt  [29] = .03
+ nedt  [30] = .17
+ nedt  [31] = .03
+ nedt  [32] = .04
+ nedt  [33] = .13
+ nedt  [34] = .19
+ nedt  [35] = .23
+ nedt  [36] = .44
+

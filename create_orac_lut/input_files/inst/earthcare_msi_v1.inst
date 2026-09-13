@@ -1,0 +1,62 @@
+# MSI instrument definition for ORAC code
+
+
+# Format
+# or * indicate a comment, can have blank lines. An = separates the constant and its value.
+
+# constants
+# + may be in any order
+# + are case insensitive (will be translated to lower case)
+# + may include spaces (they are ignored) 
+# e.g. Solar Channels is equivalent to solarchannels
+
+# uncertainty in albedo for solar channels and NedT for thermal and mixed thermal/solar channels
+
+# quantities specific to a channel can be indicated using the nadir channelid (as a number) in []
+platform = earthcare
+instrument = msi
+instrument version = 1
+
+# 0: single or N: dual view where N represents the channel offset of the slant view wrt the nadir view
+view = 0
+
+# specify instrument channels available as some instrument channels may be inapplicable, failed, too noisy etc
+available channels  = 1 2 3 4 5 6 7
+
+# specify which of the channels measure reflected solar radiation (includes channels around 4 um which have both a solar and emitted component)
+solar channels  = 1 2 3 4
+
+# specify which of the channels measure emitted thermal radiation (includes channels around 4 um which have both a solar and emitted component)
+thermal channels  =  5 6 7
+
+# Figure below captures the maximum value  with a lot of  tolerance 
+maximum satellite zenith = 20
+
+# spectral response functions
+# taken from RTTOV spectral response function archive: https://www.nwpsaf.eu/site/software/rttov/download/coefficients/spectral-response-functions/
+# channels follow ORAC (ie OSCAR) order
+srf [1] = rtcoef_earthcare_1_msi_srf_ch01.txt
+srf [2] = rtcoef_earthcare_1_msi_srf_ch02.txt
+srf [3] = rtcoef_earthcare_1_msi_srf_ch03.txt
+srf [4] = rtcoef_earthcare_1_msi_srf_ch04.txt
+srf [5] = rtcoef_earthcare_1_msi_srf_ch05.txt
+srf [6] = rtcoef_earthcare_1_msi_srf_ch06.txt
+srf [7] = rtcoef_earthcare_1_msi_srf_ch07.txt
+
+# channel random noise in percentage for solar channels and NEdT (K) for the thermal channels
+
+ snr[1] = 46
+ snr[2] = 46
+ snr[3] = 46
+ snr[4] = 46
+
+refbt  [5] = 220.
+refbt  [6] = 220.
+refbt  [7] = 220.
+
+nedt  [5] = .6
+nedt  [6] = .4
+nedt  [7] = .54
+
+
+

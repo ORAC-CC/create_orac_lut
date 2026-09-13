@@ -1,0 +1,338 @@
+FORTRANtoIDL -- Version 1.0 August 2001
+
+Abreviations:
+
+EDG  = External Development Guide
+Func = IDL Function
+Proc = IDL Procedure
+
+--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--
+Passing Scalars:
+
+Four routines in FORTRANwrapper.c demonstrate the passing of scalar values
+between IDL, C and Fortran:
+
+Func F77_addFloats   Adds two floating point numbers using F77
+Func F77_addDoubles  Adds two double precision numbers using F77
+Proc F77_addFinal    Adds 10 to a passed integer and 20 to a passed float.
+Proc F77_altValue    Directly modifies IDL variables using Fortran.
+
+All of these routines are fairly simple but demonstrate the structure of the
+more complicated routines that follow.  Each variable type in IDL (double,
+float, short integer, complex, etc) is stored in the same internal IDL_VARIABLE
+structure.  A C union is used to define the memory footprint of the IDL
+variable (see EDG Ch. 'IDL Internals: Variables'), such that no matter what the
+variable type, the same sized memory block is allocated.  The memory for a new
+variable can be allocated in C using the construct:
+
+[A]    IDL_VPTR ivReturn = IDL_Gettmp();
+       ivReturn->type = IDL_TYP_FLOAT;
+
+which, in this case, makes a new temporary variable of floating point
+precision. In each of these routines, a specifically typed scalar variable must
+be recieved from IDL.  The following snipit, ensures that argv[0] and argv[1]
+are scalar, float variables:
+
+[B]    for (i=0; i<2; i++) {
+         IDL_ENSURE_SCALAR(argv[i]);
+         if (argv[i]->type != IDL_TYP_FLOAT)
+           IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_LONGJMP,
+               "Arguments must be of float precision");
+       }
+
+An alternative approach is used in some of the latter routines which explicitly
+does type conversion (see EDG Ch. 'IDL Internals: Type Conversion').  After
+ensuring that a variable of the correct type was passed, the local variables
+can be assigned by referencing the appropriate portion of the IDL_VARIABLE
+structure.  The use of local variables is not an absolute necessity, but they
+often form a useful layer of abstraction between IDL and C.
+
+Now comes the magic. In the first two examples, a Fortran function is called
+and the local C variables are passed by reference using a C pointer. Because
+these variables are passed by reference (and not by value) the Fortran
+function/subroutine has the ability to modify the C variable directly.
+
+In the third example, F77_addFinal, an IDL procedure takes two input variables
+(IDL_LONG and double) and returns a pair of variables which are the outputs of
+a Fortran subroutine.  Again, each input variable is explicitly typed, however,
+in this case the IDL_StoreScalar routine is used to allocate the memory for the
+returning variables (as opposed to the construct shown in [A]).
+
+The final example, shows a variant on this theme.  In this case, no local
+variables are used and the Fortran routine is allowed to modify the contents of
+an IDL variable.
+
+Example calls:
+
+IDL> r =  F77_addFloats(1.0,2.0)
+
+IDL> r = F77_addDoubles(1.0d,2.0d)
+
+IDL> F77_addFinal, 1L, 2.0d, out1, out
+
+IDL> a = 10L
+IDL> F77_altValue, a
+
+--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--
+Working with Fortran Logical Types:
+
+Func F77_logic   Describes a simple way of handling F77 logic types.
+
+Both C and IDL lack a proper Boolean/logical type which can be somewhat
+annoying since many algorithms require variables that can store either 'true'
+or 'false'.  It is common both in C and IDL to simulate a Boolean variable by
+declaring an integer variable and assigning it 1 for true and 0 for false.
+
+In FORTRANwrapper.c, F77_logic initially defines a Boolean type and the
+standard true/false integers.  In this case, the argument passed into the IDL
+function is internally converted to an IDL_LONG type if required and the
+Fortran subroutine 'logic' is called.  Within 'logic', the passed integer is
+tested to determine if it is equal to 123.  If true, a logical value of '1' is
+returned to IDL.
+
+Example call:
+
+IDL> return = F77_logic(0L)
+IDL> return = F77_logic(123L)
+
+--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--
+Passing Arrays:
+
+There are three routines in FORTRANwrapper.c that demonstrate the
+passing of arrays.
+
+Func F77_sumDoubleArray  Sums the contents of the passed IDL array
+Proc F77_stats           Computes simple statistics on a one-dimensional
+                         array
+Func F77_matmpy          2 dimensional arrays -- matrix multiplication
+
+The F77_sumDoubleArray and F77_stats routines demonstrate how to handle single
+dimension arrays.  Each routine recieves an array from IDL as an input. In
+F77_sumDoubleArray, the array is simply using the Fortran function
+(summdoublearray_) and the numeric sum is returned directly to IDL. In the case
+of F77_stats, a number of statistics (mean, standard deviation, sum, sum of the
+squares of the differences) are computed based on the input IDL array.  Thus,
+in true IDL fashion, a single-dimension (4 element) array is used to store the
+output.  In both routines, the precision of the input is explicitly checked as
+previously described.  Unlike the previous examples, however, there is a subtle
+difference in how the Fortran calls are made. Remember from the previous
+examples, that C variables are explicitly passed by reference into Fortran
+(note the use of the '&' sign to ensure a pointer is passed from C -> Fortran).
+ IDL arrays are identified by an IDL_VARIABLE which gives the name and a
+pointer to the array data-block.  Thus, you should not preface the pointer to
+an array by an '&' as it already is a pointer and is, by definition, passed by
+reference.
+
+The last array example demonstrates how to pass a multi-dimension array from
+IDL -> C -> Fortran by showing a matrix multiplication routine. The trick here
+is to calculate the dimensions of the input and output 'matricies' are before
+passing into Fortran.  In this case, an explicit 'dimension check' is done to
+be sure A * B exists.  It is also important to remember that internally, IDL,
+uses notation that is somewhat backwards to conventional matrix notation:
+
+   value.arr->dim[0] gives columns
+   value.arr->dim[1] gives rows.
+
+The result matrix (C) is made in IDL with:
+
+   matC = (float *) IDL_MakeTempArray(IDL_TYP_FLOAT, 2, dim,
+       IDL_ARR_INI_ZERO, &ivReturn);
+
+and the pointers to each array, along with the dimensions, are passed to
+Fortran for the calculation.
+
+Example Calls:
+
+IDL> a = dindgen(100)
+IDL> print, F77_sumDoubleArray(a)
+
+IDL> data = [1.0,1.1,1.0,1.3,1.2,1.2,1.2,1.5]
+IDL> F77_stats, data, stats
+
+IDL> A = [[1.0,2.0],[1.0,2.0],[1.0,2.0]]
+IDL> B = [[1.0,0.0],[0.0,1.0]]
+IDL> print, F77_matmpy(A,B)
+IDL> print, F77_matmpy(B,A)
+
+--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--
+Working with Fortran Common blocks:
+
+This is where life begins to get interesting...
+
+There are three main routines in FORTRANwrapper.c that demonstrate how to work
+with Fortran common blocks.  It is important to note from the onset that IDL
+common blocks can not be readily mapped into Fortran common blocks. For those
+who care, a 'common' in IDL is simply a contiguous vector of N IDL_VARIABLE
+structures and not a named map of the variable values. While it is possible to
+pass such a block from IDL into C using a DLM, there are really few merrits in
+doing so.
+
+Proc F77_commonBlock       Makes a C structure which maps a Fortran
+                           common block and passes it back to IDL
+                           (preferred). Thus, the memory is common
+                           between IDL, C and Fortran so changes in the
+                           structure made in IDL are identical to those
+                           made in Fortran/C.
+Proc F77_commonDisconnect  Makes a structure in IDL which copied into a
+                           C/Fortran structure, modified in Fortran, and
+                           copied back (confused yet? see the code). In
+                           this way, there are 2 structures, one in C/
+                           Fortran and one in IDL.  The two only
+                           communicate via memcopy.
+Proc F77_commonConnect     Makes a structure in IDL which is copied into
+                           a C/Fortran structure.  The memory allocated
+                           to the IDL structure is then quelled, and a
+                           pointer to the Fortran common block / C
+                           structure is placed into the IDL_VARIABLE
+                           Structure. (sneaky)
+
+The first example, F77_commonBlock, is the most straight forward. From IDL, the
+name of a variable is passed into the DLM which will eventually contain the
+contents of the Fortran common block.  Imagine the first call of
+F77_commonBlock, as an initialization of the structure.  In F77_commonBlock
+(FORTRANwrapper.c), the global structure is made ensuring it exactly matches
+the size/dimension of the Fortran common block.  The real trick, is to map the
+name of this block to that of the internal name (used by the compiler) for the
+Fortran common block.  In this case, the simple name 'BLOCK' is used in the
+subroutine commonblock (FORTRANfunctions.F) so the matching name in C is
+'block_'.  Hence the existance of the line:
+
+   extern Cstruct block_;
+
+in F77_commonBlock (FORTRANwrapper.c).
+
+NOTE: This is a relatively standard compiler trick that works well under unix
+systems with all of the modern compilers I've seen.  I do not know for certain
+if it will work under windows.
+
+The structure of the returning variable is explicity defined in C, based on the
+shared C/Fortran structure/common block.
+
+    IDL_STRUCT_TAG_DEF pTags[]={
+      {"X", 0, (void *) IDL_TYP_DOUBLE},
+      {"Y", 0, (void *) IDL_TYP_DOUBLE},
+      {"Z", 0, (void *) IDL_TYP_DOUBLE},
+      {"LATITUDE", 0, (void *) IDL_TYP_FLOAT},
+      {"LONGITUDE", 0, (void *) IDL_TYP_FLOAT},
+      {"I", 0, (void *) IDL_TYP_LONG},
+      {0}
+    };
+
+Once a check is made to ensure that the passed variable can be written
+to, the IDL structure is made:
+
+    /* Make an IDL structure */
+    ptr = IDL_MakeStruct("Fortran common block (BLOCK)", pTags);
+
+    /* Assign the structure to the IDL_VPTR tmp */
+    tmp = IDL_ImportArray(1, dim, IDL_TYP_STRUCT, (UCHAR *) &block_,
+        NULL, ptr);
+
+The Fortran subroutine commonblock (FORTRANfunctions.F) takes no arguments as
+the common block or global structure memory is already shared between C and
+Fortran.
+
+An example proceeds as follows:
+
+1. Initialize the common block and use IDL variable a.
+
+IDL> F77_CommonBlock, a
+% Loaded DLM: FORTRANTOIDL.
+
+IDL> help, a, /str
+** Structure Fortran common block (BLOCK), 6 tags, length=36:
+   X               DOUBLE           10.000000
+   Y               DOUBLE           20.000000
+   Z               DOUBLE           30.000000
+   LATITUDE        FLOAT           60.0000
+   LONGITUDE       FLOAT          -30.0000
+   I               LONG                 1
+
+2. Modify the common block using Fortran and print the result from IDL
+
+IDL> F77_modCommonBlock
+
+IDL> help, a, /str
+** Structure Fortran common block (BLOCK), 6 tags, length=36:
+   X               DOUBLE           100.00000
+   Y               DOUBLE           400.00000
+   Z               DOUBLE           900.00000
+   LATITUDE        FLOAT           3600.00
+   LONGITUDE       FLOAT           900.000
+   I               LONG                 1
+
+3. Modify the common block in IDL and print the contents from Fortran
+
+IDL> a.x = 1.0 & a.y = 2.0 & a.z = 3.0
+
+IDL> F77_printCommonBlock
+    1.000000000000      2.000000000000      3.000000000000
+    3600.00000000  900.00000000
+    1
+
+4. Delete the IDL variable
+
+IDL> delvar, a
+
+IDL> help, a, /str
+A               UNDEFINED = <Undefined>
+
+IDL> F77_printCommonBlock
+    1.000000000000      2.000000000000      3.000000000000
+    3600.00000000  900.00000000
+    1
+
+Points 1 through 3 should have convinced you that it is possible to communicate
+directly between IDL and a Fortran common block.  To understand point 4, one
+needs to remember that the Fortran common block / global C structure is
+allocated immediately when the FORTRANtoIDL DLM is initialized. In the
+F77_CommonBlock routine (FORTRANtoIDL.c) we merely point the IDL_VARIABLE to
+the location of this memory.  Thus, once initalized, IDL has no way of
+de-allocating the common block so the memory is lost until IDL exits.
+
+An alternative approach is given in F77_CommonBlockDisconnect
+(FORTRANwrapper.c).  In this case, a structure is created directly in IDL such
+that IDL allocates the required memory initially.  However, noting point 4
+above, the compiler ensures space is allocated to the Fortran common block
+(NEWBLOCK in this case) when the FORTRANtoIDL DLM is initalized. Thus, we have
+a state where there exist two memory blocks: one block in IDL which IDL
+initalized and controls and another which is the true Fortran common block
+which IDL does not control.  In this case, we will copy the memory from the IDL
+structure to that of the common block, call our Fortran routine, and then copy
+the memory back from the common block to IDL.
+
+    /* Copy the memory from IDL to our local space */
+    memcpy(Cptr,ptrIDL,sizeof(CnewStruct));
+
+    /* Call Fortran */
+    commonblockdisconnect_();
+
+    /* Copy the memory from C back to IDL */
+    memcpy(ptrIDL,Cptr,sizeof(CnewStruct));
+
+In this way, the common block and IDL structure are not at all connected.
+Changes to the local IDL structure are not passed into Fortran unless another
+memory copy operation is performed.  Likewise, changes made in the Fortran
+common block are not directly propogated into the local IDL variable structure.
+
+Example:
+
+IDL> struct = {a: 2.0d, b: 2.0d, c: 2.0d, d: 2.0, e:2}
+
+IDL> F77_commonBlockDisconnect, struct
+% Loaded DLM: FORTRANTOIDL.
+
+IDL> help, struct, /str
+** Structure <823753c>, 5 tags, length=32, refs=1:
+   A               DOUBLE           4.0000000
+   B               DOUBLE           4.0000000
+   C               DOUBLE           4.0000000
+   D               FLOAT           4.00000
+   E               INT              4
+
+The last example represents a merger of the last two examples.
+
+
+What about equivilence statements?  Can these be handled as C unions?
+
+What about complex numbers?  Just another structure example?

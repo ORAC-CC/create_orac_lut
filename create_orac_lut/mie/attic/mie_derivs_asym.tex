@@ -1,0 +1,157 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{times}
+\usepackage{amsmath,amssymb,stmaryrd}
+\usepackage[colorlinks=true,menucolor=black,%
+            citecolor=black,urlcolor=black,linkcolor=black,%
+            anchorcolor=black,filecolor=black]{hyperref}
+\usepackage{doi}
+\usepackage{natbib}
+\usepackage{graphicx}
+
+\oddsidemargin  =   0.0mm
+\textwidth      = 160.0mm
+
+
+\def \Qsca { {Q_{\mbox{\rm sca}}}}
+%\def \asym { {\langle \cos \theta \rangle} }
+\def \asym { {g} }
+\def \mied { \href{/home/crun/eodg/idl/mie/mie_derivs.pro}{\tt mie\_derivs.pro} }
+\def \mies { \href{/home/crun/eodg/idl/mie/mie_single.pro}{\tt mie\_single.pro} }
+
+
+
+
+
+\title{Derivatives of the asymmetry parameter in \mied}
+\author{Andy Smith}
+
+
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Following from \citet{Grainger2004}, here is the additional mathematics required to add the asymmetry parameter to the EODG \mied routine.
+The parameters are included as keywords, so that the additional computational overhead is only carried out if required.
+\end{abstract}
+
+
+\section{Method}
+
+
+Following the notation from \citet{Grainger2004}, the asymmetry parameter, $\asym$, is given by \citep{Bohren1983}:
+\begin{equation}
+ \Qsca \; \asym = \frac{4}{x^2} \left[   \sum_n^\infty \frac{n(n+2)}{n+1} \Re \left\{ a_na^*_{n+1} +  b_n b^*_{n+1}  \right\}
+                                    +  \sum_n^\infty \frac{2n+1}{n(n+1)} \Re \left\{ a_n b^*_n \right\}\right].
+\end{equation}
+
+
+
+Taking the derivative wrt $x$, the size parameter, we obtain:
+\begin{align}
+ \frac{\partial\;}{\partial x} \left[\Qsca \; \asym \right] &=
+ \frac{4}{x^2}\sum_n^\infty \left[  \frac{n(n+2)}{n+1} \Re \left\{
+                                                                \frac{\partial a_n}{\partial x} a^*_{n+1} +
+                                                                a_n \frac{\partial a^*_{n+1}}{\partial x}  +
+                                                                \frac{\partial b_n}{\partial x} b^*_{n+1}  +
+                                                                b_n \frac{\partial b^*_{n+1}}{\partial x}
+                                                       \right\} \right. \nonumber \\
+                             & \;\;\;\;\;\;\;\;\;\;\;\; \;\;\;\;\;
+                               \left.+ \frac{2n+1}{n(n+1)} \Re \left\{ a_n \frac{\partial b^*_n}{\partial x} +
+                                    \frac{\partial a_n}{\partial x} b^*_n  \right\}\right]  \nonumber\\
+                      &\;\;\;\;\; - \frac{8}{x^3} \left[   \sum_n^\infty \frac{n(n+2)}{n+1} \Re \left\{ a_na^*_{n+1} +  b_n b^*_{n+1}  \right\}
+                                    +  \sum_n^\infty \frac{2n+1}{n(n+1)} \Re \left\{ a_n b^*_n \right\}\right] \\
+        &=\frac{4}{x^2}\sum_n^\infty \left[  \frac{n(n+2)}{n+1} \Re \left\{
+                                                                \frac{\partial a_n}{\partial x} a^*_{n+1} +
+                                                                a_n \frac{\partial a^*_{n+1}}{\partial x}  +
+                                                                \frac{\partial b_n}{\partial x} b^*_{n+1}  +
+                                                                b_n \frac{\partial b^*_{n+1}}{\partial x}
+                                                       \right\} \right. \nonumber \\
+                             & \;\;\;\;\;\;\;\;\;\;\;\; \;\;\;\;\;
+                               \left.+ \frac{2n+1}{n(n+1)} \Re \left\{ a_n \frac{\partial b^*_n}{\partial x} +
+                                    \frac{\partial a_n}{\partial x} b^*_n  \right\}\right]  - \frac{2}{x} \; \asym \; \Qsca.
+\end{align}
+Defining:
+\begin{align}
+\xi_x=\sum_n^\infty \left[  \frac{n(n+2)}{n+1} \Re \left\{
+                                                                \frac{\partial a_n}{\partial x} a^*_{n+1} +
+                                                                a_n \frac{\partial a^*_{n+1}}{\partial x}  +
+                                                                \frac{\partial b_n}{\partial x} b^*_{n+1}  +
+                                                                b_n \frac{\partial b^*_{n+1}}{\partial x}
+                                                       \right\}
+                               + \frac{2n+1}{n(n+1)} \Re \left\{ a_n \frac{\partial b^*_n}{\partial x} +
+                                    \frac{\partial a_n}{\partial x} b^*_n  \right\}\right].
+\end{align}
+we say
+\begin{align}
+ \Qsca \; \frac{\partial \asym}{\partial x} + \frac{\partial \Qsca}{\partial x}\;\asym = \frac{4}{x^2} \xi_x - \frac{2}{x}\;\asym\;\Qsca,
+\end{align}
+leading to
+\begin{align}
+\frac{\partial \asym}{\partial x} =
+                 \frac{1}{\Qsca}\left[ \frac{4}{x^2} \xi_x - \asym\left(\frac{2\Qsca}{x} + \frac{\partial \Qsca}{\partial x}\right)\right].\label{eq:dgdx}
+\end{align}
+
+
+
+
+Similarly, for the real and imaginary parts of refractive index, $m=m_r + i m_i$, we define $\xi_r$ and $\xi_i$:
+\begin{align}
+ \xi_r &= \sum_n^\infty \left[  \frac{n(n+2)}{n+1} \Re \left\{
+                                                                \frac{\partial a_n}{\partial m_r} a^*_{n+1} +
+                                                                a_n \frac{\partial a^*_{n+1}}{\partial m_r}  +
+                                                                \frac{\partial b_n}{\partial m_r} b^*_{n+1}  +
+                                                                b_n \frac{\partial b^*_{n+1}}{\partial m_r}
+                                                       \right\}
+                               + \frac{2n+1}{n(n+1)} \Re \left\{ a_n \frac{\partial b^*_n}{\partial m_r} +
+                                    \frac{\partial a_n}{\partial m_r} b^*_n  \right\}\right];\\
+ \xi_i &= \sum_n^\infty \left[  \frac{n(n+2)}{n+1} \Re \left\{
+                                                                \frac{\partial a_n}{\partial m_i} a^*_{n+1} +
+                                                                a_n \frac{\partial a^*_{n+1}}{\partial m_i}  +
+                                                                \frac{\partial b_n}{\partial m_i} b^*_{n+1}  +
+                                                                b_n \frac{\partial b^*_{n+1}}{\partial m_i}
+                                                       \right\}
+                               + \frac{2n+1}{n(n+1)} \Re \left\{ a_n \frac{\partial b^*_n}{\partial m_i} +
+                                    \frac{\partial a_n}{\partial m_i} b^*_n  \right\}\right],
+\end{align}
+and obtain the derivatives by:
+\begin{align}
+ \frac{\partial \asym}{\partial m_r} &= \frac{1}{\Qsca} \left[ \frac{4}{x^2} \xi_r - \asym \frac{\partial \Qsca}{\partial m_r} \right];\label{eq:dgdn}\\
+ \frac{\partial \asym}{\partial m_i} &= \frac{1}{\Qsca} \left[ \frac{4}{x^2} \xi_i - \asym \frac{\partial \Qsca}{\partial m_i} \right]. \label{eq:dgdk}
+\end{align}
+
+During the execution of \mied, the calculations of $\xi_x$, $\xi_r$, and $\xi_i$ are carried out iteratively as we ascend through values of n.
+At the end of the code, the final values are calculated using equations \ref{eq:dgdx},~\ref{eq:dgdn}, and \ref{eq:dgdk}.
+
+\section{Tests}
+
+A small number of tests have been carried out and appear to be fine. The calculations of $\asym$ agree with those from \mies, and derivatives are sensible when plotted over variations in $x$, $m_r$, and $m_i$, as shown in Fig.~\ref{fig:test}.
+
+\begin{figure}
+ \includegraphics[width=\textwidth]{/home/jupiter/eodg/smithan/idl/tinker/test_asym_mie_derivs.pdf}
+ \caption{Tests of the derivatives calculated using \mied.}
+ \label{fig:test}
+\end{figure}
+
+
+
+
+\begin{thebibliography}{2}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{{\tt #1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname doiprefix\endcsname\relax\def\doiprefix{doi:}\fi
+\bibitem[{Bohren and Huffman(1983)}]{Bohren1983}
+Bohren, C.~F. and D.~R. Huffman, 1983: {\it Absorption and Scattering of Light
+  by Small Particles\/}. Wiley-{VCH}, \doi{10.1002/9783527618156}.
+\bibitem[{Grainger et~al.(2004)Grainger, Lucas, Thomas, and
+  Ewen}]{Grainger2004}
+Grainger, R.~G., J.~Lucas, G.~E. Thomas, and G.~B. Ewen, 2004: Calculation of
+  {M}ie derivatives. {\it Applied Optics\/}, {\bf 43}(28):5386--5393,
+  \doi{10.1364/AO.43.005386}.
+\end{thebibliography}
+
+\end{document}

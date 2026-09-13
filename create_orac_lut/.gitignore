@@ -1,0 +1,14 @@
+# Generated LUT output
+luts/
+
+# NFS temporary files
+.nfs*
+
+# Misc temporary/editor files
+*~
+#*#
+
+attic/
+
+# Large Baum optical property tables
+input_files/baum/

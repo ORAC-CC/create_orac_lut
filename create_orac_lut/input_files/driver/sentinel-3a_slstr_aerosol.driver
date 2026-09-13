@@ -1,0 +1,13 @@
+# Non-optional arguments:
+sentinel-3a_slstr_v1.inst
+#   0  =  'Midlatitude Summer' 
+#   1  = 'Tropical Atmosphere'
+#   2  = 'Midlatitude Summer'
+#   3  = 'Midlatitude Winter'
+#   4  = 'Subarctic Summer'
+#   5  = 'Subarctic Winter'
+#   6  = '1976 US Standard'
+2                           # atmospheric gas model based on MODTRAN codes
+# Optional keyword parameters below:
+channelid=[1,2,3,4,5,6,7,8,9] # if not included all instrument channels processes
+gas=1                         # true for gas aborption (omit or set to zero otherwise)

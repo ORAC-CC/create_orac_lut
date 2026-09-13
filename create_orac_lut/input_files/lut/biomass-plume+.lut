@@ -1,0 +1,11 @@
+# This file defines the LUT tables for biomass
+25 Uneven_linear # 25 Optical depth values
+0.001 0.05 0.10 0.25 0.5 0.75 1.0 1.25 1.5 1.75 2.0 2.39 2.87 3.45 4.14 4.97 6.0 7.15 8.58 10.30 12.36 14.83 17.80 21.36 25.63
+17 Uneven_linear # 20 Effective radius values
+0.01 0.1 0.12 0.14 0.16 0.18 0.2 0.22 0.24 0.26 0.28  0.3 0.4 0.5 1 2 4 
+28 linear # 10 Solar zenith angles from 0 to 90
+0 90
+30 linear # 10 Satellite zenith angles, the maximum value is overwritten by the maximum satellite zenith angle
+0 90
+37 linear # 11 Relative azimuth angles from 0 to 180
+0 180

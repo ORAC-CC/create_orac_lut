@@ -1,0 +1,10 @@
+# MODTRAN 3.5 v1.1 produced atmospheric gas optical depth (without
+# scattering for msi channel 12 ( 1.610 um).
+*atmosphere
+Subarctic Summer
+*instrument
+msi
+*channelid
+12
+*nlevels
+          46

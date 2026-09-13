@@ -1,0 +1,118 @@
+# VIIRS instrument definition for ORAC code
+#
+# Platform: NOAA-20 (JPSS-1)
+# Instrument: VIIRS (Visible Infrared Imaging Radiometer Suite)
+#
+# Format
+# or * indicate a comment, can have blank lines. An = separates the constant and its value.
+#
+# constants
+# + may be in any order
+# + are case insensitive (will be translated to lower case)
+# + may include spaces (they are ignored)
+# e.g. Solar Channels is equivalent to solarchannels
+#
+# uncertainty definitions:
+#  - solar channels: SNR (dimensionless)
+#  - thermal channels: NEdT (K) defined at refbt (K)
+#
+# quantities specific to a channel can be indicated using the nadir channelid (as a number) in []
+
+platform = noaa-20
+instrument = viirs
+instrument version = 1 
+
+# 0: single or N: dual view where N represents the channel offset of the slant view wrt the nadir view
+view = 0
+
+# Channel numbering here follows the RTTOV VIS/IR SRF channel ordering for NOAA-20 VIIRS:
+#   01 I1, 02 I2, 03 M1, 04 M2, 05 M3, 06 M4, 07 M5, 08 M6, 09 M7, 10 DNB,
+#   11 M8, 12 M9, 13 I3, 14 M10, 15 M11, 16 I4, 17 M12, 18 M13, 19 M14,
+#   20 M15, 21 I5, 22 M16
+
+# specify instrument channels available as some instrument channels may be inapplicable, failed, too noisy etc
+available channels  = 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22
+
+# specify which of the channels measure reflected solar radiation
+# (includes the VIIRS day/night band as a reflected solar band channel)
+solar channels  = 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18
+
+# specify which of the channels measure emitted thermal radiation
+thermal channels  = 16 17 18 19 20 21 22
+
+# Figure below captures the maximum value (56.28) with a little tolerance
+maximum satellite zenith = 57
+
+# spectral response functions
+# taken from RTTOV spectral response function archive
+# https://nwp-saf.eumetsat.int/site/software/rttov/download/coefficients/spectral-response-functions/
+
+ srf [1]  = rtcoef_noaa_20_viirs_srf_ch01.txt
+ srf [2]  = rtcoef_noaa_20_viirs_srf_ch02.txt
+ srf [3]  = rtcoef_noaa_20_viirs_srf_ch03.txt
+ srf [4]  = rtcoef_noaa_20_viirs_srf_ch04.txt
+ srf [5]  = rtcoef_noaa_20_viirs_srf_ch05.txt
+ srf [6]  = rtcoef_noaa_20_viirs_srf_ch06.txt
+ srf [7]  = rtcoef_noaa_20_viirs_srf_ch07.txt
+ srf [8]  = rtcoef_noaa_20_viirs_srf_ch08.txt
+ srf [9]  = rtcoef_noaa_20_viirs_srf_ch09.txt
+ srf [10] = rtcoef_noaa_20_viirs_srf_ch10.txt
+ srf [11] = rtcoef_noaa_20_viirs_srf_ch11.txt
+ srf [12] = rtcoef_noaa_20_viirs_srf_ch12.txt
+ srf [13] = rtcoef_noaa_20_viirs_srf_ch13.txt
+ srf [14] = rtcoef_noaa_20_viirs_srf_ch14.txt
+ srf [15] = rtcoef_noaa_20_viirs_srf_ch15.txt
+ srf [16] = rtcoef_noaa_20_viirs_srf_ch16.txt
+ srf [17] = rtcoef_noaa_20_viirs_srf_ch17.txt
+ srf [18] = rtcoef_noaa_20_viirs_srf_ch18.txt
+ srf [19] = rtcoef_noaa_20_viirs_srf_ch19.txt
+ srf [20] = rtcoef_noaa_20_viirs_srf_ch20.txt
+ srf [21] = rtcoef_noaa_20_viirs_srf_ch21.txt
+ srf [22] = rtcoef_noaa_20_viirs_srf_ch22.txt
+
+
+# channel random noise as SNR (dimensionless) for solar channels
+# values taken from the NOAA-20 VIIRS on-orbit performance table (specification SNR at Ltyp),
+# except DNB which uses the VIIRS DNB SNR requirement at minimum radiance.
+
+ snr[1]  = 119
+ snr[2]  = 150
+
+ # M-bands (note: M1-M5 and M7 are dual-gain; a single conservative SNR is used here)
+ snr[3]  = 316
+ snr[4]  = 380
+ snr[5]  = 414
+ snr[6]  = 315
+ snr[7]  = 242
+ snr[8]  = 199
+ snr[9]  = 215
+
+ # DNB
+ snr[10] = 6
+
+ # SWIR and other RSB
+ snr[11] = 74
+ snr[12] = 83
+ snr[13] = 6
+ snr[14] = 342
+ snr[15] = 90
+
+
+# reference brightness temperatures (K) for thermal channels
+# and NEdT (K) defined at those reference temperatures
+
+ refbt[16] = 270.
+ refbt[17] = 270.
+ refbt[18] = 300.
+ refbt[19] = 270.
+ refbt[20] = 300.
+ refbt[21] = 210.
+ refbt[22] = 300.
+
+ nedt [16] = 2.5
+ nedt [17] = 0.396
+ nedt [18] = 0.107
+ nedt [19] = 0.091
+ nedt [20] = 0.07
+ nedt [21] = 1.5
+ nedt [22] = 0.072

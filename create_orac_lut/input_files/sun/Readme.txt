@@ -1,0 +1,1 @@
+See https://www.nrel.gov/grid/solar-resource/spectra.html

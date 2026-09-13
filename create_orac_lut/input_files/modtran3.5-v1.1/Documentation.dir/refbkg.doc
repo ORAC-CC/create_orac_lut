@@ -1,0 +1,50 @@
+
+Reflectivity/Emissivity Files in MODTRAN
+
+     The data for the spectral emissivities and reflectivities for the
+background are in a separate file (File NF09).  The data can be given at
+arbitrary wavenumber or wavelength points; Subroutine RHOEPS interpolates
+(linearly) these data onto the wavenumber grid of the calculation.  The
+data sequence for the background reflectivity file is:
+
+
+  CARD     FORMAT            DESCRIPTION
+    1      9A4             Title card - ignored
+    2       I2             JFILE - Number of backgrounds
+    3     13X,I2           LBKG - Background number
+    4      I1              JUNIT - (0,1) for (microns,wavenumber)
+    5   I1,F9.0,2x,2F4.2   JDUM,VVIN,(R,E)
+                             JDUM = Dummy
+                             VVIN = Wavenumber (cm-1)/micron (um)
+                             R    = Reflectivity
+                             E    = Emissivity
+    6             Repeat Card 5 for Each VVIN
+    7       I1             J - End of file when J = 9 (or any non-zero value)
+
+  8-12            Repeat Cards 3-7 for Next Background Entry
+
+   13       A4             END - End of data file (not used).
+
+
+The end of each reflectivity-emissivity file is specified by a 9 in Column 1.
+The total number of files to be read is given by JFILE in Card 2.  The end of
+the data file is given by END, read under an A4 Format.  There are some
+extra background files at the end (constant albedos) which were used for
+debugging.  Fifty-two (52) data entries for each background are allowed.  If
+this is not enough, change the value of KKMAX in subroutine RHOEPS.
+
+     The background emissivity (E on Card 5) is not used, because MODTRAN is
+assuming that it always equals (1 - SALB).  If a wavelength or wavenumber of
+the calculation should be outside of the spectral range of this data file,
+the nearest (first or last) entry is used.
+
+     The actual values for these background files are undocumented!  They
+represent some generic values I put together over ten years ago for a target
+signature code and have modified as needed.  The cloud file should be used
+with some care.  It has a reflectivity that is greater than 1.0, in order to
+attempt to include some strong forward scatter for smaller scattering angles.
+When used by MODTRAN for the surface albedo, I am not sure what happens---
+things like TOTAL reflectivity greater than 1.0.  Fortunately negative
+emissivities are not a problem becasuse there is a check in TRANS.
+
+Dave Robertson, SSI

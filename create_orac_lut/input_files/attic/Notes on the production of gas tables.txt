@@ -1,0 +1,21 @@
+1. cd to the modtran directory
+2. run create_orac_lut_run_modtran
+spectral transmission files are created in the output directory.
+3. cd to the inputfiles directory
+4. run gas_opd_wrapper (wraps  create_orac_lut_calc_gas_opd)
+
+Some Notes:
+
+Spectral Response functions from 
+https://nwp-saf.eumetsat.int/site/software/rttov/download/coefficients/spectral-response-functions/
+
+Channel numbers follow srf naming except atsr, atsr-2 and aatsr which were reversed 
+
+Noaa 5 channel 1 had to be edited as it had a repeated value
+Noaa 5 channel 2 had to be edited as it had a repeated value
+
+MODTRAN run for all wavelengths once rather than individual channels
+
+platform and instrument naming from 
+https://www.wmo-sat.info/oscar/satellites
+
