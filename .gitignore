@@ -1,0 +1,78 @@
+# Python and test tooling
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Build and compiled artefacts
+build/
+dist/
+*.o
+*.obj
+*.so
+*.dll
+*.dylib
+*.a
+*.mod
+*.pyc
+
+# Local scientific scratch and editor files
+*.tmp
+*.swp
+*~
+.#*
+.vscode/
+.idea/
+
+# Preservation material is deliberately kept outside repository history.
+docs/git_preservation/
+
+# Generated validation staging and diagnostics.
+validation/tmp/
+validation/scratch/
+validation/diagnostics/*.bin
+validation/diagnostics/*.npz
+
+# Generated full LUT collections. Small, explicitly selected regression
+# references elsewhere in validation/ remain trackable.
+create_orac_lut/luts/
+
+# Large generated/input staging collections retained on disk but not in the
+# baseline. Individual source/input files remain trackable outside this tree.
+create_orac_lut/input_files/baum/
+
+# Legacy compiler and editor scratch files.
+create_orac_lut/#*
+create_orac_lut/*.bak
+create_orac_lut/*.o
+create_orac_lut/*.so
+create_orac_lut/disort2/src/*.o
+create_orac_lut/disort4dlm/*.o
+create_orac_lut/disort4dlm/*.so
+mie/*.bak
+mie/*.o
+mie/*.so
+mie/dlm-code/*.o
+mie/dlm-code/*.so
+
+# Root-level generated/archival products too large or not source-controlled.
+disort.dat
+*.aux
+*.bbl
+*.blg
+*.dvi
+*.log
+*.ps
+*.toc
+*.tps
+*.eps
+*.pptx
+*.sav
+
+# Machine-local runtime files.
+*.out
+*.stdout
+*.stderr
