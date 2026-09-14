@@ -1,0 +1,22 @@
+# Aerosol formulation, compact development grid.
+# Meteosat-10 SEVIRI, aerosol_a79, channel 1, gas absorption on. Runs in about
+# 15 seconds and exercises the surface-pressure dimension (3 levels).
+# makerunfile_v2 equivalent: MM='aerosol_a79', platform='meteosat-10',
+# instrument='seviri', Test=1, srf_quad=1, Versions='21', with the gas=1 and
+# atmospheres=2 settings of the operational meteosat-10_seviri_run file.
+# See configs/template.driver for what each setting means.
+
+input_files                     # input root: create_orac_lut/input_files
+meteosat-10_seviri_v1.inst      # instrument definition (input_files/inst)
+aerosol_a79.mm                  # particle model (input_files/microphysics)
+aerosol_test.lut                # LUT grid (input_files/lut): 96 grid points
+2                               # atmosphere: MODTRAN midlatitude summer
+
+forward_model=aerosol           # particles distributed through the column
+channelid=[1]                   # omit for all 11 SEVIRI channels
+srf_quad=1                      # monochromatic at effective channel centre
+gas=1                           # MODTRAN gas optical depths (input_files/gas)
+version=21                      # product revision
+
+# Output: create_orac_lut/luts/meteosat-10_seviri_aerosol/
+#         meteosat-10_seviri_m_aerosol_a12_pa79_v21.nc

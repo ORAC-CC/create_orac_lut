@@ -1,0 +1,26 @@
+# Cloud formulation, FULL production grid. Submit through SLURM only.
+# Meteosat-10 SEVIRI, liquid-water STG, all 11 channels, full
+# liquid-water-cloud.lut grid (17 x 20 x 10 x 10 x 11 = 374,000 grid points).
+# This reproduces the configuration of the archived V2 product
+# meteosat-10_seviri_m_liquid-water_a01_pstg_v21.nc.
+# makerunfile_v2 equivalent: MM='liquid-water_stg', platform='meteosat-10',
+# instrument='seviri', Test=0, srf_quad=1, Versions='21'.
+#
+# Dry-run it first to see the workload, then:
+#   ssh atmlxint7 && cd ~/project-oraclut
+#   scripts/submit_oraclut_lut.sh --time=12:00:00 \
+#       --config configs/meteosat-10_seviri_cloud_liquid-water_stg.driver
+
+input_files                     # input root: create_orac_lut/input_files
+meteosat-10_seviri_v1.inst      # instrument definition (input_files/inst)
+liquid-water_stg.mm             # particle model (input_files/microphysics)
+liquid-water-cloud.lut          # FULL LUT grid (input_files/lut)
+2                               # atmosphere: MODTRAN midlatitude summer
+
+forward_model=cloud             # discrete particle layer
+srf_quad=1                      # monochromatic at effective channel centre
+version=21                      # product revision
+# channelid omitted: all 11 SEVIRI channels
+
+# Output: create_orac_lut/luts/meteosat-10_seviri_cloud/
+#         meteosat-10_seviri_m_liquid-water_a01_pstg_v21.nc

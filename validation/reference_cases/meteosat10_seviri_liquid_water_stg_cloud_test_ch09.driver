@@ -1,0 +1,10 @@
+# Cloud formulation, compact grid, SEVIRI channel 9 (IR10.8, thermal-only).
+# Gas absorption is not used in the legacy cloud products (a01 family).
+input_files
+meteosat-10_seviri_v1.inst
+liquid-water_stg.mm
+liquid-water-cloud_test.lut
+2
+channelid= [9]
+srf_quad=1
+version=21

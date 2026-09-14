@@ -1,0 +1,24 @@
+create_orac_lut/INSTRUCTIONS.txt
+create_orac_lut/establish_make_orac_lut.sh
+create_orac_lut/input_files/attic/Notes on the production of gas tables.txt
+create_orac_lut/input_files/attic/bbconstantsv0.pro
+create_orac_lut/input_files/attic/checkbbconstants.pro
+create_orac_lut/input_files/attic/checkbbconstants.pro.bak
+create_orac_lut/input_files/attic/create_orac_lut_calc_gas_opd.pro
+create_orac_lut/input_files/attic/gas_opd_wrapper.pro
+create_orac_lut/input_files/attic/makebbconstantscode.pro
+create_orac_lut/input_files/attic/makebbconstantscode.pro.bak
+create_orac_lut/input_files/attic/oldbbconstants.pro
+create_orac_lut/input_files/attic/oldsolconstants.pro
+create_orac_lut/input_files/attic/oldsolconstants.pro.bak
+create_orac_lut/input_files/attic/read_modtran.pro
+create_orac_lut/input_files/attic/read_srfstr.pro.bak
+create_orac_lut/input_files/attic/simpson.pro.bak
+create_orac_lut/input_files/attic/solarconstant.pro
+create_orac_lut/input_files/attic/solarconstant.pro.bak
+create_orac_lut/input_files/attic/srf.pro
+create_orac_lut/legpexp.pro
+create_orac_lut/mie_size_dist_new.pro
+create_orac_lut/quadrature.pro
+create_orac_lut/setup_oraclut_env.sh
+create_orac_lut/shift_quadrature.pro

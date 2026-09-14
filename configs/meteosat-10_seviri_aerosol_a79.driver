@@ -1,0 +1,27 @@
+# Aerosol formulation, FULL production grid. Submit through SLURM only.
+# Meteosat-10 SEVIRI, aerosol_a79, all 11 channels, gas absorption on, full
+# aerosol.lut grid (20 x 20 x 10 x 10 x 11 x 1 = 440,000 grid points; the
+# production aerosol grid carries a single 1013 hPa surface-pressure level).
+# makerunfile_v2 / meteosat-10_seviri_run equivalent: MM='aerosol_a79',
+# platform='meteosat-10', instrument='seviri', Test=0, srf_quad=1,
+# atmospheres=2, gas=1, version=21.
+#
+# Dry-run it first to see the workload, then:
+#   ssh atmlxint7 && cd ~/project-oraclut
+#   scripts/submit_oraclut_lut.sh --time=12:00:00 \
+#       --config configs/meteosat-10_seviri_aerosol_a79.driver
+
+input_files                     # input root: create_orac_lut/input_files
+meteosat-10_seviri_v1.inst      # instrument definition (input_files/inst)
+aerosol_a79.mm                  # particle model (input_files/microphysics)
+aerosol.lut                     # FULL LUT grid (input_files/lut)
+2                               # atmosphere: MODTRAN midlatitude summer
+
+forward_model=aerosol           # particles distributed through the column
+srf_quad=1                      # monochromatic at effective channel centre
+gas=1                           # MODTRAN gas optical depths (input_files/gas)
+version=21                      # product revision
+# channelid omitted: all 11 SEVIRI channels
+
+# Output: create_orac_lut/luts/meteosat-10_seviri_aerosol/
+#         meteosat-10_seviri_m_aerosol_a12_pa79_v21.nc

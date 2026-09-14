@@ -1,0 +1,1315 @@
+{
+  "state": {
+    "legacy": {
+      "channel": 1,
+      "effective_radius_um": 0.009999999776482582,
+      "optical_depth": 1.0,
+      "surface_pressure_hpa": 950.0,
+      "wavelength_um": 0.6381767392158508,
+      "particle_ssa": 0.026926318183541298,
+      "extinction_ratio": 0.8457709550857544,
+      "particle_asymmetry": 0.02170497365295887,
+      "n_layers": 45,
+      "n_moments": 1000
+    },
+    "python": {
+      "channel": 1,
+      "effective_radius_um": 0.009999999776482582,
+      "optical_depth": 1.0,
+      "surface_pressure_hpa": 950.0,
+      "atmosphere_code": 2,
+      "wavelength_um": 0.6381767988204956,
+      "particle_ssa": 0.026926320046186447,
+      "extinction_ratio": 0.8457708358764648,
+      "particle_asymmetry": 0.021704974251360764,
+      "n_layers": 45,
+      "n_moments": 1000
+    }
+  },
+  "arrays": {
+    "level_height_km": {
+      "shape_legacy": [
+        46
+      ],
+      "shape_python": [
+        46
+      ],
+      "status": "ok",
+      "max_abs_difference": 0.0,
+      "rms_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "max_rel_difference_where_meaningful": 0.0,
+      "index_of_max_abs": [
+        0
+      ],
+      "legacy_at_max": 100.0,
+      "python_at_max": 100.0,
+      "elements_differing_above_1e-6": 0,
+      "bitwise_identical": true
+    },
+    "level_pressure_hpa": {
+      "shape_legacy": [
+        46
+      ],
+      "shape_python": [
+        46
+      ],
+      "status": "ok",
+      "max_abs_difference": 0.0,
+      "rms_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "max_rel_difference_where_meaningful": 0.0,
+      "index_of_max_abs": [
+        0
+      ],
+      "legacy_at_max": 0.0002579999854788184,
+      "python_at_max": 0.0002579999854788184,
+      "elements_differing_above_1e-6": 0,
+      "bitwise_identical": true
+    },
+    "layer_height_km": {
+      "shape_legacy": [
+        45
+      ],
+      "shape_python": [
+        45
+      ],
+      "status": "ok",
+      "max_abs_difference": 0.0,
+      "rms_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "max_rel_difference_where_meaningful": 0.0,
+      "index_of_max_abs": [
+        0
+      ],
+      "legacy_at_max": 97.5,
+      "python_at_max": 97.5,
+      "elements_differing_above_1e-6": 0,
+      "bitwise_identical": true
+    },
+    "profile_height_km": {
+      "shape_legacy": [
+        5
+      ],
+      "shape_python": [
+        5
+      ],
+      "status": "ok",
+      "max_abs_difference": 0.0,
+      "rms_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "max_rel_difference_where_meaningful": 0.0,
+      "index_of_max_abs": [
+        0
+      ],
+      "legacy_at_max": 5.5,
+      "python_at_max": 5.5,
+      "elements_differing_above_1e-6": 0,
+      "bitwise_identical": true
+    },
+    "profile_relative_amount": {
+      "shape_legacy": [
+        5
+      ],
+      "shape_python": [
+        5
+      ],
+      "status": "ok",
+      "max_abs_difference": 0.0,
+      "rms_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "max_rel_difference_where_meaningful": 0.0,
+      "index_of_max_abs": [
+        0
+      ],
+      "legacy_at_max": 0.0,
+      "python_at_max": 0.0,
+      "elements_differing_above_1e-6": 0,
+      "bitwise_identical": true
+    },
+    "relative_tau_raw": {
+      "shape_legacy": [
+        45
+      ],
+      "shape_python": [
+        45
+      ],
+      "status": "ok",
+      "max_abs_difference": 0.0,
+      "rms_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "max_rel_difference_where_meaningful": 0.0,
+      "index_of_max_abs": [
+        0
+      ],
+      "legacy_at_max": 0.0,
+      "python_at_max": 0.0,
+      "elements_differing_above_1e-6": 0,
+      "bitwise_identical": true
+    },
+    "relative_tau": {
+      "shape_legacy": [
+        45
+      ],
+      "shape_python": [
+        45
+      ],
+      "status": "ok",
+      "max_abs_difference": 0.0,
+      "rms_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "max_rel_difference_where_meaningful": 0.0,
+      "index_of_max_abs": [
+        0
+      ],
+      "legacy_at_max": 0.0,
+      "python_at_max": 0.0,
+      "elements_differing_above_1e-6": 0,
+      "bitwise_identical": true
+    },
+    "gas_level": {
+      "shape_legacy": [
+        46
+      ],
+      "shape_python": [
+        46
+      ],
+      "status": "ok",
+      "max_abs_difference": 0.0,
+      "rms_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "max_rel_difference_where_meaningful": 0.0,
+      "index_of_max_abs": [
+        0
+      ],
+      "legacy_at_max": 0.0,
+      "python_at_max": 0.0,
+      "elements_differing_above_1e-6": 0,
+      "bitwise_identical": true
+    },
+    "tau_gas": {
+      "shape_legacy": [
+        45
+      ],
+      "shape_python": [
+        45
+      ],
+      "status": "ok",
+      "max_abs_difference": 0.0,
+      "rms_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "max_rel_difference_where_meaningful": 0.0,
+      "index_of_max_abs": [
+        0
+      ],
+      "legacy_at_max": 0.0,
+      "python_at_max": 0.0,
+      "elements_differing_above_1e-6": 0,
+      "bitwise_identical": true
+    },
+    "column_tau_rayleigh": {
+      "shape_legacy": [],
+      "shape_python": [],
+      "status": "ok",
+      "max_abs_difference": 2.9802322387695312e-08,
+      "rms_difference": 2.9802322387695312e-08,
+      "mean_abs_difference": 2.9802322387695312e-08,
+      "max_rel_difference_where_meaningful": 5.275522748251922e-07,
+      "index_of_max_abs": [],
+      "legacy_at_max": 0.05649169534444809,
+      "python_at_max": 0.0564916655421257,
+      "elements_differing_above_1e-6": 0,
+      "bitwise_identical": false
+    },
+    "rayleigh_level": {
+      "shape_legacy": [
+        46
+      ],
+      "shape_python": [
+        46
+      ],
+      "status": "ok",
+      "max_abs_difference": 2.9802322387695312e-08,
+      "rms_difference": 9.076068300404854e-09,
+      "mean_abs_difference": 5.02383788340851e-09,
+      "max_rel_difference_where_meaningful": 6.478480985010461e-07,
+      "index_of_max_abs": [
+        45
+      ],
+      "legacy_at_max": 0.05649169534444809,
+      "python_at_max": 0.0564916655421257,
+      "elements_differing_above_1e-6": 0,
+      "bitwise_identical": false
+    },
+    "tau_rayleigh": {
+      "shape_legacy": [
+        45
+      ],
+      "shape_python": [
+        45
+      ],
+      "status": "ok",
+      "max_abs_difference": 7.450580596923828e-09,
+      "rms_difference": 1.5805057338172096e-09,
+      "mean_abs_difference": 6.984967122064534e-10,
+      "max_rel_difference_where_meaningful": 1.8822868027852825e-06,
+      "index_of_max_abs": [
+        44
+      ],
+      "legacy_at_max": 0.006386052817106247,
+      "python_at_max": 0.00638604536652565,
+      "elements_differing_above_1e-6": 0,
+      "bitwise_identical": false
+    },
+    "tauscat": {
+      "shape_legacy": [
+        45
+      ],
+      "shape_python": [
+        45
+      ],
+      "status": "ok",
+      "max_abs_difference": 2.9802322387695312e-08,
+      "rms_difference": 6.664001874625056e-09,
+      "mean_abs_difference": 1.655684577094184e-09,
+      "max_rel_difference_where_meaningful": 1.0571061423363821e-07,
+      "index_of_max_abs": [
+        43
+      ],
+      "legacy_at_max": 0.28192365169525146,
+      "python_at_max": 0.2819236218929291,
+      "elements_differing_above_1e-6": 0,
+      "bitwise_identical": false
+    },
+    "tau_aerosol_scattering": {
+      "shape_legacy": [
+        45
+      ],
+      "shape_python": [
+        45
+      ],
+      "status": "ok",
+      "max_abs_difference": 4.656612873077393e-10,
+      "rms_difference": 6.9416686194011e-11,
+      "mean_abs_difference": 1.034802860683865e-11,
+      "max_rel_difference_where_meaningful": 6.134252407924105e-08,
+      "index_of_max_abs": [
+        43
+      ],
+      "legacy_at_max": 0.007591166067868471,
+      "python_at_max": 0.007591165602207184,
+      "elements_differing_above_1e-6": 0,
+      "bitwise_identical": false
+    },
+    "tau_aerosol_absorption": {
+      "shape_legacy": [
+        45
+      ],
+      "shape_python": [
+        45
+      ],
+      "status": "ok",
+      "max_abs_difference": 2.9802322387695312e-08,
+      "rms_difference": 6.664001874625056e-09,
+      "mean_abs_difference": 1.655684577094184e-09,
+      "max_rel_difference_where_meaningful": 1.0863577260838075e-07,
+      "index_of_max_abs": [
+        43
+      ],
+      "legacy_at_max": 0.2743324935436249,
+      "python_at_max": 0.2743324637413025,
+      "elements_differing_above_1e-6": 0,
+      "bitwise_identical": false
+    },
+    "dtau": {
+      "shape_legacy": [
+        45
+      ],
+      "shape_python": [
+        45
+      ],
+      "status": "ok",
+      "max_abs_difference": 2.9802322387695312e-08,
+      "rms_difference": 6.758270857301706e-09,
+      "mean_abs_difference": 2.1885372574763515e-09,
+      "max_rel_difference_where_meaningful": 9.730096843653884e-07,
+      "index_of_max_abs": [
+        43
+      ],
+      "legacy_at_max": 0.2899750769138336,
+      "python_at_max": 0.28997504711151123,
+      "elements_differing_above_1e-6": 0,
+      "bitwise_identical": false
+    },
+    "ssa": {
+      "shape_legacy": [
+        45
+      ],
+      "shape_python": [
+        45
+      ],
+      "status": "ok",
+      "max_abs_difference": 3.2782554626464844e-07,
+      "rms_difference": 1.218928546811944e-07,
+      "mean_abs_difference": 8.626116646660699e-08,
+      "max_rel_difference_where_meaningful": 1.528305043017619e-06,
+      "index_of_max_abs": [
+        22
+      ],
+      "legacy_at_max": 0.21450269222259521,
+      "python_at_max": 0.21450236439704895,
+      "elements_differing_above_1e-6": 0,
+      "bitwise_identical": false
+    },
+    "pmom": {
+      "shape_legacy": [
+        1000,
+        45
+      ],
+      "shape_python": [
+        1000,
+        45
+      ],
+      "status": "ok",
+      "max_abs_difference": 8.381903171539307e-09,
+      "rms_difference": 4.132223578998346e-11,
+      "mean_abs_difference": 3.8245611969777536e-13,
+      "max_rel_difference_where_meaningful": 1.0022615729106756,
+      "index_of_max_abs": [
+        1,
+        44
+      ],
+      "legacy_at_max": 0.013534227386116982,
+      "python_at_max": 0.013534235768020153,
+      "elements_differing_above_1e-6": 0,
+      "bitwise_identical": false
+    },
+    "molecular_moments": {
+      "shape_legacy": [
+        1000
+      ],
+      "shape_python": [
+        1000
+      ],
+      "status": "ok",
+      "max_abs_difference": 0.0,
+      "rms_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "max_rel_difference_where_meaningful": 0.0,
+      "index_of_max_abs": [
+        0
+      ],
+      "legacy_at_max": 1.0,
+      "python_at_max": 1.0,
+      "elements_differing_above_1e-6": 0,
+      "bitwise_identical": true
+    },
+    "particle_moments": {
+      "shape_legacy": [
+        1000
+      ],
+      "shape_python": [
+        1000
+      ],
+      "status": "ok",
+      "max_abs_difference": 1.862645149230957e-09,
+      "rms_difference": 7.515087908846002e-11,
+      "mean_abs_difference": 5.228930447052221e-12,
+      "max_rel_difference_where_meaningful": 1.0022615719969306,
+      "index_of_max_abs": [
+        1
+      ],
+      "legacy_at_max": 0.02170497179031372,
+      "python_at_max": 0.02170497365295887,
+      "elements_differing_above_1e-6": 0,
+      "bitwise_identical": false
+    }
+  },
+  "pmom_moments": {
+    "0": {
+      "shape_legacy": [
+        45
+      ],
+      "shape_python": [
+        45
+      ],
+      "status": "ok",
+      "max_abs_difference": 0.0,
+      "rms_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "max_rel_difference_where_meaningful": 0.0,
+      "index_of_max_abs": [
+        0
+      ],
+      "legacy_at_max": 1.0,
+      "python_at_max": 1.0,
+      "elements_differing_above_1e-6": 0,
+      "bitwise_identical": true
+    },
+    "1": {
+      "shape_legacy": [
+        45
+      ],
+      "shape_python": [
+        45
+      ],
+      "status": "ok",
+      "max_abs_difference": 8.381903171539307e-09,
+      "rms_difference": 1.2874877299696035e-09,
+      "mean_abs_difference": 2.483526865641276e-10,
+      "max_rel_difference_where_meaningful": 6.193115375124568e-07,
+      "index_of_max_abs": [
+        44
+      ],
+      "legacy_at_max": 0.013534227386116982,
+      "python_at_max": 0.013534235768020153,
+      "elements_differing_above_1e-6": 0,
+      "bitwise_identical": false
+    },
+    "2": {
+      "shape_legacy": [
+        45
+      ],
+      "shape_python": [
+        45
+      ],
+      "status": "ok",
+      "max_abs_difference": 0.0,
+      "rms_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "max_rel_difference_where_meaningful": 0.0,
+      "index_of_max_abs": [
+        0
+      ],
+      "legacy_at_max": 0.10000000149011612,
+      "python_at_max": 0.10000000149011612,
+      "elements_differing_above_1e-6": 0,
+      "bitwise_identical": true
+    },
+    "10": {
+      "shape_legacy": [
+        45
+      ],
+      "shape_python": [
+        45
+      ],
+      "status": "ok",
+      "max_abs_difference": 1.4725750133171012e-11,
+      "rms_difference": 3.399653747184616e-12,
+      "mean_abs_difference": 8.720665008023056e-13,
+      "max_rel_difference_where_meaningful": 1.0,
+      "index_of_max_abs": [
+        44
+      ],
+      "legacy_at_max": 1.4725750133171012e-11,
+      "python_at_max": 0.0,
+      "elements_differing_above_1e-6": 0,
+      "bitwise_identical": false
+    },
+    "100": {
+      "shape_legacy": [
+        45
+      ],
+      "shape_python": [
+        45
+      ],
+      "status": "ok",
+      "max_abs_difference": 0.0,
+      "rms_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "max_rel_difference_where_meaningful": null,
+      "index_of_max_abs": [
+        0
+      ],
+      "legacy_at_max": 0.0,
+      "python_at_max": 0.0,
+      "elements_differing_above_1e-6": 0,
+      "bitwise_identical": true
+    },
+    "500": {
+      "shape_legacy": [
+        45
+      ],
+      "shape_python": [
+        45
+      ],
+      "status": "ok",
+      "max_abs_difference": 0.0,
+      "rms_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "max_rel_difference_where_meaningful": null,
+      "index_of_max_abs": [
+        0
+      ],
+      "legacy_at_max": 0.0,
+      "python_at_max": 0.0,
+      "elements_differing_above_1e-6": 0,
+      "bitwise_identical": true
+    },
+    "999": {
+      "shape_legacy": [
+        45
+      ],
+      "shape_python": [
+        45
+      ],
+      "status": "ok",
+      "max_abs_difference": 0.0,
+      "rms_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "max_rel_difference_where_meaningful": null,
+      "index_of_max_abs": [
+        0
+      ],
+      "legacy_at_max": 0.0,
+      "python_at_max": 0.0,
+      "elements_differing_above_1e-6": 0,
+      "bitwise_identical": true
+    }
+  },
+  "layers_with_aerosol": [
+    42,
+    43,
+    44
+  ],
+  "layer_table": [
+    {
+      "layer": 0,
+      "height_km": 97.5,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 1.6545806391654594e-11,
+      "tau_gas": 0.0,
+      "dtau_legacy": 1.6545806391654594e-11,
+      "dtau_python": 1.6545797718037214e-11,
+      "ssa_legacy": 1.0,
+      "ssa_python": 1.0,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 1,
+      "height_km": 92.5,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 8.64963239921579e-11,
+      "tau_gas": 0.0,
+      "dtau_legacy": 8.64963239921579e-11,
+      "dtau_python": 8.649628235879447e-11,
+      "ssa_legacy": 1.0,
+      "ssa_python": 1.0,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 2,
+      "height_km": 87.5,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 4.2628431340396844e-10,
+      "tau_gas": 0.0,
+      "dtau_legacy": 4.2628431340396844e-10,
+      "dtau_python": 4.2628414687051475e-10,
+      "ssa_legacy": 1.0,
+      "ssa_python": 1.0,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 3,
+      "height_km": 82.5,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 1.9804065054529474e-09,
+      "tau_gas": 0.0,
+      "dtau_legacy": 1.9804065054529474e-09,
+      "dtau_python": 1.9804056172745277e-09,
+      "ssa_legacy": 1.0,
+      "ssa_python": 1.0,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 4,
+      "height_km": 77.5,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 8.672027540512772e-09,
+      "tau_gas": 6.9803500757359416e-09,
+      "dtau_legacy": 1.5652377172159504e-08,
+      "dtau_python": 1.5652373619445825e-08,
+      "ssa_legacy": 0.5540390014648438,
+      "ssa_python": 0.5540388226509094,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 5,
+      "height_km": 72.5,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 3.5789121000107116e-08,
+      "tau_gas": 6.624185289183515e-08,
+      "dtau_legacy": 1.0203097389194227e-07,
+      "dtau_python": 1.020309525756602e-07,
+      "ssa_legacy": 0.35076722502708435,
+      "ssa_python": 0.35076704621315,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 6,
+      "height_km": 67.5,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 1.3918507590915397e-07,
+      "tau_gas": 1.0390679250349422e-07,
+      "dtau_legacy": 2.4309187551807554e-07,
+      "dtau_python": 2.4309179025294725e-07,
+      "ssa_legacy": 0.5725616216659546,
+      "ssa_python": 0.572561502456665,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 7,
+      "height_km": 62.5,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 5.100176849737181e-07,
+      "tau_gas": 3.603820459829876e-07,
+      "dtau_legacy": 8.703997309567058e-07,
+      "dtau_python": 8.703993898961926e-07,
+      "ssa_legacy": 0.5859580039978027,
+      "ssa_python": 0.5859578251838684,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 8,
+      "height_km": 57.5,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 1.7605957509658765e-06,
+      "tau_gas": 7.803298649378121e-05,
+      "dtau_legacy": 7.979357906151563e-05,
+      "dtau_python": 7.979357906151563e-05,
+      "ssa_legacy": 0.02206437848508358,
+      "ssa_python": 0.022064363583922386,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 9,
+      "height_km": 52.5,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 5.72450835534255e-06,
+      "tau_gas": 2.386850246693939e-05,
+      "dtau_legacy": 2.959301127702929e-05,
+      "dtau_python": 2.9593007639050484e-05,
+      "ssa_legacy": 0.1934412270784378,
+      "ssa_python": 0.19344113767147064,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 10,
+      "height_km": 48.75,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 6.427149855880998e-06,
+      "tau_gas": 6.0836006014142185e-05,
+      "dtau_legacy": 6.726315768901259e-05,
+      "dtau_python": 6.726315041305497e-05,
+      "ssa_legacy": 0.09555230289697647,
+      "ssa_python": 0.09555227309465408,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 11,
+      "height_km": 46.25,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 1.1100764822913334e-05,
+      "tau_gas": 0.00015454999811481684,
+      "dtau_legacy": 0.00016565076657570899,
+      "dtau_python": 0.00016565075202379376,
+      "ssa_legacy": 0.06701306253671646,
+      "ssa_python": 0.06701303273439407,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 12,
+      "height_km": 43.75,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 1.8884791643358767e-05,
+      "tau_gas": 0.0002507349709048867,
+      "dtau_legacy": 0.00026961974799633026,
+      "dtau_python": 0.00026961974799633026,
+      "ssa_legacy": 0.07004231959581375,
+      "ssa_python": 0.07004228234291077,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 13,
+      "height_km": 41.25,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 3.1643183319829404e-05,
+      "tau_gas": 0.0004242680734023452,
+      "dtau_legacy": 0.0004559112712740898,
+      "dtau_python": 0.00045591124217025936,
+      "ssa_legacy": 0.06940644979476929,
+      "ssa_python": 0.0694064199924469,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 14,
+      "height_km": 38.75,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 5.222045729169622e-05,
+      "tau_gas": 0.000731911975890398,
+      "dtau_legacy": 0.0007841324550099671,
+      "dtau_python": 0.0007841323968023062,
+      "ssa_legacy": 0.06659647822380066,
+      "ssa_python": 0.06659643352031708,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 15,
+      "height_km": 36.25,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 8.48742201924324e-05,
+      "tau_gas": 0.001134179998189211,
+      "dtau_legacy": 0.0012190542183816433,
+      "dtau_python": 0.0012190542183816433,
+      "ssa_legacy": 0.06962300837039948,
+      "ssa_python": 0.06962297111749649,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 16,
+      "height_km": 33.75,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 0.00013585200940724462,
+      "tau_gas": 0.001595399808138609,
+      "dtau_legacy": 0.0017312518320977688,
+      "dtau_python": 0.0017312518320977688,
+      "ssa_legacy": 0.0784703940153122,
+      "ssa_python": 0.0784703716635704,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 17,
+      "height_km": 31.25,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 0.00021413684589788318,
+      "tau_gas": 0.0020605199970304966,
+      "dtau_legacy": 0.0022746569011360407,
+      "dtau_python": 0.002274656668305397,
+      "ssa_legacy": 0.09414028376340866,
+      "ssa_python": 0.09414025396108627,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 18,
+      "height_km": 28.75,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 0.0003323734272271395,
+      "tau_gas": 0.002594410441815853,
+      "dtau_legacy": 0.0029267838690429926,
+      "dtau_python": 0.002926783636212349,
+      "ssa_legacy": 0.1135626807808876,
+      "ssa_python": 0.11356262862682343,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 19,
+      "height_km": 26.25,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 0.0005079807015135884,
+      "tau_gas": 0.003165150061249733,
+      "dtau_legacy": 0.0036731306463479996,
+      "dtau_python": 0.0036731306463479996,
+      "ssa_legacy": 0.13829639554023743,
+      "ssa_python": 0.13829633593559265,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 20,
+      "height_km": 24.5,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 0.00026951776817440987,
+      "tau_gas": 0.001379399560391903,
+      "dtau_legacy": 0.0016489173285663128,
+      "dtau_python": 0.0016489170957356691,
+      "ssa_legacy": 0.16345135867595673,
+      "ssa_python": 0.16345123946666718,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 21,
+      "height_km": 23.5,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 0.00031664606649428606,
+      "tau_gas": 0.0013611000031232834,
+      "dtau_legacy": 0.0016777460696175694,
+      "dtau_python": 0.0016777461860328913,
+      "ssa_legacy": 0.18873301148414612,
+      "ssa_python": 0.1887330710887909,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 22,
+      "height_km": 22.5,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 0.00037108687683939934,
+      "tau_gas": 0.0013589002192020416,
+      "dtau_legacy": 0.001729987096041441,
+      "dtau_python": 0.00172998639754951,
+      "ssa_legacy": 0.21450269222259521,
+      "ssa_python": 0.21450236439704895,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 23,
+      "height_km": 21.5,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 0.00043379911221563816,
+      "tau_gas": 0.001337200403213501,
+      "dtau_legacy": 0.0017709995154291391,
+      "dtau_python": 0.0017709992825984955,
+      "ssa_legacy": 0.2449459284543991,
+      "ssa_python": 0.24494582414627075,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 24,
+      "height_km": 20.5,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 0.0005058406386524439,
+      "tau_gas": 0.0013042986392974854,
+      "dtau_legacy": 0.0018101392779499292,
+      "dtau_python": 0.0018101392779499292,
+      "ssa_legacy": 0.2794484496116638,
+      "ssa_python": 0.2794484496116638,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 25,
+      "height_km": 19.5,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 0.0005883628036826849,
+      "tau_gas": 0.0012158006429672241,
+      "dtau_legacy": 0.001804163446649909,
+      "dtau_python": 0.0018041629809886217,
+      "ssa_legacy": 0.32611390948295593,
+      "ssa_python": 0.3261137306690216,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 26,
+      "height_km": 18.5,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 0.0006826280150562525,
+      "tau_gas": 0.0010193996131420135,
+      "dtau_legacy": 0.001702027628198266,
+      "dtau_python": 0.0017020278610289097,
+      "ssa_legacy": 0.4010675251483917,
+      "ssa_python": 0.4010676145553589,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 27,
+      "height_km": 17.5,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 0.0007899976335465908,
+      "tau_gas": 0.0008221007883548737,
+      "dtau_legacy": 0.0016120984219014645,
+      "dtau_python": 0.0016120974905788898,
+      "ssa_legacy": 0.490043044090271,
+      "ssa_python": 0.4900427460670471,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 28,
+      "height_km": 16.5,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 0.0009119408205151558,
+      "tau_gas": 0.0007473994046449661,
+      "dtau_legacy": 0.001659340225160122,
+      "dtau_python": 0.0016593392938375473,
+      "ssa_legacy": 0.5495803952217102,
+      "ssa_python": 0.5495800971984863,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 29,
+      "height_km": 15.5,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 0.0010500443167984486,
+      "tau_gas": 0.0007419008761644363,
+      "dtau_legacy": 0.001791945192962885,
+      "dtau_python": 0.0017919447273015976,
+      "ssa_legacy": 0.5859801769256592,
+      "ssa_python": 0.5859800577163696,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 30,
+      "height_km": 14.5,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 0.0012059854343533516,
+      "tau_gas": 0.000750100240111351,
+      "dtau_legacy": 0.0019560856744647026,
+      "dtau_python": 0.00195608614012599,
+      "ssa_legacy": 0.6165299415588379,
+      "ssa_python": 0.6165300607681274,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 31,
+      "height_km": 13.5,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 0.0013815583661198616,
+      "tau_gas": 0.0006916988641023636,
+      "dtau_legacy": 0.002073257230222225,
+      "dtau_python": 0.0020732562988996506,
+      "ssa_legacy": 0.6663709282875061,
+      "ssa_python": 0.6663708090782166,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 32,
+      "height_km": 12.5,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 0.001578647643327713,
+      "tau_gas": 0.0005783010274171829,
+      "dtau_legacy": 0.002156948670744896,
+      "dtau_python": 0.0021569468080997467,
+      "ssa_legacy": 0.7318893074989319,
+      "ssa_python": 0.7318890690803528,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 33,
+      "height_km": 11.5,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 0.0017992304638028145,
+      "tau_gas": 0.0005165990442037582,
+      "dtau_legacy": 0.0023158295080065727,
+      "dtau_python": 0.0023158276453614235,
+      "ssa_legacy": 0.7769269943237305,
+      "ssa_python": 0.7769268155097961,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 34,
+      "height_km": 10.5,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 0.0020453641191124916,
+      "tau_gas": 0.00046770088374614716,
+      "dtau_legacy": 0.0025130650028586388,
+      "dtau_python": 0.0025130650028586388,
+      "ssa_legacy": 0.8138922452926636,
+      "ssa_python": 0.8138922452926636,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 35,
+      "height_km": 9.5,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 0.00231916643679142,
+      "tau_gas": 0.0004382990300655365,
+      "dtau_legacy": 0.0027574654668569565,
+      "dtau_python": 0.002757464535534382,
+      "ssa_legacy": 0.8410500288009644,
+      "ssa_python": 0.8410499691963196,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 36,
+      "height_km": 8.5,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 0.002622827887535095,
+      "tau_gas": 0.0004418008029460907,
+      "dtau_legacy": 0.003064628690481186,
+      "dtau_python": 0.0030646268278360367,
+      "ssa_legacy": 0.8558387160301208,
+      "ssa_python": 0.8558386564254761,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 37,
+      "height_km": 7.5,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 0.0029585380107164383,
+      "tau_gas": 0.00045679882168769836,
+      "dtau_legacy": 0.0034153368324041367,
+      "dtau_python": 0.0034153368324041367,
+      "ssa_legacy": 0.86625075340271,
+      "ssa_python": 0.86625075340271,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 38,
+      "height_km": 6.5,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 0.0033285245299339294,
+      "tau_gas": 0.0005001015961170197,
+      "dtau_legacy": 0.003828626126050949,
+      "dtau_python": 0.0038286224007606506,
+      "ssa_legacy": 0.8693783283233643,
+      "ssa_python": 0.8693782091140747,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 39,
+      "height_km": 5.5,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 0.0037349797785282135,
+      "tau_gas": 0.0005722995847463608,
+      "dtau_legacy": 0.004307279363274574,
+      "dtau_python": 0.004307279363274574,
+      "ssa_legacy": 0.8671320080757141,
+      "ssa_python": 0.8671320080757141,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 40,
+      "height_km": 4.5,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 0.0041800606995821,
+      "tau_gas": 0.0007361993193626404,
+      "dtau_legacy": 0.00491626001894474,
+      "dtau_python": 0.004916256293654442,
+      "ssa_legacy": 0.8502521514892578,
+      "ssa_python": 0.8502520322799683,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 41,
+      "height_km": 3.5,
+      "relative_tau_legacy": 0.0,
+      "relative_tau_python": 0.0,
+      "tauscat_legacy": 0.0,
+      "tauscat_python": 0.0,
+      "tau_rayleigh": 0.004665832966566086,
+      "tau_gas": 0.0010388009250164032,
+      "dtau_legacy": 0.005704633891582489,
+      "dtau_python": 0.0057046301662921906,
+      "ssa_legacy": 0.8179022669792175,
+      "ssa_python": 0.817902147769928,
+      "pmom1_legacy": 0.0,
+      "pmom1_python": 0.0
+    },
+    {
+      "layer": 42,
+      "height_km": 2.5,
+      "relative_tau_legacy": 0.20217856764793396,
+      "relative_tau_python": 0.20217856764793396,
+      "tauscat_legacy": 0.170996755361557,
+      "tauscat_python": 0.1709967404603958,
+      "tau_rayleigh": 0.005194254219532013,
+      "tau_gas": 0.0015383008867502213,
+      "dtau_legacy": 0.1777293086051941,
+      "dtau_python": 0.1777292937040329,
+      "ssa_legacy": 0.055131975561380386,
+      "ssa_python": 0.055131979286670685,
+      "pmom1_legacy": 0.010199090465903282,
+      "pmom1_python": 0.010199092328548431
+    },
+    {
+      "layer": 43,
+      "height_km": 1.5,
+      "relative_tau_legacy": 0.3333333432674408,
+      "relative_tau_python": 0.3333333432674408,
+      "tauscat_legacy": 0.28192365169525146,
+      "tauscat_python": 0.2819236218929291,
+      "tau_rayleigh": 0.0057671330869197845,
+      "tau_gas": 0.0022842995822429657,
+      "dtau_legacy": 0.2899750769138336,
+      "dtau_python": 0.28997504711151123,
+      "ssa_legacy": 0.04606705904006958,
+      "ssa_python": 0.04606706276535988,
+      "pmom1_legacy": 0.01233435794711113,
+      "pmom1_python": 0.012334358878433704
+    },
+    {
+      "layer": 44,
+      "height_km": 0.5,
+      "relative_tau_legacy": 0.46448811888694763,
+      "relative_tau_python": 0.46448811888694763,
+      "tauscat_legacy": 0.3928505480289459,
+      "tauscat_python": 0.39285051822662354,
+      "tau_rayleigh": 0.006386052817106247,
+      "tau_gas": 0.0032254979014396667,
+      "dtau_legacy": 0.40246209502220154,
+      "dtau_python": 0.40246206521987915,
+      "ssa_legacy": 0.04215072840452194,
+      "ssa_python": 0.04215071350336075,
+      "pmom1_legacy": 0.013534227386116982,
+      "pmom1_python": 0.013534235768020153
+    }
+  ],
+  "first_material_difference": null,
+  "disort_check": {
+    "R_dd_T_dd_from_legacy_arrays": [
+      0.038149524480104446,
+      0.2499353587627411
+    ],
+    "R_dd_T_dd_from_python_arrays": [
+      0.03816099092364311,
+      0.24993544816970825
+    ],
+    "R_dd_T_dd_from_python_arrays_with_legacy_profile_weights": [
+      0.03816099092364311,
+      0.24993544816970825
+    ],
+    "legacy_product_R_dd": 0.038124,
+    "python_product_R_dd": 0.037788,
+    "note": "production DISORT kernel invoked from Python on each captured input set; R_dd = FLUP/(FIsot*pi)"
+  }
+}

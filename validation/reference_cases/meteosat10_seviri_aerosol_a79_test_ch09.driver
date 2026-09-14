@@ -1,0 +1,10 @@
+# Aerosol formulation, compact grid with surface pressure, SEVIRI channel 9 (IR10.8, thermal-only), gas on.
+input_files
+meteosat-10_seviri_v1.inst
+aerosol_a79.mm
+aerosol_test.lut
+2
+channelid= [9]
+srf_quad=1
+gas=1
+version=21

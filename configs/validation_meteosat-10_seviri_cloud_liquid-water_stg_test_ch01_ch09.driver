@@ -1,0 +1,13 @@
+# Validation case: cloud formulation, SEVIRI channel(s) 1,9, compact grid. Not a production configuration.
+# Output is set explicitly because the legacy file name does not encode the channel set.
+input_files
+meteosat-10_seviri_v1.inst
+liquid-water_stg.mm
+liquid-water-cloud_test.lut
+2
+forward_model=cloud
+channelid=[1,9]
+srf_quad=1
+
+version=21
+output=validation/generated/cloud_visible_ir_comparison/python

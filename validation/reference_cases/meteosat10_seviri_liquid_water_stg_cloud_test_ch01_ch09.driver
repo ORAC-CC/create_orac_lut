@@ -1,0 +1,9 @@
+# Cloud formulation, compact grid, SEVIRI channels 1 (VIS0.6, solar) and 9 (IR10.8, thermal) in one product.
+input_files
+meteosat-10_seviri_v1.inst
+liquid-water_stg.mm
+liquid-water-cloud_test.lut
+2
+channelid= [1, 9]
+srf_quad=1
+version=21

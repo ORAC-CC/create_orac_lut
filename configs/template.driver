@@ -1,0 +1,121 @@
+# ORAC LUT configuration template
+# =============================================================================
+# Copy this file, edit it, dry-run it, submit it:
+#
+#     cp configs/template.driver configs/my_new_lut.driver
+#     $EDITOR configs/my_new_lut.driver
+#     PYTHONPATH=src /home/g/grainger/miniforge3/envs/science/bin/python \
+#         -m oraclut.generate --config configs/my_new_lut.driver --dry-run
+#     ssh atmlxint7 && cd ~/project-oraclut
+#     scripts/submit_oraclut_lut.sh --config configs/my_new_lut.driver
+#
+# This file replaces the practical role of makerunfile_v2.pro: it is the only
+# thing you normally edit. You should not need to edit Python source, the SLURM
+# batch script, or long command lines.
+#
+# Format: five positional values in this exact order, then key=value options.
+# '#' starts a comment. The positional values name reusable definition files in
+# the standard input hierarchy create_orac_lut/input_files/, so this file stays
+# short and the scientific definitions stay shared:
+#
+#     inst/         instrument definitions (channels, SRF file names, constants)
+#     srf/          spectral response functions, named by the .inst file
+#     lut/          LUT grid definitions (the dimensions of the product)
+#     microphysics/ particle models (.mm), which name their refractive indices
+#     ri/           refractive-index files, named by the .mm file
+#
+# You name only the .inst, .mm and .lut files; the SRF and refractive-index
+# files are resolved from them automatically. Give bare file names, not paths.
+# =============================================================================
+
+# -- 1. Input root. Always 'input_files'. Do not change. ----------------------
+input_files
+
+# -- 2. Instrument definition, from input_files/inst/ -------------------------
+# <platform>_<instrument>_v1.inst, e.g. meteosat-10_seviri_v1.inst,
+# aqua_modis_v1.inst, sentinel-3a_slstr_v1.inst. Dual-view instruments
+# (view > 0) are not yet supported.
+meteosat-10_seviri_v1.inst
+
+# -- 3. Microphysical model, from input_files/microphysics/ -------------------
+# The particle model. Its name also implies the formulation and LUT family:
+#   liquid-water_stg.mm  liquid-water_240.mm ... water-ice_sph.mm (cloud)
+#   sulphuric-acid_300.mm  volcanic-ash_ey1.mm  biomass_a.mm      (cloud)
+#   aerosol_a70.mm  aerosol_a75.mm ... aerosol_a79.mm             (aerosol)
+# Supported optics: single-component modified gamma (e.g. liquid-water_stg) and
+# shared-mode log-normal Mie mixtures (e.g. aerosol_a79). T-matrix and
+# Baum/Baran ice models are not yet ported and fail explicitly.
+liquid-water_stg.mm
+
+# -- 4. LUT grid definition, from input_files/lut/ ----------------------------
+# This decides the size of the calculation, so it is always named explicitly:
+# there is no hidden default and nothing silently selects a production grid.
+#   development/test grids (seconds; use these while setting a case up):
+#       liquid-water-cloud_test.lut   48 grid points
+#       ice-cloud_test.lut            32
+#       aerosol_test.lut              96 (includes surface pressure)
+#   full production grids (hours; submit these through SLURM):
+#       liquid-water-cloud.lut        17 x 20 x 10 x 10 x 11 = 374,000
+#       ice-cloud.lut                 448,800
+#       sulphuric-acid-cloud.lut      149,600
+#       ash-cloud.lut                 243,100
+#       aerosol.lut                   20 x 20 x 10 x 10 x 11 x 1 = 440,000
+# The aerosol formulation requires a grid with the sixth surface-pressure
+# block; the cloud formulation requires one without it.
+liquid-water-cloud_test.lut
+
+# -- 5. Atmosphere: MODTRAN code, from input_files/atm/ -----------------------
+#   0 = midlatitude summer (old midsatm.dat)   1 = tropical
+#   2 = midlatitude summer                     3 = midlatitude winter
+#   4 = subarctic summer                       5 = subarctic winter
+#   6 = 1976 US standard
+2
+
+# =============================================================================
+# Optional settings below. Each line is key=value; delete a line to take the
+# default shown. Keyword names follow the legacy IDL wrapper.
+# =============================================================================
+
+# Forward-model formulation: 'cloud' (discrete particle layer) or 'aerosol'
+# (particles distributed through the atmospheric column, adding a
+# surface-pressure dimension). These are historical formulation names, not
+# particle categories: the particle type comes from the .mm file above.
+# Default: derived from the material of the .mm name, as makerunfile_v2 did.
+forward_model=cloud
+
+# Channels to generate, as instrument channel numbers. Omit for every channel
+# in the .inst file. Use one channel while testing.
+channelid=[1]
+
+# Spectral response treatment: 1 = monochromatic at the effective channel
+# centre (the operational setting); 2 = integrated over the SRF. Default 1.
+srf_quad=1
+
+# Gas absorption from the MODTRAN profiles in input_files/gas/.
+# Currently implemented for the aerosol formulation only. Default off.
+#gas=1
+
+# Rayleigh scattering. On by default; set no_rayleigh=1 to exclude it (the
+# legacy second pass for liquid-water cloud bottom layers).
+#no_rayleigh=1
+
+# Radiative-transfer resolution. The defaults reproduce the legacy operational
+# settings; change them only with a scientific reason, and keep
+# phase_order >= 2 * streams.
+#streams=60
+#phase_order=1000
+
+# Output LUT product revision, written into the file name. Default 21.
+version=21
+
+# Output location. By default the product is written to
+#   create_orac_lut/luts/<platform>_<instrument>_<formulation>/
+# under the legacy file name
+#   <platform>_<instrument>_<m|b>_<substance>_a<code>_p<shortname>_v<rev>.nc
+# Set a directory or an explicit .nc path inside the repository to override.
+# Note: as in the legacy code the file name records the instrument, particle
+# model, atmosphere and revision but NOT the grid, so a test-grid run and a
+# full-grid run of the same case write the same name. Set output= below for
+# experiments, or pass --overwrite deliberately. The dry-run summary always
+# says whether the output already exists.
+#output=create_orac_lut/luts/my_experiment

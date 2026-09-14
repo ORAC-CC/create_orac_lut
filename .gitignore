@@ -68,9 +68,14 @@ disort.dat
 *.ps
 *.toc
 *.tps
-*.eps
-*.pptx
 *.sav
+
+# NOTE: *.eps, *.pdf, *.png, *.jpg and *.pptx are deliberately NOT ignored.
+# Several root-level figures and documents in those formats are manually
+# created scientific material with no reproducible source in this repository.
+
+# LaTeX font-generation log.
+missfont.log
 
 # Machine-local runtime files.
 *.out

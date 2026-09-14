@@ -1,0 +1,20 @@
+# Cloud formulation, compact development grid.
+# Meteosat-10 SEVIRI, liquid-water STG, channel 1. Runs in about 30 seconds and
+# is the case validated against the captured legacy IDL reference.
+# makerunfile_v2 equivalent: MM='liquid-water_stg', platform='meteosat-10',
+# instrument='seviri', Test=1, srf_quad=1, Versions='21'.
+# See configs/template.driver for what each setting means.
+
+input_files                     # input root: create_orac_lut/input_files
+meteosat-10_seviri_v1.inst      # instrument definition (input_files/inst)
+liquid-water_stg.mm             # particle model (input_files/microphysics)
+liquid-water-cloud_test.lut     # LUT grid (input_files/lut): 48 grid points
+2                               # atmosphere: MODTRAN midlatitude summer
+
+forward_model=cloud             # discrete particle layer
+channelid=[1]                   # omit for all 11 SEVIRI channels
+srf_quad=1                      # monochromatic at effective channel centre
+version=21                      # product revision
+
+# Output: create_orac_lut/luts/meteosat-10_seviri_cloud/
+#         meteosat-10_seviri_m_liquid-water_a01_pstg_v21.nc

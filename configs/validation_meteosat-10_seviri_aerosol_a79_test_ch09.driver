@@ -1,0 +1,13 @@
+# Validation case: aerosol formulation, SEVIRI channel(s) 9, compact grid. Not a production configuration.
+# Output is set explicitly because the legacy file name does not encode the channel set.
+input_files
+meteosat-10_seviri_v1.inst
+aerosol_a79.mm
+aerosol_test.lut
+2
+forward_model=aerosol
+channelid=[9]
+srf_quad=1
+gas=1
+version=21
+output=validation/generated/aerosol_ir_comparison/python

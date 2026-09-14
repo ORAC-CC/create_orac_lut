@@ -1,0 +1,126 @@
+{
+  "point": {
+    "channel_id": 1,
+    "solar_channel_index": 0,
+    "wavelength_microns": 0.6381767988204956,
+    "optical_depth_index": 9,
+    "optical_depth": 2.0,
+    "effective_radius_index": 11,
+    "effective_radius_microns": 23.0,
+    "solar_zenith_index": 5,
+    "solar_zenith": 50.0,
+    "satellite_zenith_index": 8,
+    "satellite_zenith": 80.0,
+    "relative_azimuth_index": 0,
+    "relative_azimuth": 0.0
+  },
+  "disort": {
+    "nlyr": 45,
+    "nstr": 60,
+    "nmom": 999,
+    "ntau": 2,
+    "numu": 20,
+    "nphi": 11,
+    "fbeam": 100.0,
+    "umu0": 0.6427875757217407,
+    "fisot": 0.0,
+    "phi0": 0.0,
+    "usrtau": 1,
+    "usrang": 1,
+    "plank": 0,
+    "onlyfl": 0,
+    "accur": 1e-08
+  },
+  "compiler": "ifort",
+  "arrays": {
+    "dtau": {
+      "shape": [
+        45
+      ],
+      "dtype": "float32",
+      "minimum": 1.551679097711034e-11,
+      "maximum": 2.0097262859344482
+    },
+    "ssalb": {
+      "shape": [
+        45
+      ],
+      "dtype": "float32",
+      "minimum": 0.9999935030937195,
+      "maximum": 1.0
+    },
+    "pmom": {
+      "shape": [
+        1000,
+        45
+      ],
+      "dtype": "float32",
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    "utau": {
+      "shape": [
+        2
+      ],
+      "dtype": "float32",
+      "minimum": 0.0,
+      "maximum": 2.058328866958618
+    },
+    "umu": {
+      "shape": [
+        20
+      ],
+      "dtype": "float32",
+      "minimum": -0.9999899864196777,
+      "maximum": 0.9999899864196777
+    },
+    "phi": {
+      "shape": [
+        11
+      ],
+      "dtype": "float32",
+      "minimum": 0.0,
+      "maximum": 180.0
+    },
+    "rfldir": {
+      "shape": [
+        2
+      ],
+      "dtype": "float32",
+      "minimum": 2.614408254623413,
+      "maximum": 64.27875518798828
+    },
+    "rfldn": {
+      "shape": [
+        2
+      ],
+      "dtype": "float32",
+      "minimum": -0.00188446044921875,
+      "maximum": 48.59682083129883
+    },
+    "flup": {
+      "shape": [
+        2
+      ],
+      "dtype": "float32",
+      "minimum": 0.0004024315276183188,
+      "maximum": 13.067303657531738
+    },
+    "uu": {
+      "shape": [
+        20,
+        2,
+        11
+      ],
+      "dtype": "float32",
+      "minimum": -1.5230128765106201,
+      "maximum": 34907.6796875
+    }
+  },
+  "optics": {
+    "ssa": 0.9999934434890747,
+    "asymmetry": 0.8733596801757812,
+    "extinction_ratio": 1.0026752948760986,
+    "phase_moment_max": 1.0
+  }
+}
