@@ -128,3 +128,33 @@ The writer accepts `lut_level=2` and an independent integer `revision` (for
 example `revision=21`). It validates supplied dimensions and array shapes and
 does not create scientific values that have not been supplied by an upstream
 stage.
+
+## Pressure-aware (aerosol formulation) products
+
+When the LUT definition carries a sixth, surface-pressure grid the legacy
+writer (`write_v2_lut.pro`, `/include_pressure`) adds:
+
+- a `surface_pressure` dimension declared **between `relative_azimuth` and
+  `channels`** — the full declaration order is `optical_depth`,
+  `effective_radius`, `satellite_zenith`, `solar_zenith`, `relative_azimuth`,
+  `surface_pressure`, `channels`, `length`, `st1`–`st4`, then the channel-class
+  dimensions (`solar_channels`, `thermal_channels`, `mixed_channels`) that exist;
+- a float32 coordinate `surface_pressure(surface_pressure)` with no fill value
+  and the attributes `long_name = "surface pressure"`, `spacing` (the LUT
+  header word, e.g. `uneven_linear`), `units = "hPa"`,
+  `valid_range = [900., 1100.]` (float32);
+- `surface_pressure` inserted as the second dimension (IDL order) of every
+  radiative-transfer operator, i.e. immediately before `channels` /
+  `solar_channels` / `thermal_channels` in the NetCDF (C) order used by the
+  Python reader.
+
+The Python writer reproduces this layout: `oraclut.io.v2.V2_DIMENSION_ORDER`
+fixes the declaration order for every product (cloud products, which have no
+pressure grid, are unaffected), and `V2_COORDINATE_DEFAULTS` supplies the
+literal `long_name`/`units`/`valid_range` for `surface_pressure` when the
+caller passes none. `spacing` is never inferred by the writer; the LUT reader
+retains the pressure-block header word as `LutGrid.surface_pressure_spacing`
+and the pipeline forwards it into the coordinate metadata, so the written
+attribute is the LUT definition's own keyword (`uneven_linear` for
+`aerosol_test.lut`).
+Verified against the captured legacy aerosol references (2026-09-14).

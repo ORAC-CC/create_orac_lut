@@ -9,6 +9,37 @@ import numpy as np
 from netCDF4 import Dataset
 
 
+# Global dimension declaration order of the legacy V2 writer (write_v2_lut.pro,
+# ncdf_dimdef sequence). The pressure dimension, when present, is declared
+# between relative_azimuth and channels; the channel-class dimensions follow the
+# string-length dimensions. Dimensions not named here keep their given order
+# after these.
+V2_DIMENSION_ORDER = (
+    "optical_depth", "effective_radius", "satellite_zenith", "solar_zenith",
+    "relative_azimuth", "surface_pressure", "channels", "length",
+    "st1", "st2", "st3", "st4", "solar_channels", "thermal_channels", "mixed_channels",
+)
+
+# Coordinate attributes the legacy writer sets as literal constants. They are
+# applied only where the caller supplies no value for that attribute; anything
+# the caller does supply wins. ``spacing`` is deliberately absent: it is the
+# LUT-definition header word and must come from the grid, never be inferred.
+V2_COORDINATE_DEFAULTS: dict[str, dict[str, Any]] = {
+    "surface_pressure": {
+        "long_name": "surface pressure",
+        "units": "hPa",
+        "valid_range": np.asarray([900.0, 1100.0], dtype=np.float32),
+    },
+}
+
+
+def v2_dimension_order(dimensions: Mapping[str, int]) -> list[str]:
+    """Return dimension names in the legacy V2 declaration order."""
+
+    known = [name for name in V2_DIMENSION_ORDER if name in dimensions]
+    return known + [name for name in dimensions if name not in V2_DIMENSION_ORDER]
+
+
 def write_v2_lut(
     path: str | Path,
     *,
@@ -34,7 +65,8 @@ def write_v2_lut(
     output = Path(path)
     attrs = variable_attributes or {}
     with Dataset(output, "w", format="NETCDF4") as dataset:
-        for name, size in dimensions.items():
+        for name in v2_dimension_order(dimensions):
+            size = dimensions[name]
             if not isinstance(size, int) or size < 0:
                 raise ValueError(f"Invalid dimension {name!r}: {size!r}")
             dataset.createDimension(name, size)
@@ -51,7 +83,8 @@ def write_v2_lut(
             fill = attrs.get(name, {}).get("_FillValue", False)
             variable = dataset.createVariable(name, array.dtype, dims, fill_value=fill)
             variable[:] = array
-            for attribute, value in attrs.get(name, {}).items():
+            variable_attrs = {**V2_COORDINATE_DEFAULTS.get(name, {}), **attrs.get(name, {})}
+            for attribute, value in variable_attrs.items():
                 if attribute != "_FillValue":
                     variable.setncattr(attribute, value)
         for attribute, value in (global_attributes or {}).items():

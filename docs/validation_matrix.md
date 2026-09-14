@@ -194,6 +194,58 @@ reports kept under each case's `before_profile_fix/`):
 The visible systematic bias has disappeared: every channel-1 operator now sits
 at or below the cloud benchmark level (1.3e-4), with no localised structure.
 
+### Finding 3 — aerosol NetCDF layout (format compatibility, corrected after 0a68fad)
+
+Through commit `0a68fad` every aerosol comparison reported **structural FAIL**
+while the science was GREEN. The cause was NetCDF representation only, and it
+was deliberately left until the scientific validation was complete:
+
+- the legacy writer declares the `surface_pressure` dimension between
+  `relative_azimuth` and `channels` (`write_v2_lut.pro` line 42), whereas the
+  Python caller appended it after `st4`;
+- the legacy `surface_pressure` coordinate (float32, dims `(surface_pressure,)`,
+  values 950/1013/1050, no fill value) carries four attributes set as literals
+  in `write_v2_lut.pro` lines 262–265: `long_name = "surface pressure"`,
+  `spacing = <LUT header word>` (`uneven_linear` here), `units = "hPa"`,
+  `valid_range = [900., 1100.]` (float32). The Python coordinate carried none.
+
+Per-variable dimension order, shapes, dtypes and coordinate values already
+agreed. Verified on the captured legacy references, not inferred.
+
+Correction (writer/reader layer only; `pipeline.py` and all science untouched):
+`src/oraclut/io/v2.py` now declares dimensions in the legacy V2 order
+(`V2_DIMENSION_ORDER`) and applies the legacy literal coordinate attributes
+(`V2_COORDINATE_DEFAULTS`: `long_name`, `units`, `valid_range`) where the caller
+supplies none; `read_lut_grid` now keeps the pressure block's spacing keyword
+(`LutGrid.surface_pressure_spacing`) instead of discarding it. The Python
+aerosol candidates were regenerated (pre-correction products and reports kept
+under each case's `before_layout_fix/`; legacy references untouched):
+
+| Case | Structural | Numerical | Worst operator |
+| --- | --- | --- | --- |
+| aerosol visible (ch 1) | **PASS** | GREEN | 9.45e-5 |
+| aerosol IR (ch 9) | **PASS** | GREEN | 2.25e-5 |
+| aerosol visible+IR (ch 1, 9) | **PASS** | GREEN | 9.45e-5 |
+
+Every scientific array (all RT operators and optics) is bitwise identical
+between the pre- and post-correction products; dimension declaration order now
+matches legacy exactly; coordinate values remain [950, 1013, 1050].
+
+The last attribute, `spacing`, was then forwarded in the follow-up step: the
+reader's `LutGrid.surface_pressure_spacing` (the `.lut` pressure-block header
+word, never inferred from the values) is passed into the coordinate-attribute
+table in `_metadata_variables` (`src/oraclut/pipeline.py`) as the single
+`surface_pressure` entry, with `long_name`/`units`/`valid_range` left to the
+writer defaults. After regeneration the comparator reports **no attribute
+differences at all** on any aerosol case, the former strict-xfail test passes
+as a normal test, and every scientific array remains bitwise identical to the
+products written before the layout work. All known aerosol structural
+differences against the coherent legacy V2 product are resolved.
+
+Cloud regression: the new writer produces a bitwise-identical cloud ch 9
+product with unchanged dimension order (no `surface_pressure`), structural
+PASS / GREEN 6.6e-5.
+
 ### Warnings
 
 Every legacy run reported one `% Program caused arithmetic error: Floating

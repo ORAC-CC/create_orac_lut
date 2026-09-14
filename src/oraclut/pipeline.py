@@ -842,6 +842,9 @@ def _metadata_variables(
             "units": "degrees", "valid_range": np.asarray([0.0, 180.0], dtype=np.float32),
         },
     }
+    if surface_pressure is not None and grid.surface_pressure_spacing is not None:
+        # The remaining surface_pressure attributes are V2 writer defaults.
+        attrs["surface_pressure"] = {"spacing": grid.surface_pressure_spacing}
     operator_attributes = {
         "T_dv": "diffuse transmission of direct light", "T_dd": "diffuse transmission",
         "R_dv": "direct reflection of diffuse light", "R_dd": "diffuse reflection of diffuse light",

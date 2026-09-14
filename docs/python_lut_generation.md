@@ -424,9 +424,11 @@ Both aerosol findings — a factor-100 scaling of `E_md` in the aerosol emission
 block, and `np.interp` clamping the vertical profile where IDL `INTERPOL`
 extrapolates linearly — were found by this matrix, corrected with one-line and
 one-function changes, and are documented with before/after records in
-`docs/validation_matrix.md`. The aerosol products still differ from legacy in
-NetCDF layout only (`surface_pressure` dimension declaration position and four
-missing coordinate attributes).
+`docs/validation_matrix.md`. The aerosol NetCDF layout now matches legacy completely — dimension
+declaration order and the full `surface_pressure` coordinate metadata
+including `spacing`, preserved from the LUT definition — with structural PASS
+and no attribute differences on all aerosol cases, and scientific arrays
+unchanged; see `docs/validation_matrix.md`, Finding 3.
 
 The legacy reference for the singleton-channel cases carries fill values
 (9.97e36) in the optics variables — a known writer artefact — where Python

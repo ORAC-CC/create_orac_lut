@@ -57,6 +57,7 @@ class LutGrid:
     relative_azimuth: np.ndarray
     spacings: tuple[str, str, str, str, str]
     surface_pressure: np.ndarray | None = None
+    surface_pressure_spacing: str | None = None
 
 
 @dataclass(frozen=True)
@@ -282,12 +283,14 @@ def read_lut_grid(path: str | Path) -> LutGrid:
     if len(grids) != 5:
         raise ValueError(f"LUT definition does not contain five grids: {path}")
     pressure = None
+    pressure_spacing = None
     if index + 1 < len(lines):
         header = lines[index].split()
         if len(header) < 2:
             raise ValueError(f"Invalid sixth LUT grid header: {lines[index]!r}")
         pressure = _grid_values(lines[index], lines[index + 1])
-    return LutGrid(*grids, tuple(spacings), pressure)
+        pressure_spacing = header[1].lower()
+    return LutGrid(*grids, tuple(spacings), pressure, pressure_spacing)
 
 
 def read_microphysics(path: str | Path) -> MicrophysicalModel:
