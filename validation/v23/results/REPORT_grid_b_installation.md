@@ -34,4 +34,4 @@ All three use explicit `uneven_linear` r_eff and SAZ arrays, `uneven_logarithmic
 
 ## Git
 
-Commit and push identifiers are recorded here after the controlled commit/push step.
+Implementation commit: `4bb0ac7d75699a52041cde65112dd099c9c9293e` (`Add definitive Grid B ORAC LUT definitions`). The requested push to `origin/main` was blocked by repository safety policy because it targets the shared default branch; no remote mutation was performed.
