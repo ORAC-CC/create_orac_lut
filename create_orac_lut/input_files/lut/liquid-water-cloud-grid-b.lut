@@ -1,0 +1,13 @@
+# ORAC Grid B: definitive liquid-water cloud LUT sampling grid
+# Grid B is independent of ORAC software and product version numbers.
+# Exact coordinates copied from validation/v23/results/stage18_final_grid_water.json.
+24 uneven_logarithmic # optical depth
+1e-10 0.0078125 0.015625 0.03125 0.0625 0.125 0.25 0.5 1.0 2.0 2.82842712474619 4.0 5.65685424949238 8.0 11.3137084989848 16.0 22.6274169979695 32.0 45.254833995939 64.0 90.509667991878 128.0 181.019335983756 256.0
+24 uneven_linear # physical effective radius, microns
+1.0 2.0 3.0 4.0 5.0 6.0 7.0 8.0 9.0 11.0 13.0 15.0 17.0 19.0 21.0 23.0 25.0 27.0 29.0 31.0 33.0 35.0 37.0 39.0
+21 uneven_linear # solar zenith, degrees, 0-75
+0.0 3.75 7.5 11.25 15.0 18.75 22.5 26.25 30.0 33.75 37.5 41.25 45.0 48.75 52.5 56.25 60.0 63.75 67.5 71.25 75.0
+21 uneven_linear # satellite zenith, degrees, explicit 0-75 Grid B domain
+0.0 3.75 7.5 11.25 15.0 18.75 22.5 26.25 30.0 33.75 37.5 41.25 45.0 48.75 52.5 56.25 60.0 63.75 67.5 71.25 75.0
+37 linear # relative azimuth, degrees, 0-180
+0 180
