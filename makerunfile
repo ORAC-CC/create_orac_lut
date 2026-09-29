@@ -1,0 +1,26 @@
+; Maker-style Python V22 master specification.
+; Counterpart of the current restored create_orac_lut/makerunfile.pro active
+; configuration.
+; The corresponding IDL products are V21; scientific settings are intended
+; to be identical.  This file expands to one transient single-LUT run per
+; entry in mmfiles; edit this file rather than maintaining those runs.
+
+platform      = 'meteosat-10'
+instrument    = 'seviri'
+forward_model = 'cloud'
+in_path       = 'create_orac_lut/input_files'
+instfile      = 'meteosat-10_seviri_v1.inst'
+mmfiles       = ['liquid-water_old.mm']
+lutfile       = 'liquid-water-cloud_test.lut'
+atmospheres   = 2
+channelid     = [1, 10]
+scat_only     = 0
+gas           = 0
+no_rayleigh   = 0
+srf_quad      = 2
+nstreams      = 60
+nmom          = 1000
+version       = 22
+out_path      = 'luts'
+
+

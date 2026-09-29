@@ -81,3 +81,34 @@ missfont.log
 *.out
 *.stdout
 *.stderr
+
+# Generated LUT products
+/luts/
+
+# Local development history, scientific validation and archived material.
+# These are retained on disk but are not part of the distributable program.
+/docs/
+/validation/
+
+# Local development/design documentation.
+/ARCHITECTURE.md
+/MIGRATION_PLAN.md
+/VALIDATION.md
+
+# Legacy-tree local backups.
+/create_orac_lut/**/*.bak
+
+# V23/grid-development LUT definitions retained locally in the legacy tree.
+/create_orac_lut/input_files/lut/*-dense.lut
+/create_orac_lut/input_files/lut/*-angular-ref.lut
+/create_orac_lut/input_files/lut/*-geometry-0-75.lut
+/create_orac_lut/input_files/lut/soz-probe.lut
+/create_orac_lut/input_files/lut/master-0-90-angular-ref.lut
+/create_orac_lut/input_files/lut/*-dense-0-75.lut
+/scripts/submit_v23_modis_cloud_luts.sh
+
+# Local migration/validation-campaign tests.
+/tests/test_idl_driver_invariant.py
+/tests/test_idl_v21_ready_mapping.py
+/tests/test_python_v22_campaign.py
+/tests/test_v21_v22_campaign_comparison.py

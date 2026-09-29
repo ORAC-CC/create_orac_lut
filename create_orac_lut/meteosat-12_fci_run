@@ -1,0 +1,28 @@
+#!/bin/bash
+source initpath.bash
+# monochromatic calculation
+# aerosol section
+export CREATE_ORAC_AEROSOL_LUT_DRIVER="input_files/driver/meteosat-12_fci_aerosol.driver"
+echo "making ..." $CREATE_ORAC_LUT_DRIVER
+idl -e "create_orac_aerosol_lut_wrapper,srf_quad=1,mmfile='aerosol_a70.mm',lutfile='aerosol.lut',tmatrix_path='/network/group/aopp/eodg/shared/dubovik_tmatrix/',version=21"
+
+export CREATE_ORAC_AEROSOL_LUT_DRIVER="input_files/driver/meteosat-12_fci_aerosol.driver"
+echo "making ..." $CREATE_ORAC_LUT_DRIVER
+idl -e "create_orac_aerosol_lut_wrapper,srf_quad=1,mmfile='aerosol_a75.mm',lutfile='aerosol.lut',tmatrix_path='/network/group/aopp/eodg/shared/dubovik_tmatrix/',version=21"
+
+export CREATE_ORAC_AEROSOL_LUT_DRIVER="input_files/driver/meteosat-12_fci_aerosol.driver"
+echo "making ..." $CREATE_ORAC_LUT_DRIVER
+idl -e "create_orac_aerosol_lut_wrapper,srf_quad=1,mmfile='aerosol_a76.mm',lutfile='aerosol.lut',tmatrix_path='/network/group/aopp/eodg/shared/dubovik_tmatrix/',version=21"
+
+export CREATE_ORAC_AEROSOL_LUT_DRIVER="input_files/driver/meteosat-12_fci_aerosol.driver"
+echo "making ..." $CREATE_ORAC_LUT_DRIVER
+idl -e "create_orac_aerosol_lut_wrapper,srf_quad=1,mmfile='aerosol_a77.mm',lutfile='aerosol.lut',tmatrix_path='/network/group/aopp/eodg/shared/dubovik_tmatrix/',version=21"
+
+export CREATE_ORAC_AEROSOL_LUT_DRIVER="input_files/driver/meteosat-12_fci_aerosol.driver"
+echo "making ..." $CREATE_ORAC_LUT_DRIVER
+idl -e "create_orac_aerosol_lut_wrapper,srf_quad=1,mmfile='aerosol_a78.mm',lutfile='aerosol.lut',tmatrix_path='/network/group/aopp/eodg/shared/dubovik_tmatrix/',version=21"
+
+export CREATE_ORAC_AEROSOL_LUT_DRIVER="input_files/driver/meteosat-12_fci_aerosol.driver"
+echo "making ..." $CREATE_ORAC_LUT_DRIVER
+idl -e "create_orac_aerosol_lut_wrapper,srf_quad=1,mmfile='aerosol_a79.mm',lutfile='aerosol.lut',tmatrix_path='/network/group/aopp/eodg/shared/dubovik_tmatrix/',version=21"
+

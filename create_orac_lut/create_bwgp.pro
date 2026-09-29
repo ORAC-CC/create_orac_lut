@@ -27,10 +27,10 @@
 ; 21/06/13, G Thomas: Original version.
 
 ; call parameters
-;mmstr.distname[c], lut_Rm[c,r], mmstr.S[c], AerM[*,*,c], srfstrarr[*].wvl[*], QV, Bext1, w1, g1, Phs1, scode=scode, tmatrix_dir=tmatrix_dir, eps=epsvals, neps=nepsvals
-;mmstr.distname[c], lut_Rm[c,r], mmstr.S[c], AerM550[c] , 0.55               , QV, Bext1, w1, g1, Phs1, scode=scode, tmatrix_dir=tmatrix_dir, eps=epsvals, neps=nepsvals, Vavg=Vavg1
-    
-pro create_bwgp, distname, Rm, S, RI, wl, Dqv, Bext, w, g, Phi, scode=scode, tmatrix_dir=tmatrix_dir, eps=eps, neps=neps, Vavg=Vavg
+;mmstr.distname[c], lut_Rm[c,r], mmstr.S[c], AerM[*,*,c], srfstrarr[*].wvl[*], QV, Bext1, w1, g1, Phs1, scode=scode, tmatrix_path=tmatrix_path, eps=epsvals, neps=nepsvals
+;mmstr.distname[c], lut_Rm[c,r], mmstr.S[c], AerM550[c] , 0.55               , QV, Bext1, w1, g1, Phs1, scode=scode, tmatrix_path=tmatrix_path, eps=epsvals, neps=nepsvals, Vavg=Vavg1
+  
+pro create_bwgp, distname, Rm, S, RI, wl, Dqv, Bext, w, g, Phi, scode=scode, tmatrix_path=tmatrix_path, eps=eps, neps=neps, Vavg=Vavg
 
   IF n_elements(RI) ne n_elements(wl) THEN message, 'create_bwgp: Array size mismatch!'
 
@@ -79,7 +79,7 @@ pro create_bwgp, distname, Rm, S, RI, wl, Dqv, Bext, w, g, Phi, scode=scode, tma
           ENDIF ELSE $
             RItmp = RI[i]
 
-        dubovik_lognormal_multiple_eps, tmatrix_dir, 1.0, Rm, S, wn[i], RItmp, eps, neps, Dqv=Dqv, Bexttmp, Bscatmp, wtmp, gtmp, ph, /no_mie, /renorm_ph, /silent
+        dubovik_lognormal_multiple_eps, tmatrix_path, 1.0, Rm, S, wn[i], RItmp, eps, neps, Dqv=Dqv, Bexttmp, Bscatmp, wtmp, gtmp, ph, /no_mie, /renorm_ph, /silent
         Phi[*,i] = ph
       ENDIF ELSE BEGIN
 ;       We're not using T-Matrix, so call the normal Mie scattering code

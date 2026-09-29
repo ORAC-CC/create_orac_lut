@@ -1,0 +1,24 @@
+; ORAC LUT Python-generator run-file template.
+; Copy this file, edit the settings below, and pass the copy to
+; create_orac_luts.py or ./submit.
+
+platform      = 'meteosat-10'
+instrument    = 'seviri'
+forward_model = 'cloud'
+
+in_path       = 'create_orac_lut/input_files'
+instfile      = 'meteosat-10_seviri_v1.inst'
+mmfile        = 'liquid-water_stg.mm'
+lutfile       = 'liquid-water-cloud.lut'
+
+atmospheres   = 2
+channelid     = [1]
+
+gas           = 0
+no_rayleigh   = 0
+srf_quad      = 1
+nstreams      = 60
+nmom          = 1000
+
+version       = 22
+out_path      = 'luts'

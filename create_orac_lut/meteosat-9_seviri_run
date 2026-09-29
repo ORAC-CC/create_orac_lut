@@ -1,0 +1,11 @@
+#!/bin/bash
+source initpath.bash
+# monochromatic calculation
+# aerosol section
+
+
+
+export CREATE_ORAC_AEROSOL_LUT_DRIVER="input_files/driver/meteosat-9_seviri_aerosol.driver"
+echo "making ..." $CREATE_ORAC_LUT_DRIVER
+idl -e "create_orac_aerosol_lut_wrapper,srf_quad=1,mmfile='aerosol_a79.mm',lutfile='aerosol.lut',tmatrix_path='/network/group/aopp/eodg/shared/dubovik_tmatrix/',version=21"
+

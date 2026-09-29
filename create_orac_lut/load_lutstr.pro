@@ -27,7 +27,6 @@
 ; LUTstr (structure) Structure with grid information.
 ;
 ; HISTORY:
-; 07/05/26  RGG Latent bug corrected: added Invalid_N_FLAG to 'Prs = lut_quadrature('. 
 ; 02/03/21  RGG Use maximumzenith angle to limit number of zenith angles to those observed.  
 ; 17/02/21  RGG Generalised to state spacing for all dimensions rather than use difference between 1st two elements.  
 ; 21/06/13, G Thomas: Original version.
@@ -106,8 +105,7 @@ pro load_lutstr, file, max_sat_zenith, LUTstr, include_pressure = include_pressu
     Words = strsplit(lines(10),' ',/extract)
     Prs_N = fix(Words[0])
     Prs_Spacing = strlowcase(Words[1])
-    Prs = lut_quadrature(Prs_N,Prs_spacing,float(strsplit(lines(11),' ',/extract)), Invalid_N_FLAG )
-	
+    Prs = lut_quadrature(Prs_N,Prs_spacing,float(strsplit(lines(11),' ',/extract)) )
     LUTstr = { Opd_N      : Opd_N      , Efr_N:       Efr_N      , Soz_N       : Soz_N      , Saz_N      : Saz_N      , Raa_N      : Raa_N      , Prs_N       : Prs_N, $
                OPD_Spacing: OPD_Spacing, Efr_Spacing: Efr_Spacing, Soz_Spacing : Soz_Spacing, Saz_Spacing: Saz_Spacing, Raa_Spacing: Raa_Spacing, Prs_Spacing : Prs_Spacing, $
                opd        : opd        , EFR:         EfR        , SOz         : Soz        , Saz        : Saz        , Raa        : Raa        , Prs         : Prs   }

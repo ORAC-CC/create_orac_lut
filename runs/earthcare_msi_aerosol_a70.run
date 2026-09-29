@@ -1,0 +1,29 @@
+; EarthCARE MSI aerosol A70 V22 Python production run.
+; Configuration based on the established legacy IDL setup.
+; All seven MSI channels are listed explicitly below.
+;
+;
+; To change aerosol composition, normally change mmfile. Available established
+; alternatives include aerosol_a75.mm, aerosol_a76.mm, aerosol_a77.mm, and
+; aerosol_a79.mm; the output name and validation target should then be reviewed.
+
+platform      = 'earthcare'
+instrument    = 'msi'
+forward_model = 'aerosol'
+
+in_path       = 'create_orac_lut/input_files'
+instfile      = 'earthcare_msi_v1.inst'
+mmfile        = 'aerosol_a70.mm'
+lutfile       = 'aerosol.lut'
+tmatrix_path  = '/network/aopp/matin/eodg/shared/dubovik_tmatrix'
+atmospheres   = 2
+channelid     = [1, 2, 3, 4, 5, 6, 7]
+
+gas           = 1
+no_rayleigh   = 0
+srf_quad      = 1
+nstreams      = 60
+nmom          = 1000
+version       = 22
+
+out_path      = 'luts'

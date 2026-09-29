@@ -18,7 +18,7 @@ function read_ri, Filename
   Get_LUN, Unit
  
   If (STRMID(Filename, 2, /REVERSE_OFFSET) EQ '.gz') Then $
-    OPENR, Unit, Filename, /COMPRESS $
+    OPENR, Unit, file, /COMPRESS $
   ELSE $
     OPENR, Unit, Filename
 

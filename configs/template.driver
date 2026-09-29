@@ -43,8 +43,9 @@ meteosat-10_seviri_v1.inst
 #   sulphuric-acid_300.mm  volcanic-ash_ey1.mm  biomass_a.mm      (cloud)
 #   aerosol_a70.mm  aerosol_a75.mm ... aerosol_a79.mm             (aerosol)
 # Supported optics: single-component modified gamma (e.g. liquid-water_stg) and
-# shared-mode log-normal Mie mixtures (e.g. aerosol_a79). T-matrix and
-# Baum/Baran ice models are not yet ported and fail explicitly.
+# shared-mode log-normal Mie mixtures (e.g. aerosol_a79). Baum full-phase-
+# matrix ice models (agg, ghm, src) are supported; T-matrix and Baran ice
+# models remain explicitly unsupported.
 liquid-water_stg.mm
 
 # -- 4. LUT grid definition, from input_files/lut/ ----------------------------

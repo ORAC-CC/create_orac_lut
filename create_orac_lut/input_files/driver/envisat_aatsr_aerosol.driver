@@ -11,5 +11,5 @@ default.lut
 #   6  = '1976 US Standard'
 2                           # atmospheric gas model based on MODTRAN codes
 # Optional keyword parameters below:
-channelid=[1,2,3,4]
+channelid=[1,2,3,4,5,6,7]
 gas=1

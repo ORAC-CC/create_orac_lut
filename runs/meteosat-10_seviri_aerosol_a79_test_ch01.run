@@ -1,0 +1,19 @@
+; Validation case: aerosol formulation, compact test grid, SEVIRI channel(s) [1].
+; Not a production configuration.  Output goes to a validation directory so
+; that the validated products of the current Python path are never overwritten.
+platform      = 'meteosat-10'
+instrument    = 'seviri'
+forward_model = 'aerosol'
+in_path       = 'create_orac_lut/input_files'
+instfile      = 'meteosat-10_seviri_v1.inst'
+mmfile        = 'aerosol_a79.mm'
+lutfile       = 'aerosol_test.lut'
+atmospheres   = 2
+channelid     = [1]
+gas           = 1
+no_rayleigh   = 0
+srf_quad      = 1
+nstreams      = 60
+nmom          = 1000
+version       = 21
+out_path      = 'validation/generated/idl_structured/aerosol_ch01'

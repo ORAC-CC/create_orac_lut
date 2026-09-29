@@ -1,0 +1,13 @@
+
+  rttovfilterdir='~/project-oraclut/create_orac_lut/input_files/srf'
+  spawn,'ls -1 '+rttovfilterdir, rttov_filters
+
+  q=where(strmid(rttov_filters,0,2) eq 'rt',count) ; select the filterfiles
+
+  for j =0,count-1 do begin 
+    filename= rttov_filters[q[j]]
+     oldbbconstants,filename,b1o,b2o,t1o,t2o
+     bbconstants,filename,b1,b2,t1,t2
+     if (b1o ne 0) then print, filename,b1o,b2o,t1o,t2o,b1,b2,t1,t2 ,(b1-b1o)/b1,(b2-b2o)/b2,(t1-t1o)/t1,(t2-t2o)/t2   
+  endfor
+end

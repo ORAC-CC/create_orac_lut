@@ -1,6 +1,9 @@
 #!/bin/bash
-source setup_oraclut_env.sh
-echo
-export ORAC_LUT_DRIVER_FILE="${ORAC_LUT_INPUT_ROOT_DIR}/driver/sentinel-3a_slstr_aerosol.driver"
-idl -e "create_orac_lut_aerosol, 0, 'aerosol_a70', 'aerosol_test', '21'"
-echo
+source initpath.bash
+# monochromatic calculation
+# aerosol section
+
+export CREATE_ORAC_AEROSOL_LUT_DRIVER="input_files/driver/sentinel-3a_slstr_aerosol.driver"
+echo "making ..." $CREATE_ORAC_LUT_DRIVER
+idl -e "create_orac_aerosol_lut_wrapper,srf_quad=1,mmfile='aerosol_a78.mm',lutfile='aerosol.lut',tmatrix_path='/network/group/aopp/eodg/shared/dubovik_tmatrix/',version=21"
+

@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# Submit the top-level makerunfile through the normal ORAC SLURM array workflow.
+
+set -euo pipefail
+
+SOURCE="${BASH_SOURCE[0]}"
+while [[ -h "$SOURCE" ]]; do
+    SOURCE_DIR="$(cd -P "$(dirname "$SOURCE")" && pwd)"
+    SOURCE="$(readlink "$SOURCE")"
+    [[ "$SOURCE" == /* ]] || SOURCE="$SOURCE_DIR/$SOURCE"
+done
+REPO_ROOT="$(cd -P "$(dirname "$SOURCE")" && pwd)"
+SUBMITTER="$REPO_ROOT/scripts/submit_oraclut_lut.sh"
+
+args=(
+    --time=12:00:00
+    --mem=16G
+    --cpus-per-task=1
+)
+
+# Resource options supplied by the owner are appended deliberately: SLURM
+# uses the later value when an option is repeated. The master argument itself
+# is fixed below and cannot be replaced by an accidental positional argument.
+args+=("$@")
+exec "$SUBMITTER" makerunfile "${args[@]}"
