@@ -21,12 +21,14 @@ INPUT_ROOT = ROOT / "create_orac_lut" / "input_files"
 
 REQUIRED = (
     "platform", "instrument", "forward_model", "in_path", "instfile", "mmfiles", "lutfile",
-    "atmospheres", "channelid", "srf_quad", "nstreams", "nmom", "version",
+    "atmospheres", "channelid", "srf_quad", "nstreams", "version",
     "out_path",
 )
+# nmom is deprecated (the IDL's fixed Legendre expansion); it is accepted
+# only for Baum / T-matrix classes, see create_orac_luts.py.
 OPTIONAL = {
     "gas": 0, "no_rayleigh": 0, "reuse_scat": 0, "scat_only": 0,
-    "tmatrix_path": None,
+    "tmatrix_path": None, "nmom": None,
 }
 LUT_BY_MATERIAL = {
     "aerosol": "aerosol.lut",
@@ -309,7 +311,10 @@ def print_preflight(path: str | Path) -> None:
     print(f"Scattering only:      {'yes' if master['scat_only'] else 'no'}")
     print(f"SRF quadrature:       {master['srf_quad']} ({SRF_QUADRATURE_NAMES[master['srf_quad']]})")
     print(f"DISORT streams:       {master['nstreams']}")
-    print(f"Legendre moments:     {master['nmom']}")
+    if master["nmom"] is None:
+        print("Legendre moments:     adaptive (King's criterion on each averaged Mie phase function)")
+    else:
+        print(f"Legendre moments:     {master['nmom']} (fixed; Baum / T-matrix tabulated phase functions)")
     print()
     print("LUT grid:")
     for name, count in expanded[0]["grid_dimensions"].items():

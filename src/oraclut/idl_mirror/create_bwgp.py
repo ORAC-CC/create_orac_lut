@@ -70,6 +70,34 @@ def gauss_cvf(p):
    return -NormalDist().inv_cdf(p)
 
 
+def size_integration_limits(distname, params, wavenumber):
+   """Radius limits (rl, ru, truncated) of the mie_size_dist_new size integration.
+
+   The IDL computes these inline in mie_size_dist_new.pro.  They are a
+   separate routine here so that the adaptive Legendre expansion uses exactly
+   the largest size parameter, 2 pi ru wavenumber, that the Mie integration
+   reaches (mie_integration_limits).
+   """
+
+   ru_max = 10000.0
+   tq = gauss_cvf(0.999)
+   if distname == "modified_gamma":
+      rl = float(params[2])
+      ru = float(params[3])
+   elif distname == "log_normal":
+      rl = math.exp(math.log(params[0]) + tq * math.log(params[1]))
+      ru = math.exp(math.log(params[0]) - tq * math.log(params[1]) + math.log(4.0))
+   else:
+      raise ValueError("Invalid size distribution name: " + str(distname))
+
+   if 2.0 * np.pi * rl * wavenumber >= ru_max:
+      raise ValueError("Lower bound of integral is larger than maximum permitted size parameter.")
+   truncated = 2.0 * np.pi * ru * wavenumber >= ru_max
+   if truncated:
+      ru = (ru_max - 1.0) / (2.0 * np.pi * wavenumber)
+   return rl, ru, truncated
+
+
 def mie_size_dist_new(distname, nd, params, wavenumber, cm, dqv, xres=0.1, npts=None):
    """Scattering parameters of a size distribution of spheres.
 
@@ -83,27 +111,14 @@ def mie_size_dist_new(distname, nd, params, wavenumber, cm, dqv, xres=0.1, npts=
    the liquid-water lattice limit (lattice_upper_radius).
    """
 
-   ru_max = 10000.0
    if np.imag(cm) > 0:
       raise ValueError("mie_size_dist_new: imaginary part of the refractive index must be negative")
 
    # Create vectors for size integration
-   tq = gauss_cvf(0.999)
-   if distname == "modified_gamma":
-      rl = float(params[2])
-      ru = float(params[3])
-   elif distname == "log_normal":
-      rl = math.exp(math.log(params[0]) + tq * math.log(params[1]))
-      ru = math.exp(math.log(params[0]) - tq * math.log(params[1]) + math.log(4.0))
-   else:
-      raise ValueError("Invalid size distribution name: " + str(distname))
-
-   if 2.0 * np.pi * rl * wavenumber >= ru_max:
-      raise ValueError("Lower bound of integral is larger than maximum permitted size parameter.")
-   if 2.0 * np.pi * ru * wavenumber >= ru_max:
+   rl, ru, truncated = size_integration_limits(distname, params, wavenumber)
+   if truncated:
       if npts is not None:
          raise ValueError("mie_size_dist_new: an explicit node count cannot be combined with a truncated upper radius")
-      ru = (ru_max - 1.0) / (2.0 * np.pi * wavenumber)
       print("Warning: Radius upper bound truncated to avoid size parameter overflow.")
 
    # Accurate calculation requires 0.1 step size in x but this can take an age
@@ -213,6 +228,25 @@ def lattice_upper_radius(rm, factor, wavenumber, xres=MIE_XRES):
    return MIE_RADIUS_LOWER + intervals * spacing, intervals + 1
 
 
+def mie_integration_limits(distname, rm, s, wavenumber, radius_upper_factor=None):
+   """(params, npts) that create_bwgp passes to mie_size_dist_new at one wavenumber.
+
+   params = [rm, s, rl, ru] with the IDL limits [0.001, 100] um, or, for a
+   modified-gamma distribution with radius_upper_factor f, the legacy lattice
+   ending at the first node >= f * rm (lattice_upper_radius), which also sets
+   npts.  size_integration_limits(distname, params, wavenumber) then gives
+   the radii actually integrated (for log-normal distributions it replaces
+   rl and ru by the mode's quantile limits).
+   """
+
+   # IDL: mie_size_dist_new, distname, 1.0, [Rm, S, 0.001, 100.0], ..., xres=0.4
+   if distname == "modified_gamma" and radius_upper_factor is not None:
+      upper, npts = lattice_upper_radius(rm, radius_upper_factor, wavenumber)
+   else:
+      upper, npts = MIE_RADIUS_UPPER, None
+   return [rm, s, MIE_RADIUS_LOWER, upper], npts
+
+
 def create_bwgp(distname, rm, s, ri, wl, dqv, scode="mie", tmatrix_path=None, eps=None, neps=None,
                 radius_upper_factor=None):
    """Bulk extinction, single-scattering albedo, asymmetry and phase function.
@@ -269,13 +303,9 @@ def create_bwgp(distname, rm, s, ri, wl, dqv, scode="mie", tmatrix_path=None, ep
          else:
             # The legacy wrapper uses Mie for zero/long-wave points and for
             # thermal channels (wl >= 6 micron), even for a T-matrix component.
-            # IDL: mie_size_dist_new, distname, 1.0, [Rm, S, 0.001, 100.0], ..., xres=0.4
-            if distname == "modified_gamma" and radius_upper_factor is not None:
-               upper, npts = lattice_upper_radius(rm, radius_upper_factor, wn[i])
-            else:
-               upper, npts = MIE_RADIUS_UPPER, None
+            params, npts = mie_integration_limits(distname, rm, s, wn[i], radius_upper_factor)
             bexttmp, bscatmp, wtmp, gtmp, spm, vavgtmp = mie_size_dist_new(
-               distname, 1.0, [rm, s, MIE_RADIUS_LOWER, upper], wn[i], ri[i], dqv, xres=MIE_XRES, npts=npts)
+               distname, 1.0, params, wn[i], ri[i], dqv, xres=MIE_XRES, npts=npts)
             phi[:, i] = spm[0, :]
             vavg = vavgtmp
          bext[i] = bexttmp
