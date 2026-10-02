@@ -35,6 +35,23 @@ Numerical results are those of the validated Python implementation
 Fortran sources.  Wherever the IDL expression has been simplified or reordered
 to keep the products bitwise identical to the validated ones, the IDL form is
 quoted in a comment beginning "IDL:".
+
+Versions and numerical changes.  Three things are recorded separately:
+
+1. LUT product / grid version (the run-file ``version``, e.g. V23).  It
+   identifies a product set and its grids (e.g. Grid B); it is not a
+   description of the source code.
+2. Microphysical numerical integration.  Up to source revision 9d663e9 (the
+   revision that produced the V23 reference LUTs) every Mie size distribution
+   was integrated over the IDL's fixed 0.001-100 um.  Since the 2026-10
+   integration-limit change, liquid-water modified-gamma components stop at
+   the first node of the same legacy radius lattice at or beyond
+   3.5 x effective radius (beyond 100 um when necessary); other components are
+   unchanged (generate_scattering_properties.radius_upper_factor).
+3. Legendre / moment calculation (see generate_scattering_properties).
+
+The exact source revision used for each validation comparison is recorded in
+validation/REPORT_lut_numerics_development.md.
 """
 
 import ast

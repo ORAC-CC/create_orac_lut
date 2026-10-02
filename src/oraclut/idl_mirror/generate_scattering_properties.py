@@ -20,12 +20,44 @@ Sequence, as in the IDL:
 
 Array index order follows the IDL: bext[m, l, r] is (SRF point, channel,
 effective radius) and amom[p, m, l, r] adds the moment index first.
+
+Deliberate difference from the IDL (2026-10, microphysical integration): for
+liquid-water modified-gamma components the size integration stops at the
+first node of the legacy radius lattice at or beyond 3.5 x effective radius
+(beyond the IDL's fixed 100 um when necessary) instead of at 100 um; see
+radius_upper_factor and create_bwgp.lattice_upper_radius.  Other components
+(ice spheres, log-normal aerosols, Baum, T-matrix) are integrated as in the
+IDL.
 """
 
 import numpy as np
 
 from .create_bwgp import create_bwgp, legpexp, quadrature
 from .baum import BaumTable
+
+# Upper limit of the liquid-water modified-gamma size integration, as a
+# multiple of effective radius, and the largest effective variance for which
+# it has been validated (validation/size_distribution_limits/ and
+# validation/REPORT_lut_numerics_development.md).  The fraction of the
+# distribution beyond k re depends only on the effective variance and on the
+# weighting: at 0.1111111 and k = 3.5 it is 6.6e-7 area-weighted (extinction
+# by large particles) and 6.5e-5 r^6-weighted (scattering by particles small
+# compared with the wavelength, the worst case), smaller for narrower
+# distributions.  k = 3, the exploratory candidate, left up to 5.8e-4 in
+# scattering and 2.5e-4 in g at r_e = 1-3 um in the thermal infrared.
+LIQUID_UPPER_RADIUS_FACTOR = 3.5
+LIQUID_MAX_EFFECTIVE_VARIANCE = 0.1111111
+
+
+def radius_upper_factor(mmstr, c):
+   """create_bwgp radius_upper_factor for component c (None = the IDL limits 0.001-100 um)."""
+
+   if mmstr.substance.lower() != "liquid-water" or mmstr.distname[c] != "modified_gamma":
+      return None
+   if mmstr.s[c] > LIQUID_MAX_EFFECTIVE_VARIANCE * (1.0 + 1e-6):
+      raise ValueError(f"{mmstr.compname[c]}: the {LIQUID_UPPER_RADIUS_FACTOR:g} x effective-radius upper limit is "
+                       f"validated for effective variance <= {LIQUID_MAX_EFFECTIVE_VARIANCE}, not {mmstr.s[c]}")
+   return LIQUID_UPPER_RADIUS_FACTOR
 
 
 def _interpol_complex(cm, wl, wvl):
@@ -329,9 +361,11 @@ def generate_scattering_properties(srfstrarr, nwvl_max, inststr, mmstr, lutstr, 
             scode = mmstr.comp[c].code
             eps = getattr(mmstr.comp[c], "eps", None)
             neps = getattr(mmstr.comp[c], "neps", None)
+            factor = radius_upper_factor(mmstr, c)              # IDL: always 0.001-100 um
             # Calculate Bext at 550 nm (the reference wavelength) and Vavg
             bext1, w1, g1, phs1, vavg1 = create_bwgp(mmstr.distname[c], lut_rm[c, r], mmstr.s[c], aerm550[c], 0.55, qv,
-                                                     scode=scode, tmatrix_path=tmatrix_path, eps=eps, neps=neps)
+                                                     scode=scode, tmatrix_path=tmatrix_path, eps=eps, neps=neps,
+                                                     radius_upper_factor=factor)
             vavg_c[c, r] = vavg1
             bext550_c[c, r] = bext1[0]
             w550_c[c, r] = w1[0]
@@ -342,7 +376,8 @@ def generate_scattering_properties(srfstrarr, nwvl_max, inststr, mmstr, lutstr, 
             # reforms the results; the same ordering is used here.
             bext1, w1, g1, phs1, _ = create_bwgp(mmstr.distname[c], lut_rm[c, r], mmstr.s[c],
                                                  aerm[:, :, c].ravel(order="F"), wvl.ravel(order="F"), qv,
-                                                 scode=scode, tmatrix_path=tmatrix_path, eps=eps, neps=neps)
+                                                 scode=scode, tmatrix_path=tmatrix_path, eps=eps, neps=neps,
+                                                 radius_upper_factor=factor)
             bext_c[:, :, c, r] = bext1.reshape((nwvl_max, nchan), order="F")
             w_c[:, :, c, r] = w1.reshape((nwvl_max, nchan), order="F")
             g_c[:, :, c, r] = g1.reshape((nwvl_max, nchan), order="F")

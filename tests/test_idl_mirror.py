@@ -8,6 +8,7 @@ validation grids and require every array of the product to be identical to the
 validated products captured in validation/generated/.
 """
 
+import importlib
 from pathlib import Path
 
 import numpy as np
@@ -425,14 +426,20 @@ def test_dubovik_branch_reports_a_missing_database(tmp_path):
                   tmatrix_path=tmp_path, eps=[1.0], neps=[1.0])
 
 
-def test_generate_scattering_properties_matches_the_validated_cloud_optics():
+def test_generate_scattering_properties_matches_the_validated_cloud_optics(monkeypatch):
    inststr = load_inststr(INST, requestedchannelid=[1, 9])
    lutstr = load_lutstr(INPUTS / "lut" / "liquid-water-cloud_test.lut", inststr.max_sat_zenith)
    srfstrarr, nwvl_max = load_srfstrarr(inststr, INPUTS / "sun" / "Gueymard2018.sssi", 1, INPUTS)
    mmstr = load_mmdat(INPUTS / "microphysics" / "liquid-water_stg.mm", INPUTS)
    nmom = 120
-   (nmom, bext550, w550, g550, phs550, amom550, bextrat, bext, w, g, vavg, phs, amom) = \
-      generate_scattering_properties(srfstrarr, nwvl_max, inststr, mmstr, lutstr, nmom)
+   # The validated path integrates liquid water over the IDL's fixed 0.001-100 um;
+   # production now stops at 3 x effective radius on the same radius lattice.
+   # Bitwise port check with the IDL limits imposed:
+   gsp = importlib.import_module("oraclut.idl_mirror.generate_scattering_properties")
+   with monkeypatch.context() as patch:
+      patch.setattr(gsp, "radius_upper_factor", lambda mmstr, c: None)
+      (nmom, bext550, w550, g550, phs550, amom550, bextrat, bext, w, g, vavg, phs, amom) = \
+         generate_scattering_properties(srfstrarr, nwvl_max, inststr, mmstr, lutstr, nmom)
    # the validated optics, computed the old way
    wavelengths = np.asarray([0.55] + [float(s.wvl_centre) for s in srfstrarr])
    ri_wavelength, ri_real, ri_imaginary = read_refractive_index(INPUTS / "ri" / "H2O_Segelstein_1981.ri")
@@ -447,6 +454,14 @@ def test_generate_scattering_properties_matches_the_validated_cloud_optics():
    assert identical(g[0].T, optics.asymmetry_parameter[:, 1:].astype(np.float32))
    assert identical(vavg, optics.average_volume_per_particle.astype(np.float32))
    assert identical(np.transpose(amom[:, 0, :, :], (0, 2, 1)), optics.phase_moments[:, :, 1:].astype(np.float32))
+   # Production (3 x effective radius): only the removed tail changes, so the
+   # optics stay within the validated tail tolerance of the legacy values.
+   adopted = generate_scattering_properties(srfstrarr, nwvl_max, inststr, mmstr, lutstr, nmom)
+   assert np.allclose(adopted[7], bext, rtol=1e-4, atol=0.0)
+   assert np.allclose(adopted[1], bext550, rtol=1e-4, atol=0.0)
+   assert np.allclose(adopted[8], w, rtol=0.0, atol=2e-5) and np.allclose(adopted[9], g, rtol=0.0, atol=2e-5)
+   assert np.allclose(adopted[12], amom, rtol=0.0, atol=1e-4)
+   assert not np.array_equal(adopted[7], bext)
 
 
 # ---------------------------------------------------------------------------
