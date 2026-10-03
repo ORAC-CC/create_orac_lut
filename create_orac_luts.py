@@ -71,6 +71,9 @@ Versions and numerical changes.  Three things are recorded separately:
    unchanged.  Log-normal (aerosol) components keep the legacy grid.  Saved
    scattering caches carry RADIUS_GRID and older ones are refused on reuse.
 
+The V24 cloud LUTs are the V23 products and grids (Grid B) computed with
+changes 2-4 (runs/V24_PRODUCTION.md).
+
 The exact source revision used for each validation comparison is recorded in
 validation/REPORT_lut_numerics_development.md.
 """

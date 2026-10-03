@@ -1,0 +1,36 @@
+; Sentinel-3B SLSTR V24 cloud LUT production run: liquid-water_253, liquid-water Grid B.
+; One of the 20 definitive dual-view SLSTR V24 reference runs (Sentinel-3B;
+; six liquid-water and four ice microphysical models). Submit the whole set
+; with scripts/submit_v24_slstr_cloud_luts.sh.
+;
+; Settings follow the legacy sentinel-3b_slstr_cloud.driver (atmosphere 2,
+; channels 1-9, no gas). The product is written directly to the flat
+; permanent ORAC LUT directory as
+;   sentinel-3b_slstr_m_liquid-water_a01_p253_v24.nc
+;
+; V24 = the V23 product grids (Grid B, unchanged) computed with the revised
+; numerics of create_orac_luts.py, "Versions and numerical changes" 2-4
+; (runs/V24_PRODUCTION.md).
+; nmom is not set (obsolete for Mie classes): the expansion length comes from
+; each size-averaged phase function.
+
+platform      = 'sentinel-3b'
+instrument    = 'slstr'
+forward_model = 'cloud'
+
+in_path       = 'create_orac_lut/input_files'
+instfile      = 'sentinel-3b_slstr_v1.inst'
+mmfile        = 'liquid-water_253.mm'
+lutfile       = 'liquid-water-cloud-grid-b.lut'
+
+atmospheres   = 2
+channelid     = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+gas           = 0
+no_rayleigh   = 0
+srf_quad      = 1
+nstreams      = 60
+version       = 24
+
+out_path      = '/network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS'
+
