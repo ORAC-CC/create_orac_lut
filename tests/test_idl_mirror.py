@@ -437,12 +437,13 @@ def test_generate_scattering_properties_matches_the_validated_cloud_optics(monke
    with pytest.raises(ValueError, match="nmom is obsolete for Mie"):
       generate_scattering_properties(srfstrarr, nwvl_max, inststr, mmstr, lutstr, 1000)
    # The validated path integrates liquid water over the IDL's fixed 0.001-100 um
-   # and expands it in a fixed number of moments.  Port check of the bulk
+   # grid and expands it in a fixed number of moments.  Port check of the bulk
    # optics (bitwise) and of the moments (where the fixed expansion is
-   # converged, radii 1-10 um) with the IDL radius limits imposed:
+   # converged, radii 1-10 um) with the IDL radius limits and grid imposed:
    gsp = importlib.import_module("oraclut.idl_mirror.generate_scattering_properties")
    with monkeypatch.context() as patch:
       patch.setattr(gsp, "radius_upper_factor", lambda mmstr, c: None)
+      patch.setattr(gsp, "refined_xres", lambda mmstr, c: None)
       (lmom, bext550, w550, g550, phs550, amom550, bextrat, bext, w, g, vavg, phs, amom) = \
          generate_scattering_properties(srfstrarr, nwvl_max, inststr, mmstr, lutstr, None)
    wavelengths = np.asarray([0.55] + [float(s.wvl_centre) for s in srfstrarr])
@@ -472,10 +473,20 @@ def test_generate_scattering_properties_matches_the_validated_cloud_optics(monke
             assert np.max(np.abs(fixed[length:, l, r] * (2.0 * np.arange(length, 1000) + 1.0))) < 1e-6
          else:
             assert np.max(np.abs(amom[1000:length, 0, l, r] * (2.0 * np.arange(1000, length) + 1.0))) < 1e-6
-   # Production radius limit (3.5 x effective radius): only the removed tail changes the bulk optics.
+   # Production radius limit (3.5 x effective radius) on the legacy spacing:
+   # only the removed tail changes the bulk optics.
+   with monkeypatch.context() as patch:
+      patch.setattr(gsp, "refined_xres", lambda mmstr, c: None)
+      limited = generate_scattering_properties(srfstrarr, nwvl_max, inststr, mmstr, lutstr, None)
+   assert np.allclose(limited[7], bext, rtol=1e-4, atol=0.0) and np.allclose(limited[1], bext550, rtol=1e-4, atol=0.0)
+   assert np.allclose(limited[8], w, rtol=0.0, atol=2e-5) and np.allclose(limited[9], g, rtol=0.0, atol=2e-5)
+   # Production (V24) also refines the radius grid: the change is the error of
+   # the legacy grid (up to 0.9% in extinction for r_e = 1 um in the thermal
+   # infrared, a few 1e-3 in w and g; validation/radius_grid/).
    adopted = generate_scattering_properties(srfstrarr, nwvl_max, inststr, mmstr, lutstr, None)
-   assert np.allclose(adopted[7], bext, rtol=1e-4, atol=0.0) and np.allclose(adopted[1], bext550, rtol=1e-4, atol=0.0)
-   assert np.allclose(adopted[8], w, rtol=0.0, atol=2e-5) and np.allclose(adopted[9], g, rtol=0.0, atol=2e-5)
+   assert not np.array_equal(adopted[7], limited[7])
+   assert np.allclose(adopted[7], bext, rtol=1.2e-2, atol=0.0) and np.allclose(adopted[1], bext550, rtol=1e-3, atol=0.0)
+   assert np.allclose(adopted[8], w, rtol=0.0, atol=4e-3) and np.allclose(adopted[9], g, rtol=0.0, atol=4e-3)
 
 
 # ---------------------------------------------------------------------------

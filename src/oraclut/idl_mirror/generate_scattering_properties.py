@@ -29,6 +29,14 @@ radius_upper_factor and create_bwgp.lattice_upper_radius.  Other components
 (ice spheres, log-normal aerosols, Baum, T-matrix) are integrated as in the
 IDL.
 
+Deliberate difference from the IDL (V24, radius grid): for liquid-water and
+ice-sphere modified-gamma components every interval of the legacy radius
+trapezoid is divided into 2^k equal parts, with k chosen per wavelength and
+effective radius so that the size-parameter step is at most
+LIQUID_REFINED_XRES or ICE_SPHERE_REFINED_XRES; the limits and the legacy
+nodes are unchanged.  See refined_xres and create_bwgp.radius_refinement_level.
+Log-normal (aerosol) components keep the legacy grid.
+
 Deliberate difference from the IDL (2026-10, Legendre expansion): for a class
 whose components are all Mie size distributions, steps 3 and 5 no longer use
 the IDL's fixed NMom (= 1000) for the quadrature order, the coefficient count
@@ -66,6 +74,17 @@ from .legendre_expansion import (
 LIQUID_UPPER_RADIUS_FACTOR = 3.5
 LIQUID_MAX_EFFECTIVE_VARIANCE = 0.1111111
 
+# Largest size-parameter step of the refined radius integration (V24), per
+# class: the coarsest nested refinement of the legacy 0.4 step for which the
+# radius-quadrature error of compact MODIS / dual-view SLSTR LUTs, against a
+# 64x finer grid, is within 1.5e-3 in R_0v at every node (glory included;
+# 0.3 x the 0.005 SLSTR noise-equivalent reflectance) and 2e-4 in extinction
+# (relative) and g (validation/radius_grid/).  Ice spheres (m ~ 1.31) have
+# weaker narrow resonances than liquid water (m ~ 1.33) and meet it at twice
+# the step.
+LIQUID_REFINED_XRES = 0.025
+ICE_SPHERE_REFINED_XRES = 0.05
+
 
 def radius_upper_factor(mmstr, c):
    """create_bwgp radius_upper_factor for component c (None = the IDL limits 0.001-100 um)."""
@@ -76,6 +95,18 @@ def radius_upper_factor(mmstr, c):
       raise ValueError(f"{mmstr.compname[c]}: the {LIQUID_UPPER_RADIUS_FACTOR:g} x effective-radius upper limit is "
                        f"validated for effective variance <= {LIQUID_MAX_EFFECTIVE_VARIANCE}, not {mmstr.s[c]}")
    return LIQUID_UPPER_RADIUS_FACTOR
+
+
+def refined_xres(mmstr, c):
+   """create_bwgp refined_xres for component c (None = the IDL radius grid).
+
+   Liquid-water and water-ice (sphere) modified-gamma Mie components only;
+   other components keep the legacy grid (not validated here).
+   """
+
+   if mmstr.distname[c] != "modified_gamma" or str(mmstr.comp[c].code).lower() != "mie":
+      return None
+   return {"liquid-water": LIQUID_REFINED_XRES, "water-ice": ICE_SPHERE_REFINED_XRES}.get(mmstr.substance.lower())
 
 
 def _interpol_complex(cm, wl, wvl):
@@ -419,10 +450,11 @@ def generate_scattering_properties(srfstrarr, nwvl_max, inststr, mmstr, lutstr, 
             eps = getattr(mmstr.comp[c], "eps", None)
             neps = getattr(mmstr.comp[c], "neps", None)
             factor = radius_upper_factor(mmstr, c)              # IDL: always 0.001-100 um
+            refine = refined_xres(mmstr, c)                    # IDL: always the xres = 0.4 grid
             # Calculate Bext at 550 nm (the reference wavelength) and Vavg
             bext1, w1, g1, phs1, vavg1 = create_bwgp(mmstr.distname[c], lut_rm[c, r], mmstr.s[c], aerm550[c], 0.55, qv,
                                                      scode=scode, tmatrix_path=tmatrix_path, eps=eps, neps=neps,
-                                                     radius_upper_factor=factor)
+                                                     radius_upper_factor=factor, refined_xres=refine)
             vavg_c[c, r] = vavg1
             bext550_c[c, r] = bext1[0]
             w550_c[c, r] = w1[0]
@@ -434,7 +466,7 @@ def generate_scattering_properties(srfstrarr, nwvl_max, inststr, mmstr, lutstr, 
             bext1, w1, g1, phs1, _ = create_bwgp(mmstr.distname[c], lut_rm[c, r], mmstr.s[c],
                                                  aerm[:, :, c].ravel(order="F"), wvl.ravel(order="F"), qv,
                                                  scode=scode, tmatrix_path=tmatrix_path, eps=eps, neps=neps,
-                                                 radius_upper_factor=factor)
+                                                 radius_upper_factor=factor, refined_xres=refine)
             bext_c[:, :, c, r] = bext1.reshape((nwvl_max, nchan), order="F")
             w_c[:, :, c, r] = w1.reshape((nwvl_max, nchan), order="F")
             g_c[:, :, c, r] = g1.reshape((nwvl_max, nchan), order="F")
@@ -542,6 +574,7 @@ def _adaptive_mie_wavelength(mmstr, lut_mrat, lut_rm, ri, wl, label):
    ncomp, nefr = lut_mrat.shape
    wavenumber = 1.0 / wl
    factors = [radius_upper_factor(mmstr, c) for c in range(ncomp)]
+   refine = [refined_xres(mmstr, c) for c in range(ncomp)]
    check_mu = np.cos(np.deg2rad(CHECK_THETA))
 
    bext_c = np.zeros((ncomp, nefr))
@@ -588,7 +621,7 @@ def _adaptive_mie_wavelength(mmstr, lut_mrat, lut_rm, ri, wl, label):
             elif lut_mrat[c, r] > 0:
                bext1, w1, g1, phs1, vavg1 = create_bwgp(mmstr.distname[c], lut_rm[c, r], mmstr.s[c], np.asarray([ri[c]]),
                                                         np.asarray([wl]), dqv, scode=mmstr.comp[c].code,
-                                                        radius_upper_factor=factors[c])
+                                                        radius_upper_factor=factors[c], refined_xres=refine[c])
                bext_c[c, r], w_c[c, r], g_c[c, r], vavg_c[c, r] = bext1[0], w1[0], g1[0], vavg1
                phs_c[:, c] = phs1[:, 0]
                previous[c] = (lut_rm[c, r], nq, (bext_c[c, r], w_c[c, r], g_c[c, r], vavg_c[c, r], phs_c[:, c].copy()))

@@ -130,7 +130,8 @@ def test_difficult_case_needs_and_gets_far_more_than_1000_moments(monkeypatch):
    length = int(lmom[0])
    assert length > 3000
    assert abs(omega[0, 0] - 1.0) < 1e-9 and abs(omega[1, 0] / 3.0 - g_c[0, 0]) < 1e-9
-   _, _, _, check_phase, _ = create_bwgp("modified_gamma", 93.0, mmstr.s[0], ri, [MODIS_CHANNEL_8], check_mu)
+   _, _, _, check_phase, _ = create_bwgp("modified_gamma", 93.0, mmstr.s[0], ri, [MODIS_CHANNEL_8], check_mu,
+                                         refined_xres=gsp.ICE_SPHERE_REFINED_XRES)
    error = np.max(np.abs(le.reconstruct_phase_function(omega[:, 0], length, check_mu) / check_phase[:, 0] - 1.0))
    assert error <= le.RECONSTRUCTION_TOLERANCE
 
@@ -165,7 +166,8 @@ def test_liquid_expansion_lengths_follow_the_averaged_phase_function(effective_r
    check_mu = np.cos(np.deg2rad(le.CHECK_THETA))
    _, _, _, direct, _ = create_bwgp("modified_gamma", effective_radius, 0.1111111,
                                     gsp._interpol_complex(*_liquid_tables(), [wavelength]), [wavelength], check_mu,
-                                    radius_upper_factor=gsp.LIQUID_UPPER_RADIUS_FACTOR)
+                                    radius_upper_factor=gsp.LIQUID_UPPER_RADIUS_FACTOR,
+                                    refined_xres=gsp.LIQUID_REFINED_XRES)
    error = np.max(np.abs(le.reconstruct_phase_function(omega[:, 0], length, check_mu) / direct[:, 0] - 1.0))
    assert error <= le.RECONSTRUCTION_TOLERANCE
 

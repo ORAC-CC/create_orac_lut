@@ -59,6 +59,17 @@ Versions and numerical changes.  Three things are recorded separately:
    figures; DISORT receives those L moments (padded to NSTR + 1).  Baum and
    T-matrix (tabulated) classes keep the fixed nmom expansion: their Legendre
    convergence is not solved (src/oraclut/idl_mirror/legendre_expansion.py).
+4. Radius integration grid.  Up to source revision dbcc42c every Mie size
+   distribution used the IDL's linear-radius trapezoid with a size-parameter
+   step of 0.4 (at least 200 nodes).  Since the V24 radius-grid change,
+   liquid-water and ice-sphere modified-gamma components divide every
+   interval of that grid into 2^k equal parts, with k the smallest level
+   giving a size-parameter step <= 0.025 (liquid water) or 0.05 (ice
+   spheres) and at least three nodes per area-weighted standard deviation of
+   the distribution (generate_scattering_properties.refined_xres,
+   create_bwgp.radius_refinement_level); limits and legacy nodes are
+   unchanged.  Log-normal (aerosol) components keep the legacy grid.  Saved
+   scattering caches carry RADIUS_GRID and older ones are refused on reuse.
 
 The exact source revision used for each validation comparison is recorded in
 validation/REPORT_lut_numerics_development.md.
@@ -78,6 +89,10 @@ from pathlib import Path
 import numpy as np
 
 REPO_ROOT = Path(__file__).resolve().parent
+# Identifier of the radius-integration scheme stored in scattering caches
+# (Versions and numerical changes, item 4).
+RADIUS_GRID = "nested-refinement-1"
+
 sys.path.insert(0, str(REPO_ROOT / "src"))
 
 from oraclut.idl_mirror import (   # noqa: E402  (import after sys.path is set)
@@ -516,13 +531,16 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
          generate_scattering_properties(srfstrarr, nwvl_max, inststr, mmstr, lutstr, nmom, tmatrix_path=tmatrix_path)
       # **** write the scattering parameters for the class as a whole for reuse
       np.savez(scatfile, lmom=lmom, bext550=bext550, w550=w550, g550=g550, phs550=phs550, amom550=amom550,
-               bextrat=bextrat, bext=bext, w=w, g=g, vavg=vavg, phs=phs, amom=amom)
+               bextrat=bextrat, bext=bext, w=w, g=g, vavg=vavg, phs=phs, amom=amom, radius_grid=RADIUS_GRID)
    else:
       # **** read the scattering parameters for the class as a whole for reuse
       with np.load(scatfile) as saved:
          if "lmom" not in saved:
             raise ValueError(f"{scatfile} holds fixed-nmom scattering properties from before the adaptive Legendre "
                              "change; recalculate them")
+         if "radius_grid" not in saved or str(saved["radius_grid"]) != RADIUS_GRID:
+            raise ValueError(f"{scatfile} holds scattering properties from before the refined radius integration; "
+                             "recalculate them")
          lmom = saved["lmom"]
          bext550, w550, g550, phs550, amom550 = (saved[k] for k in ("bext550", "w550", "g550", "phs550", "amom550"))
          bextrat, bext, w, g, vavg, phs, amom = (saved[k] for k in ("bextrat", "bext", "w", "g", "vavg", "phs", "amom"))
@@ -965,13 +983,16 @@ def create_orac_aerosol_lut(in_path, instfile, mmfile, lutfile, out_path, atmosp
          generate_scattering_properties(srfstrarr, nwvl_max, inststr, mmstr, lutstr, nmom, tmatrix_path=tmatrix_path)
       # **** write the scattering parameters for the class as a whole for reuse
       np.savez(scatfile, lmom=lmom, bext550=bext550, w550=w550, g550=g550, phs550=phs550, amom550=amom550,
-               bextrat=bextrat, bext=bext, w=w, g=g, vavg=vavg, phs=phs, amom=amom)
+               bextrat=bextrat, bext=bext, w=w, g=g, vavg=vavg, phs=phs, amom=amom, radius_grid=RADIUS_GRID)
    else:
       # **** read the scattering parameters for the class as a whole for reuse
       with np.load(scatfile) as saved:
          if "lmom" not in saved:
             raise ValueError(f"{scatfile} holds fixed-nmom scattering properties from before the adaptive Legendre "
                              "change; recalculate them")
+         if "radius_grid" not in saved or str(saved["radius_grid"]) != RADIUS_GRID:
+            raise ValueError(f"{scatfile} holds scattering properties from before the refined radius integration; "
+                             "recalculate them")
          lmom = saved["lmom"]
          bext550, w550, g550, phs550, amom550 = (saved[k] for k in ("bext550", "w550", "g550", "phs550", "amom550"))
          bextrat, bext, w, g, vavg, phs, amom = (saved[k] for k in ("bextrat", "bext", "w", "g", "vavg", "phs", "amom"))
