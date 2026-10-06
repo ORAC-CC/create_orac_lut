@@ -20,13 +20,12 @@ changes" 5; `src/oraclut/cloud_temperature.py`):
 
 | Item | V24 | V25 |
 |---|---|---|
-| Cloud temperature in the emission DISORT call | one value for every in-cloud layer (the IDL's 250 K; the value does not affect `E_md`) | the cloud top at the fixed reference temperature T_top = 240 K; the temperature rises downward along the saturated adiabat of the substance |
+| Cloud temperature in the emission DISORT call | one value for every in-cloud layer (the IDL's 250 K; the value does not affect `E_md`) | the cloud top at the fixed reference state T_top = 240 K, p_top = 628 hPa; the temperature rises downward along the phase-pure saturated adiabat of the substance |
 | Liquid-water LUTs | isothermal | saturated liquid-water adiabat (Murphy and Koop 2005 vapour pressure over supercooled water, L_v of Rogers and Yau 1989) |
 | Ice LUTs | isothermal | saturated ice adiabat (Murphy and Koop 2005 vapour pressure over ice and latent heat of sublimation) |
-| Optical depth to geometric depth | – | H = min(τ₀.₅₅ / β, H_max); z(x) = H x / τ₀.₅₅ for the cumulative 0.55 µm optical depth x below the cloud top; z = 0 for τ₀.₅₅ = 0 |
+| Optical depth to the thermodynamic path length | – | dz = dτ₀.₅₅ / β, i.e. z(x) = x / β for the cumulative 0.55 µm optical depth x below the cloud top; z is a path-length coordinate along the reference adiabat, not an altitude, not limited, not a LUT variable; z = 0 for τ₀.₅₅ = 0 |
 | β (representative volume extinction coefficient at 0.55 µm) | – | 20 km⁻¹ (liquid water), 1 km⁻¹ (ice) |
-| H_max | – | 2.5 km (liquid water), 6.0 km (ice) |
-| Cloud top state | – | the top of the atmosphere layer holding the particles (the `.mm` profile): 4 km, 628 hPa in `mls.atm` |
+| Pressure along the adiabat | – | evolved hydrostatically with the adiabat's own temperature, dp/dz = p g / (R_d T), from p_top = 628 hPa; the LUT cloud's position in the atmosphere does not enter |
 | Emission layering | the one in-cloud atmosphere layer | 12 equal-optical-depth sub-layers of each in-cloud layer, with the adiabat temperature at every boundary |
 | `E_md` normalisation | B(T) of the isothermal cloud | B(240 K); `E_md` may exceed 1 |
 | LUT dimensions | – | unchanged: no cloud-temperature, cloud-base-temperature or effective-temperature dimension |
@@ -38,8 +37,15 @@ concentration, so the microphysics does not define a physical thickness.  The
 physical cloud structure is defined from the 0.55 µm optical depth (the LUT
 coordinate) and is the same for every spectral channel.
 
-A capped cloud (τ₀.₅₅ > β H_max) is mapped continuously from the cloud top to
-H_max; no part of the cloud is held isothermal.
+The adiabat of the LUT's phase is followed throughout, whatever temperature
+is reached: no melting, no 273.15 K ceiling, no phase switch. The reference
+state (240 K, 628 hPa) is a convention of the LUT; retrieved clouds have other
+top temperatures, and the temperature contrast within the cloud is that of the
+reference adiabat. Extreme reference states at the deepest optical-depth
+nodes (τ₀.₅₅ = 256: z = 12.8 km for liquid water, 256 km for ice) are a
+limitation of this simplified V25 treatment and are documented, not limited;
+the dependence on the actual cloud-top temperature and mixed-phase physics
+are deferred.
 
 The selection is the run-file setting `cloud_temperature_profile = 'adiabatic'`.
 A run file without it, or with `'isothermal'`, reproduces the V24 calculation
@@ -62,8 +68,8 @@ and products are written to
 next to, and never over, the `_v23.nc` and `_v24.nc` products.  The generator
 refuses to overwrite an existing product.  V25 files carry global attributes
 (`cloud_temperature_profile`, `cloud_top_temperature_K`, `cloud_adiabat`,
-`cloud_extinction_coefficient_055um_per_km`, `cloud_maximum_geometric_depth_km`,
-`cloud_top_height_km`, `cloud_top_pressure_hPa`, `cloud_emission_sublayers`)
+`cloud_top_reference_pressure_hPa`, `cloud_extinction_coefficient_055um_per_km`,
+`cloud_emission_sublayers`)
 recording the treatment, and the `valid_range` of `E_md` is no longer 0–1.
 
 ## Submission and provenance

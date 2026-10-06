@@ -1,4 +1,11 @@
-"""V25 cloud temperature profile (src/oraclut/cloud_temperature.py) and its use by create_orac_luts.py."""
+"""V25 cloud temperature profile (src/oraclut/cloud_temperature.py) and its use by create_orac_luts.py.
+
+The V25 formulation: T_top = 240 K (reference pressure 628 hPa); the path
+length below the cloud top z = x / beta_ext_055 for cumulative 0.55-um
+optical depth x, not limited and independent of any altitude; a phase-pure
+saturated adiabat (liquid water or ice) throughout, with the pressure evolved
+hydrostatically along it.
+"""
 
 import inspect
 from pathlib import Path
@@ -8,35 +15,21 @@ import pytest
 
 import create_orac_luts
 from oraclut import cloud_temperature as ct
-from oraclut.idl_mirror.interpol import interpol
-from oraclut.idl_mirror.load_atmstr import load_atmstr
-from oraclut.idl_mirror.load_mmdat import load_mmdat
+from oraclut.idl_mirror.load_lutstr import load_lutstr
 
 ROOT = Path(__file__).resolve().parents[1]
 INPUTS = ROOT / "create_orac_lut" / "input_files"
-
-
-def production_profile(mmfile):
-   """(mmstr, atmstr, scatreltau) exactly as create_orac_cloud_lut forms them for atmosphere 2."""
-
-   mmstr = load_mmdat(INPUTS / "microphysics" / mmfile, INPUTS)
-   atmstr = load_atmstr(INPUTS / "atm" / "mls.atm", 2)
-   nlayers = atmstr.nlevels - 1
-   hlayers = (atmstr.height[0:nlayers] + atmstr.height[1:nlayers + 1]) / np.float32(2)
-   scatreltau = interpol(mmstr.rext, mmstr.height, hlayers)
-   return mmstr, atmstr, scatreltau / np.sum(scatreltau, dtype=np.float32)
+GRID_B_TAU_MAX = 256.0
 
 
 @pytest.fixture(scope="module")
 def liquid():
-   mmstr, atmstr, scatreltau = production_profile("liquid-water_stg.mm")
-   return ct.cloud_temperature_model(mmstr.substance, atmstr, scatreltau)
+   return ct.cloud_temperature_model("liquid-water", GRID_B_TAU_MAX)
 
 
 @pytest.fixture(scope="module")
 def ice():
-   mmstr, atmstr, scatreltau = production_profile("water-ice_sph.mm")
-   return ct.cloud_temperature_model(mmstr.substance, atmstr, scatreltau)
+   return ct.cloud_temperature_model("water-ice", GRID_B_TAU_MAX)
 
 
 # ---------------------------------------------------------------------------
@@ -68,86 +61,108 @@ def test_saturated_lapse_rates_lie_between_known_limits():
       ct.saturated_lapse_rate(240.0, 62800.0, "mixed")
 
 
-def test_liquid_and_ice_thermodynamics_differ(liquid, ice):
-   # same cloud top, different adiabats
-   assert liquid.phase == "liquid" and ice.phase == "ice"
-   assert liquid.cloud_top_km == ice.cloud_top_km == 4.0
-   assert ct.saturated_lapse_rate(260.0, 70000.0, "liquid") != ct.saturated_lapse_rate(260.0, 70000.0, "ice")
-   assert not np.allclose(liquid.temperature_at_depth_k([1.0, 2.0, 2.5]), ice.temperature_at_depth_k([1.0, 2.0, 2.5]), atol=1e-3)
-
-
 # ---------------------------------------------------------------------------
-# Profile and the optical-depth to geometric-depth model
+# The reference state and the path-length coordinate
 # ---------------------------------------------------------------------------
 
-def test_cloud_top_is_exactly_240_k(liquid, ice):
+def test_cloud_top_is_exactly_240_k_for_both_phases(liquid, ice):
+   assert ct.T_TOP_K == 240.0
    for model in (liquid, ice):
       assert model.t_top_k == 240.0
       assert model.temperature_k[0] == 240.0
       assert model.temperature_at_depth_k(0.0) == 240.0
       assert model.boundary_temperatures_k(16.0, [0.0, 0.5, 1.0])[0] == 240.0
       assert model.cloud_base_temperature_k(0.0) == 240.0
+      assert model.p_top_hpa == 628.0 and model.pressure_hpa[0] == pytest.approx(628.0)
 
 
-def test_temperature_increases_monotonically_downward(liquid, ice):
-   for model in (liquid, ice):
-      assert np.all(np.diff(model.temperature_k) > 0.0)
-      for tau in (0.25, 1.0, 4.0, 16.0, 64.0, 256.0):
-         t = model.boundary_temperatures_k(tau, np.linspace(0.0, 1.0, 13))
-         assert np.all(np.diff(t) > 0.0), tau
+def test_extinction_coefficients_are_exactly_the_model_constants(liquid, ice):
+   assert ct.CLOUD_MODELS == {"liquid-water": ("liquid", 20.0), "water-ice": ("ice", 1.0)}
+   assert liquid.beta_ext_055_per_km == 20.0
+   assert ice.beta_ext_055_per_km == 1.0
 
 
-def test_cloud_top_state_comes_from_the_production_atmosphere(liquid):
-   assert liquid.cloud_top_km == 4.0                          # top of the 3-4 km layer holding the particles
-   assert liquid.cloud_top_hpa == pytest.approx(628.0)
-
-
-def test_zero_optical_depth_is_handled_without_division_or_gradient(liquid, ice):
-   for model in (liquid, ice):
-      with np.errstate(all="raise"):
-         assert model.geometric_depth_km(0.0) == 0.0
-         assert np.all(model.depth_of_optical_depth_km(0.0, [0.0, 0.0]) == 0.0)
-         t = model.boundary_temperatures_k(0.0, np.linspace(0.0, 1.0, 13))
-      assert np.all(t == 240.0)
+def test_distance_is_exactly_optical_depth_over_beta(liquid, ice):
+   assert liquid.depth_of_optical_depth_km(10.0) == 0.5            # liquid: x = 10 -> 0.5 km
+   assert ice.depth_of_optical_depth_km(1.0) == 1.0                 # ice: x = 1 -> 1 km
+   assert liquid.depth_of_optical_depth_km(1.0) == 0.05
+   assert np.array_equal(liquid.depth_of_optical_depth_km([0.0, 2.0, 10.0, 256.0]), [0.0, 0.1, 0.5, 12.8])
+   assert np.array_equal(ice.depth_of_optical_depth_km([0.0, 4.0, 64.0, 256.0]), [0.0, 4.0, 64.0, 256.0])
    with pytest.raises(ValueError):
-      liquid.geometric_depth_km(-1.0)
+      liquid.depth_of_optical_depth_km(-1.0)
 
 
-def test_nominal_thickness_follows_the_representative_extinction(liquid, ice):
-   assert liquid.beta_ext_055_per_km == 20.0 and ice.beta_ext_055_per_km == 1.0
-   assert liquid.geometric_depth_km(10.0) == pytest.approx(0.5)      # liquid: tau 10 -> 0.5 km
-   assert ice.geometric_depth_km(1.0) == pytest.approx(1.0)          # ice: tau 1 -> 1 km
-   assert liquid.geometric_depth_km(1.0) == pytest.approx(0.05)
-   # uncapped mapping z = x / beta
-   assert np.allclose(liquid.depth_of_optical_depth_km(10.0, [0.0, 2.0, 10.0]), [0.0, 0.1, 0.5])
+def test_there_is_no_depth_limit_in_the_model(liquid):
+   source = inspect.getsource(ct).lower()
+   for word in ("h_max", "hmax", "geometric_depth", "maximum_geometric", "capped", "cap "):
+      assert word not in source, word
+   assert set(inspect.signature(ct.cloud_temperature_model).parameters) == {"substance", "max_tau_055", "t_top_k", "p_top_hpa"}
+   for name in ("h_max_km", "geometric_depth_km", "cloud_top_km"):
+      assert not hasattr(liquid, name)
 
 
-def test_thickness_caps(liquid, ice):
-   assert liquid.h_max_km == 2.5 and ice.h_max_km == 6.0
-   assert liquid.geometric_depth_km(50.0) == 2.5                     # nominal 2.5 km: at the cap
-   assert liquid.geometric_depth_km(256.0) == 2.5
-   assert ice.geometric_depth_km(6.0) == 6.0
-   assert ice.geometric_depth_km(256.0) == 6.0
-   assert liquid.geometric_depth_km(49.0) < 2.5 and ice.geometric_depth_km(5.9) < 6.0
+def test_distance_keeps_increasing_with_optical_depth(liquid, ice):
+   taus = np.array([0.5, 1.0, 4.0, 16.0, 64.0, 128.0, 256.0])
+   for model in (liquid, ice):
+      z = model.depth_of_optical_depth_km(taus)
+      assert np.all(np.diff(z) > 0.0)
+      assert np.allclose(np.diff(z) / np.diff(taus), 1.0 / model.beta_ext_055_per_km)   # never saturates
+      t = np.array([model.cloud_base_temperature_k(tau) for tau in taus])
+      assert np.all(np.diff(t) > 0.0)
 
 
-def test_capped_cloud_is_mapped_continuously_over_the_whole_optical_depth(liquid, ice):
-   for model, tau in ((liquid, 256.0), (ice, 64.0)):
-      fractions = np.linspace(0.0, 1.0, 25)
-      z = model.depth_of_optical_depth_km(tau, fractions * tau)
-      assert np.allclose(z, model.h_max_km * fractions)             # linear across 0..H_max
-      t = model.boundary_temperatures_k(tau, fractions)
-      assert np.all(np.diff(t) > 0.0)                               # no isothermal remainder
-      assert t[-1] == pytest.approx(model.temperature_at_depth_k(model.h_max_km))
-      steps = np.diff(t)
-      assert np.all(steps[1:] / steps[:-1] > 0.8)                   # smooth: the lapse rate only falls slowly with depth
-      assert np.all(steps[1:] / steps[:-1] < 1.05)
+def test_liquid_uses_the_liquid_adiabat_and_ice_the_ice_adiabat_throughout():
+   # Each tabulated profile is the integration of its own phase's lapse rate
+   # at every point, including far below the freezing level.
+   for substance, own, other in (("liquid-water", "liquid", "ice"), ("water-ice", "ice", "liquid")):
+      model = ct.cloud_temperature_model(substance, GRID_B_TAU_MAX)
+      assert model.phase == own
+      n = len(model.depth_km)
+      for i in (0, n // 4, n // 2, n - 2):
+         t, p = model.temperature_k[i], 100.0 * model.pressure_hpa[i]
+         h = 1000.0 * (model.depth_km[i + 1] - model.depth_km[i])
+         step = (model.temperature_k[i + 1] - t) / h
+         assert step == pytest.approx(ct.saturated_lapse_rate(t, p, own), rel=2e-3)
+      # at the freezing level the two adiabats differ by more than the integration tolerance
+      i = int(np.searchsorted(model.temperature_k, 273.15))
+      t, p = model.temperature_k[i], 100.0 * model.pressure_hpa[i]
+      assert abs(ct.saturated_lapse_rate(t, p, own) - ct.saturated_lapse_rate(t, p, other)) > 1e-5
 
 
-def test_all_channels_share_one_physical_cloud(liquid):
-   # The temperatures depend on the 0.55-um optical depth and the particle
-   # layer fractions only: two channels with different layer optical depths
-   # and optical properties receive the same boundary temperatures.
+def test_no_freezing_ceiling_or_phase_switch(liquid, ice):
+   # Both adiabats pass through the freezing level without any change of
+   # behaviour: strictly increasing temperature and a smoothly varying lapse rate.
+   for model in (liquid, ice):
+      t = model.temperature_k
+      assert t[-1] > 273.15 and np.all(np.diff(t) > 0.0)
+      crossing = int(np.searchsorted(t, 273.15))
+      rates = np.diff(t[crossing - 50:crossing + 50])                # 10 m steps either side of 273.15 K
+      assert np.all(rates > 0.0)
+      curvature = np.abs(np.diff(rates))                            # a phase switch or ceiling would be an outlier
+      assert curvature.max() < 3.0 * np.median(curvature)
+   source = inspect.getsource(ct)
+   assert "273.15" not in source.replace("T_FREEZE = 273.15", "")       # the constant serves the latent-heat fit only
+
+
+def test_absolute_altitude_does_not_enter(liquid):
+   # The model is built from the substance and the grid's largest optical
+   # depth only: no atmosphere, no layer profile, no cloud height.
+   parameters = inspect.signature(ct.cloud_temperature_model).parameters
+   assert "atmstr" not in parameters and "scatreltau" not in parameters
+   assert not hasattr(liquid, "cloud_top_km")
+   source = inspect.getsource(ct).lower()
+   assert "load_atmstr" not in source and "atmstr" not in source and "height" not in source and "altitude" in source
+   # the pressure along the adiabat is hydrostatic in the adiabat's own temperature
+   z, t, p = liquid.depth_km, liquid.temperature_k, 100.0 * liquid.pressure_hpa
+   i = len(z) // 2
+   expected = p[i] * ct.G0 / (ct.R_DRY * t[i])
+   assert (p[i + 1] - p[i - 1]) / (2000.0 * (z[i + 1] - z[i])) == pytest.approx(expected, rel=1e-3)
+
+
+def test_all_channels_share_one_thermodynamic_profile(liquid):
+   # The temperatures depend on the node's 0.55-um optical depth and the
+   # particle layer fractions only: two channels with different layer optical
+   # depths and optical properties receive the same boundary temperatures.
    pmom_a = np.ones((5, 1), np.float32)
    pmom_b = np.full((5, 1), 0.5, np.float32)
    _, _, _, ta = ct.emission_layers([3.0], [0.5], pmom_a, [1.0], 16.0, liquid)
@@ -157,18 +172,24 @@ def test_all_channels_share_one_physical_cloud(liquid):
    assert ta[0] == 240.0 and ta[-1] == pytest.approx(liquid.cloud_base_temperature_k(16.0), abs=1e-3)
 
 
-def test_no_microphysical_extinction_enters_the_physical_depth():
-   # The model is built from the substance, atmosphere and layer profile alone;
-   # the per-particle / normalised extinction of generate_scattering_properties
-   # is not an input.
-   parameters = inspect.signature(ct.cloud_temperature_model).parameters
-   assert set(parameters) == {"substance", "atmstr", "scatreltau", "t_top_k"}
+def test_no_microphysical_extinction_enters_the_distance():
    source = inspect.getsource(ct)
-   assert "generate_scattering_properties" not in source.replace("of\ngenerate_scattering_properties", "")  # not imported
+   assert "generate_scattering_properties" not in source.replace("of\ngenerate_scattering_properties", "")
    assert "import" not in source.split("def saturation_vapour_pressure_liquid")[0].split('"""', 2)[2].replace(
       "from dataclasses import dataclass", "").replace("import numpy as np", "")
    with pytest.raises(ValueError):
-      ct.cloud_temperature_model("sulphuric-acid", None, [1.0])
+      ct.cloud_temperature_model("sulphuric-acid", 1.0)
+
+
+def test_zero_optical_depth_is_safe(liquid, ice):
+   for model in (liquid, ice):
+      with np.errstate(all="raise"):
+         assert model.depth_of_optical_depth_km(0.0) == 0.0
+         t = model.boundary_temperatures_k(0.0, np.linspace(0.0, 1.0, 13))
+      assert np.all(t == 240.0)
+      assert model.cloud_base_temperature_k(0.0) == 240.0
+   small = ct.cloud_temperature_model("water-ice", 0.0)                   # a grid whose largest node is zero
+   assert small.cloud_base_temperature_k(0.0) == 240.0
 
 
 def test_emission_sublayers_preserve_the_layer_optical_depth_and_properties(liquid):
@@ -181,20 +202,16 @@ def test_emission_sublayers_preserve_the_layer_optical_depth_and_properties(liqu
    assert np.allclose(emtau[:4].sum(), 2.0) and np.allclose(emtau[4:].sum(), 1.0)
    assert np.all(emssa[:4] == 0.5) and np.all(emssa[4:] == 0.6)
    assert np.all(empmo[1, :4] == 0.8) and np.all(empmo[1, 4:] == 0.7)
-   # the boundary after the first layer sits at 75 % of the (capped) depth
-   assert temper[4] == pytest.approx(liquid.temperature_at_depth_k(0.75 * 2.5), abs=1e-3)
-   assert temper[-1] == pytest.approx(liquid.temperature_at_depth_k(2.5), abs=1e-3)
-   assert np.all(np.abs(np.diff(temper)) < 10.0)                   # within DISORT's accuracy guidance
-
-
-def test_dynamic_range_of_the_sublayer_temperature_steps(liquid, ice):
-   for model in (liquid, ice):
-      t = model.boundary_temperatures_k(256.0, np.linspace(0.0, 1.0, ct.EMISSION_SUBLAYERS + 1))
-      assert np.diff(t).max() < 5.0                                 # ice: 4.6 K in the first 0.5 km; liquid: 1.9 K
+   # the boundary after the first layer sits at 75 % of the node's optical depth: z = 0.75 x 64 / 20 km
+   assert temper[4] == pytest.approx(liquid.temperature_at_depth_k(0.75 * 64.0 / 20.0), abs=1e-3)
+   assert temper[-1] == pytest.approx(liquid.temperature_at_depth_k(64.0 / 20.0), abs=1e-3)
+   assert ct.EMISSION_SUBLAYERS == 12
+   with pytest.raises(ValueError, match="MXCLY"):
+      ct.emission_layers(dtau, ssalb, pmom, weights, 64.0, liquid, nsub=24)
 
 
 # ---------------------------------------------------------------------------
-# Run-file setting
+# Run-file setting and production run files
 # ---------------------------------------------------------------------------
 
 def write_run(tmp_path, extra):
@@ -246,6 +263,20 @@ def test_v25_production_run_files_select_the_adiabatic_profile_and_version_25():
             assert settings[key] == value, (run.name, key)
 
 
+def test_production_grid_extremes_are_finite_and_monotonic():
+   # The deepest Grid B node, tau_055 = 256, maps to 12.8 km (liquid) and 256 km (ice).
+   for lutfile, substance in (("liquid-water-cloud-grid-b.lut", "liquid-water"), ("ice-cloud-grid-b.lut", "water-ice")):
+      lutstr = load_lutstr(INPUTS / "lut" / lutfile, 75.0)
+      tau_max = float(np.max(lutstr.opd))
+      assert tau_max == GRID_B_TAU_MAX
+      model = ct.cloud_temperature_model(substance, tau_max)
+      assert model.depth_km[-1] == pytest.approx(tau_max / model.beta_ext_055_per_km)
+      assert np.all(np.isfinite(model.temperature_k)) and np.all(np.isfinite(model.pressure_hpa))
+      assert np.all(np.diff(model.temperature_k) > 0.0) and np.all(np.diff(model.pressure_hpa) > 0.0)
+      for tau in lutstr.opd:
+         assert np.isfinite(model.cloud_base_temperature_k(float(tau)))
+
+
 # ---------------------------------------------------------------------------
 # End to end on the compact test grid: V24 unchanged, V25 changes E_md only
 # ---------------------------------------------------------------------------
@@ -271,12 +302,13 @@ def test_generator_isothermal_is_unchanged_and_adiabatic_changes_only_e_md(tmp_p
          assert np.array_equal(iso.variables[name], adi.variables[name]), name
    assert not np.array_equal(iso.variables["E_md"], adi.variables["E_md"])
    assert np.all(adi.variables["E_md"] >= iso.variables["E_md"])          # a warmer lower cloud emits more
-   assert [int(c) for c in adi.variables["thermal_channel_id"]] == [4, 9]   # mixed (3.9 um) and thermal (10.8 um)
    assert np.all(np.isfinite(adi.variables["E_md"]))
+   assert [int(c) for c in adi.variables["thermal_channel_id"]] == [4, 9]   # mixed (3.9 um) and thermal (10.8 um)
    assert "cloud_temperature_profile" not in iso.global_attributes
    assert adi.global_attributes["cloud_temperature_profile"] == "adiabatic"
    assert adi.global_attributes["cloud_top_temperature_K"] == 240.0
+   assert adi.global_attributes["cloud_top_reference_pressure_hPa"] == 628.0
    assert adi.global_attributes["cloud_extinction_coefficient_055um_per_km"] == 20.0
-   assert adi.global_attributes["cloud_maximum_geometric_depth_km"] == 2.5
+   assert not any("geometric" in k or "height" in k for k in adi.global_attributes)
    assert tuple(iso.variable_attributes["E_md"]["valid_range"]) == (0.0, 1.0)
    assert adi.variable_attributes["E_md"]["valid_range"][1] > 1.0

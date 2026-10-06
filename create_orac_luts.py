@@ -77,13 +77,15 @@ Versions and numerical changes.  Three things are recorded separately:
    depend on T.  With the run-file setting
    cloud_temperature_profile = 'adiabatic' (V25; absent or 'isothermal' keeps
    the legacy calculation) the cloud top stays at the fixed reference
-   temperature 240 K and the temperature increases downward along the
-   saturated adiabat of the substance (liquid water or ice), over a geometric
-   depth H = min(tau_055 / beta_ext_055, H_max) with the representative
-   extinction coefficients 20 km^-1 (liquid, H_max 2.5 km) and 1 km^-1 (ice,
-   H_max 6 km), the whole optical depth mapped linearly onto 0..H; E_md stays
-   normalised by B(240 K) (src/oraclut/cloud_temperature.py).  Reflection
-   and transmission operators are unchanged; no LUT dimension is added.
+   temperature 240 K (reference pressure 628 hPa) and the temperature
+   increases downward along the phase-pure saturated adiabat of the substance
+   (liquid water or ice), the path length below the cloud top being
+   z = tau_055 / beta_ext_055 with the representative extinction coefficients
+   20 km^-1 (liquid) and 1 km^-1 (ice), uncapped and independent of the LUT
+   cloud's altitude; the pressure is evolved hydrostatically along the
+   adiabat.  E_md stays normalised by B(240 K)
+   (src/oraclut/cloud_temperature.py).  Reflection and transmission operators
+   are unchanged; no LUT dimension is added.
 
 The V24 cloud LUTs are the V23 products and grids (Grid B) computed with
 changes 2-4 (runs/V24_PRODUCTION.md).  The V25 cloud LUTs are the V24
@@ -585,12 +587,13 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
       return 0
 
    # V25: the cloud temperature profile of this LUT (None keeps the legacy
-   # isothermal emission calculation).  It depends on the substance, the
-   # atmosphere and the particle layer profile only; the layer temperatures of
-   # each (optical depth, channel) emission call come from it below.
+   # isothermal emission calculation).  It depends on the substance and on the
+   # deepest optical depth of the grid only (not on the atmosphere or the
+   # cloud's position in it); the layer temperatures of each (optical depth,
+   # channel) emission call come from it below.
    cloud_temperature = None
    if cloud_temperature_profile == "adiabatic":
-      cloud_temperature = cloud_temperature_model(mmstr.substance, atmstr, scatreltau)
+      cloud_temperature = cloud_temperature_model(mmstr.substance, float(np.max(lutstr.opd)))
       print("Cloud temperature:    " + cloud_temperature.describe())
 
    # We want the centre point of the SRF integration which, since the number of
