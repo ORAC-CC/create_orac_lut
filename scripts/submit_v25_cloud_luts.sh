@@ -5,18 +5,16 @@
 #   scripts/submit_v25_cloud_luts.sh [modis|slstr|all] [ice|liquid|both]   submit every incomplete product
 #   scripts/submit_v25_cloud_luts.sh --dry-run [modis|slstr|all] [ice|liquid|both]
 #                                                                  report what would be submitted; submit nothing
-# The second word restricts the submission to one phase family (default both):
-# the ice LUTs carry the V25 cirrostratus profile, the liquid-water LUTs keep
-# the legacy isothermal emission.
+# The second word restricts the submission to one phase family (default both).
 #
 # V25 is the V24 product set (same platforms, models, channels, Grid B
-# sampling and numerics) computed with the supplied vertically inhomogeneous
-# cirrostratus cloud profile in the thermal emission of the ice LUTs
-# (create_orac_luts.py "Versions and numerical changes" 5): every ice run file
-# sets cloud_vertical_profile = 'cirrostratus', every liquid-water run file
-# keeps the legacy isothermal emission (cloud_vertical_profile =
-# 'isothermal'; no liquid-water profile has been supplied), and all set
-# version = 25 (runs/V25_PRODUCTION.md).  Products: Aqua and Terra MODIS and
+# sampling and numerics) computed with a vertically varying cloud temperature
+# in the thermal emission (create_orac_luts.py "Versions and numerical
+# changes" 5): every ice run file sets cloud_vertical_profile =
+# 'cirrostratus' (the supplied P. Watts / OCA / EUMETSAT profile), every
+# liquid-water run file sets cloud_vertical_profile = 'wet_adiabat' (the
+# saturated liquid-water adiabat), and all set version = 25
+# (runs/V25_PRODUCTION.md).  Products: Aqua and Terra MODIS and
 # Sentinel-3A/B SLSTR (dual view), each with six liquid-water models (liquid
 # water Grid B) and four ice models (ice Grid B).  The run files are
 #   runs/<platform>_<instrument>_cloud_<model>_v25.run
@@ -137,7 +135,7 @@ check_run() {
     [[ "$(run_value version "$run")" == "$VERSION" ]] || die "$run: version is not $VERSION"
     case "$model" in
         water-ice_*)    [[ "$(run_value cloud_vertical_profile "$run")" == "cirrostratus" ]] || die "$run: cloud_vertical_profile is not 'cirrostratus' (V25 ice)" ;;
-        liquid-water_*) [[ "$(run_value cloud_vertical_profile "$run")" == "isothermal" ]] || die "$run: cloud_vertical_profile is not 'isothermal' (no liquid-water profile supplied)" ;;
+        liquid-water_*) [[ "$(run_value cloud_vertical_profile "$run")" == "wet_adiabat" ]] || die "$run: cloud_vertical_profile is not 'wet_adiabat' (V25 liquid water)" ;;
     esac
     [[ "$(run_value out_path "$run")" == "$LUT_DIR" ]] || die "$run: out_path is not $LUT_DIR"
 }

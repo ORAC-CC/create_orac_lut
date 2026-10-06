@@ -1,12 +1,14 @@
-"""V25 vertically inhomogeneous cloud profile (src/oraclut/cloud_temperature.py) and its use by create_orac_luts.py.
+"""V25 vertically varying cloud temperature (src/oraclut/cloud_temperature.py) and its use by create_orac_luts.py.
 
-The V25 formulation: the supplied cirrostratus profile set
-(references/data/ocalut_cloudprofile_Cirrostratus.dat) gives, for 13 total
-optical depths, the distribution of optical depth with depth below the cloud
-top and the temperature departure dT = 8 K/km x depth; the cloud depth H(COT)
-is interpolated linearly in COT; T = 240 K + dT at the boundaries of
-equal-optical-depth emission layers.  No representative extinction
-coefficient, saturated adiabat, depth cap or absolute altitude is involved.
+Two backends: 'cirrostratus' (ice LUTs) uses the supplied cirrostratus profile
+set (references/data/ocalut_cloudprofile_Cirrostratus.dat), which gives, for
+13 total optical depths, the distribution of optical depth with depth below
+the cloud top and the temperature departure dT = 8 K/km x depth, the cloud
+depth H(COT) interpolated linearly in COT; 'wet_adiabat' (liquid-water LUTs)
+follows the saturated liquid-water adiabat from the reference state (240 K,
+628 hPa) over z = tau_055 / 20 km^-1 without limit.  Both give T = 240 K + dT
+at the boundaries of equal-optical-depth emission layers.  No depth cap and
+no absolute altitude is involved in either.
 """
 
 import inspect
@@ -175,14 +177,109 @@ def test_all_channels_share_one_profile(model):
    assert ta[-1] == pytest.approx(240.0 + 77.76, abs=1e-3)
 
 
-def test_no_beta_adiabat_cap_or_altitude_in_the_production_path():
+def test_ice_profile_path_has_no_beta_adiabat_cap_or_altitude(model):
+   # the cirrostratus backend uses the file only
+   for name in ("beta_ext_055_per_km", "h_max_km", "cloud_top_km", "pressure_hpa"):
+      assert not hasattr(model, name)
    source = inspect.getsource(ct).lower()
-   for word in ("beta_ext", "lapse_rate(", "adiabatic_profile", "hydrostatic(", "h_max", "p_top_hpa", "tau / beta",
-                "saturation_vapour", "latent_heat", "load_atmstr", "atmstr", "altitude_km"):
+   for word in ("h_max", "hmax", "geometric_depth", "capped", "load_atmstr", "atmstr", "altitude_km", "beta_ice",
+                "saturation_vapour_pressure_ice", "latent_heat_sublimation", "melting", "t_freeze"):
       assert word not in source, word
    assert set(inspect.signature(ct.cloud_vertical_profile_model).parameters) == {"name", "max_tau_055", "t_top_k", "path"}
-   generator = inspect.getsource(create_orac_luts)
-   assert "adiabat" not in generator.lower() and "beta_ext" not in generator
+
+
+# ---------------------------------------------------------------------------
+# The liquid-water backend: the saturated liquid-water adiabat
+# ---------------------------------------------------------------------------
+
+@pytest.fixture(scope="module")
+def liquid():
+   return ct.cloud_vertical_profile_model("wet_adiabat", 256.0)
+
+
+def test_wet_adiabat_reference_state_and_constants(liquid):
+   assert liquid.name == "wet_adiabat"
+   assert liquid.t_top_k == 240.0 and ct.T_TOP_K == 240.0
+   assert liquid.p_top_hpa == 628.0 and liquid.pressure_hpa[0] == pytest.approx(628.0)
+   assert liquid.beta_ext_055_per_km == 20.0 and ct.BETA_EXT_055_LIQUID_PER_KM == 20.0
+   assert liquid.temperature_k[0] == 240.0 and liquid.boundary_temperatures_k(16.0, [0.0])[0] == 240.0
+
+
+def test_wet_adiabat_distance_is_exactly_tau_over_beta(liquid):
+   assert liquid.depth_of_optical_depth_km(10.0) == 0.5
+   assert liquid.depth_of_optical_depth_km(1.0) == 0.05
+   assert np.array_equal(liquid.depth_of_optical_depth_km([0.0, 2.0, 10.0, 256.0]), [0.0, 0.1, 0.5, 12.8])
+   assert liquid.depth_km[-1] == pytest.approx(12.8)                         # tabulated to the grid's maximum, no limit
+   taus = np.array([0.5, 1.0, 4.0, 16.0, 64.0, 128.0, 256.0])
+   z = liquid.depth_of_optical_depth_km(taus)
+   assert np.allclose(np.diff(z) / np.diff(taus), 0.05)                     # never saturates
+   assert np.all(np.diff([liquid.cloud_base_temperature_k(t) for t in taus]) > 0.0)
+
+
+def test_wet_adiabat_thermodynamics(liquid):
+   # Murphy and Koop (2005): e_sw(273.16) = 611.657 Pa; L_v(273.15) = 2.501e6 J/kg
+   assert ct.saturation_vapour_pressure_liquid(273.16) == pytest.approx(611.657, rel=2e-4)
+   assert ct.latent_heat_vaporisation(273.15) == pytest.approx(2.501e6)
+   dry = ct.G0 / ct.C_P_DRY
+   assert 0.85 * dry < ct.wet_adiabatic_lapse_rate(240.0, 62800.0) < dry       # close to the dry rate at 240 K
+   assert 0.003 < ct.wet_adiabatic_lapse_rate(290.0, 90000.0) < 0.0045
+   # every tabulated step is the liquid-water lapse rate at that state (no phase switch, no ceiling)
+   n = len(liquid.depth_km)
+   for i in (0, n // 4, n // 2, n - 2):
+      t, p = liquid.temperature_k[i], 100.0 * liquid.pressure_hpa[i]
+      h = 1000.0 * (liquid.depth_km[i + 1] - liquid.depth_km[i])
+      assert (liquid.temperature_k[i + 1] - t) / h == pytest.approx(ct.wet_adiabatic_lapse_rate(t, p), rel=2e-3)
+   assert liquid.temperature_k[-1] > 273.15 and np.all(np.diff(liquid.temperature_k) > 0.0)
+   # the pressure is hydrostatic in the adiabat's own temperature, from the reference state, not an atmosphere
+   z, t, p = liquid.depth_km, liquid.temperature_k, 100.0 * liquid.pressure_hpa
+   i = n // 2
+   assert (p[i + 1] - p[i - 1]) / (2000.0 * (z[i + 1] - z[i])) == pytest.approx(p[i] * ct.G0 / (ct.R_DRY * t[i]), rel=1e-3)
+
+
+def test_wet_adiabat_is_finite_over_the_production_grid():
+   lutstr = load_lutstr(INPUTS / "lut" / "liquid-water-cloud-grid-b.lut", 75.0)
+   tau_max = float(np.max(lutstr.opd))
+   assert tau_max == 256.0
+   model = ct.cloud_vertical_profile_model("wet_adiabat", tau_max)
+   assert np.all(np.isfinite(model.temperature_k)) and np.all(np.isfinite(model.pressure_hpa))
+   assert np.all(np.diff(model.temperature_k) > 0.0) and np.all(np.diff(model.pressure_hpa) > 0.0)
+   base = model.cloud_base_temperature_k(256.0)
+   assert 300.0 < base < 330.0                                                # about 317 K at 12.8 km (recomputed, not hard-coded)
+   for tau in lutstr.opd:
+      t = model.boundary_temperatures_k(float(tau), np.linspace(0.0, 1.0, ct.EMISSION_LAYERS + 1))
+      assert np.all(np.isfinite(t)) and np.all(np.diff(t) >= 0.0) and np.diff(t).max() < 10.0
+
+
+def test_wet_adiabat_zero_optical_depth_is_safe(liquid):
+   with np.errstate(all="raise"):
+      t = liquid.boundary_temperatures_k(0.0, np.linspace(0.0, 1.0, 13))
+   assert np.all(t == 240.0)
+   assert ct.cloud_vertical_profile_model("wet_adiabat", 0.0).cloud_base_temperature_k(0.0) == 240.0
+
+
+def test_wet_adiabat_emission_layers_and_channels(liquid):
+   dtau = np.asarray([2.0, 1.0], np.float32)
+   ssalb = np.asarray([0.5, 0.6], np.float32)
+   pmom = np.asarray([[1.0, 1.0], [0.8, 0.7]], np.float32)
+   weights = np.asarray([0.75, 0.25], np.float32)
+   emtau, emssa, empmo, temper = ct.emission_layers(dtau, ssalb, pmom, weights, 64.0, liquid, nlayers=4)
+   assert np.allclose(emtau[:4].sum(), 2.0) and np.allclose(emtau[4:].sum(), 1.0)
+   assert np.all(emssa[:4] == 0.5) and np.all(empmo[1, 4:] == 0.7)
+   assert temper[0] == 240.0 and np.all(np.diff(temper) > 0.0)
+   assert temper[4] == pytest.approx(liquid.temperature_at_depth_k(0.75 * 64.0 / 20.0), abs=1e-3)
+   assert temper[-1] == pytest.approx(liquid.temperature_at_depth_k(3.2), abs=1e-3)
+   _, _, _, ta = ct.emission_layers([3.0], [0.5], np.ones((5, 1), np.float32), [1.0], 16.0, liquid)
+   _, _, _, tb = ct.emission_layers([0.7], [0.99], np.full((5, 1), 0.5, np.float32), [1.0], 16.0, liquid)
+   assert np.array_equal(ta, tb)
+
+
+def test_generator_pairs_each_backend_with_its_phase(tmp_path):
+   assert ct.PROFILE_SUBSTANCES == {"cirrostratus": "water-ice", "wet_adiabat": "liquid-water"}
+   with pytest.raises(ValueError, match="defined for the substance"):
+      create_orac_luts.create_orac_cloud_lut(INPUTS, "meteosat-10_seviri_v1.inst", "water-ice_sph.mm",
+                                             "ice-cloud_test.lut", tmp_path, 2, channelid=[9], srf_quad=1,
+                                             version=25, work_path=tmp_path / "work",
+                                             cloud_vertical_profile="wet_adiabat")
 
 
 # ---------------------------------------------------------------------------
@@ -217,7 +314,7 @@ def test_run_file_rejects_unknown_profiles_and_aerosol_use(tmp_path):
 
 
 def test_generator_refuses_the_cirrostratus_profile_for_liquid_water(tmp_path):
-   with pytest.raises(ValueError, match="ice-cloud profile"):
+   with pytest.raises(ValueError, match="defined for the substance"):
       create_orac_luts.create_orac_cloud_lut(INPUTS, "meteosat-10_seviri_v1.inst", "liquid-water_stg.mm",
                                              "liquid-water-cloud_test.lut", tmp_path, 2, channelid=[9], srf_quad=1,
                                              version=25, work_path=tmp_path / "work",
@@ -232,9 +329,10 @@ def test_generator_refuses_the_cirrostratus_profile_for_liquid_water(tmp_path):
 def test_v25_production_run_files_select_the_profile_by_phase():
    runs = sorted((ROOT / "runs").glob("*_v25.run"))
    assert len(runs) == 40
+   assert sum("water-ice" in r.name for r in runs) == 16 and sum("liquid-water" in r.name for r in runs) == 24
    for run in runs:
       settings = create_orac_luts.read_runfile(run)
-      expected = "cirrostratus" if "water-ice" in run.name else "isothermal"
+      expected = "cirrostratus" if "water-ice" in run.name else "wet_adiabat"
       assert settings["cloud_vertical_profile"] == expected, run.name
       assert settings["version"] == 25, run.name
       twin = run.with_name(run.name.replace("_v25.run", "_v24.run"))
@@ -278,3 +376,29 @@ def test_generator_isothermal_is_unchanged_and_cirrostratus_changes_only_e_md(tm
    assert new.global_attributes["cloud_emission_layers"] == ct.EMISSION_LAYERS
    assert tuple(iso.variable_attributes["E_md"]["valid_range"]) == (0.0, 1.0)
    assert new.variable_attributes["E_md"]["valid_range"][1] > 1.0
+
+
+@pytest.mark.slow
+def test_generator_wet_adiabat_changes_only_e_md_for_liquid_water(tmp_path):
+   from oraclut.io.lut import read_lut
+
+   products = {}
+   for mode, options in (("isothermal", {}), ("wet_adiabat", {"cloud_vertical_profile": "wet_adiabat"})):
+      out = tmp_path / mode
+      out.mkdir()
+      status = create_orac_luts.create_orac_cloud_lut(
+         INPUTS, "meteosat-10_seviri_v1.inst", "liquid-water_stg.mm", "liquid-water-cloud_test.lut", out, 2,
+         channelid=[4, 9], srf_quad=1, version=25, nstreams=60, work_path=out / "work", **options)
+      assert status == 0
+      products[mode] = read_lut(next(out.glob("*.nc")))
+   iso, new = products["isothermal"], products["wet_adiabat"]
+   for name in iso.variable_names:
+      if name != "E_md":
+         assert np.array_equal(iso.variables[name], new.variables[name]), name
+   assert np.all(new.variables["E_md"] >= iso.variables["E_md"]) and not np.array_equal(iso.variables["E_md"], new.variables["E_md"])
+   assert np.all(np.isfinite(new.variables["E_md"]))
+   assert new.global_attributes["cloud_vertical_profile"] == "wet_adiabat"
+   assert new.global_attributes["cloud_top_temperature_K"] == 240.0
+   assert new.global_attributes["cloud_extinction_coefficient_055um_per_km"] == 20.0
+   assert new.global_attributes["cloud_top_reference_pressure_hPa"] == 628.0
+   assert not any("geometric" in k or "height" in k or "maximum" in k for k in new.global_attributes)

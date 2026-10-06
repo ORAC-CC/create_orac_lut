@@ -1,4 +1,15 @@
-"""Vertically inhomogeneous cloud profile for the V25 thermal-emission calculation (create_orac_cloud_lut).
+"""Vertically varying cloud temperature for the V25 thermal-emission calculation (create_orac_cloud_lut).
+
+V25 has two backends of one mechanism (a vertical distribution of the cloud
+optical depth paired with a temperature at every emission-layer boundary,
+at the reference cloud-top temperature T_TOP_K = 240 K, E_md normalised by
+B(T_TOP_K), reflection and transmission unchanged):
+
+   'cirrostratus'  ice LUTs: the supplied P. Watts / OCA / EUMETSAT cirrostratus
+                   profile (CloudProfileSet, CloudVerticalProfile below);
+   'wet_adiabat'   liquid-water LUTs: the saturated liquid-water adiabat from the
+                   reference cloud-top state over the path length
+                   z = tau_055 / BETA_EXT_055_LIQUID (WetAdiabatProfile below).
 
 Up to V24 the emission DISORT call gives every in-cloud layer one temperature
 (create_orac_cloud_lut.pro line 561, ``temp = 250.0``), so the LUT emissivity
@@ -84,8 +95,17 @@ LAPSE_K_PER_KM = 8.0                     # dT = 8 K/km z in the supplied profile
 PROFILE_FILES = {
    "cirrostratus": Path(__file__).resolve().parents[2] / "references" / "data" / "ocalut_cloudprofile_Cirrostratus.dat",
 }
+# Liquid-water backend ('wet_adiabat'): the saturated liquid-water adiabat is
+# followed from the reference cloud-top state (T_TOP_K, P_TOP_HPA) over the
+# thermodynamic path length z = tau_055 / BETA_EXT_055_LIQUID, without any
+# limit, cap or altitude; the pressure is evolved hydrostatically along the
+# path.  P_TOP_HPA is a reference convention (the mid-latitude-summer pressure
+# at 4 km, kept from the earlier V25 formulation); it is not an altitude.
+BETA_EXT_055_LIQUID_PER_KM = 20.0
+P_TOP_HPA = 628.0
+ADIABAT_STEP_KM = 0.01
 # Sub-layers of every in-cloud atmosphere layer in the emission DISORT call
-# (chosen from the layer-count convergence of validation/v25).
+# (chosen from the layer-count convergence of validation/v25, both backends).
 EMISSION_LAYERS = 40
 # DISORT 2.0 as compiled for production accepts at most MXCLY = 46 computational
 # layers (create_orac_lut/disort2/src/DISORTfunctions.f).
@@ -270,12 +290,175 @@ class CloudVerticalProfile:
       }
 
 
+# ---------------------------------------------------------------------------
+# Liquid-water backend: the saturated liquid-water adiabat
+# ---------------------------------------------------------------------------
+# Thermodynamic constants (SI).  Saturation vapour pressure over liquid water:
+# Murphy and Koop (2005, Q. J. R. Meteorol. Soc. 131, 1539-1565) Eq. 10, valid
+# for supercooled water (123-332 K); latent heat of vaporisation: Rogers and
+# Yau (1989); pseudo-adiabatic lapse rate: AMS Glossary, "moist-adiabatic
+# lapse rate".  (Validated in the earlier V25 stage, revision 13b9df3.)
+G0 = 9.80665                             # standard gravity, m s^-2
+R_DRY = 287.04                           # gas constant of dry air, J kg^-1 K^-1
+R_VAPOUR = 461.5                         # gas constant of water vapour, J kg^-1 K^-1
+C_P_DRY = 1005.7                         # specific heat of dry air at constant pressure, J kg^-1 K^-1
+EPSILON = R_DRY / R_VAPOUR               # molecular mass ratio water / dry air (0.622)
+
+
+def saturation_vapour_pressure_liquid(temperature_k):
+   """Saturation vapour pressure over liquid water (Pa); Murphy and Koop (2005) Eq. 10."""
+
+   t = np.asarray(temperature_k, dtype=np.float64)
+   return np.exp(54.842763 - 6763.22 / t - 4.210 * np.log(t) + 0.000367 * t
+                 + np.tanh(0.0415 * (t - 218.8)) * (53.878 - 1331.22 / t - 9.44523 * np.log(t) + 0.014025 * t))
+
+
+def latent_heat_vaporisation(temperature_k):
+   """Latent heat of vaporisation (J kg^-1); Rogers and Yau (1989)."""
+
+   return 2.501e6 - 2370.0 * (np.asarray(temperature_k, dtype=np.float64) - 273.15)
+
+
+def wet_adiabatic_lapse_rate(temperature_k, pressure_pa):
+   """Saturated (pseudo-)adiabatic lapse rate over liquid water, -dT/dz (K m^-1)."""
+
+   t = float(temperature_k)
+   p = float(pressure_pa)
+   e_s = float(saturation_vapour_pressure_liquid(t))
+   if not np.isfinite(e_s) or e_s >= p:
+      raise ValueError(f"saturation vapour pressure {e_s:.4g} Pa reaches the pressure {p:.4g} Pa at {t:.1f} K: "
+                       "the wet adiabat is no longer defined")
+   latent = float(latent_heat_vaporisation(t))
+   r_s = EPSILON * e_s / (p - e_s)
+   return G0 * (1.0 + latent * r_s / (R_DRY * t)) / (C_P_DRY + latent ** 2 * r_s * EPSILON / (R_DRY * t ** 2))
+
+
+def wet_adiabat(t_top_k, p_top_hpa, z_max_km, step_km=ADIABAT_STEP_KM):
+   """Integrate the saturated liquid-water adiabat downward from the reference cloud-top state.
+
+   Returns ``(depth_km, temperature_k, pressure_hpa)`` on 0, step, ..., z_max
+   by fourth-order Runge-Kutta in the path length z of the coupled system
+      dT/dz = Gamma_w(T, p),   dp/dz = p g / (R_d T)   (hydrostatic, dry air).
+   No atmospheric profile enters: z is the distance below the reference cloud
+   top along the adiabat, not an altitude.
+   """
+
+   if z_max_km < 0.0:
+      raise ValueError("z_max_km must not be negative")
+   nsteps = max(1, int(np.ceil(z_max_km / step_km - 1e-9)))
+   depth = np.linspace(0.0, max(z_max_km, step_km), nsteps + 1)
+   temperature = np.empty(nsteps + 1, dtype=np.float64)
+   pressure = np.empty(nsteps + 1, dtype=np.float64)
+   temperature[0] = float(t_top_k)
+   pressure[0] = 100.0 * float(p_top_hpa)
+
+   def rates(t, p):                                     # (dT/dz, dp/dz) per metre
+      return wet_adiabatic_lapse_rate(t, p), p * G0 / (R_DRY * t)
+
+   for i in range(nsteps):
+      t0, p0 = temperature[i], pressure[i]
+      h = 1000.0 * (depth[i + 1] - depth[i])
+      k1t, k1p = rates(t0, p0)
+      k2t, k2p = rates(t0 + 0.5 * h * k1t, p0 + 0.5 * h * k1p)
+      k3t, k3p = rates(t0 + 0.5 * h * k2t, p0 + 0.5 * h * k2p)
+      k4t, k4p = rates(t0 + h * k3t, p0 + h * k3p)
+      temperature[i + 1] = t0 + h * (k1t + 2.0 * k2t + 2.0 * k3t + k4t) / 6.0
+      pressure[i + 1] = p0 + h * (k1p + 2.0 * k2p + 2.0 * k3p + k4p) / 6.0
+      if not (np.isfinite(temperature[i + 1]) and np.isfinite(pressure[i + 1])):
+         raise ValueError(f"the wet adiabat is not finite at {depth[i + 1]:.2f} km below the cloud top")
+   return depth, temperature, pressure / 100.0
+
+
+@dataclass(frozen=True)
+class WetAdiabatProfile:
+   """The V25 liquid-water cloud of one LUT: the saturated liquid-water adiabat tabulated along z = tau / beta."""
+
+   name: str
+   t_top_k: float
+   p_top_hpa: float
+   beta_ext_055_per_km: float
+   max_tau_055: float
+   depth_km: np.ndarray          # path length below the cloud top, 0 .. max_tau_055 / beta
+   temperature_k: np.ndarray
+   pressure_hpa: np.ndarray
+
+   def depth_of_optical_depth_km(self, x):
+      """z(x) = x / beta_ext_055 for cumulative 0.55-um optical depth x below the cloud top (no limit)."""
+
+      x = np.asarray(x, dtype=np.float64)
+      if np.any(x < 0.0):
+         raise ValueError("the cumulative optical depth must not be negative")
+      return x / self.beta_ext_055_per_km
+
+   def temperature_at_depth_k(self, depth_km):
+      z = np.asarray(depth_km, dtype=np.float64)
+      if np.any(z < 0.0) or np.any(z > self.depth_km[-1] * (1.0 + 1e-9)):
+         raise ValueError(f"the wet adiabat is tabulated to {self.depth_km[-1]:.3f} km; requested {float(np.max(z)):.3f} km")
+      return np.interp(z, self.depth_km, self.temperature_k)
+
+   def pressure_at_depth_hpa(self, depth_km):
+      return np.interp(np.asarray(depth_km, dtype=np.float64), self.depth_km, self.pressure_hpa)
+
+   def boundary_temperatures_k(self, tau_055, fractions):
+      """T_top + the adiabat at layer boundaries given as cumulative optical-depth fractions 0..1."""
+
+      tau = float(tau_055)
+      if tau < 0.0:
+         raise ValueError(f"the optical depth must not be negative, got {tau}")
+      f = np.asarray(fractions, dtype=np.float64)
+      if np.any(f < 0.0) or np.any(f > 1.0 + 1e-9):
+         raise ValueError("fractions must lie between 0 and 1")
+      return self.temperature_at_depth_k(self.depth_of_optical_depth_km(np.clip(f, 0.0, 1.0) * tau))
+
+   def cloud_base_temperature_k(self, tau_055):
+      return float(self.boundary_temperatures_k(tau_055, [1.0])[0])
+
+   def describe(self):
+      z = float(self.depth_km[-1])
+      return (f"{self.name} (V25): saturated liquid-water adiabat from the reference state T_top {self.t_top_k:.1f} K, "
+              f"p_top {self.p_top_hpa:.1f} hPa; z = tau_055 / {self.beta_ext_055_per_km:g} km, no limit (tabulated to "
+              f"{z:g} km: {float(self.temperature_k[-1]):.1f} K, {float(self.pressure_hpa[-1]):.4g} hPa); "
+              f"{EMISSION_LAYERS} emission layers per cloud layer")
+
+   def global_attributes(self):
+      return {
+         "cloud_vertical_profile": self.name,
+         "cloud_top_temperature_K": np.float32(self.t_top_k),
+         "cloud_top_reference_pressure_hPa": np.float32(self.p_top_hpa),
+         "cloud_extinction_coefficient_055um_per_km": np.float32(self.beta_ext_055_per_km),
+         "cloud_emission_layers": np.int32(EMISSION_LAYERS),
+         "cloud_vertical_profile_note": (
+            "Thermal emission (E_md) of a liquid-water cloud whose temperature rises below the cloud top "
+            "(cloud_top_temperature_K, cloud_top_reference_pressure_hPa) along the saturated liquid-water adiabat, "
+            "with the path length below the cloud top z = tau_055 / cloud_extinction_coefficient_055um_per_km "
+            "(not limited; not an altitude; pressure evolved hydrostatically along the adiabat); remapped onto "
+            "cloud_emission_layers equal-optical-depth layers; E_md is normalised by the Planck radiance at "
+            "cloud_top_temperature_K and may exceed 1; reflection and transmission operators are those of the "
+            "homogeneous cloud (V24)."),
+      }
+
+
+# backend name -> the .mm substance it is defined for
+PROFILE_SUBSTANCES = {"cirrostratus": "water-ice", "wet_adiabat": "liquid-water"}
+
+
 def cloud_vertical_profile_model(name, max_tau_055, t_top_k=T_TOP_K, path=None):
-   """Build the V25 model of a LUT from the named supplied profile and the largest optical depth of its grid."""
+   """Build the V25 model of a LUT from the backend name and the largest optical depth of its grid.
+
+   'cirrostratus': the supplied profile file (PROFILE_FILES); 'wet_adiabat':
+   the saturated liquid-water adiabat tabulated to z = max_tau_055 / beta.
+   """
 
    key = str(name).lower()
+   if key == "wet_adiabat":
+      if float(max_tau_055) < 0.0:
+         raise ValueError("max_tau_055 must not be negative")
+      depth, temperature, pressure = wet_adiabat(t_top_k, P_TOP_HPA, float(max_tau_055) / BETA_EXT_055_LIQUID_PER_KM)
+      return WetAdiabatProfile(name=key, t_top_k=float(t_top_k), p_top_hpa=P_TOP_HPA,
+                               beta_ext_055_per_km=BETA_EXT_055_LIQUID_PER_KM, max_tau_055=float(max_tau_055),
+                               depth_km=depth, temperature_k=temperature, pressure_hpa=pressure)
    if key not in PROFILE_FILES:
-      raise ValueError(f"unknown cloud vertical profile {name!r}; available: {sorted(PROFILE_FILES)}")
+      raise ValueError(f"unknown cloud vertical profile {name!r}; available: {sorted(PROFILE_FILES) + ['wet_adiabat']}")
    profiles = load_cloud_profiles(PROFILE_FILES[key] if path is None else path)
    if float(max_tau_055) > profiles.cot[-1] * (1.0 + 1e-9):
       raise ValueError(f"the LUT optical depth {max_tau_055} exceeds the largest supplied profile ({profiles.cot[-1]})")
@@ -289,8 +472,8 @@ def emission_layers(dtau, ssalb, pmom, scatreltau, tau_055, model, nlayers=EMISS
    atmosphere layers, top down.  Every layer becomes ``nlayers`` sub-layers of
    equal optical depth with its own single-scattering albedo and moments; the
    boundary temperatures follow the cumulative particle optical-depth fraction
-   of the node's tau_055 (the same at every wavelength) through the supplied
-   profile.
+   of the node's tau_055 (the same at every wavelength) through the model
+   (the supplied profile or the wet adiabat).
    """
 
    f32 = np.float32

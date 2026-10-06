@@ -74,16 +74,19 @@ Versions and numerical changes.  Three things are recorded separately:
 5. Cloud vertical profile (V25).  Up to V24 the thermal-emission DISORT
    call gives every in-cloud layer one temperature (the IDL's 250 K), so the
    emissivity E_md = UU / B(T) is that of an isothermal cloud and does not
-   depend on T.  With the run-file setting
-   cloud_vertical_profile = 'cirrostratus' (V25, ice LUTs; absent or
+   depend on T.  With the run-file setting cloud_vertical_profile (absent or
    'isothermal' keeps the legacy calculation) the cloud top stays at the
-   fixed reference temperature 240 K and the cloud takes the supplied
-   vertically inhomogeneous cirrostratus profile of P. Watts (OCA / EUMETSAT;
-   references/data/ocalut_cloudprofile_Cirrostratus.dat): the distribution
+   fixed reference temperature 240 K and the temperature varies below it:
+   'cirrostratus' (ice LUTs) takes the supplied vertically inhomogeneous
+   cirrostratus profile of P. Watts (OCA / EUMETSAT;
+   references/data/ocalut_cloudprofile_Cirrostratus.dat), the distribution
    of the optical depth with depth below the cloud top and the temperature
    departure 8 K/km x depth, the cloud depth 2-11 km depending on the total
-   optical depth, interpolated to the LUT optical-depth grid and remapped onto
-   equal-optical-depth emission layers.  E_md stays normalised by B(240 K)
+   optical depth, interpolated to the LUT optical-depth grid; 'wet_adiabat'
+   (liquid-water LUTs) follows the saturated liquid-water adiabat from the
+   reference state (240 K, 628 hPa) over the path length
+   z = tau_055 / 20 km^-1, without limit.  Both are remapped onto
+   equal-optical-depth emission layers; E_md stays normalised by B(240 K)
    (src/oraclut/cloud_temperature.py).  Reflection and transmission operators
    are unchanged; no LUT dimension is added.
 
@@ -121,7 +124,7 @@ from oraclut.idl_mirror import (   # noqa: E402  (import after sys.path is set)
 )
 from oraclut.idl_mirror.generate_scattering_properties import uses_adaptive_legendre   # noqa: E402
 from oraclut.radiative_transfer.legacy_disort import getmom, plkavg   # noqa: E402  (DISORT GETMOM / PLKAVG)
-from oraclut.cloud_temperature import cloud_vertical_profile_model, emission_layers   # noqa: E402  (V25)
+from oraclut.cloud_temperature import PROFILE_SUBSTANCES, cloud_vertical_profile_model, emission_layers   # noqa: E402  (V25)
 
 
 @contextlib.contextmanager
@@ -214,7 +217,7 @@ def _print_execution_configuration(
    if cloud_vertical_profile is not None:
       print(f"Cloud profile:        {cloud_vertical_profile}"
             + (" (legacy: every in-cloud emission layer at 250 K)" if cloud_vertical_profile == "isothermal"
-               else " (V25: supplied vertically inhomogeneous profile at a 240 K cloud top; details follow)"))
+               else " (V25: vertically varying temperature below a 240 K cloud top; details follow)"))
    print(f"Output:               {output}")
    print("LUT dimensions:")
    print(f"  Optical depth:       {lutstr.opd_n}")
@@ -300,7 +303,7 @@ REQUIRED_RUN_KEYS = (
 # T-matrix (tabulated) classes.
 OPTIONAL_RUN_KEYS = {"gas": 0, "no_rayleigh": 0, "reuse_scat": 0, "scat_only": 0, "tmatrix_path": None, "nmom": None,
                      "cloud_vertical_profile": "isothermal"}
-CLOUD_VERTICAL_PROFILES = ("isothermal", "cirrostratus")        # legacy (up to V24); V25 (ice LUTs)
+CLOUD_VERTICAL_PROFILES = ("isothermal", "cirrostratus", "wet_adiabat")   # legacy (up to V24); V25 ice; V25 liquid water
 
 
 def _check_legendre_configuration(mmstr, nmom):
@@ -405,9 +408,9 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
    classes, whose expansion length comes from each averaged phase function,
    and is required only for Baum / T-matrix (tabulated) classes
    (_check_legendre_configuration).  ``cloud_vertical_profile`` is
-   "isothermal" (the legacy emission calculation, up to V24) or
-   "cirrostratus" (V25, ice LUTs only: module docstring item 5 and
-   src/oraclut/cloud_temperature.py).
+   "isothermal" (the legacy emission calculation, up to V24), "cirrostratus"
+   (V25, ice LUTs) or "wet_adiabat" (V25, liquid-water LUTs): module
+   docstring item 5 and src/oraclut/cloud_temperature.py.
    """
 
    # -----------------------------------------------------------------------------
@@ -539,9 +542,9 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
    if cloud_vertical_profile not in CLOUD_VERTICAL_PROFILES:
       raise ValueError(f"cloud_vertical_profile must be one of {CLOUD_VERTICAL_PROFILES}, "
                        f"got {cloud_vertical_profile!r}")
-   if cloud_vertical_profile == "cirrostratus" and mmstr.substance.lower() != "water-ice":
-      raise ValueError(f"the cirrostratus vertical profile is an ice-cloud profile; it is not applied to the "
-                       f"substance {mmstr.substance!r} (no liquid-water profile has been supplied)")
+   if cloud_vertical_profile != "isothermal" and mmstr.substance.lower() != PROFILE_SUBSTANCES[cloud_vertical_profile]:
+      raise ValueError(f"the {cloud_vertical_profile!r} vertical profile is defined for the substance "
+                       f"{PROFILE_SUBSTANCES[cloud_vertical_profile]!r}, not {mmstr.substance!r}")
 
    # Preserve legacy driver provenance only in private scratch.  A Python
    # ``runs/*.run`` file is the input configuration and must remain under

@@ -8,10 +8,10 @@
 ; permanent ORAC LUT directory as
 ;   aqua_modis_m_liquid-water_a01_pstg_v25.nc
 ;
-; V25 = the V24 products (Grid B grids and numerics unchanged).  No liquid-water
-; vertical cloud profile has been supplied, so this liquid-water LUT keeps the
-; legacy isothermal thermal emission (cloud_vertical_profile = 'isothermal');
-; see runs/V25_PRODUCTION.md.
+; V25 = the V24 products (Grid B grids and numerics unchanged) computed with the
+; saturated liquid-water (wet) adiabat in the thermal emission, create_orac_luts.py
+; "Versions and numerical changes" 5 (runs/V25_PRODUCTION.md): a 240 K cloud top
+; and the wet adiabat below it over the path length z = tau_055 / 20 km^-1.
 ; nmom is not set (obsolete for Mie classes): the expansion length comes from
 ; each size-averaged phase function.
 
@@ -32,6 +32,6 @@ no_rayleigh   = 0
 srf_quad      = 1
 nstreams      = 60
 version       = 25
-cloud_vertical_profile = 'isothermal'
+cloud_vertical_profile = 'wet_adiabat'
 
 out_path      = '/network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS'

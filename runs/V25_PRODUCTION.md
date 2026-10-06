@@ -2,11 +2,18 @@
 
 ## What V25 is
 
-V25 is the V24 cloud LUT product set recomputed with a vertically
-inhomogeneous cloud in the thermal-emission calculation of the **ice** LUTs,
-using the supplied cirrostratus profile of P. Watts (OCA / EUMETSAT). The
-liquid-water LUTs keep the legacy isothermal emission because no liquid-water
-profile has been supplied (§ Phase coverage).
+V25 is the V24 cloud LUT product set recomputed with a vertically varying
+cloud temperature in the thermal-emission calculation:
+
+- **ice LUTs:** the supplied vertically inhomogeneous cirrostratus profile of
+  P. Watts (OCA / EUMETSAT), `cloud_vertical_profile = 'cirrostratus'`;
+- **liquid-water LUTs:** the saturated liquid-water (wet) adiabat from the
+  reference cloud top over the path length z = τ₀.₅₅ / 20 km⁻¹,
+  `cloud_vertical_profile = 'wet_adiabat'`.
+
+Both start from the reference cloud-top temperature 240 K and normalise
+`E_md` by B(240 K). The Grid B optical-depth endpoint τ₀.₅₅ = 256 is retained
+(accepted by the user).
 
 **Unchanged from V24:**
 - platforms, instruments, channels and microphysical models;
@@ -16,7 +23,7 @@ profile has been supplied (§ Phase coverage).
   `ice-cloud-grid-b.lut`;
 - every LUT dimension and variable. The reflection and transmission
   operators are the same calculation as V24; only the emissivity `E_md` of
-  thermal and mixed channels changes (ice LUTs).
+  thermal and mixed channels changes.
 
 **The supplied profile** (`references/data/ocalut_cloudprofile_Cirrostratus.dat`,
 md5 `7d7b472f3ff9681901c03afe85c3202b`):
@@ -33,8 +40,8 @@ md5 `7d7b472f3ff9681901c03afe85c3202b`):
   in every row; the cloud depth H(COT) rises from 2.0 km (COT 0.0625) to
   11.0 km (COT 128 and 256) — the cloud does not deepen without limit.
 
-**The V25 treatment** (`create_orac_luts.py`, "Versions and numerical changes"
-5; `src/oraclut/cloud_temperature.py`):
+**The V25 ice treatment** (`create_orac_luts.py`, "Versions and numerical
+changes" 5; `src/oraclut/cloud_temperature.py`):
 
 | Item | V24 | V25 (ice LUTs) |
 |---|---|---|
@@ -45,36 +52,40 @@ md5 `7d7b472f3ff9681901c03afe85c3202b`):
 | `E_md` normalisation | B(T) of the isothermal cloud | B(240 K); `E_md` may exceed 1 |
 | LUT dimensions | – | unchanged: no cloud-temperature dimension |
 
-The profile prescribes extinction and temperature structure, not
-microphysics: every sub-layer has the LUT particle model's single-scattering
-albedo and phase function, so the diffuse and direct-beam calls (one
-homogeneous cloud layer) are unchanged and the reflection and transmission
-operators are bitwise V24. The reference temperature 240 K is a convention
-of the LUT: the supplied profile is a temperature **departure** from the
-cloud top, and retrieved clouds have other top temperatures (the dependence
-of the normalised `E_md` on the reference temperature is quantified in the
-report, § 8 diagnostic).
+**The V25 liquid-water treatment** (`WetAdiabatProfile`):
+
+| Item | V25 (liquid-water LUTs) |
+|---|---|
+| Reference cloud-top state | T_top = 240 K, p_top = 628 hPa (a reference convention, not an altitude) |
+| Thermodynamic path length | dz = dτ₀.₅₅ / β with β_ext,055 = 20 km⁻¹, i.e. z = τ₀.₅₅ / 20 km⁻¹; no limit, no H / H_max, no altitude or surface constraint |
+| Temperature | the saturated liquid-water (wet) adiabat throughout (Murphy and Koop 2005 vapour pressure over supercooled water, Rogers and Yau 1989 latent heat, pseudo-adiabatic lapse rate), followed continuously with no freezing transition, phase switch or ceiling; the pressure is evolved hydrostatically along the path in the adiabat's own temperature; 4th-order Runge–Kutta, 10 m steps |
+| Production grid extreme | τ₀.₅₅ = 256 → z = 12.8 km, 317.5 K, 2957 hPa (finite, monotonic, converged) |
+| Emission layering | 40 equal-optical-depth sub-layers, as for ice |
+
+Both treatments prescribe temperature structure, not microphysics: every
+sub-layer has the LUT particle model's single-scattering albedo and phase
+function, so the diffuse and direct-beam calls (one homogeneous cloud layer)
+are unchanged and the reflection and transmission operators are bitwise
+V24. The reference temperature 240 K is a convention of the LUT: both
+treatments give a temperature **departure** from the cloud top, retrieved
+clouds have other top temperatures, and the dependence of the normalised
+`E_md` on the reference temperature (quantified in the report, § 8) is an
+accepted limitation of V25.
 
 **History.** Two earlier V25 experiments are superseded and recorded in the
 report: (1) a constant extinction coefficient β with a depth cap H_max and a
-saturated adiabat (revision `7f6b4e2`; its 40 production jobs 488174–488213
-were cancelled by the user); (2) the uncapped z = τ/β adiabat (revision
-`13b9df3`), which gave pathological reference states for thick ice cloud
-(1630 K at COT 256). Neither remains in the production path.
+saturated adiabat for both phases (revision `7f6b4e2`; its 40 production jobs
+488174–488213 were cancelled by the user); (2) the uncapped z = τ/β adiabat
+for both phases (revision `13b9df3`), whose ice branch gave pathological
+reference states for thick ice cloud (1630 K at COT 256) and whose liquid
+branch is the definitive liquid treatment above. The ice formulation was then
+replaced by the supplied cirrostratus profile (`5722280`).
 
-The selection is the run-file setting `cloud_vertical_profile = 'cirrostratus'`
-(ice run files). A run file without it, or with `'isothermal'`, reproduces
-the V24 calculation exactly; the generator refuses `'cirrostratus'` for a
-liquid-water substance.
-
-## Phase coverage
-
-The supplied profile is a cirrostratus (ice) profile. No liquid-water
-profile exists in the repository, so the 20 liquid-water V25 run files set
-`cloud_vertical_profile = 'isothermal'` (the V24 emission). Whether to
-generate those products (identical in physics to V24) or wait for a
-liquid-water profile is a decision recorded in the report; the submission
-script accepts both families as configured.
+The selection is the run-file setting `cloud_vertical_profile`:
+`'cirrostratus'` in the 16 ice run files, `'wet_adiabat'` in the 24
+liquid-water run files. A run file without it, or with `'isothermal'`,
+reproduces the V24 calculation exactly; the generator refuses a backend for
+the other phase (cirrostratus + liquid water, wet_adiabat + water ice).
 
 ## Products
 
@@ -85,23 +96,23 @@ There are 40 configurations, as in V24:
   models (sph, agg, ghm, src).
 
 Run files are `runs/<platform>_<instrument>_cloud_<model>_v25.run` (the V24
-run files with `version = 25` and `cloud_vertical_profile`), and products are
-written to
+run files with `version = 25` and `cloud_vertical_profile`; 16 ice, 24
+liquid-water products), and products are written to
 
     /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/<platform>_<instrument>_m_<substance>_a01_p<shortname>_v25.nc
 
 next to, and never over, the `_v23.nc` and `_v24.nc` products. The generator
-refuses to overwrite an existing product. V25 ice files carry global
-attributes (`cloud_vertical_profile`, `cloud_vertical_profile_file`,
-`cloud_vertical_profile_md5`, `cloud_vertical_profile_origin`,
-`cloud_vertical_profile_type`, `cloud_top_temperature_K`,
-`cloud_emission_layers`) recording the treatment, and the `valid_range` of
+refuses to overwrite an existing product. V25 files carry global attributes
+recording the treatment (`cloud_vertical_profile`, `cloud_top_temperature_K`,
+`cloud_emission_layers`; ice: `cloud_vertical_profile_file`, `_md5`,
+`_origin`, `_type`; liquid water: `cloud_top_reference_pressure_hPa`,
+`cloud_extinction_coefficient_055um_per_km`), and the `valid_range` of
 `E_md` is no longer 0–1.
 
 ## Submission and provenance
 
     scripts/submit_v25_cloud_luts.sh --dry-run      # check all 40 run files; submit nothing
-    scripts/submit_v25_cloud_luts.sh [modis|slstr|all]   # submit every product not yet present
+    scripts/submit_v25_cloud_luts.sh [modis|slstr|all] [ice|liquid|both]   # submit every product not yet present
 
 The script submits nothing unless the production paths are unmodified and
 HEAD is contained in `origin/main` (it fetches first). It forwards each job
