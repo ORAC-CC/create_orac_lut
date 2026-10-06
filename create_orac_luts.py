@@ -71,19 +71,19 @@ Versions and numerical changes.  Three things are recorded separately:
    unchanged.  Log-normal (aerosol) components keep the legacy grid.  Saved
    scattering caches carry RADIUS_GRID and older ones are refused on reuse.
 
-5. Cloud temperature profile (V25).  Up to V24 the thermal-emission DISORT
+5. Cloud vertical profile (V25).  Up to V24 the thermal-emission DISORT
    call gives every in-cloud layer one temperature (the IDL's 250 K), so the
    emissivity E_md = UU / B(T) is that of an isothermal cloud and does not
    depend on T.  With the run-file setting
-   cloud_temperature_profile = 'adiabatic' (V25; absent or 'isothermal' keeps
-   the legacy calculation) the cloud top stays at the fixed reference
-   temperature 240 K (reference pressure 628 hPa) and the temperature
-   increases downward along the phase-pure saturated adiabat of the substance
-   (liquid water or ice), the path length below the cloud top being
-   z = tau_055 / beta_ext_055 with the representative extinction coefficients
-   20 km^-1 (liquid) and 1 km^-1 (ice), uncapped and independent of the LUT
-   cloud's altitude; the pressure is evolved hydrostatically along the
-   adiabat.  E_md stays normalised by B(240 K)
+   cloud_vertical_profile = 'cirrostratus' (V25, ice LUTs; absent or
+   'isothermal' keeps the legacy calculation) the cloud top stays at the
+   fixed reference temperature 240 K and the cloud takes the supplied
+   vertically inhomogeneous cirrostratus profile of P. Watts (OCA / EUMETSAT;
+   references/data/ocalut_cloudprofile_Cirrostratus.dat): the distribution
+   of the optical depth with depth below the cloud top and the temperature
+   departure 8 K/km x depth, the cloud depth 2-11 km depending on the total
+   optical depth, interpolated to the LUT optical-depth grid and remapped onto
+   equal-optical-depth emission layers.  E_md stays normalised by B(240 K)
    (src/oraclut/cloud_temperature.py).  Reflection and transmission operators
    are unchanged; no LUT dimension is added.
 
@@ -121,7 +121,7 @@ from oraclut.idl_mirror import (   # noqa: E402  (import after sys.path is set)
 )
 from oraclut.idl_mirror.generate_scattering_properties import uses_adaptive_legendre   # noqa: E402
 from oraclut.radiative_transfer.legacy_disort import getmom, plkavg   # noqa: E402  (DISORT GETMOM / PLKAVG)
-from oraclut.cloud_temperature import cloud_temperature_model, emission_layers   # noqa: E402  (V25)
+from oraclut.cloud_temperature import cloud_vertical_profile_model, emission_layers   # noqa: E402  (V25)
 
 
 @contextlib.contextmanager
@@ -184,7 +184,7 @@ def _replicate_dual_view(inststr, srfstrarr, rt_arrays, optical_arrays):
 def _print_execution_configuration(
    *, forward_model, inststr, mmstr, mmfile, lutfile, lutstr, qm, atmospheres,
    gas_flag, rayleigh_flag, scat_only, nstreams, nmom, version,
-   srfstrarr, output, cloud_temperature_profile=None,
+   srfstrarr, output, cloud_vertical_profile=None,
 ):
    """Print the resolved configuration and loaded SRF counts for one task."""
 
@@ -211,10 +211,10 @@ def _print_execution_configuration(
       print("Legendre moments:     adaptive (King's criterion on each averaged Mie phase function)")
    else:
       print(f"Legendre moments:     {nmom} (fixed; Baum / T-matrix tabulated phase functions)")
-   if cloud_temperature_profile is not None:
-      print(f"Cloud temperature:    {cloud_temperature_profile}"
-            + (" (legacy: every in-cloud emission layer at 250 K)" if cloud_temperature_profile == "isothermal"
-               else " (V25: fixed 240 K cloud top, saturated adiabat below; details follow)"))
+   if cloud_vertical_profile is not None:
+      print(f"Cloud profile:        {cloud_vertical_profile}"
+            + (" (legacy: every in-cloud emission layer at 250 K)" if cloud_vertical_profile == "isothermal"
+               else " (V25: supplied vertically inhomogeneous profile at a 240 K cloud top; details follow)"))
    print(f"Output:               {output}")
    print("LUT dimensions:")
    print(f"  Optical depth:       {lutstr.opd_n}")
@@ -299,8 +299,8 @@ REQUIRED_RUN_KEYS = (
 # the Python generator up to c6ad545, and is now accepted only for Baum /
 # T-matrix (tabulated) classes.
 OPTIONAL_RUN_KEYS = {"gas": 0, "no_rayleigh": 0, "reuse_scat": 0, "scat_only": 0, "tmatrix_path": None, "nmom": None,
-                     "cloud_temperature_profile": "isothermal"}
-CLOUD_TEMPERATURE_PROFILES = ("isothermal", "adiabatic")        # legacy (up to V24); V25
+                     "cloud_vertical_profile": "isothermal"}
+CLOUD_VERTICAL_PROFILES = ("isothermal", "cirrostratus")        # legacy (up to V24); V25 (ice LUTs)
 
 
 def _check_legendre_configuration(mmstr, nmom):
@@ -367,11 +367,11 @@ def read_runfile(runfile):
       raise ValueError(f"{runfile}: forward_model must be 'cloud' or 'aerosol', got {run['forward_model']!r}")
    if str(run["atmospheres"]) not in ATMOSPHERE_FILES:
       raise ValueError(f"{runfile}: atmospheres must be a MODTRAN code 0-6, got {run['atmospheres']!r}")
-   if run["cloud_temperature_profile"] not in CLOUD_TEMPERATURE_PROFILES:
-      raise ValueError(f"{runfile}: cloud_temperature_profile must be one of {CLOUD_TEMPERATURE_PROFILES}, "
-                       f"got {run['cloud_temperature_profile']!r}")
-   if run["cloud_temperature_profile"] != "isothermal" and run["forward_model"] != "cloud":
-      raise ValueError(f"{runfile}: cloud_temperature_profile = {run['cloud_temperature_profile']!r} is defined "
+   if run["cloud_vertical_profile"] not in CLOUD_VERTICAL_PROFILES:
+      raise ValueError(f"{runfile}: cloud_vertical_profile must be one of {CLOUD_VERTICAL_PROFILES}, "
+                       f"got {run['cloud_vertical_profile']!r}")
+   if run["cloud_vertical_profile"] != "isothermal" and run["forward_model"] != "cloud":
+      raise ValueError(f"{runfile}: cloud_vertical_profile = {run['cloud_vertical_profile']!r} is defined "
                        "for the cloud forward model only")
    channels = run["channelid"]
    if not isinstance(channels, (list, tuple)) or not channels:
@@ -396,7 +396,7 @@ def read_runfile(runfile):
 def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmospheres,
                           channelid=None, gas=0, no_rayleigh=0, srf_quad=None, reuse_scat=0, scat_only=0,
                           tmatrix_path=None, version=None, driver=None, nstreams=60, nmom=None, work_path=None,
-                          cloud_temperature_profile="isothermal"):
+                          cloud_vertical_profile="isothermal"):
    """Generate an ORAC LUT with the cloud formulation (discrete particle layer).
 
    Arguments follow the IDL function; ``nstreams`` (60) is the value hard-wired
@@ -404,9 +404,10 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
    moments (1000, generate_scattering_properties.pro).  It is obsolete for Mie
    classes, whose expansion length comes from each averaged phase function,
    and is required only for Baum / T-matrix (tabulated) classes
-   (_check_legendre_configuration).  ``cloud_temperature_profile`` is
-   "isothermal" (the legacy emission calculation, up to V24) or "adiabatic"
-   (V25, module docstring item 5 and src/oraclut/cloud_temperature.py).
+   (_check_legendre_configuration).  ``cloud_vertical_profile`` is
+   "isothermal" (the legacy emission calculation, up to V24) or
+   "cirrostratus" (V25, ice LUTs only: module docstring item 5 and
+   src/oraclut/cloud_temperature.py).
    """
 
    # -----------------------------------------------------------------------------
@@ -533,11 +534,14 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
       lutfile=lutfile, lutstr=lutstr, qm=qm, atmospheres=atmospheres,
       gas_flag=gas_flag, rayleigh_flag=rayleigh_flag, scat_only=scat_only,
       nstreams=nstreams, nmom=nmom, version=version, srfstrarr=srfstrarr,
-      output=v2_lut_filename, cloud_temperature_profile=cloud_temperature_profile,
+      output=v2_lut_filename, cloud_vertical_profile=cloud_vertical_profile,
    )
-   if cloud_temperature_profile not in CLOUD_TEMPERATURE_PROFILES:
-      raise ValueError(f"cloud_temperature_profile must be one of {CLOUD_TEMPERATURE_PROFILES}, "
-                       f"got {cloud_temperature_profile!r}")
+   if cloud_vertical_profile not in CLOUD_VERTICAL_PROFILES:
+      raise ValueError(f"cloud_vertical_profile must be one of {CLOUD_VERTICAL_PROFILES}, "
+                       f"got {cloud_vertical_profile!r}")
+   if cloud_vertical_profile == "cirrostratus" and mmstr.substance.lower() != "water-ice":
+      raise ValueError(f"the cirrostratus vertical profile is an ice-cloud profile; it is not applied to the "
+                       f"substance {mmstr.substance!r} (no liquid-water profile has been supplied)")
 
    # Preserve legacy driver provenance only in private scratch.  A Python
    # ``runs/*.run`` file is the input configuration and must remain under
@@ -586,15 +590,15 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
    if scat_only:
       return 0
 
-   # V25: the cloud temperature profile of this LUT (None keeps the legacy
-   # isothermal emission calculation).  It depends on the substance and on the
-   # deepest optical depth of the grid only (not on the atmosphere or the
-   # cloud's position in it); the layer temperatures of each (optical depth,
-   # channel) emission call come from it below.
-   cloud_temperature = None
-   if cloud_temperature_profile == "adiabatic":
-      cloud_temperature = cloud_temperature_model(mmstr.substance, float(np.max(lutstr.opd)))
-      print("Cloud temperature:    " + cloud_temperature.describe())
+   # V25: the vertical cloud profile of this LUT (None keeps the legacy
+   # isothermal emission calculation).  It is the supplied profile set
+   # evaluated at the LUT's optical depths (it does not depend on the
+   # atmosphere or on the cloud's position in it); the layer temperatures of
+   # each (optical depth, channel) emission call come from it below.
+   cloud_profile = None
+   if cloud_vertical_profile != "isothermal":
+      cloud_profile = cloud_vertical_profile_model(cloud_vertical_profile, float(np.max(lutstr.opd)))
+      print("Cloud profile:        " + cloud_profile.describe())
 
    # We want the centre point of the SRF integration which, since the number of
    # points is odd, is at the centre of the channel's spectral interval.
@@ -773,7 +777,7 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
                   incloud = np.flatnonzero(tauscat > 0.0)
                   emnly = incloud.size
                   if emnly > 0:
-                     if cloud_temperature is None:
+                     if cloud_profile is None:
                         # Legacy (up to V24): every in-cloud layer and the normalising Planck
                         # radiance at one temperature, so E_md is independent of its value.
                         temp = 250.0
@@ -782,14 +786,14 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
                         empmo = np.asfortranarray(pmom[:, incloud])
                         emtemp = np.full(emnly + 1, temp, f32)
                      else:
-                        # V25: the cloud top at the reference temperature and the saturated
-                        # adiabat below it, on sub-layers of every in-cloud layer; the layer
-                        # positions follow the 0.55-um optical depth lutstr.opd[a] (the same
-                        # physical cloud for every channel).  E_md is normalised by B(T_top).
-                        temp = cloud_temperature.t_top_k
+                        # V25: the supplied vertical profile at the reference cloud-top temperature,
+                        # on equal-optical-depth sub-layers of every in-cloud layer; the layer
+                        # temperatures follow the 0.55-um optical depth lutstr.opd[a] (the same
+                        # cloud structure for every channel).  E_md is normalised by B(T_top).
+                        temp = cloud_profile.t_top_k
                         emtau, emssa, empmo, emtemp = emission_layers(
                            dtau[incloud], ssalb[incloud], pmom[:, incloud], scatreltau[incloud], lutstr.opd[a],
-                           cloud_temperature)
+                           cloud_profile)
                         emnly = emtau.size
                      emutau = np.asarray([0.0, np.sum(emtau, dtype=f32)], f32)
 
@@ -861,15 +865,15 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
    private_lut_filename = work_path / v2_lut_filename.name
    print("Info: Creating " + str(v2_lut_filename))
 
-   if cloud_temperature is None:
+   if cloud_profile is None:
       write_v2_lut(private_lut_filename, lutstr, inststr, srfstrarr, vavg, bextout, bextratout, ssaout, gout,
                    td, tfd, rd, rfd, rbd=rbd, rfbd=rfbd, tfbd=tfbd, tb=tb, em=em)
    else:
-      # V25: record the cloud temperature treatment; E_md (relative to the cloud-top
+      # V25: record the cloud profile treatment; E_md (relative to the cloud-top
       # Planck radiance) may exceed 1, so its valid range is no longer 0-1.
       write_v2_lut(private_lut_filename, lutstr, inststr, srfstrarr, vavg, bextout, bextratout, ssaout, gout,
                    td, tfd, rd, rfd, rbd=rbd, rfbd=rfbd, tfbd=tfbd, tb=tb, em=em,
-                   global_attributes=cloud_temperature.global_attributes(),
+                   global_attributes=cloud_profile.global_attributes(),
                    em_valid_range=(0.0, np.finfo(np.float32).max))
    _publish_lut(private_lut_filename, v2_lut_filename)
 
@@ -1349,7 +1353,7 @@ def run(runfile):
       generate = create_orac_aerosol_lut
    options = {}
    if settings["forward_model"] == "cloud":
-      options["cloud_temperature_profile"] = settings["cloud_temperature_profile"]
+      options["cloud_vertical_profile"] = settings["cloud_vertical_profile"]
    status = generate(in_path, settings["instfile"], settings["mmfile"], settings["lutfile"], out_path,
                      settings["atmospheres"],
                      channelid=settings["channelid"], gas=settings["gas"], no_rayleigh=settings["no_rayleigh"],

@@ -24,11 +24,12 @@ nstreams      = 60
 ; Baum / T-matrix (tabulated) microphysics, e.g.
 ;   nmom          = 1000
 
-; Cloud temperature profile of the thermal-emission calculation (cloud forward
+; Vertical cloud profile of the thermal-emission calculation (cloud forward
 ; model only): absent or 'isothermal' = the legacy isothermal cloud (up to V24);
-; 'adiabatic' = V25, a 240 K cloud top with the saturated adiabat below it
+; 'cirrostratus' = V25 for ice LUTs, a 240 K cloud top with the supplied
+; vertically inhomogeneous cirrostratus profile below it
 ; (create_orac_luts.py, "Versions and numerical changes" 5).
-;   cloud_temperature_profile = 'adiabatic'
+;   cloud_vertical_profile = 'cirrostratus'
 
 version       = 22
 out_path      = 'luts'

@@ -2,14 +2,21 @@
 # Submit the forty V25 cloud LUT production calculations.
 #
 # Usage, from an interactive AOPP host (atmlxint5 is the usual one):
-#   scripts/submit_v25_cloud_luts.sh [modis|slstr|all]             submit every incomplete product
-#   scripts/submit_v25_cloud_luts.sh --dry-run [modis|slstr|all]   report what would be submitted; submit nothing
+#   scripts/submit_v25_cloud_luts.sh [modis|slstr|all] [ice|liquid|both]   submit every incomplete product
+#   scripts/submit_v25_cloud_luts.sh --dry-run [modis|slstr|all] [ice|liquid|both]
+#                                                                  report what would be submitted; submit nothing
+# The second word restricts the submission to one phase family (default both):
+# the ice LUTs carry the V25 cirrostratus profile, the liquid-water LUTs keep
+# the legacy isothermal emission.
 #
 # V25 is the V24 product set (same platforms, models, channels, Grid B
-# sampling and numerics) computed with the adiabatic cloud temperature profile
-# recorded in create_orac_luts.py ("Versions and numerical changes" 5):
-# every run file sets cloud_temperature_profile = 'adiabatic' and version = 25
-# (runs/V25_PRODUCTION.md).  Products: Aqua and Terra MODIS and
+# sampling and numerics) computed with the supplied vertically inhomogeneous
+# cirrostratus cloud profile in the thermal emission of the ice LUTs
+# (create_orac_luts.py "Versions and numerical changes" 5): every ice run file
+# sets cloud_vertical_profile = 'cirrostratus', every liquid-water run file
+# keeps the legacy isothermal emission (cloud_vertical_profile =
+# 'isothermal'; no liquid-water profile has been supplied), and all set
+# version = 25 (runs/V25_PRODUCTION.md).  Products: Aqua and Terra MODIS and
 # Sentinel-3A/B SLSTR (dual view), each with six liquid-water models (liquid
 # water Grid B) and four ice models (ice Grid B).  The run files are
 #   runs/<platform>_<instrument>_cloud_<model>_v25.run
@@ -55,10 +62,12 @@ die() { echo "submit_v25_cloud_luts.sh: $*" >&2; exit 2; }
 
 dry_run=0
 selection="all"
+family_selection="both"
 for argument in "$@"; do
     case "$argument" in
         --dry-run) dry_run=1 ;;
         modis|slstr|all) selection="$argument" ;;
+        ice|liquid|both) family_selection="$argument" ;;
         -h|--help) sed -n '2,30p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//'; exit 0 ;;
         *) die "unknown argument: $argument" ;;
     esac
@@ -126,7 +135,10 @@ check_run() {
         [[ -z "$(run_value nmom "$run")" ]] || die "$run: nmom must not be set for a Mie class"
     fi
     [[ "$(run_value version "$run")" == "$VERSION" ]] || die "$run: version is not $VERSION"
-    [[ "$(run_value cloud_temperature_profile "$run")" == "adiabatic" ]] || die "$run: cloud_temperature_profile is not 'adiabatic' (V25)"
+    case "$model" in
+        water-ice_*)    [[ "$(run_value cloud_vertical_profile "$run")" == "cirrostratus" ]] || die "$run: cloud_vertical_profile is not 'cirrostratus' (V25 ice)" ;;
+        liquid-water_*) [[ "$(run_value cloud_vertical_profile "$run")" == "isothermal" ]] || die "$run: cloud_vertical_profile is not 'isothermal' (no liquid-water profile supplied)" ;;
+    esac
     [[ "$(run_value out_path "$run")" == "$LUT_DIR" ]] || die "$run: out_path is not $LUT_DIR"
 }
 
@@ -151,6 +163,10 @@ for instrument in "${instruments[@]}"; do
             case "$model" in
                 liquid-water_*) lutfile="liquid-water-cloud-grid-b.lut"; family="water" ;;
                 water-ice_*)    lutfile="ice-cloud-grid-b.lut";          family="ice" ;;
+            esac
+            case "$family_selection" in
+                ice)    [[ "$family" == "ice" ]] || continue ;;
+                liquid) [[ "$family" == "water" ]] || continue ;;
             esac
             substance="${model%%_*}"
             shortname="${model#*_}"
