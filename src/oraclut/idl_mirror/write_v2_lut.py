@@ -78,8 +78,15 @@ def _solar_uncertainty_variables(inststr, solar_index):
 
 
 def write_v2_lut(v2_lut_filename, lutstr, inststr, srfstrarr, vavg, bextout, bextratout, ssaout, gout,
-                 td, tfd, rd, rfd, rbd=None, rfbd=None, tfbd=None, tb=None, em=None, include_pressure=False):
-   """Write the V2 LUT file ``v2_lut_filename``."""
+                 td, tfd, rd, rfd, rbd=None, rfbd=None, tfbd=None, tb=None, em=None, include_pressure=False,
+                 global_attributes=None, em_valid_range=None):
+   """Write the V2 LUT file ``v2_lut_filename``.
+
+   ``global_attributes`` (none for the legacy product) are written as NetCDF
+   global attributes; ``em_valid_range`` replaces the legacy 0-1 valid range of
+   E_md (V25 adiabatic clouds, whose E_md is relative to the cloud-top Planck
+   radiance and may exceed 1).
+   """
 
    numberofsolarchannels = int(np.sum(inststr.solar_channel_flag))
    solar_channels_exist = numberofsolarchannels > 0
@@ -295,8 +302,9 @@ def write_v2_lut(v2_lut_filename, lutstr, inststr, srfstrarr, vavg, bextout, bex
       # em already holds the emissivity as a fraction (UU/BBE): no scale here
       define("E_md", np.asarray(em, dtype=np.float32)[thermal_index].T,
              ("satellite_zenith", "optical_depth", "effective_radius", *prs, "thermal_channels"),
-             long_name="diffuse emissivity", units="dimensionless", valid_range=unit_range)
+             long_name="diffuse emissivity", units="dimensionless",
+             valid_range=unit_range if em_valid_range is None else np.asarray(em_valid_range, dtype=np.float32))
 
    Path(v2_lut_filename).parent.mkdir(parents=True, exist_ok=True)
    ncdf_write_v2_lut(v2_lut_filename, lut_level=2, revision=0, dimensions=dimensions, variables=variables,
-                     variable_dimensions=dims, variable_attributes=attrs)
+                     variable_dimensions=dims, variable_attributes=attrs, global_attributes=global_attributes)
