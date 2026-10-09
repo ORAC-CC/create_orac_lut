@@ -1,0 +1,30 @@
+; Terra MODIS V23 cloud LUT production run: liquid-water_263, liquid-water Grid B.
+; One of the 20 definitive MODIS V23 cloud production runs (Aqua and Terra;
+; six liquid-water and four ice microphysical models).  Submit the whole set
+; with scripts/submit_v23_modis_cloud_luts.sh.
+;
+; Settings follow the legacy terra_modis_cloud.driver (atmosphere 2,
+; channels 1-36, no gas).  The product is written directly to the flat
+; permanent ORAC LUT directory as
+;   terra_modis_m_liquid-water_a01_p263_v23.nc
+
+platform      = 'terra'
+instrument    = 'modis'
+forward_model = 'cloud'
+
+in_path       = 'create_orac_lut/input_files'
+instfile      = 'terra_modis_v1.inst'
+mmfile        = 'liquid-water_263.mm'
+lutfile       = 'liquid-water-cloud-grid-b.lut'
+
+atmospheres   = 2
+channelid     = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]
+
+gas           = 0
+no_rayleigh   = 0
+srf_quad      = 1
+nstreams      = 60
+nmom          = 1000
+version       = 23
+
+out_path      = '/network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS'

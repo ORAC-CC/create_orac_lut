@@ -121,6 +121,13 @@ Never silently "improve" or modernise scientific behaviour while reproducing the
 
 ## Legacy code
 
+### IDL REFERENCE SOURCE — IMMUTABLE
+
+Existing IDL `.pro` files are the authoritative reference for the
+IDL-to-Python ORAC LUT port. Never modify existing IDL `.pro` files. If
+Python and IDL differ, modify Python or document the difference. New IDL
+diagnostics must be separate files under `validation/diagnostics/`.
+
 Treat the existing historical tree as read-only reference material until the Python implementation reproduces at least one complete legacy LUT.
 
 Do not rename, move, delete, reformat, or otherwise clean the legacy files merely for tidiness. Old `.pro`, `.bak`, versioned files, run scripts, DLM interfaces, DISORT sources, and other historical material may be required to reconstruct the operational workflow.

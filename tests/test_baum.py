@@ -18,6 +18,19 @@ BAUM_FILES = {
 
 
 @pytest.mark.parametrize("shortname", ["agg", "ghm", "src"])
+def test_baum_microphysics_resolves_legacy_repository_relative_table(shortname):
+   """The path stored in each legacy .mm file is relative to create_orac_lut/."""
+
+   mmstr = load_mmdat(INPUTS / "microphysics" / f"water-ice_{shortname}.mm", INPUTS)
+   assert mmstr.comptype == ["baum"]
+   table = BaumTable(mmstr.compname[0])
+   assert table.filename.samefile(BAUM_FILES[shortname])
+   assert table.wavelengths.size > 0
+   assert table.effective_radii.size > 0
+   assert table.phase_angles.size > 0
+
+
+@pytest.mark.parametrize("shortname", ["agg", "ghm", "src"])
 def test_baum_table_loads_and_interpolates_each_habit(shortname):
    table = BaumTable(BAUM_FILES[shortname])
    bext, albedo, asymmetry, phase = table.interpolate(
