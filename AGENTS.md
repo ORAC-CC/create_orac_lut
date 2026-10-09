@@ -241,6 +241,19 @@ Clearly distinguish:
 - spectral-response convolution;
 - channel-integrated LUT quantities.
 
+## LUT product format contract
+
+Every text attribute of an ORAC LUT NetCDF product must be NC_STRING: the
+retrieval reads the axis `spacing` attributes with `nc_get_att_string`, which
+rejects NC_CHAR, and the IDL-written tables use NC_STRING throughout.  Write
+text attributes only through the typed writer helper in `src/oraclut/io/v2.py`
+(never a bare `setncattr` with a `str`), keep the writer's C-library
+self-check, and run
+`python -m oraclut.repair_string_attributes --check` on products before
+release.  Existing products are repaired with the same utility, metadata only;
+numerical content is never regenerated to fix metadata.  See
+`LUT_FORMAT_CONTRACT.md`.
+
 ## Validation requirements
 
 Every substantial implementation change must be accompanied by validation.

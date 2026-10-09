@@ -57,3 +57,14 @@ of the source tree when the job started.
 
 The jobs execute this shared working tree. **Do not change production source
 until every job has started.**
+
+## NetCDF text-attribute repair (2026-10-09)
+
+The V24 products as written stored every text attribute as NC_CHAR, which
+ORAC's `nc_get_att_string` read of the axis `spacing` attributes rejects.  All
+40 V24 products were repaired, metadata only, with
+`python -m oraclut.repair_string_attributes` (data verified byte-identical;
+originals retained as hard links in
+`ORAC_LUTS/originals_before_nc_string_repair_20261009/`).  See
+`LUT_FORMAT_CONTRACT.md` and
+`validation/netcdf_string_attributes/REPORT_netcdf_string_attribute_repair.md`.

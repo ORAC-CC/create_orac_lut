@@ -8,6 +8,8 @@ from typing import Any, Mapping
 import numpy as np
 from netCDF4 import Dataset
 
+from .string_attributes import check_text_attributes_are_strings
+
 
 # Global dimension declaration order of the legacy V2 writer (write_v2_lut.pro,
 # ncdf_dimdef sequence). The pressure dimension, when present, is declared
@@ -38,6 +40,32 @@ def v2_dimension_order(dimensions: Mapping[str, int]) -> list[str]:
 
     known = [name for name in V2_DIMENSION_ORDER if name in dimensions]
     return known + [name for name in dimensions if name not in V2_DIMENSION_ORDER]
+
+
+def put_attribute(target: Any, name: str, value: Any) -> None:
+    """Write one attribute with an explicit NetCDF external type.
+
+    Text (``str``, or a sequence of ``str``) is written as NC_STRING through
+    ``setncattr_string`` (``nc_put_att_string``), which is the type the ORAC
+    reader requires for the axis ``spacing`` attributes and the type the
+    IDL-written tables use for every text attribute.  The netCDF4 package's
+    plain ``setncattr`` writes ``str`` as NC_CHAR, which ORAC's
+    ``nc_get_att_string`` rejects with NC_ECHAR; that default produced the
+    V22-V25 regression and is deliberately not used for text here.  Non-text
+    values are written through ``setncattr`` with their NumPy dtype.  ``bytes``
+    is refused so that no text reaches the file with an implicit type.
+    """
+
+    if isinstance(value, (bytes, bytearray)):
+        raise TypeError(f"attribute {name!r}: pass text as str, not bytes, so its NetCDF type is explicit")
+    if isinstance(value, str):
+        target.setncattr_string(name, value)
+    elif isinstance(value, np.ndarray) and value.dtype.kind in "US":
+        target.setncattr_string(name, [str(item) for item in value.ravel().tolist()])
+    elif isinstance(value, (list, tuple)) and value and all(isinstance(item, str) for item in value):
+        target.setncattr_string(name, list(value))
+    else:
+        target.setncattr(name, value)
 
 
 def write_v2_lut(
@@ -86,6 +114,9 @@ def write_v2_lut(
             variable_attrs = {**V2_COORDINATE_DEFAULTS.get(name, {}), **attrs.get(name, {})}
             for attribute, value in variable_attrs.items():
                 if attribute != "_FillValue":
-                    variable.setncattr(attribute, value)
+                    put_attribute(variable, attribute, value)
         for attribute, value in (global_attributes or {}).items():
-            dataset.setncattr(attribute, value)
+            put_attribute(dataset, attribute, value)
+    # Self-check with the NetCDF C library: every text attribute must be
+    # NC_STRING (the ORAC reader contract), independent of library defaults.
+    check_text_attributes_are_strings(output)

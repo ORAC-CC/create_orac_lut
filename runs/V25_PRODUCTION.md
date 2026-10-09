@@ -135,3 +135,18 @@ comparison, the forward-model (top-of-atmosphere) differences, the
 Nakajima–King comparisons, the layer convergence, the runtime and the
 production status. `validation/v25/check_products.py` checks finished
 products; `validation/v25/monitor_jobs.sh` shows job states.
+
+## NetCDF text-attribute repair (2026-10-09)
+
+The V25 products (and V23, V24) as written stored every text attribute as
+NC_CHAR, so ORAC's `nc_get_att_string` read of the axis `spacing` attributes
+failed with `ERROR: ncdf_get_string_att(): NetCDF: Attempt to convert between
+text & numbers`.  All 40 V25 products were repaired in place of their
+metadata only (`python -m oraclut.repair_string_attributes`): every text
+attribute is now NC_STRING, as in the IDL-written tables; dimensions,
+variables, storage layout and every data byte were verified unchanged, and the
+originals were retained as hard links in
+`ORAC_LUTS/originals_before_nc_string_repair_20261009/` until the repaired
+tables have been used in ORAC.  The writer now types text attributes
+explicitly and self-checks.  See `LUT_FORMAT_CONTRACT.md` and
+`validation/netcdf_string_attributes/REPORT_netcdf_string_attribute_repair.md`.
