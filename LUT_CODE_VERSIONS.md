@@ -116,10 +116,15 @@ with the repository consolidation; the 2026-09-21 working tree itself was
 never committed separately, and no earlier commit contains that generator
 (`5e5cc0f` and before hold only the configuration-driven `oraclut.generate`
 pipeline).  The identity of `9d663e9` with the V22 freeze was established
-numerically: campaign cases regenerated from a worktree at `9d663e9` are
-bitwise identical, variable for variable, to the archived V22 products
-(`validation/v22_recovery/results_regenerated_vs_archives.md`), and reproduce
-the archived V22-versus-IDL-V21 differences exactly.  The tag `lut-code-v22`
+numerically on 2026-10-09: thirteen campaign cases (five instruments, cloud
+and aerosol, SRF quadrature 1 and 2, one dual-view instrument) regenerated
+from a worktree at `9d663e9` are bitwise identical, variable for variable, to
+the archived V22 products in twelve cases and differ in the thirteenth by one
+float32 unit in the last place at two near-zero `R_dv` points (the documented
+DISORT compiler/node sensitivity); all thirteen reproduce the archived
+V22-versus-IDL-V21 differences exactly
+(`validation/v22_recovery/results_regenerated_vs_archives.md`,
+`validation/v22_recovery/REPORT_v22_recovery.md`).  The tag `lut-code-v22`
 therefore marks exact historical source recovery for the generator, its
 inputs and the legacy grids; the 2026-09-21 tree is not separately
 recoverable, which is why `lut-code-v22` and `lut-code-v23` name the same
