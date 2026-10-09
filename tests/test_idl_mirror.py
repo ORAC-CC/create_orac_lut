@@ -2,15 +2,12 @@
 
 Each IDL-mirroring routine in src/oraclut/idl_mirror is compared with the
 reader or kernel of the current validated implementation (src/oraclut/config,
-pipeline, optics) on the validated inputs, requiring identical values.  The
-liquid-water radius limit and the Legendre expansion of Mie classes are
-deliberate departures (2026-10): generate_scattering_properties is compared
-with the validated path with the IDL radius limits imposed and, for the
-moments, where the fixed expansion is converged (tests/test_legendre_expansion.py
-and tests/test_size_integration_limits.py cover the new behaviour).
+pipeline, optics) on the validated inputs, requiring identical values.  The two
+slow tests run create_orac_cloud_lut / create_orac_aerosol_lut on the compact
+validation grids and require every array of the product to be identical to the
+validated products captured in validation/generated/.
 """
 
-import importlib
 from pathlib import Path
 
 import numpy as np
@@ -24,6 +21,7 @@ from oraclut.idl_mirror import (
    read_dubovik_filenames, read_dubovik_grid, read_dubovik_kernel_kext,
    read_dubovik_kernel_scatt_matrix, segment,
 )
+from oraclut.io.lut import read_lut
 from oraclut.optics.legacy import _mie_distribution, legacy_stg_optics, legendre_moments
 from oraclut.pipeline import _atmosphere_path, _gas_levels, _interpolate_profile, read_channels
 from oraclut.radiative_transfer import call_disort as old_call_disort, getmom
@@ -33,7 +31,32 @@ ROOT = Path(__file__).parents[1]
 INPUTS = ROOT / "create_orac_lut" / "input_files"
 INST = INPUTS / "inst" / "meteosat-10_seviri_v1.inst"
 RUNS = ROOT / "runs"
-CONCRETE_RUNS = sorted(RUNS.glob("*.run"))
+
+
+def _accepted_run_files():
+   """Run files whose LUT version this source release produces (CODE_VERSION).
+
+   The historical production run files of other product versions (for
+   example runs/*_v24.run, runs/*_v25.run) stay in the repository as the
+   record of those campaigns; the generator refuses them by version and they
+   may use settings this release does not read, so they are not exercised here.
+   """
+
+   import re
+   from oraclut.version import read_code_version
+
+   code = read_code_version(ROOT / "CODE_VERSION")
+   accepted = []
+   for path in sorted(RUNS.glob("*.run")):
+      match = re.search(r"^\s*version\s*=\s*(\d+)", path.read_text(), re.MULTILINE)
+      if match and code.accepts(int(match.group(1))):
+         accepted.append(path)
+   return accepted
+
+
+CONCRETE_RUNS = _accepted_run_files()
+VALIDATED_CLOUD_CH1 = ROOT / "validation/generated/meteosat10_seviri_liquid_water_stg_cloud_test/python_legacy_equivalent_v21.nc"
+VALIDATED_AEROSOL_CH1 = ROOT / "validation/generated/aerosol_comparison/python/meteosat-10_seviri_m_aerosol_a12_pa79_v21.nc"
 
 
 def identical(a, b):
@@ -50,19 +73,16 @@ def test_template_and_validation_run_files_parse():
    for path in CONCRETE_RUNS:
       settings = create_orac_luts.read_runfile(path)
       assert settings["forward_model"] in ("cloud", "aerosol")
-      assert settings["srf_quad"] == 1 and settings["nstreams"] == 60
-      # nmom is the deprecated fixed expansion (legacy run files, or Baum / T-matrix)
-      assert settings["nmom"] in (None, 1000)
-   assert create_orac_luts.read_runfile(RUNS / "template.run")["nmom"] is None
+      assert settings["srf_quad"] == 1 and settings["nstreams"] == 60 and settings["nmom"] == 1000
    settings = create_orac_luts.read_runfile(RUNS / "meteosat-10_seviri_aerosol_a79_test_ch01_ch09.run")
    assert settings["channelid"] == [1, 9] and settings["gas"] == 1 and settings["lutfile"] == "aerosol_test.lut"
 
 
 def test_run_file_missing_required_setting_is_an_error(tmp_path):
-   text = (RUNS / "template.run").read_text().replace("nstreams      = 60", "")
+   text = (RUNS / "template.run").read_text().replace("nmom          = 1000", "")
    bad = tmp_path / "bad.run"
    bad.write_text(text)
-   with pytest.raises(ValueError, match="required settings missing: nstreams"):
+   with pytest.raises(ValueError, match="required settings missing: nmom"):
       create_orac_luts.read_runfile(bad)
 
 
@@ -428,65 +448,28 @@ def test_dubovik_branch_reports_a_missing_database(tmp_path):
                   tmatrix_path=tmp_path, eps=[1.0], neps=[1.0])
 
 
-@pytest.mark.slow
-def test_generate_scattering_properties_matches_the_validated_cloud_optics(monkeypatch):
+def test_generate_scattering_properties_matches_the_validated_cloud_optics():
    inststr = load_inststr(INST, requestedchannelid=[1, 9])
    lutstr = load_lutstr(INPUTS / "lut" / "liquid-water-cloud_test.lut", inststr.max_sat_zenith)
    srfstrarr, nwvl_max = load_srfstrarr(inststr, INPUTS / "sun" / "Gueymard2018.sssi", 1, INPUTS)
    mmstr = load_mmdat(INPUTS / "microphysics" / "liquid-water_stg.mm", INPUTS)
-   with pytest.raises(ValueError, match="nmom is obsolete for Mie"):
-      generate_scattering_properties(srfstrarr, nwvl_max, inststr, mmstr, lutstr, 1000)
-   # The validated path integrates liquid water over the IDL's fixed 0.001-100 um
-   # grid and expands it in a fixed number of moments.  Port check of the bulk
-   # optics (bitwise) and of the moments (where the fixed expansion is
-   # converged, radii 1-10 um) with the IDL radius limits and grid imposed:
-   gsp = importlib.import_module("oraclut.idl_mirror.generate_scattering_properties")
-   with monkeypatch.context() as patch:
-      patch.setattr(gsp, "radius_upper_factor", lambda mmstr, c: None)
-      patch.setattr(gsp, "refined_xres", lambda mmstr, c: None)
-      (lmom, bext550, w550, g550, phs550, amom550, bextrat, bext, w, g, vavg, phs, amom) = \
-         generate_scattering_properties(srfstrarr, nwvl_max, inststr, mmstr, lutstr, None)
+   nmom = 120
+   (nmom, bext550, w550, g550, phs550, amom550, bextrat, bext, w, g, vavg, phs, amom) = \
+      generate_scattering_properties(srfstrarr, nwvl_max, inststr, mmstr, lutstr, nmom)
+   # the validated optics, computed the old way
    wavelengths = np.asarray([0.55] + [float(s.wvl_centre) for s in srfstrarr])
    ri_wavelength, ri_real, ri_imaginary = read_refractive_index(INPUTS / "ri" / "H2O_Segelstein_1981.ri")
    real = np.interp(wavelengths, ri_wavelength, ri_real).astype(np.float32)
    imaginary = np.interp(wavelengths, ri_wavelength, ri_imaginary).astype(np.float32)
-   optics = legacy_stg_optics(lutstr.efr, wavelengths, real.astype(np.complex64) - 1j * imaginary.astype(np.complex64), phase_order=1000)
-   assert bext.shape == (1, 2, 3) and lmom.shape == (1, 2, 3) and amom.shape == (int(lmom.max()), 1, 2, 3)
+   optics = legacy_stg_optics(lutstr.efr, wavelengths, real.astype(np.complex64) - 1j * imaginary.astype(np.complex64), phase_order=nmom)
+   assert bext.shape == (1, 2, 3) and amom.shape == (nmom, 1, 2, 3)
    assert identical(bext550, optics.extinction_coefficient[:, 0].astype(np.float32))
    assert identical(bext[0].T, optics.extinction_coefficient[:, 1:].astype(np.float32))
    assert identical(bextrat[0].T, (optics.extinction_coefficient[:, 1:] / optics.reference_extinction_coefficient[:, None]).astype(np.float32))
    assert identical(w[0].T, optics.single_scatter_albedo[:, 1:].astype(np.float32))
    assert identical(g[0].T, optics.asymmetry_parameter[:, 1:].astype(np.float32))
    assert identical(vavg, optics.average_volume_per_particle.astype(np.float32))
-   fixed = np.transpose(optics.phase_moments[:, :, 1:], (0, 2, 1))       # (1000, channel, radius)
-   for l in range(2):
-      for r in range(3):
-         # With the 100 um integration the far tail leaves coefficients near the
-         # rounding-noise level up to the degree bound; when that noise exceeds
-         # King's 1e-9 the expansion conservatively keeps them (L <= D + 1).
-         length = int(lmom[0, l, r])
-         common = min(length, 1000)
-         assert length >= 10
-         assert np.allclose(amom[:common, 0, l, r], fixed[:common, l, r], rtol=0.0, atol=1e-7)
-         assert np.all(amom[length:, 0, l, r] == 0.0)
-         if length < 1000:
-            assert np.max(np.abs(fixed[length:, l, r] * (2.0 * np.arange(length, 1000) + 1.0))) < 1e-6
-         else:
-            assert np.max(np.abs(amom[1000:length, 0, l, r] * (2.0 * np.arange(1000, length) + 1.0))) < 1e-6
-   # Production radius limit (3.5 x effective radius) on the legacy spacing:
-   # only the removed tail changes the bulk optics.
-   with monkeypatch.context() as patch:
-      patch.setattr(gsp, "refined_xres", lambda mmstr, c: None)
-      limited = generate_scattering_properties(srfstrarr, nwvl_max, inststr, mmstr, lutstr, None)
-   assert np.allclose(limited[7], bext, rtol=1e-4, atol=0.0) and np.allclose(limited[1], bext550, rtol=1e-4, atol=0.0)
-   assert np.allclose(limited[8], w, rtol=0.0, atol=2e-5) and np.allclose(limited[9], g, rtol=0.0, atol=2e-5)
-   # Production (V24) also refines the radius grid: the change is the error of
-   # the legacy grid (up to 0.9% in extinction for r_e = 1 um in the thermal
-   # infrared, a few 1e-3 in w and g; validation/radius_grid/).
-   adopted = generate_scattering_properties(srfstrarr, nwvl_max, inststr, mmstr, lutstr, None)
-   assert not np.array_equal(adopted[7], limited[7])
-   assert np.allclose(adopted[7], bext, rtol=1.2e-2, atol=0.0) and np.allclose(adopted[1], bext550, rtol=1e-3, atol=0.0)
-   assert np.allclose(adopted[8], w, rtol=0.0, atol=4e-3) and np.allclose(adopted[9], g, rtol=0.0, atol=4e-3)
+   assert identical(np.transpose(amom[:, 0, :, :], (0, 2, 1)), optics.phase_moments[:, :, 1:].astype(np.float32))
 
 
 # ---------------------------------------------------------------------------
@@ -531,27 +514,36 @@ def test_call_disort_compression_and_kernel_match_the_validated_wrapper():
 
 
 # ---------------------------------------------------------------------------
-# end to end: which Legendre-expansion definition a LUT may use
+# end to end: the compact validation products must be identical
 # ---------------------------------------------------------------------------
-# The V21 compact validation products that this file previously required
-# bitwise were made with the IDL's fixed nmom = 1000 expansion and 0.001-100 um
-# liquid integration; they are reproduced with the source revision that made
-# them (9d663e9).  Current code refuses nmom for Mie classes; Baum / T-matrix
-# classes still need it.
 
-def test_mie_luts_refuse_the_fixed_nmom_expansion(tmp_path):
-   with pytest.raises(ValueError, match="nmom is obsolete for Mie"):
-      create_orac_luts.create_orac_cloud_lut(
-         INPUTS, "meteosat-10_seviri_v1.inst", "liquid-water_stg.mm", "liquid-water-cloud_test.lut", tmp_path, 2,
-         channelid=[1], srf_quad=1, version=21, nstreams=60, nmom=1000)
-   with pytest.raises(ValueError, match="nmom is obsolete for Mie"):
-      create_orac_luts.create_orac_aerosol_lut(
-         INPUTS, "meteosat-10_seviri_v1.inst", "aerosol_a79.mm", "aerosol_test.lut", tmp_path, 2,
-         channelid=[1], gas=1, srf_quad=1, version=21, nstreams=60, nmom=1000)
+def _assert_products_identical(new_path, validated_path):
+   new = read_lut(new_path)
+   old = read_lut(validated_path)
+   assert list(new.dimensions.items()) == list(old.dimensions.items())
+   assert new.variable_dimensions == old.variable_dimensions
+   assert new.variable_dtypes == old.variable_dtypes
+   for name in old.variable_names:
+      assert identical(new.variables[name], old.variables[name]), name
 
 
-def test_tabulated_baum_luts_still_require_nmom(tmp_path):
-   with pytest.raises(ValueError, match="nmom is required for Baum"):
-      create_orac_luts.create_orac_cloud_lut(
-         INPUTS, "earthcare_msi_v1.inst", "water-ice_agg.mm", "ice-cloud_test.lut", tmp_path, 2,
-         channelid=[1], srf_quad=1, version=None, nstreams=60, nmom=None)
+@pytest.mark.slow
+@pytest.mark.skipif(not VALIDATED_CLOUD_CH1.is_file(), reason="validated cloud product missing")
+def test_create_orac_cloud_lut_reproduces_the_validated_compact_product(tmp_path):
+   status = create_orac_luts.create_orac_cloud_lut(
+      INPUTS, "meteosat-10_seviri_v1.inst", "liquid-water_stg.mm", "liquid-water-cloud_test.lut", tmp_path, 2,
+      channelid=[1], srf_quad=1, version=21, nstreams=60, nmom=1000)
+   assert status == 0
+   _assert_products_identical(tmp_path / "meteosat-10_seviri_m_liquid-water_a01_pstg_v21.nc", VALIDATED_CLOUD_CH1)
+   assert not (tmp_path / "scatfile.npz").exists()
+   assert not (tmp_path / "timestamp.txt").exists()
+
+
+@pytest.mark.slow
+@pytest.mark.skipif(not VALIDATED_AEROSOL_CH1.is_file(), reason="validated aerosol product missing")
+def test_create_orac_aerosol_lut_reproduces_the_validated_compact_product(tmp_path):
+   status = create_orac_luts.create_orac_aerosol_lut(
+      INPUTS, "meteosat-10_seviri_v1.inst", "aerosol_a79.mm", "aerosol_test.lut", tmp_path, 2,
+      channelid=[1], gas=1, srf_quad=1, version=21, nstreams=60, nmom=1000)
+   assert status == 0
+   _assert_products_identical(tmp_path / "meteosat-10_seviri_m_aerosol_a12_pa79_v21.nc", VALIDATED_AEROSOL_CH1)

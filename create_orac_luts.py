@@ -35,67 +35,6 @@ Numerical results are those of the validated Python implementation
 Fortran sources.  Wherever the IDL expression has been simplified or reordered
 to keep the products bitwise identical to the validated ones, the IDL form is
 quoted in a comment beginning "IDL:".
-
-Versions and numerical changes.  Three things are recorded separately:
-
-1. LUT product / grid version (the run-file ``version``, e.g. V23).  It
-   identifies a product set and its grids (e.g. Grid B); it is not a
-   description of the source code.
-2. Microphysical numerical integration.  Up to source revision 9d663e9 (the
-   revision that produced the V23 reference LUTs) every Mie size distribution
-   was integrated over the IDL's fixed 0.001-100 um.  Since the 2026-10
-   integration-limit change, liquid-water modified-gamma components stop at
-   the first node of the same legacy radius lattice at or beyond
-   3.5 x effective radius (beyond 100 um when necessary); other components are
-   unchanged (generate_scattering_properties.radius_upper_factor).
-3. Legendre / moment calculation.  Up to source revision c6ad545 NMom = 1000
-   (the IDL's fixed value) was the Gauss-Legendre order, the number of
-   Legendre coefficients and the number of DISORT moments for every phase
-   function.  Since the 2026-10 Legendre change, each size-distribution-
-   averaged Mie phase function is sampled on a Gauss-Legendre order above its
-   polynomial-degree bound and keeps the expansion length L given by King's
-   criterion (Grainger 1990, section 4.5), accepted only if the series
-   reproduces the directly calculated phase function to six significant
-   figures; DISORT receives those L moments (padded to NSTR + 1).  Baum and
-   T-matrix (tabulated) classes keep the fixed nmom expansion: their Legendre
-   convergence is not solved (src/oraclut/idl_mirror/legendre_expansion.py).
-4. Radius integration grid.  Up to source revision dbcc42c every Mie size
-   distribution used the IDL's linear-radius trapezoid with a size-parameter
-   step of 0.4 (at least 200 nodes).  Since the V24 radius-grid change,
-   liquid-water and ice-sphere modified-gamma components divide every
-   interval of that grid into 2^k equal parts, with k the smallest level
-   giving a size-parameter step <= 0.025 (liquid water) or 0.05 (ice
-   spheres) and at least three nodes per area-weighted standard deviation of
-   the distribution (generate_scattering_properties.refined_xres,
-   create_bwgp.radius_refinement_level); limits and legacy nodes are
-   unchanged.  Log-normal (aerosol) components keep the legacy grid.  Saved
-   scattering caches carry RADIUS_GRID and older ones are refused on reuse.
-
-5. Cloud vertical profile (V25).  Up to V24 the thermal-emission DISORT
-   call gives every in-cloud layer one temperature (the IDL's 250 K), so the
-   emissivity E_md = UU / B(T) is that of an isothermal cloud and does not
-   depend on T.  With the run-file setting cloud_vertical_profile (absent or
-   'isothermal' keeps the legacy calculation) the cloud top stays at the
-   fixed reference temperature 240 K and the temperature varies below it:
-   'cirrostratus' (ice LUTs) takes the supplied vertically inhomogeneous
-   cirrostratus profile of P. Watts (OCA / EUMETSAT;
-   references/data/ocalut_cloudprofile_Cirrostratus.dat), the distribution
-   of the optical depth with depth below the cloud top and the temperature
-   departure 8 K/km x depth, the cloud depth 2-11 km depending on the total
-   optical depth, interpolated to the LUT optical-depth grid; 'wet_adiabat'
-   (liquid-water LUTs) follows the saturated liquid-water adiabat from the
-   reference state (240 K, 628 hPa) over the path length
-   z = tau_055 / 20 km^-1, without limit.  Both are remapped onto
-   equal-optical-depth emission layers; E_md stays normalised by B(240 K)
-   (src/oraclut/cloud_temperature.py).  Reflection and transmission operators
-   are unchanged; no LUT dimension is added.
-
-The V24 cloud LUTs are the V23 products and grids (Grid B) computed with
-changes 2-4 (runs/V24_PRODUCTION.md).  The V25 cloud LUTs are the V24
-products computed with change 5 (runs/V25_PRODUCTION.md).
-
-The exact source revision used for each validation comparison is recorded in
-validation/REPORT_lut_numerics_development.md.
 """
 
 import ast
@@ -112,23 +51,15 @@ from pathlib import Path
 import numpy as np
 
 REPO_ROOT = Path(__file__).resolve().parent
-# Identifier of the radius-integration scheme stored in scattering caches
-# (Versions and numerical changes, item 4).
-RADIUS_GRID = "nested-refinement-1"
-
 sys.path.insert(0, str(REPO_ROOT / "src"))
 
 from oraclut.idl_mirror import (   # noqa: E402  (import after sys.path is set)
    call_disort, generate_scattering_properties, interpol, load_atmstr, load_gasstr,
    load_inststr, load_lutstr, load_mmdat, load_srfstrarr, setup_disort, write_v2_lut,
 )
-from oraclut.idl_mirror.generate_scattering_properties import uses_adaptive_legendre   # noqa: E402
 from oraclut.radiative_transfer.legacy_disort import getmom, plkavg   # noqa: E402  (DISORT GETMOM / PLKAVG)
-from oraclut.cloud_temperature import PROFILE_SUBSTANCES, cloud_vertical_profile_model, emission_layers   # noqa: E402  (V25)
-import importlib   # noqa: E402
-create_bwgp_module = importlib.import_module("oraclut.idl_mirror.create_bwgp")   # the package exports the function of the same name
-from oraclut.provenance import build_record, write_provenance   # noqa: E402
-from oraclut.version import LutVersionMismatch, check_lut_version, print_banner   # noqa: E402
+from oraclut.provenance import build_record, write_provenance   # noqa: E402  (provenance sidecar)
+from oraclut.version import LutVersionMismatch, check_lut_version, print_banner   # noqa: E402  (code version)
 
 
 @contextlib.contextmanager
@@ -191,7 +122,7 @@ def _replicate_dual_view(inststr, srfstrarr, rt_arrays, optical_arrays):
 def _print_execution_configuration(
    *, forward_model, inststr, mmstr, mmfile, lutfile, lutstr, qm, atmospheres,
    gas_flag, rayleigh_flag, scat_only, nstreams, nmom, version,
-   srfstrarr, output, cloud_vertical_profile=None,
+   srfstrarr, output,
 ):
    """Print the resolved configuration and loaded SRF counts for one task."""
 
@@ -214,14 +145,7 @@ def _print_execution_configuration(
    print(f"Rayleigh scattering:  {'on' if rayleigh_flag else 'off'}")
    print(f"Scattering only:      {'yes' if scat_only else 'no'}")
    print(f"DISORT streams:       {nstreams}")
-   if nmom is None:
-      print("Legendre moments:     adaptive (King's criterion on each averaged Mie phase function)")
-   else:
-      print(f"Legendre moments:     {nmom} (fixed; Baum / T-matrix tabulated phase functions)")
-   if cloud_vertical_profile is not None:
-      print(f"Cloud profile:        {cloud_vertical_profile}"
-            + (" (legacy: every in-cloud emission layer at 250 K)" if cloud_vertical_profile == "isothermal"
-               else " (V25: vertically varying temperature below a 240 K cloud top; details follow)"))
+   print(f"Legendre moments:     {nmom}")
    print(f"Output:               {output}")
    print("LUT dimensions:")
    print(f"  Optical depth:       {lutstr.opd_n}")
@@ -292,14 +216,14 @@ def _scattering_cache_path(out_path, work_path, reuse_scat):
 
 def _record_provenance(lut_file, *, forward_model, in_path, instfile, mmfile, lutfile, atmfile, inststr, mmstr,
                        lutstr, qm, atmospheres, gas_flag, rayleigh_flag, scat_only, reuse_scat, nstreams, nmom,
-                       version, driver, tmatrix_path, cloud_vertical_profile=None, cloud_profile=None):
+                       version, driver, tmatrix_path):
    """Write ``<product>.provenance.json`` next to a published product (oraclut.provenance).
 
    Records the source release and Git commit, the configuration and input
    definition files with their SHA-256 digests, the LUT grid, the numerical
    integration and DISORT settings and the product's own digest.  The NetCDF
-   product is not touched.  A failure here is reported but does not undo a
-   successfully published product.
+   product is not touched and no calculation is affected.  A failure here is
+   reported but does not undo a successfully published product.
    """
 
    try:
@@ -312,12 +236,11 @@ def _record_provenance(lut_file, *, forward_model, in_path, instfile, mmfile, lu
             grid[name] = {"n": int(np.size(values)), "spacing": axis(name + "_spacing"), "values": np.asarray(values).tolist()}
       components = {"types": list(getattr(mmstr, "comptype", []) or []), "names": list(getattr(mmstr, "compname", []) or [])}
       numerics = {
-         "radius_grid": RADIUS_GRID,
-         "mie_radius_limits_um": [create_bwgp_module.MIE_RADIUS_LOWER, create_bwgp_module.MIE_RADIUS_UPPER],
-         "mie_size_parameter_step_legacy": create_bwgp_module.MIE_XRES,
-         "legendre_expansion": ("adaptive (King's criterion on each averaged Mie phase function)" if nmom is None
-                                else f"fixed, nmom = {int(nmom)}"),
-         "nmom": None if nmom is None else int(nmom),
+         # The V22 numerics are those of the IDL (create_bwgp.py / generate_scattering_properties.py).
+         "size_distribution_integration": "legacy IDL linear-radius trapezoid, 0.001-100 um, size-parameter step 0.4 "
+                                          "(create_bwgp.mie_size_dist_new, xres = 0.4, at least 200 nodes)",
+         "legendre_expansion": f"fixed, nmom = {int(nmom)} (IDL generate_scattering_properties)",
+         "nmom": int(nmom),
          "srf_quadrature": int(qm),
          "scattering_cache_reused": bool(reuse_scat),
       }
@@ -329,8 +252,7 @@ def _record_provenance(lut_file, *, forward_model, in_path, instfile, mmfile, lu
          "atmosphere_code": str(atmospheres),
          "atmosphere_file": str(atmfile),
          "scattering_only": bool(scat_only),
-         "cloud_vertical_profile": cloud_vertical_profile,
-         "cloud_profile_attributes": None if cloud_profile is None else cloud_profile.global_attributes(),
+         "cloud_emission": "isothermal cloud (legacy IDL)" if forward_model == "cloud" else None,
       }
       configuration = {
          "forward_model": forward_model,
@@ -366,28 +288,10 @@ def _record_provenance(lut_file, *, forward_model, in_path, instfile, mmfile, lu
 # Every key a run file must set; nothing is defaulted silently.
 REQUIRED_RUN_KEYS = (
    "platform", "instrument", "forward_model", "in_path", "instfile", "mmfile", "lutfile",
-   "atmospheres", "channelid", "srf_quad", "nstreams", "version", "out_path",
+   "atmospheres", "channelid", "srf_quad", "nstreams", "nmom", "version", "out_path",
 )
 # Keys with the IDL keyword defaults (not set = not present, as in IDL).
-# nmom is deprecated: it was the fixed Legendre expansion of the IDL and of
-# the Python generator up to c6ad545, and is now accepted only for Baum /
-# T-matrix (tabulated) classes.
-OPTIONAL_RUN_KEYS = {"gas": 0, "no_rayleigh": 0, "reuse_scat": 0, "scat_only": 0, "tmatrix_path": None, "nmom": None,
-                     "cloud_vertical_profile": "isothermal"}
-CLOUD_VERTICAL_PROFILES = ("isothermal", "cirrostratus", "wet_adiabat")   # legacy (up to V24); V25 ice; V25 liquid water
-
-
-def _check_legendre_configuration(mmstr, nmom):
-   """Mie classes use the adaptive expansion (nmom obsolete); tabulated classes need nmom."""
-
-   if not uses_adaptive_legendre(mmstr):
-      if nmom is None:
-         raise ValueError("nmom is required for Baum / T-matrix (tabulated) phase functions; their Legendre "
-                          "convergence is not covered by the adaptive Mie expansion")
-      return
-   if nmom is not None:
-      raise ValueError("nmom is obsolete for Mie size distributions: the Legendre expansion length is determined "
-                       "from each averaged phase function; remove nmom from the run file")
+OPTIONAL_RUN_KEYS = {"gas": 0, "no_rayleigh": 0, "reuse_scat": 0, "scat_only": 0, "tmatrix_path": None}
 
 # IDL create_orac_*_lut.pro: Case Atmospheres of ... (MODTRAN model codes)
 ATMOSPHERE_FILES = {
@@ -441,12 +345,6 @@ def read_runfile(runfile):
       raise ValueError(f"{runfile}: forward_model must be 'cloud' or 'aerosol', got {run['forward_model']!r}")
    if str(run["atmospheres"]) not in ATMOSPHERE_FILES:
       raise ValueError(f"{runfile}: atmospheres must be a MODTRAN code 0-6, got {run['atmospheres']!r}")
-   if run["cloud_vertical_profile"] not in CLOUD_VERTICAL_PROFILES:
-      raise ValueError(f"{runfile}: cloud_vertical_profile must be one of {CLOUD_VERTICAL_PROFILES}, "
-                       f"got {run['cloud_vertical_profile']!r}")
-   if run["cloud_vertical_profile"] != "isothermal" and run["forward_model"] != "cloud":
-      raise ValueError(f"{runfile}: cloud_vertical_profile = {run['cloud_vertical_profile']!r} is defined "
-                       "for the cloud forward model only")
    channels = run["channelid"]
    if not isinstance(channels, (list, tuple)) or not channels:
       raise ValueError(
@@ -469,19 +367,11 @@ def read_runfile(runfile):
 @_with_private_workdir
 def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmospheres,
                           channelid=None, gas=0, no_rayleigh=0, srf_quad=None, reuse_scat=0, scat_only=0,
-                          tmatrix_path=None, version=None, driver=None, nstreams=60, nmom=None, work_path=None,
-                          cloud_vertical_profile="isothermal"):
+                          tmatrix_path=None, version=None, driver=None, nstreams=60, nmom=1000, work_path=None):
    """Generate an ORAC LUT with the cloud formulation (discrete particle layer).
 
-   Arguments follow the IDL function; ``nstreams`` (60) is the value hard-wired
-   in the IDL setup_disort.  ``nmom`` was the IDL's fixed number of Legendre
-   moments (1000, generate_scattering_properties.pro).  It is obsolete for Mie
-   classes, whose expansion length comes from each averaged phase function,
-   and is required only for Baum / T-matrix (tabulated) classes
-   (_check_legendre_configuration).  ``cloud_vertical_profile`` is
-   "isothermal" (the legacy emission calculation, up to V24), "cirrostratus"
-   (V25, ice LUTs) or "wet_adiabat" (V25, liquid-water LUTs): module
-   docstring item 5 and src/oraclut/cloud_temperature.py.
+   Arguments follow the IDL function; ``nstreams`` (60) and ``nmom`` (1000) are
+   the values hard-wired in the IDL (setup_disort, generate_scattering_properties).
    """
 
    # -----------------------------------------------------------------------------
@@ -545,7 +435,6 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
 
    # **** Read the scattering parameters file
    mmstr = load_mmdat(mmdirfile, in_path)
-   _check_legendre_configuration(mmstr, nmom)
 
    # **** Read the atmospheric profile file
    atmstr = load_atmstr(atmdirfile, atmospheres)
@@ -608,14 +497,8 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
       lutfile=lutfile, lutstr=lutstr, qm=qm, atmospheres=atmospheres,
       gas_flag=gas_flag, rayleigh_flag=rayleigh_flag, scat_only=scat_only,
       nstreams=nstreams, nmom=nmom, version=version, srfstrarr=srfstrarr,
-      output=v2_lut_filename, cloud_vertical_profile=cloud_vertical_profile,
+      output=v2_lut_filename,
    )
-   if cloud_vertical_profile not in CLOUD_VERTICAL_PROFILES:
-      raise ValueError(f"cloud_vertical_profile must be one of {CLOUD_VERTICAL_PROFILES}, "
-                       f"got {cloud_vertical_profile!r}")
-   if cloud_vertical_profile != "isothermal" and mmstr.substance.lower() != PROFILE_SUBSTANCES[cloud_vertical_profile]:
-      raise ValueError(f"the {cloud_vertical_profile!r} vertical profile is defined for the substance "
-                       f"{PROFILE_SUBSTANCES[cloud_vertical_profile]!r}, not {mmstr.substance!r}")
 
    # Preserve legacy driver provenance only in private scratch.  A Python
    # ``runs/*.run`` file is the input configuration and must remain under
@@ -644,35 +527,19 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
    # supplied in out_path without modifying it.
    scatfile = _scattering_cache_path(out_path, work_path, reuse_scat)
    if not reuse_scat:
-      (lmom, bext550, w550, g550, phs550, amom550, bextrat, bext, w, g, vavg, phs, amom) = \
+      (nmom, bext550, w550, g550, phs550, amom550, bextrat, bext, w, g, vavg, phs, amom) = \
          generate_scattering_properties(srfstrarr, nwvl_max, inststr, mmstr, lutstr, nmom, tmatrix_path=tmatrix_path)
       # **** write the scattering parameters for the class as a whole for reuse
-      np.savez(scatfile, lmom=lmom, bext550=bext550, w550=w550, g550=g550, phs550=phs550, amom550=amom550,
-               bextrat=bextrat, bext=bext, w=w, g=g, vavg=vavg, phs=phs, amom=amom, radius_grid=RADIUS_GRID)
+      np.savez(scatfile, nmom=nmom, bext550=bext550, w550=w550, g550=g550, phs550=phs550, amom550=amom550,
+               bextrat=bextrat, bext=bext, w=w, g=g, vavg=vavg, phs=phs, amom=amom)
    else:
       # **** read the scattering parameters for the class as a whole for reuse
       with np.load(scatfile) as saved:
-         if "lmom" not in saved:
-            raise ValueError(f"{scatfile} holds fixed-nmom scattering properties from before the adaptive Legendre "
-                             "change; recalculate them")
-         if "radius_grid" not in saved or str(saved["radius_grid"]) != RADIUS_GRID:
-            raise ValueError(f"{scatfile} holds scattering properties from before the refined radius integration; "
-                             "recalculate them")
-         lmom = saved["lmom"]
+         nmom = int(saved["nmom"])
          bext550, w550, g550, phs550, amom550 = (saved[k] for k in ("bext550", "w550", "g550", "phs550", "amom550"))
          bextrat, bext, w, g, vavg, phs, amom = (saved[k] for k in ("bextrat", "bext", "w", "g", "vavg", "phs", "amom"))
    if scat_only:
       return 0
-
-   # V25: the vertical cloud profile of this LUT (None keeps the legacy
-   # isothermal emission calculation).  It is the supplied profile set
-   # evaluated at the LUT's optical depths (it does not depend on the
-   # atmosphere or on the cloud's position in it); the layer temperatures of
-   # each (optical depth, channel) emission call come from it below.
-   cloud_profile = None
-   if cloud_vertical_profile != "isothermal":
-      cloud_profile = cloud_vertical_profile_model(cloud_vertical_profile, float(np.max(lutstr.opd)))
-      print("Cloud profile:        " + cloud_profile.describe())
 
    # We want the centre point of the SRF integration which, since the number of
    # points is odd, is at the centre of the channel's spectral interval.
@@ -689,9 +556,8 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
    # Run DISORT
    # -----------------------------------------------------------------------------
 
-   # **** The variables needed for the DISORT calls are set up for each phase
-   #      function inside the loops below (setup_disort), because the number
-   #      of Legendre moments differs from one phase function to the next.
+   # **** Setup the variables needed for the DISORT calls ****
+   disort_vars = setup_disort(nstreams, nlayers, lutstr.saz_n, lutstr.raa_n, nmom)
 
    # **** Define the LUT table output variables themselves (IDL FLTARR(channels, efr, opd, ...))
    f32 = np.float32
@@ -722,9 +588,10 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
       columntauray = (atmstr.pressure[atmstr.nlevels - 1] / f32(1013.0)) / \
                      (f32(117.03) * wvl_centre ** f32(4.0) - f32(1.316) * wvl_centre ** f32(2.0))
 
-   # Molecular (Rayleigh) phase moments come from the DISORT GETMOM procedure
-   # (IDL: GETMOM, 2, 0.0, NMom-1 inside the layer loop), called below with the
-   # number of moments of each particle phase function.
+   # Molecular (Rayleigh) phase moments from the DISORT GETMOM procedure.  The
+   # IDL calls GETMOM, 2, 0.0, NMom-1 inside the layer loop; the result is the
+   # same every time, so it is evaluated once here.
+   rayleigh_pm = getmom(2, 0.0, nmom - 1)
 
    # Indices of the upwelling view directions in UU (IDL: UU[2*saz_n-lindgen(saz_n)-1, ...])
    up = slice(2 * lutstr.saz_n - 1, lutstr.saz_n - 1, -1)
@@ -779,21 +646,12 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
                # NOW USE THE GETMOM PROCEDURE (PART OF DISORT) TO GENERATE PHASE FUNCTION
                # MOMENTS FOR THE MOLECULAR SCATTERING AND COMBINE THEM WITH THE PARTICLE
                # MOMENTS GENERATED EARLIER, WEIGHTED BY SCATTERING OPTICAL DEPTH.
-               # The number of Legendre moments of this phase function (determined from
-               # the averaged phase function, generate_scattering_properties).  DISORT
-               # needs NMOM >= NSTR (delta-M uses PMOM(NSTR)), so a shorter expansion is
-               # padded with zero moments, below the termination threshold.
-               nlmom = max(int(lmom[m, l, r]), nstreams + 1)
-               disort_vars = setup_disort(nstreams, nlayers, lutstr.saz_n, lutstr.raa_n, nlmom)
-               rayleigh_pm = getmom(2, 0.0, nlmom - 1)
-               particle_pm = np.zeros(nlmom, f32)
-               particle_pm[:min(nlmom, amom.shape[0])] = amom[:min(nlmom, amom.shape[0]), m, l, r]
-               pmom = np.zeros((nlmom, nlayers), f32, order="F")
+               pmom = np.zeros((nmom, nlayers), f32, order="F")
                for h in range(nlayers):
                   if asym[h] == 0.0:
                      pm = rayleigh_pm                                          # Rayleigh scattering only
                   else:
-                     pm = (rayleigh_pm * tauray[h] + particle_pm * w[m, l, r] * tauscat[h]) / \
+                     pm = (rayleigh_pm * tauray[h] + amom[:, m, l, r] * w[m, l, r] * tauscat[h]) / \
                           (tauray[h] + w[m, l, r] * tauscat[h])
                      if np.any(pm > 1.0):
                         pm = pm.copy()
@@ -848,32 +706,18 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
                   wn = f32(1e4) / srfstrarr[l].wvl_centre
                   wnlo = f32(0.995) * wn
                   wnhi = f32(1.005) * wn
+                  temp = 250.0
                   incloud = np.flatnonzero(tauscat > 0.0)
                   emnly = incloud.size
                   if emnly > 0:
-                     if cloud_profile is None:
-                        # Legacy (up to V24): every in-cloud layer and the normalising Planck
-                        # radiance at one temperature, so E_md is independent of its value.
-                        temp = 250.0
-                        emtau = dtau[incloud]
-                        emssa = ssalb[incloud]
-                        empmo = np.asfortranarray(pmom[:, incloud])
-                        emtemp = np.full(emnly + 1, temp, f32)
-                     else:
-                        # V25: the supplied vertical profile at the reference cloud-top temperature,
-                        # on equal-optical-depth sub-layers of every in-cloud layer; the layer
-                        # temperatures follow the 0.55-um optical depth lutstr.opd[a] (the same
-                        # cloud structure for every channel).  E_md is normalised by B(T_top).
-                        temp = cloud_profile.t_top_k
-                        emtau, emssa, empmo, emtemp = emission_layers(
-                           dtau[incloud], ssalb[incloud], pmom[:, incloud], scatreltau[incloud], lutstr.opd[a],
-                           cloud_profile)
-                        emnly = emtau.size
+                     emtau = dtau[incloud]
+                     emssa = ssalb[incloud]
+                     empmo = np.asfortranarray(pmom[:, incloud])
                      emutau = np.asarray([0.0, np.sum(emtau, dtype=f32)], f32)
 
                      rfldir, rfldn, flup, dfdt, uavg, uu, albmed, trnmed = call_disort(
                         disort_vars, emtau, emssa, empmo, emutau, umu, lutstr.raa, fbeam, umu0, fisot,
-                        plank=True, wnlo=wnlo, wnhi=wnhi, temp=emtemp, nlayer=emnly)
+                        plank=True, wnlo=wnlo, wnhi=wnhi, temp=np.full(emnly + 1, temp, f32), nlayer=emnly)
                      # Now calculate the Planck emission across the wavelength interval.
                      bbe = plkavg(float(wnlo), float(wnhi), temp)
                      # Finally, combine to produce the emissivity.
@@ -939,23 +783,14 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
    private_lut_filename = work_path / v2_lut_filename.name
    print("Info: Creating " + str(v2_lut_filename))
 
-   if cloud_profile is None:
-      write_v2_lut(private_lut_filename, lutstr, inststr, srfstrarr, vavg, bextout, bextratout, ssaout, gout,
-                   td, tfd, rd, rfd, rbd=rbd, rfbd=rfbd, tfbd=tfbd, tb=tb, em=em)
-   else:
-      # V25: record the cloud profile treatment; E_md (relative to the cloud-top
-      # Planck radiance) may exceed 1, so its valid range is no longer 0-1.
-      write_v2_lut(private_lut_filename, lutstr, inststr, srfstrarr, vavg, bextout, bextratout, ssaout, gout,
-                   td, tfd, rd, rfd, rbd=rbd, rfbd=rfbd, tfbd=tfbd, tb=tb, em=em,
-                   global_attributes=cloud_profile.global_attributes(),
-                   em_valid_range=(0.0, np.finfo(np.float32).max))
+   write_v2_lut(private_lut_filename, lutstr, inststr, srfstrarr, vavg, bextout, bextratout, ssaout, gout,
+                td, tfd, rd, rfd, rbd=rbd, rfbd=rfbd, tfbd=tfbd, tb=tb, em=em)
    _publish_lut(private_lut_filename, v2_lut_filename)
    _record_provenance(v2_lut_filename, forward_model="cloud", in_path=in_path, instfile=instfile, mmfile=mmfile,
                       lutfile=lutfile, atmfile=atmfile, inststr=inststr, mmstr=mmstr, lutstr=lutstr, qm=qm,
                       atmospheres=atmospheres, gas_flag=gas_flag, rayleigh_flag=rayleigh_flag, scat_only=scat_only,
                       reuse_scat=reuse_scat, nstreams=nstreams, nmom=nmom, version=version, driver=driver,
-                      tmatrix_path=tmatrix_path, cloud_vertical_profile=cloud_vertical_profile,
-                      cloud_profile=cloud_profile)
+                      tmatrix_path=tmatrix_path)
 
    # -----------------------------------------------------------------------------
    # Output termination timestamp.
@@ -981,11 +816,8 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
 @_with_private_workdir
 def create_orac_aerosol_lut(in_path, instfile, mmfile, lutfile, out_path, atmospheres,
                             channelid=None, gas=0, no_rayleigh=0, srf_quad=None, reuse_scat=0, scat_only=0,
-                            tmatrix_path=None, version=None, driver=None, nstreams=60, nmom=None, work_path=None):
-   """Generate an ORAC LUT with the aerosol formulation (particles through the column).
-
-   Arguments as create_orac_cloud_lut (including the meaning of ``nmom``).
-   """
+                            tmatrix_path=None, version=None, driver=None, nstreams=60, nmom=1000, work_path=None):
+   """Generate an ORAC LUT with the aerosol formulation (particles through the column)."""
 
    # -----------------------------------------------------------------------------
    # Test input and output files and directories
@@ -1048,7 +880,6 @@ def create_orac_aerosol_lut(in_path, instfile, mmfile, lutfile, out_path, atmosp
 
    # **** Read the scattering parameters file
    mmstr = load_mmdat(mmdirfile, in_path)
-   _check_legendre_configuration(mmstr, nmom)
 
    # **** Read the atmospheric profile file
    atmstr = load_atmstr(atmdirfile, atmospheres)
@@ -1134,21 +965,15 @@ def create_orac_aerosol_lut(in_path, instfile, mmfile, lutfile, out_path, atmosp
    # -----------------------------------------------------------------------------
    scatfile = _scattering_cache_path(out_path, work_path, reuse_scat)
    if not reuse_scat:
-      (lmom, bext550, w550, g550, phs550, amom550, bextrat, bext, w, g, vavg, phs, amom) = \
+      (nmom, bext550, w550, g550, phs550, amom550, bextrat, bext, w, g, vavg, phs, amom) = \
          generate_scattering_properties(srfstrarr, nwvl_max, inststr, mmstr, lutstr, nmom, tmatrix_path=tmatrix_path)
       # **** write the scattering parameters for the class as a whole for reuse
-      np.savez(scatfile, lmom=lmom, bext550=bext550, w550=w550, g550=g550, phs550=phs550, amom550=amom550,
-               bextrat=bextrat, bext=bext, w=w, g=g, vavg=vavg, phs=phs, amom=amom, radius_grid=RADIUS_GRID)
+      np.savez(scatfile, nmom=nmom, bext550=bext550, w550=w550, g550=g550, phs550=phs550, amom550=amom550,
+               bextrat=bextrat, bext=bext, w=w, g=g, vavg=vavg, phs=phs, amom=amom)
    else:
       # **** read the scattering parameters for the class as a whole for reuse
       with np.load(scatfile) as saved:
-         if "lmom" not in saved:
-            raise ValueError(f"{scatfile} holds fixed-nmom scattering properties from before the adaptive Legendre "
-                             "change; recalculate them")
-         if "radius_grid" not in saved or str(saved["radius_grid"]) != RADIUS_GRID:
-            raise ValueError(f"{scatfile} holds scattering properties from before the refined radius integration; "
-                             "recalculate them")
-         lmom = saved["lmom"]
+         nmom = int(saved["nmom"])
          bext550, w550, g550, phs550, amom550 = (saved[k] for k in ("bext550", "w550", "g550", "phs550", "amom550"))
          bextrat, bext, w, g, vavg, phs, amom = (saved[k] for k in ("bextrat", "bext", "w", "g", "vavg", "phs", "amom"))
    if scat_only:
@@ -1168,9 +993,8 @@ def create_orac_aerosol_lut(in_path, instfile, mmfile, lutfile, out_path, atmosp
    # Run DISORT
    # -----------------------------------------------------------------------------
 
-   # **** The variables needed for the DISORT calls are set up for each phase
-   #      function inside the loops below (setup_disort), because the number
-   #      of Legendre moments differs from one phase function to the next.
+   # **** Setup the variables needed for the DISORT calls ****
+   disort_vars = setup_disort(nstreams, nlayers, lutstr.saz_n, lutstr.raa_n, nmom)
 
    # **** Define the LUT table output variables themselves (IDL FLTARR(channels, prs, efr, opd, ...))
    f32 = np.float32
@@ -1194,6 +1018,7 @@ def create_orac_aerosol_lut(in_path, instfile, mmfile, lutfile, out_path, atmosp
    #      channels that need it.
 
    wvl_centre = np.asarray([s.wvl_centre for s in srfstrarr], f32)
+   rayleigh_pm = getmom(2, 0.0, nmom - 1)             # molecular phase moments (constant; see cloud)
    up = slice(2 * lutstr.saz_n - 1, lutstr.saz_n - 1, -1)
 
    for l in range(inststr.number_of_nadir_channels):
@@ -1244,23 +1069,14 @@ def create_orac_aerosol_lut(in_path, instfile, mmfile, lutfile, out_path, atmosp
                   asym = np.zeros(nlayers, f32)
                   asym[tauscat > 0.0] = g[m, l, r]
 
-                  # The number of Legendre moments of this phase function (determined from
-                  # the averaged phase function, generate_scattering_properties).  DISORT
-                  # needs NMOM >= NSTR (delta-M uses PMOM(NSTR)), so a shorter expansion is
-                  # padded with zero moments, below the termination threshold.
-                  nlmom = max(int(lmom[m, l, r]), nstreams + 1)
-                  disort_vars = setup_disort(nstreams, nlayers, lutstr.saz_n, lutstr.raa_n, nlmom)
-                  rayleigh_pm = getmom(2, 0.0, nlmom - 1)
-                  particle_pm = np.zeros(nlmom, f32)
-                  particle_pm[:min(nlmom, amom.shape[0])] = amom[:min(nlmom, amom.shape[0]), m, l, r]
                   # Molecular and aerosol phase moments combined per layer
-                  pmom = np.zeros((nlmom, nlayers), f32, order="F")
+                  pmom = np.zeros((nmom, nlayers), f32, order="F")
                   for h in range(nlayers):
                      scattau = tauray[h] + w[m, l, r] * tauscat[h]
                      if asym[h] == 0.0 or scattau == 0.0:
                         pm = rayleigh_pm
                      else:
-                        pm = (rayleigh_pm * tauray[h] + particle_pm * w[m, l, r] * tauscat[h]) / scattau
+                        pm = (rayleigh_pm * tauray[h] + amom[:, m, l, r] * w[m, l, r] * tauscat[h]) / scattau
                         if np.any(pm > 1.0):
                            pm = pm.copy()
                            pm[pm > 1.0] = 1.0
@@ -1445,16 +1261,13 @@ def run(runfile):
       generate = create_orac_cloud_lut
    else:
       generate = create_orac_aerosol_lut
-   options = {}
-   if settings["forward_model"] == "cloud":
-      options["cloud_vertical_profile"] = settings["cloud_vertical_profile"]
    status = generate(in_path, settings["instfile"], settings["mmfile"], settings["lutfile"], out_path,
                      settings["atmospheres"],
                      channelid=settings["channelid"], gas=settings["gas"], no_rayleigh=settings["no_rayleigh"],
                      srf_quad=settings["srf_quad"], reuse_scat=settings["reuse_scat"], scat_only=settings["scat_only"],
                      tmatrix_path=settings["tmatrix_path"],
                      version=settings["version"], driver=runfile,
-                     nstreams=settings["nstreams"], nmom=settings["nmom"], **options)
+                     nstreams=settings["nstreams"], nmom=settings["nmom"])
    if status != 0:
       print("create_orac_lut failed with code: " + str(status))
    return status

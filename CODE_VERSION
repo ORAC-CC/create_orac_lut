@@ -16,8 +16,8 @@
 # scientific_config_description
 #                       one line describing that scheme.
 
-code_release = lut-code-v25.1
-lut_version = 25
-compatible_lut_versions = 24
-scientific_config = v25
-scientific_config_description = V24 numerics (liquid-water size integration to 3.5 effective radii, adaptive Legendre expansion of Mie phase functions, nested radius-integration refinement) plus the V25 cloud vertical temperature profiles in the thermal emission; the cloud_vertical_profile run-file setting absent or 'isothermal' gives the V24 calculation
+code_release = lut-code-v22.1
+lut_version = 22
+compatible_lut_versions = 21
+scientific_config = v22
+scientific_config_description = Python reproduction of the IDL V21 generator (lut-code-v22, 9d663e9): fixed 0.001-100 um Mie size integration on the legacy radius lattice (size-parameter step 0.4), fixed NMom = 1000 Legendre expansion, DISORT 60 streams, isothermal cloud emission, legacy product grids; version 21 is accepted only for the legacy-comparison run files whose products are compared with the IDL V21 tables

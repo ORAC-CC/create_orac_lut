@@ -66,7 +66,7 @@ def repo(tmp_path):
 def test_repository_code_version_is_valid_and_matches_a_release_tag_name():
     code = version.read_code_version(ROOT / "CODE_VERSION")
     assert version.RELEASE_TAG_PATTERN.match(code.code_release)
-    assert code.lut_version >= 25
+    assert code.lut_version >= 21
     assert code.lut_version not in code.compatible_lut_versions
     assert code.scientific_config and code.scientific_config_description
 
@@ -175,8 +175,9 @@ def test_check_lut_version_accepts_declared_and_compatible_versions_only():
     assert version.check_lut_version(code.lut_version, code) == code.lut_version
     for compatible in code.compatible_lut_versions:
         assert version.check_lut_version(compatible, code) == compatible
-    with pytest.raises(version.LutVersionMismatch, match="requests LUT version 22"):
-        version.check_lut_version(22, code, source="run file x.run")
+    foreign = next(v for v in range(1, 100) if not code.accepts(v))
+    with pytest.raises(version.LutVersionMismatch, match=f"requests LUT version {foreign}"):
+        version.check_lut_version(foreign, code, source="run file x.run")
     with pytest.raises(version.LutVersionMismatch, match="does not state the LUT version"):
         version.check_lut_version(None, code)
 

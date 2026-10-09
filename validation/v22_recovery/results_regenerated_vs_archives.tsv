@@ -1,14 +1,14 @@
-case	instrument	model	qm	regen_vs_archived_v22	regen_vs_idl_v21_worst_abs	archived_v22_vs_idl_v21_worst_abs	within_envelopes	same_as_archive
-000	aqua_modis	aerosol	1	51/52 bitwise	0.00293 (metadata), 2.38e-07 (optics), 8.81e-05 (operators)	0.00293, 2.38e-07, 8.81e-05	True	True
-002	aqua_modis	cloud	1	51/51 bitwise	0.00293 (metadata), 0.000427 (optics), 0.000842 (operators)	0.00293, 0.000427, 0.000842	True	True
-004	earthcare_msi	aerosol	1	52/52 bitwise	0.000671 (metadata), 1.79e-07 (optics), 8.72e-05 (operators)	0.000671, 1.79e-07, 8.72e-05	True	True
-006	earthcare_msi	cloud	1	51/51 bitwise	0.000671 (metadata), 0.00107 (optics), 0.00017 (operators)	0.000671, 0.00107, 0.00017	True	True
-007	earthcare_msi	cloud	2	51/51 bitwise	0.000671 (metadata), 3.05e-05 (optics), 0.00012 (operators)	0.000671, 3.05e-05, 0.00012	True	True
-032	meteosat-10_seviri	aerosol	1	52/52 bitwise	0.000977 (metadata), 2.98e-07 (optics), 0.000118 (operators)	0.000977, 2.98e-07, 0.000118	True	True
-033	meteosat-10_seviri	aerosol	2	52/52 bitwise	0.000977 (metadata), 5.96e-08 (optics), 0.000104 (operators)	0.000977, 5.96e-08, 0.000104	True	True
-034	meteosat-10_seviri	cloud	1	51/51 bitwise	0.000977 (metadata), 0.000397 (optics), 0.000126 (operators)	0.000977, 0.000397, 0.000126	True	True
-035	meteosat-10_seviri	cloud	2	51/51 bitwise	0.000977 (metadata), 4.58e-05 (optics), 0.000136 (operators)	0.000977, 4.58e-05, 0.000136	True	True
-062	noaa-20_viirs	cloud	1	51/51 bitwise	0.000977 (metadata), 0.00562 (optics), 0.000192 (operators)	0.000977, 0.00562, 0.000192	True	True
-063	noaa-20_viirs	cloud	2	51/51 bitwise	0.000977 (metadata), 0.000214 (optics), 9.89e-05 (operators)	0.000977, 0.000214, 9.89e-05	True	True
-086	sentinel-3a_slstr	cloud	1	53/53 bitwise	0.00488 (metadata), 0.000381 (optics), 0.000121 (operators)	0.00488, 0.000381, 0.000121	True	True
-087	sentinel-3a_slstr	cloud	2	53/53 bitwise	0.00488 (metadata), 0.000153 (optics), 0.000114 (operators)	0.00488, 0.000153, 0.000114	True	True
+case	instrument	model	qm	regen_vs_archived_v22	regen_vs_idl_v21_worst_abs	archived_v22_vs_idl_v21_worst_abs	within_envelopes	same_as_archive	attributes
+000	aqua_modis	aerosol	1	51/52 bitwise	0.00293 (metadata), 2.38e-07 (optics), 8.81e-05 (operators)	0.00293, 2.38e-07, 8.81e-05	True	True	names/values identical; 0 NC_CHAR->NC_STRING
+002	aqua_modis	cloud	1	51/51 bitwise	0.00293 (metadata), 0.000427 (optics), 0.000842 (operators)	0.00293, 0.000427, 0.000842	True	True	names/values identical; 0 NC_CHAR->NC_STRING
+004	earthcare_msi	aerosol	1	52/52 bitwise	0.000671 (metadata), 1.79e-07 (optics), 8.72e-05 (operators)	0.000671, 1.79e-07, 8.72e-05	True	True	names/values identical; 0 NC_CHAR->NC_STRING
+006	earthcare_msi	cloud	1	51/51 bitwise	0.000671 (metadata), 0.00107 (optics), 0.00017 (operators)	0.000671, 0.00107, 0.00017	True	True	names/values identical; 0 NC_CHAR->NC_STRING
+007	earthcare_msi	cloud	2	51/51 bitwise	0.000671 (metadata), 3.05e-05 (optics), 0.00012 (operators)	0.000671, 3.05e-05, 0.00012	True	True	names/values identical; 0 NC_CHAR->NC_STRING
+032	meteosat-10_seviri	aerosol	1	52/52 bitwise	0.000977 (metadata), 2.98e-07 (optics), 0.000118 (operators)	0.000977, 2.98e-07, 0.000118	True	True	names/values identical; 0 NC_CHAR->NC_STRING
+033	meteosat-10_seviri	aerosol	2	52/52 bitwise	0.000977 (metadata), 5.96e-08 (optics), 0.000104 (operators)	0.000977, 5.96e-08, 0.000104	True	True	names/values identical; 0 NC_CHAR->NC_STRING
+034	meteosat-10_seviri	cloud	1	51/51 bitwise	0.000977 (metadata), 0.000397 (optics), 0.000126 (operators)	0.000977, 0.000397, 0.000126	True	True	names/values identical; 0 NC_CHAR->NC_STRING
+035	meteosat-10_seviri	cloud	2	51/51 bitwise	0.000977 (metadata), 4.58e-05 (optics), 0.000136 (operators)	0.000977, 4.58e-05, 0.000136	True	True	names/values identical; 0 NC_CHAR->NC_STRING
+062	noaa-20_viirs	cloud	1	51/51 bitwise	0.000977 (metadata), 0.00562 (optics), 0.000192 (operators)	0.000977, 0.00562, 0.000192	True	True	names/values identical; 0 NC_CHAR->NC_STRING
+063	noaa-20_viirs	cloud	2	51/51 bitwise	0.000977 (metadata), 0.000214 (optics), 9.89e-05 (operators)	0.000977, 0.000214, 9.89e-05	True	True	names/values identical; 0 NC_CHAR->NC_STRING
+086	sentinel-3a_slstr	cloud	1	53/53 bitwise	0.00488 (metadata), 0.000381 (optics), 0.000121 (operators)	0.00488, 0.000381, 0.000121	True	True	names/values identical; 0 NC_CHAR->NC_STRING
+087	sentinel-3a_slstr	cloud	2	53/53 bitwise	0.00488 (metadata), 0.000153 (optics), 0.000114 (operators)	0.00488, 0.000153, 0.000114	True	True	names/values identical; 0 NC_CHAR->NC_STRING

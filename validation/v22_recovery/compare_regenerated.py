@@ -16,8 +16,12 @@ auto-masking disabled:
   metadata 0.0400390625, particle optics 0.0088958740234375, RT operators
   0.0008418560028076172, applied as in the original campaign.
 
-Read-only on every archive; writes ``results_regenerated_vs_archives.md`` and
-``.tsv`` next to this script.
+Attributes are compared too: names, order and values must agree with the
+archived V22 product; external types may differ only by NC_CHAR -> NC_STRING
+(the NetCDF repair of 2026-10-09, LUT_FORMAT_CONTRACT.md), which is reported.
+
+Read-only on every archive; writes ``<output-name>.md`` and ``.tsv`` next to
+this script (default ``results_regenerated_vs_archives``).
 """
 
 from __future__ import annotations
@@ -29,6 +33,9 @@ from pathlib import Path
 
 import numpy as np
 from netCDF4 import Dataset
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
+from oraclut.io import netcdf_c as nc   # noqa: E402
 
 HERE = Path(__file__).resolve().parent
 BACKUP = Path("/network/scratch/grainger/quota-relief/project-oraclut-bloated-backup")
@@ -49,6 +56,42 @@ def family(name: str) -> str:
     if name in METADATA:
         return "metadata"
     return "other"
+
+
+def attribute_rows(path: Path) -> list[tuple]:
+    """(variable, name, type, value) for every attribute, values via the C API."""
+
+    rows = []
+    with nc.open_file(path) as ncid:
+        for a in nc.list_attributes(path):
+            varid = nc.NC_GLOBAL if a.variable is None else nc.inq_varid(ncid, a.variable)
+            if a.xtype == nc.NC_CHAR:
+                value = nc.get_att_text(ncid, varid, a.name, a.length).decode("utf-8", "replace")
+            elif a.xtype == nc.NC_STRING:
+                value = "".join(nc.get_att_string(ncid, varid, a.name, a.length))
+            else:
+                value = nc.get_att_raw(ncid, varid, a.name, a.xtype, a.length)
+            rows.append((a.variable, a.name, a.xtype, value))
+    return rows
+
+
+def compare_attributes(regen: Path, archived: Path) -> dict:
+    """Names/order/values must match; count NC_CHAR->NC_STRING type changes and any other difference."""
+
+    ra, rb = attribute_rows(regen), attribute_rows(archived)
+    result = {"same_names": [(r[0], r[1]) for r in ra] == [(r[0], r[1]) for r in rb],
+              "char_to_string": 0, "other_differences": []}
+    if not result["same_names"]:
+        result["other_differences"].append("attribute names/order differ")
+        return result
+    for a, b in zip(ra, rb):
+        if a[2] == b[2] and a[3] == b[3]:
+            continue
+        if b[2] == nc.NC_CHAR and a[2] == nc.NC_STRING and a[3] == b[3]:
+            result["char_to_string"] += 1
+        else:
+            result["other_differences"].append(f"{a[0] or 'GLOBAL'}:{a[1]}")
+    return result
 
 
 def read_all(path: Path) -> dict[str, np.ndarray]:
@@ -94,15 +137,18 @@ def main(argv=None) -> int:
     parser.add_argument("regen_root", type=Path)
     parser.add_argument("--cases", default=None, help="comma-separated case ids (default: all regenerated)")
     parser.add_argument("--summary", type=Path, default=SUMMARY)
+    parser.add_argument("--output-name", default="results_regenerated_vs_archives",
+                        help="basename of the .md/.tsv written next to this script")
+    parser.add_argument("--title", default="Recovered V22 generator (9d663e9) against the archived V22 and IDL V21 campaign products")
     args = parser.parse_args(argv)
 
     cases = {c["case_id"]: c for c in json.loads(args.summary.read_text())["cases"]}
     wanted = args.cases.split(",") if args.cases else sorted(p.name[4:] for p in args.regen_root.glob("case*") if p.is_dir())
     rows = []
-    lines = ["# Recovered V22 generator (9d663e9) against the archived V22 and IDL V21 campaign products", "",
+    lines = [f"# {args.title}", "",
              f"Regenerated products: `{args.regen_root}`.  Archives: `{BACKUP}` (read-only).", "",
-             "| case | instrument | model | qm | regen vs archived V22 | regen vs IDL V21: worst abs (family) | archived V22 vs IDL V21: worst abs | envelopes | ",
-             "|---|---|---|---|---|---|---|---|"]
+             "| case | instrument | model | qm | regen vs archived V22 | regen vs IDL V21: worst abs (family) | archived V22 vs IDL V21: worst abs | envelopes | attributes vs archived V22 |",
+             "|---|---|---|---|---|---|---|---|---|"]
     all_bitwise = True
     for case_id in wanted:
         case = cases[case_id]
@@ -112,7 +158,7 @@ def main(argv=None) -> int:
         idl = BACKUP / case["idl_path"]
         if regen is None or not archived.exists() or not idl.exists():
             rows.append((case_id, "missing", "", "", "", ""))
-            lines.append(f"| {case_id} | {case['instrument']} | | | missing product | | | |")
+            lines.append(f"| {case_id} | {case['instrument']} | | | missing product | | | | |")
             continue
         r, a, i = read_all(regen), read_all(archived), read_all(idl)
         ra = compare(r, a)
@@ -130,21 +176,27 @@ def main(argv=None) -> int:
                 worst_ai[fam] = max(worst_ai.get(fam, 0.0), absd)
         within = all(worst_ri.get(fam, 0.0) <= limit for fam, limit in ENVELOPE.items())
         same_as_archive = all(abs(worst_ri.get(f, 0.0) - worst_ai.get(f, 0.0)) == 0.0 for f in ENVELOPE)
+        attrs = compare_attributes(regen, archived)
+        attr_text = (f"names/values identical; {attrs['char_to_string']} NC_CHAR->NC_STRING"
+                     if attrs["same_names"] and not attrs["other_differences"]
+                     else "DIFFER: " + ", ".join(attrs["other_differences"][:6]))
+        all_bitwise &= attrs["same_names"] and not attrs["other_differences"]
         ri_text = ", ".join(f"{worst_ri.get(f, 0.0):.3g} ({f})" for f in ("metadata", "optics", "operators"))
         ai_text = ", ".join(f"{worst_ai.get(f, 0.0):.3g}" for f in ("metadata", "optics", "operators"))
         rows.append((case_id, case["instrument"], case["forward_model"], case["qm"],
-                     f"{ra['bitwise']}/{ra['variables']} bitwise", ri_text, ai_text, within, same_as_archive))
+                     f"{ra['bitwise']}/{ra['variables']} bitwise", ri_text, ai_text, within, same_as_archive, attr_text))
         lines.append(f"| {case_id} | {case['instrument']} | {case['forward_model']} {case['microphysics']} | {case['qm']} | "
                      f"{'IDENTICAL' if bitwise else 'DIFFERS'} ({ra['bitwise']}/{ra['variables']} variables bitwise) | "
                      f"{ri_text} | {ai_text} | {'within' if within else 'EXCEEDED'}; "
-                     f"{'same as archive' if same_as_archive else 'differs from archive'} |")
-    lines += ["", f"All regenerated products bitwise identical to the archived V22 products: **{all_bitwise}**.",
+                     f"{'same as archive' if same_as_archive else 'differs from archive'} | {attr_text} |")
+    lines += ["", f"All regenerated products bitwise identical to the archived V22 products in every variable, "
+                  f"with attributes identical in name and value: **{all_bitwise}**.",
               "", "Envelopes: metadata 0.0400390625, optics 0.0088958740234375, operators 0.0008418560028076172 "
               "(V22_FREEZE.md).  'other' variables (channel ids, flags, grids, strings) are compared for identity only."]
-    (HERE / "results_regenerated_vs_archives.md").write_text("\n".join(lines) + "\n")
-    with open(HERE / "results_regenerated_vs_archives.tsv", "w") as handle:
+    (HERE / f"{args.output_name}.md").write_text("\n".join(lines) + "\n")
+    with open(HERE / f"{args.output_name}.tsv", "w") as handle:
         handle.write("case\tinstrument\tmodel\tqm\tregen_vs_archived_v22\tregen_vs_idl_v21_worst_abs\t"
-                     "archived_v22_vs_idl_v21_worst_abs\twithin_envelopes\tsame_as_archive\n")
+                     "archived_v22_vs_idl_v21_worst_abs\twithin_envelopes\tsame_as_archive\tattributes\n")
         for row in rows:
             handle.write("\t".join(str(x) for x in row) + "\n")
     print("\n".join(lines))

@@ -367,3 +367,60 @@ git ls-remote origin refs/heads/main refs/tags/lut-code-v22.1
 Expected end state: one branch `main`; V22 science; versioning retained;
 V21 reference material untouched; V23-V25 recoverable from their tags and
 preserved on GitHub; no LUT modified; no permanent experimental branch.
+
+## 15. Restoration performed (2026-10-09, approved by the owner)
+
+Preparatory commit `05b1978` "Track the validation source, reports and
+tabulated results": the blanket `/validation/` ignore was narrowed so that
+validation source, reports, grid/run definitions and small tables (173 files,
+3.6 MB) are versioned, while NetCDF products, NumPy arrays, figures, job logs
+(`validation/slurm` is a symlink to scratch), caches, pytest scratch and the
+large forward-model arrays of `validation/v24/results/disort_options/` stay on
+disk; `tests/test_nakajima_king.py` is now tracked and passes (6 tests).  The
+V25 release tag was not touched.
+
+Restoration, exactly as in section 14, on `main` by ordinary commits:
+
+- `git checkout lut-code-v22 -- create_orac_luts.py src/oraclut/idl_mirror/create_bwgp.py
+  src/oraclut/idl_mirror/generate_scattering_properties.py src/oraclut/idl_mirror/write_v2_lut.py
+  src/oraclut/master_run.py tests/test_idl_mirror.py`;
+- `git rm src/oraclut/idl_mirror/legendre_expansion.py src/oraclut/cloud_temperature.py
+  tests/test_cloud_temperature.py tests/test_legendre_expansion.py tests/test_radius_grid.py
+  tests/test_size_integration_limits.py`;
+- the version banner, the LUT-version check and the provenance hook were
+  re-applied to the restored `create_orac_luts.py`: `git diff lut-code-v22 --
+  create_orac_luts.py` adds 90 lines (two imports, `_record_provenance`, its
+  two calls after `_publish_lut`, the banner and check in `run()`) and changes
+  only the three lines of the `except` clause in `main()`; no scientific
+  statement differs from `9d663e9`.  The provenance record describes the V22
+  numerics (legacy lattice, fixed `nmom`, isothermal cloud);
+- `CODE_VERSION`: `code_release = lut-code-v22.1`, `lut_version = 22`,
+  `compatible_lut_versions = 21` (legacy-comparison run files only; justified
+  in `LUT_CODE_VERSIONS.md` section 2), `scientific_config = v22`;
+- `runs/template.run` restored to its V22 form (`nmom = 1000`, `version = 22`)
+  with the version note; `tests/test_idl_mirror.py` (V22 version) iterates
+  only the run files whose version the release accepts, because the V24/V25
+  run files remain in the tree as history and are not readable by the V22
+  reader (`nmom` missing, `cloud_vertical_profile` unknown); one assertion in
+  `tests/test_version.py` chose a foreign version dynamically instead of the
+  literal 22;
+- kept unchanged: `references/data/ocalut_cloudprofile_Cirrostratus.dat`
+  (historical V25 reference material), `runs/*_v23/24/25.run`, the V23-V25
+  submission scripts, `runs/V24_PRODUCTION.md`, `runs/V25_PRODUCTION.md`, the
+  NetCDF NC_STRING writer/repair (`src/oraclut/io/`), the versioning and
+  provenance modules, `src/oraclut/generate.py` hooks, `create_orac_lut/`, `mie/`.
+
+Verification of the restored tree (before the commit, hence `Working tree:
+MODIFIED` in the banners and provenance):
+
+| check | result |
+|---|---|
+| banner | `LUT version: 22`, `Code release: lut-code-v22.1`, `Scientific config: v22` |
+| version check | V23, V24 and V25 run files refused: V23 by version ("requests LUT version 23 ... produces LUT version 22 (compatible: 21)"), V24/V25 already by the V22 run-file reader (`nmom` missing / `cloud_vertical_profile` unknown) |
+| campaign cases regenerated from the restored tree (034, 035, 000, 004, 062, 086) vs archived V22 | bitwise identical in every variable (5 cases); case 000: 51/52, the same two one-ULP `R_dv` values as before; worst differences vs IDL V21 identical to the archived products; `results_restored_main_vs_archives.md` |
+| restored tree vs `9d663e9` worktree regenerations | bitwise identical data and dimensions in all six cases |
+| NC_STRING repair effect (requirement 2) | attribute names, order and values identical to the archived V22 products; the only differences are 84-88 NC_CHAR -> NC_STRING type changes per file; dimensions, coordinate grids and every data value unchanged; `python -m oraclut.repair_string_attributes --check`: 6 compliant |
+| provenance | one `.provenance.json` per product; `--verify` reports the commit, `lut_sha256_matches: true`, V22 numerics recorded |
+| tests | full non-slow suite: 284 passed, 13 skipped, 5 failed (the pre-existing missing historical files: `docs/idl_python_port_status.md`, `validation/reference_cases/...`, `validation/diagnostics/aerosol_legacy_provenance.pro`); slow V21-equivalence tests: 2 passed, 3 skipped (their reference products are not present on disk) |
+
+The V22.1 commit, tag and push are recorded at the end of this report.

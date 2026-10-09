@@ -1,0 +1,7 @@
+case	instrument	model	qm	regen_vs_archived_v22	regen_vs_idl_v21_worst_abs	archived_v22_vs_idl_v21_worst_abs	within_envelopes	same_as_archive	attributes
+000	aqua_modis	aerosol	1	51/52 bitwise	0.00293 (metadata), 2.38e-07 (optics), 8.81e-05 (operators)	0.00293, 2.38e-07, 8.81e-05	True	True	names/values identical; 87 NC_CHAR->NC_STRING
+004	earthcare_msi	aerosol	1	52/52 bitwise	0.000671 (metadata), 1.79e-07 (optics), 8.72e-05 (operators)	0.000671, 1.79e-07, 8.72e-05	True	True	names/values identical; 87 NC_CHAR->NC_STRING
+034	meteosat-10_seviri	cloud	1	51/51 bitwise	0.000977 (metadata), 0.000397 (optics), 0.000126 (operators)	0.000977, 0.000397, 0.000126	True	True	names/values identical; 84 NC_CHAR->NC_STRING
+035	meteosat-10_seviri	cloud	2	51/51 bitwise	0.000977 (metadata), 4.58e-05 (optics), 0.000136 (operators)	0.000977, 4.58e-05, 0.000136	True	True	names/values identical; 84 NC_CHAR->NC_STRING
+062	noaa-20_viirs	cloud	1	51/51 bitwise	0.000977 (metadata), 0.00562 (optics), 0.000192 (operators)	0.000977, 0.00562, 0.000192	True	True	names/values identical; 84 NC_CHAR->NC_STRING
+086	sentinel-3a_slstr	cloud	1	53/53 bitwise	0.00488 (metadata), 0.000381 (optics), 0.000121 (operators)	0.00488, 0.000381, 0.000121	True	True	names/values identical; 88 NC_CHAR->NC_STRING

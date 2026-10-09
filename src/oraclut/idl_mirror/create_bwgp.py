@@ -26,29 +26,6 @@ import numpy as np
 from ..optics.legacy_mie import mie_single_batch
 from .dubovik import dubovik_lognormal_multiple_eps
 
-# Radius limits (microns) and size-parameter step that create_bwgp passes to
-# mie_size_dist_new (IDL create_bwgp.pro: [Rm, S, 0.001, 100.0], xres=0.4).
-MIE_RADIUS_LOWER = 0.001
-MIE_RADIUS_UPPER = 100.0
-MIE_XRES = 0.4
-
-# Radius-integration refinement of modified-gamma (Mie) size distributions
-# (V24; validation/radius_grid/ and validation/REPORT_lut_numerics_development.md).
-# The legacy trapezoid spacing is 0.4 in size parameter, about two nodes per
-# period of the Mie ripple structure of water and ice (~0.8 in x), so the
-# averaged optics alias that structure and sample its narrow resonances
-# coarsely.  The refined grid divides each legacy interval into 2^k equal
-# parts (radius_refinement_level): every legacy node is kept, the limits are
-# unchanged, and k is the smallest level giving a size-parameter step of at
-# most refined_xres (chosen per class by the caller,
-# generate_scattering_properties.refined_xres) and at least
-# MIE_NODES_PER_SPREAD nodes per area-weighted standard deviation of the
-# distribution, re sqrt(ve).
-MIE_NODES_PER_SPREAD = 3.0
-# Radius nodes x angles evaluated by one Mie kernel call in mie_size_dist_new
-# (32 MB per float64 phase array), which bounds the memory of refined grids.
-MIE_BLOCK_ELEMENTS = 4_000_000
-
 
 def quadrature(quadtype, npts):
    """Abscissae and weights on [-1, 1]: 'T' trapezium or 'G' Gauss-Legendre.
@@ -87,16 +64,20 @@ def gauss_cvf(p):
    return -NormalDist().inv_cdf(p)
 
 
-def size_integration_limits(distname, params, wavenumber):
-   """Radius limits (rl, ru, truncated) of the mie_size_dist_new size integration.
+def mie_size_dist_new(distname, nd, params, wavenumber, cm, dqv, xres=0.1):
+   """Scattering parameters of a size distribution of spheres.
 
-   The IDL computes these inline in mie_size_dist_new.pro.  They are a
-   separate routine here so that the adaptive Legendre expansion uses exactly
-   the largest size parameter, 2 pi ru wavenumber, that the Mie integration
-   reaches (mie_integration_limits).
+   params: 'log_normal'     [mode radius Rm, spread S, -, -]
+           'modified_gamma' [effective radius, effective variance, Rl, Ru]
+   Returns (bext, bsca, w, g, spm, vavg) where spm[0, :] is F11 at cos(theta) = dqv
+   and vavg is the average volume per particle.  Nd is the number density (1).
    """
 
    ru_max = 10000.0
+   if np.imag(cm) > 0:
+      raise ValueError("mie_size_dist_new: imaginary part of the refractive index must be negative")
+
+   # Create vectors for size integration
    tq = gauss_cvf(0.999)
    if distname == "modified_gamma":
       rl = float(params[2])
@@ -109,45 +90,13 @@ def size_integration_limits(distname, params, wavenumber):
 
    if 2.0 * np.pi * rl * wavenumber >= ru_max:
       raise ValueError("Lower bound of integral is larger than maximum permitted size parameter.")
-   truncated = 2.0 * np.pi * ru * wavenumber >= ru_max
-   if truncated:
+   if 2.0 * np.pi * ru * wavenumber >= ru_max:
       ru = (ru_max - 1.0) / (2.0 * np.pi * wavenumber)
-   return rl, ru, truncated
-
-
-def mie_size_dist_new(distname, nd, params, wavenumber, cm, dqv, xres=0.1, npts=None):
-   """Scattering parameters of a size distribution of spheres.
-
-   params: 'log_normal'     [mode radius Rm, spread S, -, -]
-           'modified_gamma' [effective radius, effective variance, Rl, Ru]
-   Returns (bext, bsca, w, g, spm, vavg) where spm[0, :] is F11 at cos(theta) = dqv
-   and vavg is the average volume per particle.  Nd is the number density (1).
-
-   npts: number of trapezoid radius nodes on [Rl, Ru].  None (the IDL) uses
-   max(int(2 pi (Ru - Rl) wavenumber / xres), 200); create_bwgp passes it for
-   the liquid-water lattice limit (lattice_upper_radius) and for refined
-   grids (mie_integration_limits).
-
-   The Mie kernel is called on blocks of at most MIE_BLOCK_ELEMENTS radius
-   nodes x angles.  The per-node efficiencies do not depend on the block, and
-   the phase-function sum over nodes is accumulated in the order of the
-   single-call sum, so the result is bitwise that of one call.
-   """
-
-   if np.imag(cm) > 0:
-      raise ValueError("mie_size_dist_new: imaginary part of the refractive index must be negative")
-
-   # Create vectors for size integration
-   rl, ru, truncated = size_integration_limits(distname, params, wavenumber)
-   if truncated:
-      if npts is not None:
-         raise ValueError("mie_size_dist_new: an explicit node count cannot be combined with a truncated upper radius")
       print("Warning: Radius upper bound truncated to avoid size parameter overflow.")
 
    # Accurate calculation requires 0.1 step size in x but this can take an age
    # so limit to 200 (IDL: Npts = (long(2D0*!dpi*(ru-rl)*wavenumber/xres)) > 200)
-   if npts is None:
-      npts = max(int(2.0 * np.pi * (ru - rl) * wavenumber / xres), 200)
+   npts = max(int(2.0 * np.pi * (ru - rl) * wavenumber / xres), 200)
 
    # quadrature on the radii
    absc, wght = quadrature("T", npts)
@@ -173,24 +122,14 @@ def mie_size_dist_new(distname, nd, params, wavenumber, cm, dqv, xres=0.1, npts=
    # Single-particle Mie efficiencies and F11 at every radius: the preserved
    # Fortran kernel (IDL: Mie_dlm_single, Dx, DCm, Dqv=DDqv, Dqxt, Dqsc, Dqbk, Dg, ..., F11, ...)
    dqv = np.asarray(dqv, dtype=np.float64)
+   mie = mie_single_batch(dx, complex(cm), dqv)
+   dqxt = mie["qext"]
+   dqsc = mie["qsca"]
+   dg = mie["g"]
+   f11 = mie["f11"]                                    # (npts, inp)
+
    w1pa = w1p * np.pi * r ** 2                          # area weighted distribution
    w1pv = w1pa * (4.0 / 3.0) * r                        # IDL: W1PA * 4./3. * R  (volume weighted)
-
-   dqxt = np.empty(npts)
-   dqsc = np.empty(npts)
-   dg = np.empty(npts)
-   # sum over radius of W1PA * F11 * Dqsc; numpy reduces axis 0 node by node,
-   # so carrying the partial sum as the first row keeps the single-call order
-   phase_sum = np.zeros(dqv.size, dtype=np.float64)
-   block = max(1, MIE_BLOCK_ELEMENTS // dqv.size)
-   for start in range(0, npts, block):
-      sl = slice(start, min(start + block, npts))
-      mie = mie_single_batch(dx[sl], complex(cm), dqv)
-      dqxt[sl] = mie["qext"]
-      dqsc[sl] = mie["qsca"]
-      dg[sl] = mie["g"]
-      terms = w1pa[sl, None] * mie["f11"] * dqsc[sl, None]          # f11: (nodes, inp)
-      phase_sum = np.add.reduce(np.concatenate((phase_sum[None, :], terms)), axis=0) if start else np.sum(terms, axis=0)
 
    bext = float(np.sum(w1pa * dqxt))
    bsca = float(np.sum(w1pa * dqsc))
@@ -199,7 +138,7 @@ def mie_size_dist_new(distname, nd, params, wavenumber, cm, dqv, xres=0.1, npts=
 
    spm = np.zeros((4, dqv.size), dtype=np.float64)
    # IDL: SPM[0,i] = total(W1PA * DSPM[0,i,*] * Dqsc) / Bsca
-   spm[0, :] = phase_sum / bsca
+   spm[0, :] = np.sum(w1pa[:, None] * f11 * dqsc[:, None], axis=0) / bsca
    # F33, F12, F34 (spm[1:4]) are not needed for the scalar RT and are left zero.
 
    vavg = float(np.sum(w1pv))
@@ -240,82 +179,7 @@ def legpexp(inp, qv, qw, phase):
    return inlc, lc
 
 
-def lattice_upper_radius(rm, factor, wavenumber, xres=MIE_XRES):
-   """Upper radius and node count of a modified-gamma integration ending at factor * rm.
-
-   The legacy grid (IDL create_bwgp.pro / mie_size_dist_new.pro) is a
-   linear-radius trapezoid on [0.001, 100] um with
-   npts = max(int(2 pi (100 - 0.001) wavenumber / xres), 200) nodes.  Moving
-   its endpoint would move every node, and with xres = 0.4 (an under-resolved
-   grid, see radius_refinement_level) that changes the result by up to ~0.5% in
-   extinction and ~20% in the phase function even where the removed tail is
-   negligible.  The legacy spacing is
-   therefore kept and the grid stops at the first lattice node at or beyond
-   factor * rm (beyond 100 um when necessary), so the nodes up to 100 um are
-   those of the legacy grid and the change is the removed (or added) tail
-   alone (validation/size_distribution_limits/).
-   """
-
-   spacing = legacy_radius_spacing(wavenumber, xres)
-   intervals = int(math.ceil((factor * rm - MIE_RADIUS_LOWER) / spacing))
-   return MIE_RADIUS_LOWER + intervals * spacing, intervals + 1
-
-
-def legacy_radius_spacing(wavenumber, xres=MIE_XRES):
-   """Node spacing (um) of the legacy 0.001-100 um trapezoid grid at one wavenumber."""
-
-   reference_points = max(int(2.0 * np.pi * (MIE_RADIUS_UPPER - MIE_RADIUS_LOWER) * wavenumber / xres), 200)
-   return (MIE_RADIUS_UPPER - MIE_RADIUS_LOWER) / (reference_points - 1)
-
-
-def radius_refinement_level(spacing, wavenumber, rm, s, refined_xres):
-   """Refinement level k of a legacy grid of the given spacing (um) for a modified gamma (rm = re, s = ve).
-
-   The smallest k >= 0 for which the refined spacing h = spacing / 2^k gives
-   a size-parameter step 2 pi h wavenumber <= refined_xres and
-   h <= re sqrt(ve) / MIE_NODES_PER_SPREAD.  The legacy step exceeds its
-   nominal xres = 0.4 by up to 1% (integer node count), so both bounds are
-   applied with a 2% margin: the nominal 0.4 / 2^k counts as 0.4 / 2^k.
-   """
-
-   limit = min(refined_xres / (2.0 * np.pi * wavenumber), rm * math.sqrt(s) / MIE_NODES_PER_SPREAD)
-   level = 0
-   while spacing / 2**level > 1.02 * limit:
-      level += 1
-   return level
-
-
-def mie_integration_limits(distname, rm, s, wavenumber, radius_upper_factor=None, refined_xres=None):
-   """(params, npts) that create_bwgp passes to mie_size_dist_new at one wavenumber.
-
-   params = [rm, s, rl, ru] with the IDL limits [0.001, 100] um, or, for a
-   modified-gamma distribution with radius_upper_factor f, the legacy lattice
-   ending at the first node >= f * rm (lattice_upper_radius), which also sets
-   npts.  size_integration_limits(distname, params, wavenumber) then gives
-   the radii actually integrated (for log-normal distributions it replaces
-   rl and ru by the mode's quantile limits).
-
-   refined_xres (modified gamma only; None keeps the legacy grid): divide
-   every interval of that legacy grid into 2^k (radius_refinement_level), so
-   npts = (n - 1) 2^k + 1 for the legacy n; the limits and the legacy nodes
-   are unchanged.
-   """
-
-   # IDL: mie_size_dist_new, distname, 1.0, [Rm, S, 0.001, 100.0], ..., xres=0.4
-   if distname == "modified_gamma" and radius_upper_factor is not None:
-      upper, npts = lattice_upper_radius(rm, radius_upper_factor, wavenumber)
-   else:
-      upper, npts = MIE_RADIUS_UPPER, None
-   if distname == "modified_gamma" and refined_xres is not None:
-      if npts is None:                                 # the IDL node count of mie_size_dist_new
-         npts = max(int(2.0 * np.pi * (upper - MIE_RADIUS_LOWER) * wavenumber / MIE_XRES), 200)
-      level = radius_refinement_level((upper - MIE_RADIUS_LOWER) / (npts - 1), wavenumber, rm, s, refined_xres)
-      npts = (npts - 1) * 2**level + 1
-   return [rm, s, MIE_RADIUS_LOWER, upper], npts
-
-
-def create_bwgp(distname, rm, s, ri, wl, dqv, scode="mie", tmatrix_path=None, eps=None, neps=None,
-                radius_upper_factor=None, refined_xres=None):
+def create_bwgp(distname, rm, s, ri, wl, dqv, scode="mie", tmatrix_path=None, eps=None, neps=None):
    """Bulk extinction, single-scattering albedo, asymmetry and phase function.
 
    For each wavelength wl[i] (with refractive index ri[i]) the Mie size
@@ -323,14 +187,6 @@ def create_bwgp(distname, rm, s, ri, wl, dqv, scode="mie", tmatrix_path=None, ep
    cos(theta) = dqv) are returned, plus Vavg (average volume per particle,
    from the last wavelength; called with the single 0.55 micron reference
    wavelength when Vavg is wanted).
-
-   radius_upper_factor: None keeps the IDL radius limits [0.001, 100] um.  For
-   a modified-gamma distribution a number f integrates up to the first
-   legacy-lattice node at or beyond f * rm (lattice_upper_radius); it is
-   ignored for log-normal distributions, whose limits mie_size_dist_new
-   derives from the mode.  refined_xres: None keeps the legacy node spacing;
-   a size-parameter step refines it for a modified-gamma distribution
-   (mie_integration_limits, radius_refinement_level).
    """
 
    wl = np.atleast_1d(np.asarray(wl, dtype=np.float64))
@@ -372,9 +228,8 @@ def create_bwgp(distname, rm, s, ri, wl, dqv, scode="mie", tmatrix_path=None, ep
          else:
             # The legacy wrapper uses Mie for zero/long-wave points and for
             # thermal channels (wl >= 6 micron), even for a T-matrix component.
-            params, npts = mie_integration_limits(distname, rm, s, wn[i], radius_upper_factor, refined_xres)
             bexttmp, bscatmp, wtmp, gtmp, spm, vavgtmp = mie_size_dist_new(
-               distname, 1.0, params, wn[i], ri[i], dqv, xres=MIE_XRES, npts=npts)
+               distname, 1.0, [rm, s, 0.001, 100.0], wn[i], ri[i], dqv, xres=0.4)
             phi[:, i] = spm[0, :]
             vavg = vavgtmp
          bext[i] = bexttmp
