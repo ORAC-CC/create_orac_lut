@@ -18,6 +18,8 @@ import sys
 
 from .config import read_driver, read_instrument, read_lut_grid, read_microphysics, reference_configuration
 from .pipeline import generate_aerosol, generate_cloud, read_channels, write_generation
+from .provenance import build_record, write_provenance
+from .version import LutVersionMismatch, check_lut_version, print_banner
 
 
 INPUT_ROOT = Path("create_orac_lut") / "input_files"
@@ -565,7 +567,14 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     try:
         config = resolve_configuration(args)
+        # Identify the source (CODE_VERSION + Git) before anything else.  A
+        # dry run only reports; a real run must request a LUT version this
+        # source release produces (oraclut.version.check_lut_version).
+        summary = print_banner(lut_version=config.revision, generator="oraclut.generate (configuration file)")
         _print_summary(config)
+        if not args.dry_run:
+            check_lut_version(config.revision, summary.code,
+                              source=f"configuration {config.config_path or 'command line'}")
         if args.dry_run:
             if config.output_path.exists():
                 sys.stdout.flush()
@@ -601,10 +610,43 @@ def main(argv: list[str] | None = None) -> int:
         )
         print(f"wrote {config.output_path}")
         print(f"dimensions: {result.dimensions}")
+        _write_generation_provenance(config, result)
         return 0
-    except (FileExistsError, FileNotFoundError, NotImplementedError, ValueError) as exc:
+    except (FileExistsError, FileNotFoundError, NotImplementedError, ValueError, LutVersionMismatch) as exc:
         parser.error(str(exc))
     return 2
+
+
+def _write_generation_provenance(config: ResolvedConfiguration, result) -> None:
+    """Provenance sidecar for a product of this configuration-driven path (oraclut.provenance)."""
+
+    grid = config.grid
+    axes = {}
+    for name in ("optical_depth", "effective_radius", "satellite_zenith", "solar_zenith", "relative_azimuth",
+                 "surface_pressure"):
+        values = getattr(grid, name, None)
+        if values is not None:
+            axes[name] = {"n": len(values), "values": [float(v) for v in values]}
+    try:
+        record = build_record(
+            config.output_path, generator="oraclut.generate (development pipeline, oraclut.pipeline)",
+            lut_version=config.revision,
+            configuration={"forward_model": config.forward_model, "channels": list(config.channels),
+                           "atmosphere_code": config.atmosphere, "srf_quad": config.srf_quad,
+                           "rayleigh": config.rayleigh, "gas": config.gas, "lut_level": config.lut_level,
+                           "instrument": str(config.instrument_path.name), "microphysics": str(config.microphysics_path.name)},
+            configuration_file=config.config_path,
+            input_files={"instrument": config.instrument_path, "microphysics": config.microphysics_path,
+                         "lut_definition": config.lut_path},
+            grid={"definition_file": config.lut_path.name, **axes, "dimensions": dict(result.dimensions)},
+            numerics={"phase_order": config.phase_order, "srf_quadrature": config.srf_quad,
+                      "note": "legacy-reproduction pipeline (oraclut.optics, fixed Legendre order)"},
+            radiative_transfer={"solver": "DISORT (oraclut.radiative_transfer.legacy_disort)",
+                                "nstreams": config.streams, "rayleigh": config.rayleigh, "gas": config.gas,
+                                "atmosphere_code": config.atmosphere})
+        print(f"provenance record: {write_provenance(config.output_path, record)}")
+    except Exception as exc:   # the product is already written; report, do not hide it
+        print(f"WARNING: provenance record for {config.output_path} could not be written: {exc}", file=sys.stderr)
 
 
 def prepare_reference(repository_root: str | Path) -> None:

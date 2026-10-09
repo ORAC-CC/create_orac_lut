@@ -248,6 +248,21 @@ Clearly distinguish:
 - spectral-response convolution;
 - channel-integrated LUT quantities.
 
+## Code versions, releases and provenance
+
+`CODE_VERSION` at the repository root is the single authoritative definition
+of the source release (`code_release`, an annotated tag `lut-code-v<n>[.<m>]`),
+the LUT product version it produces and the scientific configuration; do not
+hard-code version numbers elsewhere.  The generator prints the version banner
+(release, commit, working-tree status) at start-up, refuses a run file whose
+`version` the release does not produce, and writes a
+`<product>.provenance.json` sidecar next to every LUT.  Keep these in place.
+A new scientific version is released by updating `CODE_VERSION`, committing
+on `main`, tagging with `scripts/tag_lut_code_release.sh` and pushing commit
+and tag; historical releases are inspected in temporary worktrees, never by
+resetting `main`, rewriting history or keeping duplicate source trees.  See
+`LUT_CODE_VERSIONS.md`.
+
 ## LUT product format contract
 
 Every text attribute of an ORAC LUT NetCDF product must be NC_STRING: the

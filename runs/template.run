@@ -33,5 +33,9 @@ nstreams      = 60
 ; (create_orac_luts.py, "Versions and numerical changes" 5).
 ;   cloud_vertical_profile = 'cirrostratus'
 
-version       = 22
+; LUT product version.  It must be the version this source release produces
+; (CODE_VERSION: lut_version, or one of compatible_lut_versions); the
+; generator prints its version summary at start-up and refuses any other
+; value (LUT_CODE_VERSIONS.md).
+version       = 25
 out_path      = 'luts'

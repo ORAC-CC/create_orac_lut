@@ -1,0 +1,23 @@
+# Authoritative version definition of the ORAC LUT generator.
+#
+# Read by src/oraclut/version.py and printed at the start of every LUT
+# calculation; see LUT_CODE_VERSIONS.md for the meaning of each field and the
+# release procedure.  One "name = value" assignment per line.
+#
+# code_release          the annotated Git tag of this source release.  A
+#                       working tree whose HEAD is not that tag, or that has
+#                       uncommitted changes, reports itself accordingly.
+# lut_version           the LUT product version this release produces.
+# compatible_lut_versions
+#                       other product versions this release may be asked to
+#                       produce (space separated; may be empty).  Each entry
+#                       must be justified in LUT_CODE_VERSIONS.md.
+# scientific_config     short identifier of the scientific/numerical scheme.
+# scientific_config_description
+#                       one line describing that scheme.
+
+code_release = lut-code-v25.1
+lut_version = 25
+compatible_lut_versions = 24
+scientific_config = v25
+scientific_config_description = V24 numerics (liquid-water size integration to 3.5 effective radii, adaptive Legendre expansion of Mie phase functions, nested radius-integration refinement) plus the V25 cloud vertical temperature profiles in the thermal emission; the cloud_vertical_profile run-file setting absent or 'isothermal' gives the V24 calculation

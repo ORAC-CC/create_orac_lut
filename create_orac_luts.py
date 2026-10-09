@@ -125,6 +125,10 @@ from oraclut.idl_mirror import (   # noqa: E402  (import after sys.path is set)
 from oraclut.idl_mirror.generate_scattering_properties import uses_adaptive_legendre   # noqa: E402
 from oraclut.radiative_transfer.legacy_disort import getmom, plkavg   # noqa: E402  (DISORT GETMOM / PLKAVG)
 from oraclut.cloud_temperature import PROFILE_SUBSTANCES, cloud_vertical_profile_model, emission_layers   # noqa: E402  (V25)
+import importlib   # noqa: E402
+create_bwgp_module = importlib.import_module("oraclut.idl_mirror.create_bwgp")   # the package exports the function of the same name
+from oraclut.provenance import build_record, write_provenance   # noqa: E402
+from oraclut.version import LutVersionMismatch, check_lut_version, print_banner   # noqa: E402
 
 
 @contextlib.contextmanager
@@ -284,6 +288,73 @@ def _scattering_cache_path(out_path, work_path, reuse_scat):
    """Return the private or explicitly persistent scattering-cache path."""
 
    return Path(out_path) / "scatfile.npz" if reuse_scat else Path(work_path) / "scatfile.npz"
+
+
+def _record_provenance(lut_file, *, forward_model, in_path, instfile, mmfile, lutfile, atmfile, inststr, mmstr,
+                       lutstr, qm, atmospheres, gas_flag, rayleigh_flag, scat_only, reuse_scat, nstreams, nmom,
+                       version, driver, tmatrix_path, cloud_vertical_profile=None, cloud_profile=None):
+   """Write ``<product>.provenance.json`` next to a published product (oraclut.provenance).
+
+   Records the source release and Git commit, the configuration and input
+   definition files with their SHA-256 digests, the LUT grid, the numerical
+   integration and DISORT settings and the product's own digest.  The NetCDF
+   product is not touched.  A failure here is reported but does not undo a
+   successfully published product.
+   """
+
+   try:
+      in_path = Path(in_path)
+      axis = lambda name: getattr(lutstr, name, None)   # noqa: E731
+      grid = {"definition_file": lutfile}
+      for name in ("opd", "efr", "saz", "soz", "raa", "prs"):
+         values = axis(name)
+         if values is not None:
+            grid[name] = {"n": int(np.size(values)), "spacing": axis(name + "_spacing"), "values": np.asarray(values).tolist()}
+      components = {"types": list(getattr(mmstr, "comptype", []) or []), "names": list(getattr(mmstr, "compname", []) or [])}
+      numerics = {
+         "radius_grid": RADIUS_GRID,
+         "mie_radius_limits_um": [create_bwgp_module.MIE_RADIUS_LOWER, create_bwgp_module.MIE_RADIUS_UPPER],
+         "mie_size_parameter_step_legacy": create_bwgp_module.MIE_XRES,
+         "legendre_expansion": ("adaptive (King's criterion on each averaged Mie phase function)" if nmom is None
+                                else f"fixed, nmom = {int(nmom)}"),
+         "nmom": None if nmom is None else int(nmom),
+         "srf_quadrature": int(qm),
+         "scattering_cache_reused": bool(reuse_scat),
+      }
+      radiative_transfer = {
+         "solver": "DISORT (create_orac_lut/disort2, oraclut.radiative_transfer.legacy_disort)",
+         "nstreams": int(nstreams),
+         "rayleigh": bool(rayleigh_flag),
+         "gas_absorption": bool(gas_flag),
+         "atmosphere_code": str(atmospheres),
+         "atmosphere_file": str(atmfile),
+         "scattering_only": bool(scat_only),
+         "cloud_vertical_profile": cloud_vertical_profile,
+         "cloud_profile_attributes": None if cloud_profile is None else cloud_profile.global_attributes(),
+      }
+      configuration = {
+         "forward_model": forward_model,
+         "platform": inststr.platform,
+         "instrument": inststr.instrument,
+         "instrument_file": instfile,
+         "microphysics_file": mmfile,
+         "substance": getattr(mmstr, "substance", None),
+         "particle_model_shortname": getattr(mmstr, "shortname", None),
+         "components": components,
+         "channels": np.asarray(inststr.channelid).tolist(),
+         "srf_files": [str(name) for name in getattr(inststr, "srf_file", [])],
+         "tmatrix_path": None if tmatrix_path is None else str(tmatrix_path),
+      }
+      record = build_record(
+         lut_file, generator="create_orac_luts.py", lut_version=version, configuration=configuration,
+         configuration_file=driver,
+         input_files={"instrument": in_path / "inst" / instfile, "microphysics": in_path / "microphysics" / mmfile,
+                      "lut_definition": in_path / "lut" / lutfile, "atmosphere": in_path / "atm" / atmfile},
+         grid=grid, numerics=numerics, radiative_transfer=radiative_transfer)
+      sidecar = write_provenance(lut_file, record)
+      print("Provenance record: " + str(sidecar))
+   except Exception as exc:   # the product is already published; report, do not hide it
+      print(f"WARNING: provenance record for {lut_file} could not be written: {exc}", file=sys.stderr)
 
 
 # ==============================================================================
@@ -879,6 +950,12 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
                    global_attributes=cloud_profile.global_attributes(),
                    em_valid_range=(0.0, np.finfo(np.float32).max))
    _publish_lut(private_lut_filename, v2_lut_filename)
+   _record_provenance(v2_lut_filename, forward_model="cloud", in_path=in_path, instfile=instfile, mmfile=mmfile,
+                      lutfile=lutfile, atmfile=atmfile, inststr=inststr, mmstr=mmstr, lutstr=lutstr, qm=qm,
+                      atmospheres=atmospheres, gas_flag=gas_flag, rayleigh_flag=rayleigh_flag, scat_only=scat_only,
+                      reuse_scat=reuse_scat, nstreams=nstreams, nmom=nmom, version=version, driver=driver,
+                      tmatrix_path=tmatrix_path, cloud_vertical_profile=cloud_vertical_profile,
+                      cloud_profile=cloud_profile)
 
    # -----------------------------------------------------------------------------
    # Output termination timestamp.
@@ -1302,6 +1379,11 @@ def create_orac_aerosol_lut(in_path, instfile, mmfile, lutfile, out_path, atmosp
    write_v2_lut(private_lut_filename, lutstr, inststr, srfstrarr, vavg, bextout, bextratout, ssaout, gout,
                 td, tfd, rd, rfd, rbd=rbd, rfbd=rfbd, tfbd=tfbd, tb=tb, em=em, include_pressure=True)
    _publish_lut(private_lut_filename, v2_lut_filename)
+   _record_provenance(v2_lut_filename, forward_model="aerosol", in_path=in_path, instfile=instfile, mmfile=mmfile,
+                      lutfile=lutfile, atmfile=atmfile, inststr=inststr, mmstr=mmstr, lutstr=lutstr, qm=qm,
+                      atmospheres=atmospheres, gas_flag=gas_flag, rayleigh_flag=rayleigh_flag, scat_only=scat_only,
+                      reuse_scat=reuse_scat, nstreams=nstreams, nmom=nmom, version=version, driver=driver,
+                      tmatrix_path=tmatrix_path)
 
    # -----------------------------------------------------------------------------
    # Output termination timestamp.
@@ -1324,6 +1406,11 @@ def run(runfile):
    if not runfile.is_file():
       raise FileNotFoundError(f"run file not found: {runfile}")
    settings = read_runfile(runfile)
+
+   # Identify the source (CODE_VERSION + Git) before any calculation; the
+   # requested LUT version is checked against it below, once the run file's
+   # own consistency has been validated.
+   summary = print_banner(lut_version=settings["version"], generator="create_orac_luts.py (run file)")
 
    # Relative paths in the run file are taken from the repository root (where
    # this program lives), so the run file reads the same from any directory.
@@ -1348,6 +1435,10 @@ def run(runfile):
          f"{runfile}: requested channels {requested} include invalid channel(s) {invalid} for "
          f"{inststr.platform}/{inststr.instrument}; valid channels are {valid}"
       )
+
+   # Refuse a LUT version this source release does not produce (no Mie or
+   # DISORT work has been done yet).
+   check_lut_version(settings["version"], summary.code, source=f"run file {runfile}")
 
    print("making ... " + str(runfile))
    if settings["forward_model"] == "cloud":
@@ -1377,9 +1468,10 @@ def main(argv=None):
       return 2
    try:
       return run(argv[0])
-   except (FileNotFoundError, ValueError, NotImplementedError) as exc:
-      # A clear one-line failure for a bad run file or an unported option,
-      # instead of a traceback (the IDL wrapper printed the failure code).
+   except (FileNotFoundError, ValueError, NotImplementedError, LutVersionMismatch) as exc:
+      # A clear one-line failure for a bad run file, an unported option or a
+      # LUT version this source release does not produce, instead of a
+      # traceback (the IDL wrapper printed the failure code).
       print("create_orac_luts.py: " + str(exc), file=sys.stderr)
       return 2
 
