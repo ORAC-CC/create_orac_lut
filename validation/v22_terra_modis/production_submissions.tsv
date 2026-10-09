@@ -1,0 +1,4 @@
+submitted_utc	host	revision	job_id	job_name	run_file	product
+2026-10-09T19:46:32Z	atmlxint5	4fee1b41e4c4ebaeb84b871369b168d7cafefa44	490632	v22_terra_water_old	runs/terra_modis_cloud_liquid-water_old_v22.run	/network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/terra_modis_m_liquid-water_a01_pold_v22.nc
+2026-10-09T19:46:34Z	atmlxint5	4fee1b41e4c4ebaeb84b871369b168d7cafefa44	490633	v22_terra_water_240	runs/terra_modis_cloud_liquid-water_240_v22.run	/network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/terra_modis_m_liquid-water_a01_p240_v22.nc
+2026-10-09T19:46:38Z	atmlxint5	4fee1b41e4c4ebaeb84b871369b168d7cafefa44	490634	v22_terra_ice_agg	runs/terra_modis_cloud_water-ice_agg_v22.run	/network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/terra_modis_m_water-ice_a01_pagg_v22.nc
