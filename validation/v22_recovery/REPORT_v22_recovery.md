@@ -424,3 +424,13 @@ MODIFIED` in the banners and provenance):
 | tests | full non-slow suite: 284 passed, 13 skipped, 5 failed (the pre-existing missing historical files: `docs/idl_python_port_status.md`, `validation/reference_cases/...`, `validation/diagnostics/aerosol_legacy_provenance.pro`); slow V21-equivalence tests: 2 passed, 3 skipped (their reference products are not present on disk) |
 
 The V22.1 commit, tag and push are recorded at the end of this report.
+
+Restoration commit: `d9a7e8b` "Restore the V22 scientific implementation as
+the production generator" on `main`.  Release tag `lut-code-v22.1` is placed
+on the follow-up commit that records this hash (so that the tagged state
+contains its own documentation); it was created with `git tag -a` rather than
+`scripts/tag_lut_code_release.sh` because the owner's concurrent, unrelated
+edits to `create_orac_lut/makerunfile.pro` and `create_orac_lut/terra_modis_run`
+(20:13 and 20:19 BST, not part of this work, left untouched and uncommitted)
+make the script's clean-tree check refuse; the committed content itself is
+complete and the banner reports those two files as the only modifications.
