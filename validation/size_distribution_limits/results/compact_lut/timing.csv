@@ -1,0 +1,5 @@
+instrument,variant,scattering_cpu_s,total_cpu_s,status
+modis,reference,841.315934644,878.5051579999999,0
+modis,candidate,864.3523767649999,901.1687681489999,0
+slstr,reference,873.98172531,911.6420719820001,0
+slstr,candidate,858.6212959620001,895.508566946,0

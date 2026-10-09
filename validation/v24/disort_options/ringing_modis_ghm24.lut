@@ -1,0 +1,13 @@
+# Grid B nodes around smooth negative R_0v at large radius (channel 24, re 81-93, all sza)
+# in terra_modis_m_water-ice_a01_pghm_v24.nc (identical in V23).
+# Validation only (run_variant.py case ringing_modis_ghm24).
+3 uneven_logarithmic # optical depth
+8.0 16.0 32.0
+3 uneven_linear # physical effective radius, microns
+85.0 89.0 93.0
+2 uneven_linear # solar zenith, degrees
+26.25 30.0
+4 uneven_linear # satellite zenith, degrees
+0.0 30.0 60.0 75.0
+37 linear # relative azimuth, degrees, 0-180
+0 180

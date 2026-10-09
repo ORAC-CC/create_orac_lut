@@ -1,0 +1,12 @@
+000 aqua_modis aerosol 1 luts/aqua_modis_aerosol/aqua_modis_m_aerosol_a01_pa79_v22.nc
+002 aqua_modis cloud 1 luts/aqua_modis_cloud/aqua_modis_m_liquid-water_a01_pstg_v22.nc
+004 earthcare_msi aerosol 1 luts/earthcare_msi_aerosol/earthcare_msi_m_aerosol_a01_pa79_v22.nc
+006 earthcare_msi cloud 1 luts/earthcare_msi_cloud/earthcare_msi_m_liquid-water_a01_pstg_v22.nc
+007 earthcare_msi cloud 2 luts/earthcare_msi_cloud/earthcare_msi_b_liquid-water_a01_pstg_v22.nc
+032 meteosat-10_seviri aerosol 1 luts/meteosat-10_seviri_aerosol/meteosat-10_seviri_m_aerosol_a01_pa79_v22.nc
+033 meteosat-10_seviri aerosol 2 luts/meteosat-10_seviri_aerosol/meteosat-10_seviri_b_aerosol_a01_pa79_v22.nc
+035 meteosat-10_seviri cloud 2 luts/meteosat-10_seviri_cloud/meteosat-10_seviri_b_liquid-water_a01_pstg_v22.nc
+062 noaa-20_viirs cloud 1 luts/noaa-20_viirs_cloud/noaa-20_viirs_m_liquid-water_a01_pstg_v22.nc
+063 noaa-20_viirs cloud 2 luts/noaa-20_viirs_cloud/noaa-20_viirs_b_liquid-water_a01_pstg_v22.nc
+086 sentinel-3a_slstr cloud 1 luts/sentinel-3a_slstr_cloud/sentinel-3a_slstr_m_liquid-water_a01_pstg_v22.nc
+087 sentinel-3a_slstr cloud 2 luts/sentinel-3a_slstr_cloud/sentinel-3a_slstr_b_liquid-water_a01_pstg_v22.nc

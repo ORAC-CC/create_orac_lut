@@ -1,0 +1,15 @@
+{
+  "case": "liquid",
+  "variant": "adopted",
+  "revision": "working tree",
+  "host": "atmlxint5.atm.ox.ac.uk",
+  "cpu": "Intel(R) Xeon(R) Gold 6240R CPU @ 2.40GHz",
+  "threads": 1,
+  "wall_s": 9784.069432735443,
+  "cpu_s": 9782.903401929,
+  "mie_calls": 1667,
+  "radius_nodes": 2581544,
+  "node_angle_evaluations": 6290045304,
+  "mie_cpu_s": 9688.181367196006,
+  "other_cpu_s": 94.72203473299305
+}

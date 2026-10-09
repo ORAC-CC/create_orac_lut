@@ -1,0 +1,144 @@
+{
+  "phase_order": 128,
+  "xres": 0.4,
+  "reference_bounds_microns": [
+    0.001,
+    100.0
+  ],
+  "reference_note": "0.001\u2013100 is the production modified-gamma reference. Log-normal aerosols use their legacy mode-radius/spread-dependent bounds.",
+  "wavelengths_microns": [
+    0.55,
+    0.64583063,
+    0.86778653,
+    1.62807465,
+    3.78025293,
+    11.02639866
+  ],
+  "wavelength_provenance": {
+    "0.55": "ORAC reference wavelength and near SLSTR S1 (0.5541 \u00b5m)",
+    "0.64583063": "Aqua MODIS channel 1 centre from repository SRF",
+    "0.86778653": "Sentinel-3A SLSTR channel 3 centre from repository SRF",
+    "1.62807465": "Aqua MODIS channel 6 centre from repository SRF",
+    "3.78025293": "Aqua MODIS channel 20 centre from repository SRF",
+    "11.02639866": "Aqua MODIS channel 31 centre from repository SRF"
+  },
+  "cases": [
+    {
+      "name": "cloud_re5",
+      "family": "liquid_cloud",
+      "distribution": "modified_gamma",
+      "radius_parameter": 5.0,
+      "spread": 0.1111111,
+      "refractive_index_file": "H2O_Segelstein_1981.ri",
+      "provenance": "liquid-water_stg.mm; effective variance 0.1111111",
+      "legacy_bounds": [
+        0.001,
+        100.0
+      ]
+    },
+    {
+      "name": "cloud_re10",
+      "family": "liquid_cloud",
+      "distribution": "modified_gamma",
+      "radius_parameter": 10.0,
+      "spread": 0.1111111,
+      "refractive_index_file": "H2O_Segelstein_1981.ri",
+      "provenance": "liquid-water_stg.mm; effective variance 0.1111111",
+      "legacy_bounds": [
+        0.001,
+        100.0
+      ]
+    },
+    {
+      "name": "cloud_re15",
+      "family": "liquid_cloud",
+      "distribution": "modified_gamma",
+      "radius_parameter": 15.0,
+      "spread": 0.1111111,
+      "refractive_index_file": "H2O_Segelstein_1981.ri",
+      "provenance": "liquid-water_stg.mm; effective variance 0.1111111",
+      "legacy_bounds": [
+        0.001,
+        100.0
+      ]
+    },
+    {
+      "name": "cloud_re20",
+      "family": "liquid_cloud",
+      "distribution": "modified_gamma",
+      "radius_parameter": 20.0,
+      "spread": 0.1111111,
+      "refractive_index_file": "H2O_Segelstein_1981.ri",
+      "provenance": "liquid-water_stg.mm; effective variance 0.1111111",
+      "legacy_bounds": [
+        0.001,
+        100.0
+      ]
+    },
+    {
+      "name": "cloud_re30",
+      "family": "liquid_cloud",
+      "distribution": "modified_gamma",
+      "radius_parameter": 30.0,
+      "spread": 0.1111111,
+      "refractive_index_file": "H2O_Segelstein_1981.ri",
+      "provenance": "liquid-water_stg.mm; effective variance 0.1111111",
+      "legacy_bounds": [
+        0.001,
+        100.0
+      ]
+    },
+    {
+      "name": "cloud_re40",
+      "family": "liquid_cloud",
+      "distribution": "modified_gamma",
+      "radius_parameter": 40.0,
+      "spread": 0.1111111,
+      "refractive_index_file": "H2O_Segelstein_1981.ri",
+      "provenance": "liquid-water_stg.mm; effective variance 0.1111111",
+      "legacy_bounds": [
+        0.001,
+        100.0
+      ]
+    },
+    {
+      "name": "aerosol_small",
+      "family": "aerosol",
+      "distribution": "log_normal",
+      "radius_parameter": 0.07,
+      "spread": 1.7,
+      "refractive_index_file": "waf.ri",
+      "provenance": "aerosol_a79.mm small water-soluble mode",
+      "legacy_bounds": [
+        0.013581800228722272,
+        1.4431076639273985
+      ]
+    },
+    {
+      "name": "aerosol_accumulation",
+      "family": "aerosol",
+      "distribution": "log_normal",
+      "radius_parameter": 0.217,
+      "spread": 1.77,
+      "refractive_index_file": "chaiten_ash_Deguine_2020.ri",
+      "provenance": "volcanic-ash_ctn.mm accumulation mode",
+      "legacy_bounds": [
+        0.03716761852789635,
+        5.0677446513994004
+      ]
+    },
+    {
+      "name": "aerosol_coarse",
+      "family": "aerosol",
+      "distribution": "log_normal",
+      "radius_parameter": 0.788,
+      "spread": 1.822,
+      "refractive_index_file": "ssc.ri",
+      "provenance": "aerosol_a75.mm coarse sea-salt mode",
+      "legacy_bounds": [
+        0.123415929675792,
+        20.125246445290863
+      ]
+    }
+  ]
+}

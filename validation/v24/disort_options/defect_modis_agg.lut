@@ -1,0 +1,13 @@
+# Grid B nodes around corrupted direct-beam DISORT calls in
+# aqua_modis_m_water-ice_a01_pagg_v24.nc (channel 24, re 9, sza 60).
+# Validation only (run_variant.py case defect_modis_agg).
+3 uneven_logarithmic # optical depth
+32.0 64.0 128.0
+3 uneven_linear # physical effective radius, microns
+7.0 9.0 11.0
+2 uneven_linear # solar zenith, degrees
+56.25 60.0
+3 uneven_linear # satellite zenith, degrees
+30.0 45.0 75.0
+37 linear # relative azimuth, degrees, 0-180
+0 180

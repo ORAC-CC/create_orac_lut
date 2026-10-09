@@ -1,0 +1,432 @@
+liquid-water_stg_re10_wl0.4118525: K-1 vs K  ext 4.4e-07 ssa 2.9e-09 g 3.6e-07 phase side 6.9e-04 back 7.7e-04 chi 1.4e-06
+   k=0 dx=0.400 dr=0.0262: ext 1.5e-05 ssa 7.4e-09 g 1.6e-05 phase fwd 5.3e-03 side 3.1e-02 back 1.2e-01 rms 6.6e-03 chi 4.8e-05
+   k=1 dx=0.200 dr=0.0131: ext 1.1e-05 ssa 5.6e-09 g 8.7e-06 phase fwd 1.0e-03 side 5.5e-03 back 2.6e-02 rms 2.6e-03 chi 1.8e-05
+   k=2 dx=0.100 dr=0.0066: ext 4.1e-05 ssa 8.7e-09 g 3.5e-05 phase fwd 8.7e-04 side 3.2e-03 back 1.5e-02 rms 1.6e-03 chi 3.5e-05
+   k=3 dx=0.050 dr=0.0033: ext 6.4e-06 ssa 5.9e-09 g 5.3e-06 phase fwd 2.6e-04 side 3.1e-03 back 6.1e-03 rms 6.3e-04 chi 9.9e-06
+   k=4 dx=0.025 dr=0.0016: ext 1.3e-06 ssa 2.9e-09 g 1.2e-06 phase fwd 1.3e-04 side 1.7e-03 back 3.5e-03 rms 3.6e-04 chi 5.7e-06
+   k=5 dx=0.013 dr=0.0008: ext 4.4e-07 ssa 2.9e-09 g 3.6e-07 phase fwd 4.5e-05 side 6.9e-04 back 7.7e-04 rms 1.4e-04 chi 1.4e-06
+   k=6 dx=0.006 dr=0.0004: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re10_wl0.6462791: K-1 vs K  ext 2.9e-06 ssa 7.1e-09 g 2.6e-06 phase side 8.7e-04 back 2.5e-03 chi 3.2e-06
+   k=0 dx=0.400 dr=0.0412: ext 1.5e-04 ssa 5.3e-08 g 1.3e-04 phase fwd 6.3e-04 side 2.7e-02 back 1.2e-01 rms 1.2e-02 chi 2.8e-04
+   k=1 dx=0.200 dr=0.0206: ext 2.0e-04 ssa 1.4e-08 g 1.7e-04 phase fwd 1.6e-03 side 1.5e-02 back 5.8e-02 rms 5.9e-03 chi 1.7e-04
+   k=2 dx=0.100 dr=0.0103: ext 1.5e-04 ssa 4.2e-07 g 1.3e-04 phase fwd 6.0e-04 side 1.0e-02 back 4.1e-02 rms 3.4e-03 chi 1.3e-04
+   k=3 dx=0.050 dr=0.0051: ext 5.2e-05 ssa 1.3e-07 g 4.5e-05 phase fwd 3.4e-04 side 5.0e-03 back 1.6e-02 rms 1.4e-03 chi 4.5e-05
+   k=4 dx=0.025 dr=0.0026: ext 3.2e-05 ssa 3.3e-08 g 2.7e-05 phase fwd 2.0e-04 side 3.5e-03 back 1.3e-02 rms 9.1e-04 chi 2.7e-05
+   k=5 dx=0.013 dr=0.0013: ext 2.9e-06 ssa 7.1e-09 g 2.6e-06 phase fwd 6.6e-05 side 8.7e-04 back 2.5e-03 rms 2.1e-04 chi 3.2e-06
+   k=6 dx=0.006 dr=0.0006: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re10_wl0.8680: K-1 vs K  ext 2.2e-05 ssa 2.7e-07 g 1.9e-05 phase side 1.4e-03 back 4.0e-03 chi 1.9e-05
+   k=0 dx=0.400 dr=0.0553: ext 1.6e-05 ssa 3.1e-06 g 1.5e-05 phase fwd 3.1e-03 side 2.9e-02 back 1.3e-01 rms 1.5e-02 chi 2.2e-04
+   k=1 dx=0.200 dr=0.0277: ext 8.4e-05 ssa 2.8e-06 g 7.9e-05 phase fwd 1.1e-03 side 1.4e-02 back 6.3e-02 rms 6.0e-03 chi 1.0e-04
+   k=2 dx=0.100 dr=0.0138: ext 1.5e-04 ssa 3.0e-07 g 1.3e-04 phase fwd 1.3e-03 side 9.9e-03 back 1.3e-02 rms 2.3e-03 chi 1.3e-04
+   k=3 dx=0.050 dr=0.0069: ext 1.2e-06 ssa 5.7e-07 g 2.2e-06 phase fwd 2.5e-04 side 4.3e-03 back 8.9e-03 rms 1.1e-03 chi 2.7e-05
+   k=4 dx=0.025 dr=0.0035: ext 3.3e-05 ssa 5.1e-07 g 2.7e-05 phase fwd 8.7e-05 side 2.5e-03 back 3.6e-03 rms 5.8e-04 chi 2.7e-05
+   k=5 dx=0.013 dr=0.0017: ext 2.2e-05 ssa 2.7e-07 g 1.9e-05 phase fwd 9.0e-05 side 1.4e-03 back 4.0e-03 rms 3.6e-04 chi 1.9e-05
+   k=6 dx=0.006 dr=0.0009: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re10_wl1.6291: K-1 vs K  ext 1.3e-05 ssa 7.2e-06 g 4.9e-06 phase side 2.8e-04 back 4.5e-04 chi 4.9e-06
+   k=0 dx=0.400 dr=0.1038: ext 4.1e-04 ssa 2.9e-04 g 7.2e-05 phase fwd 5.2e-03 side 3.6e-02 back 1.1e-01 rms 1.8e-02 chi 6.0e-04
+   k=1 dx=0.200 dr=0.0519: ext 6.3e-04 ssa 1.3e-04 g 4.1e-04 phase fwd 2.7e-03 side 1.8e-02 back 8.3e-02 rms 1.0e-02 chi 4.1e-04
+   k=2 dx=0.100 dr=0.0260: ext 4.3e-05 ssa 4.0e-05 g 7.1e-05 phase fwd 6.6e-04 side 6.6e-03 back 3.1e-02 rms 3.9e-03 chi 7.1e-05
+   k=3 dx=0.050 dr=0.0130: ext 7.3e-05 ssa 2.9e-05 g 3.7e-05 phase fwd 2.5e-04 side 4.6e-03 back 5.6e-03 rms 9.3e-04 chi 3.7e-05
+   k=4 dx=0.025 dr=0.0065: ext 5.6e-06 ssa 2.8e-06 g 2.4e-06 phase fwd 9.6e-06 side 1.4e-03 back 2.1e-03 rms 3.6e-04 chi 4.8e-06
+   k=5 dx=0.013 dr=0.0032: ext 1.3e-05 ssa 7.2e-06 g 4.9e-06 phase fwd 2.4e-05 side 2.8e-04 back 4.5e-04 rms 8.9e-05 chi 4.9e-06
+   k=6 dx=0.006 dr=0.0016: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re10_wl11.0262: K-1 vs K  ext 6.1e-12 ssa 4.4e-13 g 3.6e-13 phase side 2.2e-11 back 4.3e-12 chi 4.0e-12
+   k=0 dx=0.286 dr=0.5025: ext 8.2e-09 ssa 6.1e-10 g 5.0e-10 phase fwd 7.1e-08 side 3.1e-08 back 5.7e-09 rms 3.1e-08 chi 5.5e-09
+   k=1 dx=0.143 dr=0.2513: ext 2.1e-09 ssa 1.5e-10 g 1.2e-10 phase fwd 1.8e-08 side 7.7e-09 back 1.4e-09 rms 7.6e-09 chi 1.4e-09
+   k=2 dx=0.072 dr=0.1256: ext 5.1e-10 ssa 3.8e-11 g 3.1e-11 phase fwd 4.4e-09 side 1.9e-09 back 3.5e-10 rms 1.9e-09 chi 3.4e-10
+   k=3 dx=0.036 dr=0.0628: ext 1.3e-10 ssa 9.4e-12 g 7.6e-12 phase fwd 1.1e-09 side 4.7e-10 back 8.8e-11 rms 4.7e-10 chi 8.5e-11
+   k=4 dx=0.018 dr=0.0314: ext 3.0e-11 ssa 2.3e-12 g 1.8e-12 phase fwd 2.6e-10 side 1.1e-10 back 1.8e-11 rms 1.1e-10 chi 2.0e-11
+   k=5 dx=0.009 dr=0.0157: ext 6.1e-12 ssa 4.4e-13 g 3.6e-13 phase fwd 5.2e-11 side 2.2e-11 back 4.3e-12 rms 2.2e-11 chi 4.0e-12
+   k=6 dx=0.004 dr=0.0079: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re10_wl2.1142: K-1 vs K  ext 1.1e-08 ssa 6.6e-09 g 3.3e-09 phase side 5.3e-07 back 6.4e-07 chi 5.8e-09
+   k=0 dx=0.401 dr=0.1350: ext 1.7e-04 ssa 1.7e-04 g 2.7e-04 phase fwd 1.9e-03 side 2.0e-02 back 1.0e-01 rms 1.4e-02 chi 2.7e-04
+   k=1 dx=0.201 dr=0.0675: ext 5.0e-07 ssa 3.1e-06 g 2.2e-06 phase fwd 5.9e-05 side 1.0e-02 back 2.7e-02 rms 3.9e-03 chi 3.9e-05
+   k=2 dx=0.100 dr=0.0337: ext 1.4e-08 ssa 9.1e-11 g 1.2e-08 phase fwd 9.2e-07 side 6.2e-03 back 4.6e-03 rms 8.8e-04 chi 7.3e-06
+   k=3 dx=0.050 dr=0.0169: ext 3.9e-08 ssa 3.5e-08 g 3.0e-09 phase fwd 4.0e-07 side 5.4e-04 back 1.7e-04 rms 1.0e-04 chi 6.7e-07
+   k=4 dx=0.025 dr=0.0084: ext 2.1e-08 ssa 3.4e-09 g 1.8e-08 phase fwd 2.7e-08 side 5.3e-05 back 7.0e-06 rms 8.9e-06 chi 6.4e-08
+   k=5 dx=0.013 dr=0.0042: ext 1.1e-08 ssa 6.6e-09 g 3.3e-09 phase fwd 4.1e-08 side 5.3e-07 back 6.4e-07 rms 1.2e-07 chi 5.8e-09
+   k=6 dx=0.006 dr=0.0021: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re10_wl3.785: K-1 vs K  ext 8.6e-13 ssa 1.9e-13 g 4.8e-14 phase side 4.4e-12 back 2.9e-12 chi 2.3e-13
+   k=0 dx=0.401 dr=0.2415: ext 5.9e-03 ssa 1.5e-03 g 1.4e-03 phase fwd 1.1e-02 side 2.5e-02 back 8.6e-02 rms 1.4e-02 chi 1.5e-03
+   k=1 dx=0.200 dr=0.1208: ext 5.3e-04 ssa 1.9e-04 g 1.0e-04 phase fwd 1.2e-03 side 4.1e-03 back 1.2e-02 rms 2.0e-03 chi 2.3e-04
+   k=2 dx=0.100 dr=0.0604: ext 6.7e-06 ssa 1.4e-06 g 1.2e-06 phase fwd 8.1e-06 side 1.9e-04 back 4.5e-04 rms 7.8e-05 chi 5.3e-06
+   k=3 dx=0.050 dr=0.0302: ext 3.5e-08 ssa 1.1e-08 g 8.5e-09 phase fwd 7.9e-08 side 8.4e-07 back 8.3e-07 rms 2.6e-07 chi 1.7e-08
+   k=4 dx=0.025 dr=0.0151: ext 4.5e-12 ssa 9.4e-13 g 1.0e-13 phase fwd 2.9e-11 side 6.2e-11 back 4.1e-11 rms 1.5e-11 chi 1.2e-12
+   k=5 dx=0.013 dr=0.0075: ext 8.6e-13 ssa 1.9e-13 g 4.8e-14 phase fwd 5.9e-12 side 4.4e-12 back 2.9e-12 rms 2.4e-12 chi 2.3e-13
+   k=6 dx=0.006 dr=0.0038: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re1_wl11.0262: K-1 vs K  ext 1.6e-09 ssa 2.5e-10 g 5.2e-09 phase side 1.7e-08 back 1.0e-08 chi 5.2e-09
+   k=0 dx=0.286 dr=0.5025: ext 8.6e-03 ssa 3.2e-04 g 2.8e-04 phase fwd 5.8e-04 side 7.1e-04 back 8.2e-04 rms 5.4e-04 chi 2.8e-04
+   k=1 dx=0.143 dr=0.2513: ext 3.5e-05 ssa 1.1e-06 g 1.5e-06 phase fwd 5.0e-06 side 5.0e-06 back 2.6e-06 rms 3.8e-06 chi 1.5e-06
+   k=2 dx=0.072 dr=0.1256: ext 1.2e-07 ssa 2.1e-08 g 4.4e-07 phase fwd 1.4e-06 side 1.4e-06 back 8.5e-07 rms 1.1e-06 chi 4.4e-07
+   k=3 dx=0.036 dr=0.0628: ext 3.3e-08 ssa 5.2e-09 g 1.1e-07 phase fwd 3.5e-07 side 3.5e-07 back 2.1e-07 rms 2.7e-07 chi 1.1e-07
+   k=4 dx=0.018 dr=0.0314: ext 7.8e-09 ssa 1.2e-09 g 2.6e-08 phase fwd 8.3e-08 side 8.3e-08 back 5.1e-08 rms 6.4e-08 chi 2.6e-08
+   k=5 dx=0.009 dr=0.0157: ext 1.6e-09 ssa 2.5e-10 g 5.2e-09 phase fwd 1.7e-08 side 1.7e-08 back 1.0e-08 rms 1.3e-08 chi 5.2e-09
+   k=6 dx=0.004 dr=0.0079: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re1_wl12.02: K-1 vs K  ext 1.3e-09 ssa 1.7e-10 g 4.4e-09 phase side 1.4e-08 back 8.9e-09 chi 4.4e-09
+   k=0 dx=0.263 dr=0.5025: ext 9.1e-03 ssa 2.4e-04 g 2.3e-04 phase fwd 5.1e-04 side 5.9e-04 back 6.8e-04 rms 4.6e-04 chi 2.3e-04
+   k=1 dx=0.131 dr=0.2513: ext 3.6e-05 ssa 8.8e-07 g 1.2e-06 phase fwd 4.1e-06 side 4.1e-06 back 2.3e-06 rms 3.2e-06 chi 1.2e-06
+   k=2 dx=0.066 dr=0.1256: ext 9.4e-08 ssa 1.5e-08 g 3.7e-07 phase fwd 1.2e-06 side 1.2e-06 back 7.5e-07 rms 9.1e-07 chi 3.7e-07
+   k=3 dx=0.033 dr=0.0628: ext 2.7e-08 ssa 3.6e-09 g 9.3e-08 phase fwd 2.9e-07 side 2.9e-07 back 1.9e-07 rms 2.2e-07 chi 9.3e-08
+   k=4 dx=0.016 dr=0.0314: ext 6.5e-09 ssa 8.7e-10 g 2.2e-08 phase fwd 6.9e-08 side 6.8e-08 back 4.5e-08 rms 5.4e-08 chi 2.2e-08
+   k=5 dx=0.008 dr=0.0157: ext 1.3e-09 ssa 1.7e-10 g 4.4e-09 phase fwd 1.4e-08 side 1.4e-08 back 8.9e-09 rms 1.1e-08 chi 4.4e-09
+   k=6 dx=0.004 dr=0.0079: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re1_wl3.785: K-1 vs K  ext 3.1e-10 ssa 4.1e-12 g 7.0e-11 phase side 1.3e-09 back 1.2e-10 chi 1.4e-10
+   k=0 dx=0.401 dr=0.2415: ext 1.3e-05 ssa 2.0e-06 g 3.0e-05 phase fwd 1.2e-05 side 3.7e-04 back 3.4e-04 rms 1.5e-04 chi 3.0e-05
+   k=1 dx=0.200 dr=0.1208: ext 1.1e-07 ssa 1.6e-09 g 2.4e-08 phase fwd 4.7e-07 side 4.4e-07 back 3.8e-08 rms 2.6e-07 chi 4.8e-08
+   k=2 dx=0.100 dr=0.0604: ext 2.7e-08 ssa 3.5e-10 g 6.0e-09 phase fwd 1.2e-07 side 1.1e-07 back 1.0e-08 rms 6.5e-08 chi 1.2e-08
+   k=3 dx=0.050 dr=0.0302: ext 6.6e-09 ssa 8.6e-11 g 1.5e-09 phase fwd 2.9e-08 side 2.7e-08 back 2.6e-09 rms 1.6e-08 chi 3.0e-09
+   k=4 dx=0.025 dr=0.0151: ext 1.6e-09 ssa 2.1e-11 g 3.5e-10 phase fwd 7.0e-09 side 6.5e-09 back 6.1e-10 rms 3.8e-09 chi 7.1e-10
+   k=5 dx=0.013 dr=0.0075: ext 3.1e-10 ssa 4.1e-12 g 7.0e-11 phase fwd 1.4e-09 side 1.3e-09 back 1.2e-10 rms 7.7e-10 chi 1.4e-10
+   k=6 dx=0.006 dr=0.0038: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re20_wl0.4118525: K-1 vs K  ext 3.8e-07 ssa 1.2e-09 g 3.3e-07 phase side 9.1e-04 back 4.4e-04 chi 4.3e-07
+   k=0 dx=0.400 dr=0.0262: ext 7.5e-06 ssa 2.0e-08 g 6.5e-06 phase fwd 2.5e-03 side 2.0e-02 back 5.0e-02 rms 3.6e-03 chi 6.5e-06
+   k=1 dx=0.200 dr=0.0131: ext 2.4e-06 ssa 2.1e-08 g 2.0e-06 phase fwd 2.5e-04 side 4.1e-03 back 3.8e-02 rms 2.1e-03 chi 2.8e-06
+   k=2 dx=0.100 dr=0.0066: ext 2.4e-06 ssa 1.4e-08 g 2.1e-06 phase fwd 2.2e-04 side 2.4e-03 back 9.4e-03 rms 8.0e-04 chi 2.1e-06
+   k=3 dx=0.050 dr=0.0033: ext 2.0e-06 ssa 1.0e-08 g 1.7e-06 phase fwd 5.4e-05 side 2.3e-03 back 2.6e-03 rms 3.1e-04 chi 1.7e-06
+   k=4 dx=0.025 dr=0.0016: ext 2.3e-06 ssa 1.0e-08 g 2.0e-06 phase fwd 5.1e-05 side 1.9e-03 back 1.1e-03 rms 1.5e-04 chi 2.0e-06
+   k=5 dx=0.013 dr=0.0008: ext 3.8e-07 ssa 1.2e-09 g 3.3e-07 phase fwd 1.9e-05 side 9.1e-04 back 4.4e-04 rms 8.4e-05 chi 4.3e-07
+   k=6 dx=0.006 dr=0.0004: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re20_wl0.6462791: K-1 vs K  ext 7.2e-06 ssa 5.7e-08 g 6.2e-06 phase side 8.4e-04 back 1.7e-03 chi 6.2e-06
+   k=0 dx=0.400 dr=0.0412: ext 1.3e-05 ssa 9.8e-09 g 1.1e-05 phase fwd 4.1e-04 side 1.2e-02 back 1.2e-01 rms 7.8e-03 chi 2.7e-05
+   k=1 dx=0.200 dr=0.0206: ext 1.3e-05 ssa 3.5e-08 g 1.2e-05 phase fwd 3.5e-04 side 5.5e-03 back 4.9e-02 rms 2.7e-03 chi 1.2e-05
+   k=2 dx=0.100 dr=0.0103: ext 1.4e-06 ssa 6.4e-08 g 1.3e-06 phase fwd 1.1e-04 side 4.9e-03 back 8.0e-03 rms 8.9e-04 chi 4.2e-06
+   k=3 dx=0.050 dr=0.0051: ext 1.6e-06 ssa 6.8e-08 g 1.3e-06 phase fwd 5.8e-05 side 3.0e-03 back 1.9e-03 rms 4.1e-04 chi 2.3e-06
+   k=4 dx=0.025 dr=0.0026: ext 6.1e-06 ssa 6.7e-08 g 5.3e-06 phase fwd 6.1e-05 side 2.6e-03 back 1.5e-03 rms 3.0e-04 chi 5.3e-06
+   k=5 dx=0.013 dr=0.0013: ext 7.2e-06 ssa 5.7e-08 g 6.2e-06 phase fwd 6.3e-05 side 8.4e-04 back 1.7e-03 rms 1.7e-04 chi 6.2e-06
+   k=6 dx=0.006 dr=0.0006: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re20_wl0.8680: K-1 vs K  ext 9.6e-06 ssa 4.2e-07 g 8.8e-06 phase side 1.2e-03 back 1.1e-03 chi 8.8e-06
+   k=0 dx=0.400 dr=0.0553: ext 2.1e-05 ssa 2.4e-06 g 1.9e-05 phase fwd 9.9e-04 side 1.2e-02 back 1.6e-01 rms 1.0e-02 chi 1.9e-05
+   k=1 dx=0.200 dr=0.0277: ext 9.0e-06 ssa 2.5e-06 g 5.7e-06 phase fwd 2.6e-04 side 6.2e-03 back 3.4e-02 rms 2.9e-03 chi 9.5e-06
+   k=2 dx=0.100 dr=0.0138: ext 1.4e-05 ssa 1.8e-06 g 1.0e-05 phase fwd 1.5e-04 side 3.9e-03 back 1.1e-02 rms 1.1e-03 chi 1.0e-05
+   k=3 dx=0.050 dr=0.0069: ext 9.2e-06 ssa 4.7e-07 g 8.4e-06 phase fwd 9.7e-05 side 3.5e-03 back 3.9e-03 rms 5.7e-04 chi 8.4e-06
+   k=4 dx=0.025 dr=0.0035: ext 1.6e-05 ssa 1.4e-07 g 1.4e-05 phase fwd 1.1e-04 side 2.2e-03 back 1.9e-03 rms 4.2e-04 chi 1.4e-05
+   k=5 dx=0.013 dr=0.0017: ext 9.6e-06 ssa 4.2e-07 g 8.8e-06 phase fwd 8.2e-05 side 1.2e-03 back 1.1e-03 rms 2.3e-04 chi 8.8e-06
+   k=6 dx=0.006 dr=0.0009: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re20_wl1.6291: K-1 vs K  ext 5.0e-06 ssa 2.7e-06 g 2.0e-06 phase side 1.7e-04 back 2.2e-04 chi 2.0e-06
+   k=0 dx=0.400 dr=0.1038: ext 2.0e-04 ssa 9.0e-06 g 1.6e-04 phase fwd 8.6e-04 side 1.7e-02 back 9.3e-02 rms 8.7e-03 chi 1.6e-04
+   k=1 dx=0.200 dr=0.0519: ext 9.0e-05 ssa 9.1e-06 g 6.9e-05 phase fwd 8.6e-04 side 1.3e-02 back 3.7e-02 rms 3.6e-03 chi 6.9e-05
+   k=2 dx=0.100 dr=0.0260: ext 2.1e-05 ssa 1.9e-05 g 7.4e-07 phase fwd 1.5e-04 side 5.5e-03 back 6.4e-03 rms 1.0e-03 chi 1.3e-05
+   k=3 dx=0.050 dr=0.0130: ext 1.7e-05 ssa 6.2e-06 g 8.9e-06 phase fwd 1.3e-04 side 1.8e-03 back 2.0e-03 rms 4.0e-04 chi 8.9e-06
+   k=4 dx=0.025 dr=0.0065: ext 8.5e-08 ssa 1.8e-07 g 2.2e-07 phase fwd 2.2e-05 side 9.6e-04 back 7.6e-04 rms 1.8e-04 chi 1.9e-06
+   k=5 dx=0.013 dr=0.0032: ext 5.0e-06 ssa 2.7e-06 g 2.0e-06 phase fwd 1.6e-05 side 1.7e-04 back 2.2e-04 rms 4.2e-05 chi 2.0e-06
+   k=6 dx=0.006 dr=0.0016: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re20_wl11.0262: K-1 vs K  ext 1.1e-12 ssa 6.6e-15 g 2.1e-14 phase side 1.3e-12 back 7.3e-13 chi 6.1e-13
+   k=0 dx=0.286 dr=0.5025: ext 1.4e-09 ssa 3.3e-12 g 2.9e-11 phase fwd 1.2e-08 side 1.7e-09 back 1.5e-10 rms 4.7e-09 chi 8.4e-10
+   k=1 dx=0.143 dr=0.2513: ext 3.6e-10 ssa 9.1e-13 g 7.3e-12 phase fwd 3.0e-09 side 4.3e-10 back 6.8e-11 rms 1.2e-09 chi 2.1e-10
+   k=2 dx=0.072 dr=0.1256: ext 9.0e-11 ssa 2.3e-13 g 1.8e-12 phase fwd 7.6e-10 side 1.1e-10 back 1.1e-11 rms 2.9e-10 chi 5.2e-11
+   k=3 dx=0.036 dr=0.0628: ext 2.2e-11 ssa 3.5e-14 g 4.5e-13 phase fwd 1.9e-10 side 2.7e-11 back 6.8e-12 rms 7.3e-11 chi 1.3e-11
+   k=4 dx=0.018 dr=0.0314: ext 5.3e-12 ssa 2.5e-14 g 1.1e-13 phase fwd 4.5e-11 side 6.3e-12 back 7.6e-12 rms 1.7e-11 chi 3.1e-12
+   k=5 dx=0.009 dr=0.0157: ext 1.1e-12 ssa 6.6e-15 g 2.1e-14 phase fwd 8.9e-12 side 1.3e-12 back 7.3e-13 rms 3.5e-12 chi 6.1e-13
+   k=6 dx=0.004 dr=0.0079: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re20_wl2.1142: K-1 vs K  ext 5.8e-09 ssa 3.2e-09 g 2.0e-09 phase side 1.4e-06 back 7.5e-07 chi 4.7e-09
+   k=0 dx=0.401 dr=0.1350: ext 1.1e-04 ssa 5.5e-05 g 4.4e-05 phase fwd 1.8e-03 side 1.2e-02 back 7.8e-02 rms 9.0e-03 chi 6.5e-05
+   k=1 dx=0.201 dr=0.0675: ext 1.0e-06 ssa 1.0e-06 g 1.9e-06 phase fwd 1.4e-04 side 7.8e-03 back 2.1e-02 rms 2.7e-03 chi 2.3e-05
+   k=2 dx=0.100 dr=0.0337: ext 1.6e-06 ssa 1.5e-06 g 2.7e-08 phase fwd 1.2e-05 side 4.0e-03 back 4.3e-03 rms 7.9e-04 chi 3.7e-06
+   k=3 dx=0.050 dr=0.0169: ext 1.1e-07 ssa 1.4e-07 g 2.3e-08 phase fwd 1.2e-06 side 5.2e-04 back 4.3e-04 rms 1.2e-04 chi 5.4e-07
+   k=4 dx=0.025 dr=0.0084: ext 9.0e-08 ssa 4.0e-08 g 4.3e-08 phase fwd 2.1e-07 side 1.0e-04 back 9.3e-06 rms 1.5e-05 chi 6.0e-08
+   k=5 dx=0.013 dr=0.0042: ext 5.8e-09 ssa 3.2e-09 g 2.0e-09 phase fwd 9.9e-08 side 1.4e-06 back 7.5e-07 rms 2.3e-07 chi 4.7e-09
+   k=6 dx=0.006 dr=0.0021: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re20_wl3.785: K-1 vs K  ext 1.8e-11 ssa 2.2e-11 g 4.5e-12 phase side 1.0e-09 back 2.0e-10 chi 1.8e-11
+   k=0 dx=0.401 dr=0.2415: ext 3.7e-03 ssa 1.3e-03 g 1.2e-03 phase fwd 2.4e-03 side 2.5e-02 back 6.9e-02 rms 1.2e-02 chi 1.2e-03
+   k=1 dx=0.200 dr=0.1208: ext 2.9e-04 ssa 7.8e-05 g 8.4e-05 phase fwd 2.8e-04 side 6.2e-03 back 8.5e-03 rms 2.6e-03 chi 2.1e-04
+   k=2 dx=0.100 dr=0.0604: ext 8.0e-06 ssa 5.2e-06 g 3.0e-06 phase fwd 2.1e-05 side 4.4e-04 back 6.5e-04 rms 1.4e-04 chi 7.3e-06
+   k=3 dx=0.050 dr=0.0302: ext 3.7e-08 ssa 1.0e-08 g 1.3e-08 phase fwd 3.1e-08 side 3.4e-06 back 1.5e-06 rms 7.4e-07 chi 1.6e-08
+   k=4 dx=0.025 dr=0.0151: ext 3.8e-11 ssa 1.2e-11 g 3.6e-12 phase fwd 2.1e-10 side 2.3e-09 back 1.2e-09 rms 4.0e-10 chi 3.7e-11
+   k=5 dx=0.013 dr=0.0075: ext 1.8e-11 ssa 2.2e-11 g 4.5e-12 phase fwd 8.5e-11 side 1.0e-09 back 2.0e-10 rms 2.4e-10 chi 1.8e-11
+   k=6 dx=0.006 dr=0.0038: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re2_wl11.0262: K-1 vs K  ext 3.7e-10 ssa 8.7e-11 g 5.6e-10 phase side 4.1e-09 back 1.1e-09 chi 6.0e-10
+   k=0 dx=0.286 dr=0.5025: ext 3.2e-05 ssa 4.1e-06 g 1.1e-06 phase fwd 3.0e-06 side 8.5e-06 back 1.0e-05 rms 4.0e-06 chi 1.1e-06
+   k=1 dx=0.143 dr=0.2513: ext 1.1e-07 ssa 3.1e-08 g 1.9e-07 phase fwd 1.4e-06 side 1.4e-06 back 3.8e-07 rms 9.3e-07 chi 2.0e-07
+   k=2 dx=0.072 dr=0.1256: ext 3.1e-08 ssa 7.4e-09 g 4.7e-08 phase fwd 3.6e-07 side 3.5e-07 back 9.4e-08 rms 2.3e-07 chi 5.1e-08
+   k=3 dx=0.036 dr=0.0628: ext 7.7e-09 ssa 1.8e-09 g 1.2e-08 phase fwd 8.9e-08 side 8.7e-08 back 2.3e-08 rms 5.7e-08 chi 1.3e-08
+   k=4 dx=0.018 dr=0.0314: ext 1.8e-09 ssa 4.3e-10 g 2.8e-09 phase fwd 2.1e-08 side 2.1e-08 back 5.6e-09 rms 1.4e-08 chi 3.0e-09
+   k=5 dx=0.009 dr=0.0157: ext 3.7e-10 ssa 8.7e-11 g 5.6e-10 phase fwd 4.3e-09 side 4.1e-09 back 1.1e-09 rms 2.7e-09 chi 6.0e-10
+   k=6 dx=0.004 dr=0.0079: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re2_wl12.02: K-1 vs K  ext 2.7e-10 ssa 5.6e-11 g 4.7e-10 phase side 3.3e-09 back 8.9e-10 chi 4.7e-10
+   k=0 dx=0.263 dr=0.5025: ext 3.7e-05 ssa 3.7e-06 g 1.1e-06 phase fwd 1.9e-06 side 6.4e-06 back 7.9e-06 rms 3.0e-06 chi 1.1e-06
+   k=1 dx=0.131 dr=0.2513: ext 7.7e-08 ssa 2.0e-08 g 1.6e-07 phase fwd 1.1e-06 side 1.1e-06 back 3.0e-07 rms 7.4e-07 chi 1.6e-07
+   k=2 dx=0.066 dr=0.1256: ext 2.3e-08 ssa 4.7e-09 g 4.0e-08 phase fwd 2.9e-07 side 2.8e-07 back 7.5e-08 rms 1.9e-07 chi 4.0e-08
+   k=3 dx=0.033 dr=0.0628: ext 5.7e-09 ssa 1.2e-09 g 9.9e-09 phase fwd 7.1e-08 side 6.9e-08 back 1.9e-08 rms 4.6e-08 chi 9.9e-09
+   k=4 dx=0.016 dr=0.0314: ext 1.3e-09 ssa 2.8e-10 g 2.4e-09 phase fwd 1.7e-08 side 1.6e-08 back 4.4e-09 rms 1.1e-08 chi 2.4e-09
+   k=5 dx=0.008 dr=0.0157: ext 2.7e-10 ssa 5.6e-11 g 4.7e-10 phase fwd 3.4e-09 side 3.3e-09 back 8.9e-10 rms 2.2e-09 chi 4.7e-10
+   k=6 dx=0.004 dr=0.0079: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re2_wl3.785: K-1 vs K  ext 2.5e-11 ssa 1.7e-12 g 3.5e-12 phase side 1.5e-10 back 2.3e-10 chi 3.5e-12
+   k=0 dx=0.401 dr=0.2415: ext 5.7e-05 ssa 1.4e-06 g 2.9e-06 phase fwd 3.3e-05 side 9.0e-05 back 1.9e-04 rms 4.8e-05 chi 5.7e-06
+   k=1 dx=0.200 dr=0.1208: ext 1.3e-08 ssa 5.8e-10 g 1.5e-09 phase fwd 1.5e-08 side 1.4e-07 back 1.4e-07 rms 2.7e-08 chi 2.5e-09
+   k=2 dx=0.100 dr=0.0604: ext 2.2e-09 ssa 1.4e-10 g 3.0e-10 phase fwd 6.5e-09 side 1.3e-08 back 1.9e-08 rms 5.0e-09 chi 3.0e-10
+   k=3 dx=0.050 dr=0.0302: ext 5.3e-10 ssa 3.6e-11 g 7.4e-11 phase fwd 1.6e-09 side 3.2e-09 back 4.7e-09 rms 1.2e-09 chi 7.4e-11
+   k=4 dx=0.025 dr=0.0151: ext 1.3e-10 ssa 8.5e-12 g 1.8e-11 phase fwd 3.8e-10 side 7.7e-10 back 1.1e-09 rms 2.9e-10 chi 1.8e-11
+   k=5 dx=0.013 dr=0.0075: ext 2.5e-11 ssa 1.7e-12 g 3.5e-12 phase fwd 7.6e-11 side 1.5e-10 back 2.3e-10 rms 5.9e-11 chi 3.5e-12
+   k=6 dx=0.006 dr=0.0038: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re30_wl0.6462791: K-1 vs K  ext 3.7e-06 ssa 2.7e-08 g 3.2e-06 phase side 5.9e-04 back 1.4e-03 chi 3.2e-06
+   k=0 dx=0.400 dr=0.0412: ext 1.3e-05 ssa 1.5e-07 g 1.1e-05 phase fwd 2.0e-04 side 7.0e-03 back 1.3e-01 rms 6.9e-03 chi 1.1e-05
+   k=1 dx=0.200 dr=0.0206: ext 8.0e-06 ssa 1.3e-07 g 6.8e-06 phase fwd 1.9e-04 side 4.5e-03 back 3.5e-02 rms 1.9e-03 chi 6.8e-06
+   k=2 dx=0.100 dr=0.0103: ext 1.1e-05 ssa 1.4e-07 g 9.5e-06 phase fwd 1.4e-04 side 4.7e-03 back 5.3e-03 rms 6.5e-04 chi 9.5e-06
+   k=3 dx=0.050 dr=0.0051: ext 1.4e-06 ssa 1.8e-08 g 1.2e-06 phase fwd 6.4e-05 side 2.3e-03 back 1.7e-03 rms 3.3e-04 chi 1.2e-06
+   k=4 dx=0.025 dr=0.0026: ext 3.9e-06 ssa 8.3e-09 g 3.4e-06 phase fwd 6.6e-05 side 2.1e-03 back 1.5e-03 rms 2.5e-04 chi 3.4e-06
+   k=5 dx=0.013 dr=0.0013: ext 3.7e-06 ssa 2.7e-08 g 3.2e-06 phase fwd 5.9e-05 side 5.9e-04 back 1.4e-03 rms 1.3e-04 chi 3.2e-06
+   k=6 dx=0.006 dr=0.0006: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re30_wl0.8680: K-1 vs K  ext 4.2e-06 ssa 2.6e-07 g 3.9e-06 phase side 8.3e-04 back 1.4e-03 chi 3.9e-06
+   k=0 dx=0.400 dr=0.0553: ext 1.3e-05 ssa 5.0e-07 g 1.2e-05 phase fwd 4.1e-04 side 8.1e-03 back 2.0e-01 rms 1.1e-02 chi 1.2e-05
+   k=1 dx=0.200 dr=0.0277: ext 9.9e-06 ssa 6.5e-08 g 8.7e-06 phase fwd 2.7e-04 side 8.1e-03 back 3.8e-02 rms 2.1e-03 chi 8.7e-06
+   k=2 dx=0.100 dr=0.0138: ext 3.0e-06 ssa 3.6e-07 g 3.0e-06 phase fwd 1.3e-04 side 6.9e-03 back 5.2e-03 rms 7.5e-04 chi 3.0e-06
+   k=3 dx=0.050 dr=0.0069: ext 1.0e-05 ssa 2.4e-07 g 9.0e-06 phase fwd 1.8e-04 side 3.0e-03 back 2.7e-03 rms 4.8e-04 chi 9.0e-06
+   k=4 dx=0.025 dr=0.0035: ext 6.1e-06 ssa 1.2e-07 g 5.4e-06 phase fwd 5.6e-05 side 1.9e-03 back 1.5e-03 rms 2.8e-04 chi 5.4e-06
+   k=5 dx=0.013 dr=0.0017: ext 4.2e-06 ssa 2.6e-07 g 3.9e-06 phase fwd 5.0e-05 side 8.3e-04 back 1.4e-03 rms 1.7e-04 chi 3.9e-06
+   k=6 dx=0.006 dr=0.0009: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re30_wl1.6291: K-1 vs K  ext 9.3e-07 ssa 4.7e-07 g 4.0e-07 phase side 6.0e-05 back 6.7e-05 chi 4.0e-07
+   k=0 dx=0.400 dr=0.1038: ext 1.7e-05 ssa 1.0e-05 g 2.3e-05 phase fwd 3.1e-04 side 1.5e-02 back 8.1e-02 rms 6.2e-03 chi 2.3e-05
+   k=1 dx=0.200 dr=0.0519: ext 4.6e-06 ssa 3.7e-06 g 7.3e-06 phase fwd 1.7e-04 side 1.1e-02 back 2.9e-02 rms 2.5e-03 chi 8.0e-06
+   k=2 dx=0.100 dr=0.0260: ext 5.4e-06 ssa 3.9e-06 g 1.1e-06 phase fwd 4.4e-05 side 5.1e-03 back 3.7e-03 rms 5.9e-04 chi 2.5e-06
+   k=3 dx=0.050 dr=0.0130: ext 3.1e-06 ssa 1.0e-06 g 1.8e-06 phase fwd 3.4e-05 side 2.2e-03 back 5.5e-04 rms 2.4e-04 chi 1.8e-06
+   k=4 dx=0.025 dr=0.0065: ext 3.8e-07 ssa 6.6e-08 g 2.6e-07 phase fwd 1.2e-05 side 3.9e-04 back 2.8e-04 rms 7.0e-05 chi 2.9e-07
+   k=5 dx=0.013 dr=0.0032: ext 9.3e-07 ssa 4.7e-07 g 4.0e-07 phase fwd 4.2e-06 side 6.0e-05 back 6.7e-05 rms 1.3e-05 chi 4.0e-07
+   k=6 dx=0.006 dr=0.0016: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re30_wl11.0262: K-1 vs K  ext 5.0e-13 ssa 1.3e-15 g 6.0e-15 phase side 1.2e-12 back 1.8e-12 chi 2.9e-13
+   k=0 dx=0.286 dr=0.5025: ext 6.8e-10 ssa 2.5e-12 g 8.5e-12 phase fwd 5.9e-09 side 7.6e-10 back 5.5e-11 rms 2.1e-09 chi 3.9e-10
+   k=1 dx=0.143 dr=0.2513: ext 1.7e-10 ssa 6.6e-13 g 2.1e-12 phase fwd 1.5e-09 side 1.9e-10 back 5.6e-11 rms 5.3e-10 chi 9.7e-11
+   k=2 dx=0.072 dr=0.1256: ext 4.2e-11 ssa 1.1e-13 g 5.3e-13 phase fwd 3.6e-10 side 4.7e-11 back 6.0e-12 rms 1.3e-10 chi 2.4e-11
+   k=3 dx=0.036 dr=0.0628: ext 1.0e-11 ssa 2.2e-14 g 1.3e-13 phase fwd 9.0e-11 side 1.2e-11 back 4.9e-12 rms 3.3e-11 chi 6.0e-12
+   k=4 dx=0.018 dr=0.0314: ext 2.5e-12 ssa 1.7e-14 g 3.1e-14 phase fwd 2.1e-11 side 2.9e-12 back 1.2e-11 rms 7.9e-12 chi 1.4e-12
+   k=5 dx=0.009 dr=0.0157: ext 5.0e-13 ssa 1.3e-15 g 6.0e-15 phase fwd 4.3e-12 side 1.2e-12 back 1.8e-12 rms 1.6e-12 chi 2.9e-13
+   k=6 dx=0.004 dr=0.0079: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re30_wl2.1142: K-1 vs K  ext 3.3e-10 ssa 4.4e-10 g 6.9e-11 phase side 4.5e-07 back 3.0e-07 chi 1.2e-09
+   k=0 dx=0.401 dr=0.1350: ext 3.6e-06 ssa 1.6e-05 g 1.8e-05 phase fwd 4.7e-04 side 6.3e-03 back 5.8e-02 rms 4.7e-03 chi 2.0e-05
+   k=1 dx=0.201 dr=0.0675: ext 4.4e-06 ssa 4.4e-06 g 2.0e-07 phase fwd 6.3e-05 side 7.0e-03 back 1.0e-02 rms 1.2e-03 chi 4.3e-06
+   k=2 dx=0.100 dr=0.0337: ext 6.4e-07 ssa 6.2e-07 g 1.8e-08 phase fwd 7.6e-06 side 1.9e-03 back 1.3e-03 rms 3.0e-04 chi 1.0e-06
+   k=3 dx=0.050 dr=0.0169: ext 4.2e-08 ssa 6.5e-08 g 2.3e-08 phase fwd 4.8e-07 side 3.3e-04 back 1.4e-04 rms 5.6e-05 chi 1.4e-07
+   k=4 dx=0.025 dr=0.0084: ext 5.8e-08 ssa 2.4e-08 g 2.7e-08 phase fwd 2.4e-07 side 3.0e-05 back 5.1e-06 rms 4.4e-06 chi 2.7e-08
+   k=5 dx=0.013 dr=0.0042: ext 3.3e-10 ssa 4.4e-10 g 6.9e-11 phase fwd 2.7e-08 side 4.5e-07 back 3.0e-07 rms 7.9e-08 chi 1.2e-09
+   k=6 dx=0.006 dr=0.0021: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re30_wl3.785: K-1 vs K  ext 5.3e-11 ssa 4.7e-11 g 2.2e-13 phase side 9.0e-09 back 1.0e-09 chi 4.5e-11
+   k=0 dx=0.401 dr=0.2415: ext 1.5e-03 ssa 6.0e-04 g 3.9e-04 phase fwd 1.0e-03 side 1.4e-02 back 1.9e-02 rms 5.1e-03 chi 4.6e-04
+   k=1 dx=0.200 dr=0.1208: ext 6.9e-05 ssa 1.9e-05 g 2.1e-05 phase fwd 1.0e-04 side 2.1e-03 back 3.9e-03 rms 9.0e-04 chi 4.9e-05
+   k=2 dx=0.100 dr=0.0604: ext 3.1e-06 ssa 1.6e-06 g 1.2e-06 phase fwd 9.0e-06 side 1.4e-04 back 2.8e-04 rms 5.1e-05 chi 2.2e-06
+   k=3 dx=0.050 dr=0.0302: ext 8.1e-09 ssa 1.9e-09 g 3.5e-09 phase fwd 1.4e-08 side 1.5e-06 back 6.1e-07 rms 2.8e-07 chi 4.1e-09
+   k=4 dx=0.025 dr=0.0151: ext 2.6e-10 ssa 3.7e-11 g 3.6e-11 phase fwd 2.2e-09 side 2.4e-08 back 3.3e-09 rms 3.2e-09 chi 2.5e-10
+   k=5 dx=0.013 dr=0.0075: ext 5.3e-11 ssa 4.7e-11 g 2.2e-13 phase fwd 1.2e-10 side 9.0e-09 back 1.0e-09 rms 1.9e-09 chi 4.5e-11
+   k=6 dx=0.006 dr=0.0038: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re3_wl11.0262: K-1 vs K  ext 1.5e-10 ssa 3.6e-11 g 1.0e-10 phase side 1.5e-09 back 3.3e-10 chi 1.9e-10
+   k=0 dx=0.286 dr=0.5025: ext 3.6e-07 ssa 1.5e-07 g 1.4e-07 phase fwd 2.2e-06 side 2.0e-06 back 4.3e-07 rms 1.2e-06 chi 2.6e-07
+   k=1 dx=0.143 dr=0.2513: ext 5.0e-08 ssa 1.2e-08 g 3.6e-08 phase fwd 5.5e-07 side 5.2e-07 back 1.1e-07 rms 3.1e-07 chi 6.5e-08
+   k=2 dx=0.072 dr=0.1256: ext 1.2e-08 ssa 3.1e-09 g 8.9e-09 phase fwd 1.4e-07 side 1.3e-07 back 2.8e-08 rms 7.8e-08 chi 1.6e-08
+   k=3 dx=0.036 dr=0.0628: ext 3.1e-09 ssa 7.6e-10 g 2.2e-09 phase fwd 3.4e-08 side 3.2e-08 back 7.0e-09 rms 1.9e-08 chi 4.0e-09
+   k=4 dx=0.018 dr=0.0314: ext 7.3e-10 ssa 1.8e-10 g 5.2e-10 phase fwd 8.1e-09 side 7.6e-09 back 1.7e-09 rms 4.6e-09 chi 9.6e-10
+   k=5 dx=0.009 dr=0.0157: ext 1.5e-10 ssa 3.6e-11 g 1.0e-10 phase fwd 1.6e-09 side 1.5e-09 back 3.3e-10 rms 9.1e-10 chi 1.9e-10
+   k=6 dx=0.004 dr=0.0079: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re3_wl12.02: K-1 vs K  ext 1.0e-10 ssa 2.3e-11 g 9.0e-11 phase side 1.2e-09 back 2.4e-10 chi 1.4e-10
+   k=0 dx=0.263 dr=0.5025: ext 5.6e-07 ssa 1.3e-07 g 1.2e-07 phase fwd 1.7e-06 side 1.6e-06 back 3.2e-07 rms 9.5e-07 chi 1.9e-07
+   k=1 dx=0.131 dr=0.2513: ext 3.5e-08 ssa 7.7e-09 g 3.0e-08 phase fwd 4.2e-07 side 4.0e-07 back 8.1e-08 rms 2.4e-07 chi 4.9e-08
+   k=2 dx=0.066 dr=0.1256: ext 8.7e-09 ssa 1.9e-09 g 7.6e-09 phase fwd 1.0e-07 side 9.9e-08 back 2.0e-08 rms 6.0e-08 chi 1.2e-08
+   k=3 dx=0.033 dr=0.0628: ext 2.2e-09 ssa 4.8e-10 g 1.9e-09 phase fwd 2.6e-08 side 2.5e-08 back 5.0e-09 rms 1.5e-08 chi 3.0e-09
+   k=4 dx=0.016 dr=0.0314: ext 5.1e-10 ssa 1.1e-10 g 4.5e-10 phase fwd 6.2e-09 side 5.8e-09 back 1.2e-09 rms 3.5e-09 chi 7.2e-10
+   k=5 dx=0.008 dr=0.0157: ext 1.0e-10 ssa 2.3e-11 g 9.0e-11 phase fwd 1.2e-09 side 1.2e-09 back 2.4e-10 rms 7.1e-10 chi 1.4e-10
+   k=6 dx=0.004 dr=0.0079: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re3_wl3.785: K-1 vs K  ext 7.0e-12 ssa 3.1e-13 g 5.5e-13 phase side 2.3e-11 back 7.2e-11 chi 2.4e-12
+   k=0 dx=0.401 dr=0.2415: ext 2.0e-04 ssa 2.5e-06 g 7.8e-06 phase fwd 3.4e-04 side 2.9e-04 back 1.1e-03 rms 2.8e-04 chi 5.5e-05
+   k=1 dx=0.200 dr=0.1208: ext 9.4e-09 ssa 7.7e-09 g 1.5e-08 phase fwd 7.9e-07 side 3.0e-06 back 7.4e-06 rms 1.3e-06 chi 6.9e-08
+   k=2 dx=0.100 dr=0.0604: ext 6.6e-10 ssa 4.2e-11 g 2.3e-11 phase fwd 4.5e-09 side 3.6e-09 back 5.6e-09 rms 2.2e-09 chi 2.3e-10
+   k=3 dx=0.050 dr=0.0302: ext 1.5e-10 ssa 6.5e-12 g 1.2e-11 phase fwd 9.0e-10 side 4.8e-10 back 1.5e-09 rms 4.4e-10 chi 5.0e-11
+   k=4 dx=0.025 dr=0.0151: ext 3.5e-11 ssa 1.5e-12 g 2.8e-12 phase fwd 2.2e-10 side 1.1e-10 back 3.6e-10 rms 1.0e-10 chi 1.2e-11
+   k=5 dx=0.013 dr=0.0075: ext 7.0e-12 ssa 3.1e-13 g 5.5e-13 phase fwd 4.3e-11 side 2.3e-11 back 7.2e-11 rms 2.1e-11 chi 2.4e-12
+   k=6 dx=0.006 dr=0.0038: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re40_wl0.6462791: K-1 vs K  ext 1.4e-06 ssa 3.4e-08 g 1.2e-06 phase side 4.6e-04 back 9.9e-04 chi 1.2e-06
+   k=0 dx=0.400 dr=0.0412: ext 9.6e-06 ssa 1.7e-07 g 8.3e-06 phase fwd 2.1e-04 side 5.8e-03 back 1.3e-01 rms 5.9e-03 chi 8.3e-06
+   k=1 dx=0.200 dr=0.0206: ext 6.8e-06 ssa 1.7e-07 g 5.8e-06 phase fwd 1.2e-04 side 4.5e-03 back 2.4e-02 rms 1.3e-03 chi 5.8e-06
+   k=2 dx=0.100 dr=0.0103: ext 7.0e-06 ssa 1.7e-07 g 6.0e-06 phase fwd 1.4e-04 side 4.3e-03 back 3.7e-03 rms 5.1e-04 chi 6.0e-06
+   k=3 dx=0.050 dr=0.0051: ext 1.1e-06 ssa 4.5e-09 g 1.0e-06 phase fwd 8.1e-05 side 2.3e-03 back 1.2e-03 rms 2.8e-04 chi 1.0e-06
+   k=4 dx=0.025 dr=0.0026: ext 1.1e-06 ssa 4.8e-09 g 1.0e-06 phase fwd 6.7e-05 side 1.8e-03 back 1.1e-03 rms 2.0e-04 chi 1.0e-06
+   k=5 dx=0.013 dr=0.0013: ext 1.4e-06 ssa 3.4e-08 g 1.2e-06 phase fwd 4.8e-05 side 4.6e-04 back 9.9e-04 rms 1.1e-04 chi 1.2e-06
+   k=6 dx=0.006 dr=0.0006: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re40_wl0.8680: K-1 vs K  ext 1.1e-06 ssa 1.2e-07 g 1.1e-06 phase side 5.3e-04 back 9.9e-04 chi 1.1e-06
+   k=0 dx=0.400 dr=0.0553: ext 1.6e-05 ssa 2.3e-07 g 1.4e-05 phase fwd 4.1e-04 side 7.1e-03 back 2.3e-01 rms 1.1e-02 chi 1.4e-05
+   k=1 dx=0.200 dr=0.0277: ext 2.0e-05 ssa 1.4e-06 g 1.6e-05 phase fwd 3.1e-04 side 7.0e-03 back 3.4e-02 rms 1.7e-03 chi 1.6e-05
+   k=2 dx=0.100 dr=0.0138: ext 8.8e-06 ssa 3.1e-07 g 7.5e-06 phase fwd 1.8e-04 side 6.5e-03 back 3.6e-03 rms 6.3e-04 chi 7.5e-06
+   k=3 dx=0.050 dr=0.0069: ext 9.0e-06 ssa 1.1e-07 g 7.8e-06 phase fwd 1.5e-04 side 3.4e-03 back 2.1e-03 rms 4.3e-04 chi 7.8e-06
+   k=4 dx=0.025 dr=0.0035: ext 1.7e-06 ssa 2.0e-07 g 1.7e-06 phase fwd 3.9e-05 side 1.5e-03 back 1.2e-03 rms 1.9e-04 chi 1.7e-06
+   k=5 dx=0.013 dr=0.0017: ext 1.1e-06 ssa 1.2e-07 g 1.1e-06 phase fwd 3.1e-05 side 5.3e-04 back 9.9e-04 rms 1.1e-04 chi 1.1e-06
+   k=6 dx=0.006 dr=0.0009: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re40_wl1.6291: K-1 vs K  ext 1.9e-07 ssa 8.6e-08 g 8.9e-08 phase side 3.1e-05 back 3.0e-05 chi 1.0e-07
+   k=0 dx=0.400 dr=0.1038: ext 9.2e-07 ssa 1.8e-06 g 2.2e-06 phase fwd 1.0e-04 side 8.8e-03 back 1.0e-01 rms 6.8e-03 chi 5.7e-06
+   k=1 dx=0.200 dr=0.0519: ext 1.4e-06 ssa 2.5e-06 g 1.0e-06 phase fwd 4.2e-05 side 9.4e-03 back 2.5e-02 rms 2.0e-03 chi 2.4e-06
+   k=2 dx=0.100 dr=0.0260: ext 1.2e-06 ssa 8.5e-07 g 2.4e-07 phase fwd 1.4e-05 side 4.5e-03 back 2.1e-03 rms 4.0e-04 chi 8.5e-07
+   k=3 dx=0.050 dr=0.0130: ext 8.8e-07 ssa 2.1e-07 g 5.8e-07 phase fwd 1.5e-05 side 2.1e-03 back 2.2e-04 rms 1.9e-04 chi 5.8e-07
+   k=4 dx=0.025 dr=0.0065: ext 2.1e-07 ssa 3.4e-08 g 1.4e-07 phase fwd 7.4e-06 side 2.7e-04 back 2.1e-04 rms 3.8e-05 chi 1.4e-07
+   k=5 dx=0.013 dr=0.0032: ext 1.9e-07 ssa 8.6e-08 g 8.9e-08 phase fwd 1.4e-06 side 3.1e-05 back 3.0e-05 rms 5.1e-06 chi 1.0e-07
+   k=6 dx=0.006 dr=0.0016: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re40_wl11.0262: K-1 vs K  ext 2.7e-13 ssa 4.9e-15 g 3.3e-15 phase side 1.2e-12 back 4.2e-12 chi 1.5e-13
+   k=0 dx=0.286 dr=0.5025: ext 3.7e-10 ssa 4.2e-12 g 3.3e-12 phase fwd 3.3e-09 side 4.3e-10 back 7.6e-11 rms 1.1e-09 chi 2.1e-10
+   k=1 dx=0.143 dr=0.2513: ext 9.2e-11 ssa 1.1e-12 g 8.2e-13 phase fwd 8.1e-10 side 1.1e-10 back 3.4e-11 rms 2.8e-10 chi 5.3e-11
+   k=2 dx=0.072 dr=0.1256: ext 2.3e-11 ssa 1.6e-13 g 2.0e-13 phase fwd 2.0e-10 side 2.6e-11 back 7.3e-12 rms 6.9e-11 chi 1.3e-11
+   k=3 dx=0.036 dr=0.0628: ext 5.7e-12 ssa 4.6e-14 g 5.0e-14 phase fwd 5.0e-11 side 6.8e-12 back 1.1e-11 rms 1.7e-11 chi 3.3e-12
+   k=4 dx=0.018 dr=0.0314: ext 1.3e-12 ssa 2.5e-14 g 1.2e-14 phase fwd 1.2e-11 side 1.7e-12 back 6.5e-12 rms 4.1e-12 chi 7.7e-13
+   k=5 dx=0.009 dr=0.0157: ext 2.7e-13 ssa 4.9e-15 g 3.3e-15 phase fwd 2.4e-12 side 1.2e-12 back 4.2e-12 rms 8.8e-13 chi 1.5e-13
+   k=6 dx=0.004 dr=0.0079: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re40_wl2.1142: K-1 vs K  ext 3.0e-10 ssa 9.5e-11 g 2.1e-10 phase side 3.5e-07 back 3.2e-07 chi 6.2e-10
+   k=0 dx=0.401 dr=0.1350: ext 3.5e-06 ssa 7.9e-06 g 4.5e-06 phase fwd 1.2e-04 side 5.7e-03 back 4.2e-02 rms 3.9e-03 chi 7.2e-06
+   k=1 dx=0.201 dr=0.0675: ext 1.8e-06 ssa 1.8e-06 g 1.2e-07 phase fwd 2.3e-05 side 5.4e-03 back 6.6e-03 rms 7.8e-04 chi 1.3e-06
+   k=2 dx=0.100 dr=0.0337: ext 1.7e-07 ssa 1.6e-07 g 5.2e-09 phase fwd 3.1e-06 side 1.6e-03 back 5.2e-04 rms 1.4e-04 chi 3.9e-07
+   k=3 dx=0.050 dr=0.0169: ext 1.6e-08 ssa 2.5e-08 g 7.7e-09 phase fwd 2.2e-07 side 1.8e-04 back 4.4e-05 rms 2.5e-05 chi 3.7e-08
+   k=4 dx=0.025 dr=0.0084: ext 1.9e-08 ssa 7.0e-09 g 9.0e-09 phase fwd 1.4e-07 side 7.4e-06 back 2.3e-06 rms 1.2e-06 chi 9.0e-09
+   k=5 dx=0.013 dr=0.0042: ext 3.0e-10 ssa 9.5e-11 g 2.1e-10 phase fwd 1.5e-08 side 3.5e-07 back 3.2e-07 rms 5.1e-08 chi 6.2e-10
+   k=6 dx=0.006 dr=0.0021: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re40_wl3.785: K-1 vs K  ext 3.7e-11 ssa 2.4e-11 g 1.6e-11 phase side 3.5e-08 back 2.8e-09 chi 5.2e-11
+   k=0 dx=0.401 dr=0.2415: ext 7.1e-04 ssa 3.0e-04 g 1.7e-04 phase fwd 8.2e-04 side 8.2e-03 back 1.4e-02 rms 3.1e-03 chi 2.1e-04
+   k=1 dx=0.200 dr=0.1208: ext 2.4e-05 ssa 9.2e-06 g 6.9e-06 phase fwd 4.9e-05 side 6.5e-04 back 2.8e-03 rms 3.3e-04 chi 1.2e-05
+   k=2 dx=0.100 dr=0.0604: ext 9.4e-07 ssa 4.4e-07 g 3.4e-07 phase fwd 2.4e-06 side 3.8e-05 back 1.0e-04 rms 1.6e-05 chi 5.9e-07
+   k=3 dx=0.050 dr=0.0302: ext 1.1e-09 ssa 4.6e-10 g 9.5e-10 phase fwd 1.2e-08 side 4.9e-07 back 2.6e-07 rms 8.9e-08 chi 1.9e-09
+   k=4 dx=0.025 dr=0.0151: ext 7.6e-10 ssa 2.0e-10 g 1.0e-10 phase fwd 6.7e-09 side 1.0e-07 back 9.2e-09 rms 1.1e-08 chi 6.9e-10
+   k=5 dx=0.013 dr=0.0075: ext 3.7e-11 ssa 2.4e-11 g 1.6e-11 phase fwd 3.0e-10 side 3.5e-08 back 2.8e-09 rms 6.0e-09 chi 5.2e-11
+   k=6 dx=0.006 dr=0.0038: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re5_wl0.4118525: K-1 vs K  ext 1.8e-05 ssa 3.9e-09 g 1.5e-05 phase side 1.3e-03 back 1.9e-03 chi 1.5e-05
+   k=0 dx=0.400 dr=0.0262: ext 4.2e-04 ssa 5.9e-09 g 2.0e-04 phase fwd 6.9e-03 side 2.9e-02 back 1.4e-01 rms 1.3e-02 chi 3.2e-04
+   k=1 dx=0.200 dr=0.0131: ext 4.7e-05 ssa 4.7e-09 g 3.0e-05 phase fwd 2.5e-03 side 1.5e-02 back 4.5e-02 rms 5.4e-03 chi 1.4e-04
+   k=2 dx=0.100 dr=0.0066: ext 8.8e-05 ssa 4.1e-09 g 7.7e-05 phase fwd 8.9e-04 side 7.9e-03 back 4.5e-02 rms 3.5e-03 chi 7.7e-05
+   k=3 dx=0.050 dr=0.0033: ext 4.7e-05 ssa 1.6e-08 g 4.3e-05 phase fwd 3.1e-04 side 7.0e-03 back 1.7e-02 rms 1.6e-03 chi 4.3e-05
+   k=4 dx=0.025 dr=0.0016: ext 2.8e-05 ssa 8.7e-09 g 2.4e-05 phase fwd 2.8e-04 side 3.3e-03 back 5.1e-03 rms 5.9e-04 chi 2.4e-05
+   k=5 dx=0.013 dr=0.0008: ext 1.8e-05 ssa 3.9e-09 g 1.5e-05 phase fwd 7.6e-05 side 1.3e-03 back 1.9e-03 rms 2.7e-04 chi 1.5e-05
+   k=6 dx=0.006 dr=0.0004: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re5_wl0.6462791: K-1 vs K  ext 2.9e-05 ssa 2.9e-08 g 2.5e-05 phase side 1.5e-03 back 2.5e-03 chi 2.5e-05
+   k=0 dx=0.400 dr=0.0412: ext 8.3e-05 ssa 1.4e-07 g 1.4e-04 phase fwd 2.6e-03 side 5.8e-02 back 1.9e-01 rms 2.4e-02 chi 7.7e-04
+   k=1 dx=0.200 dr=0.0206: ext 9.7e-04 ssa 2.3e-09 g 7.9e-04 phase fwd 2.0e-03 side 2.2e-02 back 6.4e-02 rms 9.7e-03 chi 7.9e-04
+   k=2 dx=0.100 dr=0.0103: ext 8.1e-04 ssa 4.8e-07 g 7.0e-04 phase fwd 3.8e-03 side 2.5e-02 back 6.5e-02 rms 9.2e-03 chi 7.0e-04
+   k=3 dx=0.050 dr=0.0051: ext 1.8e-04 ssa 2.1e-07 g 1.6e-04 phase fwd 7.1e-04 side 8.8e-03 back 2.0e-02 rms 2.7e-03 chi 1.6e-04
+   k=4 dx=0.025 dr=0.0026: ext 5.6e-05 ssa 8.2e-08 g 4.7e-05 phase fwd 1.5e-04 side 4.8e-03 back 1.0e-02 rms 1.0e-03 chi 4.7e-05
+   k=5 dx=0.013 dr=0.0013: ext 2.9e-05 ssa 2.9e-08 g 2.5e-05 phase fwd 1.3e-04 side 1.5e-03 back 2.5e-03 rms 3.6e-04 chi 2.5e-05
+   k=6 dx=0.006 dr=0.0006: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re5_wl0.8680: K-1 vs K  ext 6.3e-07 ssa 4.0e-07 g 9.3e-07 phase side 9.1e-04 back 7.5e-04 chi 5.1e-06
+   k=0 dx=0.400 dr=0.0553: ext 4.8e-03 ssa 2.7e-06 g 3.7e-03 phase fwd 7.5e-03 side 5.1e-02 back 2.4e-01 rms 3.2e-02 chi 3.7e-03
+   k=1 dx=0.200 dr=0.0277: ext 9.9e-04 ssa 5.1e-08 g 8.5e-04 phase fwd 8.7e-04 side 4.3e-02 back 9.7e-02 rms 1.9e-02 chi 8.5e-04
+   k=2 dx=0.100 dr=0.0138: ext 7.4e-04 ssa 1.7e-06 g 5.9e-04 phase fwd 2.6e-03 side 1.3e-02 back 2.7e-02 rms 4.8e-03 chi 5.9e-04
+   k=3 dx=0.050 dr=0.0069: ext 2.7e-04 ssa 1.2e-06 g 2.1e-04 phase fwd 3.6e-04 side 9.1e-03 back 1.5e-02 rms 3.2e-03 chi 2.1e-04
+   k=4 dx=0.025 dr=0.0035: ext 1.4e-05 ssa 7.5e-07 g 7.9e-06 phase fwd 2.3e-04 side 3.2e-03 back 3.5e-03 rms 8.0e-04 chi 3.3e-05
+   k=5 dx=0.013 dr=0.0017: ext 6.3e-07 ssa 4.0e-07 g 9.3e-07 phase fwd 2.7e-05 side 9.1e-04 back 7.5e-04 rms 2.0e-04 chi 5.1e-06
+   k=6 dx=0.006 dr=0.0009: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re5_wl1.6291: K-1 vs K  ext 3.0e-07 ssa 1.7e-07 g 1.1e-07 phase side 1.1e-05 back 1.8e-05 chi 1.1e-07
+   k=0 dx=0.400 dr=0.1038: ext 1.4e-03 ssa 2.2e-06 g 9.7e-04 phase fwd 3.3e-03 side 1.2e-02 back 7.9e-02 rms 1.2e-02 chi 9.7e-04
+   k=1 dx=0.200 dr=0.0519: ext 5.4e-05 ssa 1.3e-05 g 5.0e-05 phase fwd 2.3e-04 side 3.2e-03 back 1.3e-02 rms 2.2e-03 chi 5.6e-05
+   k=2 dx=0.100 dr=0.0260: ext 9.3e-06 ssa 2.4e-06 g 5.4e-06 phase fwd 6.0e-05 side 1.9e-03 back 3.7e-03 rms 6.0e-04 chi 8.6e-06
+   k=3 dx=0.050 dr=0.0130: ext 2.6e-06 ssa 1.4e-06 g 9.7e-07 phase fwd 2.0e-05 side 6.4e-04 back 5.4e-04 rms 1.0e-04 chi 1.7e-06
+   k=4 dx=0.025 dr=0.0065: ext 3.7e-07 ssa 1.5e-07 g 1.7e-07 phase fwd 2.2e-06 side 9.5e-05 back 5.7e-05 rms 1.6e-05 chi 2.8e-07
+   k=5 dx=0.013 dr=0.0032: ext 3.0e-07 ssa 1.7e-07 g 1.1e-07 phase fwd 2.3e-06 side 1.1e-05 back 1.8e-05 rms 2.4e-06 chi 1.1e-07
+   k=6 dx=0.006 dr=0.0016: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re5_wl11.0262: K-1 vs K  ext 4.1e-11 ssa 8.5e-12 g 1.0e-11 phase side 3.5e-10 back 6.1e-11 chi 4.0e-11
+   k=0 dx=0.286 dr=0.5025: ext 5.6e-08 ssa 1.1e-08 g 1.4e-08 phase fwd 5.6e-07 side 4.7e-07 back 9.6e-08 rms 2.8e-07 chi 5.5e-08
+   k=1 dx=0.143 dr=0.2513: ext 1.4e-08 ssa 2.9e-09 g 3.5e-09 phase fwd 1.4e-07 side 1.2e-07 back 2.1e-08 rms 7.0e-08 chi 1.4e-08
+   k=2 dx=0.072 dr=0.1256: ext 3.5e-09 ssa 7.2e-10 g 8.7e-10 phase fwd 3.5e-08 side 2.9e-08 back 5.2e-09 rms 1.7e-08 chi 3.4e-09
+   k=3 dx=0.036 dr=0.0628: ext 8.6e-10 ssa 1.8e-10 g 2.2e-10 phase fwd 8.7e-09 side 7.3e-09 back 1.3e-09 rms 4.3e-09 chi 8.5e-10
+   k=4 dx=0.018 dr=0.0314: ext 2.0e-10 ssa 4.3e-11 g 5.1e-11 phase fwd 2.1e-09 side 1.7e-09 back 3.0e-10 rms 1.0e-09 chi 2.0e-10
+   k=5 dx=0.009 dr=0.0157: ext 4.1e-11 ssa 8.5e-12 g 1.0e-11 phase fwd 4.1e-10 side 3.5e-10 back 6.1e-11 rms 2.0e-10 chi 4.0e-11
+   k=6 dx=0.004 dr=0.0079: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re5_wl2.1142: K-1 vs K  ext 3.9e-11 ssa 2.5e-11 g 1.1e-11 phase side 1.5e-09 back 1.8e-09 chi 1.8e-11
+   k=0 dx=0.401 dr=0.1350: ext 3.6e-06 ssa 2.1e-07 g 7.9e-06 phase fwd 2.6e-04 side 3.4e-03 back 1.7e-02 rms 2.4e-03 chi 1.3e-04
+   k=1 dx=0.201 dr=0.0675: ext 2.6e-09 ssa 1.8e-08 g 1.6e-08 phase fwd 1.8e-07 side 2.0e-03 back 2.8e-03 rms 3.6e-04 chi 5.2e-06
+   k=2 dx=0.100 dr=0.0337: ext 1.2e-09 ssa 4.6e-10 g 7.1e-10 phase fwd 3.6e-08 side 1.8e-04 back 5.5e-05 rms 3.0e-05 chi 4.0e-07
+   k=3 dx=0.050 dr=0.0169: ext 1.7e-10 ssa 7.9e-11 g 1.9e-10 phase fwd 5.2e-10 side 6.3e-06 back 1.1e-07 rms 9.3e-07 chi 4.6e-09
+   k=4 dx=0.025 dr=0.0084: ext 2.3e-10 ssa 1.4e-10 g 2.3e-10 phase fwd 1.3e-09 side 1.4e-07 back 8.9e-08 rms 2.9e-08 chi 6.5e-10
+   k=5 dx=0.013 dr=0.0042: ext 3.9e-11 ssa 2.5e-11 g 1.1e-11 phase fwd 5.0e-10 side 1.5e-09 back 1.8e-09 rms 3.2e-10 chi 1.8e-11
+   k=6 dx=0.006 dr=0.0021: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+liquid-water_stg_re5_wl3.785: K-1 vs K  ext 1.9e-12 ssa 1.5e-13 g 1.5e-13 phase side 8.7e-12 back 1.1e-11 chi 3.4e-13
+   k=0 dx=0.401 dr=0.2415: ext 3.0e-04 ssa 8.8e-06 g 3.1e-04 phase fwd 1.2e-03 side 3.7e-03 back 3.4e-02 rms 4.4e-03 chi 3.1e-04
+   k=1 dx=0.200 dr=0.1208: ext 5.7e-06 ssa 7.9e-07 g 6.7e-06 phase fwd 2.8e-05 side 8.2e-05 back 1.4e-03 rms 1.6e-04 chi 6.7e-06
+   k=2 dx=0.100 dr=0.0604: ext 5.7e-08 ssa 2.9e-08 g 1.4e-08 phase fwd 7.5e-07 side 1.4e-06 back 1.0e-05 rms 1.2e-06 chi 3.8e-08
+   k=3 dx=0.050 dr=0.0302: ext 6.1e-11 ssa 3.7e-11 g 6.5e-12 phase fwd 8.6e-10 side 2.1e-09 back 9.8e-09 rms 1.3e-09 chi 6.4e-11
+   k=4 dx=0.025 dr=0.0151: ext 9.4e-12 ssa 7.6e-13 g 7.5e-13 phase fwd 4.0e-11 side 4.3e-11 back 5.3e-11 rms 2.1e-11 chi 1.7e-12
+   k=5 dx=0.013 dr=0.0075: ext 1.9e-12 ssa 1.5e-13 g 1.5e-13 phase fwd 8.0e-12 side 8.7e-12 back 1.1e-11 rms 4.1e-12 chi 3.4e-13
+   k=6 dx=0.006 dr=0.0038: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+water-ice_sph_re10_wl0.6462791: K-1 vs K  ext 3.1e-06 ssa 8.3e-10 g 2.8e-06 phase side 1.2e-03 back 1.2e-03 chi 3.6e-06
+   k=0 dx=0.400 dr=0.0412: ext 1.0e-04 ssa 9.6e-08 g 8.5e-05 phase fwd 7.8e-04 side 1.7e-02 back 6.7e-02 rms 7.4e-03 chi 8.5e-05
+   k=1 dx=0.200 dr=0.0206: ext 7.1e-05 ssa 1.7e-07 g 6.1e-05 phase fwd 3.0e-04 side 1.0e-02 back 2.1e-02 rms 3.0e-03 chi 6.1e-05
+   k=2 dx=0.100 dr=0.0103: ext 4.2e-05 ssa 6.6e-08 g 3.7e-05 phase fwd 1.7e-04 side 6.4e-03 back 7.0e-03 rms 1.3e-03 chi 3.7e-05
+   k=3 dx=0.050 dr=0.0051: ext 4.1e-05 ssa 7.5e-08 g 3.6e-05 phase fwd 1.5e-04 side 4.4e-03 back 3.0e-03 rms 7.4e-04 chi 3.6e-05
+   k=4 dx=0.025 dr=0.0026: ext 1.2e-05 ssa 2.8e-08 g 1.0e-05 phase fwd 6.6e-05 side 3.6e-03 back 1.8e-03 rms 4.8e-04 chi 1.0e-05
+   k=5 dx=0.013 dr=0.0013: ext 3.1e-06 ssa 8.3e-10 g 2.8e-06 phase fwd 5.0e-05 side 1.2e-03 back 1.2e-03 rms 2.0e-04 chi 3.6e-06
+   k=6 dx=0.006 dr=0.0006: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+water-ice_sph_re10_wl11.0262: K-1 vs K  ext 3.2e-14 ssa 1.2e-14 g 0.0e+00 phase side 5.2e-13 back 3.9e-13 chi 8.5e-15
+   k=0 dx=0.286 dr=0.5025: ext 9.8e-12 ssa 4.0e-12 g 5.7e-13 phase fwd 2.1e-12 side 4.7e-11 back 5.0e-11 rms 1.7e-11 chi 5.7e-13
+   k=1 dx=0.143 dr=0.2513: ext 1.4e-12 ssa 5.5e-13 g 0.0e+00 phase fwd 2.6e-12 side 3.5e-12 back 3.1e-12 rms 1.7e-12 chi 3.6e-13
+   k=2 dx=0.072 dr=0.1256: ext 5.4e-14 ssa 2.1e-14 g 2.2e-16 phase fwd 3.8e-13 side 5.3e-12 back 4.9e-12 rms 1.5e-12 chi 8.4e-14
+   k=3 dx=0.036 dr=0.0628: ext 1.3e-13 ssa 5.0e-14 g 3.3e-16 phase fwd 5.9e-14 side 1.4e-12 back 2.0e-12 rms 4.1e-13 chi 2.5e-14
+   k=4 dx=0.018 dr=0.0314: ext 1.4e-13 ssa 5.5e-14 g 3.3e-16 phase fwd 2.3e-13 side 4.6e-13 back 2.6e-12 rms 3.6e-13 chi 3.3e-14
+   k=5 dx=0.009 dr=0.0157: ext 3.2e-14 ssa 1.2e-14 g 0.0e+00 phase fwd 2.0e-14 side 5.2e-13 back 3.9e-13 rms 1.5e-13 chi 8.5e-15
+   k=6 dx=0.004 dr=0.0079: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+water-ice_sph_re10_wl2.1142: K-1 vs K  ext 2.1e-11 ssa 1.6e-11 g 5.1e-12 phase side 1.4e-09 back 4.3e-09 chi 1.8e-11
+   k=0 dx=0.401 dr=0.1350: ext 6.6e-07 ssa 3.3e-06 g 2.4e-06 phase fwd 2.8e-05 side 2.0e-02 back 7.5e-02 rms 8.4e-03 chi 1.2e-04
+   k=1 dx=0.201 dr=0.0675: ext 6.2e-07 ssa 2.5e-07 g 2.8e-07 phase fwd 1.5e-06 side 1.7e-02 back 1.3e-02 rms 2.1e-03 chi 1.2e-05
+   k=2 dx=0.100 dr=0.0337: ext 3.7e-08 ssa 2.6e-08 g 4.2e-08 phase fwd 2.2e-07 side 1.5e-03 back 1.0e-04 rms 2.6e-04 chi 1.6e-06
+   k=3 dx=0.050 dr=0.0169: ext 4.0e-08 ssa 2.4e-08 g 1.5e-08 phase fwd 1.6e-07 side 1.5e-04 back 1.9e-05 rms 3.2e-05 chi 1.6e-07
+   k=4 dx=0.025 dr=0.0084: ext 4.1e-08 ssa 2.4e-08 g 1.5e-08 phase fwd 1.5e-07 side 2.4e-06 back 6.3e-06 rms 7.9e-07 chi 1.7e-08
+   k=5 dx=0.013 dr=0.0042: ext 2.1e-11 ssa 1.6e-11 g 5.1e-12 phase fwd 8.1e-11 side 1.4e-09 back 4.3e-09 rms 5.1e-10 chi 1.8e-11
+   k=6 dx=0.006 dr=0.0021: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+water-ice_sph_re30_wl0.6462791: K-1 vs K  ext 5.2e-07 ssa 1.6e-08 g 4.7e-07 phase side 7.8e-04 back 7.6e-04 chi 4.7e-07
+   k=0 dx=0.400 dr=0.0412: ext 2.3e-05 ssa 1.1e-07 g 2.0e-05 phase fwd 2.5e-04 side 1.0e-02 back 1.1e-01 rms 6.0e-03 chi 2.0e-05
+   k=1 dx=0.200 dr=0.0206: ext 1.4e-05 ssa 3.0e-08 g 1.3e-05 phase fwd 2.4e-04 side 6.5e-03 back 2.6e-02 rms 1.8e-03 chi 1.3e-05
+   k=2 dx=0.100 dr=0.0103: ext 3.2e-06 ssa 3.5e-08 g 2.8e-06 phase fwd 2.4e-04 side 6.0e-03 back 5.9e-03 rms 7.9e-04 chi 3.4e-06
+   k=3 dx=0.050 dr=0.0051: ext 3.9e-06 ssa 1.3e-08 g 3.4e-06 phase fwd 1.8e-04 side 6.2e-03 back 3.0e-03 rms 5.9e-04 chi 3.4e-06
+   k=4 dx=0.025 dr=0.0026: ext 1.1e-06 ssa 3.2e-08 g 9.9e-07 phase fwd 1.3e-04 side 2.5e-03 back 2.5e-03 rms 2.9e-04 chi 2.1e-06
+   k=5 dx=0.013 dr=0.0013: ext 5.2e-07 ssa 1.6e-08 g 4.7e-07 phase fwd 4.4e-05 side 7.8e-04 back 7.6e-04 rms 1.0e-04 chi 4.7e-07
+   k=6 dx=0.006 dr=0.0006: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+water-ice_sph_re30_wl11.0262: K-1 vs K  ext 1.5e-12 ssa 5.6e-14 g 1.7e-14 phase side 1.7e-12 back 2.3e-12 chi 8.8e-13
+   k=0 dx=0.286 dr=0.5025: ext 2.1e-09 ssa 8.0e-11 g 2.5e-11 phase fwd 1.6e-08 side 2.3e-09 back 2.1e-10 rms 6.0e-09 chi 1.2e-09
+   k=1 dx=0.143 dr=0.2513: ext 5.2e-10 ssa 2.0e-11 g 6.2e-12 phase fwd 4.1e-09 side 5.8e-10 back 1.0e-10 rms 1.5e-09 chi 3.0e-10
+   k=2 dx=0.072 dr=0.1256: ext 1.3e-10 ssa 4.9e-12 g 1.5e-12 phase fwd 1.0e-09 side 1.4e-10 back 1.7e-11 rms 3.8e-10 chi 7.4e-11
+   k=3 dx=0.036 dr=0.0628: ext 3.2e-11 ssa 1.2e-12 g 3.8e-13 phase fwd 2.5e-10 side 3.6e-11 back 6.7e-12 rms 9.3e-11 chi 1.8e-11
+   k=4 dx=0.018 dr=0.0314: ext 7.6e-12 ssa 3.1e-13 g 9.0e-14 phase fwd 6.0e-11 side 8.5e-12 back 1.3e-11 rms 2.2e-11 chi 4.3e-12
+   k=5 dx=0.009 dr=0.0157: ext 1.5e-12 ssa 5.6e-14 g 1.7e-14 phase fwd 1.2e-11 side 1.7e-12 back 2.3e-12 rms 4.4e-12 chi 8.8e-13
+   k=6 dx=0.004 dr=0.0079: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+water-ice_sph_re30_wl2.1142: K-1 vs K  ext 6.6e-10 ssa 1.3e-10 g 3.6e-11 phase side 8.9e-08 back 7.4e-08 chi 6.0e-10
+   k=0 dx=0.401 dr=0.1350: ext 8.1e-08 ssa 5.3e-07 g 5.1e-07 phase fwd 1.1e-05 side 6.1e-03 back 5.6e-02 rms 5.3e-03 chi 7.9e-06
+   k=1 dx=0.201 dr=0.0675: ext 1.3e-07 ssa 6.9e-09 g 2.5e-08 phase fwd 6.6e-07 side 6.7e-03 back 6.6e-03 rms 7.8e-04 chi 2.0e-06
+   k=2 dx=0.100 dr=0.0337: ext 6.2e-08 ssa 4.2e-08 g 1.8e-08 phase fwd 4.0e-07 side 6.4e-04 back 2.6e-04 rms 1.4e-04 chi 3.6e-07
+   k=3 dx=0.050 dr=0.0169: ext 7.7e-09 ssa 7.0e-09 g 7.4e-10 phase fwd 2.4e-07 side 1.9e-04 back 1.8e-05 rms 3.2e-05 chi 2.8e-08
+   k=4 dx=0.025 dr=0.0084: ext 7.4e-09 ssa 6.6e-09 g 3.8e-10 phase fwd 2.3e-07 side 3.4e-06 back 7.5e-06 rms 8.3e-07 chi 6.8e-09
+   k=5 dx=0.013 dr=0.0042: ext 6.6e-10 ssa 1.3e-10 g 3.6e-11 phase fwd 6.2e-09 side 8.9e-08 back 7.4e-08 rms 1.8e-08 chi 6.0e-10
+   k=6 dx=0.006 dr=0.0021: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+water-ice_sph_re60_wl0.6462791: K-1 vs K  ext 9.3e-07 ssa 4.1e-08 g 7.9e-07 phase side 6.1e-04 back 8.8e-04 chi 7.9e-07
+   k=0 dx=0.400 dr=0.0412: ext 7.3e-06 ssa 1.5e-07 g 5.8e-06 phase fwd 4.2e-04 side 7.7e-03 back 5.9e-02 rms 2.7e-03 chi 5.8e-06
+   k=1 dx=0.200 dr=0.0206: ext 9.3e-06 ssa 1.1e-07 g 8.3e-06 phase fwd 2.2e-04 side 5.2e-03 back 1.5e-02 rms 1.0e-03 chi 8.3e-06
+   k=2 dx=0.100 dr=0.0103: ext 3.1e-06 ssa 3.0e-08 g 2.8e-06 phase fwd 1.4e-04 side 4.9e-03 back 5.0e-03 rms 4.8e-04 chi 2.8e-06
+   k=3 dx=0.050 dr=0.0051: ext 7.2e-07 ssa 6.2e-08 g 6.0e-07 phase fwd 9.8e-05 side 5.0e-03 back 5.0e-03 rms 3.9e-04 chi 6.0e-07
+   k=4 dx=0.025 dr=0.0026: ext 5.4e-07 ssa 7.0e-08 g 4.2e-07 phase fwd 9.9e-05 side 6.2e-04 back 5.9e-03 rms 2.5e-04 chi 4.8e-07
+   k=5 dx=0.013 dr=0.0013: ext 9.3e-07 ssa 4.1e-08 g 7.9e-07 phase fwd 4.4e-05 side 6.1e-04 back 8.8e-04 rms 9.7e-05 chi 7.9e-07
+   k=6 dx=0.006 dr=0.0006: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+water-ice_sph_re60_wl11.0262: K-1 vs K  ext 3.2e-09 ssa 3.7e-11 g 9.1e-12 phase side 7.1e-09 back 6.2e-11 chi 7.7e-10
+   k=0 dx=0.286 dr=0.5025: ext 4.4e-06 ssa 5.0e-08 g 1.2e-08 phase fwd 5.2e-06 side 9.7e-06 back 7.4e-08 rms 3.9e-06 chi 1.0e-06
+   k=1 dx=0.143 dr=0.2513: ext 1.1e-06 ssa 1.3e-08 g 3.1e-09 phase fwd 1.3e-06 side 2.4e-06 back 1.8e-08 rms 9.7e-07 chi 2.6e-07
+   k=2 dx=0.072 dr=0.1256: ext 2.8e-07 ssa 3.1e-09 g 7.8e-10 phase fwd 3.3e-07 side 6.1e-07 back 4.7e-09 rms 2.4e-07 chi 6.5e-08
+   k=3 dx=0.036 dr=0.0628: ext 6.8e-08 ssa 7.7e-10 g 1.9e-10 phase fwd 8.1e-08 side 1.5e-07 back 1.2e-09 rms 6.0e-08 chi 1.6e-08
+   k=4 dx=0.018 dr=0.0314: ext 1.6e-08 ssa 1.8e-10 g 4.6e-11 phase fwd 1.9e-08 side 3.6e-08 back 2.7e-10 rms 1.4e-08 chi 3.8e-09
+   k=5 dx=0.009 dr=0.0157: ext 3.2e-09 ssa 3.7e-11 g 9.1e-12 phase fwd 3.8e-09 side 7.1e-09 back 6.2e-11 rms 2.8e-09 chi 7.7e-10
+   k=6 dx=0.004 dr=0.0079: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+water-ice_sph_re60_wl2.1142: K-1 vs K  ext 4.9e-10 ssa 1.2e-09 g 3.8e-10 phase side 7.3e-07 back 4.1e-07 chi 1.5e-09
+   k=0 dx=0.401 dr=0.1350: ext 3.1e-07 ssa 5.6e-08 g 2.8e-09 phase fwd 7.1e-06 side 1.8e-03 back 5.7e-02 rms 3.2e-03 chi 1.2e-06
+   k=1 dx=0.201 dr=0.0675: ext 1.6e-07 ssa 2.0e-09 g 6.4e-09 phase fwd 4.6e-06 side 1.7e-03 back 1.3e-03 rms 1.6e-04 chi 3.1e-07
+   k=2 dx=0.100 dr=0.0337: ext 1.9e-08 ssa 7.9e-09 g 1.3e-11 phase fwd 7.9e-07 side 2.0e-04 back 1.2e-05 rms 2.1e-05 chi 1.5e-08
+   k=3 dx=0.050 dr=0.0169: ext 5.7e-09 ssa 8.4e-09 g 1.9e-09 phase fwd 1.8e-07 side 7.7e-06 back 5.0e-06 rms 1.3e-06 chi 6.1e-09
+   k=4 dx=0.025 dr=0.0084: ext 4.1e-10 ssa 5.3e-09 g 9.7e-10 phase fwd 9.9e-08 side 2.0e-06 back 1.8e-06 rms 2.1e-07 chi 4.1e-09
+   k=5 dx=0.013 dr=0.0042: ext 4.9e-10 ssa 1.2e-09 g 3.8e-10 phase fwd 3.8e-08 side 7.3e-07 back 4.1e-07 rms 9.9e-08 chi 1.5e-09
+   k=6 dx=0.006 dr=0.0021: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+water-ice_sph_re93_wl0.6462791: K-1 vs K  ext 5.5e-07 ssa 2.2e-09 g 4.8e-07 phase side 5.0e-04 back 1.2e-03 chi 4.8e-07
+   k=0 dx=0.400 dr=0.0412: ext 6.7e-06 ssa 1.3e-07 g 1.8e-06 phase fwd 5.0e-04 side 9.0e-03 back 2.0e-02 rms 1.2e-03 chi 1.8e-06
+   k=1 dx=0.200 dr=0.0206: ext 5.8e-06 ssa 1.7e-07 g 5.6e-06 phase fwd 3.2e-04 side 4.8e-03 back 1.5e-02 rms 8.7e-04 chi 5.6e-06
+   k=2 dx=0.100 dr=0.0103: ext 1.5e-06 ssa 2.2e-08 g 1.5e-06 phase fwd 1.4e-04 side 4.5e-03 back 6.3e-03 rms 4.3e-04 chi 1.5e-06
+   k=3 dx=0.050 dr=0.0051: ext 4.2e-07 ssa 3.2e-08 g 4.3e-07 phase fwd 7.7e-05 side 4.4e-03 back 5.1e-03 rms 3.6e-04 chi 4.5e-07
+   k=4 dx=0.025 dr=0.0026: ext 5.6e-08 ssa 2.6e-08 g 6.1e-08 phase fwd 7.3e-05 side 5.2e-04 back 4.3e-03 rms 2.3e-04 chi 2.4e-07
+   k=5 dx=0.013 dr=0.0013: ext 5.5e-07 ssa 2.2e-09 g 4.8e-07 phase fwd 5.9e-05 side 5.0e-04 back 1.2e-03 rms 8.6e-05 chi 4.8e-07
+   k=6 dx=0.006 dr=0.0006: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+water-ice_sph_re93_wl11.0262: K-1 vs K  ext 4.8e-09 ssa 1.2e-11 g 1.8e-12 phase side 4.5e-08 back 4.1e-11 chi 1.3e-09
+   k=0 dx=0.286 dr=0.5025: ext 6.5e-06 ssa 1.6e-08 g 2.4e-09 phase fwd 2.5e-05 side 6.1e-05 back 5.1e-08 rms 2.4e-05 chi 1.7e-06
+   k=1 dx=0.143 dr=0.2513: ext 1.6e-06 ssa 4.0e-09 g 6.1e-10 phase fwd 6.2e-06 side 1.5e-05 back 1.2e-08 rms 6.0e-06 chi 4.3e-07
+   k=2 dx=0.072 dr=0.1256: ext 4.1e-07 ssa 9.9e-10 g 1.5e-10 phase fwd 1.5e-06 side 3.8e-06 back 3.2e-09 rms 1.5e-06 chi 1.1e-07
+   k=3 dx=0.036 dr=0.0628: ext 1.0e-07 ssa 2.4e-10 g 3.7e-11 phase fwd 3.8e-07 side 9.4e-07 back 7.9e-10 rms 3.7e-07 chi 2.6e-08
+   k=4 dx=0.018 dr=0.0314: ext 2.4e-08 ssa 5.8e-11 g 8.9e-12 phase fwd 9.1e-08 side 2.2e-07 back 1.7e-10 rms 8.8e-08 chi 6.3e-09
+   k=5 dx=0.009 dr=0.0157: ext 4.8e-09 ssa 1.2e-11 g 1.8e-12 phase fwd 1.8e-08 side 4.5e-08 back 4.1e-11 rms 1.8e-08 chi 1.3e-09
+   k=6 dx=0.004 dr=0.0079: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00
+water-ice_sph_re93_wl2.1142: K-1 vs K  ext 1.1e-09 ssa 2.8e-09 g 4.5e-10 phase side 1.5e-06 back 8.5e-07 chi 2.1e-09
+   k=0 dx=0.401 dr=0.1350: ext 1.0e-07 ssa 4.0e-07 g 1.7e-08 phase fwd 3.7e-05 side 1.1e-03 back 4.3e-02 rms 2.2e-03 chi 8.3e-07
+   k=1 dx=0.201 dr=0.0675: ext 3.0e-07 ssa 7.0e-08 g 4.5e-08 phase fwd 1.6e-05 side 1.2e-03 back 4.1e-04 rms 6.9e-05 chi 2.9e-07
+   k=2 dx=0.100 dr=0.0337: ext 2.5e-08 ssa 8.2e-10 g 1.6e-09 phase fwd 3.1e-06 side 7.5e-05 back 2.6e-05 rms 7.4e-06 chi 4.0e-08
+   k=3 dx=0.050 dr=0.0169: ext 1.1e-08 ssa 1.5e-08 g 2.7e-09 phase fwd 7.2e-07 side 8.1e-06 back 8.1e-06 rms 1.3e-06 chi 2.1e-08
+   k=4 dx=0.025 dr=0.0084: ext 1.5e-09 ssa 1.3e-08 g 2.2e-09 phase fwd 2.8e-07 side 4.6e-06 back 3.6e-06 rms 4.7e-07 chi 1.1e-08
+   k=5 dx=0.013 dr=0.0042: ext 1.1e-09 ssa 2.8e-09 g 4.5e-10 phase fwd 8.1e-08 side 1.5e-06 back 8.5e-07 rms 2.2e-07 chi 2.1e-09
+   k=6 dx=0.006 dr=0.0021: ext 0.0e+00 ssa 0.0e+00 g 0.0e+00 phase fwd 0.0e+00 side 0.0e+00 back 0.0e+00 rms 0.0e+00 chi 0.0e+00

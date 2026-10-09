@@ -85,10 +85,22 @@ missfont.log
 # Generated LUT products
 /luts/
 
-# Local development history, scientific validation and archived material.
+# Local development history and archived material.
 # These are retained on disk but are not part of the distributable program.
 /docs/
-/validation/
+
+# Validation: source code, reports, run/grid definitions and small tabulated
+# results are version-controlled (2026-10-09); generated products, arrays,
+# figures, job logs, caches, pytest scratch and large intermediate results
+# stay on disk only.
+validation/generated/
+validation/slurm
+validation/netcdf_string_attributes/logs/
+validation/v24/results/disort_options/
+validation/**/*.nc
+validation/**/*.npz
+validation/**/*.png
+validation/**/__pycache__/
 
 # Local development/design documentation.
 /ARCHITECTURE.md

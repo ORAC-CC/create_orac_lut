@@ -1,0 +1,242 @@
+[
+  {
+    "case": "liquid",
+    "instrument": "modis",
+    "level": 0,
+    "units": 1053138415165.0593,
+    "nodes": 763362,
+    "predicted_mie_cpu_h": 0.7848026863267048
+  },
+  {
+    "case": "liquid",
+    "instrument": "modis",
+    "level": 2,
+    "units": 4211410578190.0967,
+    "nodes": 3050784,
+    "predicted_mie_cpu_h": 3.138358915974282
+  },
+  {
+    "case": "liquid",
+    "instrument": "modis",
+    "level": 3,
+    "units": 8422439819296.224,
+    "nodes": 6100680,
+    "predicted_mie_cpu_h": 6.276433658127169
+  },
+  {
+    "case": "liquid",
+    "instrument": "modis",
+    "level": 4,
+    "units": 16844498090400.781,
+    "nodes": 12200472,
+    "predicted_mie_cpu_h": 12.552582985114697
+  },
+  {
+    "case": "liquid",
+    "instrument": "modis",
+    "level": "rule",
+    "units": 16844498090400.781,
+    "nodes": 12200472,
+    "predicted_mie_cpu_h": 12.552582985114697
+  },
+  {
+    "case": "liquid",
+    "instrument": "slstr",
+    "level": 0,
+    "units": 213343201331.29312,
+    "nodes": 198819,
+    "predicted_mie_cpu_h": 0.1589841516588264
+  },
+  {
+    "case": "liquid",
+    "instrument": "slstr",
+    "level": 2,
+    "units": 853103663096.974,
+    "nodes": 794556,
+    "predicted_mie_cpu_h": 0.6357360408401047
+  },
+  {
+    "case": "liquid",
+    "instrument": "slstr",
+    "level": 3,
+    "units": 1706117529278.62,
+    "nodes": 1588872,
+    "predicted_mie_cpu_h": 1.271405164683015
+  },
+  {
+    "case": "liquid",
+    "instrument": "slstr",
+    "level": 4,
+    "units": 3412145197117.929,
+    "nodes": 3177504,
+    "predicted_mie_cpu_h": 2.542743364285321
+  },
+  {
+    "case": "liquid",
+    "instrument": "slstr",
+    "level": "rule",
+    "units": 3412145197117.929,
+    "nodes": 3177504,
+    "predicted_mie_cpu_h": 2.542743364285321
+  },
+  {
+    "case": "liquid",
+    "instrument": "benchmark",
+    "level": 0,
+    "units": 232528747441.64224,
+    "nodes": 161504,
+    "predicted_mie_cpu_h": 0.1732812923852778
+  },
+  {
+    "case": "liquid",
+    "instrument": "benchmark",
+    "level": 2,
+    "units": 929867477756.0002,
+    "nodes": 645512,
+    "predicted_mie_cpu_h": 0.6929407226649976
+  },
+  {
+    "case": "liquid",
+    "instrument": "benchmark",
+    "level": 3,
+    "units": 1859652388666.2668,
+    "nodes": 1290856,
+    "predicted_mie_cpu_h": 1.3858199162077067
+  },
+  {
+    "case": "liquid",
+    "instrument": "benchmark",
+    "level": 4,
+    "units": 3719222169926.4014,
+    "nodes": 2581544,
+    "predicted_mie_cpu_h": 2.771578273067364
+  },
+  {
+    "case": "liquid",
+    "instrument": "benchmark",
+    "level": "rule",
+    "units": 3719222169926.4014,
+    "nodes": 2581544,
+    "predicted_mie_cpu_h": 2.771578273067364
+  },
+  {
+    "case": "ice_sph",
+    "instrument": "modis",
+    "level": 0,
+    "units": 2241081742840.3755,
+    "nodes": 1504462,
+    "predicted_mie_cpu_h": 1.6380689237031667
+  },
+  {
+    "case": "ice_sph",
+    "instrument": "modis",
+    "level": 2,
+    "units": 8961893553783.719,
+    "nodes": 6014629,
+    "predicted_mie_cpu_h": 6.550497042282346
+  },
+  {
+    "case": "ice_sph",
+    "instrument": "modis",
+    "level": 3,
+    "units": 17922975460999.176,
+    "nodes": 12028185,
+    "predicted_mie_cpu_h": 13.100400829532942
+  },
+  {
+    "case": "ice_sph",
+    "instrument": "modis",
+    "level": 4,
+    "units": 35845138963656.66,
+    "nodes": 24055297,
+    "predicted_mie_cpu_h": 26.200208176150273
+  },
+  {
+    "case": "ice_sph",
+    "instrument": "modis",
+    "level": "rule",
+    "units": 17922975460999.176,
+    "nodes": 12028185,
+    "predicted_mie_cpu_h": 13.100400829532942
+  },
+  {
+    "case": "ice_sph",
+    "instrument": "slstr",
+    "level": 0,
+    "units": 454759479591.3322,
+    "nodes": 391819,
+    "predicted_mie_cpu_h": 0.33239634103388627
+  },
+  {
+    "case": "ice_sph",
+    "instrument": "slstr",
+    "level": 2,
+    "units": 1818465993245.5916,
+    "nodes": 1566406,
+    "predicted_mie_cpu_h": 1.3291673281721896
+  },
+  {
+    "case": "ice_sph",
+    "instrument": "slstr",
+    "level": 3,
+    "units": 3636741209391.28,
+    "nodes": 3132522,
+    "predicted_mie_cpu_h": 2.6581952120605177
+  },
+  {
+    "case": "ice_sph",
+    "instrument": "slstr",
+    "level": 4,
+    "units": 7273291548492.617,
+    "nodes": 6264754,
+    "predicted_mie_cpu_h": 5.316250911721984
+  },
+  {
+    "case": "ice_sph",
+    "instrument": "slstr",
+    "level": "rule",
+    "units": 3636741209391.28,
+    "nodes": 3132522,
+    "predicted_mie_cpu_h": 2.6581952120605177
+  },
+  {
+    "case": "ice_sph",
+    "instrument": "benchmark",
+    "level": 0,
+    "units": 494526093505.6477,
+    "nodes": 318333,
+    "predicted_mie_cpu_h": 0.36146286422611146
+  },
+  {
+    "case": "ice_sph",
+    "instrument": "benchmark",
+    "level": 2,
+    "units": 1977577277160.5208,
+    "nodes": 1272723,
+    "predicted_mie_cpu_h": 1.4454661871603607
+  },
+  {
+    "case": "ice_sph",
+    "instrument": "benchmark",
+    "level": 3,
+    "units": 3954978751404.7407,
+    "nodes": 2545243,
+    "predicted_mie_cpu_h": 2.890803875083775
+  },
+  {
+    "case": "ice_sph",
+    "instrument": "benchmark",
+    "level": 4,
+    "units": 7909781639604.494,
+    "nodes": 5090283,
+    "predicted_mie_cpu_h": 5.781479206863928
+  },
+  {
+    "case": "ice_sph",
+    "instrument": "benchmark",
+    "level": "rule",
+    "units": 3954978751404.7407,
+    "nodes": 2545243,
+    "predicted_mie_cpu_h": 2.890803875083775
+  }
+]

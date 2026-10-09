@@ -1,0 +1,13 @@
+# Compact ice grid for the DISORT-options investigation
+# (validation/v24/disort_options/run_variant.py).  Not a production grid:
+# every value is a node of ice-cloud-grid-b.lut.
+6 uneven_logarithmic # optical depth
+0.25 1.0 4.0 16.0 64.0 256.0
+5 uneven_linear # physical effective radius, microns
+5.0 15.0 33.0 61.0 93.0
+4 uneven_linear # solar zenith, degrees
+0.0 30.0 60.0 75.0
+4 uneven_linear # satellite zenith, degrees
+0.0 30.0 60.0 75.0
+7 linear # relative azimuth, degrees, 0-180
+0 180

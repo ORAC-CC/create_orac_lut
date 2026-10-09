@@ -1,0 +1,52 @@
+[
+  {
+    "variant": "adaptive",
+    "channel": 1,
+    "wavelength_um": 0.6462790966033936,
+    "mean_moments": 1235.1666666666667,
+    "max_moments": 2749
+  },
+  {
+    "variant": "adaptive",
+    "channel": 3,
+    "wavelength_um": 0.46574246883392334,
+    "mean_moments": 1704.875,
+    "max_moments": 3789
+  },
+  {
+    "variant": "adaptive",
+    "channel": 6,
+    "wavelength_um": 1.629384994506836,
+    "mean_moments": 486.0416666666667,
+    "max_moments": 1067
+  },
+  {
+    "variant": "adaptive",
+    "channel": 7,
+    "wavelength_um": 2.1142098903656006,
+    "mean_moments": 376.625,
+    "max_moments": 827
+  },
+  {
+    "variant": "adaptive",
+    "channel": 20,
+    "wavelength_um": 3.788212537765503,
+    "mean_moments": 213.95833333333334,
+    "max_moments": 466
+  },
+  {
+    "variant": "adaptive",
+    "channel": 31,
+    "wavelength_um": 11.01842212677002,
+    "mean_moments": 77.45833333333333,
+    "max_moments": 165
+  },
+  {
+    "variant": "adaptive",
+    "channel": "all (incl. 0.55 um reference)",
+    "wavelength_um": null,
+    "cpu_s": 641.457699305,
+    "mean_moments": 682.3541666666666,
+    "max_moments": 3789
+  }
+]

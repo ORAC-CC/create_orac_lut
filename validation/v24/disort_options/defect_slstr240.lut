@@ -1,0 +1,13 @@
+# Grid B nodes around a corrupted direct-beam DISORT call in
+# sentinel-3a_slstr_m_liquid-water_a01_p240_v24.nc (channel 2, tau 64, re 37, sza 60).
+# Validation only (run_variant.py case defect_slstr240).
+3 uneven_logarithmic # optical depth
+32.0 64.0 128.0
+3 uneven_linear # physical effective radius, microns
+35.0 37.0 39.0
+2 uneven_linear # solar zenith, degrees
+56.25 60.0
+3 uneven_linear # satellite zenith, degrees
+30.0 45.0 60.0
+37 linear # relative azimuth, degrees, 0-180
+0 180

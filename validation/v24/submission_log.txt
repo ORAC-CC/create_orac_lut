@@ -1,0 +1,522 @@
+Revision: 51717b82dece213d0f93ff1476ff1806983bbbe4 (clean production paths; contained in origin/main)
+SUBMIT  runs/aqua_modis_cloud_liquid-water_old_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/aqua_modis_m_liquid-water_a01_pold_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_aqua_water_old\ runs/aqua_modis_cloud_liquid-water_old_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_aqua_water_old
+  generator arguments: runs/aqua_modis_cloud_liquid-water_old_v24.run
+Submitted batch job 485440
+SUBMIT  runs/aqua_modis_cloud_liquid-water_stg_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/aqua_modis_m_liquid-water_a01_pstg_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_aqua_water_stg\ runs/aqua_modis_cloud_liquid-water_stg_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_aqua_water_stg
+  generator arguments: runs/aqua_modis_cloud_liquid-water_stg_v24.run
+Submitted batch job 485441
+SUBMIT  runs/aqua_modis_cloud_liquid-water_240_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/aqua_modis_m_liquid-water_a01_p240_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_aqua_water_240\ runs/aqua_modis_cloud_liquid-water_240_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_aqua_water_240
+  generator arguments: runs/aqua_modis_cloud_liquid-water_240_v24.run
+Submitted batch job 485442
+SUBMIT  runs/aqua_modis_cloud_liquid-water_253_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/aqua_modis_m_liquid-water_a01_p253_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_aqua_water_253\ runs/aqua_modis_cloud_liquid-water_253_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_aqua_water_253
+  generator arguments: runs/aqua_modis_cloud_liquid-water_253_v24.run
+Submitted batch job 485443
+SUBMIT  runs/aqua_modis_cloud_liquid-water_263_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/aqua_modis_m_liquid-water_a01_p263_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_aqua_water_263\ runs/aqua_modis_cloud_liquid-water_263_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_aqua_water_263
+  generator arguments: runs/aqua_modis_cloud_liquid-water_263_v24.run
+Submitted batch job 485444
+SUBMIT  runs/aqua_modis_cloud_liquid-water_273_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/aqua_modis_m_liquid-water_a01_p273_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_aqua_water_273\ runs/aqua_modis_cloud_liquid-water_273_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_aqua_water_273
+  generator arguments: runs/aqua_modis_cloud_liquid-water_273_v24.run
+Submitted batch job 485445
+SUBMIT  runs/aqua_modis_cloud_water-ice_sph_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/aqua_modis_m_water-ice_a01_psph_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_aqua_ice_sph\ runs/aqua_modis_cloud_water-ice_sph_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_aqua_ice_sph
+  generator arguments: runs/aqua_modis_cloud_water-ice_sph_v24.run
+Submitted batch job 485446
+SUBMIT  runs/aqua_modis_cloud_water-ice_agg_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/aqua_modis_m_water-ice_a01_pagg_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_aqua_ice_agg\ runs/aqua_modis_cloud_water-ice_agg_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_aqua_ice_agg
+  generator arguments: runs/aqua_modis_cloud_water-ice_agg_v24.run
+Submitted batch job 485447
+SUBMIT  runs/aqua_modis_cloud_water-ice_ghm_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/aqua_modis_m_water-ice_a01_pghm_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_aqua_ice_ghm\ runs/aqua_modis_cloud_water-ice_ghm_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_aqua_ice_ghm
+  generator arguments: runs/aqua_modis_cloud_water-ice_ghm_v24.run
+Submitted batch job 485448
+SUBMIT  runs/aqua_modis_cloud_water-ice_src_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/aqua_modis_m_water-ice_a01_psrc_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_aqua_ice_src\ runs/aqua_modis_cloud_water-ice_src_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_aqua_ice_src
+  generator arguments: runs/aqua_modis_cloud_water-ice_src_v24.run
+Submitted batch job 485449
+SUBMIT  runs/terra_modis_cloud_liquid-water_old_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/terra_modis_m_liquid-water_a01_pold_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_terra_water_old\ runs/terra_modis_cloud_liquid-water_old_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_terra_water_old
+  generator arguments: runs/terra_modis_cloud_liquid-water_old_v24.run
+Submitted batch job 485450
+SUBMIT  runs/terra_modis_cloud_liquid-water_stg_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/terra_modis_m_liquid-water_a01_pstg_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_terra_water_stg\ runs/terra_modis_cloud_liquid-water_stg_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_terra_water_stg
+  generator arguments: runs/terra_modis_cloud_liquid-water_stg_v24.run
+Submitted batch job 485451
+SUBMIT  runs/terra_modis_cloud_liquid-water_240_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/terra_modis_m_liquid-water_a01_p240_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_terra_water_240\ runs/terra_modis_cloud_liquid-water_240_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_terra_water_240
+  generator arguments: runs/terra_modis_cloud_liquid-water_240_v24.run
+Submitted batch job 485452
+SUBMIT  runs/terra_modis_cloud_liquid-water_253_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/terra_modis_m_liquid-water_a01_p253_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_terra_water_253\ runs/terra_modis_cloud_liquid-water_253_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_terra_water_253
+  generator arguments: runs/terra_modis_cloud_liquid-water_253_v24.run
+Submitted batch job 485453
+SUBMIT  runs/terra_modis_cloud_liquid-water_263_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/terra_modis_m_liquid-water_a01_p263_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_terra_water_263\ runs/terra_modis_cloud_liquid-water_263_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_terra_water_263
+  generator arguments: runs/terra_modis_cloud_liquid-water_263_v24.run
+Submitted batch job 485454
+SUBMIT  runs/terra_modis_cloud_liquid-water_273_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/terra_modis_m_liquid-water_a01_p273_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_terra_water_273\ runs/terra_modis_cloud_liquid-water_273_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_terra_water_273
+  generator arguments: runs/terra_modis_cloud_liquid-water_273_v24.run
+Submitted batch job 485455
+SUBMIT  runs/terra_modis_cloud_water-ice_sph_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/terra_modis_m_water-ice_a01_psph_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_terra_ice_sph\ runs/terra_modis_cloud_water-ice_sph_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_terra_ice_sph
+  generator arguments: runs/terra_modis_cloud_water-ice_sph_v24.run
+Submitted batch job 485456
+SUBMIT  runs/terra_modis_cloud_water-ice_agg_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/terra_modis_m_water-ice_a01_pagg_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_terra_ice_agg\ runs/terra_modis_cloud_water-ice_agg_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_terra_ice_agg
+  generator arguments: runs/terra_modis_cloud_water-ice_agg_v24.run
+Submitted batch job 485457
+SUBMIT  runs/terra_modis_cloud_water-ice_ghm_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/terra_modis_m_water-ice_a01_pghm_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_terra_ice_ghm\ runs/terra_modis_cloud_water-ice_ghm_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_terra_ice_ghm
+  generator arguments: runs/terra_modis_cloud_water-ice_ghm_v24.run
+Submitted batch job 485458
+SUBMIT  runs/terra_modis_cloud_water-ice_src_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/terra_modis_m_water-ice_a01_psrc_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_terra_ice_src\ runs/terra_modis_cloud_water-ice_src_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_terra_ice_src
+  generator arguments: runs/terra_modis_cloud_water-ice_src_v24.run
+Submitted batch job 485459
+SUBMIT  runs/sentinel-3a_slstr_cloud_liquid-water_old_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/sentinel-3a_slstr_m_liquid-water_a01_pold_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_sentinel-3a_water_old\ runs/sentinel-3a_slstr_cloud_liquid-water_old_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_sentinel-3a_water_old
+  generator arguments: runs/sentinel-3a_slstr_cloud_liquid-water_old_v24.run
+Submitted batch job 485460
+SUBMIT  runs/sentinel-3a_slstr_cloud_liquid-water_stg_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/sentinel-3a_slstr_m_liquid-water_a01_pstg_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_sentinel-3a_water_stg\ runs/sentinel-3a_slstr_cloud_liquid-water_stg_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_sentinel-3a_water_stg
+  generator arguments: runs/sentinel-3a_slstr_cloud_liquid-water_stg_v24.run
+Submitted batch job 485461
+SUBMIT  runs/sentinel-3a_slstr_cloud_liquid-water_240_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/sentinel-3a_slstr_m_liquid-water_a01_p240_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_sentinel-3a_water_240\ runs/sentinel-3a_slstr_cloud_liquid-water_240_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_sentinel-3a_water_240
+  generator arguments: runs/sentinel-3a_slstr_cloud_liquid-water_240_v24.run
+Submitted batch job 485462
+SUBMIT  runs/sentinel-3a_slstr_cloud_liquid-water_253_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/sentinel-3a_slstr_m_liquid-water_a01_p253_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_sentinel-3a_water_253\ runs/sentinel-3a_slstr_cloud_liquid-water_253_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_sentinel-3a_water_253
+  generator arguments: runs/sentinel-3a_slstr_cloud_liquid-water_253_v24.run
+Submitted batch job 485463
+SUBMIT  runs/sentinel-3a_slstr_cloud_liquid-water_263_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/sentinel-3a_slstr_m_liquid-water_a01_p263_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_sentinel-3a_water_263\ runs/sentinel-3a_slstr_cloud_liquid-water_263_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_sentinel-3a_water_263
+  generator arguments: runs/sentinel-3a_slstr_cloud_liquid-water_263_v24.run
+Submitted batch job 485464
+SUBMIT  runs/sentinel-3a_slstr_cloud_liquid-water_273_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/sentinel-3a_slstr_m_liquid-water_a01_p273_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_sentinel-3a_water_273\ runs/sentinel-3a_slstr_cloud_liquid-water_273_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_sentinel-3a_water_273
+  generator arguments: runs/sentinel-3a_slstr_cloud_liquid-water_273_v24.run
+Submitted batch job 485465
+SUBMIT  runs/sentinel-3a_slstr_cloud_water-ice_sph_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/sentinel-3a_slstr_m_water-ice_a01_psph_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_sentinel-3a_ice_sph\ runs/sentinel-3a_slstr_cloud_water-ice_sph_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_sentinel-3a_ice_sph
+  generator arguments: runs/sentinel-3a_slstr_cloud_water-ice_sph_v24.run
+Submitted batch job 485466
+SUBMIT  runs/sentinel-3a_slstr_cloud_water-ice_agg_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/sentinel-3a_slstr_m_water-ice_a01_pagg_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_sentinel-3a_ice_agg\ runs/sentinel-3a_slstr_cloud_water-ice_agg_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_sentinel-3a_ice_agg
+  generator arguments: runs/sentinel-3a_slstr_cloud_water-ice_agg_v24.run
+Submitted batch job 485467
+SUBMIT  runs/sentinel-3a_slstr_cloud_water-ice_ghm_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/sentinel-3a_slstr_m_water-ice_a01_pghm_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_sentinel-3a_ice_ghm\ runs/sentinel-3a_slstr_cloud_water-ice_ghm_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_sentinel-3a_ice_ghm
+  generator arguments: runs/sentinel-3a_slstr_cloud_water-ice_ghm_v24.run
+Submitted batch job 485468
+SUBMIT  runs/sentinel-3a_slstr_cloud_water-ice_src_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/sentinel-3a_slstr_m_water-ice_a01_psrc_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_sentinel-3a_ice_src\ runs/sentinel-3a_slstr_cloud_water-ice_src_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_sentinel-3a_ice_src
+  generator arguments: runs/sentinel-3a_slstr_cloud_water-ice_src_v24.run
+Submitted batch job 485469
+SUBMIT  runs/sentinel-3b_slstr_cloud_liquid-water_old_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/sentinel-3b_slstr_m_liquid-water_a01_pold_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_sentinel-3b_water_old\ runs/sentinel-3b_slstr_cloud_liquid-water_old_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_sentinel-3b_water_old
+  generator arguments: runs/sentinel-3b_slstr_cloud_liquid-water_old_v24.run
+Submitted batch job 485470
+SUBMIT  runs/sentinel-3b_slstr_cloud_liquid-water_stg_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/sentinel-3b_slstr_m_liquid-water_a01_pstg_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_sentinel-3b_water_stg\ runs/sentinel-3b_slstr_cloud_liquid-water_stg_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_sentinel-3b_water_stg
+  generator arguments: runs/sentinel-3b_slstr_cloud_liquid-water_stg_v24.run
+Submitted batch job 485471
+SUBMIT  runs/sentinel-3b_slstr_cloud_liquid-water_240_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/sentinel-3b_slstr_m_liquid-water_a01_p240_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_sentinel-3b_water_240\ runs/sentinel-3b_slstr_cloud_liquid-water_240_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_sentinel-3b_water_240
+  generator arguments: runs/sentinel-3b_slstr_cloud_liquid-water_240_v24.run
+Submitted batch job 485472
+SUBMIT  runs/sentinel-3b_slstr_cloud_liquid-water_253_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/sentinel-3b_slstr_m_liquid-water_a01_p253_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_sentinel-3b_water_253\ runs/sentinel-3b_slstr_cloud_liquid-water_253_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_sentinel-3b_water_253
+  generator arguments: runs/sentinel-3b_slstr_cloud_liquid-water_253_v24.run
+Submitted batch job 485473
+SUBMIT  runs/sentinel-3b_slstr_cloud_liquid-water_263_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/sentinel-3b_slstr_m_liquid-water_a01_p263_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_sentinel-3b_water_263\ runs/sentinel-3b_slstr_cloud_liquid-water_263_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_sentinel-3b_water_263
+  generator arguments: runs/sentinel-3b_slstr_cloud_liquid-water_263_v24.run
+Submitted batch job 485474
+SUBMIT  runs/sentinel-3b_slstr_cloud_liquid-water_273_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/sentinel-3b_slstr_m_liquid-water_a01_p273_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_sentinel-3b_water_273\ runs/sentinel-3b_slstr_cloud_liquid-water_273_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_sentinel-3b_water_273
+  generator arguments: runs/sentinel-3b_slstr_cloud_liquid-water_273_v24.run
+Submitted batch job 485475
+SUBMIT  runs/sentinel-3b_slstr_cloud_water-ice_sph_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/sentinel-3b_slstr_m_water-ice_a01_psph_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_sentinel-3b_ice_sph\ runs/sentinel-3b_slstr_cloud_water-ice_sph_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_sentinel-3b_ice_sph
+  generator arguments: runs/sentinel-3b_slstr_cloud_water-ice_sph_v24.run
+Submitted batch job 485476
+SUBMIT  runs/sentinel-3b_slstr_cloud_water-ice_agg_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/sentinel-3b_slstr_m_water-ice_a01_pagg_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_sentinel-3b_ice_agg\ runs/sentinel-3b_slstr_cloud_water-ice_agg_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_sentinel-3b_ice_agg
+  generator arguments: runs/sentinel-3b_slstr_cloud_water-ice_agg_v24.run
+Submitted batch job 485477
+SUBMIT  runs/sentinel-3b_slstr_cloud_water-ice_ghm_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/sentinel-3b_slstr_m_water-ice_a01_pghm_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_sentinel-3b_ice_ghm\ runs/sentinel-3b_slstr_cloud_water-ice_ghm_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_sentinel-3b_ice_ghm
+  generator arguments: runs/sentinel-3b_slstr_cloud_water-ice_ghm_v24.run
+Submitted batch job 485478
+SUBMIT  runs/sentinel-3b_slstr_cloud_water-ice_src_v24.run -> /network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/sentinel-3b_slstr_m_water-ice_a01_psrc_v24.nc
+Dispatching ORAC LUT submission from atmlxint5 to atmlxint7 over ssh
+  repository: /home/g/grainger/project-oraclut (shared filesystem; nothing is copied)
+  arguments: --time=72:00:00\ --mem=24G\ --job-name=v24_sentinel-3b_ice_src\ runs/sentinel-3b_slstr_cloud_water-ice_src_v24.run
+Submitting ORAC LUT job from atmlxint7
+  repository: /home/g/grainger/project-oraclut
+  batch script: scripts/run_oraclut_lut.slurm
+  logs: validation/slurm/oraclut_lut_<arrayjob>_<task>.out|.err
+  sbatch override: --time=72:00:00
+  sbatch override: --mem=24G
+  sbatch override: --job-name=v24_sentinel-3b_ice_src
+  generator arguments: runs/sentinel-3b_slstr_cloud_water-ice_src_v24.run
+Submitted batch job 485479
+0 complete, 40 submitted; recorded in validation/v24/production_submissions.tsv.

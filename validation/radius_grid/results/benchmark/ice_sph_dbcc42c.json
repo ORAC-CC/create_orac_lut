@@ -1,0 +1,15 @@
+{
+  "case": "ice_sph",
+  "variant": "dbcc42c",
+  "revision": "dbcc42c",
+  "host": "atmlxint5.atm.ox.ac.uk",
+  "cpu": "Intel(R) Xeon(R) Gold 6240R CPU @ 2.40GHz",
+  "threads": 1,
+  "wall_s": 1316.1708986759186,
+  "cpu_s": 1316.028967082,
+  "mie_calls": 203,
+  "radius_nodes": 318333,
+  "node_angle_evaluations": 842068447,
+  "mie_cpu_s": 1301.2663112140012,
+  "other_cpu_s": 14.762655867998774
+}

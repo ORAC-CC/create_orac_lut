@@ -1,0 +1,11 @@
+# V25 compact ice validation grid: Grid B nodes (validation/v25/run_compact.py)
+7 uneven_logarithmic # optical depth
+0.0625 0.25 1.0 4.0 16.0 64.0 256.0
+5 uneven_linear # physical effective radius, microns
+5.0 15.0 33.0 61.0 93.0
+4 uneven_linear # solar zenith, degrees
+0.0 30.0 60.0 75.0
+4 uneven_linear # satellite zenith, degrees
+0.0 30.0 60.0 75.0
+7 linear # relative azimuth, degrees, 0-180
+0 180

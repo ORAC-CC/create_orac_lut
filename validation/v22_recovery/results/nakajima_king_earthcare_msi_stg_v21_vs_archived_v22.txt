@@ -1,0 +1,2 @@
+Wrote validation/v22_recovery/results/nakajima_king_earthcare_msi_stg_v21_vs_archived_v22.png
+median |dR| = 1.49e-05, max |dR| = 9.83e-05 (channel 1 0.668 um vs channel 4 2.211 um, SZA=VZA=RAA=0); archived V22 earthcare_msi liquid-water stg product vs IDL V21

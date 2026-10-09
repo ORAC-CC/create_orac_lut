@@ -1,0 +1,1 @@
+{"variant": "v23 (9d663e9)", "channels": [3, 1, 6, 7, 20, 31], "grid": "liquid-water-cloud-grid-b.lut", "microphysics": "liquid-water_stg.mm", "cpu_s": 409.346651547, "note": "single thread, one generate_scattering_properties call incl. the 0.55 um reference; same set as benchmark_legendre.csv"}

@@ -1,0 +1,13 @@
+# Grid B nodes around a suspect direct-beam DISORT call (channel 17, tau 0.5, re 85, sza 60)
+# in terra_modis_m_water-ice_a01_pghm_v24.nc (identical in V23).
+# Validation only (run_variant.py case defect_modis_ghm17).
+3 uneven_logarithmic # optical depth
+0.25 0.5 1.0
+3 uneven_linear # physical effective radius, microns
+81.0 85.0 89.0
+2 uneven_linear # solar zenith, degrees
+56.25 60.0
+4 uneven_linear # satellite zenith, degrees
+0.0 30.0 60.0 75.0
+37 linear # relative azimuth, degrees, 0-180
+0 180

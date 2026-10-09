@@ -1,0 +1,14 @@
+# Compact aerosol grid for the adaptive Legendre comparison
+# (validation/legendre_expansion/compact_lut_legendre.py).  Not a production grid.
+3 uneven_logarithmic # optical depth
+0.0625 0.5 4.0
+4 uneven_linear # physical effective radius, microns
+0.1 1.0 3.3598182201 10.0
+2 uneven_linear # solar zenith, degrees
+0.0 45.0
+2 uneven_linear # satellite zenith, degrees
+0.0 45.0
+3 linear # relative azimuth, degrees, 0-180
+0 180
+1 uneven_linear # surface pressure, hPa
+1013.0

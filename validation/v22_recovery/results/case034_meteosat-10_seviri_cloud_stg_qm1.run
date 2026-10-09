@@ -1,0 +1,19 @@
+; Regeneration of V21/V22 campaign case 034 with the recovered V22 generator (9d663e9).
+platform      = 'meteosat-10'
+instrument    = 'seviri'
+forward_model = 'cloud'
+in_path       = 'create_orac_lut/input_files'
+instfile      = 'meteosat-10_seviri_v1.inst'
+mmfile        = 'liquid-water_stg.mm'
+lutfile       = 'liquid-water-cloud_test.lut'
+atmospheres   = 2
+channelid     = [1, 9]
+gas           = 0
+no_rayleigh   = 0
+srf_quad      = 1
+reuse_scat    = 0
+scat_only     = 0
+nstreams      = 60
+nmom          = 1000
+version       = 22
+out_path      = '/tmp/user/27004/claude-27004/-home-g-grainger-project-oraclut/a9306acb-8b8a-4a69-8c66-91307b66598c/scratchpad/v22-regen/out/case034'

@@ -1,0 +1,13 @@
+# Compact liquid-water grid for the DISORT-options investigation (near-backscatter geometries)
+# (validation/v24/disort_options/run_variant.py).  Not a production grid:
+# every value is a node of liquid-water-cloud-grid-b.lut.
+6 uneven_logarithmic # optical depth
+0.25 1.0 4.0 16.0 64.0 256.0
+5 uneven_linear # physical effective radius, microns
+3.0 7.0 15.0 25.0 35.0
+2 uneven_linear # solar zenith, degrees
+30.0 33.75
+2 uneven_linear # satellite zenith, degrees
+30.0 33.75
+37 linear # relative azimuth, degrees, 0-180 (Grid B; the generator needs a grid symmetric about 90)
+0 180

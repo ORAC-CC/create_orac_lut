@@ -1,0 +1,12 @@
+# Compact liquid-water cloud grid for the integration-limit and Legendre comparisons
+# (validation/size_distribution_limits/compact_lut_comparison.py).  Not a production grid.
+5 uneven_logarithmic # optical depth
+0.5 2.0 8.0 32.0 128.0
+5 uneven_linear # physical effective radius, microns
+5.0 10.0 20.0 30.0 40.0
+3 uneven_linear # solar zenith, degrees
+0.0 30.0 60.0
+3 uneven_linear # satellite zenith, degrees
+0.0 30.0 55.0
+3 linear # relative azimuth, degrees, 0-180
+0 180
