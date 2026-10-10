@@ -159,7 +159,15 @@ def validate(row: dict) -> tuple[bool, list[str]]:
         check(rec["lut_version"] == 22 and rec["source"]["code_release"] == "lut-code-v22.1",
               f"provenance lut_version {rec['lut_version']}, code_release {rec['source']['code_release']}, "
               f"scientific_config {rec['source']['scientific_config']}")
-        check(git["commit"] == row["revision"], f"provenance commit {git['commit']} equals the submitted revision")
+        # The job reads the shared tree when it starts, so its commit may be a
+        # later one than the submission revision; accept it only if no
+        # production path differs between the two.
+        import subprocess
+        same_production = git["commit"] == row["revision"] or subprocess.run(
+            ["/usr/bin/git", "-C", str(ROOT), "diff", "--quiet", row["revision"], git["commit"], "--",
+             "CODE_VERSION", "create_orac_luts.py", "src", "mie", "create_orac_lut", "runs", "scripts"]).returncode == 0
+        check(same_production, f"provenance commit {git['commit'][:7]} = submitted revision {row['revision'][:7]} "
+                               "or differs from it in no production path")
         check(ver["commit_in_repository"] and ver.get("lut_sha256_matches"), "commit in repository; product SHA-256 matches")
         check(rec["configuration_file"]["sha256"] == sha256_file(run), "run-file SHA-256 equals the committed run file")
         check(rec["numerics"]["nmom"] == 1000 and rec["radiative_transfer"]["nstreams"] == 60,
