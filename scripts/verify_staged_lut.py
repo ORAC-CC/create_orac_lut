@@ -61,7 +61,14 @@ def verify(new, old, precision):
       for name in SCIENCE:
          if name not in a.variables:
             continue
-         values = np.ma.filled(a[name][:].astype(np.float64), np.nan)
+         # Raw values: netCDF4's automatic masking would also hide legitimate
+         # values outside valid_range (e.g. slightly negative transmittances).
+         variable = a[name]
+         variable.set_auto_maskandscale(False)
+         values = np.asarray(variable[:], dtype=np.float64)
+         fill = getattr(variable, "_FillValue", None)
+         if fill is not None:
+            values = np.where(values == float(fill), np.nan, values)
          finite[name] = {"finite_fraction": float(np.mean(np.isfinite(values))),
                          "min": float(np.nanmin(values)), "max": float(np.nanmax(values))}
          if not np.all(np.isfinite(values)):

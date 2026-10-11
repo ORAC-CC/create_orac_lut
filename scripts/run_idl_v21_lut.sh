@@ -59,6 +59,7 @@ setup_environment() {
 
 stage_inputs() {   # $1 run directory; $2 optional compact case letter
    mkdir -p "$1/luts" "$1/input_files"
+   local entry name
    for entry in "$LEGACY"/input_files/*; do
       name="$(basename "$entry")"
       if [ -n "${2:-}" ] && [ "$name" = lut ]; then continue; fi

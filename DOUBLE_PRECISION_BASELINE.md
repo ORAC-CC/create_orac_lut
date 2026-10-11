@@ -1,8 +1,10 @@
 # Double-precision V21/V22 numerical baseline
 
-Status (2026-10-11): **implementation complete and validated on compact
-cases; complete Terra MODIS products and the V21/V22 equivalence benchmark
-pending** (section 6).  The new double-precision V21 IDL tables are a
+Status (2026-10-11, after the production jobs): **FAIL / not established**
+(section 8).  The double-precision V21 products did not finish (SLURM time
+limit), and the double-precision V22 `pagg` product contains NaN at three
+nodes from a double-precision breakdown of DISORT 2.1 for exactly
+conservative layers at NSTR 60, which affects the IDL V21 path equally.  The new double-precision V21 IDL tables are a
 *candidate* reference: nothing in the shared ORAC LUT directory has been
 replaced, and the historical single-precision V21 products remain the
 archived reference until the owner approves the replacement.
@@ -172,3 +174,41 @@ generated material is deleted; anything else is inventoried for the owner.
 Promotion of the new V21 tables into the shared ORAC LUT directory, and any
 replacement of existing products there, requires the owner's explicit
 approval.
+
+## 8. Production results (2026-10-11)
+
+* IDL integration validation (job 494838): **passed** — double within 1
+  float32 ulp of the validated DISORT_DP results, single bitwise equal to
+  historical V21, all four compact cases.
+* V21 double products (jobs 494839-494841): **cancelled at the 10 h limit**
+  after 69 % (pold, 8454/12240 channel-tau-r_e nodes), 70 % (p240) and 65 %
+  (pagg, 9493/14688).  Projected run time ~15 h (liquid) and ~16 h (ice) per
+  product, five times the earlier estimate.  The batch limit is now 30 h
+  (`scripts/run_idl_v21_lut_v02.slurm`); no product was resubmitted.
+* V22 double products (jobs 494795-494797): complete; dimensions, variables
+  and coordinates bitwise identical to the original V21 grid.  pold and p240
+  pass `verify_staged_lut.py`; **pagg fails**: three DISORT calls (diffuse and
+  direct beam) return NaN — channel 14 tau 16 r_e 25, channel 12 tau 64 r_e
+  13, channel 4 tau 128 r_e 17 (R_0v 3300, R_dv 30, R_dd 3, T_dd 3 values).
+* Cause, reproduced in isolation (`validation/v21_v22_terra_modis/v22_double/work/nan_pagg`):
+  every layer has SSALB = 1.  DISORT dithers it to 1 - 10*epsilon; in double
+  precision 2.2e-14, which leaves the near-conservative eigenproblem
+  degenerate.  ifort and gfortran double both give NaN at NSTR 60; REAL*16
+  gives FLUP 238.0632; single precision 238.0604; double with SSALB = 1-1e-12
+  gives 238.06318 (quad agreement) and NSTR 48/56/64/80 are finite.  Any
+  remedy (a larger dither in the double build, or a sub-unity SSALB cap in
+  call_disort) changes DISORT or the generators and needs the owner's decision.
+* Change from historical V21 (single) to V22 (double), ORAC interpolation at
+  2000 random operational states per product
+  (`validation/v21_v22_terra_modis/v21_v22_double/results_v21single_vs_v22double/`),
+  in units of the production uncertainty, max / RMS / p99:
+
+  | Product | Solar F | Solar dF/dlog tau (x0.1) | Solar dF/dr_e (x1 um) | Mixed BT F | Thermal BT F |
+  |---|---|---|---|---|---|
+  | pold | 0.82 / 0.015 / 0.057 | 0.35 / 0.006 / 0.024 | 0.78 / 0.010 / 0.031 | 0.046 / 0.004 / 0.019 | 0.002 |
+  | p240 | 1.39 / 0.018 / 0.059 | 3.20 / 0.021 / 0.024 | 2.11 / 0.017 / 0.032 | 2.46 / 0.040 / 0.021 | 0.002 |
+  | pagg | NaN (3 failed calls) | NaN | NaN | 0.15 / 0.006 / 0.026 | 0.001 |
+
+  These are not an equivalence test (different precision and generators);
+  they show the size of the double-precision correction, concentrated in the
+  isolated single-precision failures (p240) with p99 below 0.06 sigma.

@@ -1,0 +1,578 @@
+{
+ "tolerance_sigma": 0.1,
+ "step_log10_tau": 0.1,
+ "step_re_um": 1.0,
+ "products": {
+  "pold": {
+   "v21": "/network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/terra_modis_m_liquid-water_a01_pold_v21.nc",
+   "v22": "/home/g/grainger/project-oraclut/staging/lut_v22_double/terra_modis_m_liquid-water_a01_pold_v22.nc",
+   "node_maximum_absolute_difference": {},
+   "operational_max_sigma": 5.2567841422646415,
+   "interpolated": {
+    "solar": {
+     "cases": 34315,
+     "forward_model": {
+      "max_sigma": 0.816473106974935,
+      "rms_sigma": 0.014752112850723179,
+      "p99_sigma": 0.057204842863381476,
+      "p999_sigma": 0.1242030908471858,
+      "count_over_tolerance": 56,
+      "worst_case": {
+       "channel": 16.0,
+       "sza": 62.50578687978999,
+       "vza": 64.5615401625109,
+       "raa": 48.313724667167435,
+       "log10_tau": 0.32969506536324866,
+       "re": 10.175999998003302,
+       "reference": 0.14812560508064732,
+       "dF_sigma": -0.816473106974935,
+       "dJtau_sigma": 0.12121881023915945,
+       "dJre_sigma": -0.779089771556729
+      }
+     },
+     "jacobian_log10_tau": {
+      "max_sigma": 0.3452208459147998,
+      "rms_sigma": 0.006107524465566344,
+      "p99_sigma": 0.024339833552969654,
+      "p999_sigma": 0.060933888691737714,
+      "count_over_tolerance": 4,
+      "worst_case": {
+       "channel": 13.0,
+       "sza": 35.36159235329691,
+       "vza": 39.316097364397876,
+       "raa": 4.089625889823738,
+       "log10_tau": 1.0507060248131999,
+       "re": 5.6367206317805145,
+       "reference": 0.48857954041720997,
+       "dF_sigma": 0.435218290609633,
+       "dJtau_sigma": -0.3452208459147998,
+       "dJre_sigma": -0.31097495698118527
+      }
+     },
+     "jacobian_re": {
+      "max_sigma": 0.779089771556729,
+      "rms_sigma": 0.009754566552732524,
+      "p99_sigma": 0.031226542159531353,
+      "p999_sigma": 0.09376494034488775,
+      "count_over_tolerance": 30,
+      "worst_case": {
+       "channel": 16.0,
+       "sza": 62.50578687978999,
+       "vza": 64.5615401625109,
+       "raa": 48.313724667167435,
+       "log10_tau": 0.32969506536324866,
+       "re": 10.175999998003302,
+       "reference": 0.14812560508064732,
+       "dF_sigma": -0.816473106974935,
+       "dJtau_sigma": 0.12121881023915945,
+       "dJre_sigma": -0.779089771556729
+      }
+     }
+    },
+    "thermal": {
+     "cases": 20000,
+     "forward_model": {
+      "max_sigma": 0.002468352249513052,
+      "rms_sigma": 0.0003275586910183582,
+      "p99_sigma": 0.000760530744565326,
+      "p999_sigma": 0.00109859271997955,
+      "count_over_tolerance": 0,
+      "worst_case": {
+       "channel": 35.0,
+       "sza": 24.407178051459443,
+       "vza": 13.053448749606394,
+       "raa": 163.50169400071061,
+       "log10_tau": 1.86258683814349,
+       "re": 1.6244662691793592,
+       "reference": 272.6668880921495,
+       "dF_sigma": -0.002468352249513052,
+       "dJtau_sigma": 0.0005204551854068258,
+       "dJre_sigma": 0.001650303929608075
+      }
+     },
+     "jacobian_log10_tau": {
+      "max_sigma": 0.0009728046151160516,
+      "rms_sigma": 4.034524458608312e-05,
+      "p99_sigma": 0.00014839422208811026,
+      "p999_sigma": 0.00040901050375550315,
+      "count_over_tolerance": 0,
+      "worst_case": {
+       "channel": 34.0,
+       "sza": 30.865836173346818,
+       "vza": 12.305003030954932,
+       "raa": 97.73797109041749,
+       "log10_tau": 1.6537394261168816,
+       "re": 1.7688917235644173,
+       "reference": 272.6311669875352,
+       "dF_sigma": -0.0006699814918499235,
+       "dJtau_sigma": -0.0009728046151160516,
+       "dJre_sigma": 0.0012010759953033432
+      }
+     },
+     "jacobian_re": {
+      "max_sigma": 0.002249330484128811,
+      "rms_sigma": 6.20212311582779e-05,
+      "p99_sigma": 0.00019950132082580037,
+      "p999_sigma": 0.0007641532443884595,
+      "count_over_tolerance": 0,
+      "worst_case": {
+       "channel": 34.0,
+       "sza": 67.82100776874411,
+       "vza": 1.106829628042998,
+       "raa": 85.14705461687409,
+       "log10_tau": 1.737557000711154,
+       "re": 2.180979744406449,
+       "reference": 272.5343483159383,
+       "dF_sigma": -0.0009257397729422867,
+       "dJtau_sigma": -0.00048425085912623313,
+       "dJre_sigma": 0.002249330484128811
+      }
+     }
+    },
+    "mixed": {
+     "cases": 12000,
+     "forward_model": {
+      "max_sigma": 0.04610255288141364,
+      "rms_sigma": 0.003546794572170944,
+      "p99_sigma": 0.019040110313645563,
+      "p999_sigma": 0.02918572570872266,
+      "count_over_tolerance": 0,
+      "worst_case": {
+       "channel": 20.0,
+       "sza": 25.53247413277278,
+       "vza": 24.15570792715087,
+       "raa": 1.2137046261515794,
+       "log10_tau": -1.988910410839552,
+       "re": 29.67772142903938,
+       "reference": 225.19336927036363,
+       "dF_sigma": 0.04610255288141364,
+       "dJtau_sigma": 0.02401227439356559,
+       "dJre_sigma": -0.01629971399776164
+      }
+     },
+     "jacobian_log10_tau": {
+      "max_sigma": 0.027969921287857226,
+      "rms_sigma": 0.0012443121574107552,
+      "p99_sigma": 0.0053190667308608075,
+      "p999_sigma": 0.012979176773203796,
+      "count_over_tolerance": 0,
+      "worst_case": {
+       "channel": 20.0,
+       "sza": 23.15264688258448,
+       "vza": 63.58390263375264,
+       "raa": 161.50293411582183,
+       "log10_tau": -1.5859107245578676,
+       "re": 29.51676697219351,
+       "reference": 241.39418550934218,
+       "dF_sigma": 0.002312264984958986,
+       "dJtau_sigma": 0.027969921287857226,
+       "dJre_sigma": 0.016353798895930517
+      }
+     },
+     "jacobian_re": {
+      "max_sigma": 0.03501530310069802,
+      "rms_sigma": 0.0016843101060304662,
+      "p99_sigma": 0.007349148358682124,
+      "p999_sigma": 0.017407544530935713,
+      "count_over_tolerance": 0,
+      "worst_case": {
+       "channel": 20.0,
+       "sza": 26.341649779023662,
+       "vza": 49.144098113653286,
+       "raa": 24.203778158685992,
+       "log10_tau": -1.9689004713943716,
+       "re": 27.902025837610495,
+       "reference": 229.1639900621406,
+       "dF_sigma": 0.04316612474307736,
+       "dJtau_sigma": 0.024257757949024027,
+       "dJre_sigma": 0.03501530310069802
+      }
+     }
+    }
+   },
+   "worst_sigma": 0.816473106974935,
+   "passed": false
+  },
+  "p240": {
+   "v21": "/network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/terra_modis_m_liquid-water_a01_p240_v21.nc",
+   "v22": "/home/g/grainger/project-oraclut/staging/lut_v22_double/terra_modis_m_liquid-water_a01_p240_v22.nc",
+   "node_maximum_absolute_difference": {},
+   "operational_max_sigma": 38.87222460228773,
+   "interpolated": {
+    "solar": {
+     "cases": 34331,
+     "forward_model": {
+      "max_sigma": 1.3861861570239795,
+      "rms_sigma": 0.0180544103050796,
+      "p99_sigma": 0.05925442457945558,
+      "p999_sigma": 0.1288709265227571,
+      "count_over_tolerance": 68,
+      "worst_case": {
+       "channel": 7.0,
+       "sza": 56.67254656776723,
+       "vza": 43.39150659769231,
+       "raa": 70.70709663404806,
+       "log10_tau": 0.5203445348364357,
+       "re": 17.430483267472525,
+       "reference": 0.0928373021342466,
+       "dF_sigma": -1.3861861570239795,
+       "dJtau_sigma": -0.5280979221054213,
+       "dJre_sigma": 0.6675988039071076
+      }
+     },
+     "jacobian_log10_tau": {
+      "max_sigma": 3.1952977214785028,
+      "rms_sigma": 0.020477190593153605,
+      "p99_sigma": 0.024296646385476173,
+      "p999_sigma": 0.06793174961180612,
+      "count_over_tolerance": 14,
+      "worst_case": {
+       "channel": 6.0,
+       "sza": 72.87602637417474,
+       "vza": 49.70041891429457,
+       "raa": 11.72201879652709,
+       "log10_tau": 2.4033226078272683,
+       "re": 29.46619020650129,
+       "reference": 0.12960357319532298,
+       "dF_sigma": 0.6066649795421943,
+       "dJtau_sigma": 3.1952977214785028,
+       "dJre_sigma": -0.3181012746160228
+      }
+     },
+     "jacobian_re": {
+      "max_sigma": 2.113172660422462,
+      "rms_sigma": 0.016685620149195248,
+      "p99_sigma": 0.03225401825536483,
+      "p999_sigma": 0.09522320705274422,
+      "count_over_tolerance": 31,
+      "worst_case": {
+       "channel": 6.0,
+       "sza": 71.31781338659067,
+       "vza": 60.67912158568529,
+       "raa": 27.97674470004855,
+       "log10_tau": 2.032080546209444,
+       "re": 27.674696965494977,
+       "reference": 0.16706100855686135,
+       "dF_sigma": -1.0660903401127262,
+       "dJtau_sigma": -0.28497284799465344,
+       "dJre_sigma": -2.113172660422462
+      }
+     }
+    },
+    "thermal": {
+     "cases": 20000,
+     "forward_model": {
+      "max_sigma": 0.002472909338761445,
+      "rms_sigma": 0.0003277546092492625,
+      "p99_sigma": 0.0007674396329376932,
+      "p999_sigma": 0.0010207276142288001,
+      "count_over_tolerance": 0,
+      "worst_case": {
+       "channel": 32.0,
+       "sza": 24.407178051459443,
+       "vza": 13.053448749606394,
+       "raa": 163.50169400071061,
+       "log10_tau": 1.86258683814349,
+       "re": 1.6244662691793592,
+       "reference": 272.52154131008024,
+       "dF_sigma": -0.002472909338761445,
+       "dJtau_sigma": 0.0004890085768432229,
+       "dJre_sigma": 0.0015503311725505785
+      }
+     },
+     "jacobian_log10_tau": {
+      "max_sigma": 0.000765199149938457,
+      "rms_sigma": 3.8459334684480703e-05,
+      "p99_sigma": 0.00014839585664910265,
+      "p999_sigma": 0.0003692414076424135,
+      "count_over_tolerance": 0,
+      "worst_case": {
+       "channel": 32.0,
+       "sza": 30.865836173346818,
+       "vza": 12.305003030954932,
+       "raa": 97.73797109041749,
+       "log10_tau": 1.6537394261168816,
+       "re": 1.7688917235644173,
+       "reference": 272.4834748184813,
+       "dF_sigma": -0.0016820950937856166,
+       "dJtau_sigma": -0.000765199149938457,
+       "dJre_sigma": 0.000942228763718829
+      }
+     },
+     "jacobian_re": {
+      "max_sigma": 0.0017907746539318676,
+      "rms_sigma": 4.947205000718893e-05,
+      "p99_sigma": 0.00018859185070476585,
+      "p999_sigma": 0.0004995968319237306,
+      "count_over_tolerance": 0,
+      "worst_case": {
+       "channel": 32.0,
+       "sza": 67.82100776874411,
+       "vza": 1.106829628042998,
+       "raa": 85.14705461687409,
+       "log10_tau": 1.737557000711154,
+       "re": 2.180979744406449,
+       "reference": 272.45231038026225,
+       "dF_sigma": -0.001877413400695458,
+       "dJtau_sigma": -0.00037181096084792274,
+       "dJre_sigma": 0.0017907746539318676
+      }
+     }
+    },
+    "mixed": {
+     "cases": 12000,
+     "forward_model": {
+      "max_sigma": 2.4627812382658614,
+      "rms_sigma": 0.039674104463610776,
+      "p99_sigma": 0.02066047955401158,
+      "p999_sigma": 0.1521888899686121,
+      "count_over_tolerance": 13,
+      "worst_case": {
+       "channel": 20.0,
+       "sza": 32.435369587114714,
+       "vza": 11.251295585733859,
+       "raa": 158.60562829248502,
+       "log10_tau": 0.019039244892135265,
+       "re": 11.341134936512706,
+       "reference": 290.9544281193539,
+       "dF_sigma": -2.4627812382658614,
+       "dJtau_sigma": 0.5613893028361105,
+       "dJre_sigma": 0.8547431614286447
+      }
+     },
+     "jacobian_log10_tau": {
+      "max_sigma": 2.620041753276698,
+      "rms_sigma": 0.026807867666534795,
+      "p99_sigma": 0.0062467272921450405,
+      "p999_sigma": 0.07231286114407626,
+      "count_over_tolerance": 8,
+      "worst_case": {
+       "channel": 20.0,
+       "sza": 31.13069859957092,
+       "vza": 9.047894667942002,
+       "raa": 45.14358901569543,
+       "log10_tau": -0.23194354673999418,
+       "re": 11.275995392241217,
+       "reference": 286.48813680856,
+       "dF_sigma": -1.2117475289062223,
+       "dJtau_sigma": -2.620041753276698,
+       "dJre_sigma": 0.35437221548171016
+      }
+     },
+     "jacobian_re": {
+      "max_sigma": 1.929261435014242,
+      "rms_sigma": 0.028853954826045296,
+      "p99_sigma": 0.011003355497705012,
+      "p999_sigma": 0.1324904026859989,
+      "count_over_tolerance": 13,
+      "worst_case": {
+       "channel": 20.0,
+       "sza": 30.584226774614336,
+       "vza": 16.212901732013123,
+       "raa": 73.62190628946617,
+       "log10_tau": -0.0384986694747127,
+       "re": 9.815905912386846,
+       "reference": 293.7902189417975,
+       "dF_sigma": -1.215002153777447,
+       "dJtau_sigma": -0.14387755603013705,
+       "dJre_sigma": -1.929261435014242
+      }
+     }
+    }
+   },
+   "worst_sigma": 3.1952977214785028,
+   "passed": false
+  },
+  "pagg": {
+   "v21": "/network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/terra_modis_m_water-ice_a01_pagg_v21.nc",
+   "v22": "/home/g/grainger/project-oraclut/staging/lut_v22_double/terra_modis_m_water-ice_a01_pagg_v22.nc",
+   "node_maximum_absolute_difference": {},
+   "operational_max_sigma": 6.096909429311898,
+   "interpolated": {
+    "solar": {
+     "cases": 35568,
+     "forward_model": {
+      "max_sigma": NaN,
+      "rms_sigma": NaN,
+      "p99_sigma": NaN,
+      "p999_sigma": NaN,
+      "count_over_tolerance": 12,
+      "worst_case": {
+       "channel": 14.0,
+       "sza": 8.430118847967323,
+       "vza": 23.795323304559908,
+       "raa": 88.76720728087562,
+       "log10_tau": 0.8032320537794511,
+       "re": 27.995585450287766,
+       "reference": 0.42931226926230565,
+       "dF_sigma": NaN,
+       "dJtau_sigma": NaN,
+       "dJre_sigma": NaN
+      }
+     },
+     "jacobian_log10_tau": {
+      "max_sigma": NaN,
+      "rms_sigma": NaN,
+      "p99_sigma": NaN,
+      "p999_sigma": NaN,
+      "count_over_tolerance": 2,
+      "worst_case": {
+       "channel": 14.0,
+       "sza": 8.430118847967323,
+       "vza": 23.795323304559908,
+       "raa": 88.76720728087562,
+       "log10_tau": 0.8032320537794511,
+       "re": 27.995585450287766,
+       "reference": 0.42931226926230565,
+       "dF_sigma": NaN,
+       "dJtau_sigma": NaN,
+       "dJre_sigma": NaN
+      }
+     },
+     "jacobian_re": {
+      "max_sigma": NaN,
+      "rms_sigma": NaN,
+      "p99_sigma": NaN,
+      "p999_sigma": NaN,
+      "count_over_tolerance": 3,
+      "worst_case": {
+       "channel": 14.0,
+       "sza": 8.430118847967323,
+       "vza": 23.795323304559908,
+       "raa": 88.76720728087562,
+       "log10_tau": 0.8032320537794511,
+       "re": 27.995585450287766,
+       "reference": 0.42931226926230565,
+       "dF_sigma": NaN,
+       "dJtau_sigma": NaN,
+       "dJre_sigma": NaN
+      }
+     }
+    },
+    "thermal": {
+     "cases": 20000,
+     "forward_model": {
+      "max_sigma": 0.0013481543713151423,
+      "rms_sigma": 0.000258740756656846,
+      "p99_sigma": 0.0006776253970893389,
+      "p999_sigma": 0.0011092373861748385,
+      "count_over_tolerance": 0,
+      "worst_case": {
+       "channel": 34.0,
+       "sza": 36.52654172275297,
+       "vza": 0.03917347578179742,
+       "raa": 166.78064301442907,
+       "log10_tau": 1.3992384318226092,
+       "re": 88.02920374231905,
+       "reference": 241.254333711725,
+       "dF_sigma": 0.0013481543713151423,
+       "dJtau_sigma": -6.550462224144854e-06,
+       "dJre_sigma": -1.2679648554548535e-05
+      }
+     },
+     "jacobian_log10_tau": {
+      "max_sigma": 0.0003853158026762932,
+      "rms_sigma": 2.7077000311955087e-05,
+      "p99_sigma": 0.00010197091556138222,
+      "p999_sigma": 0.00019297254132812403,
+      "count_over_tolerance": 0,
+      "worst_case": {
+       "channel": 29.0,
+       "sza": 10.91640673628656,
+       "vza": 63.866315939566384,
+       "raa": 65.47550886268745,
+       "log10_tau": -0.41776094681746545,
+       "re": 9.00793043310897,
+       "reference": 274.3415700368887,
+       "dF_sigma": -0.00043497286533025997,
+       "dJtau_sigma": -0.0003853158026762932,
+       "dJre_sigma": 1.7268821600315754e-05
+      }
+     },
+     "jacobian_re": {
+      "max_sigma": 0.00029821113854792654,
+      "rms_sigma": 1.1651603640319539e-05,
+      "p99_sigma": 5.1053939426495505e-05,
+      "p999_sigma": 0.00011914639300762017,
+      "count_over_tolerance": 0,
+      "worst_case": {
+       "channel": 30.0,
+       "sza": 24.880107056771955,
+       "vza": 50.41810160254647,
+       "raa": 77.62889131689533,
+       "log10_tau": -0.10913500562511924,
+       "re": 10.94464594323048,
+       "reference": 250.73379034187005,
+       "dF_sigma": -0.0002979434447528491,
+       "dJtau_sigma": -0.00016259291631171932,
+       "dJre_sigma": 0.00029821113854792654
+      }
+     }
+    },
+    "mixed": {
+     "cases": 12000,
+     "forward_model": {
+      "max_sigma": 0.14890777355907536,
+      "rms_sigma": 0.0055319816017178,
+      "p99_sigma": 0.025480445954624575,
+      "p999_sigma": 0.035274148906500574,
+      "count_over_tolerance": 1,
+      "worst_case": {
+       "channel": 20.0,
+       "sza": 46.53057978791124,
+       "vza": 59.99799285092097,
+       "raa": 34.12963445943867,
+       "log10_tau": -1.789345713396599,
+       "re": 63.63401353857873,
+       "reference": 225.517132960528,
+       "dF_sigma": -0.14890777355907536,
+       "dJtau_sigma": 0.04324760467751696,
+       "dJre_sigma": -0.0683843574575429
+      }
+     },
+     "jacobian_log10_tau": {
+      "max_sigma": 0.07949255408793084,
+      "rms_sigma": 0.001670636183107124,
+      "p99_sigma": 0.006104557434560517,
+      "p999_sigma": 0.013174865669320555,
+      "count_over_tolerance": 0,
+      "worst_case": {
+       "channel": 20.0,
+       "sza": 51.631048599674536,
+       "vza": 37.5555019000226,
+       "raa": 13.599934630535206,
+       "log10_tau": -2.0733656051342764,
+       "re": 66.71635465658343,
+       "reference": 211.74642258646372,
+       "dF_sigma": 0.006535928948549326,
+       "dJtau_sigma": -0.07949255408793084,
+       "dJre_sigma": 0.007017216321807863
+      }
+     },
+     "jacobian_re": {
+      "max_sigma": 0.0683843574575429,
+      "rms_sigma": 0.0013864780181793404,
+      "p99_sigma": 0.003130555614266193,
+      "p999_sigma": 0.010894397600857779,
+      "count_over_tolerance": 0,
+      "worst_case": {
+       "channel": 20.0,
+       "sza": 46.53057978791124,
+       "vza": 59.99799285092097,
+       "raa": 34.12963445943867,
+       "log10_tau": -1.789345713396599,
+       "re": 63.63401353857873,
+       "reference": 225.517132960528,
+       "dF_sigma": -0.14890777355907536,
+       "dJtau_sigma": 0.04324760467751696,
+       "dJre_sigma": -0.0683843574575429
+      }
+     }
+    }
+   },
+   "worst_sigma": NaN,
+   "passed": false
+  }
+ },
+ "all_passed": false
+}

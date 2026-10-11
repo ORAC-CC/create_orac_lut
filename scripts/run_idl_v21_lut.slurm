@@ -3,7 +3,7 @@
 #SBATCH --output=validation/slurm/%x_%j.out
 #SBATCH --error=validation/slurm/%x_%j.err
 #SBATCH --partition=priority-eodg
-#SBATCH --time=10:00:00
+#SBATCH --time=30:00:00
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=8G
 #
