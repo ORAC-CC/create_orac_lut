@@ -1,0 +1,240 @@
+{
+ "configuration": {
+  "channels": [
+   6
+  ],
+  "components": {
+   "names": [
+    "water"
+   ],
+   "types": [
+    "user"
+   ]
+  },
+  "forward_model": "cloud",
+  "instrument": "modis",
+  "instrument_file": "terra_modis_v1.inst",
+  "microphysics_file": "liquid-water_240.mm",
+  "particle_model_shortname": "240",
+  "platform": "terra",
+  "srf_files": [
+   "rtcoef_eos_1_modis-shifted_srf_ch06.txt"
+  ],
+  "substance": "liquid-water",
+  "tmatrix_path": null
+ },
+ "configuration_file": null,
+ "generated_utc": "2026-10-11T19:37:51Z",
+ "generator": "create_orac_luts.py",
+ "grid": {
+  "definition_file": "case_A.lut",
+  "efr": {
+   "n": 3,
+   "spacing": "uneven_linear",
+   "values": [
+    27.0,
+    29.0,
+    31.0
+   ]
+  },
+  "opd": {
+   "n": 3,
+   "spacing": "uneven_logarithmic",
+   "values": [
+    64.0,
+    128.0,
+    256.0
+   ]
+  },
+  "raa": {
+   "n": 11,
+   "spacing": "linear",
+   "values": [
+    0.0,
+    18.0,
+    36.0,
+    54.0,
+    72.0,
+    90.0,
+    108.0,
+    126.0,
+    144.0,
+    162.0,
+    180.0
+   ]
+  },
+  "saz": {
+   "n": 10,
+   "spacing": "linear",
+   "values": [
+    0.0,
+    7.222222328186035,
+    14.44444465637207,
+    21.66666603088379,
+    28.88888931274414,
+    36.11111068725586,
+    43.33333206176758,
+    50.55555725097656,
+    57.77777862548828,
+    65.0
+   ]
+  },
+  "soz": {
+   "n": 2,
+   "spacing": "uneven_linear",
+   "values": [
+    70.0,
+    80.0
+   ]
+  }
+ },
+ "input_files": {
+  "atmosphere": {
+   "path": "create_orac_lut/input_files/atm/mls.atm",
+   "sha256": "45244e3c78ee3fb05c841b1a9882e0551710f9450a4e4bfbf536e6bb1226dc5a",
+   "size_bytes": 8655
+  },
+  "instrument": {
+   "path": "create_orac_lut/input_files/inst/terra_modis_v1.inst",
+   "sha256": "8b1f1adcac24e8b066a5735edbffedd2f942157196ad6dc09c5ef9c5e4693d05",
+   "size_bytes": 4828
+  },
+  "lut_definition": {
+   "path": "validation/v21_v22_terra_modis/v21_v22_single/work/case_A/input_files/lut/case_A.lut",
+   "sha256": "4a0b261085dca25e717f03349750bd3c25b2475bb7337fa6bd524d6d9d33ba11",
+   "size_bytes": 134
+  },
+  "microphysics": {
+   "path": "create_orac_lut/input_files/microphysics/liquid-water_240.mm",
+   "sha256": "8145e8c5be0cb565a727eecb827d5def620205dcf9f39b15e722f1fe0269cbf2",
+   "size_bytes": 426
+  }
+ },
+ "job": {
+  "slurm_array_task_id": null,
+  "slurm_job_id": null,
+  "slurm_job_name": null,
+  "user": "grainger",
+  "working_directory": "/tmp"
+ },
+ "lut_version": 22,
+ "numerics": {
+  "legendre_expansion": "fixed, nmom = 1000 (IDL generate_scattering_properties)",
+  "nmom": 1000,
+  "scattering_cache_reused": false,
+  "size_distribution_integration": "legacy IDL linear-radius trapezoid, 0.001-100 um, size-parameter step 0.4 (create_bwgp.mie_size_dist_new, xres = 0.4, at least 200 nodes)",
+  "srf_quadrature": 1
+ },
+ "output": {
+  "directory": "/home/g/grainger/project-oraclut/validation/v21_v22_terra_modis/v21_v22_single/work/case_A/luts",
+  "file": "terra_modis_m_liquid-water_a01_p240_v22.nc",
+  "sha256": "2661c467912072dadd8ef42fe81797e7a0980564c92106fa57d1de0ac0a3d98c",
+  "size_bytes": 60555
+ },
+ "provenance_format": 1,
+ "radiative_transfer": {
+  "atmosphere_code": "2",
+  "atmosphere_file": "mls.atm",
+  "cloud_emission": "isothermal cloud (legacy IDL)",
+  "disort_library": "single-precision kernel built from create_orac_lut/disort2/src",
+  "disort_precision": "single",
+  "gas_absorption": false,
+  "nstreams": 60,
+  "rayleigh": true,
+  "scattering_only": false,
+  "solver": "DISORT (create_orac_lut/disort2 source, oraclut.radiative_transfer.legacy_disort)"
+ },
+ "source": {
+  "code_release": "lut-code-v22.2",
+  "compatible_lut_versions": [
+   21
+  ],
+  "git": {
+   "available": true,
+   "branch": "main",
+   "commit": "3bead8635c26d4a20304792b4903d1ea45bd2b73",
+   "describe": "lut-code-v22.1-6-g3bead86",
+   "detail": "",
+   "modified": true,
+   "release_relation": "tag lut-code-v22.2 not present in this repository",
+   "release_tag_commit": null,
+   "tracked_changes": [
+    "create_orac_lut/input_files/lut/aerosol-pa76-grid-b.lut",
+    "create_orac_lut/input_files/lut/aerosol.lut",
+    "create_orac_lut/input_files/lut/aerosol.lut.bak",
+    "create_orac_lut/input_files/lut/aerosol_test.lut",
+    "create_orac_lut/input_files/lut/aerosol_test.lut.bak",
+    "create_orac_lut/input_files/lut/ash-cloud.lut",
+    "create_orac_lut/input_files/lut/ash-plume.lut.bak",
+    "create_orac_lut/input_files/lut/ash-plume_test.lut",
+    "create_orac_lut/input_files/lut/ash-plume_test.lut.bak",
+    "create_orac_lut/input_files/lut/biomass-cloud.lut",
+    "create_orac_lut/input_files/lut/biomass-plume+.lut",
+    "create_orac_lut/input_files/lut/biomass-plume+.lut.bak",
+    "create_orac_lut/input_files/lut/biomass-plume.lut.bak",
+    "create_orac_lut/input_files/lut/biomass-plume_test.lut",
+    "create_orac_lut/input_files/lut/biomass-plume_test.lut.bak",
+    "create_orac_lut/input_files/lut/ice-cloud-2R.lut",
+    "create_orac_lut/input_files/lut/ice-cloud-2R.lut.bak",
+    "create_orac_lut/input_files/lut/ice-cloud-grid-b.lut",
+    "create_orac_lut/input_files/lut/ice-cloud-old.lut",
+    "create_orac_lut/input_files/lut/ice-cloud-old.lut.bak",
+    "create_orac_lut/input_files/lut/ice-cloud.lut.bak",
+    "create_orac_lut/input_files/lut/ice-cloud_test.lut.bak",
+    "create_orac_lut/input_files/lut/liquid-water-cloud-2R.lut",
+    "create_orac_lut/input_files/lut/liquid-water-cloud-2R.lut.bak",
+    "create_orac_lut/input_files/lut/liquid-water-cloud-4R.lut",
+    "create_orac_lut/input_files/lut/liquid-water-cloud-4R.lut.bak",
+    "create_orac_lut/input_files/lut/liquid-water-cloud-MODIS.lut",
+    "create_orac_lut/input_files/lut/liquid-water-cloud-MODIS.lut.bak",
+    "create_orac_lut/input_files/lut/liquid-water-cloud-grid-b.lut",
+    "create_orac_lut/input_files/lut/liquid-water-cloud-old.lut",
+    "create_orac_lut/input_files/lut/liquid-water-cloud-old.lut.bak",
+    "create_orac_lut/input_files/lut/liquid-water-cloud.lut.bak",
+    "create_orac_lut/input_files/lut/liquid-water-cloud_test.lut.bak",
+    "create_orac_lut/input_files/lut/sulphuric-acid-cloud.lut",
+    "create_orac_lut/input_files/lut/sulphuric-acid-cloud.lut.bak",
+    "create_orac_lut/input_files/lut/sulphuric-acid-cloud_test.lut",
+    "create_orac_lut/makerunfile.pro"
+   ],
+   "untracked_production_files": [
+    "create_orac_lut/input_files/lut/archive/aerosol-pa76-grid-b.lut",
+    "create_orac_lut/input_files/lut/archive/aerosol.lut",
+    "create_orac_lut/input_files/lut/archive/aerosol_test.lut",
+    "create_orac_lut/input_files/lut/archive/ash-cloud.lut",
+    "create_orac_lut/input_files/lut/archive/ash-plume_test.lut",
+    "create_orac_lut/input_files/lut/archive/biomass-cloud.lut",
+    "create_orac_lut/input_files/lut/archive/biomass-plume+.lut",
+    "create_orac_lut/input_files/lut/archive/biomass-plume_test.lut",
+    "create_orac_lut/input_files/lut/archive/ice-cloud-2R.lut",
+    "create_orac_lut/input_files/lut/archive/ice-cloud-grid-b.lut",
+    "create_orac_lut/input_files/lut/archive/ice-cloud-old.lut",
+    "create_orac_lut/input_files/lut/archive/liquid-water-cloud-2R.lut",
+    "create_orac_lut/input_files/lut/archive/liquid-water-cloud-4R.lut",
+    "create_orac_lut/input_files/lut/archive/liquid-water-cloud-MODIS.lut",
+    "create_orac_lut/input_files/lut/archive/liquid-water-cloud-grid-b.lut",
+    "create_orac_lut/input_files/lut/archive/liquid-water-cloud-old.lut",
+    "create_orac_lut/input_files/lut/archive/sulphuric-acid-cloud.lut",
+    "create_orac_lut/input_files/lut/archive/sulphuric-acid-cloud_test.lut",
+    "create_orac_lut/input_files/lut/ice-cloud_v01.lut",
+    "create_orac_lut/input_files/lut/liquid-water-cloud_v01.lut"
+   ],
+   "working_tree": "MODIFIED"
+  },
+  "lut_version": 22,
+  "scientific_config": "v22-double",
+  "scientific_config_description": "Python reproduction of the IDL V21 generator with double-precision DISORT (create_orac_lut/disort2_dp, the kernel of the IDL DISORTtoIDL_DP DLM; ORAC_LUT_DISORT_PRECISION=single restores the historical kernel) and IDL-compatible TOTAL reductions: fixed 0.001-100 um Mie size integration on the legacy radius lattice (size-parameter step 0.4), fixed NMom = 1000 Legendre expansion, DISORT 60 streams, isothermal cloud emission, legacy product grids, float32 storage; version 21 is accepted only for the legacy-comparison run files whose products are compared with the IDL V21 tables",
+  "software": {
+   "fortran_compiler": "gfortran",
+   "fortran_compiler_version": "GNU Fortran (Debian 12.2.0-14+deb12u1) 12.2.0",
+   "fortran_flags": "",
+   "hdf5": "1.14.6",
+   "hostname": "atmlxint5.atm.ox.ac.uk",
+   "libnetcdf": "4.9.2",
+   "netCDF4": "1.7.2",
+   "numpy": "2.2.6",
+   "platform": "Linux-6.1.0-53-amd64-x86_64-with-glibc2.36",
+   "python": "3.11.13"
+  }
+ }
+}

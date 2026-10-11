@@ -1,0 +1,134 @@
+{
+ "oraclut": {
+  "path": "src/oraclut/__init__.py",
+  "sha256": "664645594755345f6a5fe76d52d948396ec5ae4c9050dcb2d5488a64b3713460"
+ },
+ "oraclut.idl_mirror": {
+  "path": "src/oraclut/idl_mirror/__init__.py",
+  "sha256": "97078eebd53c2df8627d01e74ec84338eeae6be5ae7cde7bbf45913bc67a415b"
+ },
+ "oraclut.idl_mirror.baum": {
+  "path": "src/oraclut/idl_mirror/baum.py",
+  "sha256": "1e05b81515659ee9cbe62aac98327d22ce1f1e4511938dd2176d580a02bbf06c"
+ },
+ "oraclut.idl_mirror.call_disort": {
+  "path": "src/oraclut/idl_mirror/call_disort.py",
+  "sha256": "0593818e838a276cbbc02a62cbc17e0a4c5e1e06c6fbb254fa9be9848cb6f7dd"
+ },
+ "oraclut.idl_mirror.create_bwgp": {
+  "path": "src/oraclut/idl_mirror/create_bwgp.py",
+  "sha256": "7fca4e34d447c53215e45f32271db386004e188980a79dc2b30ca2275e09b58a"
+ },
+ "oraclut.idl_mirror.dubovik": {
+  "path": "src/oraclut/idl_mirror/dubovik.py",
+  "sha256": "60dd7056406b650a9ecc09fb5e89dd3ab462d2d21d4efd0e9bbfa734ed3d1ec8"
+ },
+ "oraclut.idl_mirror.generate_scattering_properties": {
+  "path": "src/oraclut/idl_mirror/generate_scattering_properties.py",
+  "sha256": "4a33b6dc48653f7f1f9eb132c395995ee08f199f36f673736866da15fa220e6f"
+ },
+ "oraclut.idl_mirror.interpol": {
+  "path": "src/oraclut/idl_mirror/interpol.py",
+  "sha256": "572d87369f14a8c122044ed277cecc5f6423ebd58531779a0b27f3bcddaf81db"
+ },
+ "oraclut.idl_mirror.load_atmstr": {
+  "path": "src/oraclut/idl_mirror/load_atmstr.py",
+  "sha256": "e2dc0e2c38deea5c8101dd9f44289ce2d79b2f3faab7c3fef9aefaeed714ee45"
+ },
+ "oraclut.idl_mirror.load_gasstr": {
+  "path": "src/oraclut/idl_mirror/load_gasstr.py",
+  "sha256": "2c59ca827b4506d052592ab070084e426edce08000171c48dc9fb2da8750174f"
+ },
+ "oraclut.idl_mirror.load_inststr": {
+  "path": "src/oraclut/idl_mirror/load_inststr.py",
+  "sha256": "02246e6acd8322a0ea8091c0b03fa4b9fc088504fb34b69414c4b3e45a21125f"
+ },
+ "oraclut.idl_mirror.load_lutstr": {
+  "path": "src/oraclut/idl_mirror/load_lutstr.py",
+  "sha256": "b32b91a0f9e47ee057e6b6a48ef709012c6802d74835bee92a82203102ba39d7"
+ },
+ "oraclut.idl_mirror.load_mmdat": {
+  "path": "src/oraclut/idl_mirror/load_mmdat.py",
+  "sha256": "36740093127fb84fb15ce0d3b57d8247703c7776138eed3c649638bd36401af5"
+ },
+ "oraclut.idl_mirror.load_srfstrarr": {
+  "path": "src/oraclut/idl_mirror/load_srfstrarr.py",
+  "sha256": "f9f3ec0a18c4be2dd991880f96cd3d16d29775af81f5979d1c36736bbfb2a2b0"
+ },
+ "oraclut.idl_mirror.segment": {
+  "path": "src/oraclut/idl_mirror/segment.py",
+  "sha256": "9db86f3e07779f75618947e61c69fbd913815e309f219cfbc31a11dfb9636001"
+ },
+ "oraclut.idl_mirror.setup_disort": {
+  "path": "src/oraclut/idl_mirror/setup_disort.py",
+  "sha256": "a3d319ff90bc2d57e11033c85c025964ad1d3790605c67daecfc5e367ae36e49"
+ },
+ "oraclut.idl_mirror.total": {
+  "path": "src/oraclut/idl_mirror/total.py",
+  "sha256": "1e6f30cbfefbeae4158cb9c5a3ec252e72be08e571632a9462b1611935c822ac"
+ },
+ "oraclut.idl_mirror.write_v2_lut": {
+  "path": "src/oraclut/idl_mirror/write_v2_lut.py",
+  "sha256": "ab0c2210dbf692ccb9fad1e8243bd2c7f24d9fb6eb0f2293e33ae4fb29920002"
+ },
+ "oraclut.idl_total": {
+  "path": "src/oraclut/idl_total.py",
+  "sha256": "3380dcf7743a1fb35ce04ba9bf4b6fb029efe2c1403c20751fe867fbcd503a46"
+ },
+ "oraclut.io": {
+  "path": "src/oraclut/io/__init__.py",
+  "sha256": "adee29f087d0b56c286cc7e4efe816922e3b7a455e42d6799317af61b7296d19"
+ },
+ "oraclut.io.lut": {
+  "path": "src/oraclut/io/lut.py",
+  "sha256": "f59f303de93e212780284c1b1d31919093779498459ae17cf043684ddba8818c"
+ },
+ "oraclut.io.netcdf_c": {
+  "path": "src/oraclut/io/netcdf_c.py",
+  "sha256": "9cb57aa9336e28da3381c87d20a1d5d87411f97e92afb51fde49bc47f2e98116"
+ },
+ "oraclut.io.string_attributes": {
+  "path": "src/oraclut/io/string_attributes.py",
+  "sha256": "f4ad623e9f0e03fb9d1cfd85e1362fe8f748bfca6a2ffc0b488e2e521d05b6ef"
+ },
+ "oraclut.io.v2": {
+  "path": "src/oraclut/io/v2.py",
+  "sha256": "3f982ff3c8e43655d573cf547d94e2dd7a6d34aa52032f5c2f38459563aa1110"
+ },
+ "oraclut.optics": {
+  "path": "src/oraclut/optics/__init__.py",
+  "sha256": "43fdfa4b5ef46e34699b75dbdbd93eda3bf74079863d492c12da05132c78bdcb"
+ },
+ "oraclut.optics.legacy": {
+  "path": "src/oraclut/optics/legacy.py",
+  "sha256": "37a70a5bb4412b658f1643f803e5c482f4ea97b5d42dda3259f18a58132fed84"
+ },
+ "oraclut.optics.legacy_mie": {
+  "path": "src/oraclut/optics/legacy_mie.py",
+  "sha256": "18f258c20de259f964b5b9e625e3f7daa3d2a5556fd204f88683aab736ab9612"
+ },
+ "oraclut.provenance": {
+  "path": "src/oraclut/provenance.py",
+  "sha256": "2bf7d213fb1e8c4d9db83a401c1f0a0677938b1e6bf394cf75dba74ae1b2a297"
+ },
+ "oraclut.radiative_transfer": {
+  "path": "src/oraclut/radiative_transfer/__init__.py",
+  "sha256": "ced577f8fab65101d2d9e2025220d4353c0f3d5f36c4efc84dc2ba78cce34ab5"
+ },
+ "oraclut.radiative_transfer.legacy_disort": {
+  "path": "src/oraclut/radiative_transfer/legacy_disort.py",
+  "sha256": "98f243b1a6547fb1f05d05ffe3c45dfafb0988c3c33bf8739377f3911cb49cde"
+ },
+ "oraclut.version": {
+  "path": "src/oraclut/version.py",
+  "sha256": "dc192004ab12c327f30288ccb423768557aa6d887e27afbf40dfc3f25b68ff4d"
+ },
+ "create_orac_luts": {
+  "path": "create_orac_luts.py",
+  "sha256": "7c0e92e55198178909ddbc0c3482b9390409bc69df4dd61576d60b7f6347012b"
+ },
+ "single_precision_library": {
+  "path": "build/oraclut/liboraclut_disort_gfortran.so",
+  "sha256": "2e4740e303fa877e6b66b14321b9d941ab011b9c3d9dff60003f70ef3ecd5284"
+ }
+}
