@@ -116,6 +116,7 @@ reconstruction in section 3, marked as such; nothing is written next to them.
 | **V25** | **`lut-code-v25` = `f066fdd`** (products generated at `990d970`; `1d6aa74` added the NetCDF NC_STRING repair, `f066fdd` the untracked V23 configuration) | 2026-10-06 (tag 2026-10-09) | V24 numerics plus cloud vertical temperature profiles in the thermal emission (cirrostratus / wet adiabat) | `validation/v25/results/REPORT_v25_cloud_temperature_profile.md`; an unexplained anomaly is under investigation (2026-10-09) | 40 job logs "Git revision: 990d970…" |
 | V25 maintenance | `lut-code-v25.1` | 2026-10-09 | Identical science to `lut-code-v25`; adds `CODE_VERSION`, the version banner, the LUT-version check and provenance sidecars | Full test suite; compact smoke product | this document |
 | **V22 restored (production)** | **`lut-code-v22.1`** (restoration commit `d9a7e8b`, tag on the documentation commit that follows it) | 2026-10-09 | The V22 scientific implementation of `9d663e9` (`create_orac_luts.py`, `idl_mirror/create_bwgp.py`, `generate_scattering_properties.py`, `write_v2_lut.py`, `master_run.py` restored byte for byte, V24/V25 modules removed) with the later infrastructure retained: NetCDF NC_STRING text attributes (`io/v2.py`), repair utility, `CODE_VERSION`, banner, LUT-version check, provenance sidecars | Campaign cases regenerated from the restored tree bitwise identical to the archived V22 products in every scientific variable (`validation/v22_recovery/results_restored_main_vs_archives.md`); full test suite | `validation/v22_recovery/REPORT_v22_recovery.md` section 15 |
+| **V21/V22 double precision (candidate)** | **`lut-code-v22.2`** (`CODE_VERSION`; not yet tagged) | 2026-10-10 | V22 science with IDL-compatible `TOTAL` reductions and double-precision DISORT (`create_orac_lut/disort2_dp`); the IDL V21 generator uses the same kernel through `call_disort.pro` (`ORAC_LUT_DISORT_PRECISION`, default `double`) | Compact IDL/Python validation; complete products and V21/V22 benchmark pending | `DOUBLE_PRECISION_BASELINE.md`; `releases/idl_lut_v21_double.release`, `releases/lut_v22_double.release` |
 
 **Note on V22.**  The IDL-structured Python generator (`create_orac_luts.py`,
 `src/oraclut/idl_mirror`) that produced the V22 campaign products on
@@ -240,3 +241,18 @@ and V25 code is recovered from `lut-code-v23`, `lut-code-v24`,
 `references/data/ocalut_cloudprofile_Cirrostratus.dat` stays as historical
 V25 reference material.  Details and the verification of the restored tree
 against the archived V22 products: `validation/v22_recovery/REPORT_v22_recovery.md`.
+
+## 7. Double-precision V21/V22 baseline (2026-10-10)
+
+Both generators now solve DISORT in double precision by default; the
+historical single-precision kernel remains selectable with
+`ORAC_LUT_DISORT_PRECISION=single`.  The LUT product versions are unchanged
+(IDL V21, Python V22); the Python source release is `lut-code-v22.2`.  Each
+release is defined by a sealed SourceVault manifest:
+`releases/idl_lut_v21_single.release` (historical IDL V21),
+`releases/idl_lut_v21_double.release` (new IDL V21),
+`releases/lut_v22.release` (historical Python V22, sealed; still runnable with
+`ORAC_LUT_RELEASE_MANIFEST=lut_v22.release` and launcher v03, which serves its
+`CODE_VERSION` from `CODE_VERSION_v01`) and `releases/lut_v22_double.release`
+(new Python V22).  Architecture, reproduction, production and the
+equivalence benchmark: `DOUBLE_PRECISION_BASELINE.md`.

@@ -23,6 +23,7 @@ import re
 import numpy as np
 
 from .segment import segment
+from .total import idl_total
 
 
 def integrate_trapeziodal(x, y):
@@ -32,7 +33,7 @@ def integrate_trapeziodal(x, y):
    y = np.asarray(y, dtype=np.float32)
    dx = x[1:] - x[:-1]
    ym = np.float32(0.5) * (y[:-1] + y[1:])
-   return np.sum(dx * ym, dtype=np.float32)
+   return idl_total(dx * ym)
 
 
 def simpson_integral(x, y):
@@ -42,7 +43,7 @@ def simpson_integral(x, y):
    reproduced deliberately because F0 in every validated product depends on it.
    """
 
-   return np.sum(np.asarray(x, dtype=np.float32) * np.asarray(y, dtype=np.float32), dtype=np.float32)
+   return idl_total(np.asarray(x, dtype=np.float32) * np.asarray(y, dtype=np.float32))
 
 
 def read_srfstr(filename):

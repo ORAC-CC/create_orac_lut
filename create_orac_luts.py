@@ -54,10 +54,11 @@ REPO_ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(REPO_ROOT / "src"))
 
 from oraclut.idl_mirror import (   # noqa: E402  (import after sys.path is set)
-   call_disort, generate_scattering_properties, interpol, load_atmstr, load_gasstr,
+   call_disort, generate_scattering_properties, idl_total, interpol, load_atmstr, load_gasstr,
    load_inststr, load_lutstr, load_mmdat, load_srfstrarr, setup_disort, write_v2_lut,
 )
 from oraclut.radiative_transfer.legacy_disort import getmom, plkavg   # noqa: E402  (DISORT GETMOM / PLKAVG)
+from oraclut.radiative_transfer.legacy_disort import DOUBLE_LIBRARY, disort_precision   # noqa: E402  (solver precision)
 from oraclut.provenance import build_record, write_provenance   # noqa: E402  (provenance sidecar)
 from oraclut.version import LutVersionMismatch, check_lut_version, print_banner   # noqa: E402  (code version)
 
@@ -145,6 +146,7 @@ def _print_execution_configuration(
    print(f"Rayleigh scattering:  {'on' if rayleigh_flag else 'off'}")
    print(f"Scattering only:      {'yes' if scat_only else 'no'}")
    print(f"DISORT streams:       {nstreams}")
+   print(f"DISORT precision:     {disort_precision()}")
    print(f"Legendre moments:     {nmom}")
    print(f"Output:               {output}")
    print("LUT dimensions:")
@@ -245,7 +247,10 @@ def _record_provenance(lut_file, *, forward_model, in_path, instfile, mmfile, lu
          "scattering_cache_reused": bool(reuse_scat),
       }
       radiative_transfer = {
-         "solver": "DISORT (create_orac_lut/disort2, oraclut.radiative_transfer.legacy_disort)",
+         "solver": "DISORT (create_orac_lut/disort2 source, oraclut.radiative_transfer.legacy_disort)",
+         "disort_precision": disort_precision(),
+         "disort_library": (str(DOUBLE_LIBRARY.relative_to(REPO_ROOT)) if disort_precision() == "double"
+                            else "single-precision kernel built from create_orac_lut/disort2/src"),
          "nstreams": int(nstreams),
          "rayleigh": bool(rayleigh_flag),
          "gas_absorption": bool(gas_flag),
@@ -516,7 +521,7 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
    nlayers = atmstr.nlevels - 1
    hlayers = (atmstr.height[0:nlayers] + atmstr.height[1:nlayers + 1]) / np.float32(2)
    scatreltau = interpol(mmstr.rext, mmstr.height, hlayers)
-   scatreltau = scatreltau / np.sum(scatreltau, dtype=np.float32)
+   scatreltau = scatreltau / idl_total(scatreltau)
 
    # -----------------------------------------------------------------------------
    # Generate scattering properties by calling the scattering code (Mie), or by
@@ -629,7 +634,7 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
                tauscat = lutstr.opd[a] * scatreltau * bextrat[m, l, r]
                # the optical depths are additive
                dtau = taugas + tauray + tauscat
-               totaltau = np.sum(dtau, dtype=f32)
+               totaltau = idl_total(dtau)
 
                # The single scattering albedo is weighted by optical depth.
                # NB. SSA for Rayleigh scattering = 1, and is effectively 0 for gas
@@ -713,7 +718,7 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
                      emtau = dtau[incloud]
                      emssa = ssalb[incloud]
                      empmo = np.asfortranarray(pmom[:, incloud])
-                     emutau = np.asarray([0.0, np.sum(emtau, dtype=f32)], f32)
+                     emutau = np.asarray([0.0, idl_total(emtau)], f32)
 
                      rfldir, rfldn, flup, dfdt, uavg, uu, albmed, trnmed = call_disort(
                         disort_vars, emtau, emssa, empmo, emutau, umu, lutstr.raa, fbeam, umu0, fisot,
@@ -756,7 +761,7 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
    # Normalise the RT operators with respect to the SRF.  Note 'sum' is unity in
    # monochromatic mode (srf_quad = 1).
    for l in range(inststr.number_of_nadir_channels):
-      srfsum = np.sum(srfstrarr[l].val, dtype=f32)
+      srfsum = idl_total(srfstrarr[l].val)
       rfd[l] /= srfsum
       tfd[l] /= srfsum
       rd[l] /= srfsum
@@ -957,7 +962,7 @@ def create_orac_aerosol_lut(in_path, instfile, mmfile, lutfile, out_path, atmosp
    nlayers = atmstr.nlevels - 1
    hlayers = (atmstr.height[0:nlayers] + atmstr.height[1:nlayers + 1]) / np.float32(2)
    scatreltau = interpol(mmstr.rext, mmstr.height, hlayers)
-   scatreltau = scatreltau / np.sum(scatreltau, dtype=np.float32)
+   scatreltau = scatreltau / idl_total(scatreltau)
 
    # -----------------------------------------------------------------------------
    # Generate scattering properties by calling the scattering code (Mie), or by
@@ -1059,7 +1064,7 @@ def create_orac_aerosol_lut(in_path, instfile, mmfile, lutfile, out_path, atmosp
                   tauscat = lutstr.opd[a] * scatreltau * bextrat[m, l, r]
                   # the optical depths are additive
                   dtau = taugas + tauray + tauscat
-                  totaltau = np.sum(dtau, dtype=f32)
+                  totaltau = idl_total(dtau)
 
                   # The single scattering albedo is weighted by optical depth.
                   ssalb = np.divide(tauray + w[m, l, r] * tauscat, dtau, out=np.zeros_like(dtau), where=dtau != 0)
@@ -1127,7 +1132,7 @@ def create_orac_aerosol_lut(in_path, instfile, mmfile, lutfile, out_path, atmosp
                         emtau = dtau[incloud]
                         emssa = ssalb[incloud]
                         empmo = np.asfortranarray(pmom[:, incloud])
-                        emutau = np.asarray([0.0, np.sum(emtau, dtype=f32)], f32)
+                        emutau = np.asarray([0.0, idl_total(emtau)], f32)
 
                         rfldir, rfldn, flup, dfdt, uavg, uu, albmed, trnmed = call_disort(
                            disort_vars, emtau, emssa, empmo, emutau, umu, lutstr.raa, fbeam, umu0, fisot,
@@ -1165,7 +1170,7 @@ def create_orac_aerosol_lut(in_path, instfile, mmfile, lutfile, out_path, atmosp
 
    # Normalise the RT operators with respect to the SRF ('sum' is unity for srf_quad = 1)
    for l in range(inststr.number_of_nadir_channels):
-      srfsum = np.sum(srfstrarr[l].val, dtype=f32)
+      srfsum = idl_total(srfstrarr[l].val)
       rfd[l] /= srfsum
       tfd[l] /= srfsum
       rd[l] /= srfsum

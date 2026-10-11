@@ -239,10 +239,12 @@ def test_run_file_rejects_extra_generator_arguments(mocks):
     assert not Path(str(record) + ".sbatch").exists()
 
 
-def test_batch_script_routes_a_run_file_to_create_orac_luts():
+def test_batch_script_routes_run_files_to_the_release_launcher():
     text = (ROOT / "scripts" / "run_oraclut_lut.slurm").read_text()
     assert '*.run)' in text
-    assert '"$PYTHON" create_orac_luts.py "$1"' in text
+    assert '"$PYTHON" create_orac_luts_release_v03.py "$1"' in text
+    assert '"$PYTHON" create_orac_luts_release_v03.py "$TRANSIENT_RUN"' in text
+    assert '"$PYTHON" create_orac_luts.py' not in text
     assert '"$PYTHON" -m oraclut.generate "$@"' in text
     assert '"$PYTHON" -m oraclut.master_run makerunfile --manifest-task' in text
 

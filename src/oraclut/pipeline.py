@@ -27,6 +27,7 @@ from .config import (
     read_srf,
 )
 from .io.v2 import write_v2_lut
+from .idl_total import idl_total
 from .optics import legacy_mixed_mie_optics, legacy_stg_optics
 from .radiative_transfer import call_disort, getmom, plkavg
 
@@ -59,16 +60,13 @@ class GenerationResult:
 def _legacy_integral(x: np.ndarray, y: np.ndarray) -> np.float32:
     x = np.asarray(x, dtype=np.float32)
     y = np.asarray(y, dtype=np.float32)
-    return np.sum(
-        (x[1:] - x[:-1]) * (y[1:] + y[:-1]) * np.float32(0.5),
-        dtype=np.float32,
-    )
+    return idl_total((x[1:] - x[:-1]) * (y[1:] + y[:-1]) * np.float32(0.5))
 
 
 def _legacy_simpson_bug(x: np.ndarray, y: np.ndarray) -> np.float32:
     """Match the current ``simpson_integral.pro`` implementation exactly."""
 
-    return np.sum(np.asarray(x) * np.asarray(y), dtype=np.float32)
+    return idl_total(np.asarray(x) * np.asarray(y))
 
 
 def _solar_f0(
@@ -190,7 +188,7 @@ def _layer_inputs(
     n_layers = atmosphere.height_km.size - 1
     layer_height = (atmosphere.height_km[:n_layers] + atmosphere.height_km[1:]) / np.float32(2.0)
     relative_tau = _interpolate_profile(model_height, model_relative_amount, layer_height)
-    relative_tau /= np.sum(relative_tau, dtype=np.float32)
+    relative_tau /= idl_total(relative_tau)
     if no_rayleigh:
         column_tau = np.float32(1.0e-6)
     else:
@@ -317,7 +315,7 @@ def calculate_cloud_operators(
                     dtype=np.float32,
                 )
                 dtau = (tau_rayleigh + tauscat).astype(np.float32)
-                total_tau = np.sum(dtau, dtype=np.float32)
+                total_tau = idl_total(dtau)
                 denominator = dtau.copy()
                 ssa = np.divide(
                     tau_rayleigh + single_scatter_albedo[radius_index, channel_index] * tauscat,
@@ -360,7 +358,7 @@ def calculate_cloud_operators(
                         em_tau = dtau[layers]
                         em_ssa = ssa[layers]
                         em_pmom = np.asfortranarray(pmom[:, layers])
-                        em_utau = np.asarray([0.0, np.sum(em_tau, dtype=np.float32)], dtype=np.float32)
+                        em_utau = np.asarray([0.0, idl_total(em_tau)], dtype=np.float32)
                         wavenumber = np.float32(1.0e4) / channel.wavelength_microns
                         wnlo = np.float32(0.995) * wavenumber
                         wnhi = np.float32(1.005) * wavenumber
@@ -425,7 +423,7 @@ def calculate_aerosol_operators(
     n_layers = atmosphere.height_km.size - 1
     layer_height = (atmosphere.height_km[:n_layers] + atmosphere.height_km[1:]) / np.float32(2.0)
     relative_tau = _interpolate_profile(model_height, model_relative_amount, layer_height)
-    relative_tau /= np.sum(relative_tau, dtype=np.float32)
+    relative_tau /= idl_total(relative_tau)
     up_indices = slice(2 * grid.satellite_zenith.size - 1, grid.satellite_zenith.size - 1, -1)
     for channel_index, channel in enumerate(channels):
         if gas_levels is None:
@@ -455,7 +453,7 @@ def calculate_aerosol_operators(
                         dtype=np.float32,
                     )
                     dtau = (tau_gas + tau_rayleigh + tauscat).astype(np.float32)
-                    total_tau = np.sum(dtau, dtype=np.float32)
+                    total_tau = idl_total(dtau)
                     denominator = dtau.copy()
                     ssa = np.divide(
                         tau_rayleigh + single_scatter_albedo[radius_index, channel_index] * tauscat,
@@ -495,7 +493,7 @@ def calculate_aerosol_operators(
                             em_tau = dtau[layers]
                             em_ssa = ssa[layers]
                             em_pmom = np.asfortranarray(pmom[:, layers])
-                            em_utau = np.asarray([0.0, np.sum(em_tau, dtype=np.float32)], dtype=np.float32)
+                            em_utau = np.asarray([0.0, idl_total(em_tau)], dtype=np.float32)
                             wavenumber = np.float32(1.0e4) / channel.wavelength_microns
                             wnlo = np.float32(0.995) * wavenumber
                             wnhi = np.float32(1.005) * wavenumber

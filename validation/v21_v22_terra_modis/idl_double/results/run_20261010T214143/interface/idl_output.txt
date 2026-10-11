@@ -1,0 +1,27 @@
+IDL 8.9.0 (linux x86_64 m64).
+(c) 2023, L3Harris Geospatial Solutions, Inc.
+
+Licensed for use by: University of Oxford
+License: 422836
+% Compiled module: DP_INTERFACE_TEST.
+% Loaded DLM: DISORTTOIDL_DP.
+DISORTtoIDL_DP fortran_real_bytes=8 c_double_bytes=8 ifort=[ifort (IFORT) 2021.6.0 20220226] FFLAGS=[-O2 -fp-model precise -fpic -real-size 64 -double-size 64 -integer-size 32] gcc=[gcc (Debian 12.2.0-14+deb12u1) 12.2.0] CFLAGS=[-O2 -fPIC -std=gnu99 -Wall -Wextra -Wno-cast-function-type]
+PASS  kernel REAL is 8 bytes
+% Loaded DLM: DISORTTOIDL.
+
+ ******* WARNING >>>>>>  UPBEAM--SGECO says matrix near singular
+
+historical DISORT versus V21 capture: bitwise =    1, max |difference| = 
+      0.00000
+PASS  historical DISORT reproduces V21 capture (bitwise or <= 1e-4)
+PASS  outputs are DOUBLE
+PASS  UU dimensions
+PASS  inputs unchanged
+PASS  float32 and float64 inputs give identical results
+PASS  repeat call bitwise identical
+PASS  LAMBER = 0 rejected
+PASS  wrong PMOM layout rejected
+PASS  SSALB > 1 rejected
+PASS  short UMU rejected
+DP INTERFACE TEST PASSED
+% Program caused arithmetic error: Floating underflow

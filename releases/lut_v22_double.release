@@ -1,0 +1,81 @@
+# ORAC LUT release manifest
+#
+# LUT release V22 with double-precision DISORT: the Python generator that
+# reproduces the IDL V21 lookup tables (active revisions with IDL-compatible
+# TOTAL reductions), with DISORT solved by the double-precision kernel shared
+# with the IDL DLM DISORTtoIDL_DP (create_orac_lut/disort2_dp).  NSTR 60,
+# NMOM 1000, original LUT grids, float32 NetCDF storage.  A product is made with
+#
+#    ORAC_LUT_RELEASE_MANIFEST=lut_v22_double.release python create_orac_luts_release_v03.py runs/<product>.run
+#
+# which refuses to run unless every file below has exactly this content (and
+# ORAC_LUT_DISORT_PRECISION selects double, the default).  The historical
+# single-precision V22 release is releases/lut_v22.release (sealed; its
+# products are reproduced from Git tag lut-code-v22.1).  This file is sealed:
+# once a product has been made from it, it is never edited.
+#
+# LUT release numbers (V21, V22, ...) and source-file versions (_v01, _v02, ...)
+# are independent: each file's version advances only when that file changes.
+# "pinned" files have no versioned name; their content is fixed by SHA-256.
+# The library entries are built in the checkout named by library_checkout.
+#
+# Columns: role  logical-name  file-version  sha256  path (relative to the repository)
+
+manifest_schema = oraclut-release-manifest-1
+lut_release = 22
+disort_precision = double
+library_checkout = /home/g/grainger/project-oraclut
+created = 2026-10-11
+git_head_at_creation = 37cf766a9c8e8571b306c7901869fad52d1d6186
+
+driver   create_orac_luts                                     v03     7c0e92e55198178909ddbc0c3482b9390409bc69df4dd61576d60b7f6347012b  create_orac_luts_v03.py
+package  oraclut                                              v01     664645594755345f6a5fe76d52d948396ec5ae4c9050dcb2d5488a64b3713460  src/oraclut/__init___v01.py
+package  oraclut.idl_mirror                                   v02     97078eebd53c2df8627d01e74ec84338eeae6be5ae7cde7bbf45913bc67a415b  src/oraclut/idl_mirror/__init___v02.py
+module   oraclut.idl_mirror.baum                              v01     1e05b81515659ee9cbe62aac98327d22ce1f1e4511938dd2176d580a02bbf06c  src/oraclut/idl_mirror/baum_v01.py
+module   oraclut.idl_mirror.call_disort                       v01     0593818e838a276cbbc02a62cbc17e0a4c5e1e06c6fbb254fa9be9848cb6f7dd  src/oraclut/idl_mirror/call_disort_v01.py
+module   oraclut.idl_mirror.create_bwgp                       v02     7fca4e34d447c53215e45f32271db386004e188980a79dc2b30ca2275e09b58a  src/oraclut/idl_mirror/create_bwgp_v02.py
+module   oraclut.idl_mirror.dubovik                           v02     60dd7056406b650a9ecc09fb5e89dd3ab462d2d21d4efd0e9bbfa734ed3d1ec8  src/oraclut/idl_mirror/dubovik_v02.py
+module   oraclut.idl_mirror.generate_scattering_properties    v02     4a33b6dc48653f7f1f9eb132c395995ee08f199f36f673736866da15fa220e6f  src/oraclut/idl_mirror/generate_scattering_properties_v02.py
+module   oraclut.idl_mirror.interpol                          v01     572d87369f14a8c122044ed277cecc5f6423ebd58531779a0b27f3bcddaf81db  src/oraclut/idl_mirror/interpol_v01.py
+module   oraclut.idl_mirror.load_atmstr                       v01     e2dc0e2c38deea5c8101dd9f44289ce2d79b2f3faab7c3fef9aefaeed714ee45  src/oraclut/idl_mirror/load_atmstr_v01.py
+module   oraclut.idl_mirror.load_gasstr                       v01     2c59ca827b4506d052592ab070084e426edce08000171c48dc9fb2da8750174f  src/oraclut/idl_mirror/load_gasstr_v01.py
+module   oraclut.idl_mirror.load_inststr                      v01     02246e6acd8322a0ea8091c0b03fa4b9fc088504fb34b69414c4b3e45a21125f  src/oraclut/idl_mirror/load_inststr_v01.py
+module   oraclut.idl_mirror.load_lutstr                       v01     b32b91a0f9e47ee057e6b6a48ef709012c6802d74835bee92a82203102ba39d7  src/oraclut/idl_mirror/load_lutstr_v01.py
+module   oraclut.idl_mirror.load_mmdat                        v01     36740093127fb84fb15ce0d3b57d8247703c7776138eed3c649638bd36401af5  src/oraclut/idl_mirror/load_mmdat_v01.py
+module   oraclut.idl_mirror.load_srfstrarr                    v02     f9f3ec0a18c4be2dd991880f96cd3d16d29775af81f5979d1c36736bbfb2a2b0  src/oraclut/idl_mirror/load_srfstrarr_v02.py
+module   oraclut.idl_mirror.segment                           v01     9db86f3e07779f75618947e61c69fbd913815e309f219cfbc31a11dfb9636001  src/oraclut/idl_mirror/segment_v01.py
+module   oraclut.idl_mirror.setup_disort                      v01     a3d319ff90bc2d57e11033c85c025964ad1d3790605c67daecfc5e367ae36e49  src/oraclut/idl_mirror/setup_disort_v01.py
+module   oraclut.idl_mirror.total                             v01     1e6f30cbfefbeae4158cb9c5a3ec252e72be08e571632a9462b1611935c822ac  src/oraclut/idl_mirror/total_v01.py
+module   oraclut.idl_mirror.write_v2_lut                      v02     ab0c2210dbf692ccb9fad1e8243bd2c7f24d9fb6eb0f2293e33ae4fb29920002  src/oraclut/idl_mirror/write_v2_lut_v02.py
+module   oraclut.idl_total                                    v01     3380dcf7743a1fb35ce04ba9bf4b6fb029efe2c1403c20751fe867fbcd503a46  src/oraclut/idl_total_v01.py
+package  oraclut.io                                           v01     adee29f087d0b56c286cc7e4efe816922e3b7a455e42d6799317af61b7296d19  src/oraclut/io/__init___v01.py
+module   oraclut.io.lut                                       v01     f59f303de93e212780284c1b1d31919093779498459ae17cf043684ddba8818c  src/oraclut/io/lut_v01.py
+module   oraclut.io.netcdf_c                                  v01     9cb57aa9336e28da3381c87d20a1d5d87411f97e92afb51fde49bc47f2e98116  src/oraclut/io/netcdf_c_v01.py
+module   oraclut.io.string_attributes                         v01     f4ad623e9f0e03fb9d1cfd85e1362fe8f748bfca6a2ffc0b488e2e521d05b6ef  src/oraclut/io/string_attributes_v01.py
+module   oraclut.io.v2                                        v01     3f982ff3c8e43655d573cf547d94e2dd7a6d34aa52032f5c2f38459563aa1110  src/oraclut/io/v2_v01.py
+package  oraclut.optics                                       v01     43fdfa4b5ef46e34699b75dbdbd93eda3bf74079863d492c12da05132c78bdcb  src/oraclut/optics/__init___v01.py
+module   oraclut.optics.legacy                                v02     37a70a5bb4412b658f1643f803e5c482f4ea97b5d42dda3259f18a58132fed84  src/oraclut/optics/legacy_v02.py
+module   oraclut.optics.legacy_mie                            v01     18f258c20de259f964b5b9e625e3f7daa3d2a5556fd204f88683aab736ab9612  src/oraclut/optics/legacy_mie_v01.py
+module   oraclut.provenance                                   v01     2bf7d213fb1e8c4d9db83a401c1f0a0677938b1e6bf394cf75dba74ae1b2a297  src/oraclut/provenance_v01.py
+package  oraclut.radiative_transfer                           v01     ced577f8fab65101d2d9e2025220d4353c0f3d5f36c4efc84dc2ba78cce34ab5  src/oraclut/radiative_transfer/__init___v01.py
+module   oraclut.radiative_transfer.legacy_disort             v02     98f243b1a6547fb1f05d05ffe3c45dfafb0988c3c33bf8739377f3911cb49cde  src/oraclut/radiative_transfer/legacy_disort_v02.py
+module   oraclut.version                                      v01     dc192004ab12c327f30288ccb423768557aa6d887e27afbf40dfc3f25b68ff4d  src/oraclut/version_v01.py
+config   CODE_VERSION                                         pinned  a4f40060954001e115495e7875e3c394088c05cf39659d90bdaf193a38e1af25  CODE_VERSION
+adapter  mie-adapter                                          pinned  4454fd031eb20efd25f0418aec458fc12ea9ed32ccba1006cc181605e24aa104  src/oraclut/optics/legacy_mie.c
+adapter  disort-adapter                                       pinned  e85a9741ce6bfd5734b5688e57dba63f30bcb6a63a073d029feba8118ddb197d  src/oraclut/radiative_transfer/legacy_disort.c
+kernel   mie-mieint.f                                         pinned  d704cca0c51ee7b2be667f58aec1f0033f914ec5c3a438970d1b49105fb3458c  mie/dlm-code/mieint.f
+kernel   disort-DISORTfunctions.f                             pinned  3f45489e9fc580a8aec6c9604ac6ffdc9e8cad73830a16f185038fe07db55f72  create_orac_lut/disort2/src/DISORTfunctions.f
+kernel   disort-BDREF.f                                       pinned  31e1c747aefc36e4fdd0ef3f87677f0dfc5aaca92d6dbba7e667d1e51f3b92ef  create_orac_lut/disort2/src/BDREF.f
+kernel   disort-PRTFIN.f                                      pinned  d3846c637cb4fbbbf96af3048e94209bfdc1a33e454540f70429c768b8520770  create_orac_lut/disort2/src/PRTFIN.f
+kernel   disort-ambrals-fortran.c                             pinned  4ecf4c8382ac201c6bbc2b33eb56c247959c85ea861e94192af6a1e3bfff0dc7  create_orac_lut/disort2/src/ambrals-fortran.c
+kernel   disort-ambralsfor.c                                  pinned  067cecd0647ae0c0620cbbcc1e61890a2a661edb51ad0d8c48ba75e3fa2196e2  create_orac_lut/disort2/src/ambralsfor.c
+kernel   disort-ambralsfor.h                                  pinned  f562ddb308a82c748f497d81f31c10696143b5a18deb91cbf0fbd22fad0a0e92  create_orac_lut/disort2/src/ambralsfor.h
+kernel   disort-ErrPack.f                                     pinned  d1b90b20821584ebb712888458f2713f73664db0626545d3ef688468e8c5baaf  create_orac_lut/disort2/src/disort/ErrPack.f
+kernel   disort-LINPAK.f                                      pinned  8f0ec48b1d96ea1c6b08fbff42529507864ab00b50d65974e4b00efbf3fe96a0  create_orac_lut/disort2/src/disort/LINPAK.f
+kernel   disort-RDI1MACH.f                                    pinned  c59dadbf0ac9ee25e56e7551d042017cc5cc179b102f848eb08f643ab6ea3738  create_orac_lut/disort2/src/disort/RDI1MACH.f
+kernel   disort-double-dp_support.f                           pinned  a79dbb61cf6cf66496ae34303afa26b75a8ab25dbf9efab57fce4b7beef7f28d  create_orac_lut/disort2_dp/dp_support.f
+kernel   disort-double-build_dlm.sh                           pinned  ea21a3170d12fc60d082142e567a384204f554df5fce2beb26986b3f08a42a12  create_orac_lut/disort2_dp/build_dlm.sh
+kernel   disort-double-BUILD_INFO.txt                         pinned  0441f0773c2fab6c8db6cdccaf28a0144d83ec09482af6444ca79e1882b7c35c  create_orac_lut/disort2_dp/BUILD_INFO.txt
+library  mie-library                                          pinned  3f79512e8ef476399fc0a71b64ababa4b1638cc95b26dba878dda8c5d91185c0  build/oraclut/liboraclut_mie_gfortran.so
+library  disort-library                                       pinned  2e4740e303fa877e6b66b14321b9d941ab011b9c3d9dff60003f70ef3ecd5284  build/oraclut/liboraclut_disort_gfortran.so
+library  disort-double-library                                pinned  2e45aca683fe5eecf4c9d92ff6831f4def62a57f85fc147d7fb63eeb0f476698  create_orac_lut/disort2_dp/libdisort_dp.so

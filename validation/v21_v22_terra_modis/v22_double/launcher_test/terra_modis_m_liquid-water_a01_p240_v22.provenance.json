@@ -1,0 +1,272 @@
+{
+ "configuration": {
+  "channels": [
+   1
+  ],
+  "components": {
+   "names": [
+    "water"
+   ],
+   "types": [
+    "user"
+   ]
+  },
+  "forward_model": "cloud",
+  "instrument": "modis",
+  "instrument_file": "terra_modis_v1.inst",
+  "microphysics_file": "liquid-water_240.mm",
+  "particle_model_shortname": "240",
+  "platform": "terra",
+  "srf_files": [
+   "rtcoef_eos_1_modis-shifted_srf_ch01.txt"
+  ],
+  "substance": "liquid-water",
+  "tmatrix_path": null
+ },
+ "configuration_file": {
+  "path": "validation/v21_v22_terra_modis/v22_double/test_runs/case_D_v22_double.run",
+  "sha256": "47d6d1869ee07f3047c5b47c6da684f83257995eb27a7539bde211d157533067",
+  "size_bytes": 614,
+  "text": "; Compact launcher test of the double-precision V22 release (case D: Terra MODIS p240 ch1, tau 4/8/16, re 9/11/13, SZA 40).\nplatform      = 'terra'\ninstrument    = 'modis'\nforward_model = 'cloud'\n\nin_path       = 'validation/v21_v22_terra_modis/v22_double/work/case_D/input_files'\ninstfile      = 'terra_modis_v1.inst'\nmmfile        = 'liquid-water_240.mm'\nlutfile       = 'case_D.lut'\n\natmospheres   = 2\nchannelid     = [1]\n\ngas           = 0\nno_rayleigh   = 0\nsrf_quad      = 1\nnstreams      = 60\nnmom          = 1000\nversion       = 22\n\nout_path      = 'validation/v21_v22_terra_modis/v22_double/launcher_test'\n"
+ },
+ "generated_utc": "2026-10-10T22:34:04Z",
+ "generator": "create_orac_luts.py",
+ "grid": {
+  "definition_file": "case_D.lut",
+  "efr": {
+   "n": 3,
+   "spacing": "uneven_linear",
+   "values": [
+    9.0,
+    11.0,
+    13.0
+   ]
+  },
+  "opd": {
+   "n": 3,
+   "spacing": "uneven_logarithmic",
+   "values": [
+    4.0,
+    8.0,
+    16.0
+   ]
+  },
+  "raa": {
+   "n": 11,
+   "spacing": "linear",
+   "values": [
+    0.0,
+    18.0,
+    36.0,
+    54.0,
+    72.0,
+    90.0,
+    108.0,
+    126.0,
+    144.0,
+    162.0,
+    180.0
+   ]
+  },
+  "saz": {
+   "n": 10,
+   "spacing": "linear",
+   "values": [
+    0.0,
+    7.222222328186035,
+    14.44444465637207,
+    21.66666603088379,
+    28.88888931274414,
+    36.11111068725586,
+    43.33333206176758,
+    50.55555725097656,
+    57.77777862548828,
+    65.0
+   ]
+  },
+  "soz": {
+   "n": 1,
+   "spacing": "uneven_linear",
+   "values": [
+    40.0
+   ]
+  }
+ },
+ "input_files": {
+  "atmosphere": {
+   "path": "create_orac_lut/input_files/atm/mls.atm",
+   "sha256": "45244e3c78ee3fb05c841b1a9882e0551710f9450a4e4bfbf536e6bb1226dc5a",
+   "size_bytes": 8655
+  },
+  "instrument": {
+   "path": "create_orac_lut/input_files/inst/terra_modis_v1.inst",
+   "sha256": "8b1f1adcac24e8b066a5735edbffedd2f942157196ad6dc09c5ef9c5e4693d05",
+   "size_bytes": 4828
+  },
+  "lut_definition": {
+   "path": "validation/v21_v22_terra_modis/v22_double/work/case_D/input_files/lut/case_D.lut",
+   "sha256": "85216d1a507b84255e319795fe616e9044cbf822b7d995fc38ce835bc23dc5e6",
+   "size_bytes": 124
+  },
+  "microphysics": {
+   "path": "create_orac_lut/input_files/microphysics/liquid-water_240.mm",
+   "sha256": "8145e8c5be0cb565a727eecb827d5def620205dcf9f39b15e722f1fe0269cbf2",
+   "size_bytes": 426
+  }
+ },
+ "job": {
+  "slurm_array_task_id": null,
+  "slurm_job_id": null,
+  "slurm_job_name": null,
+  "user": "grainger",
+  "working_directory": "/home/g/grainger/project-oraclut"
+ },
+ "lut_version": 22,
+ "numerics": {
+  "legendre_expansion": "fixed, nmom = 1000 (IDL generate_scattering_properties)",
+  "nmom": 1000,
+  "scattering_cache_reused": false,
+  "size_distribution_integration": "legacy IDL linear-radius trapezoid, 0.001-100 um, size-parameter step 0.4 (create_bwgp.mie_size_dist_new, xres = 0.4, at least 200 nodes)",
+  "srf_quadrature": 1
+ },
+ "output": {
+  "directory": "/home/g/grainger/project-oraclut/validation/v21_v22_terra_modis/v22_double/launcher_test",
+  "file": "terra_modis_m_liquid-water_a01_p240_v22.nc",
+  "sha256": "3bd8a6751516177505cf7e63a58a33a60bb36c6fe0da34b0190feb9e82709bb3",
+  "size_bytes": 236083
+ },
+ "provenance_format": 1,
+ "radiative_transfer": {
+  "atmosphere_code": "2",
+  "atmosphere_file": "mls.atm",
+  "cloud_emission": "isothermal cloud (legacy IDL)",
+  "disort_library": "create_orac_lut/disort2_dp/libdisort_dp.so",
+  "disort_precision": "double",
+  "gas_absorption": false,
+  "nstreams": 60,
+  "rayleigh": true,
+  "scattering_only": false,
+  "solver": "DISORT (create_orac_lut/disort2 source, oraclut.radiative_transfer.legacy_disort)"
+ },
+ "source": {
+  "code_release": "lut-code-v22.2",
+  "compatible_lut_versions": [
+   21
+  ],
+  "git": {
+   "available": true,
+   "branch": "main",
+   "commit": "37cf766a9c8e8571b306c7901869fad52d1d6186",
+   "describe": "lut-code-v22.1-3-g37cf766",
+   "detail": "",
+   "modified": true,
+   "release_relation": "tag lut-code-v22.2 not present in this repository",
+   "release_tag_commit": null,
+   "tracked_changes": [
+    "CODE_VERSION",
+    "create_orac_lut/call_disort.pro",
+    "create_orac_lut/initpath.bash",
+    "create_orac_lut/makerunfile.pro",
+    "create_orac_lut/terra_modis_run",
+    "create_orac_luts.py",
+    "scripts/run_oraclut_lut.slurm",
+    "scripts/submit_oraclut_lut.sh",
+    "src/oraclut/idl_mirror/__init__.py",
+    "src/oraclut/idl_mirror/create_bwgp.py",
+    "src/oraclut/idl_mirror/dubovik.py",
+    "src/oraclut/idl_mirror/generate_scattering_properties.py",
+    "src/oraclut/idl_mirror/load_srfstrarr.py",
+    "src/oraclut/idl_mirror/write_v2_lut.py",
+    "src/oraclut/optics/legacy.py",
+    "src/oraclut/pipeline.py",
+    "src/oraclut/radiative_transfer/legacy_disort.py",
+    "tests/test_submit_wrapper.py"
+   ],
+   "untracked_production_files": [
+    "create_orac_lut/call_disort_v01.pro",
+    "create_orac_lut/call_disort_v02.pro",
+    "create_orac_lut/disort2_dp/BUILD_INFO.txt",
+    "create_orac_lut/disort2_dp/DISORTtoIDL_DP.c",
+    "create_orac_lut/disort2_dp/DISORTtoIDL_DP.dlm",
+    "create_orac_lut/disort2_dp/DISORTtoIDL_DP_v01.c",
+    "create_orac_lut/disort2_dp/build_dlm.sh",
+    "create_orac_lut/disort2_dp/build_dlm_v01.sh",
+    "create_orac_lut/disort2_dp/dp_support.f",
+    "create_orac_lut/disort2_dp/dp_support_v01.f",
+    "create_orac_lut/disort2_dp/exports.map",
+    "create_orac_lut/disort2_dp/exports_v01.map",
+    "create_orac_lut/initpath_v01.bash",
+    "create_orac_lut/terra_modis_run_v01",
+    "runs/terra_modis_cloud_liquid-water_240_v22_double.run",
+    "runs/terra_modis_cloud_liquid-water_old_v22_double.run",
+    "runs/terra_modis_cloud_water-ice_agg_v22_double.run",
+    "scripts/check_release_manifest.py",
+    "scripts/check_release_manifest_v01.py",
+    "scripts/make_idl_release_manifest.py",
+    "scripts/make_idl_release_manifest_v01.py",
+    "scripts/make_lut_v22_double_manifest.py",
+    "scripts/run_oraclut_lut_v01.slurm",
+    "scripts/submit_oraclut_lut_v01.sh",
+    "src/oraclut/__init___v01.py",
+    "src/oraclut/idl_mirror/__init___v01.py",
+    "src/oraclut/idl_mirror/__init___v02.py",
+    "src/oraclut/idl_mirror/baum_v01.py",
+    "src/oraclut/idl_mirror/call_disort_v01.py",
+    "src/oraclut/idl_mirror/create_bwgp_v01.py",
+    "src/oraclut/idl_mirror/create_bwgp_v02.py",
+    "src/oraclut/idl_mirror/dubovik_v01.py",
+    "src/oraclut/idl_mirror/dubovik_v02.py",
+    "src/oraclut/idl_mirror/generate_scattering_properties_v01.py",
+    "src/oraclut/idl_mirror/generate_scattering_properties_v02.py",
+    "src/oraclut/idl_mirror/interpol_v01.py",
+    "src/oraclut/idl_mirror/load_atmstr_v01.py",
+    "src/oraclut/idl_mirror/load_gasstr_v01.py",
+    "src/oraclut/idl_mirror/load_inststr_v01.py",
+    "src/oraclut/idl_mirror/load_lutstr_v01.py",
+    "src/oraclut/idl_mirror/load_mmdat_v01.py",
+    "src/oraclut/idl_mirror/load_srfstrarr_v01.py",
+    "src/oraclut/idl_mirror/load_srfstrarr_v02.py",
+    "src/oraclut/idl_mirror/segment_v01.py",
+    "src/oraclut/idl_mirror/setup_disort_v01.py",
+    "src/oraclut/idl_mirror/total.py",
+    "src/oraclut/idl_mirror/total_v01.py",
+    "src/oraclut/idl_mirror/write_v2_lut_v01.py",
+    "src/oraclut/idl_mirror/write_v2_lut_v02.py",
+    "src/oraclut/idl_total.py",
+    "src/oraclut/idl_total_v01.py",
+    "src/oraclut/io/__init___v01.py",
+    "src/oraclut/io/lut_v01.py",
+    "src/oraclut/io/netcdf_c_v01.py",
+    "src/oraclut/io/string_attributes_v01.py",
+    "src/oraclut/io/v2_v01.py",
+    "src/oraclut/optics/__init___v01.py",
+    "src/oraclut/optics/legacy_mie_v01.py",
+    "src/oraclut/optics/legacy_v01.py",
+    "src/oraclut/optics/legacy_v02.py",
+    "src/oraclut/pipeline_v01.py",
+    "src/oraclut/pipeline_v02.py",
+    "src/oraclut/provenance_v01.py",
+    "src/oraclut/radiative_transfer/__init___v01.py",
+    "src/oraclut/radiative_transfer/legacy_disort_v01.py",
+    "src/oraclut/radiative_transfer/legacy_disort_v02.py",
+    "src/oraclut/version_v01.py"
+   ],
+   "working_tree": "MODIFIED"
+  },
+  "lut_version": 22,
+  "scientific_config": "v22-double",
+  "scientific_config_description": "Python reproduction of the IDL V21 generator with double-precision DISORT (create_orac_lut/disort2_dp, the kernel of the IDL DISORTtoIDL_DP DLM; ORAC_LUT_DISORT_PRECISION=single restores the historical kernel) and IDL-compatible TOTAL reductions: fixed 0.001-100 um Mie size integration on the legacy radius lattice (size-parameter step 0.4), fixed NMom = 1000 Legendre expansion, DISORT 60 streams, isothermal cloud emission, legacy product grids, float32 storage; version 21 is accepted only for the legacy-comparison run files whose products are compared with the IDL V21 tables",
+  "software": {
+   "fortran_compiler": "gfortran",
+   "fortran_compiler_version": "GNU Fortran (Debian 12.2.0-14+deb12u1) 12.2.0",
+   "fortran_flags": "",
+   "hdf5": "1.14.6",
+   "hostname": "atmlxint5.atm.ox.ac.uk",
+   "libnetcdf": "4.9.2",
+   "netCDF4": "1.7.2",
+   "numpy": "2.2.6",
+   "platform": "Linux-6.1.0-53-amd64-x86_64-with-glibc2.36",
+   "python": "3.11.13"
+  }
+ }
+}

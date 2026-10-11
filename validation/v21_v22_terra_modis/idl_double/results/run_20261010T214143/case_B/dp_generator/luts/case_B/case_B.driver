@@ -1,0 +1,10 @@
+# Double-precision DISORT validation case B: p240 ch20 tau 1 re 11 SZA 30 (largest mixed-channel BT error; V21 negative R_0v)
+# Grid values equal the production Terra MODIS LUT nodes exactly.
+input_files
+terra_modis_v1.inst
+liquid-water_240.mm
+case_B.lut
+2
+channelid=[20]
+srf_quad=1
+version=21

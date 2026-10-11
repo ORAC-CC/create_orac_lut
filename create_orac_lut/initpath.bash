@@ -1,7 +1,7 @@
 # IDL PATHS
 
-export IDL_PATH="<IDL_DEFAULT>:+/home/g/grainger/project-oraclut/"
-export IDL_DLM_PATH="<IDL_DEFAULT>:+/home/g/grainger/project-oraclut"
+export IDL_PATH="<IDL_DEFAULT>:+/home/g/grainger/project-oraclut/create_orac_lut"
+export IDL_DLM_PATH="<IDL_DEFAULT>:+/home/g/grainger/project-oraclut/create_orac_lut"
 
 
 # machine="atmlxint3.atm.ox.ac.uk"

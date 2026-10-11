@@ -1,0 +1,28 @@
+date: 2026-10-10T23:08:47+01:00
+host: atmlxint5.atm.ox.ac.uk
+ifort: ifort (IFORT) 2021.6.0 20220226 (/network/software/linux-x86_64/compilers/intel/2022/compiler/2022.1.0/linux/bin/intel64/ifort)
+gcc: gcc (Debian 12.2.0-14+deb12u1) 12.2.0
+FFLAGS: -O2 -fp-model precise -fpic -real-size 64 -double-size 64 -integer-size 32
+CFLAGS: -O2 -fPIC -std=gnu99 -Wall -Wextra -Wno-cast-function-type
+LDFLAGS: -shared -fpic -Wl,-rpath,/network/software/linux-x86_64/compilers/intel/2022/compiler/2022.1.0/linux/compiler/lib/intel64_lin
+DLM exported symbols: IDL_Load 
+sources:
+3f45489e9fc580a8aec6c9604ac6ffdc9e8cad73830a16f185038fe07db55f72  disort2/src/DISORTfunctions.f
+d3846c637cb4fbbbf96af3048e94209bfdc1a33e454540f70429c768b8520770  disort2/src/PRTFIN.f
+d1b90b20821584ebb712888458f2713f73664db0626545d3ef688468e8c5baaf  disort2/src/disort/ErrPack.f
+8f0ec48b1d96ea1c6b08fbff42529507864ab00b50d65974e4b00efbf3fe96a0  disort2/src/disort/LINPAK.f
+c59dadbf0ac9ee25e56e7551d042017cc5cc179b102f848eb08f643ab6ea3738  disort2/src/disort/RDI1MACH.f
+a79dbb61cf6cf66496ae34303afa26b75a8ab25dbf9efab57fce4b7beef7f28d  dp_support.f
+fa1f8e182dd8132184f0bd680d0cdbb16d8f1c78a0684ab72adb8305783e7a26  DISORTtoIDL_DP.c
+f2d1c3b1879238aba9a42465a69bc1bf5d31b55d96638c2167c86daae1f54cc5  exports.map
+1b9c1cfd8f4ce6eeb2a55cd158d3e5d4585bde9d9de627635d5d1f5da6ffd6f1  DISORTtoIDL_DP.dlm
+kernel objects:
+0fdfd674e00a758fa758c004e6435ed250370e67ee1da30c402e27102193d7fa  build/DISORTfunctions.o
+13939dfb8cbd86826fcc07e324087457b1db45a2c484dc51b5c6867bcb8bd298  build/PRTFIN.o
+4d4fc12d9f81bf74541c8fad08e08c907eb52971e2a5fe780c32d815a9ebe128  build/ErrPack.o
+93c056629c61f5c59bad96f4281af49a1909000009f9139b601aa7ae885806a5  build/LINPAK.o
+06570eb19e87e7fd9bde332e9ec29c01ece4829abbf368e45294a92fafc03e29  build/RDI1MACH.o
+79c49c2b4fe61822af968319e1669f50f9a55c5f014c933c355abb964a8dd1cc  build/dp_support.o
+products:
+21dfcf7e44ccdecb62aed299e3f93839afddf4194f0be4820cffe783250f5789  DISORTtoIDL_DP.so
+2e45aca683fe5eecf4c9d92ff6831f4def62a57f85fc147d7fb63eeb0f476698  libdisort_dp.so

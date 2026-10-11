@@ -1,0 +1,562 @@
+{
+ "v21_vs_v22_captured": {
+  "rfldir": {
+   "bitwise_equal": 2,
+   "size": 2,
+   "max_abs_diff": 0.0
+  },
+  "rfldn": {
+   "bitwise_equal": 0,
+   "size": 2,
+   "max_abs_diff": 1.0478229522705078
+  },
+  "flup": {
+   "bitwise_equal": 0,
+   "size": 2,
+   "max_abs_diff": 4.897353649139404
+  },
+  "dfdt": {
+   "bitwise_equal": 0,
+   "size": 2,
+   "max_abs_diff": 2.92778349830769e-05
+  },
+  "uavg": {
+   "bitwise_equal": 0,
+   "size": 2,
+   "max_abs_diff": 1.9544248580932617
+  },
+  "uu": {
+   "bitwise_equal": 110,
+   "size": 440,
+   "max_abs_diff": 6.543504357337952
+  },
+  "albmed": {
+   "bitwise_equal": 20,
+   "size": 20,
+   "max_abs_diff": 0.0
+  },
+  "trnmed": {
+   "bitwise_equal": 20,
+   "size": 20,
+   "max_abs_diff": 0.0
+  }
+ },
+ "runs": [
+  {
+   "library": "/home/g/grainger/project-oraclut/create_orac_lut/disort2/src/DISORTtoIDL.so",
+   "inputs": "v21_inputs",
+   "maxcly": 3,
+   "status": 0,
+   "top": {
+    "rfldn": 0.0498046875,
+    "flup": 7.410708427429199,
+    "uavg": 9.75434398651123
+   },
+   "vs_v21_captured": {
+    "rfldir": {
+     "bitwise_equal": 2,
+     "size": 2,
+     "max_abs_diff": 0.0
+    },
+    "rfldn": {
+     "bitwise_equal": 2,
+     "size": 2,
+     "max_abs_diff": 0.0
+    },
+    "flup": {
+     "bitwise_equal": 2,
+     "size": 2,
+     "max_abs_diff": 0.0
+    },
+    "dfdt": {
+     "bitwise_equal": 2,
+     "size": 2,
+     "max_abs_diff": 0.0
+    },
+    "uavg": {
+     "bitwise_equal": 2,
+     "size": 2,
+     "max_abs_diff": 0.0
+    },
+    "uu": {
+     "bitwise_equal": 422,
+     "size": 440,
+     "max_abs_diff": 1.4185905456542969e-05
+    },
+    "albmed": {
+     "bitwise_equal": 20,
+     "size": 20,
+     "max_abs_diff": 0.0
+    },
+    "trnmed": {
+     "bitwise_equal": 20,
+     "size": 20,
+     "max_abs_diff": 0.0
+    }
+   },
+   "vs_v22_captured": {
+    "rfldir": {
+     "bitwise_equal": 2,
+     "size": 2,
+     "max_abs_diff": 0.0
+    },
+    "rfldn": {
+     "bitwise_equal": 0,
+     "size": 2,
+     "max_abs_diff": 1.0478229522705078
+    },
+    "flup": {
+     "bitwise_equal": 0,
+     "size": 2,
+     "max_abs_diff": 4.897353649139404
+    },
+    "dfdt": {
+     "bitwise_equal": 0,
+     "size": 2,
+     "max_abs_diff": 2.92778349830769e-05
+    },
+    "uavg": {
+     "bitwise_equal": 0,
+     "size": 2,
+     "max_abs_diff": 1.9544248580932617
+    },
+    "uu": {
+     "bitwise_equal": 110,
+     "size": 440,
+     "max_abs_diff": 6.543504357337952
+    },
+    "albmed": {
+     "bitwise_equal": 20,
+     "size": 20,
+     "max_abs_diff": 0.0
+    },
+    "trnmed": {
+     "bitwise_equal": 20,
+     "size": 20,
+     "max_abs_diff": 0.0
+    }
+   },
+   "max_abs_toa_up_vs_double": 1.6838464662179362
+  },
+  {
+   "library": "/home/g/grainger/project-oraclut/create_orac_lut/disort2/src/DISORTtoIDL.so",
+   "inputs": "v21_inputs",
+   "maxcly": 45,
+   "status": 0,
+   "top": {
+    "rfldn": 0.0498046875,
+    "flup": 7.410708427429199,
+    "uavg": 9.75434398651123
+   },
+   "vs_v21_captured": {
+    "rfldir": {
+     "bitwise_equal": 2,
+     "size": 2,
+     "max_abs_diff": 0.0
+    },
+    "rfldn": {
+     "bitwise_equal": 2,
+     "size": 2,
+     "max_abs_diff": 0.0
+    },
+    "flup": {
+     "bitwise_equal": 2,
+     "size": 2,
+     "max_abs_diff": 0.0
+    },
+    "dfdt": {
+     "bitwise_equal": 2,
+     "size": 2,
+     "max_abs_diff": 0.0
+    },
+    "uavg": {
+     "bitwise_equal": 2,
+     "size": 2,
+     "max_abs_diff": 0.0
+    },
+    "uu": {
+     "bitwise_equal": 422,
+     "size": 440,
+     "max_abs_diff": 1.4185905456542969e-05
+    },
+    "albmed": {
+     "bitwise_equal": 20,
+     "size": 20,
+     "max_abs_diff": 0.0
+    },
+    "trnmed": {
+     "bitwise_equal": 20,
+     "size": 20,
+     "max_abs_diff": 0.0
+    }
+   },
+   "vs_v22_captured": {
+    "rfldir": {
+     "bitwise_equal": 2,
+     "size": 2,
+     "max_abs_diff": 0.0
+    },
+    "rfldn": {
+     "bitwise_equal": 0,
+     "size": 2,
+     "max_abs_diff": 1.0478229522705078
+    },
+    "flup": {
+     "bitwise_equal": 0,
+     "size": 2,
+     "max_abs_diff": 4.897353649139404
+    },
+    "dfdt": {
+     "bitwise_equal": 0,
+     "size": 2,
+     "max_abs_diff": 2.92778349830769e-05
+    },
+    "uavg": {
+     "bitwise_equal": 0,
+     "size": 2,
+     "max_abs_diff": 1.9544248580932617
+    },
+    "uu": {
+     "bitwise_equal": 110,
+     "size": 440,
+     "max_abs_diff": 6.543504357337952
+    },
+    "albmed": {
+     "bitwise_equal": 20,
+     "size": 20,
+     "max_abs_diff": 0.0
+    },
+    "trnmed": {
+     "bitwise_equal": 20,
+     "size": 20,
+     "max_abs_diff": 0.0
+    }
+   },
+   "max_abs_toa_up_vs_double": 1.6838464662179362
+  },
+  {
+   "library": "/home/g/grainger/project-oraclut/create_orac_lut/disort2/src/DISORTtoIDL.so",
+   "inputs": "v22_inputs",
+   "maxcly": 3,
+   "status": 0,
+   "top": {
+    "rfldn": 0.08283042907714844,
+    "flup": 8.820323944091797,
+    "uavg": 10.25557804107666
+   },
+   "vs_v21_captured": {
+    "rfldir": {
+     "bitwise_equal": 2,
+     "size": 2,
+     "max_abs_diff": 0.0
+    },
+    "rfldn": {
+     "bitwise_equal": 0,
+     "size": 2,
+     "max_abs_diff": 0.03302574157714844
+    },
+    "flup": {
+     "bitwise_equal": 0,
+     "size": 2,
+     "max_abs_diff": 1.4096155166625977
+    },
+    "dfdt": {
+     "bitwise_equal": 0,
+     "size": 2,
+     "max_abs_diff": 7.5086281867697835e-06
+    },
+    "uavg": {
+     "bitwise_equal": 0,
+     "size": 2,
+     "max_abs_diff": 0.5012340545654297
+    },
+    "uu": {
+     "bitwise_equal": 110,
+     "size": 440,
+     "max_abs_diff": 1.5009536743164062
+    },
+    "albmed": {
+     "bitwise_equal": 20,
+     "size": 20,
+     "max_abs_diff": 0.0
+    },
+    "trnmed": {
+     "bitwise_equal": 20,
+     "size": 20,
+     "max_abs_diff": 0.0
+    }
+   },
+   "vs_v22_captured": {
+    "rfldir": {
+     "bitwise_equal": 2,
+     "size": 2,
+     "max_abs_diff": 0.0
+    },
+    "rfldn": {
+     "bitwise_equal": 0,
+     "size": 2,
+     "max_abs_diff": 1.0808486938476562
+    },
+    "flup": {
+     "bitwise_equal": 0,
+     "size": 2,
+     "max_abs_diff": 6.306969165802002
+    },
+    "dfdt": {
+     "bitwise_equal": 0,
+     "size": 2,
+     "max_abs_diff": 3.6786463169846684e-05
+    },
+    "uavg": {
+     "bitwise_equal": 0,
+     "size": 2,
+     "max_abs_diff": 2.4556589126586914
+    },
+    "uu": {
+     "bitwise_equal": 110,
+     "size": 440,
+     "max_abs_diff": 8.044434785842896
+    },
+    "albmed": {
+     "bitwise_equal": 20,
+     "size": 20,
+     "max_abs_diff": 0.0
+    },
+    "trnmed": {
+     "bitwise_equal": 20,
+     "size": 20,
+     "max_abs_diff": 0.0
+    }
+   },
+   "max_abs_toa_up_vs_double": 0.6443196974721175
+  }
+ ],
+ "double": [
+  {
+   "library": "/home/g/grainger/project-oraclut/validation/tmp/disort_options/build/double100/libdisort_double100.so",
+   "inputs": "v21_inputs",
+   "status": 0,
+   "top": {
+    "rfldn": -1.4217960142559605e-09,
+    "flup": 11.048776562845243,
+    "uavg": 10.99041200576966
+   },
+   "vs_v21_captured": {
+    "rfldir": {
+     "bitwise_equal": 2,
+     "size": 2,
+     "max_abs_diff": 0.0
+    },
+    "rfldn": {
+     "bitwise_equal": 0,
+     "size": 2,
+     "max_abs_diff": 0.049804688921796014
+    },
+    "flup": {
+     "bitwise_equal": 0,
+     "size": 2,
+     "max_abs_diff": 3.638068199157715
+    },
+    "dfdt": {
+     "bitwise_equal": 0,
+     "size": 2,
+     "max_abs_diff": 0.00014612282086835316
+    },
+    "uavg": {
+     "bitwise_equal": 0,
+     "size": 2,
+     "max_abs_diff": 1.236067771911621
+    },
+    "uu": {
+     "bitwise_equal": 110,
+     "size": 440,
+     "max_abs_diff": 1.6838464736938477
+    },
+    "albmed": {
+     "bitwise_equal": 20,
+     "size": 20,
+     "max_abs_diff": 0.0
+    },
+    "trnmed": {
+     "bitwise_equal": 20,
+     "size": 20,
+     "max_abs_diff": 0.0
+    }
+   },
+   "vs_v22_captured": {
+    "rfldir": {
+     "bitwise_equal": 2,
+     "size": 2,
+     "max_abs_diff": 0.0
+    },
+    "rfldn": {
+     "bitwise_equal": 0,
+     "size": 2,
+     "max_abs_diff": 0.9980182633487118
+    },
+    "flup": {
+     "bitwise_equal": 0,
+     "size": 2,
+     "max_abs_diff": 8.53542184829712
+    },
+    "dfdt": {
+     "bitwise_equal": 0,
+     "size": 2,
+     "max_abs_diff": 0.00011684498588527626
+    },
+    "uavg": {
+     "bitwise_equal": 0,
+     "size": 2,
+     "max_abs_diff": 3.190492630004883
+    },
+    "uu": {
+     "bitwise_equal": 110,
+     "size": 440,
+     "max_abs_diff": 8.227324962615967
+    },
+    "albmed": {
+     "bitwise_equal": 20,
+     "size": 20,
+     "max_abs_diff": 0.0
+    },
+    "trnmed": {
+     "bitwise_equal": 20,
+     "size": 20,
+     "max_abs_diff": 0.0
+    }
+   }
+  },
+  {
+   "library": "/home/g/grainger/project-oraclut/validation/tmp/disort_options/build/double100/libdisort_double100.so",
+   "inputs": "v22_inputs",
+   "status": 0,
+   "top": {
+    "rfldn": 5.274021219747738e-09,
+    "flup": 11.048775700784466,
+    "uavg": 10.990411590049096
+   },
+   "vs_v21_captured": {
+    "rfldir": {
+     "bitwise_equal": 2,
+     "size": 2,
+     "max_abs_diff": 0.0
+    },
+    "rfldn": {
+     "bitwise_equal": 0,
+     "size": 2,
+     "max_abs_diff": 0.04980468222597878
+    },
+    "flup": {
+     "bitwise_equal": 0,
+     "size": 2,
+     "max_abs_diff": 3.6380672454833984
+    },
+    "dfdt": {
+     "bitwise_equal": 0,
+     "size": 2,
+     "max_abs_diff": 0.00014612282086835316
+    },
+    "uavg": {
+     "bitwise_equal": 0,
+     "size": 2,
+     "max_abs_diff": 1.236067771911621
+    },
+    "uu": {
+     "bitwise_equal": 110,
+     "size": 440,
+     "max_abs_diff": 1.6838531494140625
+    },
+    "albmed": {
+     "bitwise_equal": 20,
+     "size": 20,
+     "max_abs_diff": 0.0
+    },
+    "trnmed": {
+     "bitwise_equal": 20,
+     "size": 20,
+     "max_abs_diff": 0.0
+    }
+   },
+   "vs_v22_captured": {
+    "rfldir": {
+     "bitwise_equal": 2,
+     "size": 2,
+     "max_abs_diff": 0.0
+    },
+    "rfldn": {
+     "bitwise_equal": 0,
+     "size": 2,
+     "max_abs_diff": 0.998018270044529
+    },
+    "flup": {
+     "bitwise_equal": 0,
+     "size": 2,
+     "max_abs_diff": 8.535420894622803
+    },
+    "dfdt": {
+     "bitwise_equal": 0,
+     "size": 2,
+     "max_abs_diff": 0.00011684498588527626
+    },
+    "uavg": {
+     "bitwise_equal": 0,
+     "size": 2,
+     "max_abs_diff": 3.190492630004883
+    },
+    "uu": {
+     "bitwise_equal": 110,
+     "size": 440,
+     "max_abs_diff": 8.227324724197388
+    },
+    "albmed": {
+     "bitwise_equal": 20,
+     "size": 20,
+     "max_abs_diff": 0.0
+    },
+    "trnmed": {
+     "bitwise_equal": 20,
+     "size": 20,
+     "max_abs_diff": 0.0
+    }
+   }
+  }
+ ],
+ "double_v21_vs_v22_inputs": {
+  "rfldir": 0.0,
+  "rfldn": 6.695817234003698e-09,
+  "flup": 8.620607765408295e-07,
+  "dfdt": 1.1599829268216792e-19,
+  "uavg": 4.1572056375116517e-07,
+  "uu": 1.664970124526377e-05,
+  "albmed": 0.0,
+  "trnmed": 0.0
+ },
+ "attribution": {
+  "/home/g/grainger/project-oraclut/create_orac_lut/disort2/src/DISORTtoIDL.so": [
+   {
+    "swapped_to_v22": "dtauc+utau",
+    "max_abs_toa_up_vs_v21": 1.430511474609375e-05,
+    "max_abs_toa_up_vs_double": 1.6838464662179362,
+    "flup_top": 7.4107842445373535
+   },
+   {
+    "swapped_to_v22": "pmom",
+    "max_abs_toa_up_vs_v21": 1.4222774505615234,
+    "max_abs_toa_up_vs_double": 0.6443196974721175,
+    "flup_top": 8.820323944091797
+   },
+   {
+    "swapped_to_v22": "umu",
+    "max_abs_toa_up_vs_v21": 0.2500268220901489,
+    "max_abs_toa_up_vs_double": 1.9338272081482883,
+    "flup_top": 7.410708427429199
+   },
+   {
+    "swapped_to_v22": "all",
+    "max_abs_toa_up_vs_v21": 1.5009536743164062,
+    "max_abs_toa_up_vs_double": 0.6443196974721175,
+    "flup_top": 8.820323944091797
+   }
+  ]
+ }
+}

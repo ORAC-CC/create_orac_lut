@@ -1,0 +1,7261 @@
+{
+ "reference": {
+  "path": "/network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/terra_modis_m_liquid-water_a01_p240_v21.nc",
+  "size_bytes": 41318050,
+  "mtime_ns": 1791596279137209075,
+  "mtime_utc": "2026-10-10T01:37:59.137Z",
+  "sha256": "ef39386bc5c4b2f280f6419c3f548d9f6d5b8b5f9fa55c64425a783a5ebb0521",
+  "data_model": "NETCDF4",
+  "disk_format": "HDF5"
+ },
+ "candidate": {
+  "path": "/network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/terra_modis_m_liquid-water_a01_p240_v22.nc",
+  "size_bytes": 41330203,
+  "mtime_ns": 1791606720391381188,
+  "mtime_utc": "2026-10-10T04:32:00.391Z",
+  "sha256": "8055e7e1e9980f40a7c0f045d96366c148e1620e759c84fe7bf52eeaf106a69c",
+  "data_model": "NETCDF4",
+  "disk_format": "HDF5"
+ },
+ "dimensions": {
+  "reference": {
+   "optical_depth": 17,
+   "effective_radius": 20,
+   "satellite_zenith": 10,
+   "solar_zenith": 10,
+   "relative_azimuth": 11,
+   "channels": 36,
+   "length": 39,
+   "st1": 19,
+   "st2": 5,
+   "st3": 5,
+   "st4": 7,
+   "solar_channels": 26,
+   "thermal_channels": 16,
+   "mixed_channels": 6
+  },
+  "candidate": {
+   "optical_depth": 17,
+   "effective_radius": 20,
+   "satellite_zenith": 10,
+   "solar_zenith": 10,
+   "relative_azimuth": 11,
+   "channels": 36,
+   "length": 39,
+   "st1": 19,
+   "st2": 5,
+   "st3": 5,
+   "st4": 7,
+   "solar_channels": 26,
+   "thermal_channels": 16,
+   "mixed_channels": 6
+  },
+  "same_names_and_lengths": true
+ },
+ "variable_order": {
+  "reference": [
+   "instrument_filename",
+   "platform",
+   "instrument",
+   "instrument_version",
+   "max_sat_zenith",
+   "number_of_channels",
+   "SRF_file",
+   "channel_id",
+   "central_wavelength",
+   "central_wavenumber",
+   "solar_channel_flag",
+   "mixed_channel_flag",
+   "thermal_channel_flag",
+   "solar_channel_id",
+   "oldf0",
+   "oldf1",
+   "F0",
+   "snr",
+   "oldnefr",
+   "mixed_channel_id",
+   "thermal_channel_id",
+   "refbt",
+   "nedt",
+   "B1",
+   "B2",
+   "T1",
+   "T2",
+   "oldwvn",
+   "oldb1",
+   "oldb2",
+   "oldt1",
+   "oldt2",
+   "oldnebt",
+   "average_volume_per_particle",
+   "extinction_coefficient",
+   "extinction_coefficient_ratio",
+   "single_scatter_albedo",
+   "asymmetry_parameter",
+   "optical_depth",
+   "effective_radius",
+   "satellite_zenith",
+   "solar_zenith",
+   "relative_azimuth",
+   "T_dv",
+   "T_dd",
+   "R_dv",
+   "R_dd",
+   "R_0v",
+   "R_0d",
+   "T_0d",
+   "T_00",
+   "E_md"
+  ],
+  "candidate": [
+   "instrument_filename",
+   "platform",
+   "instrument",
+   "instrument_version",
+   "max_sat_zenith",
+   "number_of_channels",
+   "SRF_file",
+   "channel_id",
+   "central_wavelength",
+   "central_wavenumber",
+   "solar_channel_flag",
+   "mixed_channel_flag",
+   "thermal_channel_flag",
+   "solar_channel_id",
+   "oldf0",
+   "oldf1",
+   "F0",
+   "snr",
+   "oldnefr",
+   "mixed_channel_id",
+   "thermal_channel_id",
+   "refbt",
+   "nedt",
+   "B1",
+   "B2",
+   "T1",
+   "T2",
+   "oldwvn",
+   "oldb1",
+   "oldb2",
+   "oldt1",
+   "oldt2",
+   "oldnebt",
+   "average_volume_per_particle",
+   "extinction_coefficient",
+   "extinction_coefficient_ratio",
+   "single_scatter_albedo",
+   "asymmetry_parameter",
+   "optical_depth",
+   "effective_radius",
+   "satellite_zenith",
+   "solar_zenith",
+   "relative_azimuth",
+   "T_dv",
+   "T_dd",
+   "R_dv",
+   "R_dd",
+   "R_0v",
+   "R_0d",
+   "T_0d",
+   "T_00",
+   "E_md"
+  ],
+  "same": true
+ },
+ "variables": {
+  "reference": {
+   "instrument_filename": {
+    "dimensions": [
+     "st1"
+    ],
+    "shape": [
+     19
+    ],
+    "dtype": "|S1",
+    "datatype": "|S1",
+    "packing": {},
+    "attributes": {}
+   },
+   "platform": {
+    "dimensions": [
+     "st2"
+    ],
+    "shape": [
+     5
+    ],
+    "dtype": "|S1",
+    "datatype": "|S1",
+    "packing": {},
+    "attributes": {}
+   },
+   "instrument": {
+    "dimensions": [
+     "st3"
+    ],
+    "shape": [
+     5
+    ],
+    "dtype": "|S1",
+    "datatype": "|S1",
+    "packing": {},
+    "attributes": {}
+   },
+   "instrument_version": {
+    "dimensions": [
+     "st4"
+    ],
+    "shape": [
+     7
+    ],
+    "dtype": "|S1",
+    "datatype": "|S1",
+    "packing": {},
+    "attributes": {}
+   },
+   "max_sat_zenith": {
+    "dimensions": [],
+    "shape": [],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "units": "degrees",
+     "valid_range": [
+      0.0,
+      90.0
+     ]
+    }
+   },
+   "number_of_channels": {
+    "dimensions": [],
+    "shape": [],
+    "dtype": "int32",
+    "datatype": "int32",
+    "packing": {},
+    "attributes": {
+     "units": "dimensionless",
+     "valid_range": [
+      0,
+      36
+     ]
+    }
+   },
+   "SRF_file": {
+    "dimensions": [
+     "channels",
+     "length"
+    ],
+    "shape": [
+     36,
+     39
+    ],
+    "dtype": "|S1",
+    "datatype": "|S1",
+    "packing": {},
+    "attributes": {
+     "long_name": "file containing the spectral response for the channel"
+    }
+   },
+   "channel_id": {
+    "dimensions": [
+     "channels"
+    ],
+    "shape": [
+     36
+    ],
+    "dtype": "int16",
+    "datatype": "int16",
+    "packing": {},
+    "attributes": {
+     "long_name": "Instrument channel identifier",
+     "units": "dimensionless",
+     "valid_range": [
+      0,
+      36
+     ]
+    }
+   },
+   "central_wavelength": {
+    "dimensions": [
+     "channels"
+    ],
+    "shape": [
+     36
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "effective central wavelength for the channel",
+     "units": "microns",
+     "valid_range": [
+      0.0,
+      3.4028234663852886e+38
+     ]
+    }
+   },
+   "central_wavenumber": {
+    "dimensions": [
+     "channels"
+    ],
+    "shape": [
+     36
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "effective central wavenumber for the channel",
+     "units": "cm^{-1}",
+     "valid_range": [
+      0.0,
+      3.4028234663852886e+38
+     ]
+    }
+   },
+   "solar_channel_flag": {
+    "dimensions": [
+     "channels"
+    ],
+    "shape": [
+     36
+    ],
+    "dtype": "int16",
+    "datatype": "int16",
+    "packing": {},
+    "attributes": {
+     "long_name": "Flag set to 1 if channel measures reflected solar radiation otherwise 0",
+     "units": "dimensionless",
+     "valid_range": [
+      0,
+      1
+     ]
+    }
+   },
+   "mixed_channel_flag": {
+    "dimensions": [
+     "channels"
+    ],
+    "shape": [
+     36
+    ],
+    "dtype": "int16",
+    "datatype": "int16",
+    "packing": {},
+    "attributes": {
+     "long_name": "Flag set to 1 if channel measures reflected solar and emitted infrared radiation otherwise 0",
+     "units": "dimensionless",
+     "valid_range": [
+      0,
+      1
+     ]
+    }
+   },
+   "thermal_channel_flag": {
+    "dimensions": [
+     "channels"
+    ],
+    "shape": [
+     36
+    ],
+    "dtype": "int16",
+    "datatype": "int16",
+    "packing": {},
+    "attributes": {
+     "long_name": "Flag set to 1 if channel measures emitted infrared radiation otherwise 0",
+     "units": "dimensionless",
+     "valid_range": [
+      0,
+      1
+     ]
+    }
+   },
+   "solar_channel_id": {
+    "dimensions": [
+     "solar_channels"
+    ],
+    "shape": [
+     26
+    ],
+    "dtype": "int16",
+    "datatype": "int16",
+    "packing": {},
+    "attributes": {
+     "long_name": "Instrument channel identifier for solar channels",
+     "units": "dimensionless",
+     "valid_range": [
+      0,
+      36
+     ]
+    }
+   },
+   "oldf0": {
+    "dimensions": [
+     "solar_channels"
+    ],
+    "shape": [
+     26
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "SAD file F0",
+     "units": "W/(m^2 um)",
+     "valid_range": [
+      0.0,
+      3.4028234663852886e+38
+     ]
+    }
+   },
+   "oldf1": {
+    "dimensions": [
+     "solar_channels"
+    ],
+    "shape": [
+     26
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "SAD file F1",
+     "units": "W/(m^2 um)",
+     "valid_range": [
+      0.0,
+      3.4028234663852886e+38
+     ]
+    }
+   },
+   "F0": {
+    "dimensions": [
+     "solar_channels"
+    ],
+    "shape": [
+     26
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "in-band solar radiance",
+     "units": "W/(m^2 um)",
+     "valid_range": [
+      0.0,
+      3.4028234663852886e+38
+     ]
+    }
+   },
+   "snr": {
+    "dimensions": [
+     "solar_channels"
+    ],
+    "shape": [
+     26
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "signal-to-noise ratio",
+     "units": "dimensionless",
+     "valid_range": [
+      0.0,
+      3.4028234663852886e+38
+     ]
+    }
+   },
+   "oldnefr": {
+    "dimensions": [
+     "channels"
+    ],
+    "shape": [
+     36
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "SAD file NeFr (measurement uncertainty)",
+     "units": "W/(m^2 sr um)",
+     "valid_range": [
+      0.0,
+      3.4028234663852886e+38
+     ]
+    }
+   },
+   "mixed_channel_id": {
+    "dimensions": [
+     "mixed_channels"
+    ],
+    "shape": [
+     6
+    ],
+    "dtype": "int16",
+    "datatype": "int16",
+    "packing": {},
+    "attributes": {
+     "long_name": "Instrument channel identifier for mixed channels",
+     "units": "dimensionless",
+     "valid_range": [
+      0,
+      36
+     ]
+    }
+   },
+   "thermal_channel_id": {
+    "dimensions": [
+     "thermal_channels"
+    ],
+    "shape": [
+     16
+    ],
+    "dtype": "int16",
+    "datatype": "int16",
+    "packing": {},
+    "attributes": {
+     "long_name": "Instrument channel identifier for thermal channels",
+     "units": "dimensionless",
+     "valid_range": [
+      0,
+      36
+     ]
+    }
+   },
+   "refbt": {
+    "dimensions": [
+     "thermal_channels"
+    ],
+    "shape": [
+     16
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "reference brightness temperate at neDT has been calculated",
+     "units": "K",
+     "valid_range": [
+      100,
+      500
+     ]
+    }
+   },
+   "nedt": {
+    "dimensions": [
+     "thermal_channels"
+    ],
+    "shape": [
+     16
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "noise equivalent delta temperature",
+     "units": "K",
+     "valid_range": [
+      0.0,
+      3.4028234663852886e+38
+     ]
+    }
+   },
+   "B1": {
+    "dimensions": [
+     "thermal_channels"
+    ],
+    "shape": [
+     16
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {}
+   },
+   "B2": {
+    "dimensions": [
+     "thermal_channels"
+    ],
+    "shape": [
+     16
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {}
+   },
+   "T1": {
+    "dimensions": [
+     "thermal_channels"
+    ],
+    "shape": [
+     16
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {}
+   },
+   "T2": {
+    "dimensions": [
+     "thermal_channels"
+    ],
+    "shape": [
+     16
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {}
+   },
+   "oldwvn": {
+    "dimensions": [
+     "channels"
+    ],
+    "shape": [
+     36
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "SAD file Wvn",
+     "units": "1/cm",
+     "valid_range": [
+      0.0,
+      3.4028234663852886e+38
+     ]
+    }
+   },
+   "oldb1": {
+    "dimensions": [
+     "channels"
+    ],
+    "shape": [
+     36
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "SAD file B1"
+    }
+   },
+   "oldb2": {
+    "dimensions": [
+     "channels"
+    ],
+    "shape": [
+     36
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "SAD file B2"
+    }
+   },
+   "oldt1": {
+    "dimensions": [
+     "channels"
+    ],
+    "shape": [
+     36
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "SAD file T1"
+    }
+   },
+   "oldt2": {
+    "dimensions": [
+     "channels"
+    ],
+    "shape": [
+     36
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "SAD file T2"
+    }
+   },
+   "oldnebt": {
+    "dimensions": [
+     "channels"
+    ],
+    "shape": [
+     36
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "SAD file NeBT",
+     "units": "K",
+     "valid_range": [
+      0.0,
+      3.4028234663852886e+38
+     ]
+    }
+   },
+   "average_volume_per_particle": {
+    "dimensions": [
+     "effective_radius"
+    ],
+    "shape": [
+     20
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "average volume per particle",
+     "units": "to be investigated",
+     "valid_range": [
+      0.0,
+      3.4028234663852886e+38
+     ]
+    }
+   },
+   "extinction_coefficient": {
+    "dimensions": [
+     "effective_radius",
+     "channels"
+    ],
+    "shape": [
+     20,
+     36
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "volume extinction coefficient",
+     "units": "to be investigated",
+     "valid_range": [
+      0.0,
+      3.4028234663852886e+38
+     ]
+    }
+   },
+   "extinction_coefficient_ratio": {
+    "dimensions": [
+     "effective_radius",
+     "channels"
+    ],
+    "shape": [
+     20,
+     36
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "ratio of volume extinction coefficient to the volume extinction coefficient at 550 nm",
+     "units": "dimensionless",
+     "valid_range": [
+      0.0,
+      3.4028234663852886e+38
+     ]
+    }
+   },
+   "single_scatter_albedo": {
+    "dimensions": [
+     "effective_radius",
+     "channels"
+    ],
+    "shape": [
+     20,
+     36
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "single scatter albedo",
+     "units": "dimensionless",
+     "valid_range": [
+      0.0,
+      1.0
+     ]
+    }
+   },
+   "asymmetry_parameter": {
+    "dimensions": [
+     "effective_radius",
+     "channels"
+    ],
+    "shape": [
+     20,
+     36
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "asymmetry parameter",
+     "units": "dimensionless",
+     "valid_range": [
+      -1.0,
+      1.0
+     ]
+    }
+   },
+   "optical_depth": {
+    "dimensions": [
+     "optical_depth"
+    ],
+    "shape": [
+     17
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "optical depth",
+     "spacing": "uneven_logarithmic",
+     "units": "dimensionless",
+     "valid_range": [
+      0.0,
+      3.4028234663852886e+38
+     ]
+    }
+   },
+   "effective_radius": {
+    "dimensions": [
+     "effective_radius"
+    ],
+    "shape": [
+     20
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "particle effective radius",
+     "spacing": "linear",
+     "units": "microns",
+     "valid_range": [
+      0.0,
+      3.4028234663852886e+38
+     ]
+    }
+   },
+   "satellite_zenith": {
+    "dimensions": [
+     "satellite_zenith"
+    ],
+    "shape": [
+     10
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "satellite zenith angle",
+     "spacing": "linear",
+     "units": "degrees",
+     "valid_range": [
+      0.0,
+      180.0
+     ]
+    }
+   },
+   "solar_zenith": {
+    "dimensions": [
+     "solar_zenith"
+    ],
+    "shape": [
+     10
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "solar zenith angle",
+     "spacing": "linear",
+     "units": "degrees",
+     "valid_range": [
+      0.0,
+      180.0
+     ]
+    }
+   },
+   "relative_azimuth": {
+    "dimensions": [
+     "relative_azimuth"
+    ],
+    "shape": [
+     11
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "satellite azimuth relative to the Sun",
+     "spacing": "linear",
+     "units": "degrees",
+     "valid_range": [
+      0.0,
+      180.0
+     ]
+    }
+   },
+   "T_dv": {
+    "dimensions": [
+     "satellite_zenith",
+     "optical_depth",
+     "effective_radius",
+     "channels"
+    ],
+    "shape": [
+     10,
+     17,
+     20,
+     36
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "diffuse transmission of direct light",
+     "units": "dimensionless",
+     "valid_range": [
+      0.0,
+      1.0
+     ]
+    }
+   },
+   "T_dd": {
+    "dimensions": [
+     "optical_depth",
+     "effective_radius",
+     "channels"
+    ],
+    "shape": [
+     17,
+     20,
+     36
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "diffuse transmission",
+     "units": "dimensionless",
+     "valid_range": [
+      0.0,
+      1.0
+     ]
+    }
+   },
+   "R_dv": {
+    "dimensions": [
+     "satellite_zenith",
+     "optical_depth",
+     "effective_radius",
+     "channels"
+    ],
+    "shape": [
+     10,
+     17,
+     20,
+     36
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "direct reflection of diffuse light",
+     "units": "dimensionless",
+     "valid_range": [
+      0.0,
+      1.0
+     ]
+    }
+   },
+   "R_dd": {
+    "dimensions": [
+     "optical_depth",
+     "effective_radius",
+     "channels"
+    ],
+    "shape": [
+     17,
+     20,
+     36
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "diffuse reflection of diffuse light",
+     "units": "dimensionless",
+     "valid_range": [
+      0.0,
+      1.0
+     ]
+    }
+   },
+   "R_0v": {
+    "dimensions": [
+     "relative_azimuth",
+     "satellite_zenith",
+     "solar_zenith",
+     "optical_depth",
+     "effective_radius",
+     "solar_channels"
+    ],
+    "shape": [
+     11,
+     10,
+     10,
+     17,
+     20,
+     26
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "bi-directional reflectance",
+     "units": "dimensionless",
+     "valid_range": [
+      0.0,
+      1.0
+     ]
+    }
+   },
+   "R_0d": {
+    "dimensions": [
+     "solar_zenith",
+     "optical_depth",
+     "effective_radius",
+     "solar_channels"
+    ],
+    "shape": [
+     10,
+     17,
+     20,
+     26
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "diffuse reflectance of direct beam",
+     "units": "dimensionless",
+     "valid_range": [
+      0.0,
+      1.0
+     ]
+    }
+   },
+   "T_0d": {
+    "dimensions": [
+     "solar_zenith",
+     "optical_depth",
+     "effective_radius",
+     "solar_channels"
+    ],
+    "shape": [
+     10,
+     17,
+     20,
+     26
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "diffuse transmission of diffuse light",
+     "units": "dimensionless",
+     "valid_range": [
+      0.0,
+      1.0
+     ]
+    }
+   },
+   "T_00": {
+    "dimensions": [
+     "solar_zenith",
+     "optical_depth",
+     "effective_radius",
+     "solar_channels"
+    ],
+    "shape": [
+     10,
+     17,
+     20,
+     26
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "direct transmission",
+     "units": "dimensionless",
+     "valid_range": [
+      0.0,
+      1.0
+     ]
+    }
+   },
+   "E_md": {
+    "dimensions": [
+     "satellite_zenith",
+     "optical_depth",
+     "effective_radius",
+     "thermal_channels"
+    ],
+    "shape": [
+     10,
+     17,
+     20,
+     16
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "diffuse emissivity",
+     "units": "dimensionless",
+     "valid_range": [
+      0.0,
+      1.0
+     ]
+    }
+   }
+  },
+  "candidate": {
+   "instrument_filename": {
+    "dimensions": [
+     "st1"
+    ],
+    "shape": [
+     19
+    ],
+    "dtype": "|S1",
+    "datatype": "|S1",
+    "packing": {},
+    "attributes": {}
+   },
+   "platform": {
+    "dimensions": [
+     "st2"
+    ],
+    "shape": [
+     5
+    ],
+    "dtype": "|S1",
+    "datatype": "|S1",
+    "packing": {},
+    "attributes": {}
+   },
+   "instrument": {
+    "dimensions": [
+     "st3"
+    ],
+    "shape": [
+     5
+    ],
+    "dtype": "|S1",
+    "datatype": "|S1",
+    "packing": {},
+    "attributes": {}
+   },
+   "instrument_version": {
+    "dimensions": [
+     "st4"
+    ],
+    "shape": [
+     7
+    ],
+    "dtype": "|S1",
+    "datatype": "|S1",
+    "packing": {},
+    "attributes": {}
+   },
+   "max_sat_zenith": {
+    "dimensions": [],
+    "shape": [],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "units": "degrees",
+     "valid_range": [
+      0.0,
+      90.0
+     ]
+    }
+   },
+   "number_of_channels": {
+    "dimensions": [],
+    "shape": [],
+    "dtype": "int32",
+    "datatype": "int32",
+    "packing": {},
+    "attributes": {
+     "units": "dimensionless",
+     "valid_range": [
+      0,
+      36
+     ]
+    }
+   },
+   "SRF_file": {
+    "dimensions": [
+     "channels",
+     "length"
+    ],
+    "shape": [
+     36,
+     39
+    ],
+    "dtype": "|S1",
+    "datatype": "|S1",
+    "packing": {},
+    "attributes": {
+     "long_name": "file containing the spectral response for the channel"
+    }
+   },
+   "channel_id": {
+    "dimensions": [
+     "channels"
+    ],
+    "shape": [
+     36
+    ],
+    "dtype": "int16",
+    "datatype": "int16",
+    "packing": {},
+    "attributes": {
+     "long_name": "Instrument channel identifier",
+     "units": "dimensionless",
+     "valid_range": [
+      0,
+      36
+     ]
+    }
+   },
+   "central_wavelength": {
+    "dimensions": [
+     "channels"
+    ],
+    "shape": [
+     36
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "effective central wavelength for the channel",
+     "units": "microns",
+     "valid_range": [
+      0.0,
+      3.4028234663852886e+38
+     ]
+    }
+   },
+   "central_wavenumber": {
+    "dimensions": [
+     "channels"
+    ],
+    "shape": [
+     36
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "effective central wavenumber for the channel",
+     "units": "cm^{-1}",
+     "valid_range": [
+      0.0,
+      3.4028234663852886e+38
+     ]
+    }
+   },
+   "solar_channel_flag": {
+    "dimensions": [
+     "channels"
+    ],
+    "shape": [
+     36
+    ],
+    "dtype": "int16",
+    "datatype": "int16",
+    "packing": {},
+    "attributes": {
+     "long_name": "Flag set to 1 if channel measures reflected solar radiation otherwise 0",
+     "units": "dimensionless",
+     "valid_range": [
+      0,
+      1
+     ]
+    }
+   },
+   "mixed_channel_flag": {
+    "dimensions": [
+     "channels"
+    ],
+    "shape": [
+     36
+    ],
+    "dtype": "int16",
+    "datatype": "int16",
+    "packing": {},
+    "attributes": {
+     "long_name": "Flag set to 1 if channel measures reflected solar and emitted infrared radiation otherwise 0",
+     "units": "dimensionless",
+     "valid_range": [
+      0,
+      1
+     ]
+    }
+   },
+   "thermal_channel_flag": {
+    "dimensions": [
+     "channels"
+    ],
+    "shape": [
+     36
+    ],
+    "dtype": "int16",
+    "datatype": "int16",
+    "packing": {},
+    "attributes": {
+     "long_name": "Flag set to 1 if channel measures emitted infrared radiation otherwise 0",
+     "units": "dimensionless",
+     "valid_range": [
+      0,
+      1
+     ]
+    }
+   },
+   "solar_channel_id": {
+    "dimensions": [
+     "solar_channels"
+    ],
+    "shape": [
+     26
+    ],
+    "dtype": "int16",
+    "datatype": "int16",
+    "packing": {},
+    "attributes": {
+     "long_name": "Instrument channel identifier for solar channels",
+     "units": "dimensionless",
+     "valid_range": [
+      0,
+      36
+     ]
+    }
+   },
+   "oldf0": {
+    "dimensions": [
+     "solar_channels"
+    ],
+    "shape": [
+     26
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "SAD file F0",
+     "units": "W/(m^2 um)",
+     "valid_range": [
+      0.0,
+      3.4028234663852886e+38
+     ]
+    }
+   },
+   "oldf1": {
+    "dimensions": [
+     "solar_channels"
+    ],
+    "shape": [
+     26
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "SAD file F1",
+     "units": "W/(m^2 um)",
+     "valid_range": [
+      0.0,
+      3.4028234663852886e+38
+     ]
+    }
+   },
+   "F0": {
+    "dimensions": [
+     "solar_channels"
+    ],
+    "shape": [
+     26
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "in-band solar radiance",
+     "units": "W/(m^2 um)",
+     "valid_range": [
+      0.0,
+      3.4028234663852886e+38
+     ]
+    }
+   },
+   "snr": {
+    "dimensions": [
+     "solar_channels"
+    ],
+    "shape": [
+     26
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "signal-to-noise ratio",
+     "units": "dimensionless",
+     "valid_range": [
+      0.0,
+      3.4028234663852886e+38
+     ]
+    }
+   },
+   "oldnefr": {
+    "dimensions": [
+     "channels"
+    ],
+    "shape": [
+     36
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "SAD file NeFr (measurement uncertainty)",
+     "units": "W/(m^2 sr um)",
+     "valid_range": [
+      0.0,
+      3.4028234663852886e+38
+     ]
+    }
+   },
+   "mixed_channel_id": {
+    "dimensions": [
+     "mixed_channels"
+    ],
+    "shape": [
+     6
+    ],
+    "dtype": "int16",
+    "datatype": "int16",
+    "packing": {},
+    "attributes": {
+     "long_name": "Instrument channel identifier for mixed channels",
+     "units": "dimensionless",
+     "valid_range": [
+      0,
+      36
+     ]
+    }
+   },
+   "thermal_channel_id": {
+    "dimensions": [
+     "thermal_channels"
+    ],
+    "shape": [
+     16
+    ],
+    "dtype": "int16",
+    "datatype": "int16",
+    "packing": {},
+    "attributes": {
+     "long_name": "Instrument channel identifier for thermal channels",
+     "units": "dimensionless",
+     "valid_range": [
+      0,
+      36
+     ]
+    }
+   },
+   "refbt": {
+    "dimensions": [
+     "thermal_channels"
+    ],
+    "shape": [
+     16
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "reference brightness temperate at neDT has been calculated",
+     "units": "K",
+     "valid_range": [
+      100,
+      500
+     ]
+    }
+   },
+   "nedt": {
+    "dimensions": [
+     "thermal_channels"
+    ],
+    "shape": [
+     16
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "noise equivalent delta temperature",
+     "units": "K",
+     "valid_range": [
+      0.0,
+      3.4028234663852886e+38
+     ]
+    }
+   },
+   "B1": {
+    "dimensions": [
+     "thermal_channels"
+    ],
+    "shape": [
+     16
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {}
+   },
+   "B2": {
+    "dimensions": [
+     "thermal_channels"
+    ],
+    "shape": [
+     16
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {}
+   },
+   "T1": {
+    "dimensions": [
+     "thermal_channels"
+    ],
+    "shape": [
+     16
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {}
+   },
+   "T2": {
+    "dimensions": [
+     "thermal_channels"
+    ],
+    "shape": [
+     16
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {}
+   },
+   "oldwvn": {
+    "dimensions": [
+     "channels"
+    ],
+    "shape": [
+     36
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "SAD file Wvn",
+     "units": "1/cm",
+     "valid_range": [
+      0.0,
+      3.4028234663852886e+38
+     ]
+    }
+   },
+   "oldb1": {
+    "dimensions": [
+     "channels"
+    ],
+    "shape": [
+     36
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "SAD file B1"
+    }
+   },
+   "oldb2": {
+    "dimensions": [
+     "channels"
+    ],
+    "shape": [
+     36
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "SAD file B2"
+    }
+   },
+   "oldt1": {
+    "dimensions": [
+     "channels"
+    ],
+    "shape": [
+     36
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "SAD file T1"
+    }
+   },
+   "oldt2": {
+    "dimensions": [
+     "channels"
+    ],
+    "shape": [
+     36
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "SAD file T2"
+    }
+   },
+   "oldnebt": {
+    "dimensions": [
+     "channels"
+    ],
+    "shape": [
+     36
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "SAD file NeBT",
+     "units": "K",
+     "valid_range": [
+      0.0,
+      3.4028234663852886e+38
+     ]
+    }
+   },
+   "average_volume_per_particle": {
+    "dimensions": [
+     "effective_radius"
+    ],
+    "shape": [
+     20
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "average volume per particle",
+     "units": "to be investigated",
+     "valid_range": [
+      0.0,
+      3.4028234663852886e+38
+     ]
+    }
+   },
+   "extinction_coefficient": {
+    "dimensions": [
+     "effective_radius",
+     "channels"
+    ],
+    "shape": [
+     20,
+     36
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "volume extinction coefficient",
+     "units": "to be investigated",
+     "valid_range": [
+      0.0,
+      3.4028234663852886e+38
+     ]
+    }
+   },
+   "extinction_coefficient_ratio": {
+    "dimensions": [
+     "effective_radius",
+     "channels"
+    ],
+    "shape": [
+     20,
+     36
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "ratio of volume extinction coefficient to the volume extinction coefficient at 550 nm",
+     "units": "dimensionless",
+     "valid_range": [
+      0.0,
+      3.4028234663852886e+38
+     ]
+    }
+   },
+   "single_scatter_albedo": {
+    "dimensions": [
+     "effective_radius",
+     "channels"
+    ],
+    "shape": [
+     20,
+     36
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "single scatter albedo",
+     "units": "dimensionless",
+     "valid_range": [
+      0.0,
+      1.0
+     ]
+    }
+   },
+   "asymmetry_parameter": {
+    "dimensions": [
+     "effective_radius",
+     "channels"
+    ],
+    "shape": [
+     20,
+     36
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "asymmetry parameter",
+     "units": "dimensionless",
+     "valid_range": [
+      -1.0,
+      1.0
+     ]
+    }
+   },
+   "optical_depth": {
+    "dimensions": [
+     "optical_depth"
+    ],
+    "shape": [
+     17
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "optical depth",
+     "spacing": "uneven_logarithmic",
+     "units": "dimensionless",
+     "valid_range": [
+      0.0,
+      3.4028234663852886e+38
+     ]
+    }
+   },
+   "effective_radius": {
+    "dimensions": [
+     "effective_radius"
+    ],
+    "shape": [
+     20
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "particle effective radius",
+     "spacing": "linear",
+     "units": "microns",
+     "valid_range": [
+      0.0,
+      3.4028234663852886e+38
+     ]
+    }
+   },
+   "satellite_zenith": {
+    "dimensions": [
+     "satellite_zenith"
+    ],
+    "shape": [
+     10
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "satellite zenith angle",
+     "spacing": "linear",
+     "units": "degrees",
+     "valid_range": [
+      0.0,
+      180.0
+     ]
+    }
+   },
+   "solar_zenith": {
+    "dimensions": [
+     "solar_zenith"
+    ],
+    "shape": [
+     10
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "solar zenith angle",
+     "spacing": "linear",
+     "units": "degrees",
+     "valid_range": [
+      0.0,
+      180.0
+     ]
+    }
+   },
+   "relative_azimuth": {
+    "dimensions": [
+     "relative_azimuth"
+    ],
+    "shape": [
+     11
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "satellite azimuth relative to the Sun",
+     "spacing": "linear",
+     "units": "degrees",
+     "valid_range": [
+      0.0,
+      180.0
+     ]
+    }
+   },
+   "T_dv": {
+    "dimensions": [
+     "satellite_zenith",
+     "optical_depth",
+     "effective_radius",
+     "channels"
+    ],
+    "shape": [
+     10,
+     17,
+     20,
+     36
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "diffuse transmission of direct light",
+     "units": "dimensionless",
+     "valid_range": [
+      0.0,
+      1.0
+     ]
+    }
+   },
+   "T_dd": {
+    "dimensions": [
+     "optical_depth",
+     "effective_radius",
+     "channels"
+    ],
+    "shape": [
+     17,
+     20,
+     36
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "diffuse transmission",
+     "units": "dimensionless",
+     "valid_range": [
+      0.0,
+      1.0
+     ]
+    }
+   },
+   "R_dv": {
+    "dimensions": [
+     "satellite_zenith",
+     "optical_depth",
+     "effective_radius",
+     "channels"
+    ],
+    "shape": [
+     10,
+     17,
+     20,
+     36
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "direct reflection of diffuse light",
+     "units": "dimensionless",
+     "valid_range": [
+      0.0,
+      1.0
+     ]
+    }
+   },
+   "R_dd": {
+    "dimensions": [
+     "optical_depth",
+     "effective_radius",
+     "channels"
+    ],
+    "shape": [
+     17,
+     20,
+     36
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "diffuse reflection of diffuse light",
+     "units": "dimensionless",
+     "valid_range": [
+      0.0,
+      1.0
+     ]
+    }
+   },
+   "R_0v": {
+    "dimensions": [
+     "relative_azimuth",
+     "satellite_zenith",
+     "solar_zenith",
+     "optical_depth",
+     "effective_radius",
+     "solar_channels"
+    ],
+    "shape": [
+     11,
+     10,
+     10,
+     17,
+     20,
+     26
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "bi-directional reflectance",
+     "units": "dimensionless",
+     "valid_range": [
+      0.0,
+      1.0
+     ]
+    }
+   },
+   "R_0d": {
+    "dimensions": [
+     "solar_zenith",
+     "optical_depth",
+     "effective_radius",
+     "solar_channels"
+    ],
+    "shape": [
+     10,
+     17,
+     20,
+     26
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "diffuse reflectance of direct beam",
+     "units": "dimensionless",
+     "valid_range": [
+      0.0,
+      1.0
+     ]
+    }
+   },
+   "T_0d": {
+    "dimensions": [
+     "solar_zenith",
+     "optical_depth",
+     "effective_radius",
+     "solar_channels"
+    ],
+    "shape": [
+     10,
+     17,
+     20,
+     26
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "diffuse transmission of diffuse light",
+     "units": "dimensionless",
+     "valid_range": [
+      0.0,
+      1.0
+     ]
+    }
+   },
+   "T_00": {
+    "dimensions": [
+     "solar_zenith",
+     "optical_depth",
+     "effective_radius",
+     "solar_channels"
+    ],
+    "shape": [
+     10,
+     17,
+     20,
+     26
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "direct transmission",
+     "units": "dimensionless",
+     "valid_range": [
+      0.0,
+      1.0
+     ]
+    }
+   },
+   "E_md": {
+    "dimensions": [
+     "satellite_zenith",
+     "optical_depth",
+     "effective_radius",
+     "thermal_channels"
+    ],
+    "shape": [
+     10,
+     17,
+     20,
+     16
+    ],
+    "dtype": "float32",
+    "datatype": "float32",
+    "packing": {},
+    "attributes": {
+     "long_name": "diffuse emissivity",
+     "units": "dimensionless",
+     "valid_range": [
+      0.0,
+      1.0
+     ]
+    }
+   }
+  }
+ },
+ "attribute_differences": [],
+ "comparisons": [
+  {
+   "variable": "B1",
+   "status": "ok",
+   "reference_dimensions": [
+    "thermal_channels"
+   ],
+   "candidate_dimensions": [
+    "thermal_channels"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "shape": [
+    16
+   ],
+   "elements": 16,
+   "jointly_valid_elements": 16,
+   "differing_elements": 0,
+   "exactly_equal": true,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 4183.10009765625,
+   "reference_maximum": 219247.0,
+   "candidate_minimum": 4183.10009765625,
+   "candidate_maximum": 219247.0,
+   "maximum_absolute_difference": 0.0,
+   "mean_absolute_difference": 0.0,
+   "rms_difference": 0.0,
+   "absolute_difference_percentiles": {
+    "50": 0.0,
+    "90": 0.0,
+    "95": 0.0,
+    "99": 0.0,
+    "99.9": 0.0,
+    "100": 0.0
+   },
+   "near_zero_threshold": 0.219247,
+   "near_zero_elements": 0,
+   "maximum_absolute_difference_near_zero": null,
+   "maximum_relative_difference": 0.0,
+   "relative_difference_elements": 16,
+   "maximum_symmetric_relative_difference": 0.0,
+   "maximum_absolute_index": [
+    0
+   ],
+   "maximum_absolute_location": {
+    "thermal_channels": {
+     "index": 0,
+     "coordinate": 20.0
+    }
+   },
+   "maximum_reference_value": 219247.0,
+   "maximum_candidate_value": 219247.0
+  },
+  {
+   "variable": "B2",
+   "status": "ok",
+   "reference_dimensions": [
+    "thermal_channels"
+   ],
+   "candidate_dimensions": [
+    "thermal_channels"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "shape": [
+    16
+   ],
+   "elements": 16,
+   "jointly_valid_elements": 16,
+   "differing_elements": 0,
+   "exactly_equal": true,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 1015.1199951171875,
+   "reference_maximum": 3798.93994140625,
+   "candidate_minimum": 1015.1199951171875,
+   "candidate_maximum": 3798.93994140625,
+   "maximum_absolute_difference": 0.0,
+   "mean_absolute_difference": 0.0,
+   "rms_difference": 0.0,
+   "absolute_difference_percentiles": {
+    "50": 0.0,
+    "90": 0.0,
+    "95": 0.0,
+    "99": 0.0,
+    "99.9": 0.0,
+    "100": 0.0
+   },
+   "near_zero_threshold": 0.0037989399414062497,
+   "near_zero_elements": 0,
+   "maximum_absolute_difference_near_zero": null,
+   "maximum_relative_difference": 0.0,
+   "relative_difference_elements": 16,
+   "maximum_symmetric_relative_difference": 0.0,
+   "maximum_absolute_index": [
+    0
+   ],
+   "maximum_absolute_location": {
+    "thermal_channels": {
+     "index": 0,
+     "coordinate": 20.0
+    }
+   },
+   "maximum_reference_value": 3798.93994140625,
+   "maximum_candidate_value": 3798.93994140625
+  },
+  {
+   "variable": "E_md",
+   "status": "ok",
+   "reference_dimensions": [
+    "satellite_zenith",
+    "optical_depth",
+    "effective_radius",
+    "thermal_channels"
+   ],
+   "candidate_dimensions": [
+    "satellite_zenith",
+    "optical_depth",
+    "effective_radius",
+    "thermal_channels"
+   ],
+   "candidate_transpose_order": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "shape": [
+    10,
+    17,
+    20,
+    16
+   ],
+   "elements": 54400,
+   "jointly_valid_elements": 54400,
+   "differing_elements": 47993,
+   "exactly_equal": false,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": -9.513067417143972e-11,
+   "reference_maximum": 0.9988967776298523,
+   "candidate_minimum": -9.533158984442736e-11,
+   "candidate_maximum": 0.9988968372344971,
+   "maximum_absolute_difference": 5.885958671569824e-06,
+   "mean_absolute_difference": 1.436598264127769e-07,
+   "rms_difference": 2.6573861463496046e-07,
+   "absolute_difference_percentiles": {
+    "50": 5.960464477539063e-08,
+    "90": 3.5762786865234375e-07,
+    "95": 5.364418029785156e-07,
+    "99": 1.0132789611816406e-06,
+    "99.9": 2.5697164237499504e-06,
+    "100": 5.885958671569824e-06
+   },
+   "near_zero_threshold": 9.988967776298522e-07,
+   "near_zero_elements": 3200,
+   "maximum_absolute_difference_near_zero": 6.08071405727717e-12,
+   "maximum_relative_difference": 0.00035739464794299784,
+   "relative_difference_elements": 51200,
+   "maximum_symmetric_relative_difference": 0.00035733079388635774,
+   "maximum_absolute_index": [
+    4,
+    6,
+    13,
+    11
+   ],
+   "maximum_absolute_location": {
+    "satellite_zenith": {
+     "index": 4,
+     "coordinate": 28.88888931274414
+    },
+    "optical_depth": {
+     "index": 6,
+     "coordinate": 0.25
+    },
+    "effective_radius": {
+     "index": 13,
+     "coordinate": 27.0
+    },
+    "thermal_channels": {
+     "index": 11,
+     "coordinate": 32.0
+    }
+   },
+   "maximum_reference_value": 0.1439167857170105,
+   "maximum_candidate_value": 0.14392267167568207
+  },
+  {
+   "variable": "F0",
+   "status": "ok",
+   "reference_dimensions": [
+    "solar_channels"
+   ],
+   "candidate_dimensions": [
+    "solar_channels"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "shape": [
+    26
+   ],
+   "elements": 26,
+   "jointly_valid_elements": 26,
+   "differing_elements": 22,
+   "exactly_equal": false,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 3.162315607070923,
+   "reference_maximum": 651.4459838867188,
+   "candidate_minimum": 3.162316083908081,
+   "candidate_maximum": 651.4459838867188,
+   "maximum_absolute_difference": 0.00030517578125,
+   "mean_absolute_difference": 5.585413712721605e-05,
+   "rms_difference": 9.254219528020051e-05,
+   "absolute_difference_percentiles": {
+    "50": 3.0517578125e-05,
+    "90": 0.000152587890625,
+    "95": 0.00018310546875,
+    "99": 0.000274658203125,
+    "99.9": 0.0003021240234375002,
+    "100": 0.00030517578125
+   },
+   "near_zero_threshold": 0.0006514459838867187,
+   "near_zero_elements": 0,
+   "maximum_absolute_difference_near_zero": null,
+   "maximum_relative_difference": 6.862946949420081e-07,
+   "relative_difference_elements": 26,
+   "maximum_symmetric_relative_difference": 6.862949304422931e-07,
+   "maximum_absolute_index": [
+    9
+   ],
+   "maximum_absolute_location": {
+    "solar_channels": {
+     "index": 9,
+     "coordinate": 10.0
+    }
+   },
+   "maximum_reference_value": 621.4119873046875,
+   "maximum_candidate_value": 621.4122924804688
+  },
+  {
+   "variable": "R_0d",
+   "status": "ok",
+   "reference_dimensions": [
+    "solar_zenith",
+    "optical_depth",
+    "effective_radius",
+    "solar_channels"
+   ],
+   "candidate_dimensions": [
+    "solar_zenith",
+    "optical_depth",
+    "effective_radius",
+    "solar_channels"
+   ],
+   "candidate_transpose_order": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "shape": [
+    10,
+    17,
+    20,
+    26
+   ],
+   "elements": 88400,
+   "jointly_valid_elements": 88400,
+   "differing_elements": 88337,
+   "exactly_equal": false,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": -0.0004630708717741072,
+   "reference_maximum": 1.3230613470077515,
+   "candidate_minimum": -0.0014163036830723286,
+   "candidate_maximum": 1.6283613443374634,
+   "maximum_absolute_difference": 1.2015957534313202,
+   "mean_absolute_difference": 6.465916042874168e-05,
+   "rms_difference": 0.004476671821088425,
+   "absolute_difference_percentiles": {
+    "50": 2.9616057872772217e-05,
+    "90": 9.933114051818848e-05,
+    "95": 0.00012754686176776888,
+    "99": 0.0001966959238052365,
+    "99.9": 0.0004906792640686219,
+    "100": 1.2015957534313202
+   },
+   "near_zero_threshold": 1.3230613470077514e-06,
+   "near_zero_elements": 21,
+   "maximum_absolute_difference_near_zero": 0.00017596316399703937,
+   "maximum_relative_difference": 58.40535253989499,
+   "relative_difference_elements": 88379,
+   "maximum_symmetric_relative_difference": 2.0,
+   "maximum_absolute_index": [
+    8,
+    16,
+    14,
+    5
+   ],
+   "maximum_absolute_location": {
+    "solar_zenith": {
+     "index": 8,
+     "coordinate": 80.0
+    },
+    "optical_depth": {
+     "index": 16,
+     "coordinate": 256.0
+    },
+    "effective_radius": {
+     "index": 14,
+     "coordinate": 29.0
+    },
+    "solar_channels": {
+     "index": 5,
+     "coordinate": 6.0
+    }
+   },
+   "maximum_reference_value": 0.4267655909061432,
+   "maximum_candidate_value": 1.6283613443374634
+  },
+  {
+   "variable": "R_0v",
+   "status": "ok",
+   "reference_dimensions": [
+    "relative_azimuth",
+    "satellite_zenith",
+    "solar_zenith",
+    "optical_depth",
+    "effective_radius",
+    "solar_channels"
+   ],
+   "candidate_dimensions": [
+    "relative_azimuth",
+    "satellite_zenith",
+    "solar_zenith",
+    "optical_depth",
+    "effective_radius",
+    "solar_channels"
+   ],
+   "candidate_transpose_order": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "shape": [
+    11,
+    10,
+    10,
+    17,
+    20,
+    26
+   ],
+   "elements": 9724000,
+   "jointly_valid_elements": 9724000,
+   "differing_elements": 9712123,
+   "exactly_equal": false,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": -0.014704648405313492,
+   "reference_maximum": 1.1913148164749146,
+   "candidate_minimum": -0.47390052676200867,
+   "candidate_maximum": 1.1913484334945679,
+   "maximum_absolute_difference": 0.5414476096630096,
+   "mean_absolute_difference": 1.565506456934484e-05,
+   "rms_difference": 0.0010525179482788027,
+   "absolute_difference_percentiles": {
+    "50": 3.5241246223449707e-06,
+    "90": 2.3052096366882324e-05,
+    "95": 3.662891685962677e-05,
+    "99": 0.00010687112808227539,
+    "99.9": 0.0005080699920654297,
+    "100": 0.5414476096630096
+   },
+   "near_zero_threshold": 1.1913148164749145e-06,
+   "near_zero_elements": 4600,
+   "maximum_absolute_difference_near_zero": 6.390280304913176e-09,
+   "maximum_relative_difference": 236.83353475453055,
+   "relative_difference_elements": 9719400,
+   "maximum_symmetric_relative_difference": 2.0,
+   "maximum_absolute_index": [
+    10,
+    0,
+    8,
+    16,
+    14,
+    5
+   ],
+   "maximum_absolute_location": {
+    "relative_azimuth": {
+     "index": 10,
+     "coordinate": 180.0
+    },
+    "satellite_zenith": {
+     "index": 0,
+     "coordinate": 0.0
+    },
+    "solar_zenith": {
+     "index": 8,
+     "coordinate": 80.0
+    },
+    "optical_depth": {
+     "index": 16,
+     "coordinate": 256.0
+    },
+    "effective_radius": {
+     "index": 14,
+     "coordinate": 29.0
+    },
+    "solar_channels": {
+     "index": 5,
+     "coordinate": 6.0
+    }
+   },
+   "maximum_reference_value": 0.0676012933254242,
+   "maximum_candidate_value": -0.47384631633758545
+  },
+  {
+   "variable": "R_dd",
+   "status": "ok",
+   "reference_dimensions": [
+    "optical_depth",
+    "effective_radius",
+    "channels"
+   ],
+   "candidate_dimensions": [
+    "optical_depth",
+    "effective_radius",
+    "channels"
+   ],
+   "candidate_transpose_order": [
+    0,
+    1,
+    2
+   ],
+   "shape": [
+    17,
+    20,
+    36
+   ],
+   "elements": 12240,
+   "jointly_valid_elements": 12240,
+   "differing_elements": 12238,
+   "exactly_equal": false,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": -0.0005150724318809807,
+   "reference_maximum": 0.9783071279525757,
+   "candidate_minimum": -0.0005941075505688787,
+   "candidate_maximum": 0.9783172607421875,
+   "maximum_absolute_difference": 0.0008592605590820312,
+   "mean_absolute_difference": 4.986465444018023e-05,
+   "rms_difference": 6.95780842590383e-05,
+   "absolute_difference_percentiles": {
+    "50": 3.6656856536865234e-05,
+    "90": 0.00011105090379714969,
+    "95": 0.00014091145712882277,
+    "99": 0.00020868282765150085,
+    "99.9": 0.0003961436748504783,
+    "100": 0.0008592605590820312
+   },
+   "near_zero_threshold": 9.783071279525757e-07,
+   "near_zero_elements": 6,
+   "maximum_absolute_difference_near_zero": 4.0684687178327295e-05,
+   "maximum_relative_difference": 45.090262703007326,
+   "relative_difference_elements": 12234,
+   "maximum_symmetric_relative_difference": 2.0,
+   "maximum_absolute_index": [
+    16,
+    5,
+    11
+   ],
+   "maximum_absolute_location": {
+    "optical_depth": {
+     "index": 16,
+     "coordinate": 256.0
+    },
+    "effective_radius": {
+     "index": 5,
+     "coordinate": 11.0
+    },
+    "channels": {
+     "index": 11,
+     "coordinate": 12.0
+    }
+   },
+   "maximum_reference_value": 0.9594183564186096,
+   "maximum_candidate_value": 0.9602776169776917
+  },
+  {
+   "variable": "R_dv",
+   "status": "ok",
+   "reference_dimensions": [
+    "satellite_zenith",
+    "optical_depth",
+    "effective_radius",
+    "channels"
+   ],
+   "candidate_dimensions": [
+    "satellite_zenith",
+    "optical_depth",
+    "effective_radius",
+    "channels"
+   ],
+   "candidate_transpose_order": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "shape": [
+    10,
+    17,
+    20,
+    36
+   ],
+   "elements": 122400,
+   "jointly_valid_elements": 122400,
+   "differing_elements": 122291,
+   "exactly_equal": false,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": -5.339384188118856e-06,
+   "reference_maximum": 0.9826668500900269,
+   "candidate_minimum": -5.339758899935987e-06,
+   "candidate_maximum": 0.9826743006706238,
+   "maximum_absolute_difference": 0.0010810494422912598,
+   "mean_absolute_difference": 1.0823573247857684e-05,
+   "rms_difference": 3.052439630015551e-05,
+   "absolute_difference_percentiles": {
+    "50": 3.855908289551735e-06,
+    "90": 2.467632293701172e-05,
+    "95": 3.758072853088379e-05,
+    "99": 0.00010383188724517791,
+    "99.9": 0.00036697405576706105,
+    "100": 0.0010810494422912598
+   },
+   "near_zero_threshold": 9.826668500900268e-07,
+   "near_zero_elements": 1960,
+   "maximum_absolute_difference_near_zero": 3.908496637450298e-09,
+   "maximum_relative_difference": 0.04759462358823933,
+   "relative_difference_elements": 120440,
+   "maximum_symmetric_relative_difference": 0.04648832639034157,
+   "maximum_absolute_index": [
+    0,
+    16,
+    5,
+    11
+   ],
+   "maximum_absolute_location": {
+    "satellite_zenith": {
+     "index": 0,
+     "coordinate": 0.0
+    },
+    "optical_depth": {
+     "index": 16,
+     "coordinate": 256.0
+    },
+    "effective_radius": {
+     "index": 5,
+     "coordinate": 11.0
+    },
+    "channels": {
+     "index": 11,
+     "coordinate": 12.0
+    }
+   },
+   "maximum_reference_value": 0.948311448097229,
+   "maximum_candidate_value": 0.9493924975395203
+  },
+  {
+   "variable": "SRF_file",
+   "status": "ok",
+   "reference_dimensions": [
+    "channels",
+    "length"
+   ],
+   "candidate_dimensions": [
+    "channels",
+    "length"
+   ],
+   "candidate_transpose_order": [
+    0,
+    1
+   ],
+   "reference_dtype": "|S1",
+   "candidate_dtype": "|S1",
+   "elements": 1404,
+   "differing_elements": 0,
+   "exactly_equal": true
+  },
+  {
+   "variable": "T1",
+   "status": "ok",
+   "reference_dimensions": [
+    "thermal_channels"
+   ],
+   "candidate_dimensions": [
+    "thermal_channels"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "shape": [
+    16
+   ],
+   "elements": 16,
+   "jointly_valid_elements": 16,
+   "differing_elements": 0,
+   "exactly_equal": true,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 0.0010000000474974513,
+   "reference_maximum": 0.4102250039577484,
+   "candidate_minimum": 0.0010000000474974513,
+   "candidate_maximum": 0.4102250039577484,
+   "maximum_absolute_difference": 0.0,
+   "mean_absolute_difference": 0.0,
+   "rms_difference": 0.0,
+   "absolute_difference_percentiles": {
+    "50": 0.0,
+    "90": 0.0,
+    "95": 0.0,
+    "99": 0.0,
+    "99.9": 0.0,
+    "100": 0.0
+   },
+   "near_zero_threshold": 4.102250039577484e-07,
+   "near_zero_elements": 0,
+   "maximum_absolute_difference_near_zero": null,
+   "maximum_relative_difference": 0.0,
+   "relative_difference_elements": 16,
+   "maximum_symmetric_relative_difference": 0.0,
+   "maximum_absolute_index": [
+    0
+   ],
+   "maximum_absolute_location": {
+    "thermal_channels": {
+     "index": 0,
+     "coordinate": 20.0
+    }
+   },
+   "maximum_reference_value": 0.4102250039577484,
+   "maximum_candidate_value": 0.4102250039577484
+  },
+  {
+   "variable": "T2",
+   "status": "ok",
+   "reference_dimensions": [
+    "thermal_channels"
+   ],
+   "candidate_dimensions": [
+    "thermal_channels"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "shape": [
+    16
+   ],
+   "elements": 16,
+   "jointly_valid_elements": 16,
+   "differing_elements": 0,
+   "exactly_equal": true,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 0.9991390109062195,
+   "reference_maximum": 1.0,
+   "candidate_minimum": 0.9991390109062195,
+   "candidate_maximum": 1.0,
+   "maximum_absolute_difference": 0.0,
+   "mean_absolute_difference": 0.0,
+   "rms_difference": 0.0,
+   "absolute_difference_percentiles": {
+    "50": 0.0,
+    "90": 0.0,
+    "95": 0.0,
+    "99": 0.0,
+    "99.9": 0.0,
+    "100": 0.0
+   },
+   "near_zero_threshold": 1e-06,
+   "near_zero_elements": 0,
+   "maximum_absolute_difference_near_zero": null,
+   "maximum_relative_difference": 0.0,
+   "relative_difference_elements": 16,
+   "maximum_symmetric_relative_difference": 0.0,
+   "maximum_absolute_index": [
+    0
+   ],
+   "maximum_absolute_location": {
+    "thermal_channels": {
+     "index": 0,
+     "coordinate": 20.0
+    }
+   },
+   "maximum_reference_value": 0.9991390109062195,
+   "maximum_candidate_value": 0.9991390109062195
+  },
+  {
+   "variable": "T_00",
+   "status": "ok",
+   "reference_dimensions": [
+    "solar_zenith",
+    "optical_depth",
+    "effective_radius",
+    "solar_channels"
+   ],
+   "candidate_dimensions": [
+    "solar_zenith",
+    "optical_depth",
+    "effective_radius",
+    "solar_channels"
+   ],
+   "candidate_transpose_order": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "shape": [
+    10,
+    17,
+    20,
+    26
+   ],
+   "elements": 88400,
+   "jointly_valid_elements": 88400,
+   "differing_elements": 52446,
+   "exactly_equal": false,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 0.0,
+   "reference_maximum": 0.9999800324440002,
+   "candidate_minimum": 0.0,
+   "candidate_maximum": 0.9999799728393555,
+   "maximum_absolute_difference": 2.4437904357910156e-06,
+   "mean_absolute_difference": 5.4609084904074406e-08,
+   "rms_difference": 1.319835572262739e-07,
+   "absolute_difference_percentiles": {
+    "50": 4.375839968151496e-16,
+    "90": 1.7881393432617188e-07,
+    "95": 2.5331974029541016e-07,
+    "99": 5.960464477539062e-07,
+    "99.9": 1.043081283569336e-06,
+    "100": 2.4437904357910156e-06
+   },
+   "near_zero_threshold": 9.999800324440002e-07,
+   "near_zero_elements": 34104,
+   "maximum_absolute_difference_near_zero": 1.4097167877480388e-11,
+   "maximum_relative_difference": 8.578569603103003e-05,
+   "relative_difference_elements": 54296,
+   "maximum_symmetric_relative_difference": 8.578201659602971e-05,
+   "maximum_absolute_index": [
+    1,
+    8,
+    2,
+    0
+   ],
+   "maximum_absolute_location": {
+    "solar_zenith": {
+     "index": 1,
+     "coordinate": 10.0
+    },
+    "optical_depth": {
+     "index": 8,
+     "coordinate": 1.0
+    },
+    "effective_radius": {
+     "index": 2,
+     "coordinate": 5.0
+    },
+    "solar_channels": {
+     "index": 0,
+     "coordinate": 1.0
+    }
+   },
+   "maximum_reference_value": 0.3414696455001831,
+   "maximum_candidate_value": 0.3414720892906189
+  },
+  {
+   "variable": "T_0d",
+   "status": "ok",
+   "reference_dimensions": [
+    "solar_zenith",
+    "optical_depth",
+    "effective_radius",
+    "solar_channels"
+   ],
+   "candidate_dimensions": [
+    "solar_zenith",
+    "optical_depth",
+    "effective_radius",
+    "solar_channels"
+   ],
+   "candidate_transpose_order": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "shape": [
+    10,
+    17,
+    20,
+    26
+   ],
+   "elements": 88400,
+   "jointly_valid_elements": 88400,
+   "differing_elements": 85604,
+   "exactly_equal": false,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": -8.959430124377832e-05,
+   "reference_maximum": 0.8195121884346008,
+   "candidate_minimum": -5.139084896654822e-05,
+   "candidate_maximum": 0.8194617033004761,
+   "maximum_absolute_difference": 0.008338794112205505,
+   "mean_absolute_difference": 2.893354469732794e-05,
+   "rms_difference": 5.754954237382416e-05,
+   "absolute_difference_percentiles": {
+    "50": 1.7583370208740234e-05,
+    "90": 7.149577140808105e-05,
+    "95": 9.193451041937807e-05,
+    "99": 0.00013786554336547852,
+    "99.9": 0.00027935846149921835,
+    "100": 0.008338794112205505
+   },
+   "near_zero_threshold": 8.195121884346008e-07,
+   "near_zero_elements": 4632,
+   "maximum_absolute_difference_near_zero": 0.00011108814265980982,
+   "maximum_relative_difference": 54.88235077560596,
+   "relative_difference_elements": 83768,
+   "maximum_symmetric_relative_difference": 2.0,
+   "maximum_absolute_index": [
+    3,
+    5,
+    10,
+    8
+   ],
+   "maximum_absolute_location": {
+    "solar_zenith": {
+     "index": 3,
+     "coordinate": 30.0
+    },
+    "optical_depth": {
+     "index": 5,
+     "coordinate": 0.125
+    },
+    "effective_radius": {
+     "index": 10,
+     "coordinate": 21.0
+    },
+    "solar_channels": {
+     "index": 8,
+     "coordinate": 9.0
+    }
+   },
+   "maximum_reference_value": 0.21246816217899323,
+   "maximum_candidate_value": 0.22080695629119873
+  },
+  {
+   "variable": "T_dd",
+   "status": "ok",
+   "reference_dimensions": [
+    "optical_depth",
+    "effective_radius",
+    "channels"
+   ],
+   "candidate_dimensions": [
+    "optical_depth",
+    "effective_radius",
+    "channels"
+   ],
+   "candidate_transpose_order": [
+    0,
+    1,
+    2
+   ],
+   "shape": [
+    17,
+    20,
+    36
+   ],
+   "elements": 12240,
+   "jointly_valid_elements": 12240,
+   "differing_elements": 11754,
+   "exactly_equal": false,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 0.0,
+   "reference_maximum": 1.0000895261764526,
+   "candidate_minimum": 0.0,
+   "candidate_maximum": 1.0003676414489746,
+   "maximum_absolute_difference": 0.0004531070590019226,
+   "mean_absolute_difference": 2.7089358384358114e-05,
+   "rms_difference": 4.197626528564029e-05,
+   "absolute_difference_percentiles": {
+    "50": 1.5556812286376953e-05,
+    "90": 7.022023200988772e-05,
+    "95": 9.185373783111568e-05,
+    "99": 0.0001347064971923828,
+    "99.9": 0.00020952478796244304,
+    "100": 0.0004531070590019226
+   },
+   "near_zero_threshold": 1.0000895261764525e-06,
+   "near_zero_elements": 1231,
+   "maximum_absolute_difference_near_zero": 1.1476686267997138e-10,
+   "maximum_relative_difference": 0.012591467492419031,
+   "relative_difference_elements": 11009,
+   "maximum_symmetric_relative_difference": 0.012512690921925973,
+   "maximum_absolute_index": [
+    16,
+    5,
+    11
+   ],
+   "maximum_absolute_location": {
+    "optical_depth": {
+     "index": 16,
+     "coordinate": 256.0
+    },
+    "effective_radius": {
+     "index": 5,
+     "coordinate": 11.0
+    },
+    "channels": {
+     "index": 11,
+     "coordinate": 12.0
+    }
+   },
+   "maximum_reference_value": 0.03598524630069733,
+   "maximum_candidate_value": 0.03643835335969925
+  },
+  {
+   "variable": "T_dv",
+   "status": "ok",
+   "reference_dimensions": [
+    "satellite_zenith",
+    "optical_depth",
+    "effective_radius",
+    "channels"
+   ],
+   "candidate_dimensions": [
+    "satellite_zenith",
+    "optical_depth",
+    "effective_radius",
+    "channels"
+   ],
+   "candidate_transpose_order": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "shape": [
+    10,
+    17,
+    20,
+    36
+   ],
+   "elements": 122400,
+   "jointly_valid_elements": 122400,
+   "differing_elements": 114883,
+   "exactly_equal": false,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": -2.5818675963054346e-15,
+   "reference_maximum": 1.0000009536743164,
+   "candidate_minimum": -2.5818576436683043e-15,
+   "candidate_maximum": 1.0000009536743164,
+   "maximum_absolute_difference": 0.0005762651562690735,
+   "mean_absolute_difference": 8.495857402043516e-06,
+   "rms_difference": 1.8815978737507793e-05,
+   "absolute_difference_percentiles": {
+    "50": 2.86102294921875e-06,
+    "90": 2.266131341457369e-05,
+    "95": 3.166124224662781e-05,
+    "99": 6.324052810668945e-05,
+    "99.9": 0.00018612310290336753,
+    "100": 0.0005762651562690735
+   },
+   "near_zero_threshold": 1.0000009536743163e-06,
+   "near_zero_elements": 12350,
+   "maximum_absolute_difference_near_zero": 4.5849901653127745e-10,
+   "maximum_relative_difference": 0.04205614400748857,
+   "relative_difference_elements": 110050,
+   "maximum_symmetric_relative_difference": 0.04295949945527899,
+   "maximum_absolute_index": [
+    0,
+    16,
+    5,
+    11
+   ],
+   "maximum_absolute_location": {
+    "satellite_zenith": {
+     "index": 0,
+     "coordinate": 0.0
+    },
+    "optical_depth": {
+     "index": 16,
+     "coordinate": 256.0
+    },
+    "effective_radius": {
+     "index": 5,
+     "coordinate": 11.0
+    },
+    "channels": {
+     "index": 11,
+     "coordinate": 12.0
+    }
+   },
+   "maximum_reference_value": 0.045931510627269745,
+   "maximum_candidate_value": 0.04650777578353882
+  },
+  {
+   "variable": "asymmetry_parameter",
+   "status": "ok",
+   "reference_dimensions": [
+    "effective_radius",
+    "channels"
+   ],
+   "candidate_dimensions": [
+    "effective_radius",
+    "channels"
+   ],
+   "candidate_transpose_order": [
+    0,
+    1
+   ],
+   "shape": [
+    20,
+    36
+   ],
+   "elements": 720,
+   "jointly_valid_elements": 720,
+   "differing_elements": 546,
+   "exactly_equal": false,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 0.07661628723144531,
+   "reference_maximum": 0.9767294526100159,
+   "candidate_minimum": 0.07661623507738113,
+   "candidate_maximum": 0.9767294526100159,
+   "maximum_absolute_difference": 5.0067901611328125e-06,
+   "mean_absolute_difference": 2.669377459420098e-07,
+   "rms_difference": 5.765474321150553e-07,
+   "absolute_difference_percentiles": {
+    "50": 5.960464477539063e-08,
+    "90": 7.748603820800781e-07,
+    "95": 1.4334917068481418e-06,
+    "99": 2.4920701980590788e-06,
+    "99.9": 3.5925507545472426e-06,
+    "100": 5.0067901611328125e-06
+   },
+   "near_zero_threshold": 9.767294526100158e-07,
+   "near_zero_elements": 0,
+   "maximum_absolute_difference_near_zero": null,
+   "maximum_relative_difference": 5.9096781673694025e-06,
+   "relative_difference_elements": 720,
+   "maximum_symmetric_relative_difference": 5.909660705272979e-06,
+   "maximum_absolute_index": [
+    2,
+    0
+   ],
+   "maximum_absolute_location": {
+    "effective_radius": {
+     "index": 2,
+     "coordinate": 5.0
+    },
+    "channels": {
+     "index": 0,
+     "coordinate": 1.0
+    }
+   },
+   "maximum_reference_value": 0.8472187519073486,
+   "maximum_candidate_value": 0.8472237586975098
+  },
+  {
+   "variable": "average_volume_per_particle",
+   "status": "ok",
+   "reference_dimensions": [
+    "effective_radius"
+   ],
+   "candidate_dimensions": [
+    "effective_radius"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "shape": [
+    20
+   ],
+   "elements": 20,
+   "jointly_valid_elements": 20,
+   "differing_elements": 3,
+   "exactly_equal": false,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 2.895953893661499,
+   "reference_maximum": 171653.203125,
+   "candidate_minimum": 2.895953893661499,
+   "candidate_maximum": 171653.203125,
+   "maximum_absolute_difference": 0.001953125,
+   "mean_absolute_difference": 0.0001468658447265625,
+   "rms_difference": 0.0004882842302231439,
+   "absolute_difference_percentiles": {
+    "50": 0.0,
+    "90": 0.00010452270507812638,
+    "95": 0.0010253906250000007,
+    "99": 0.0017675781249999988,
+    "99.9": 0.0019345703125000016,
+    "100": 0.001953125
+   },
+   "near_zero_threshold": 0.171653203125,
+   "near_zero_elements": 0,
+   "maximum_absolute_difference_near_zero": null,
+   "maximum_relative_difference": 9.991590078630816e-08,
+   "relative_difference_elements": 20,
+   "maximum_symmetric_relative_difference": 9.991590577790203e-08,
+   "maximum_absolute_index": [
+    10
+   ],
+   "maximum_absolute_location": {
+    "effective_radius": {
+     "index": 10,
+     "coordinate": 21.0
+    }
+   },
+   "maximum_reference_value": 26819.4296875,
+   "maximum_candidate_value": 26819.427734375
+  },
+  {
+   "variable": "central_wavelength",
+   "status": "ok",
+   "reference_dimensions": [
+    "channels"
+   ],
+   "candidate_dimensions": [
+    "channels"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "shape": [
+    36
+   ],
+   "elements": 36,
+   "jointly_valid_elements": 36,
+   "differing_elements": 34,
+   "exactly_equal": false,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 0.41185253858566284,
+   "reference_maximum": 14.17526912689209,
+   "candidate_minimum": 0.41185250878334045,
+   "candidate_maximum": 14.175276756286621,
+   "maximum_absolute_difference": 7.62939453125e-06,
+   "mean_absolute_difference": 1.1639462576972114e-06,
+   "rms_difference": 2.2246967337792067e-06,
+   "absolute_difference_percentiles": {
+    "50": 2.384185791015625e-07,
+    "90": 3.814697265625e-06,
+    "95": 4.76837158203125e-06,
+    "99": 7.62939453125e-06,
+    "99.9": 7.62939453125e-06,
+    "100": 7.62939453125e-06
+   },
+   "near_zero_threshold": 1.417526912689209e-05,
+   "near_zero_elements": 0,
+   "maximum_absolute_difference_near_zero": null,
+   "maximum_relative_difference": 1.129845279693552e-06,
+   "relative_difference_elements": 36,
+   "maximum_symmetric_relative_difference": 1.1298446414187346e-06,
+   "maximum_absolute_index": [
+    26
+   ],
+   "maximum_absolute_location": {
+    "channels": {
+     "index": 26,
+     "coordinate": 27.0
+    }
+   },
+   "maximum_reference_value": 6.752601146697998,
+   "maximum_candidate_value": 6.752608776092529
+  },
+  {
+   "variable": "central_wavenumber",
+   "status": "ok",
+   "reference_dimensions": [
+    "channels"
+   ],
+   "candidate_dimensions": [
+    "channels"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "shape": [
+    36
+   ],
+   "elements": 36,
+   "jointly_valid_elements": 36,
+   "differing_elements": 28,
+   "exactly_equal": false,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 705.5760498046875,
+   "reference_maximum": 24290.693359375,
+   "candidate_minimum": 705.5758666992188,
+   "candidate_maximum": 24290.6875,
+   "maximum_absolute_difference": 0.005859375,
+   "mean_absolute_difference": 0.0016191270616319445,
+   "rms_difference": 0.002500062550980798,
+   "absolute_difference_percentiles": {
+    "50": 0.0008544921875,
+    "90": 0.00439453125,
+    "95": 0.005859375,
+    "99": 0.005859375,
+    "99.9": 0.005859375,
+    "100": 0.005859375
+   },
+   "near_zero_threshold": 0.024290693359375,
+   "near_zero_elements": 0,
+   "maximum_absolute_difference_near_zero": null,
+   "maximum_relative_difference": 1.2873317544044323e-06,
+   "relative_difference_elements": 36,
+   "maximum_symmetric_relative_difference": 1.2873325830164886e-06,
+   "maximum_absolute_index": [
+    7
+   ],
+   "maximum_absolute_location": {
+    "channels": {
+     "index": 7,
+     "coordinate": 8.0
+    }
+   },
+   "maximum_reference_value": 24290.693359375,
+   "maximum_candidate_value": 24290.6875
+  },
+  {
+   "variable": "channel_id",
+   "status": "ok",
+   "reference_dimensions": [
+    "channels"
+   ],
+   "candidate_dimensions": [
+    "channels"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "shape": [
+    36
+   ],
+   "elements": 36,
+   "jointly_valid_elements": 36,
+   "differing_elements": 0,
+   "exactly_equal": true,
+   "reference_dtype": "int16",
+   "candidate_dtype": "int16",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 1.0,
+   "reference_maximum": 36.0,
+   "candidate_minimum": 1.0,
+   "candidate_maximum": 36.0,
+   "maximum_absolute_difference": 0.0,
+   "mean_absolute_difference": 0.0,
+   "rms_difference": 0.0,
+   "absolute_difference_percentiles": {
+    "50": 0.0,
+    "90": 0.0,
+    "95": 0.0,
+    "99": 0.0,
+    "99.9": 0.0,
+    "100": 0.0
+   },
+   "near_zero_threshold": 3.6e-05,
+   "near_zero_elements": 0,
+   "maximum_absolute_difference_near_zero": null,
+   "maximum_relative_difference": 0.0,
+   "relative_difference_elements": 36,
+   "maximum_symmetric_relative_difference": 0.0,
+   "maximum_absolute_index": [
+    0
+   ],
+   "maximum_absolute_location": {
+    "channels": {
+     "index": 0,
+     "coordinate": 1.0
+    }
+   },
+   "maximum_reference_value": 1.0,
+   "maximum_candidate_value": 1.0
+  },
+  {
+   "variable": "effective_radius",
+   "status": "ok",
+   "reference_dimensions": [
+    "effective_radius"
+   ],
+   "candidate_dimensions": [
+    "effective_radius"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "shape": [
+    20
+   ],
+   "elements": 20,
+   "jointly_valid_elements": 20,
+   "differing_elements": 0,
+   "exactly_equal": true,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 1.0,
+   "reference_maximum": 39.0,
+   "candidate_minimum": 1.0,
+   "candidate_maximum": 39.0,
+   "maximum_absolute_difference": 0.0,
+   "mean_absolute_difference": 0.0,
+   "rms_difference": 0.0,
+   "absolute_difference_percentiles": {
+    "50": 0.0,
+    "90": 0.0,
+    "95": 0.0,
+    "99": 0.0,
+    "99.9": 0.0,
+    "100": 0.0
+   },
+   "near_zero_threshold": 3.9e-05,
+   "near_zero_elements": 0,
+   "maximum_absolute_difference_near_zero": null,
+   "maximum_relative_difference": 0.0,
+   "relative_difference_elements": 20,
+   "maximum_symmetric_relative_difference": 0.0,
+   "maximum_absolute_index": [
+    0
+   ],
+   "maximum_absolute_location": {
+    "effective_radius": {
+     "index": 0,
+     "coordinate": 1.0
+    }
+   },
+   "maximum_reference_value": 1.0,
+   "maximum_candidate_value": 1.0
+  },
+  {
+   "variable": "extinction_coefficient",
+   "status": "ok",
+   "reference_dimensions": [
+    "effective_radius",
+    "channels"
+   ],
+   "candidate_dimensions": [
+    "effective_radius",
+    "channels"
+   ],
+   "candidate_transpose_order": [
+    0,
+    1
+   ],
+   "shape": [
+    20,
+    36
+   ],
+   "elements": 720,
+   "jointly_valid_elements": 720,
+   "differing_elements": 537,
+   "exactly_equal": false,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 0.1919708549976349,
+   "reference_maximum": 7442.53369140625,
+   "candidate_minimum": 0.19197088479995728,
+   "candidate_maximum": 7442.533203125,
+   "maximum_absolute_difference": 0.0205078125,
+   "mean_absolute_difference": 0.0009895588374800152,
+   "rms_difference": 0.002637314366457742,
+   "absolute_difference_percentiles": {
+    "50": 0.00018310546875,
+    "90": 0.00244140625,
+    "95": 0.005627441406249989,
+    "99": 0.01171875,
+    "99.9": 0.019454589843750092,
+    "100": 0.0205078125
+   },
+   "near_zero_threshold": 0.007442533691406249,
+   "near_zero_elements": 0,
+   "maximum_absolute_difference_near_zero": null,
+   "maximum_relative_difference": 5.923132579494297e-06,
+   "relative_difference_elements": 720,
+   "maximum_symmetric_relative_difference": 5.923150121296025e-06,
+   "maximum_absolute_index": [
+    19,
+    0
+   ],
+   "maximum_absolute_location": {
+    "effective_radius": {
+     "index": 19,
+     "coordinate": 39.0
+    },
+    "channels": {
+     "index": 0,
+     "coordinate": 1.0
+    }
+   },
+   "maximum_reference_value": 6739.005859375,
+   "maximum_candidate_value": 6738.9853515625
+  },
+  {
+   "variable": "extinction_coefficient_ratio",
+   "status": "ok",
+   "reference_dimensions": [
+    "effective_radius",
+    "channels"
+   ],
+   "candidate_dimensions": [
+    "effective_radius",
+    "channels"
+   ],
+   "candidate_transpose_order": [
+    0,
+    1
+   ],
+   "shape": [
+    20,
+    36
+   ],
+   "elements": 720,
+   "jointly_valid_elements": 720,
+   "differing_elements": 607,
+   "exactly_equal": false,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 0.03467022255063057,
+   "reference_maximum": 1.4839966297149658,
+   "candidate_minimum": 0.03467022627592087,
+   "candidate_maximum": 1.4839955568313599,
+   "maximum_absolute_difference": 7.033348083496094e-06,
+   "mean_absolute_difference": 5.150576018624836e-07,
+   "rms_difference": 8.816205882083308e-07,
+   "absolute_difference_percentiles": {
+    "50": 2.384185791015625e-07,
+    "90": 1.3172626495361342e-06,
+    "95": 2.1457672119140625e-06,
+    "99": 3.0994415283203125e-06,
+    "99.9": 4.890561103820988e-06,
+    "100": 7.033348083496094e-06
+   },
+   "near_zero_threshold": 1.4839966297149657e-06,
+   "near_zero_elements": 0,
+   "maximum_absolute_difference_near_zero": null,
+   "maximum_relative_difference": 6.978657609078784e-06,
+   "relative_difference_elements": 720,
+   "maximum_symmetric_relative_difference": 6.978681959994765e-06,
+   "maximum_absolute_index": [
+    2,
+    0
+   ],
+   "maximum_absolute_location": {
+    "effective_radius": {
+     "index": 2,
+     "coordinate": 5.0
+    },
+    "channels": {
+     "index": 0,
+     "coordinate": 1.0
+    }
+   },
+   "maximum_reference_value": 1.0078368186950684,
+   "maximum_candidate_value": 1.0078297853469849
+  },
+  {
+   "variable": "instrument",
+   "status": "ok",
+   "reference_dimensions": [
+    "st3"
+   ],
+   "candidate_dimensions": [
+    "st3"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "reference_dtype": "|S1",
+   "candidate_dtype": "|S1",
+   "elements": 5,
+   "differing_elements": 0,
+   "exactly_equal": true
+  },
+  {
+   "variable": "instrument_filename",
+   "status": "ok",
+   "reference_dimensions": [
+    "st1"
+   ],
+   "candidate_dimensions": [
+    "st1"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "reference_dtype": "|S1",
+   "candidate_dtype": "|S1",
+   "elements": 19,
+   "differing_elements": 0,
+   "exactly_equal": true
+  },
+  {
+   "variable": "instrument_version",
+   "status": "ok",
+   "reference_dimensions": [
+    "st4"
+   ],
+   "candidate_dimensions": [
+    "st4"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "reference_dtype": "|S1",
+   "candidate_dtype": "|S1",
+   "elements": 7,
+   "differing_elements": 0,
+   "exactly_equal": true
+  },
+  {
+   "variable": "max_sat_zenith",
+   "status": "ok",
+   "reference_dimensions": [],
+   "candidate_dimensions": [],
+   "candidate_transpose_order": [],
+   "shape": [],
+   "elements": 1,
+   "jointly_valid_elements": 1,
+   "differing_elements": 0,
+   "exactly_equal": true,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 65.0,
+   "reference_maximum": 65.0,
+   "candidate_minimum": 65.0,
+   "candidate_maximum": 65.0,
+   "maximum_absolute_difference": 0.0,
+   "mean_absolute_difference": 0.0,
+   "rms_difference": 0.0,
+   "absolute_difference_percentiles": {
+    "50": 0.0,
+    "90": 0.0,
+    "95": 0.0,
+    "99": 0.0,
+    "99.9": 0.0,
+    "100": 0.0
+   },
+   "near_zero_threshold": 6.5e-05,
+   "near_zero_elements": 0,
+   "maximum_absolute_difference_near_zero": null,
+   "maximum_relative_difference": 0.0,
+   "relative_difference_elements": 1,
+   "maximum_symmetric_relative_difference": 0.0,
+   "maximum_absolute_index": [],
+   "maximum_absolute_location": {},
+   "maximum_reference_value": 65.0,
+   "maximum_candidate_value": 65.0
+  },
+  {
+   "variable": "mixed_channel_flag",
+   "status": "ok",
+   "reference_dimensions": [
+    "channels"
+   ],
+   "candidate_dimensions": [
+    "channels"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "shape": [
+    36
+   ],
+   "elements": 36,
+   "jointly_valid_elements": 36,
+   "differing_elements": 0,
+   "exactly_equal": true,
+   "reference_dtype": "int16",
+   "candidate_dtype": "int16",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 0.0,
+   "reference_maximum": 1.0,
+   "candidate_minimum": 0.0,
+   "candidate_maximum": 1.0,
+   "maximum_absolute_difference": 0.0,
+   "mean_absolute_difference": 0.0,
+   "rms_difference": 0.0,
+   "absolute_difference_percentiles": {
+    "50": 0.0,
+    "90": 0.0,
+    "95": 0.0,
+    "99": 0.0,
+    "99.9": 0.0,
+    "100": 0.0
+   },
+   "near_zero_threshold": 1e-06,
+   "near_zero_elements": 30,
+   "maximum_absolute_difference_near_zero": 0.0,
+   "maximum_relative_difference": 0.0,
+   "relative_difference_elements": 6,
+   "maximum_symmetric_relative_difference": 0.0,
+   "maximum_absolute_index": [
+    0
+   ],
+   "maximum_absolute_location": {
+    "channels": {
+     "index": 0,
+     "coordinate": 1.0
+    }
+   },
+   "maximum_reference_value": 0.0,
+   "maximum_candidate_value": 0.0
+  },
+  {
+   "variable": "mixed_channel_id",
+   "status": "ok",
+   "reference_dimensions": [
+    "mixed_channels"
+   ],
+   "candidate_dimensions": [
+    "mixed_channels"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "shape": [
+    6
+   ],
+   "elements": 6,
+   "jointly_valid_elements": 6,
+   "differing_elements": 0,
+   "exactly_equal": true,
+   "reference_dtype": "int16",
+   "candidate_dtype": "int16",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 20.0,
+   "reference_maximum": 25.0,
+   "candidate_minimum": 20.0,
+   "candidate_maximum": 25.0,
+   "maximum_absolute_difference": 0.0,
+   "mean_absolute_difference": 0.0,
+   "rms_difference": 0.0,
+   "absolute_difference_percentiles": {
+    "50": 0.0,
+    "90": 0.0,
+    "95": 0.0,
+    "99": 0.0,
+    "99.9": 0.0,
+    "100": 0.0
+   },
+   "near_zero_threshold": 2.4999999999999998e-05,
+   "near_zero_elements": 0,
+   "maximum_absolute_difference_near_zero": null,
+   "maximum_relative_difference": 0.0,
+   "relative_difference_elements": 6,
+   "maximum_symmetric_relative_difference": 0.0,
+   "maximum_absolute_index": [
+    0
+   ],
+   "maximum_absolute_location": {
+    "mixed_channels": {
+     "index": 0,
+     "coordinate": 20.0
+    }
+   },
+   "maximum_reference_value": 20.0,
+   "maximum_candidate_value": 20.0
+  },
+  {
+   "variable": "nedt",
+   "status": "ok",
+   "reference_dimensions": [
+    "thermal_channels"
+   ],
+   "candidate_dimensions": [
+    "thermal_channels"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "shape": [
+    16
+   ],
+   "elements": 16,
+   "jointly_valid_elements": 16,
+   "differing_elements": 0,
+   "exactly_equal": true,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 0.019999999552965164,
+   "reference_maximum": 0.4399999976158142,
+   "candidate_minimum": 0.019999999552965164,
+   "candidate_maximum": 0.4399999976158142,
+   "maximum_absolute_difference": 0.0,
+   "mean_absolute_difference": 0.0,
+   "rms_difference": 0.0,
+   "absolute_difference_percentiles": {
+    "50": 0.0,
+    "90": 0.0,
+    "95": 0.0,
+    "99": 0.0,
+    "99.9": 0.0,
+    "100": 0.0
+   },
+   "near_zero_threshold": 4.399999976158142e-07,
+   "near_zero_elements": 0,
+   "maximum_absolute_difference_near_zero": null,
+   "maximum_relative_difference": 0.0,
+   "relative_difference_elements": 16,
+   "maximum_symmetric_relative_difference": 0.0,
+   "maximum_absolute_index": [
+    0
+   ],
+   "maximum_absolute_location": {
+    "thermal_channels": {
+     "index": 0,
+     "coordinate": 20.0
+    }
+   },
+   "maximum_reference_value": 0.029999999329447746,
+   "maximum_candidate_value": 0.029999999329447746
+  },
+  {
+   "variable": "number_of_channels",
+   "status": "ok",
+   "reference_dimensions": [],
+   "candidate_dimensions": [],
+   "candidate_transpose_order": [],
+   "shape": [],
+   "elements": 1,
+   "jointly_valid_elements": 1,
+   "differing_elements": 0,
+   "exactly_equal": true,
+   "reference_dtype": "int32",
+   "candidate_dtype": "int32",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 36.0,
+   "reference_maximum": 36.0,
+   "candidate_minimum": 36.0,
+   "candidate_maximum": 36.0,
+   "maximum_absolute_difference": 0.0,
+   "mean_absolute_difference": 0.0,
+   "rms_difference": 0.0,
+   "absolute_difference_percentiles": {
+    "50": 0.0,
+    "90": 0.0,
+    "95": 0.0,
+    "99": 0.0,
+    "99.9": 0.0,
+    "100": 0.0
+   },
+   "near_zero_threshold": 3.6e-05,
+   "near_zero_elements": 0,
+   "maximum_absolute_difference_near_zero": null,
+   "maximum_relative_difference": 0.0,
+   "relative_difference_elements": 1,
+   "maximum_symmetric_relative_difference": 0.0,
+   "maximum_absolute_index": [],
+   "maximum_absolute_location": {},
+   "maximum_reference_value": 36.0,
+   "maximum_candidate_value": 36.0
+  },
+  {
+   "variable": "oldb1",
+   "status": "ok",
+   "reference_dimensions": [
+    "channels"
+   ],
+   "candidate_dimensions": [
+    "channels"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "shape": [
+    36
+   ],
+   "elements": 36,
+   "jointly_valid_elements": 16,
+   "differing_elements": 0,
+   "exactly_equal": true,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 20,
+   "candidate_masked": 20,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 0.0,
+   "reference_maximum": 0.0,
+   "candidate_minimum": 0.0,
+   "candidate_maximum": 0.0,
+   "maximum_absolute_difference": 0.0,
+   "mean_absolute_difference": 0.0,
+   "rms_difference": 0.0,
+   "absolute_difference_percentiles": {
+    "50": 0.0,
+    "90": 0.0,
+    "95": 0.0,
+    "99": 0.0,
+    "99.9": 0.0,
+    "100": 0.0
+   },
+   "near_zero_threshold": 1e-12,
+   "near_zero_elements": 16,
+   "maximum_absolute_difference_near_zero": 0.0,
+   "maximum_relative_difference": null,
+   "relative_difference_elements": 0,
+   "maximum_symmetric_relative_difference": null,
+   "maximum_absolute_index": [
+    0
+   ],
+   "maximum_absolute_location": {
+    "channels": {
+     "index": 0,
+     "coordinate": 1.0
+    }
+   },
+   "maximum_reference_value": 0.0,
+   "maximum_candidate_value": 0.0
+  },
+  {
+   "variable": "oldb2",
+   "status": "ok",
+   "reference_dimensions": [
+    "channels"
+   ],
+   "candidate_dimensions": [
+    "channels"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "shape": [
+    36
+   ],
+   "elements": 36,
+   "jointly_valid_elements": 16,
+   "differing_elements": 0,
+   "exactly_equal": true,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 20,
+   "candidate_masked": 20,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 0.0,
+   "reference_maximum": 0.0,
+   "candidate_minimum": 0.0,
+   "candidate_maximum": 0.0,
+   "maximum_absolute_difference": 0.0,
+   "mean_absolute_difference": 0.0,
+   "rms_difference": 0.0,
+   "absolute_difference_percentiles": {
+    "50": 0.0,
+    "90": 0.0,
+    "95": 0.0,
+    "99": 0.0,
+    "99.9": 0.0,
+    "100": 0.0
+   },
+   "near_zero_threshold": 1e-12,
+   "near_zero_elements": 16,
+   "maximum_absolute_difference_near_zero": 0.0,
+   "maximum_relative_difference": null,
+   "relative_difference_elements": 0,
+   "maximum_symmetric_relative_difference": null,
+   "maximum_absolute_index": [
+    0
+   ],
+   "maximum_absolute_location": {
+    "channels": {
+     "index": 0,
+     "coordinate": 1.0
+    }
+   },
+   "maximum_reference_value": 0.0,
+   "maximum_candidate_value": 0.0
+  },
+  {
+   "variable": "oldf0",
+   "status": "ok",
+   "reference_dimensions": [
+    "solar_channels"
+   ],
+   "candidate_dimensions": [
+    "solar_channels"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "shape": [
+    26
+   ],
+   "elements": 26,
+   "jointly_valid_elements": 26,
+   "differing_elements": 0,
+   "exactly_equal": true,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 0.0,
+   "reference_maximum": 0.0,
+   "candidate_minimum": 0.0,
+   "candidate_maximum": 0.0,
+   "maximum_absolute_difference": 0.0,
+   "mean_absolute_difference": 0.0,
+   "rms_difference": 0.0,
+   "absolute_difference_percentiles": {
+    "50": 0.0,
+    "90": 0.0,
+    "95": 0.0,
+    "99": 0.0,
+    "99.9": 0.0,
+    "100": 0.0
+   },
+   "near_zero_threshold": 1e-12,
+   "near_zero_elements": 26,
+   "maximum_absolute_difference_near_zero": 0.0,
+   "maximum_relative_difference": null,
+   "relative_difference_elements": 0,
+   "maximum_symmetric_relative_difference": null,
+   "maximum_absolute_index": [
+    0
+   ],
+   "maximum_absolute_location": {
+    "solar_channels": {
+     "index": 0,
+     "coordinate": 1.0
+    }
+   },
+   "maximum_reference_value": 0.0,
+   "maximum_candidate_value": 0.0
+  },
+  {
+   "variable": "oldf1",
+   "status": "ok",
+   "reference_dimensions": [
+    "solar_channels"
+   ],
+   "candidate_dimensions": [
+    "solar_channels"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "shape": [
+    26
+   ],
+   "elements": 26,
+   "jointly_valid_elements": 26,
+   "differing_elements": 0,
+   "exactly_equal": true,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 0.0,
+   "reference_maximum": 0.0,
+   "candidate_minimum": 0.0,
+   "candidate_maximum": 0.0,
+   "maximum_absolute_difference": 0.0,
+   "mean_absolute_difference": 0.0,
+   "rms_difference": 0.0,
+   "absolute_difference_percentiles": {
+    "50": 0.0,
+    "90": 0.0,
+    "95": 0.0,
+    "99": 0.0,
+    "99.9": 0.0,
+    "100": 0.0
+   },
+   "near_zero_threshold": 1e-12,
+   "near_zero_elements": 26,
+   "maximum_absolute_difference_near_zero": 0.0,
+   "maximum_relative_difference": null,
+   "relative_difference_elements": 0,
+   "maximum_symmetric_relative_difference": null,
+   "maximum_absolute_index": [
+    0
+   ],
+   "maximum_absolute_location": {
+    "solar_channels": {
+     "index": 0,
+     "coordinate": 1.0
+    }
+   },
+   "maximum_reference_value": 0.0,
+   "maximum_candidate_value": 0.0
+  },
+  {
+   "variable": "oldnebt",
+   "status": "ok",
+   "reference_dimensions": [
+    "channels"
+   ],
+   "candidate_dimensions": [
+    "channels"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "shape": [
+    36
+   ],
+   "elements": 36,
+   "jointly_valid_elements": 16,
+   "differing_elements": 0,
+   "exactly_equal": true,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 20,
+   "candidate_masked": 20,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 0.0,
+   "reference_maximum": 0.0,
+   "candidate_minimum": 0.0,
+   "candidate_maximum": 0.0,
+   "maximum_absolute_difference": 0.0,
+   "mean_absolute_difference": 0.0,
+   "rms_difference": 0.0,
+   "absolute_difference_percentiles": {
+    "50": 0.0,
+    "90": 0.0,
+    "95": 0.0,
+    "99": 0.0,
+    "99.9": 0.0,
+    "100": 0.0
+   },
+   "near_zero_threshold": 1e-12,
+   "near_zero_elements": 16,
+   "maximum_absolute_difference_near_zero": 0.0,
+   "maximum_relative_difference": null,
+   "relative_difference_elements": 0,
+   "maximum_symmetric_relative_difference": null,
+   "maximum_absolute_index": [
+    0
+   ],
+   "maximum_absolute_location": {
+    "channels": {
+     "index": 0,
+     "coordinate": 1.0
+    }
+   },
+   "maximum_reference_value": 0.0,
+   "maximum_candidate_value": 0.0
+  },
+  {
+   "variable": "oldnefr",
+   "status": "ok",
+   "reference_dimensions": [
+    "channels"
+   ],
+   "candidate_dimensions": [
+    "channels"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "shape": [
+    36
+   ],
+   "elements": 36,
+   "jointly_valid_elements": 26,
+   "differing_elements": 0,
+   "exactly_equal": true,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 10,
+   "candidate_masked": 10,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 0.0,
+   "reference_maximum": 0.0,
+   "candidate_minimum": 0.0,
+   "candidate_maximum": 0.0,
+   "maximum_absolute_difference": 0.0,
+   "mean_absolute_difference": 0.0,
+   "rms_difference": 0.0,
+   "absolute_difference_percentiles": {
+    "50": 0.0,
+    "90": 0.0,
+    "95": 0.0,
+    "99": 0.0,
+    "99.9": 0.0,
+    "100": 0.0
+   },
+   "near_zero_threshold": 1e-12,
+   "near_zero_elements": 26,
+   "maximum_absolute_difference_near_zero": 0.0,
+   "maximum_relative_difference": null,
+   "relative_difference_elements": 0,
+   "maximum_symmetric_relative_difference": null,
+   "maximum_absolute_index": [
+    0
+   ],
+   "maximum_absolute_location": {
+    "channels": {
+     "index": 0,
+     "coordinate": 1.0
+    }
+   },
+   "maximum_reference_value": 0.0,
+   "maximum_candidate_value": 0.0
+  },
+  {
+   "variable": "oldt1",
+   "status": "ok",
+   "reference_dimensions": [
+    "channels"
+   ],
+   "candidate_dimensions": [
+    "channels"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "shape": [
+    36
+   ],
+   "elements": 36,
+   "jointly_valid_elements": 16,
+   "differing_elements": 0,
+   "exactly_equal": true,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 20,
+   "candidate_masked": 20,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 0.0,
+   "reference_maximum": 0.0,
+   "candidate_minimum": 0.0,
+   "candidate_maximum": 0.0,
+   "maximum_absolute_difference": 0.0,
+   "mean_absolute_difference": 0.0,
+   "rms_difference": 0.0,
+   "absolute_difference_percentiles": {
+    "50": 0.0,
+    "90": 0.0,
+    "95": 0.0,
+    "99": 0.0,
+    "99.9": 0.0,
+    "100": 0.0
+   },
+   "near_zero_threshold": 1e-12,
+   "near_zero_elements": 16,
+   "maximum_absolute_difference_near_zero": 0.0,
+   "maximum_relative_difference": null,
+   "relative_difference_elements": 0,
+   "maximum_symmetric_relative_difference": null,
+   "maximum_absolute_index": [
+    0
+   ],
+   "maximum_absolute_location": {
+    "channels": {
+     "index": 0,
+     "coordinate": 1.0
+    }
+   },
+   "maximum_reference_value": 0.0,
+   "maximum_candidate_value": 0.0
+  },
+  {
+   "variable": "oldt2",
+   "status": "ok",
+   "reference_dimensions": [
+    "channels"
+   ],
+   "candidate_dimensions": [
+    "channels"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "shape": [
+    36
+   ],
+   "elements": 36,
+   "jointly_valid_elements": 16,
+   "differing_elements": 0,
+   "exactly_equal": true,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 20,
+   "candidate_masked": 20,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 0.0,
+   "reference_maximum": 0.0,
+   "candidate_minimum": 0.0,
+   "candidate_maximum": 0.0,
+   "maximum_absolute_difference": 0.0,
+   "mean_absolute_difference": 0.0,
+   "rms_difference": 0.0,
+   "absolute_difference_percentiles": {
+    "50": 0.0,
+    "90": 0.0,
+    "95": 0.0,
+    "99": 0.0,
+    "99.9": 0.0,
+    "100": 0.0
+   },
+   "near_zero_threshold": 1e-12,
+   "near_zero_elements": 16,
+   "maximum_absolute_difference_near_zero": 0.0,
+   "maximum_relative_difference": null,
+   "relative_difference_elements": 0,
+   "maximum_symmetric_relative_difference": null,
+   "maximum_absolute_index": [
+    0
+   ],
+   "maximum_absolute_location": {
+    "channels": {
+     "index": 0,
+     "coordinate": 1.0
+    }
+   },
+   "maximum_reference_value": 0.0,
+   "maximum_candidate_value": 0.0
+  },
+  {
+   "variable": "oldwvn",
+   "status": "ok",
+   "reference_dimensions": [
+    "channels"
+   ],
+   "candidate_dimensions": [
+    "channels"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "shape": [
+    36
+   ],
+   "elements": 36,
+   "jointly_valid_elements": 16,
+   "differing_elements": 0,
+   "exactly_equal": true,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 20,
+   "candidate_masked": 20,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 0.0,
+   "reference_maximum": 0.0,
+   "candidate_minimum": 0.0,
+   "candidate_maximum": 0.0,
+   "maximum_absolute_difference": 0.0,
+   "mean_absolute_difference": 0.0,
+   "rms_difference": 0.0,
+   "absolute_difference_percentiles": {
+    "50": 0.0,
+    "90": 0.0,
+    "95": 0.0,
+    "99": 0.0,
+    "99.9": 0.0,
+    "100": 0.0
+   },
+   "near_zero_threshold": 1e-12,
+   "near_zero_elements": 16,
+   "maximum_absolute_difference_near_zero": 0.0,
+   "maximum_relative_difference": null,
+   "relative_difference_elements": 0,
+   "maximum_symmetric_relative_difference": null,
+   "maximum_absolute_index": [
+    0
+   ],
+   "maximum_absolute_location": {
+    "channels": {
+     "index": 0,
+     "coordinate": 1.0
+    }
+   },
+   "maximum_reference_value": 0.0,
+   "maximum_candidate_value": 0.0
+  },
+  {
+   "variable": "optical_depth",
+   "status": "ok",
+   "reference_dimensions": [
+    "optical_depth"
+   ],
+   "candidate_dimensions": [
+    "optical_depth"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "shape": [
+    17
+   ],
+   "elements": 17,
+   "jointly_valid_elements": 17,
+   "differing_elements": 0,
+   "exactly_equal": true,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 1.000000013351432e-10,
+   "reference_maximum": 256.0,
+   "candidate_minimum": 1.000000013351432e-10,
+   "candidate_maximum": 256.0,
+   "maximum_absolute_difference": 0.0,
+   "mean_absolute_difference": 0.0,
+   "rms_difference": 0.0,
+   "absolute_difference_percentiles": {
+    "50": 0.0,
+    "90": 0.0,
+    "95": 0.0,
+    "99": 0.0,
+    "99.9": 0.0,
+    "100": 0.0
+   },
+   "near_zero_threshold": 0.000256,
+   "near_zero_elements": 1,
+   "maximum_absolute_difference_near_zero": 0.0,
+   "maximum_relative_difference": 0.0,
+   "relative_difference_elements": 16,
+   "maximum_symmetric_relative_difference": 0.0,
+   "maximum_absolute_index": [
+    0
+   ],
+   "maximum_absolute_location": {
+    "optical_depth": {
+     "index": 0,
+     "coordinate": 1.000000013351432e-10
+    }
+   },
+   "maximum_reference_value": 1.000000013351432e-10,
+   "maximum_candidate_value": 1.000000013351432e-10
+  },
+  {
+   "variable": "platform",
+   "status": "ok",
+   "reference_dimensions": [
+    "st2"
+   ],
+   "candidate_dimensions": [
+    "st2"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "reference_dtype": "|S1",
+   "candidate_dtype": "|S1",
+   "elements": 5,
+   "differing_elements": 0,
+   "exactly_equal": true
+  },
+  {
+   "variable": "refbt",
+   "status": "ok",
+   "reference_dimensions": [
+    "thermal_channels"
+   ],
+   "candidate_dimensions": [
+    "thermal_channels"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "shape": [
+    16
+   ],
+   "elements": 16,
+   "jointly_valid_elements": 16,
+   "differing_elements": 0,
+   "exactly_equal": true,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 290.0,
+   "reference_maximum": 290.0,
+   "candidate_minimum": 290.0,
+   "candidate_maximum": 290.0,
+   "maximum_absolute_difference": 0.0,
+   "mean_absolute_difference": 0.0,
+   "rms_difference": 0.0,
+   "absolute_difference_percentiles": {
+    "50": 0.0,
+    "90": 0.0,
+    "95": 0.0,
+    "99": 0.0,
+    "99.9": 0.0,
+    "100": 0.0
+   },
+   "near_zero_threshold": 0.00029,
+   "near_zero_elements": 0,
+   "maximum_absolute_difference_near_zero": null,
+   "maximum_relative_difference": 0.0,
+   "relative_difference_elements": 16,
+   "maximum_symmetric_relative_difference": 0.0,
+   "maximum_absolute_index": [
+    0
+   ],
+   "maximum_absolute_location": {
+    "thermal_channels": {
+     "index": 0,
+     "coordinate": 20.0
+    }
+   },
+   "maximum_reference_value": 290.0,
+   "maximum_candidate_value": 290.0
+  },
+  {
+   "variable": "relative_azimuth",
+   "status": "ok",
+   "reference_dimensions": [
+    "relative_azimuth"
+   ],
+   "candidate_dimensions": [
+    "relative_azimuth"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "shape": [
+    11
+   ],
+   "elements": 11,
+   "jointly_valid_elements": 11,
+   "differing_elements": 0,
+   "exactly_equal": true,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 0.0,
+   "reference_maximum": 180.0,
+   "candidate_minimum": 0.0,
+   "candidate_maximum": 180.0,
+   "maximum_absolute_difference": 0.0,
+   "mean_absolute_difference": 0.0,
+   "rms_difference": 0.0,
+   "absolute_difference_percentiles": {
+    "50": 0.0,
+    "90": 0.0,
+    "95": 0.0,
+    "99": 0.0,
+    "99.9": 0.0,
+    "100": 0.0
+   },
+   "near_zero_threshold": 0.00017999999999999998,
+   "near_zero_elements": 1,
+   "maximum_absolute_difference_near_zero": 0.0,
+   "maximum_relative_difference": 0.0,
+   "relative_difference_elements": 10,
+   "maximum_symmetric_relative_difference": 0.0,
+   "maximum_absolute_index": [
+    0
+   ],
+   "maximum_absolute_location": {
+    "relative_azimuth": {
+     "index": 0,
+     "coordinate": 0.0
+    }
+   },
+   "maximum_reference_value": 0.0,
+   "maximum_candidate_value": 0.0
+  },
+  {
+   "variable": "satellite_zenith",
+   "status": "ok",
+   "reference_dimensions": [
+    "satellite_zenith"
+   ],
+   "candidate_dimensions": [
+    "satellite_zenith"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "shape": [
+    10
+   ],
+   "elements": 10,
+   "jointly_valid_elements": 10,
+   "differing_elements": 0,
+   "exactly_equal": true,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 0.0,
+   "reference_maximum": 65.0,
+   "candidate_minimum": 0.0,
+   "candidate_maximum": 65.0,
+   "maximum_absolute_difference": 0.0,
+   "mean_absolute_difference": 0.0,
+   "rms_difference": 0.0,
+   "absolute_difference_percentiles": {
+    "50": 0.0,
+    "90": 0.0,
+    "95": 0.0,
+    "99": 0.0,
+    "99.9": 0.0,
+    "100": 0.0
+   },
+   "near_zero_threshold": 6.5e-05,
+   "near_zero_elements": 1,
+   "maximum_absolute_difference_near_zero": 0.0,
+   "maximum_relative_difference": 0.0,
+   "relative_difference_elements": 9,
+   "maximum_symmetric_relative_difference": 0.0,
+   "maximum_absolute_index": [
+    0
+   ],
+   "maximum_absolute_location": {
+    "satellite_zenith": {
+     "index": 0,
+     "coordinate": 0.0
+    }
+   },
+   "maximum_reference_value": 0.0,
+   "maximum_candidate_value": 0.0
+  },
+  {
+   "variable": "single_scatter_albedo",
+   "status": "ok",
+   "reference_dimensions": [
+    "effective_radius",
+    "channels"
+   ],
+   "candidate_dimensions": [
+    "effective_radius",
+    "channels"
+   ],
+   "candidate_transpose_order": [
+    0,
+    1
+   ],
+   "shape": [
+    20,
+    36
+   ],
+   "elements": 720,
+   "jointly_valid_elements": 720,
+   "differing_elements": 458,
+   "exactly_equal": false,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 0.02382100559771061,
+   "reference_maximum": 0.9999996423721313,
+   "candidate_minimum": 0.023820994421839714,
+   "candidate_maximum": 0.9999996423721313,
+   "maximum_absolute_difference": 2.682209014892578e-06,
+   "mean_absolute_difference": 1.642025179333157e-07,
+   "rms_difference": 3.2972496286603456e-07,
+   "absolute_difference_percentiles": {
+    "50": 5.960464477539063e-08,
+    "90": 4.798173904418952e-07,
+    "95": 6.556510925292969e-07,
+    "99": 1.2403726577758757e-06,
+    "99.9": 2.4250745773315654e-06,
+    "100": 2.682209014892578e-06
+   },
+   "near_zero_threshold": 9.999996423721314e-07,
+   "near_zero_elements": 0,
+   "maximum_absolute_difference_near_zero": null,
+   "maximum_relative_difference": 2.6822341150496045e-06,
+   "relative_difference_elements": 720,
+   "maximum_symmetric_relative_difference": 2.6822305178645047e-06,
+   "maximum_absolute_index": [
+    5,
+    11
+   ],
+   "maximum_absolute_location": {
+    "effective_radius": {
+     "index": 5,
+     "coordinate": 11.0
+    },
+    "channels": {
+     "index": 11,
+     "coordinate": 12.0
+    }
+   },
+   "maximum_reference_value": 0.9999906420707703,
+   "maximum_candidate_value": 0.9999933242797852
+  },
+  {
+   "variable": "snr",
+   "status": "ok",
+   "reference_dimensions": [
+    "solar_channels"
+   ],
+   "candidate_dimensions": [
+    "solar_channels"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "shape": [
+    26
+   ],
+   "elements": 26,
+   "jointly_valid_elements": 26,
+   "differing_elements": 0,
+   "exactly_equal": true,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 0.0,
+   "reference_maximum": 1704.0,
+   "candidate_minimum": 0.0,
+   "candidate_maximum": 1704.0,
+   "maximum_absolute_difference": 0.0,
+   "mean_absolute_difference": 0.0,
+   "rms_difference": 0.0,
+   "absolute_difference_percentiles": {
+    "50": 0.0,
+    "90": 0.0,
+    "95": 0.0,
+    "99": 0.0,
+    "99.9": 0.0,
+    "100": 0.0
+   },
+   "near_zero_threshold": 0.001704,
+   "near_zero_elements": 6,
+   "maximum_absolute_difference_near_zero": 0.0,
+   "maximum_relative_difference": 0.0,
+   "relative_difference_elements": 20,
+   "maximum_symmetric_relative_difference": 0.0,
+   "maximum_absolute_index": [
+    0
+   ],
+   "maximum_absolute_location": {
+    "solar_channels": {
+     "index": 0,
+     "coordinate": 1.0
+    }
+   },
+   "maximum_reference_value": 205.0,
+   "maximum_candidate_value": 205.0
+  },
+  {
+   "variable": "solar_channel_flag",
+   "status": "ok",
+   "reference_dimensions": [
+    "channels"
+   ],
+   "candidate_dimensions": [
+    "channels"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "shape": [
+    36
+   ],
+   "elements": 36,
+   "jointly_valid_elements": 36,
+   "differing_elements": 0,
+   "exactly_equal": true,
+   "reference_dtype": "int16",
+   "candidate_dtype": "int16",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 0.0,
+   "reference_maximum": 1.0,
+   "candidate_minimum": 0.0,
+   "candidate_maximum": 1.0,
+   "maximum_absolute_difference": 0.0,
+   "mean_absolute_difference": 0.0,
+   "rms_difference": 0.0,
+   "absolute_difference_percentiles": {
+    "50": 0.0,
+    "90": 0.0,
+    "95": 0.0,
+    "99": 0.0,
+    "99.9": 0.0,
+    "100": 0.0
+   },
+   "near_zero_threshold": 1e-06,
+   "near_zero_elements": 10,
+   "maximum_absolute_difference_near_zero": 0.0,
+   "maximum_relative_difference": 0.0,
+   "relative_difference_elements": 26,
+   "maximum_symmetric_relative_difference": 0.0,
+   "maximum_absolute_index": [
+    0
+   ],
+   "maximum_absolute_location": {
+    "channels": {
+     "index": 0,
+     "coordinate": 1.0
+    }
+   },
+   "maximum_reference_value": 1.0,
+   "maximum_candidate_value": 1.0
+  },
+  {
+   "variable": "solar_channel_id",
+   "status": "ok",
+   "reference_dimensions": [
+    "solar_channels"
+   ],
+   "candidate_dimensions": [
+    "solar_channels"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "shape": [
+    26
+   ],
+   "elements": 26,
+   "jointly_valid_elements": 26,
+   "differing_elements": 0,
+   "exactly_equal": true,
+   "reference_dtype": "int16",
+   "candidate_dtype": "int16",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 1.0,
+   "reference_maximum": 26.0,
+   "candidate_minimum": 1.0,
+   "candidate_maximum": 26.0,
+   "maximum_absolute_difference": 0.0,
+   "mean_absolute_difference": 0.0,
+   "rms_difference": 0.0,
+   "absolute_difference_percentiles": {
+    "50": 0.0,
+    "90": 0.0,
+    "95": 0.0,
+    "99": 0.0,
+    "99.9": 0.0,
+    "100": 0.0
+   },
+   "near_zero_threshold": 2.6e-05,
+   "near_zero_elements": 0,
+   "maximum_absolute_difference_near_zero": null,
+   "maximum_relative_difference": 0.0,
+   "relative_difference_elements": 26,
+   "maximum_symmetric_relative_difference": 0.0,
+   "maximum_absolute_index": [
+    0
+   ],
+   "maximum_absolute_location": {
+    "solar_channels": {
+     "index": 0,
+     "coordinate": 1.0
+    }
+   },
+   "maximum_reference_value": 1.0,
+   "maximum_candidate_value": 1.0
+  },
+  {
+   "variable": "solar_zenith",
+   "status": "ok",
+   "reference_dimensions": [
+    "solar_zenith"
+   ],
+   "candidate_dimensions": [
+    "solar_zenith"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "shape": [
+    10
+   ],
+   "elements": 10,
+   "jointly_valid_elements": 10,
+   "differing_elements": 0,
+   "exactly_equal": true,
+   "reference_dtype": "float32",
+   "candidate_dtype": "float32",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 0.0,
+   "reference_maximum": 90.0,
+   "candidate_minimum": 0.0,
+   "candidate_maximum": 90.0,
+   "maximum_absolute_difference": 0.0,
+   "mean_absolute_difference": 0.0,
+   "rms_difference": 0.0,
+   "absolute_difference_percentiles": {
+    "50": 0.0,
+    "90": 0.0,
+    "95": 0.0,
+    "99": 0.0,
+    "99.9": 0.0,
+    "100": 0.0
+   },
+   "near_zero_threshold": 8.999999999999999e-05,
+   "near_zero_elements": 1,
+   "maximum_absolute_difference_near_zero": 0.0,
+   "maximum_relative_difference": 0.0,
+   "relative_difference_elements": 9,
+   "maximum_symmetric_relative_difference": 0.0,
+   "maximum_absolute_index": [
+    0
+   ],
+   "maximum_absolute_location": {
+    "solar_zenith": {
+     "index": 0,
+     "coordinate": 0.0
+    }
+   },
+   "maximum_reference_value": 0.0,
+   "maximum_candidate_value": 0.0
+  },
+  {
+   "variable": "thermal_channel_flag",
+   "status": "ok",
+   "reference_dimensions": [
+    "channels"
+   ],
+   "candidate_dimensions": [
+    "channels"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "shape": [
+    36
+   ],
+   "elements": 36,
+   "jointly_valid_elements": 36,
+   "differing_elements": 0,
+   "exactly_equal": true,
+   "reference_dtype": "int16",
+   "candidate_dtype": "int16",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 0.0,
+   "reference_maximum": 1.0,
+   "candidate_minimum": 0.0,
+   "candidate_maximum": 1.0,
+   "maximum_absolute_difference": 0.0,
+   "mean_absolute_difference": 0.0,
+   "rms_difference": 0.0,
+   "absolute_difference_percentiles": {
+    "50": 0.0,
+    "90": 0.0,
+    "95": 0.0,
+    "99": 0.0,
+    "99.9": 0.0,
+    "100": 0.0
+   },
+   "near_zero_threshold": 1e-06,
+   "near_zero_elements": 20,
+   "maximum_absolute_difference_near_zero": 0.0,
+   "maximum_relative_difference": 0.0,
+   "relative_difference_elements": 16,
+   "maximum_symmetric_relative_difference": 0.0,
+   "maximum_absolute_index": [
+    0
+   ],
+   "maximum_absolute_location": {
+    "channels": {
+     "index": 0,
+     "coordinate": 1.0
+    }
+   },
+   "maximum_reference_value": 0.0,
+   "maximum_candidate_value": 0.0
+  },
+  {
+   "variable": "thermal_channel_id",
+   "status": "ok",
+   "reference_dimensions": [
+    "thermal_channels"
+   ],
+   "candidate_dimensions": [
+    "thermal_channels"
+   ],
+   "candidate_transpose_order": [
+    0
+   ],
+   "shape": [
+    16
+   ],
+   "elements": 16,
+   "jointly_valid_elements": 16,
+   "differing_elements": 0,
+   "exactly_equal": true,
+   "reference_dtype": "int16",
+   "candidate_dtype": "int16",
+   "reference_masked": 0,
+   "candidate_masked": 0,
+   "mask_difference": 0,
+   "reference_nan": 0,
+   "candidate_nan": 0,
+   "nan_mask_difference": 0,
+   "reference_inf": 0,
+   "candidate_inf": 0,
+   "packing_reference": {},
+   "packing_candidate": {},
+   "reference_minimum": 20.0,
+   "reference_maximum": 36.0,
+   "candidate_minimum": 20.0,
+   "candidate_maximum": 36.0,
+   "maximum_absolute_difference": 0.0,
+   "mean_absolute_difference": 0.0,
+   "rms_difference": 0.0,
+   "absolute_difference_percentiles": {
+    "50": 0.0,
+    "90": 0.0,
+    "95": 0.0,
+    "99": 0.0,
+    "99.9": 0.0,
+    "100": 0.0
+   },
+   "near_zero_threshold": 3.6e-05,
+   "near_zero_elements": 0,
+   "maximum_absolute_difference_near_zero": null,
+   "maximum_relative_difference": 0.0,
+   "relative_difference_elements": 16,
+   "maximum_symmetric_relative_difference": 0.0,
+   "maximum_absolute_index": [
+    0
+   ],
+   "maximum_absolute_location": {
+    "thermal_channels": {
+     "index": 0,
+     "coordinate": 20.0
+    }
+   },
+   "maximum_reference_value": 20.0,
+   "maximum_candidate_value": 20.0
+  }
+ ],
+ "relative_difference_definition": "abs(candidate-reference)/abs(reference), only where abs(reference) exceeds max(1e-12, 1e-6*max(abs(reference)))",
+ "symmetric_relative_difference_definition": "2*abs(candidate-reference)/(abs(reference)+abs(candidate)), with the same near-zero exclusion",
+ "direct_beam_calls": [
+  {
+   "rank": 1,
+   "maximum_absolute_R_0v_difference": 0.5414476096630096,
+   "p99_absolute_R_0v_difference": 0.5414475752413273,
+   "rms_R_0v_difference": 0.29771983538735103,
+   "reference_R_0v_minimum": 0.011446229182183743,
+   "reference_R_0v_maximum": 0.4547441005706787,
+   "candidate_R_0v_minimum": -0.47390052676200867,
+   "candidate_R_0v_maximum": 0.7428505420684814,
+   "solar_channels_index": 5,
+   "solar_channels": 6.0,
+   "optical_depth_index": 16,
+   "optical_depth": 256.0,
+   "effective_radius_index": 14,
+   "effective_radius": 29.0,
+   "solar_zenith_index": 8,
+   "solar_zenith": 80.0
+  },
+  {
+   "rank": 2,
+   "maximum_absolute_R_0v_difference": 0.13088735938072205,
+   "p99_absolute_R_0v_difference": 0.13088683664798736,
+   "rms_R_0v_difference": 0.07498331218514413,
+   "reference_R_0v_minimum": 0.05928058177232742,
+   "reference_R_0v_maximum": 0.6591733694076538,
+   "candidate_R_0v_minimum": -0.007137541193515062,
+   "candidate_R_0v_maximum": 0.5282866954803467,
+   "solar_channels_index": 5,
+   "solar_channels": 6.0,
+   "optical_depth_index": 15,
+   "optical_depth": 128.0,
+   "effective_radius_index": 14,
+   "effective_radius": 29.0,
+   "solar_zenith_index": 8,
+   "solar_zenith": 80.0
+  },
+  {
+   "rank": 3,
+   "maximum_absolute_R_0v_difference": 0.08565838634967804,
+   "p99_absolute_R_0v_difference": 0.08565833762288094,
+   "rms_R_0v_difference": 0.03472349083192246,
+   "reference_R_0v_minimum": 0.08263229578733444,
+   "reference_R_0v_maximum": 0.19467823207378387,
+   "candidate_R_0v_minimum": 0.08833248168230057,
+   "candidate_R_0v_maximum": 0.23413944244384766,
+   "solar_channels_index": 19,
+   "solar_channels": 20.0,
+   "optical_depth_index": 12,
+   "optical_depth": 16.0,
+   "effective_radius_index": 9,
+   "effective_radius": 19.0,
+   "solar_zenith_index": 1,
+   "solar_zenith": 10.0
+  },
+  {
+   "rank": 4,
+   "maximum_absolute_R_0v_difference": 0.05906263366341591,
+   "p99_absolute_R_0v_difference": 0.05886439226567745,
+   "rms_R_0v_difference": 0.02784204475803008,
+   "reference_R_0v_minimum": -0.014704648405313492,
+   "reference_R_0v_maximum": 0.11875177174806595,
+   "candidate_R_0v_minimum": 0.020160820335149765,
+   "candidate_R_0v_maximum": 0.12031976133584976,
+   "solar_channels_index": 19,
+   "solar_channels": 20.0,
+   "optical_depth_index": 8,
+   "optical_depth": 1.0,
+   "effective_radius_index": 5,
+   "effective_radius": 11.0,
+   "solar_zenith_index": 3,
+   "solar_zenith": 30.0
+  },
+  {
+   "rank": 5,
+   "maximum_absolute_R_0v_difference": 0.05271364003419876,
+   "p99_absolute_R_0v_difference": 0.05271338403224945,
+   "rms_R_0v_difference": 0.017242445938414428,
+   "reference_R_0v_minimum": 0.0750056803226471,
+   "reference_R_0v_maximum": 0.19101008772850037,
+   "candidate_R_0v_minimum": 0.08239253610372543,
+   "candidate_R_0v_maximum": 0.19181384146213531,
+   "solar_channels_index": 19,
+   "solar_channels": 20.0,
+   "optical_depth_index": 11,
+   "optical_depth": 8.0,
+   "effective_radius_index": 9,
+   "effective_radius": 19.0,
+   "solar_zenith_index": 1,
+   "solar_zenith": 10.0
+  },
+  {
+   "rank": 6,
+   "maximum_absolute_R_0v_difference": 0.04312478005886078,
+   "p99_absolute_R_0v_difference": 0.04312463853508234,
+   "rms_R_0v_difference": 0.01923446841531846,
+   "reference_R_0v_minimum": 0.05331157520413399,
+   "reference_R_0v_maximum": 0.5255342721939087,
+   "candidate_R_0v_minimum": 0.03654559701681137,
+   "candidate_R_0v_maximum": 0.5348429679870605,
+   "solar_channels_index": 5,
+   "solar_channels": 6.0,
+   "optical_depth_index": 14,
+   "optical_depth": 64.0,
+   "effective_radius_index": 14,
+   "effective_radius": 29.0,
+   "solar_zenith_index": 8,
+   "solar_zenith": 80.0
+  },
+  {
+   "rank": 7,
+   "maximum_absolute_R_0v_difference": 0.04308129847049713,
+   "p99_absolute_R_0v_difference": 0.042865025624632826,
+   "rms_R_0v_difference": 0.015550219104854856,
+   "reference_R_0v_minimum": 0.060000941157341,
+   "reference_R_0v_maximum": 0.16918352246284485,
+   "candidate_R_0v_minimum": 0.031985461711883545,
+   "candidate_R_0v_maximum": 0.1685643196105957,
+   "solar_channels_index": 19,
+   "solar_channels": 20.0,
+   "optical_depth_index": 9,
+   "optical_depth": 2.0,
+   "effective_radius_index": 5,
+   "effective_radius": 11.0,
+   "solar_zenith_index": 3,
+   "solar_zenith": 30.0
+  },
+  {
+   "rank": 8,
+   "maximum_absolute_R_0v_difference": 0.026848942041397095,
+   "p99_absolute_R_0v_difference": 0.026848535686731338,
+   "rms_R_0v_difference": 0.015408947393035579,
+   "reference_R_0v_minimum": 0.06683962047100067,
+   "reference_R_0v_maximum": 0.3199639320373535,
+   "candidate_R_0v_minimum": 0.07107304036617279,
+   "candidate_R_0v_maximum": 0.3174617290496826,
+   "solar_channels_index": 6,
+   "solar_channels": 7.0,
+   "optical_depth_index": 10,
+   "optical_depth": 4.0,
+   "effective_radius_index": 8,
+   "effective_radius": 17.0,
+   "solar_zenith_index": 5,
+   "solar_zenith": 50.0
+  },
+  {
+   "rank": 9,
+   "maximum_absolute_R_0v_difference": 0.02633729949593544,
+   "p99_absolute_R_0v_difference": 0.02633724294602871,
+   "rms_R_0v_difference": 0.009472507625535868,
+   "reference_R_0v_minimum": 0.04865925386548042,
+   "reference_R_0v_maximum": 0.4838545322418213,
+   "candidate_R_0v_minimum": 0.03704238682985306,
+   "candidate_R_0v_maximum": 0.4849804937839508,
+   "solar_channels_index": 11,
+   "solar_channels": 12.0,
+   "optical_depth_index": 9,
+   "optical_depth": 2.0,
+   "effective_radius_index": 3,
+   "effective_radius": 7.0,
+   "solar_zenith_index": 7,
+   "solar_zenith": 70.0
+  },
+  {
+   "rank": 10,
+   "maximum_absolute_R_0v_difference": 0.02280983328819275,
+   "p99_absolute_R_0v_difference": 0.022809511162340642,
+   "rms_R_0v_difference": 0.008712454852728719,
+   "reference_R_0v_minimum": 0.0002428465086268261,
+   "reference_R_0v_maximum": 0.28346413373947144,
+   "candidate_R_0v_minimum": -0.006740441080182791,
+   "candidate_R_0v_maximum": 0.2791626751422882,
+   "solar_channels_index": 19,
+   "solar_channels": 20.0,
+   "optical_depth_index": 8,
+   "optical_depth": 1.0,
+   "effective_radius_index": 9,
+   "effective_radius": 19.0,
+   "solar_zenith_index": 8,
+   "solar_zenith": 80.0
+  },
+  {
+   "rank": 11,
+   "maximum_absolute_R_0v_difference": 0.01338127814233303,
+   "p99_absolute_R_0v_difference": 0.013378361128270627,
+   "rms_R_0v_difference": 0.003640597994588347,
+   "reference_R_0v_minimum": 0.010382297448813915,
+   "reference_R_0v_maximum": 0.30204305052757263,
+   "candidate_R_0v_minimum": 0.011387651786208153,
+   "candidate_R_0v_maximum": 0.2886650860309601,
+   "solar_channels_index": 19,
+   "solar_channels": 20.0,
+   "optical_depth_index": 11,
+   "optical_depth": 8.0,
+   "effective_radius_index": 9,
+   "effective_radius": 19.0,
+   "solar_zenith_index": 8,
+   "solar_zenith": 80.0
+  },
+  {
+   "rank": 12,
+   "maximum_absolute_R_0v_difference": 0.012551218271255493,
+   "p99_absolute_R_0v_difference": 0.012486510686576364,
+   "rms_R_0v_difference": 0.004313353347547063,
+   "reference_R_0v_minimum": 0.006009722128510475,
+   "reference_R_0v_maximum": 0.46673062443733215,
+   "candidate_R_0v_minimum": 0.009603123180568218,
+   "candidate_R_0v_maximum": 0.46821457147598267,
+   "solar_channels_index": 5,
+   "solar_channels": 6.0,
+   "optical_depth_index": 9,
+   "optical_depth": 2.0,
+   "effective_radius_index": 13,
+   "effective_radius": 27.0,
+   "solar_zenith_index": 8,
+   "solar_zenith": 80.0
+  },
+  {
+   "rank": 13,
+   "maximum_absolute_R_0v_difference": 0.012023207731544971,
+   "p99_absolute_R_0v_difference": 0.012022956013679505,
+   "rms_R_0v_difference": 0.004826687794979869,
+   "reference_R_0v_minimum": 0.0036339848302304745,
+   "reference_R_0v_maximum": 0.23843899369239807,
+   "candidate_R_0v_minimum": -0.002003740519285202,
+   "candidate_R_0v_maximum": 0.2264162003993988,
+   "solar_channels_index": 19,
+   "solar_channels": 20.0,
+   "optical_depth_index": 7,
+   "optical_depth": 0.5,
+   "effective_radius_index": 9,
+   "effective_radius": 19.0,
+   "solar_zenith_index": 8,
+   "solar_zenith": 80.0
+  },
+  {
+   "rank": 14,
+   "maximum_absolute_R_0v_difference": 0.011499295360408723,
+   "p99_absolute_R_0v_difference": 0.011405207358766345,
+   "rms_R_0v_difference": 0.003228699182942924,
+   "reference_R_0v_minimum": -0.005784354638308287,
+   "reference_R_0v_maximum": 0.02157142199575901,
+   "candidate_R_0v_minimum": 0.001088598626665771,
+   "candidate_R_0v_maximum": 0.017523879185318947,
+   "solar_channels_index": 5,
+   "solar_channels": 6.0,
+   "optical_depth_index": 5,
+   "optical_depth": 0.125,
+   "effective_radius_index": 10,
+   "effective_radius": 21.0,
+   "solar_zenith_index": 3,
+   "solar_zenith": 30.0
+  },
+  {
+   "rank": 15,
+   "maximum_absolute_R_0v_difference": 0.011170295998454094,
+   "p99_absolute_R_0v_difference": 0.011166696511209011,
+   "rms_R_0v_difference": 0.0033723698764828083,
+   "reference_R_0v_minimum": 0.011863818392157555,
+   "reference_R_0v_maximum": 0.29680144786834717,
+   "candidate_R_0v_minimum": 0.010794023983180523,
+   "candidate_R_0v_maximum": 0.2856360971927643,
+   "solar_channels_index": 19,
+   "solar_channels": 20.0,
+   "optical_depth_index": 14,
+   "optical_depth": 64.0,
+   "effective_radius_index": 9,
+   "effective_radius": 19.0,
+   "solar_zenith_index": 8,
+   "solar_zenith": 80.0
+  },
+  {
+   "rank": 16,
+   "maximum_absolute_R_0v_difference": 0.010878238826990128,
+   "p99_absolute_R_0v_difference": 0.010877997055649758,
+   "rms_R_0v_difference": 0.003709027658633944,
+   "reference_R_0v_minimum": 0.018851788714528084,
+   "reference_R_0v_maximum": 0.4682498276233673,
+   "candidate_R_0v_minimum": 0.018677396699786186,
+   "candidate_R_0v_maximum": 0.47910353541374207,
+   "solar_channels_index": 4,
+   "solar_channels": 5.0,
+   "optical_depth_index": 9,
+   "optical_depth": 2.0,
+   "effective_radius_index": 3,
+   "effective_radius": 7.0,
+   "solar_zenith_index": 8,
+   "solar_zenith": 80.0
+  },
+  {
+   "rank": 17,
+   "maximum_absolute_R_0v_difference": 0.010434523224830627,
+   "p99_absolute_R_0v_difference": 0.010433584004640579,
+   "rms_R_0v_difference": 0.0029652788430090155,
+   "reference_R_0v_minimum": 0.08587156981229782,
+   "reference_R_0v_maximum": 0.46959754824638367,
+   "candidate_R_0v_minimum": 0.08915853500366211,
+   "candidate_R_0v_maximum": 0.4672752022743225,
+   "solar_channels_index": 14,
+   "solar_channels": 15.0,
+   "optical_depth_index": 13,
+   "optical_depth": 32.0,
+   "effective_radius_index": 1,
+   "effective_radius": 3.0,
+   "solar_zenith_index": 8,
+   "solar_zenith": 80.0
+  },
+  {
+   "rank": 18,
+   "maximum_absolute_R_0v_difference": 0.009727776050567627,
+   "p99_absolute_R_0v_difference": 0.00972567953169346,
+   "rms_R_0v_difference": 0.003898280901289228,
+   "reference_R_0v_minimum": 0.0066057974472641945,
+   "reference_R_0v_maximum": 0.2995252311229706,
+   "candidate_R_0v_minimum": 0.009084389545023441,
+   "candidate_R_0v_maximum": 0.28980138897895813,
+   "solar_channels_index": 19,
+   "solar_channels": 20.0,
+   "optical_depth_index": 9,
+   "optical_depth": 2.0,
+   "effective_radius_index": 9,
+   "effective_radius": 19.0,
+   "solar_zenith_index": 8,
+   "solar_zenith": 80.0
+  },
+  {
+   "rank": 19,
+   "maximum_absolute_R_0v_difference": 0.009572207927703857,
+   "p99_absolute_R_0v_difference": 0.009528253078460691,
+   "rms_R_0v_difference": 0.0036835699580350604,
+   "reference_R_0v_minimum": 0.6429722309112549,
+   "reference_R_0v_maximum": 0.8250961899757385,
+   "candidate_R_0v_minimum": 0.6429740786552429,
+   "candidate_R_0v_maximum": 0.8259528279304504,
+   "solar_channels_index": 2,
+   "solar_channels": 3.0,
+   "optical_depth_index": 14,
+   "optical_depth": 64.0,
+   "effective_radius_index": 14,
+   "effective_radius": 29.0,
+   "solar_zenith_index": 3,
+   "solar_zenith": 30.0
+  },
+  {
+   "rank": 20,
+   "maximum_absolute_R_0v_difference": 0.008605778217315674,
+   "p99_absolute_R_0v_difference": 0.008562907725572584,
+   "rms_R_0v_difference": 0.00337597518802302,
+   "reference_R_0v_minimum": 0.14371097087860107,
+   "reference_R_0v_maximum": 0.26087686419487,
+   "candidate_R_0v_minimum": 0.1431495100259781,
+   "candidate_R_0v_maximum": 0.2532728612422943,
+   "solar_channels_index": 19,
+   "solar_channels": 20.0,
+   "optical_depth_index": 12,
+   "optical_depth": 16.0,
+   "effective_radius_index": 5,
+   "effective_radius": 11.0,
+   "solar_zenith_index": 3,
+   "solar_zenith": 30.0
+  },
+  {
+   "rank": 21,
+   "maximum_absolute_R_0v_difference": 0.008528262376785278,
+   "p99_absolute_R_0v_difference": 0.008480467051267622,
+   "rms_R_0v_difference": 0.0035119875470828545,
+   "reference_R_0v_minimum": 0.10979502648115158,
+   "reference_R_0v_maximum": 0.22494031488895416,
+   "candidate_R_0v_minimum": 0.1062268316745758,
+   "candidate_R_0v_maximum": 0.22028851509094238,
+   "solar_channels_index": 19,
+   "solar_channels": 20.0,
+   "optical_depth_index": 10,
+   "optical_depth": 4.0,
+   "effective_radius_index": 5,
+   "effective_radius": 11.0,
+   "solar_zenith_index": 3,
+   "solar_zenith": 30.0
+  },
+  {
+   "rank": 22,
+   "maximum_absolute_R_0v_difference": 0.008302286267280579,
+   "p99_absolute_R_0v_difference": 0.00830117791891098,
+   "rms_R_0v_difference": 0.003525444250969754,
+   "reference_R_0v_minimum": 0.1503317952156067,
+   "reference_R_0v_maximum": 0.2932640314102173,
+   "candidate_R_0v_minimum": 0.15264087915420532,
+   "candidate_R_0v_maximum": 0.29169121384620667,
+   "solar_channels_index": 10,
+   "solar_channels": 11.0,
+   "optical_depth_index": 10,
+   "optical_depth": 4.0,
+   "effective_radius_index": 9,
+   "effective_radius": 19.0,
+   "solar_zenith_index": 3,
+   "solar_zenith": 30.0
+  },
+  {
+   "rank": 23,
+   "maximum_absolute_R_0v_difference": 0.00803329050540924,
+   "p99_absolute_R_0v_difference": 0.008031759820878505,
+   "rms_R_0v_difference": 0.002152283936509319,
+   "reference_R_0v_minimum": 0.009127743542194366,
+   "reference_R_0v_maximum": 0.29884910583496094,
+   "candidate_R_0v_minimum": 0.01110746432095766,
+   "candidate_R_0v_maximum": 0.29082080721855164,
+   "solar_channels_index": 19,
+   "solar_channels": 20.0,
+   "optical_depth_index": 16,
+   "optical_depth": 256.0,
+   "effective_radius_index": 9,
+   "effective_radius": 19.0,
+   "solar_zenith_index": 8,
+   "solar_zenith": 80.0
+  },
+  {
+   "rank": 24,
+   "maximum_absolute_R_0v_difference": 0.00803329050540924,
+   "p99_absolute_R_0v_difference": 0.008031759820878505,
+   "rms_R_0v_difference": 0.002152283936509319,
+   "reference_R_0v_minimum": 0.009127743542194366,
+   "reference_R_0v_maximum": 0.29884910583496094,
+   "candidate_R_0v_minimum": 0.01110746432095766,
+   "candidate_R_0v_maximum": 0.29082080721855164,
+   "solar_channels_index": 19,
+   "solar_channels": 20.0,
+   "optical_depth_index": 15,
+   "optical_depth": 128.0,
+   "effective_radius_index": 9,
+   "effective_radius": 19.0,
+   "solar_zenith_index": 8,
+   "solar_zenith": 80.0
+  },
+  {
+   "rank": 25,
+   "maximum_absolute_R_0v_difference": 0.007896512746810913,
+   "p99_absolute_R_0v_difference": 0.00786086320877075,
+   "rms_R_0v_difference": 0.002523018941657912,
+   "reference_R_0v_minimum": 0.1468995213508606,
+   "reference_R_0v_maximum": 0.26001012325286865,
+   "candidate_R_0v_minimum": 0.14608515799045563,
+   "candidate_R_0v_maximum": 0.25661665201187134,
+   "solar_channels_index": 19,
+   "solar_channels": 20.0,
+   "optical_depth_index": 16,
+   "optical_depth": 256.0,
+   "effective_radius_index": 5,
+   "effective_radius": 11.0,
+   "solar_zenith_index": 3,
+   "solar_zenith": 30.0
+  },
+  {
+   "rank": 26,
+   "maximum_absolute_R_0v_difference": 0.007896512746810913,
+   "p99_absolute_R_0v_difference": 0.00786086320877075,
+   "rms_R_0v_difference": 0.002523018941657912,
+   "reference_R_0v_minimum": 0.1468995213508606,
+   "reference_R_0v_maximum": 0.26001012325286865,
+   "candidate_R_0v_minimum": 0.14608515799045563,
+   "candidate_R_0v_maximum": 0.25661665201187134,
+   "solar_channels_index": 19,
+   "solar_channels": 20.0,
+   "optical_depth_index": 15,
+   "optical_depth": 128.0,
+   "effective_radius_index": 5,
+   "effective_radius": 11.0,
+   "solar_zenith_index": 3,
+   "solar_zenith": 30.0
+  },
+  {
+   "rank": 27,
+   "maximum_absolute_R_0v_difference": 0.007896512746810913,
+   "p99_absolute_R_0v_difference": 0.00786086320877075,
+   "rms_R_0v_difference": 0.002523018941657912,
+   "reference_R_0v_minimum": 0.1468995213508606,
+   "reference_R_0v_maximum": 0.26001012325286865,
+   "candidate_R_0v_minimum": 0.14608515799045563,
+   "candidate_R_0v_maximum": 0.25661665201187134,
+   "solar_channels_index": 19,
+   "solar_channels": 20.0,
+   "optical_depth_index": 14,
+   "optical_depth": 64.0,
+   "effective_radius_index": 5,
+   "effective_radius": 11.0,
+   "solar_zenith_index": 3,
+   "solar_zenith": 30.0
+  },
+  {
+   "rank": 28,
+   "maximum_absolute_R_0v_difference": 0.007456719875335693,
+   "p99_absolute_R_0v_difference": 0.007456568405032158,
+   "rms_R_0v_difference": 0.004127938632913143,
+   "reference_R_0v_minimum": 0.04112851992249489,
+   "reference_R_0v_maximum": 0.5117634534835815,
+   "candidate_R_0v_minimum": 0.037094760686159134,
+   "candidate_R_0v_maximum": 0.5167510509490967,
+   "solar_channels_index": 5,
+   "solar_channels": 6.0,
+   "optical_depth_index": 13,
+   "optical_depth": 32.0,
+   "effective_radius_index": 14,
+   "effective_radius": 29.0,
+   "solar_zenith_index": 8,
+   "solar_zenith": 80.0
+  },
+  {
+   "rank": 29,
+   "maximum_absolute_R_0v_difference": 0.007442031055688858,
+   "p99_absolute_R_0v_difference": 0.007439928045496345,
+   "rms_R_0v_difference": 0.002630579528035798,
+   "reference_R_0v_minimum": 0.008445700630545616,
+   "reference_R_0v_maximum": 0.29216498136520386,
+   "candidate_R_0v_minimum": 0.00914776511490345,
+   "candidate_R_0v_maximum": 0.2949928045272827,
+   "solar_channels_index": 19,
+   "solar_channels": 20.0,
+   "optical_depth_index": 10,
+   "optical_depth": 4.0,
+   "effective_radius_index": 9,
+   "effective_radius": 19.0,
+   "solar_zenith_index": 8,
+   "solar_zenith": 80.0
+  },
+  {
+   "rank": 30,
+   "maximum_absolute_R_0v_difference": 0.007209450006484985,
+   "p99_absolute_R_0v_difference": 0.00717685654759407,
+   "rms_R_0v_difference": 0.0025997166514012304,
+   "reference_R_0v_minimum": 0.13665057718753815,
+   "reference_R_0v_maximum": 0.258465051651001,
+   "candidate_R_0v_minimum": 0.13995888829231262,
+   "candidate_R_0v_maximum": 0.251255601644516,
+   "solar_channels_index": 19,
+   "solar_channels": 20.0,
+   "optical_depth_index": 11,
+   "optical_depth": 8.0,
+   "effective_radius_index": 5,
+   "effective_radius": 11.0,
+   "solar_zenith_index": 3,
+   "solar_zenith": 30.0
+  },
+  {
+   "rank": 31,
+   "maximum_absolute_R_0v_difference": 0.00693126767873764,
+   "p99_absolute_R_0v_difference": 0.0069275697506964206,
+   "rms_R_0v_difference": 0.002168798563286699,
+   "reference_R_0v_minimum": 0.01187076698988676,
+   "reference_R_0v_maximum": 0.29570937156677246,
+   "candidate_R_0v_minimum": 0.012148858048021793,
+   "candidate_R_0v_maximum": 0.2941572964191437,
+   "solar_channels_index": 19,
+   "solar_channels": 20.0,
+   "optical_depth_index": 12,
+   "optical_depth": 16.0,
+   "effective_radius_index": 9,
+   "effective_radius": 19.0,
+   "solar_zenith_index": 8,
+   "solar_zenith": 80.0
+  },
+  {
+   "rank": 32,
+   "maximum_absolute_R_0v_difference": 0.006539300084114075,
+   "p99_absolute_R_0v_difference": 0.00650894284248352,
+   "rms_R_0v_difference": 0.0023678663346730047,
+   "reference_R_0v_minimum": 0.14461608231067657,
+   "reference_R_0v_maximum": 0.2589888870716095,
+   "candidate_R_0v_minimum": 0.14363348484039307,
+   "candidate_R_0v_maximum": 0.2618884742259979,
+   "solar_channels_index": 19,
+   "solar_channels": 20.0,
+   "optical_depth_index": 13,
+   "optical_depth": 32.0,
+   "effective_radius_index": 5,
+   "effective_radius": 11.0,
+   "solar_zenith_index": 3,
+   "solar_zenith": 30.0
+  },
+  {
+   "rank": 33,
+   "maximum_absolute_R_0v_difference": 0.006491422653198242,
+   "p99_absolute_R_0v_difference": 0.006462520882487296,
+   "rms_R_0v_difference": 0.002155426997893287,
+   "reference_R_0v_minimum": 0.03987816721200943,
+   "reference_R_0v_maximum": 0.38790538907051086,
+   "candidate_R_0v_minimum": 0.039879005402326584,
+   "candidate_R_0v_maximum": 0.3864801824092865,
+   "solar_channels_index": 3,
+   "solar_channels": 4.0,
+   "optical_depth_index": 10,
+   "optical_depth": 4.0,
+   "effective_radius_index": 2,
+   "effective_radius": 5.0,
+   "solar_zenith_index": 8,
+   "solar_zenith": 80.0
+  },
+  {
+   "rank": 34,
+   "maximum_absolute_R_0v_difference": 0.005230814218521118,
+   "p99_absolute_R_0v_difference": 0.005206927359104155,
+   "rms_R_0v_difference": 0.0016778519567262951,
+   "reference_R_0v_minimum": 0.38033753633499146,
+   "reference_R_0v_maximum": 0.7612707018852234,
+   "candidate_R_0v_minimum": 0.3819538354873657,
+   "candidate_R_0v_maximum": 0.7664999961853027,
+   "solar_channels_index": 16,
+   "solar_channels": 17.0,
+   "optical_depth_index": 14,
+   "optical_depth": 64.0,
+   "effective_radius_index": 4,
+   "effective_radius": 9.0,
+   "solar_zenith_index": 6,
+   "solar_zenith": 60.0
+  },
+  {
+   "rank": 35,
+   "maximum_absolute_R_0v_difference": 0.004991479218006134,
+   "p99_absolute_R_0v_difference": 0.004991034269332886,
+   "rms_R_0v_difference": 0.0015416074472661175,
+   "reference_R_0v_minimum": 0.01201801747083664,
+   "reference_R_0v_maximum": 0.29726046323776245,
+   "candidate_R_0v_minimum": 0.012739515863358974,
+   "candidate_R_0v_maximum": 0.29227083921432495,
+   "solar_channels_index": 19,
+   "solar_channels": 20.0,
+   "optical_depth_index": 13,
+   "optical_depth": 32.0,
+   "effective_radius_index": 9,
+   "effective_radius": 19.0,
+   "solar_zenith_index": 8,
+   "solar_zenith": 80.0
+  },
+  {
+   "rank": 36,
+   "maximum_absolute_R_0v_difference": 0.004797607660293579,
+   "p99_absolute_R_0v_difference": 0.004797079861164093,
+   "rms_R_0v_difference": 0.0027536532585039648,
+   "reference_R_0v_minimum": 0.11286349594593048,
+   "reference_R_0v_maximum": 0.3555472195148468,
+   "candidate_R_0v_minimum": 0.11601632088422775,
+   "candidate_R_0v_maximum": 0.3603437840938568,
+   "solar_channels_index": 6,
+   "solar_channels": 7.0,
+   "optical_depth_index": 11,
+   "optical_depth": 8.0,
+   "effective_radius_index": 8,
+   "effective_radius": 17.0,
+   "solar_zenith_index": 5,
+   "solar_zenith": 50.0
+  },
+  {
+   "rank": 37,
+   "maximum_absolute_R_0v_difference": 0.004723608493804932,
+   "p99_absolute_R_0v_difference": 0.004720756411552429,
+   "rms_R_0v_difference": 0.0011800284672678887,
+   "reference_R_0v_minimum": 0.5906044244766235,
+   "reference_R_0v_maximum": 0.7105302214622498,
+   "candidate_R_0v_minimum": 0.5898702144622803,
+   "candidate_R_0v_maximum": 0.7105250358581543,
+   "solar_channels_index": 8,
+   "solar_channels": 9.0,
+   "optical_depth_index": 14,
+   "optical_depth": 64.0,
+   "effective_radius_index": 9,
+   "effective_radius": 19.0,
+   "solar_zenith_index": 4,
+   "solar_zenith": 40.0
+  },
+  {
+   "rank": 38,
+   "maximum_absolute_R_0v_difference": 0.0046056658029556274,
+   "p99_absolute_R_0v_difference": 0.004605604857206344,
+   "rms_R_0v_difference": 0.0018685937712565454,
+   "reference_R_0v_minimum": 0.08268237113952637,
+   "reference_R_0v_maximum": 0.19460655748844147,
+   "candidate_R_0v_minimum": 0.0808108001947403,
+   "candidate_R_0v_maximum": 0.1943703293800354,
+   "solar_channels_index": 19,
+   "solar_channels": 20.0,
+   "optical_depth_index": 15,
+   "optical_depth": 128.0,
+   "effective_radius_index": 9,
+   "effective_radius": 19.0,
+   "solar_zenith_index": 1,
+   "solar_zenith": 10.0
+  },
+  {
+   "rank": 39,
+   "maximum_absolute_R_0v_difference": 0.0046056658029556274,
+   "p99_absolute_R_0v_difference": 0.004605604857206344,
+   "rms_R_0v_difference": 0.0018685937712565454,
+   "reference_R_0v_minimum": 0.08268237113952637,
+   "reference_R_0v_maximum": 0.19460655748844147,
+   "candidate_R_0v_minimum": 0.0808108001947403,
+   "candidate_R_0v_maximum": 0.1943703293800354,
+   "solar_channels_index": 19,
+   "solar_channels": 20.0,
+   "optical_depth_index": 16,
+   "optical_depth": 256.0,
+   "effective_radius_index": 9,
+   "effective_radius": 19.0,
+   "solar_zenith_index": 1,
+   "solar_zenith": 10.0
+  },
+  {
+   "rank": 40,
+   "maximum_absolute_R_0v_difference": 0.00446801632642746,
+   "p99_absolute_R_0v_difference": 0.0044675876200199124,
+   "rms_R_0v_difference": 0.0021521473844139582,
+   "reference_R_0v_minimum": 0.08291792124509811,
+   "reference_R_0v_maximum": 0.1944943219423294,
+   "candidate_R_0v_minimum": 0.08559207618236542,
+   "candidate_R_0v_maximum": 0.1958180069923401,
+   "solar_channels_index": 19,
+   "solar_channels": 20.0,
+   "optical_depth_index": 13,
+   "optical_depth": 32.0,
+   "effective_radius_index": 9,
+   "effective_radius": 19.0,
+   "solar_zenith_index": 1,
+   "solar_zenith": 10.0
+  },
+  {
+   "rank": 41,
+   "maximum_absolute_R_0v_difference": 0.004083909094333649,
+   "p99_absolute_R_0v_difference": 0.004058190360665321,
+   "rms_R_0v_difference": 0.0016337501298607138,
+   "reference_R_0v_minimum": 0.009789371863007545,
+   "reference_R_0v_maximum": 0.06477409601211548,
+   "candidate_R_0v_minimum": 0.012019835412502289,
+   "candidate_R_0v_maximum": 0.06630272418260574,
+   "solar_channels_index": 19,
+   "solar_channels": 20.0,
+   "optical_depth_index": 7,
+   "optical_depth": 0.5,
+   "effective_radius_index": 5,
+   "effective_radius": 11.0,
+   "solar_zenith_index": 3,
+   "solar_zenith": 30.0
+  },
+  {
+   "rank": 42,
+   "maximum_absolute_R_0v_difference": 0.0039692409336566925,
+   "p99_absolute_R_0v_difference": 0.003967957450076938,
+   "rms_R_0v_difference": 0.0012258756737698248,
+   "reference_R_0v_minimum": 0.0010414010612294078,
+   "reference_R_0v_maximum": 0.16033953428268433,
+   "candidate_R_0v_minimum": 0.0005327178514562547,
+   "candidate_R_0v_maximum": 0.16430659592151642,
+   "solar_channels_index": 19,
+   "solar_channels": 20.0,
+   "optical_depth_index": 6,
+   "optical_depth": 0.25,
+   "effective_radius_index": 9,
+   "effective_radius": 19.0,
+   "solar_zenith_index": 8,
+   "solar_zenith": 80.0
+  },
+  {
+   "rank": 43,
+   "maximum_absolute_R_0v_difference": 0.0035013556480407715,
+   "p99_absolute_R_0v_difference": 0.003497413992881775,
+   "rms_R_0v_difference": 0.0016754659729202822,
+   "reference_R_0v_minimum": 0.41036754846572876,
+   "reference_R_0v_maximum": 0.8047251105308533,
+   "candidate_R_0v_minimum": 0.4090023338794708,
+   "candidate_R_0v_maximum": 0.8033555150032043,
+   "solar_channels_index": 13,
+   "solar_channels": 14.0,
+   "optical_depth_index": 16,
+   "optical_depth": 256.0,
+   "effective_radius_index": 15,
+   "effective_radius": 31.0,
+   "solar_zenith_index": 6,
+   "solar_zenith": 60.0
+  },
+  {
+   "rank": 44,
+   "maximum_absolute_R_0v_difference": 0.0034216083586215973,
+   "p99_absolute_R_0v_difference": 0.0034214575216174126,
+   "rms_R_0v_difference": 0.0019812377659923185,
+   "reference_R_0v_minimum": 0.036815982311964035,
+   "reference_R_0v_maximum": 0.5083205103874207,
+   "candidate_R_0v_minimum": 0.03743620961904526,
+   "candidate_R_0v_maximum": 0.5095708966255188,
+   "solar_channels_index": 5,
+   "solar_channels": 6.0,
+   "optical_depth_index": 12,
+   "optical_depth": 16.0,
+   "effective_radius_index": 14,
+   "effective_radius": 29.0,
+   "solar_zenith_index": 8,
+   "solar_zenith": 80.0
+  },
+  {
+   "rank": 45,
+   "maximum_absolute_R_0v_difference": 0.0031796935945749283,
+   "p99_absolute_R_0v_difference": 0.003179601626470685,
+   "rms_R_0v_difference": 0.0013698547301422836,
+   "reference_R_0v_minimum": 0.0024019507691264153,
+   "reference_R_0v_maximum": 0.03508038818836212,
+   "candidate_R_0v_minimum": 0.0033272861037403345,
+   "candidate_R_0v_maximum": 0.03518342971801758,
+   "solar_channels_index": 25,
+   "solar_channels": 26.0,
+   "optical_depth_index": 6,
+   "optical_depth": 0.25,
+   "effective_radius_index": 7,
+   "effective_radius": 15.0,
+   "solar_zenith_index": 3,
+   "solar_zenith": 30.0
+  },
+  {
+   "rank": 46,
+   "maximum_absolute_R_0v_difference": 0.0029912125319242477,
+   "p99_absolute_R_0v_difference": 0.0029882149025797842,
+   "rms_R_0v_difference": 0.0012744054609702279,
+   "reference_R_0v_minimum": 0.009663408622145653,
+   "reference_R_0v_maximum": 0.20442703366279602,
+   "candidate_R_0v_minimum": 0.009438111446797848,
+   "candidate_R_0v_maximum": 0.2074153870344162,
+   "solar_channels_index": 13,
+   "solar_channels": 14.0,
+   "optical_depth_index": 6,
+   "optical_depth": 0.25,
+   "effective_radius_index": 3,
+   "effective_radius": 7.0,
+   "solar_zenith_index": 8,
+   "solar_zenith": 80.0
+  },
+  {
+   "rank": 47,
+   "maximum_absolute_R_0v_difference": 0.0024813860654830933,
+   "p99_absolute_R_0v_difference": 0.0024812547117471695,
+   "rms_R_0v_difference": 0.0018568106217569046,
+   "reference_R_0v_minimum": 0.030752912163734436,
+   "reference_R_0v_maximum": 0.5053471326828003,
+   "candidate_R_0v_minimum": 0.028997844085097313,
+   "candidate_R_0v_maximum": 0.5029850602149963,
+   "solar_channels_index": 5,
+   "solar_channels": 6.0,
+   "optical_depth_index": 11,
+   "optical_depth": 8.0,
+   "effective_radius_index": 14,
+   "effective_radius": 29.0,
+   "solar_zenith_index": 8,
+   "solar_zenith": 80.0
+  },
+  {
+   "rank": 48,
+   "maximum_absolute_R_0v_difference": 0.002278834581375122,
+   "p99_absolute_R_0v_difference": 0.0022780191898345947,
+   "rms_R_0v_difference": 0.0011036885007282898,
+   "reference_R_0v_minimum": 0.1337912231683731,
+   "reference_R_0v_maximum": 0.36904197931289673,
+   "candidate_R_0v_minimum": 0.13376809656620026,
+   "candidate_R_0v_maximum": 0.368139386177063,
+   "solar_channels_index": 6,
+   "solar_channels": 7.0,
+   "optical_depth_index": 13,
+   "optical_depth": 32.0,
+   "effective_radius_index": 8,
+   "effective_radius": 17.0,
+   "solar_zenith_index": 5,
+   "solar_zenith": 50.0
+  },
+  {
+   "rank": 49,
+   "maximum_absolute_R_0v_difference": 0.0021986961364746094,
+   "p99_absolute_R_0v_difference": 0.0021649128198623652,
+   "rms_R_0v_difference": 0.0007404973562361414,
+   "reference_R_0v_minimum": 0.7743115425109863,
+   "reference_R_0v_maximum": 1.028654932975769,
+   "candidate_R_0v_minimum": 0.7743183970451355,
+   "candidate_R_0v_maximum": 1.029952049255371,
+   "solar_channels_index": 9,
+   "solar_channels": 10.0,
+   "optical_depth_index": 16,
+   "optical_depth": 256.0,
+   "effective_radius_index": 8,
+   "effective_radius": 17.0,
+   "solar_zenith_index": 2,
+   "solar_zenith": 20.0
+  },
+  {
+   "rank": 50,
+   "maximum_absolute_R_0v_difference": 0.0021827593445777893,
+   "p99_absolute_R_0v_difference": 0.002152932733297348,
+   "rms_R_0v_difference": 0.0005092116687295218,
+   "reference_R_0v_minimum": 0.018329782411456108,
+   "reference_R_0v_maximum": 0.4255041182041168,
+   "candidate_R_0v_minimum": 0.01833197847008705,
+   "candidate_R_0v_maximum": 0.4276573956012726,
+   "solar_channels_index": 17,
+   "solar_channels": 18.0,
+   "optical_depth_index": 8,
+   "optical_depth": 1.0,
+   "effective_radius_index": 3,
+   "effective_radius": 7.0,
+   "solar_zenith_index": 7,
+   "solar_zenith": 70.0
+  },
+  {
+   "rank": 51,
+   "maximum_absolute_R_0v_difference": 0.0020695566199719906,
+   "p99_absolute_R_0v_difference": 0.0020691263303160667,
+   "rms_R_0v_difference": 0.0005175387828231482,
+   "reference_R_0v_minimum": 0.0029869438149034977,
+   "reference_R_0v_maximum": 0.009604882448911667,
+   "candidate_R_0v_minimum": 0.002747840713709593,
+   "candidate_R_0v_maximum": 0.00920511968433857,
+   "solar_channels_index": 23,
+   "solar_channels": 24.0,
+   "optical_depth_index": 12,
+   "optical_depth": 16.0,
+   "effective_radius_index": 17,
+   "effective_radius": 35.0,
+   "solar_zenith_index": 3,
+   "solar_zenith": 30.0
+  },
+  {
+   "rank": 52,
+   "maximum_absolute_R_0v_difference": 0.0019530653953552246,
+   "p99_absolute_R_0v_difference": 0.0019524157047271728,
+   "rms_R_0v_difference": 0.0006180646115743516,
+   "reference_R_0v_minimum": 0.7141053676605225,
+   "reference_R_0v_maximum": 0.9552940130233765,
+   "candidate_R_0v_minimum": 0.7141045928001404,
+   "candidate_R_0v_maximum": 0.9552958607673645,
+   "solar_channels_index": 3,
+   "solar_channels": 4.0,
+   "optical_depth_index": 16,
+   "optical_depth": 256.0,
+   "effective_radius_index": 10,
+   "effective_radius": 21.0,
+   "solar_zenith_index": 3,
+   "solar_zenith": 30.0
+  },
+  {
+   "rank": 53,
+   "maximum_absolute_R_0v_difference": 0.0019001513719558716,
+   "p99_absolute_R_0v_difference": 0.0019000741839408876,
+   "rms_R_0v_difference": 0.0006855041812417061,
+   "reference_R_0v_minimum": 0.13421005010604858,
+   "reference_R_0v_maximum": 0.3686473071575165,
+   "candidate_R_0v_minimum": 0.1345289796590805,
+   "candidate_R_0v_maximum": 0.3688978850841522,
+   "solar_channels_index": 6,
+   "solar_channels": 7.0,
+   "optical_depth_index": 15,
+   "optical_depth": 128.0,
+   "effective_radius_index": 8,
+   "effective_radius": 17.0,
+   "solar_zenith_index": 5,
+   "solar_zenith": 50.0
+  },
+  {
+   "rank": 54,
+   "maximum_absolute_R_0v_difference": 0.001893840730190277,
+   "p99_absolute_R_0v_difference": 0.0018938085623085498,
+   "rms_R_0v_difference": 0.0006302312835811089,
+   "reference_R_0v_minimum": 0.019873639568686485,
+   "reference_R_0v_maximum": 0.493996262550354,
+   "candidate_R_0v_minimum": 0.019205229356884956,
+   "candidate_R_0v_maximum": 0.4942609965801239,
+   "solar_channels_index": 5,
+   "solar_channels": 6.0,
+   "optical_depth_index": 10,
+   "optical_depth": 4.0,
+   "effective_radius_index": 14,
+   "effective_radius": 29.0,
+   "solar_zenith_index": 8,
+   "solar_zenith": 80.0
+  },
+  {
+   "rank": 55,
+   "maximum_absolute_R_0v_difference": 0.0017972588539123535,
+   "p99_absolute_R_0v_difference": 0.0017859295010566709,
+   "rms_R_0v_difference": 0.0004953608815343455,
+   "reference_R_0v_minimum": 0.33215105533599854,
+   "reference_R_0v_maximum": 0.7317677140235901,
+   "candidate_R_0v_minimum": 0.3321499824523926,
+   "candidate_R_0v_maximum": 0.7299739122390747,
+   "solar_channels_index": 16,
+   "solar_channels": 17.0,
+   "optical_depth_index": 13,
+   "optical_depth": 32.0,
+   "effective_radius_index": 4,
+   "effective_radius": 9.0,
+   "solar_zenith_index": 6,
+   "solar_zenith": 60.0
+  },
+  {
+   "rank": 56,
+   "maximum_absolute_R_0v_difference": 0.0016835927963256836,
+   "p99_absolute_R_0v_difference": 0.0016835157573223114,
+   "rms_R_0v_difference": 0.0007346255163800267,
+   "reference_R_0v_minimum": 0.13216201961040497,
+   "reference_R_0v_maximum": 0.3678675889968872,
+   "candidate_R_0v_minimum": 0.13118697702884674,
+   "candidate_R_0v_maximum": 0.3678874373435974,
+   "solar_channels_index": 6,
+   "solar_channels": 7.0,
+   "optical_depth_index": 12,
+   "optical_depth": 16.0,
+   "effective_radius_index": 8,
+   "effective_radius": 17.0,
+   "solar_zenith_index": 5,
+   "solar_zenith": 50.0
+  },
+  {
+   "rank": 57,
+   "maximum_absolute_R_0v_difference": 0.0016172230243682861,
+   "p99_absolute_R_0v_difference": 0.0016164535284042358,
+   "rms_R_0v_difference": 0.0005195022652180747,
+   "reference_R_0v_minimum": 0.10117557644844055,
+   "reference_R_0v_maximum": 0.4732435643672943,
+   "candidate_R_0v_minimum": 0.10087454319000244,
+   "candidate_R_0v_maximum": 0.474857360124588,
+   "solar_channels_index": 14,
+   "solar_channels": 15.0,
+   "optical_depth_index": 14,
+   "optical_depth": 64.0,
+   "effective_radius_index": 1,
+   "effective_radius": 3.0,
+   "solar_zenith_index": 8,
+   "solar_zenith": 80.0
+  },
+  {
+   "rank": 58,
+   "maximum_absolute_R_0v_difference": 0.0016016960144042969,
+   "p99_absolute_R_0v_difference": 0.0016016960144042969,
+   "rms_R_0v_difference": 0.0012368680279729318,
+   "reference_R_0v_minimum": 0.8125386238098145,
+   "reference_R_0v_maximum": 1.1707361936569214,
+   "candidate_R_0v_minimum": 0.8134108781814575,
+   "candidate_R_0v_maximum": 1.1723378896713257,
+   "solar_channels_index": 11,
+   "solar_channels": 12.0,
+   "optical_depth_index": 16,
+   "optical_depth": 256.0,
+   "effective_radius_index": 5,
+   "effective_radius": 11.0,
+   "solar_zenith_index": 0,
+   "solar_zenith": 0.0
+  },
+  {
+   "rank": 59,
+   "maximum_absolute_R_0v_difference": 0.0015865080058574677,
+   "p99_absolute_R_0v_difference": 0.0015861076954752206,
+   "rms_R_0v_difference": 0.0004645481686018356,
+   "reference_R_0v_minimum": 0.004708454478532076,
+   "reference_R_0v_maximum": 0.14397616684436798,
+   "candidate_R_0v_minimum": 0.004712430294603109,
+   "candidate_R_0v_maximum": 0.1442117542028427,
+   "solar_channels_index": 16,
+   "solar_channels": 17.0,
+   "optical_depth_index": 6,
+   "optical_depth": 0.25,
+   "effective_radius_index": 9,
+   "effective_radius": 19.0,
+   "solar_zenith_index": 7,
+   "solar_zenith": 70.0
+  },
+  {
+   "rank": 60,
+   "maximum_absolute_R_0v_difference": 0.0015696287155151367,
+   "p99_absolute_R_0v_difference": 0.0015696287155151367,
+   "rms_R_0v_difference": 0.001059741867721495,
+   "reference_R_0v_minimum": 0.8112404346466064,
+   "reference_R_0v_maximum": 1.1658220291137695,
+   "candidate_R_0v_minimum": 0.8119589686393738,
+   "candidate_R_0v_maximum": 1.1673916578292847,
+   "solar_channels_index": 11,
+   "solar_channels": 12.0,
+   "optical_depth_index": 16,
+   "optical_depth": 256.0,
+   "effective_radius_index": 6,
+   "effective_radius": 13.0,
+   "solar_zenith_index": 0,
+   "solar_zenith": 0.0
+  },
+  {
+   "rank": 61,
+   "maximum_absolute_R_0v_difference": 0.0014635324478149414,
+   "p99_absolute_R_0v_difference": 0.0014635324478149414,
+   "rms_R_0v_difference": 0.0008448659804953151,
+   "reference_R_0v_minimum": 0.810397207736969,
+   "reference_R_0v_maximum": 1.1608425378799438,
+   "candidate_R_0v_minimum": 0.8109362721443176,
+   "candidate_R_0v_maximum": 1.1623060703277588,
+   "solar_channels_index": 11,
+   "solar_channels": 12.0,
+   "optical_depth_index": 16,
+   "optical_depth": 256.0,
+   "effective_radius_index": 7,
+   "effective_radius": 15.0,
+   "solar_zenith_index": 0,
+   "solar_zenith": 0.0
+  },
+  {
+   "rank": 62,
+   "maximum_absolute_R_0v_difference": 0.0014438480138778687,
+   "p99_absolute_R_0v_difference": 0.0014437830448150635,
+   "rms_R_0v_difference": 0.0006283339792401182,
+   "reference_R_0v_minimum": 0.08272048830986023,
+   "reference_R_0v_maximum": 0.19454790651798248,
+   "candidate_R_0v_minimum": 0.08227430284023285,
+   "candidate_R_0v_maximum": 0.19514676928520203,
+   "solar_channels_index": 19,
+   "solar_channels": 20.0,
+   "optical_depth_index": 14,
+   "optical_depth": 64.0,
+   "effective_radius_index": 9,
+   "effective_radius": 19.0,
+   "solar_zenith_index": 1,
+   "solar_zenith": 10.0
+  },
+  {
+   "rank": 63,
+   "maximum_absolute_R_0v_difference": 0.0014303941279649734,
+   "p99_absolute_R_0v_difference": 0.0014293436333537102,
+   "rms_R_0v_difference": 0.00035919938086733944,
+   "reference_R_0v_minimum": 0.00233122194185853,
+   "reference_R_0v_maximum": 0.015118829905986786,
+   "candidate_R_0v_minimum": 0.00227156700566411,
+   "candidate_R_0v_maximum": 0.01654922403395176,
+   "solar_channels_index": 17,
+   "solar_channels": 18.0,
+   "optical_depth_index": 2,
+   "optical_depth": 0.015625,
+   "effective_radius_index": 19,
+   "effective_radius": 39.0,
+   "solar_zenith_index": 7,
+   "solar_zenith": 70.0
+  },
+  {
+   "rank": 64,
+   "maximum_absolute_R_0v_difference": 0.0014226436614990234,
+   "p99_absolute_R_0v_difference": 0.0014221113920211792,
+   "rms_R_0v_difference": 0.0007067799045659188,
+   "reference_R_0v_minimum": 0.1343902200460434,
+   "reference_R_0v_maximum": 0.36762306094169617,
+   "candidate_R_0v_minimum": 0.1348271369934082,
+   "candidate_R_0v_maximum": 0.3680983781814575,
+   "solar_channels_index": 6,
+   "solar_channels": 7.0,
+   "optical_depth_index": 16,
+   "optical_depth": 256.0,
+   "effective_radius_index": 8,
+   "effective_radius": 17.0,
+   "solar_zenith_index": 5,
+   "solar_zenith": 50.0
+  },
+  {
+   "rank": 65,
+   "maximum_absolute_R_0v_difference": 0.0013876557350158691,
+   "p99_absolute_R_0v_difference": 0.001336163505911827,
+   "rms_R_0v_difference": 0.0004873806657254937,
+   "reference_R_0v_minimum": 0.003147622337564826,
+   "reference_R_0v_maximum": 0.15034574270248413,
+   "candidate_R_0v_minimum": 0.003969904966652393,
+   "candidate_R_0v_maximum": 0.15038231015205383,
+   "solar_channels_index": 20,
+   "solar_channels": 21.0,
+   "optical_depth_index": 7,
+   "optical_depth": 0.5,
+   "effective_radius_index": 9,
+   "effective_radius": 19.0,
+   "solar_zenith_index": 7,
+   "solar_zenith": 70.0
+  },
+  {
+   "rank": 66,
+   "maximum_absolute_R_0v_difference": 0.001382049173116684,
+   "p99_absolute_R_0v_difference": 0.001382003128528595,
+   "rms_R_0v_difference": 0.0008699066790189955,
+   "reference_R_0v_minimum": 0.036949194967746735,
+   "reference_R_0v_maximum": 0.2623756527900696,
+   "candidate_R_0v_minimum": 0.03781821206212044,
+   "candidate_R_0v_maximum": 0.26154404878616333,
+   "solar_channels_index": 6,
+   "solar_channels": 7.0,
+   "optical_depth_index": 9,
+   "optical_depth": 2.0,
+   "effective_radius_index": 8,
+   "effective_radius": 17.0,
+   "solar_zenith_index": 5,
+   "solar_zenith": 50.0
+  },
+  {
+   "rank": 67,
+   "maximum_absolute_R_0v_difference": 0.0013480186462402344,
+   "p99_absolute_R_0v_difference": 0.0013375520706176759,
+   "rms_R_0v_difference": 0.00116982683662864,
+   "reference_R_0v_minimum": 0.8019317388534546,
+   "reference_R_0v_maximum": 1.0840294361114502,
+   "candidate_R_0v_minimum": 0.8027810454368591,
+   "candidate_R_0v_maximum": 1.085367202758789,
+   "solar_channels_index": 11,
+   "solar_channels": 12.0,
+   "optical_depth_index": 16,
+   "optical_depth": 256.0,
+   "effective_radius_index": 5,
+   "effective_radius": 11.0,
+   "solar_zenith_index": 1,
+   "solar_zenith": 10.0
+  },
+  {
+   "rank": 68,
+   "maximum_absolute_R_0v_difference": 0.0013476312160491943,
+   "p99_absolute_R_0v_difference": 0.0013462799787521363,
+   "rms_R_0v_difference": 0.000575718351665952,
+   "reference_R_0v_minimum": 0.3562929630279541,
+   "reference_R_0v_maximum": 0.48476219177246094,
+   "candidate_R_0v_minimum": 0.3555987775325775,
+   "candidate_R_0v_maximum": 0.48577970266342163,
+   "solar_channels_index": 13,
+   "solar_channels": 14.0,
+   "optical_depth_index": 11,
+   "optical_depth": 8.0,
+   "effective_radius_index": 1,
+   "effective_radius": 3.0,
+   "solar_zenith_index": 3,
+   "solar_zenith": 30.0
+  },
+  {
+   "rank": 69,
+   "maximum_absolute_R_0v_difference": 0.0013254880905151367,
+   "p99_absolute_R_0v_difference": 0.0013254880905151367,
+   "rms_R_0v_difference": 0.000670728823938484,
+   "reference_R_0v_minimum": 0.809647798538208,
+   "reference_R_0v_maximum": 1.1555789709091187,
+   "candidate_R_0v_minimum": 0.8100423216819763,
+   "candidate_R_0v_maximum": 1.1569044589996338,
+   "solar_channels_index": 11,
+   "solar_channels": 12.0,
+   "optical_depth_index": 16,
+   "optical_depth": 256.0,
+   "effective_radius_index": 8,
+   "effective_radius": 17.0,
+   "solar_zenith_index": 0,
+   "solar_zenith": 0.0
+  },
+  {
+   "rank": 70,
+   "maximum_absolute_R_0v_difference": 0.0013129711151123047,
+   "p99_absolute_R_0v_difference": 0.00130739688873291,
+   "rms_R_0v_difference": 0.00035704859763681276,
+   "reference_R_0v_minimum": 0.6823815703392029,
+   "reference_R_0v_maximum": 0.9180140495300293,
+   "candidate_R_0v_minimum": 0.6823825836181641,
+   "candidate_R_0v_maximum": 0.9180029630661011,
+   "solar_channels_index": 0,
+   "solar_channels": 1.0,
+   "optical_depth_index": 15,
+   "optical_depth": 128.0,
+   "effective_radius_index": 10,
+   "effective_radius": 21.0,
+   "solar_zenith_index": 3,
+   "solar_zenith": 30.0
+  },
+  {
+   "rank": 71,
+   "maximum_absolute_R_0v_difference": 0.0012925565242767334,
+   "p99_absolute_R_0v_difference": 0.0012332619726657867,
+   "rms_R_0v_difference": 0.000506511040943969,
+   "reference_R_0v_minimum": 0.11427471786737442,
+   "reference_R_0v_maximum": 0.4543238580226898,
+   "candidate_R_0v_minimum": 0.11476738750934601,
+   "candidate_R_0v_maximum": 0.45561641454696655,
+   "solar_channels_index": 14,
+   "solar_channels": 15.0,
+   "optical_depth_index": 10,
+   "optical_depth": 4.0,
+   "effective_radius_index": 6,
+   "effective_radius": 13.0,
+   "solar_zenith_index": 5,
+   "solar_zenith": 50.0
+  },
+  {
+   "rank": 72,
+   "maximum_absolute_R_0v_difference": 0.0012666992843151093,
+   "p99_absolute_R_0v_difference": 0.001265004475135356,
+   "rms_R_0v_difference": 0.0004455641586615344,
+   "reference_R_0v_minimum": 0.0030451936181634665,
+   "reference_R_0v_maximum": 0.010035624727606773,
+   "candidate_R_0v_minimum": 0.0029597568791359663,
+   "candidate_R_0v_maximum": 0.009460893459618092,
+   "solar_channels_index": 23,
+   "solar_channels": 24.0,
+   "optical_depth_index": 11,
+   "optical_depth": 8.0,
+   "effective_radius_index": 17,
+   "effective_radius": 35.0,
+   "solar_zenith_index": 3,
+   "solar_zenith": 30.0
+  },
+  {
+   "rank": 73,
+   "maximum_absolute_R_0v_difference": 0.0012659404310397804,
+   "p99_absolute_R_0v_difference": 0.0012599023419898002,
+   "rms_R_0v_difference": 0.00044945539330132323,
+   "reference_R_0v_minimum": -3.547558662830852e-05,
+   "reference_R_0v_maximum": 0.04931336268782616,
+   "candidate_R_0v_minimum": 0.0006463973550125957,
+   "candidate_R_0v_maximum": 0.04868312180042267,
+   "solar_channels_index": 20,
+   "solar_channels": 21.0,
+   "optical_depth_index": 5,
+   "optical_depth": 0.125,
+   "effective_radius_index": 9,
+   "effective_radius": 19.0,
+   "solar_zenith_index": 7,
+   "solar_zenith": 70.0
+  },
+  {
+   "rank": 74,
+   "maximum_absolute_R_0v_difference": 0.0012516975402832031,
+   "p99_absolute_R_0v_difference": 0.0012413075566291808,
+   "rms_R_0v_difference": 0.0004082028201745344,
+   "reference_R_0v_minimum": 0.3985237181186676,
+   "reference_R_0v_maximum": 0.7795968055725098,
+   "candidate_R_0v_minimum": 0.3995368778705597,
+   "candidate_R_0v_maximum": 0.780848503112793,
+   "solar_channels_index": 16,
+   "solar_channels": 17.0,
+   "optical_depth_index": 15,
+   "optical_depth": 128.0,
+   "effective_radius_index": 4,
+   "effective_radius": 9.0,
+   "solar_zenith_index": 6,
+   "solar_zenith": 60.0
+  },
+  {
+   "rank": 75,
+   "maximum_absolute_R_0v_difference": 0.0012437207624316216,
+   "p99_absolute_R_0v_difference": 0.0012379389256238936,
+   "rms_R_0v_difference": 0.0003427245852451847,
+   "reference_R_0v_minimum": 0.012621077708899975,
+   "reference_R_0v_maximum": 0.22895556688308716,
+   "candidate_R_0v_minimum": 0.013222526758909225,
+   "candidate_R_0v_maximum": 0.2283429354429245,
+   "solar_channels_index": 20,
+   "solar_channels": 21.0,
+   "optical_depth_index": 12,
+   "optical_depth": 16.0,
+   "effective_radius_index": 9,
+   "effective_radius": 19.0,
+   "solar_zenith_index": 7,
+   "solar_zenith": 70.0
+  },
+  {
+   "rank": 76,
+   "maximum_absolute_R_0v_difference": 0.0012418031692504883,
+   "p99_absolute_R_0v_difference": 0.0012418031692504883,
+   "rms_R_0v_difference": 0.0010380118636906716,
+   "reference_R_0v_minimum": 0.8144983649253845,
+   "reference_R_0v_maximum": 1.1746858358383179,
+   "candidate_R_0v_minimum": 0.8152411580085754,
+   "candidate_R_0v_maximum": 1.1759276390075684,
+   "solar_channels_index": 11,
+   "solar_channels": 12.0,
+   "optical_depth_index": 16,
+   "optical_depth": 256.0,
+   "effective_radius_index": 4,
+   "effective_radius": 9.0,
+   "solar_zenith_index": 0,
+   "solar_zenith": 0.0
+  },
+  {
+   "rank": 77,
+   "maximum_absolute_R_0v_difference": 0.0012409687042236328,
+   "p99_absolute_R_0v_difference": 0.0012383365631103516,
+   "rms_R_0v_difference": 0.001085967103344977,
+   "reference_R_0v_minimum": 0.7703704833984375,
+   "reference_R_0v_maximum": 1.04302978515625,
+   "candidate_R_0v_minimum": 0.7711586356163025,
+   "candidate_R_0v_maximum": 1.0441179275512695,
+   "solar_channels_index": 11,
+   "solar_channels": 12.0,
+   "optical_depth_index": 16,
+   "optical_depth": 256.0,
+   "effective_radius_index": 5,
+   "effective_radius": 11.0,
+   "solar_zenith_index": 2,
+   "solar_zenith": 20.0
+  },
+  {
+   "rank": 78,
+   "maximum_absolute_R_0v_difference": 0.0012155771255493164,
+   "p99_absolute_R_0v_difference": 0.0012107154726982115,
+   "rms_R_0v_difference": 0.0003246782498568797,
+   "reference_R_0v_minimum": 0.15459370613098145,
+   "reference_R_0v_maximum": 0.6205729842185974,
+   "candidate_R_0v_minimum": 0.15459969639778137,
+   "candidate_R_0v_maximum": 0.6217885613441467,
+   "solar_channels_index": 11,
+   "solar_channels": 12.0,
+   "optical_depth_index": 12,
+   "optical_depth": 16.0,
+   "effective_radius_index": 7,
+   "effective_radius": 15.0,
+   "solar_zenith_index": 7,
+   "solar_zenith": 70.0
+  },
+  {
+   "rank": 79,
+   "maximum_absolute_R_0v_difference": 0.00121307373046875,
+   "p99_absolute_R_0v_difference": 0.0011974310874938966,
+   "rms_R_0v_difference": 0.001039204064435047,
+   "reference_R_0v_minimum": 0.8006003499031067,
+   "reference_R_0v_maximum": 1.0758931636810303,
+   "candidate_R_0v_minimum": 0.8013564348220825,
+   "candidate_R_0v_maximum": 1.077106237411499,
+   "solar_channels_index": 11,
+   "solar_channels": 12.0,
+   "optical_depth_index": 16,
+   "optical_depth": 256.0,
+   "effective_radius_index": 6,
+   "effective_radius": 13.0,
+   "solar_zenith_index": 1,
+   "solar_zenith": 10.0
+  },
+  {
+   "rank": 80,
+   "maximum_absolute_R_0v_difference": 0.001205379143357277,
+   "p99_absolute_R_0v_difference": 0.0012045970279723405,
+   "rms_R_0v_difference": 0.00033170297214225484,
+   "reference_R_0v_minimum": 0.0010984106920659542,
+   "reference_R_0v_maximum": 0.09645043313503265,
+   "candidate_R_0v_minimum": 0.001016019145026803,
+   "candidate_R_0v_maximum": 0.09765505790710449,
+   "solar_channels_index": 19,
+   "solar_channels": 20.0,
+   "optical_depth_index": 5,
+   "optical_depth": 0.125,
+   "effective_radius_index": 9,
+   "effective_radius": 19.0,
+   "solar_zenith_index": 8,
+   "solar_zenith": 80.0
+  },
+  {
+   "rank": 81,
+   "maximum_absolute_R_0v_difference": 0.0011901557445526123,
+   "p99_absolute_R_0v_difference": 0.0011741643771529197,
+   "rms_R_0v_difference": 0.00041765835546680476,
+   "reference_R_0v_minimum": 0.0016171276802197099,
+   "reference_R_0v_maximum": 0.09034242480993271,
+   "candidate_R_0v_minimum": 0.001740728970617056,
+   "candidate_R_0v_maximum": 0.09152020514011383,
+   "solar_channels_index": 20,
+   "solar_channels": 21.0,
+   "optical_depth_index": 6,
+   "optical_depth": 0.25,
+   "effective_radius_index": 9,
+   "effective_radius": 19.0,
+   "solar_zenith_index": 7,
+   "solar_zenith": 70.0
+  },
+  {
+   "rank": 82,
+   "maximum_absolute_R_0v_difference": 0.0011502504348754883,
+   "p99_absolute_R_0v_difference": 0.0011386871337890625,
+   "rms_R_0v_difference": 0.0009979048362727745,
+   "reference_R_0v_minimum": 0.8036550879478455,
+   "reference_R_0v_maximum": 1.097084403038025,
+   "candidate_R_0v_minimum": 0.8043799996376038,
+   "candidate_R_0v_maximum": 1.0982201099395752,
+   "solar_channels_index": 11,
+   "solar_channels": 12.0,
+   "optical_depth_index": 16,
+   "optical_depth": 256.0,
+   "effective_radius_index": 4,
+   "effective_radius": 9.0,
+   "solar_zenith_index": 1,
+   "solar_zenith": 10.0
+  },
+  {
+   "rank": 83,
+   "maximum_absolute_R_0v_difference": 0.001126851886510849,
+   "p99_absolute_R_0v_difference": 0.0011199179571121929,
+   "rms_R_0v_difference": 0.00045565041405875553,
+   "reference_R_0v_minimum": 0.007212215103209019,
+   "reference_R_0v_maximum": 0.2038051038980484,
+   "candidate_R_0v_minimum": 0.007066972553730011,
+   "candidate_R_0v_maximum": 0.20277731120586395,
+   "solar_channels_index": 20,
+   "solar_channels": 21.0,
+   "optical_depth_index": 8,
+   "optical_depth": 1.0,
+   "effective_radius_index": 9,
+   "effective_radius": 19.0,
+   "solar_zenith_index": 7,
+   "solar_zenith": 70.0
+  },
+  {
+   "rank": 84,
+   "maximum_absolute_R_0v_difference": 0.001104116439819336,
+   "p99_absolute_R_0v_difference": 0.0011026990413665772,
+   "rms_R_0v_difference": 0.0009657876365104576,
+   "reference_R_0v_minimum": 0.769226610660553,
+   "reference_R_0v_maximum": 1.033605694770813,
+   "candidate_R_0v_minimum": 0.7699317932128906,
+   "candidate_R_0v_maximum": 1.0346529483795166,
+   "solar_channels_index": 11,
+   "solar_channels": 12.0,
+   "optical_depth_index": 16,
+   "optical_depth": 256.0,
+   "effective_radius_index": 6,
+   "effective_radius": 13.0,
+   "solar_zenith_index": 2,
+   "solar_zenith": 20.0
+  },
+  {
+   "rank": 85,
+   "maximum_absolute_R_0v_difference": 0.0010962486267089844,
+   "p99_absolute_R_0v_difference": 0.0010959839820861817,
+   "rms_R_0v_difference": 0.0009591870609903764,
+   "reference_R_0v_minimum": 0.7176679372787476,
+   "reference_R_0v_maximum": 0.9492262005805969,
+   "candidate_R_0v_minimum": 0.7183659672737122,
+   "candidate_R_0v_maximum": 0.9501899480819702,
+   "solar_channels_index": 11,
+   "solar_channels": 12.0,
+   "optical_depth_index": 16,
+   "optical_depth": 256.0,
+   "effective_radius_index": 5,
+   "effective_radius": 11.0,
+   "solar_zenith_index": 3,
+   "solar_zenith": 30.0
+  },
+  {
+   "rank": 86,
+   "maximum_absolute_R_0v_difference": 0.0010892415884882212,
+   "p99_absolute_R_0v_difference": 0.0010880614817142485,
+   "rms_R_0v_difference": 0.00035102767833415183,
+   "reference_R_0v_minimum": 0.0017803721129894257,
+   "reference_R_0v_maximum": 0.008050704374909401,
+   "candidate_R_0v_minimum": 0.0016877843299880624,
+   "candidate_R_0v_maximum": 0.00763972382992506,
+   "solar_channels_index": 23,
+   "solar_channels": 24.0,
+   "optical_depth_index": 8,
+   "optical_depth": 1.0,
+   "effective_radius_index": 17,
+   "effective_radius": 35.0,
+   "solar_zenith_index": 3,
+   "solar_zenith": 30.0
+  },
+  {
+   "rank": 87,
+   "maximum_absolute_R_0v_difference": 0.0010839104652404785,
+   "p99_absolute_R_0v_difference": 0.0010669803619384765,
+   "rms_R_0v_difference": 0.0003865705738410813,
+   "reference_R_0v_minimum": 0.527289628982544,
+   "reference_R_0v_maximum": 0.6996945738792419,
+   "candidate_R_0v_minimum": 0.5272802710533142,
+   "candidate_R_0v_maximum": 0.6997482180595398,
+   "solar_channels_index": 17,
+   "solar_channels": 18.0,
+   "optical_depth_index": 12,
+   "optical_depth": 16.0,
+   "effective_radius_index": 1,
+   "effective_radius": 3.0,
+   "solar_zenith_index": 3,
+   "solar_zenith": 30.0
+  },
+  {
+   "rank": 88,
+   "maximum_absolute_R_0v_difference": 0.0010831356048583984,
+   "p99_absolute_R_0v_difference": 0.0010778651386499404,
+   "rms_R_0v_difference": 0.00047846656864263264,
+   "reference_R_0v_minimum": 0.020157339051365852,
+   "reference_R_0v_maximum": 0.49523937702178955,
+   "candidate_R_0v_minimum": 0.020148199051618576,
+   "candidate_R_0v_maximum": 0.49415624141693115,
+   "solar_channels_index": 5,
+   "solar_channels": 6.0,
+   "optical_depth_index": 10,
+   "optical_depth": 4.0,
+   "effective_radius_index": 13,
+   "effective_radius": 27.0,
+   "solar_zenith_index": 8,
+   "solar_zenith": 80.0
+  },
+  {
+   "rank": 89,
+   "maximum_absolute_R_0v_difference": 0.0010617971420288086,
+   "p99_absolute_R_0v_difference": 0.0010602807998657227,
+   "rms_R_0v_difference": 0.0009298934930732969,
+   "reference_R_0v_minimum": 0.7719614505767822,
+   "reference_R_0v_maximum": 1.052603840827942,
+   "candidate_R_0v_minimum": 0.7726367712020874,
+   "candidate_R_0v_maximum": 1.0535399913787842,
+   "solar_channels_index": 11,
+   "solar_channels": 12.0,
+   "optical_depth_index": 16,
+   "optical_depth": 256.0,
+   "effective_radius_index": 4,
+   "effective_radius": 9.0,
+   "solar_zenith_index": 2,
+   "solar_zenith": 20.0
+  },
+  {
+   "rank": 90,
+   "maximum_absolute_R_0v_difference": 0.001037001609802246,
+   "p99_absolute_R_0v_difference": 0.001037001609802246,
+   "rms_R_0v_difference": 0.0006035480374690096,
+   "reference_R_0v_minimum": 0.7774434685707092,
+   "reference_R_0v_maximum": 1.1117074489593506,
+   "candidate_R_0v_minimum": 0.7778397798538208,
+   "candidate_R_0v_maximum": 1.1127444505691528,
+   "solar_channels_index": 11,
+   "solar_channels": 12.0,
+   "optical_depth_index": 15,
+   "optical_depth": 128.0,
+   "effective_radius_index": 6,
+   "effective_radius": 13.0,
+   "solar_zenith_index": 0,
+   "solar_zenith": 0.0
+  },
+  {
+   "rank": 91,
+   "maximum_absolute_R_0v_difference": 0.0010362863540649414,
+   "p99_absolute_R_0v_difference": 0.0010362863540649414,
+   "rms_R_0v_difference": 0.0004908072825965736,
+   "reference_R_0v_minimum": 0.7762307524681091,
+   "reference_R_0v_maximum": 1.1061424016952515,
+   "candidate_R_0v_minimum": 0.7765068411827087,
+   "candidate_R_0v_maximum": 1.1071786880493164,
+   "solar_channels_index": 11,
+   "solar_channels": 12.0,
+   "optical_depth_index": 15,
+   "optical_depth": 128.0,
+   "effective_radius_index": 7,
+   "effective_radius": 15.0,
+   "solar_zenith_index": 0,
+   "solar_zenith": 0.0
+  },
+  {
+   "rank": 92,
+   "maximum_absolute_R_0v_difference": 0.0010352778481319547,
+   "p99_absolute_R_0v_difference": 0.0010344511788571253,
+   "rms_R_0v_difference": 0.00040790873232404826,
+   "reference_R_0v_minimum": 0.0004639031831175089,
+   "reference_R_0v_maximum": 0.0031107747927308083,
+   "candidate_R_0v_minimum": 0.00031313305953517556,
+   "candidate_R_0v_maximum": 0.003403078531846404,
+   "solar_channels_index": 23,
+   "solar_channels": 24.0,
+   "optical_depth_index": 6,
+   "optical_depth": 0.25,
+   "effective_radius_index": 17,
+   "effective_radius": 35.0,
+   "solar_zenith_index": 3,
+   "solar_zenith": 30.0
+  },
+  {
+   "rank": 93,
+   "maximum_absolute_R_0v_difference": 0.0010322090238332748,
+   "p99_absolute_R_0v_difference": 0.0010237138532102107,
+   "rms_R_0v_difference": 0.000321750310944518,
+   "reference_R_0v_minimum": 0.004624687600880861,
+   "reference_R_0v_maximum": 0.03759154677391052,
+   "candidate_R_0v_minimum": 0.005216183606535196,
+   "candidate_R_0v_maximum": 0.036563657224178314,
+   "solar_channels_index": 19,
+   "solar_channels": 20.0,
+   "optical_depth_index": 6,
+   "optical_depth": 0.25,
+   "effective_radius_index": 5,
+   "effective_radius": 11.0,
+   "solar_zenith_index": 3,
+   "solar_zenith": 30.0
+  },
+  {
+   "rank": 94,
+   "maximum_absolute_R_0v_difference": 0.0010319948196411133,
+   "p99_absolute_R_0v_difference": 0.0010319948196411133,
+   "rms_R_0v_difference": 0.0004399404795776356,
+   "reference_R_0v_minimum": 0.808972179889679,
+   "reference_R_0v_maximum": 1.1501786708831787,
+   "candidate_R_0v_minimum": 0.8091889023780823,
+   "candidate_R_0v_maximum": 1.1512106657028198,
+   "solar_channels_index": 11,
+   "solar_channels": 12.0,
+   "optical_depth_index": 16,
+   "optical_depth": 256.0,
+   "effective_radius_index": 9,
+   "effective_radius": 19.0,
+   "solar_zenith_index": 0,
+   "solar_zenith": 0.0
+  },
+  {
+   "rank": 95,
+   "maximum_absolute_R_0v_difference": 0.001002632372546941,
+   "p99_absolute_R_0v_difference": 0.0010023717900912743,
+   "rms_R_0v_difference": 0.00032349046998761773,
+   "reference_R_0v_minimum": -0.0004996014758944511,
+   "reference_R_0v_maximum": 0.0023399509955197573,
+   "candidate_R_0v_minimum": 0.00013086535909678787,
+   "candidate_R_0v_maximum": 0.0015548113733530045,
+   "solar_channels_index": 23,
+   "solar_channels": 24.0,
+   "optical_depth_index": 5,
+   "optical_depth": 0.125,
+   "effective_radius_index": 17,
+   "effective_radius": 35.0,
+   "solar_zenith_index": 3,
+   "solar_zenith": 30.0
+  },
+  {
+   "rank": 96,
+   "maximum_absolute_R_0v_difference": 0.0009957849979400635,
+   "p99_absolute_R_0v_difference": 0.0009861411619931457,
+   "rms_R_0v_difference": 0.0003518833684826804,
+   "reference_R_0v_minimum": 0.012650283984839916,
+   "reference_R_0v_maximum": 0.22830620408058167,
+   "candidate_R_0v_minimum": 0.012471787631511688,
+   "candidate_R_0v_maximum": 0.22819243371486664,
+   "solar_channels_index": 20,
+   "solar_channels": 21.0,
+   "optical_depth_index": 13,
+   "optical_depth": 32.0,
+   "effective_radius_index": 9,
+   "effective_radius": 19.0,
+   "solar_zenith_index": 7,
+   "solar_zenith": 70.0
+  },
+  {
+   "rank": 97,
+   "maximum_absolute_R_0v_difference": 0.0009957551956176758,
+   "p99_absolute_R_0v_difference": 0.0009957551956176758,
+   "rms_R_0v_difference": 0.0004068249972627875,
+   "reference_R_0v_minimum": 0.7752391695976257,
+   "reference_R_0v_maximum": 1.1004798412322998,
+   "candidate_R_0v_minimum": 0.7754318714141846,
+   "candidate_R_0v_maximum": 1.1014755964279175,
+   "solar_channels_index": 11,
+   "solar_channels": 12.0,
+   "optical_depth_index": 15,
+   "optical_depth": 128.0,
+   "effective_radius_index": 8,
+   "effective_radius": 17.0,
+   "solar_zenith_index": 0,
+   "solar_zenith": 0.0
+  },
+  {
+   "rank": 98,
+   "maximum_absolute_R_0v_difference": 0.000982329249382019,
+   "p99_absolute_R_0v_difference": 0.0009767588973045348,
+   "rms_R_0v_difference": 0.000256499725943276,
+   "reference_R_0v_minimum": 0.15184131264686584,
+   "reference_R_0v_maximum": 0.6285891532897949,
+   "candidate_R_0v_minimum": 0.15184307098388672,
+   "candidate_R_0v_maximum": 0.6295673847198486,
+   "solar_channels_index": 11,
+   "solar_channels": 12.0,
+   "optical_depth_index": 12,
+   "optical_depth": 16.0,
+   "effective_radius_index": 11,
+   "effective_radius": 23.0,
+   "solar_zenith_index": 7,
+   "solar_zenith": 70.0
+  },
+  {
+   "rank": 99,
+   "maximum_absolute_R_0v_difference": 0.0009812116622924805,
+   "p99_absolute_R_0v_difference": 0.000980525016784668,
+   "rms_R_0v_difference": 0.0008532006605111015,
+   "reference_R_0v_minimum": 0.7165943384170532,
+   "reference_R_0v_maximum": 0.9472028613090515,
+   "candidate_R_0v_minimum": 0.7172169089317322,
+   "candidate_R_0v_maximum": 0.9480934739112854,
+   "solar_channels_index": 11,
+   "solar_channels": 12.0,
+   "optical_depth_index": 16,
+   "optical_depth": 256.0,
+   "effective_radius_index": 6,
+   "effective_radius": 13.0,
+   "solar_zenith_index": 3,
+   "solar_zenith": 30.0
+  },
+  {
+   "rank": 100,
+   "maximum_absolute_R_0v_difference": 0.0009789889154490083,
+   "p99_absolute_R_0v_difference": 0.0009741530823521315,
+   "rms_R_0v_difference": 0.00040844692218873084,
+   "reference_R_0v_minimum": 0.00013258607941679657,
+   "reference_R_0v_maximum": 0.025843458250164986,
+   "candidate_R_0v_minimum": 0.0003115524596069008,
+   "candidate_R_0v_maximum": 0.02516222931444645,
+   "solar_channels_index": 20,
+   "solar_channels": 21.0,
+   "optical_depth_index": 4,
+   "optical_depth": 0.0625,
+   "effective_radius_index": 9,
+   "effective_radius": 19.0,
+   "solar_zenith_index": 7,
+   "solar_zenith": 70.0
+  }
+ ]
+}

@@ -6,11 +6,12 @@
 #   scripts/submit_oraclut_lut.sh --config configs/<configuration>.driver [--time=.. --mem=.. --cpus-per-task=..]
 #   scripts/submit_oraclut_lut.sh [sbatch options] -- <oraclut.generate options>
 #
-# A runs/<name>.run file is executed by python create_orac_luts.py (the
-# IDL-structured path); --config and other options go to python -m
-# oraclut.generate (the current path).  Arguments beginning with --time=,
-# --mem=, --cpus-per-task=, --job-name=, --partition=, --account= or --qos= are
-# passed to sbatch.  A literal "--" ends the sbatch options.
+# A runs/<name>.run file is executed by the release launcher, python
+# create_orac_luts_release_v03.py (the IDL-structured path, run from the sealed
+# source files of the run file's LUT release; SOURCE_VERSIONING.md); --config
+# and other options go to python -m oraclut.generate (development path).
+# Arguments beginning with --time=, --mem=, --cpus-per-task=, --job-name=,
+# --partition=, --account= or --qos= are passed to sbatch.  A literal "--" ends the sbatch options.
 #
 # Where the work happens:
 #   atmlxint7           validates, creates the log directory, drops the login

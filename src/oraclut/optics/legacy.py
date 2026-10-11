@@ -13,6 +13,7 @@ from statistics import NormalDist
 
 import numpy as np
 
+from ..idl_total import idl_total
 from .legacy_mie import mie_single_batch
 
 
@@ -84,13 +85,13 @@ def _mie_distribution(
 
     area_weight = distribution_weight * np.pi * radius ** 2
     volume_weight = area_weight * (4.0 / 3.0) * radius
-    extinction = float(np.sum(area_weight * particle["qext"]))
-    scattering = float(np.sum(area_weight * particle["qsca"]))
-    asymmetry = float(np.sum(area_weight * particle["g"] * particle["qsca"]) / scattering)
-    phase = np.sum(
-        area_weight[:, None] * particle["f11"] * particle["qsca"][:, None], axis=0
+    extinction = float(idl_total(area_weight * particle["qext"]))
+    scattering = float(idl_total(area_weight * particle["qsca"]))
+    asymmetry = float(idl_total(area_weight * particle["g"] * particle["qsca"]) / scattering)
+    phase = idl_total(
+        area_weight[:, None] * particle["f11"] * particle["qsca"][:, None], dimension=1
     ) / scattering
-    return extinction, scattering / extinction, asymmetry, phase, float(np.sum(volume_weight))
+    return extinction, scattering / extinction, asymmetry, phase, float(idl_total(volume_weight))
 
 
 def legendre_moments(
@@ -108,15 +109,15 @@ def legendre_moments(
     if not (qv.shape == qw.shape == values.shape):
         raise ValueError("qv, qw and phase must have equal shapes")
     coefficients = np.zeros(qv.size, dtype=np.float64)
-    coefficients[0] = np.sum(values * qw) / 2.0
+    coefficients[0] = idl_total(values * qw) / 2.0
     if qv.size == 1:
         return coefficients
-    coefficients[1] = 3.0 * np.sum(values * qv * qw) / 2.0
+    coefficients[1] = 3.0 * idl_total(values * qv * qw) / 2.0
     previous = np.ones_like(qv)
     current = qv.copy()
     for order in range(2, qv.size):
         polynomial = ((2.0 * order - 1.0) / order) * qv * current - ((order - 1.0) / order) * previous
-        coefficients[order] = (2.0 * order + 1.0) * np.sum(values * polynomial * qw) / 2.0
+        coefficients[order] = (2.0 * order + 1.0) * idl_total(values * polynomial * qw) / 2.0
         if abs(coefficients[order]) < minimum_absolute_coefficient:
             break
         previous, current = current, polynomial
@@ -318,18 +319,18 @@ def legacy_mixed_mie_optics(
                 * optics.single_scatter_albedo[radius_index, wavelength_index]
                 for ratio, optics in zip(ratios, component_optics)
             ])
-            total_bext = np.sum(bext)
-            total_bextw = np.sum(bextw)
-            extinction[radius_index, wavelength_index] = total_bext / np.sum(ratios)
+            total_bext = idl_total(bext)
+            total_bextw = idl_total(bextw)
+            extinction[radius_index, wavelength_index] = total_bext / idl_total(ratios)
             ssa[radius_index, wavelength_index] = total_bextw / total_bext
-            asymmetry[radius_index, wavelength_index] = np.sum(np.asarray([
+            asymmetry[radius_index, wavelength_index] = idl_total(np.asarray([
                 value * optics.asymmetry_parameter[radius_index, wavelength_index]
                 for value, optics in zip(bextw, component_optics)
             ])) / total_bextw
-            moments[:, radius_index, wavelength_index] = np.sum(np.asarray([
+            moments[:, radius_index, wavelength_index] = idl_total(np.asarray([
                 value * optics.phase_moments[:, radius_index, wavelength_index]
                 for value, optics in zip(bextw, component_optics)
-            ]), axis=0) / total_bextw
+            ]), dimension=1) / total_bextw
     return OpticalProperties(
         wavelength_microns=wavelengths,
         effective_radius_microns=radii,

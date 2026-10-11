@@ -128,6 +128,16 @@ IDL-to-Python ORAC LUT port. Never modify existing IDL `.pro` files. If
 Python and IDL differ, modify Python or document the difference. New IDL
 diagnostics must be separate files under `validation/diagnostics/`.
 
+One owner-approved exception (2026-10-10): `create_orac_lut/call_disort.pro`
+selects the DISORT precision.  Double precision (`DISORT_DP`,
+`create_orac_lut/disort2_dp/`) is the default; `ORAC_LUT_DISORT_PRECISION=single`
+executes the original `DISORT` statement with the historical DLM, and every
+statement before the solver call is the original.  The original file is
+preserved as `call_disort_v01.pro`, and the complete historical source set
+in `releases/idl_lut_v21_single.release`.  No other `.pro` file is changed;
+see `DOUBLE_PRECISION_BASELINE.md`.  Never SourceVault-version a `.dlm` file
+inside the IDL DLM path (a second descriptor of the same module conflicts).
+
 Treat the existing historical tree as read-only reference material until the Python implementation reproduces at least one complete legacy LUT.
 
 Do not rename, move, delete, reformat, or otherwise clean the legacy files merely for tidiness. Old `.pro`, `.bak`, versioned files, run scripts, DLM interfaces, DISORT sources, and other historical material may be required to reconstruct the operational workflow.
@@ -235,6 +245,12 @@ The Python architecture should not assume that the current legacy DISORT wrapper
 
 Do not change the radiative-transfer method during legacy reproduction.
 
+Both generators solve DISORT in double precision by default
+(`ORAC_LUT_DISORT_PRECISION`, `double` or `single`; NSTR 60 unchanged).  The
+IDL DLM `DISORTtoIDL_DP` and the Python library `libdisort_dp.so` are the same
+kernel objects built by `create_orac_lut/disort2_dp/build_dlm.sh`; the
+historical single-precision `DISORTtoIDL.so` is never rebuilt or replaced.
+
 ## Spectral treatment
 
 Instrument spectral-response integration is scientifically important, especially for infrared channels.
@@ -261,7 +277,12 @@ A new scientific version is released by updating `CODE_VERSION`, committing
 on `main`, tagging with `scripts/tag_lut_code_release.sh` and pushing commit
 and tag; historical releases are inspected in temporary worktrees, never by
 resetting `main`, rewriting history or keeping duplicate source trees.  See
-`LUT_CODE_VERSIONS.md`.
+`LUT_CODE_VERSIONS.md`.  Sealed SourceVault release manifests in `releases/`
+(`lut_v<NN>[_<label>].release` for Python, `idl_lut_v<NN>_<label>.release` for
+IDL) list every source, library and input with SHA-256; the Python release
+launcher (`create_orac_luts_release_v03.py`) selects one with
+`ORAC_LUT_RELEASE_MANIFEST` when several define a release, and
+`scripts/check_release_manifest.py` verifies any manifest.
 
 ## LUT product format contract
 

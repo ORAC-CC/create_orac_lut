@@ -1,0 +1,10 @@
+# Double-precision DISORT validation case D: p240 ch1 tau 8 re 11 SZA 40 (ordinary node, V21 and V22 agree)
+# Grid values equal the production Terra MODIS LUT nodes exactly.
+input_files
+terra_modis_v1.inst
+liquid-water_240.mm
+case_D.lut
+2
+channelid=[1]
+srf_quad=1
+version=21

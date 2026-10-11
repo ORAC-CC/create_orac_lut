@@ -1,0 +1,10 @@
+3 uneven_logarithmic
+64.0 128.0 256.0
+3 uneven_linear
+27.0 29.0 31.0
+2 uneven_linear
+70.0 80.0
+10 linear
+0.0 90.0
+11 linear
+0.0 180.0

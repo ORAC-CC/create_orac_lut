@@ -26,6 +26,7 @@ import numpy as np
 
 from .create_bwgp import create_bwgp, legpexp, quadrature
 from .baum import BaumTable
+from .total import idl_total
 
 
 def _interpol_complex(cm, wl, wvl):
@@ -115,7 +116,7 @@ def create_range(rat, mr, spd, radii):
    group_starts = np.concatenate(([0], unq_er[:-1] + 1))
    for mode, (start, end) in enumerate(zip(group_starts, unq_er)):
       members = srt_er[start:end + 1]
-      ratq[mode] = np.sum(rat[members])
+      ratq[mode] = idl_total(rat[members])
       if ratq[mode] <= 0.0:
          raise ValueError("create_range: every size mode must have a positive total mixing ratio")
       mode_ratq[:members.size, mode] = rat[members] / ratq[mode]
@@ -126,9 +127,8 @@ def create_range(rat, mr, spd, radii):
    nmr = np.zeros((nunq, radii.size), dtype=np.float64)
    g = np.exp(2.0 * np.log(spq)**2)
    f = np.exp(4.5 * np.log(spq)**2)
-   ea = np.sum(rat * mr**3 * np.exp(4.5 * np.log(spd)**2)) / np.sum(
-      rat * mr**2 * np.exp(2.0 * np.log(spd)**2)
-   )
+   ea = idl_total(rat * mr**3 * np.exp(4.5 * np.log(spd)**2), double=True) / idl_total(
+      rat * mr**2 * np.exp(2.0 * np.log(spd)**2), double=True)
 
    for i, radius in enumerate(radii):
       # IDL: Nmr[*,I] = Mrq; this is overwritten in the boundary branches.
@@ -289,7 +289,7 @@ def generate_scattering_properties(srfstrarr, nwvl_max, inststr, mmstr, lutstr, 
 
          # IDL normalizes each interpolated Baum phase function with the
          # Gauss-Legendre weights before expanding it into moments.
-         norm550 = np.sum(phs550_c[:, c, :] * weights[:, None], axis=0) / 2.0
+         norm550 = idl_total(phs550_c[:, c, :] * weights[:, None], dimension=1) / 2.0
          if np.any(norm550 == 0.0) or not np.all(np.isfinite(norm550)):
             raise ValueError(f"{mmstr.compname[c]}: invalid Baum phase-function normalization")
          phs550_c[:, c, :] /= norm550[None, :]
@@ -301,7 +301,7 @@ def generate_scattering_properties(srfstrarr, nwvl_max, inststr, mmstr, lutstr, 
          g_c[:, :, c, :] = g1.reshape((nwvl_max, nchan, nefr), order="F")
          phs_c[:, :, :, c, :] = phs1.reshape((nmom, nwvl_max, nchan, nefr), order="F")
 
-         norm = np.sum(phs_c[:, :, :, c, :] * weights[:, None, None, None], axis=0) / 2.0
+         norm = idl_total(phs_c[:, :, :, c, :] * weights[:, None, None, None], dimension=1) / 2.0
          if np.any(norm == 0.0) or not np.all(np.isfinite(norm)):
             raise ValueError(f"{mmstr.compname[c]}: invalid Baum phase-function normalization")
          phs_c[:, :, :, c, :] /= norm[None, :, :, :]
@@ -384,25 +384,25 @@ def generate_scattering_properties(srfstrarr, nwvl_max, inststr, mmstr, lutstr, 
             # Calculate the 550 nm quantities (once, with the first channel)
             if l == 0:
                mratbext = lut_mrat[:, r] * bext550_c[:, r]
-               tmratbext = np.sum(mratbext)
+               tmratbext = idl_total(mratbext)
                mratbextw = mratbext * w550_c[:, r]
-               tmratbextw = np.sum(mratbextw)
-               bext550[r] = tmratbext / np.sum(lut_mrat[:, r])
+               tmratbextw = idl_total(mratbextw)
+               bext550[r] = tmratbext / idl_total(lut_mrat[:, r])
                w550[r] = tmratbextw / tmratbext
-               g550[r] = np.sum(mratbextw * g550_c[:, r]) / tmratbextw
-               phs550[:, r] = np.sum(mratbextw[None, :] * phs550_c[:, :, r], axis=1) / tmratbextw
+               g550[r] = idl_total(mratbextw * g550_c[:, r]) / tmratbextw
+               phs550[:, r] = idl_total(mratbextw[None, :] * phs550_c[:, :, r], dimension=2) / tmratbextw
                # Calculate the Legendre moments for the phase function
                inlc, alc = legpexp(nmom, qv, weights, phs550[:, r])
                amom550[:, r] = alc / two_n_plus_one
 
             mratbext = lut_mrat[:, r] * bext_c[m, l, :, r]
-            tmratbext = np.sum(mratbext)
+            tmratbext = idl_total(mratbext)
             mratbextw = mratbext * w_c[m, l, :, r]
-            tmratbextw = np.sum(mratbextw)
-            bext[m, l, r] = tmratbext / np.sum(lut_mrat[:, r])
+            tmratbextw = idl_total(mratbextw)
+            bext[m, l, r] = tmratbext / idl_total(lut_mrat[:, r])
             w[m, l, r] = tmratbextw / tmratbext
-            g[m, l, r] = np.sum(mratbextw * g_c[m, l, :, r]) / tmratbextw
-            phs[:, m, l, r] = np.sum(mratbextw[None, :] * phs_c[:, m, l, :, r], axis=1) / tmratbextw
+            g[m, l, r] = idl_total(mratbextw * g_c[m, l, :, r]) / tmratbextw
+            phs[:, m, l, r] = idl_total(mratbextw[None, :] * phs_c[:, m, l, :, r], dimension=2) / tmratbextw
 
             # Calculate the Legendre moments for the phase function
             inlc, alc = legpexp(nmom, qv, weights, phs[:, m, l, r])

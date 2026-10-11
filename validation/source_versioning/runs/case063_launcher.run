@@ -1,0 +1,19 @@
+; V01 source-set check: V21/V22 campaign case 063 (launcher run).
+platform      = 'noaa-20'
+instrument    = 'viirs'
+forward_model = 'cloud'
+in_path       = 'create_orac_lut/input_files'
+instfile      = 'noaa-20_viirs_v1.inst'
+mmfile        = 'liquid-water_stg.mm'
+lutfile       = 'liquid-water-cloud_test.lut'
+atmospheres   = 2
+channelid     = [1, 20]
+gas           = 0
+no_rayleigh   = 0
+srf_quad      = 2
+reuse_scat    = 0
+scat_only     = 0
+nstreams      = 60
+nmom          = 1000
+version       = 22
+out_path      = 'validation/tmp/source_versioning/compact/launcher/case063'

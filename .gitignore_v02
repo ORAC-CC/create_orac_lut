@@ -1,0 +1,136 @@
+# Python and test tooling
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Build and compiled artefacts
+build/
+dist/
+*.o
+*.obj
+*.so
+*.dll
+*.dylib
+*.a
+*.mod
+*.pyc
+
+# Local scientific scratch and editor files
+*.tmp
+*.swp
+*~
+.#*
+.vscode/
+.idea/
+
+# Preservation material is deliberately kept outside repository history.
+docs/git_preservation/
+
+# Generated validation staging and diagnostics.
+validation/tmp/
+validation/scratch/
+validation/diagnostics/*.bin
+validation/diagnostics/*.npz
+
+# Generated full LUT collections. Small, explicitly selected regression
+# references elsewhere in validation/ remain trackable.
+create_orac_lut/luts/
+
+# Large generated/input staging collections retained on disk but not in the
+# baseline. Individual source/input files remain trackable outside this tree.
+create_orac_lut/input_files/baum/
+
+# Legacy compiler and editor scratch files.
+create_orac_lut/#*
+create_orac_lut/*.bak
+create_orac_lut/*.o
+create_orac_lut/*.so
+create_orac_lut/disort2/src/*.o
+create_orac_lut/disort4dlm/*.o
+create_orac_lut/disort4dlm/*.so
+mie/*.bak
+mie/*.o
+mie/*.so
+mie/dlm-code/*.o
+mie/dlm-code/*.so
+
+# Root-level generated/archival products too large or not source-controlled.
+disort.dat
+*.aux
+*.bbl
+*.blg
+*.dvi
+*.log
+*.ps
+*.toc
+*.tps
+*.sav
+
+# NOTE: *.eps, *.pdf, *.png, *.jpg and *.pptx are deliberately NOT ignored.
+# Several root-level figures and documents in those formats are manually
+# created scientific material with no reproducible source in this repository.
+
+# LaTeX font-generation log.
+missfont.log
+
+# Machine-local runtime files.
+*.out
+*.stdout
+*.stderr
+
+# Generated LUT products
+/luts/
+
+# Local development history and archived material.
+# These are retained on disk but are not part of the distributable program.
+/docs/
+
+# Validation: source code, reports, run/grid definitions and small tabulated
+# results are version-controlled (2026-10-09); generated products, arrays,
+# figures, job logs, caches, pytest scratch and large intermediate results
+# stay on disk only.
+validation/generated/
+validation/slurm
+validation/netcdf_string_attributes/logs/
+validation/v24/results/disort_options/
+validation/**/*.nc
+validation/**/*.npz
+validation/**/*.png
+validation/**/__pycache__/
+
+# Local development/design documentation.
+/ARCHITECTURE.md
+/MIGRATION_PLAN.md
+/VALIDATION.md
+
+# Legacy-tree local backups.
+/create_orac_lut/**/*.bak
+
+# V23/grid-development LUT definitions retained locally in the legacy tree.
+/create_orac_lut/input_files/lut/*-dense.lut
+/create_orac_lut/input_files/lut/*-angular-ref.lut
+/create_orac_lut/input_files/lut/*-geometry-0-75.lut
+/create_orac_lut/input_files/lut/soz-probe.lut
+/create_orac_lut/input_files/lut/master-0-90-angular-ref.lut
+/create_orac_lut/input_files/lut/*-dense-0-75.lut
+/scripts/submit_v23_modis_cloud_luts.sh
+
+# Local migration/validation-campaign tests.
+/tests/test_idl_driver_invariant.py
+/tests/test_idl_v21_ready_mapping.py
+/tests/test_python_v22_campaign.py
+/tests/test_v21_v22_campaign_comparison.py
+
+# Double-precision V21/V22 LUT staging (generated products, never committed)
+# and the symlinked input trees / work directories of the validation runs.
+/staging/
+validation/v21_v22_terra_modis/idl_double/build/
+validation/v21_v22_terra_modis/idl_double/results/**/input_files/
+validation/v21_v22_terra_modis/v22_double/work/
+validation/v21_v22_terra_modis/disort_boundary/run/
+validation/v21_v22_terra_modis/disort_boundary/results/**/input_files
+create_orac_lut/disort2_dp/build/

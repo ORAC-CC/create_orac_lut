@@ -18,10 +18,16 @@
 #
 # Three ways of naming the calculation:
 #   * a run file (IDL-structured path):   runs/<name>.run
-#     runs  python create_orac_luts.py runs/<name>.run
-#   * generator options (current path):   --config configs/<name>.driver ...
-#     runs  python -m oraclut.generate <options>
+#     runs  python create_orac_luts_release_v03.py runs/<name>.run
+#     (the release launcher: the run file's version selects the release
+#     manifest releases/lut_v<NN>[_<label>].release -- set
+#     ORAC_LUT_RELEASE_MANIFEST=<file> when several define that release, e.g.
+#     lut_v22_double.release -- whose sealed source files generate the LUT and
+#     are recorded in it; SOURCE_VERSIONING.md)
+#   * generator options (development path, not a release product):
+#     --config configs/<name>.driver ...  runs  python -m oraclut.generate <options>
 #   * maker master array:                  --master-manifest <path>
+#     (each transient run file goes through the release launcher too)
 # The run file or manifest carries the scientific configuration; SLURM only
 # executes one concrete calculation per task.
 
@@ -68,6 +74,9 @@ echo "Python:        $PYTHON"
 echo "Python version: $("$PYTHON" --version 2>&1)"
 echo "Git revision:  $(git -C "$REPO" rev-parse HEAD 2>/dev/null || echo unknown)"
 echo "Source state:  $(if [[ -z "$(git -C "$REPO" status --porcelain -- create_orac_luts.py src mie create_orac_lut 2>/dev/null)" ]]; then echo clean; else echo MODIFIED; fi)"
+echo "Release files: $(cd "$REPO" && sha256sum create_orac_luts_release_v03.py releases/*.release 2>/dev/null | tr '\n' ';')"
+echo "Manifest:      ${ORAC_LUT_RELEASE_MANIFEST:-<the only manifest of the release>}"
+echo "DISORT:        ${ORAC_LUT_DISORT_PRECISION:-double} precision"
 echo "TMPDIR:        $TMPDIR"
 echo "CPUs:          ${SLURM_CPUS_PER_TASK:-unknown}; memory: ${SLURM_MEM_PER_NODE:-unknown} MB; time limit: see squeue -j ${SLURM_JOB_ID:-}"
 echo "============================================================"
@@ -94,13 +103,14 @@ if [[ "$1" == "--master-manifest" ]]; then
     echo "Master manifest: $MASTER_MANIFEST"
     echo "Array task index: $MASTER_INDEX"
     echo "Transient concrete run: $TRANSIENT_RUN"
-    "$PYTHON" create_orac_luts.py "$TRANSIENT_RUN"
+    "$PYTHON" create_orac_luts_release_v03.py "$TRANSIENT_RUN"
 else
 case "$1" in
     *.run)
-        # IDL-structured path: the run file is the whole configuration.
+        # IDL-structured path: the run file is the whole configuration; the
+        # release launcher runs the sealed source files of the requested release.
         [ "$#" -eq 1 ] || { echo "ERROR: a run file takes no further arguments: $*" >&2; exit 1; }
-        "$PYTHON" create_orac_luts.py "$1"
+        "$PYTHON" create_orac_luts_release_v03.py "$1"
         ;;
     *)
         "$PYTHON" -m oraclut.generate "$@"

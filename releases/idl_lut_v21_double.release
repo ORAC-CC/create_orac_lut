@@ -1,0 +1,195 @@
+# ORAC IDL LUT release manifest
+#
+# IDL LUT release V21, double precision (new reference candidate): the same
+# legacy ORAC LUT V2.1 IDL generator and inputs as the historical V21 release,
+# with DISORT solved by the validated double-precision DLM
+# create_orac_lut/disort2_dp/DISORTtoIDL_DP.so (default of call_disort.pro;
+# ORAC_LUT_DISORT_PRECISION=double).  NSTR 60, NMOM 1000, original LUT grids,
+# float32 NetCDF storage, LUT version 21.  Validation:
+# validation/v21_v22_terra_modis/REPORT_idl_double_precision.md.
+# Products made from this manifest are recorded, with SHA-256, in the
+# companion file of the same name with suffix .products.
+#
+# LUT release numbers (V21, V22, ...) and source-file versions (_v01, _v02, ...)
+# are independent: each file's version advances only when that file changes.
+# "pinned" files have no versioned name; their content is fixed by SHA-256.
+#
+# Columns: role  logical-name  file-version  sha256  path (relative to the
+# repository, or absolute outside it)
+
+manifest_schema = oraclut-idl-release-manifest-1
+lut_release = 21
+disort_precision = double
+nstreams = 60
+nmom = 1000
+idl = IDL 8.9.0 (linux x86_64 m64), module idl/890
+fortran_runtime = intel-compilers/2022 (ifort 2021.6.0 runtime)
+created = 2026-10-10
+git_head_at_creation = 37cf766a9c8e8571b306c7901869fad52d1d6186
+
+idl-source  call_disort.pro                              v02     837e3a4e8904d7ce43e4d4604204cb73bfa6c095566479645b38efc5962b924b  create_orac_lut/call_disort_v02.pro
+idl-source  create_bwgp.pro                              pinned  84ccd12d5be7f94202ac466008ba3ffdd1552dba07c2fba5211d3240327d5927  create_orac_lut/create_bwgp.pro
+idl-source  create_orac_aerosol_lut.pro                  pinned  ea84e2631687c3232d3c08f5ca084b068920951543b3d3b7425db0f045039aa1  create_orac_lut/create_orac_aerosol_lut.pro
+idl-source  create_orac_aerosol_lut_wrapper.pro          pinned  96c1c2afe776893ccec45082d05623a1ebe87417348fd9dbf511809044c3b7f4  create_orac_lut/create_orac_aerosol_lut_wrapper.pro
+idl-source  create_orac_cloud_lut.pro                    pinned  5547c30d1d0bcf1eb68d430ce4af2d943e6ea1b3ba1edd14135db4342e6fa752  create_orac_lut/create_orac_cloud_lut.pro
+idl-source  create_orac_cloud_lut_wrapper.pro            pinned  efd944be662d8a6e964e0f7732746ea21b86909e7a56909df618315432e08333  create_orac_lut/create_orac_cloud_lut_wrapper.pro
+idl-source  create_range.pro                             pinned  8149c3a32a5182b359a8302ecb89adebdc5a31e641d025cee41d15986303d9cc  create_orac_lut/create_range.pro
+idl-source  disort2/ExampleDISORT.pro                    pinned  f58ec7c89903d1c2f63e6865963d353e56ecf1676e592e205416293e63782cd3  create_orac_lut/disort2/ExampleDISORT.pro
+idl-source  dubovik/dubovik_lognormal.pro                pinned  2983f5b0b55b65cd2aadd4224b7d7ed43508d3b9190286f72fe8337caac99fad  create_orac_lut/dubovik/dubovik_lognormal.pro
+idl-source  dubovik/dubovik_lognormal_multiple_eps.pro   pinned  105c3c0876eec383140e57dab0cb3399ffd52292bd6598e2895315547b1b3b6b  create_orac_lut/dubovik/dubovik_lognormal_multiple_eps.pro
+idl-source  dubovik/dubovik_read_filenames.pro           pinned  8d32edd12360548696c882c3efcbb7b241907225c05bf0b366df2d3d3e76b244  create_orac_lut/dubovik/dubovik_read_filenames.pro
+idl-source  dubovik/dubovik_read_kernel_kext.pro         pinned  5749db67f01a136dd99c588dc8a2b6d3aebc55176acf1cdd3854ad573a015c39  create_orac_lut/dubovik/dubovik_read_kernel_kext.pro
+idl-source  dubovik/dubovik_read_kernel_scatt_matrix.pro pinned  a9cd24481ae008220fbf4bb745c5e2bdfde59bbfab734a2ea6789153ff978d02  create_orac_lut/dubovik/dubovik_read_kernel_scatt_matrix.pro
+idl-source  generate_scattering_properties.pro           pinned  d57a572efee8a2477ab3b79707c24d768ca4f121fc698396ec909ad35a562844  create_orac_lut/generate_scattering_properties.pro
+idl-source  generate_scattering_properties_simple.pro    pinned  c7b05d9298192608204900a50b64269bc201a04834e70603445531621683dbfb  create_orac_lut/generate_scattering_properties_simple.pro
+idl-source  input_files/attic/bbconstantsv0.pro          pinned  f7076a4cba1f845c088fa4de72701ac1e055b7d2bdf49278b4fe8707dd4d6a85  create_orac_lut/input_files/attic/bbconstantsv0.pro
+idl-source  input_files/attic/checkbbconstants.pro       pinned  026110839af3c8da0295b14a28d8991357c6766bdeadb5e37f444454d9e644eb  create_orac_lut/input_files/attic/checkbbconstants.pro
+idl-source  input_files/attic/create_orac_lut_calc_gas_opd.pro pinned  7087fbb7c90335872bde043b44f01d097b3e921973737fdafedb75ccc1b47572  create_orac_lut/input_files/attic/create_orac_lut_calc_gas_opd.pro
+idl-source  input_files/attic/gas_opd_wrapper.pro        pinned  5eadc723b37e24a8dbfb912a1bcd3851f403328fcae939f098bc3fcdc2661513  create_orac_lut/input_files/attic/gas_opd_wrapper.pro
+idl-source  input_files/attic/makebbconstantscode.pro    pinned  6b8a0e418ab22bbc2099b7da18a94290f905b1866f4835f676a6023c38729323  create_orac_lut/input_files/attic/makebbconstantscode.pro
+idl-source  input_files/attic/oldbbconstants.pro         pinned  e76e5355d63f591e2960db2570da0520278bdb9a07c617927c719ee7527c5498  create_orac_lut/input_files/attic/oldbbconstants.pro
+idl-source  input_files/attic/oldsolconstants.pro        pinned  7517adf70932f0dc2bc8370da0b8bf17b5bad7f8504ba1aa4387ce42cc8db322  create_orac_lut/input_files/attic/oldsolconstants.pro
+idl-source  input_files/attic/read_modtran.pro           pinned  9c5ad3ae9535e281b0aaa607858fc53888cc33bc003538cbdfb4bf370d7c470b  create_orac_lut/input_files/attic/read_modtran.pro
+idl-source  input_files/attic/solarconstant.pro          pinned  f5c0e61535dfc8dc685a15e91325e6caf34c0d65c16be79ccd07ad9a77dcdd71  create_orac_lut/input_files/attic/solarconstant.pro
+idl-source  input_files/attic/srf.pro                    pinned  0a64829dbe86b6bc4e6f70a6fea4510ee7db5dacad75973ca60cb2c536443be9  create_orac_lut/input_files/attic/srf.pro
+idl-source  input_files/bbconstants.pro                  pinned  b1142f57d0ae86496198ec0d29e1a73e7d56ac89aceb4d5d0c275b1cbcf45165  create_orac_lut/input_files/bbconstants.pro
+idl-source  input_files/bbconstantsv0.pro                pinned  f7076a4cba1f845c088fa4de72701ac1e055b7d2bdf49278b4fe8707dd4d6a85  create_orac_lut/input_files/bbconstantsv0.pro
+idl-source  input_files/checkbbconstants.pro             pinned  026110839af3c8da0295b14a28d8991357c6766bdeadb5e37f444454d9e644eb  create_orac_lut/input_files/checkbbconstants.pro
+idl-source  input_files/create_orac_lut_calc_gas_opd.pro pinned  7087fbb7c90335872bde043b44f01d097b3e921973737fdafedb75ccc1b47572  create_orac_lut/input_files/create_orac_lut_calc_gas_opd.pro
+idl-source  input_files/gas_opd_wrapper.pro              pinned  5eadc723b37e24a8dbfb912a1bcd3851f403328fcae939f098bc3fcdc2661513  create_orac_lut/input_files/gas_opd_wrapper.pro
+idl-source  input_files/makebbconstantscode.pro          pinned  6b8a0e418ab22bbc2099b7da18a94290f905b1866f4835f676a6023c38729323  create_orac_lut/input_files/makebbconstantscode.pro
+idl-source  input_files/modtran3.5-v1.1/Source.dir/SOURCE/l7_aerext.pro pinned  6aa92f5e20ed82d8506b1525d6c2a6ec88192a2cc5580da62181914181c27970  create_orac_lut/input_files/modtran3.5-v1.1/Source.dir/SOURCE/l7_aerext.pro
+idl-source  input_files/modtran3.5-v1.1/Source.dir/SOURCE/l7_exabin.pro pinned  1cf6e8b891465d49f352b19567efe9eb0c8435423112fbdd8ca4d817e752e86a  create_orac_lut/input_files/modtran3.5-v1.1/Source.dir/SOURCE/l7_exabin.pro
+idl-source  input_files/modtran3.5-v1.1/Source.dir/SOURCE/l7_extdta.pro pinned  9ace3bdab091293b0091faf31128620d1e0e189b684d2dfc640d2c5e8182b613  create_orac_lut/input_files/modtran3.5-v1.1/Source.dir/SOURCE/l7_extdta.pro
+idl-source  input_files/modtran3.5-v1.1/create_orac_lut_run_modtran.pro pinned  5475f2f00bc105e9404f697eaf6cc812c1010e8128efcf1d23bdaa68db90bab8  create_orac_lut/input_files/modtran3.5-v1.1/create_orac_lut_run_modtran.pro
+idl-source  input_files/oldbbconstants.pro               pinned  e76e5355d63f591e2960db2570da0520278bdb9a07c617927c719ee7527c5498  create_orac_lut/input_files/oldbbconstants.pro
+idl-source  input_files/oldsolconstants.pro              pinned  7517adf70932f0dc2bc8370da0b8bf17b5bad7f8504ba1aa4387ce42cc8db322  create_orac_lut/input_files/oldsolconstants.pro
+idl-source  input_files/read_modtran.pro                 pinned  9c5ad3ae9535e281b0aaa607858fc53888cc33bc003538cbdfb4bf370d7c470b  create_orac_lut/input_files/read_modtran.pro
+idl-source  input_files/read_srfstr.pro                  pinned  c23ec22d7d730c87bef15cefe2509c3be8fea848a98fae2bb1edd189753e3acc  create_orac_lut/input_files/read_srfstr.pro
+idl-source  input_files/simpson_integral.pro             pinned  923b266269c758dfe6d870fae397b410f1c00fbd654d77dc260fa44e14390534  create_orac_lut/input_files/simpson_integral.pro
+idl-source  input_files/solarconstant.pro                pinned  f5c0e61535dfc8dc685a15e91325e6caf34c0d65c16be79ccd07ad9a77dcdd71  create_orac_lut/input_files/solarconstant.pro
+idl-source  input_files/srf.pro                          pinned  0a64829dbe86b6bc4e6f70a6fea4510ee7db5dacad75973ca60cb2c536443be9  create_orac_lut/input_files/srf.pro
+idl-source  input_files/sun/CreateGueymard2018.pro       pinned  6a002345ab09aac3b5d0264f1eaa164a4f40b2429d32c3e585b358712e075fbb  create_orac_lut/input_files/sun/CreateGueymard2018.pro
+idl-source  input_files/sun/comparesolar.pro             pinned  83f72bf1614f6e8ddf7dcdab9c3a17e45e5ee831c4c32f377632a3bc41188f90  create_orac_lut/input_files/sun/comparesolar.pro
+idl-source  integrate_trapeziodal.pro                    pinned  36699ed320920d4fc527f4c9b290608ed0fef4f2333da74334eea50476bf3ffa  create_orac_lut/integrate_trapeziodal.pro
+idl-source  itest.pro                                    pinned  81e32d409244992f14f231240974bee50cb8d1852c9025592165ab9ef9348cfe  create_orac_lut/itest.pro
+idl-source  legpexp.pro                                  pinned  2c57030c5cb89fb86b6b5ecca9b6afff918089b4f77d91ee3222dea880de55c3  create_orac_lut/legpexp.pro
+idl-source  load_atmstr.pro                              pinned  d5e5c0971cfff1d58525f35d7841cfa569c83fb31e1c2592cb4cb5c9d4b5b4ed  create_orac_lut/load_atmstr.pro
+idl-source  load_gasstr.pro                              pinned  b6d630f8d993e4199640e04dbf2fd963f2e2f5aaf315fa81768f7e4f0f9a3c97  create_orac_lut/load_gasstr.pro
+idl-source  load_inststr.pro                             pinned  87771753275c94dc2ceb39aab93e27912464aeb45daa1099f8be90cb1a9290f8  create_orac_lut/load_inststr.pro
+idl-source  load_lutstr.pro                              pinned  52878eabe05993888817be5ed98708c30704969a36adebddf55d026d8d545ec6  create_orac_lut/load_lutstr.pro
+idl-source  load_mmdat.pro                               pinned  7af33e65b419f93bf5b7bebb5c3666cc6fc096cfcb87c0987409759056ad75f6  create_orac_lut/load_mmdat.pro
+idl-source  load_solar_spectrum.pro                      pinned  0f0c8bf85925eaf202ef8f38261aaaf2cb38e4e47ef1a250048aca0b92dadf50  create_orac_lut/load_solar_spectrum.pro
+idl-source  load_srfstrarr.pro                           pinned  b8ca8d5c603be514fa4e8a7c9e702bc5236f4a82136a76ae3b0bafb0f25548dc  create_orac_lut/load_srfstrarr.pro
+idl-source  loadxy.pro                                   pinned  1fed6085de14cea2225f506e73e999f5c7fee58c45a9a03b858baeb765a15ae9  create_orac_lut/loadxy.pro
+idl-source  loadxyz.pro                                  pinned  9e168d0a2604ba216fba64e9220337c7aa739fa1a2b41dc5899b14e432e8ee7b  create_orac_lut/loadxyz.pro
+idl-source  makerunfile.pro                              pinned  45296e006926aadb589a433e955fac3b8ede8f159fc75da118dae44f1c8eda86  create_orac_lut/makerunfile.pro
+idl-source  mie/attic/gen_sph_funcs.pro                  pinned  f2391cffc32c37b99283ab7ee16d62f54221a5152859a1cd8d13c023a2de9795  create_orac_lut/mie/attic/gen_sph_funcs.pro
+idl-source  mie/attic/legpcrt.pro                        pinned  90083ca7668b56ee359f183d0c4dfbceeb5d829b6c7f5b9217546a985cc6937e  create_orac_lut/mie/attic/legpcrt.pro
+idl-source  mie/attic/mie_derivs.pro                     pinned  01a5684e21b5b53b988f20ca5ee3fb36b233cbdd87349af7f2a586e146e4bb7e  create_orac_lut/mie/attic/mie_derivs.pro
+idl-source  mie/attic/mie_derivs_ln.pro                  pinned  81a21d483fe948b0a2c54bc221cfa110346e8846a1e714a5e902149ce5f4bf43  create_orac_lut/mie/attic/mie_derivs_ln.pro
+idl-source  mie/attic/mie_single.pro                     pinned  079c2d2b15d6f8a85545a118f184895bfdbd5d0dcb2c7347a1239e3f7858bccf  create_orac_lut/mie/attic/mie_single.pro
+idl-source  mie/attic/mie_size_dist.pro                  pinned  6061a8f0dcbb7eb3b84e990aa868dddc1b98ad97530f15b95305facfffb5d901  create_orac_lut/mie/attic/mie_size_dist.pro
+idl-source  mie/attic/mie_uoc_d.pro                      pinned  b4294461516a2462cac0195a68fa489f3def4e3c288d1bcfdc5895df8534f164  create_orac_lut/mie/attic/mie_uoc_d.pro
+idl-source  mie/attic/mieext.pro                         pinned  6673cc92606f19bde5d7b18845bb4f2ab01788a41a5394da57acd62bfa7056ec  create_orac_lut/mie/attic/mieext.pro
+idl-source  mie/attic/mieext_f.pro                       pinned  5cee511bb2f22fa3401259b7f7f9ebd9880316fc7c8bb83f99e033bee0d4ce5f  create_orac_lut/mie/attic/mieext_f.pro
+idl-source  mie/attic/quadrature_test.pro                pinned  067a89e4ff9bf0a7eb39ee6a233144df1d86e8e8821c3eac02ae0b0fa3223768  create_orac_lut/mie/attic/quadrature_test.pro
+idl-source  mie/attic/scat_phase_matrix_exp.pro          pinned  fd88faed2eee7b7128f4514e7b1b6c2c54af8c441cc919c290b8f9ce3da44548  create_orac_lut/mie/attic/scat_phase_matrix_exp.pro
+idl-source  mie_size_dist_new.pro                        pinned  48a543b8804a9a7ead123d4a3fec6bfa106c107e797a07b62fbf26e9571790f3  create_orac_lut/mie_size_dist_new.pro
+idl-source  newload_srfstrarr.pro                        pinned  caf223df543f5d91059535b33152fb46a7e14a20291183b580d36984cd411bfd  create_orac_lut/newload_srfstrarr.pro
+idl-source  quadrature.pro                               pinned  20196864dbbe6b5246f11abacca40659ec03672c65321769bb04d6d1b77f1611  create_orac_lut/quadrature.pro
+idl-source  rd_optdat_p.pro                              pinned  d0639660d8b3153dbf3944c5776fdb071e536af33574d7fe83b61edac320d7c1  create_orac_lut/rd_optdat_p.pro
+idl-source  read_baran.pro                               pinned  b5ff54537045d30ded2c28be4fdf7e3a182116251dca5ed3ec61fd86c82417c0  create_orac_lut/read_baran.pro
+idl-source  read_baum.pro                                pinned  8272ac587ba50683518e40d601cb40119a2c104479d4aac2e49d39cd276322c2  create_orac_lut/read_baum.pro
+idl-source  read_ri.pro                                  pinned  52daef1e63ee5ca30e35ae551c1e95e1371eb2b0ba6d57f27638310c14802f01  create_orac_lut/read_ri.pro
+idl-source  read_v2_lut.pro                              pinned  e65a61730652a58c4ca66376bda8d6bc945d5742535cac1075c3645187ea47ee  create_orac_lut/read_v2_lut.pro
+idl-source  segment.pro                                  pinned  0bac086563517282c2f9eb2640235ae8960bf7855e17462450cb1b938dcabd48  create_orac_lut/segment.pro
+idl-source  setup_disort.pro                             pinned  c049d45db227d4a4c870679fe86640565d390f174753d797a539df7664b770b3  create_orac_lut/setup_disort.pro
+idl-source  setup_disort4.pro                            pinned  1773222728bdae3c685d396fb42abcd743d7e50f0221c5f059e3beb1a0f547a9  create_orac_lut/setup_disort4.pro
+idl-source  shift_quadrature.pro                         pinned  09cd538d7fc17574b9eff59495a46693980c840a53d79eae38d0e930260f7719  create_orac_lut/shift_quadrature.pro
+idl-source  write_orac_optprop_luts.pro                  pinned  c3f72d74d88c3e239b4974ee138359128db235dd57f86177db99e7f77ef88c3d  create_orac_lut/write_orac_optprop_luts.pro
+idl-source  write_v2_lut.pro                             pinned  9830f18159f3d07be951b317c123087d25d84e0a875241f3dd9e79c4397987d4  create_orac_lut/write_v2_lut.pro
+run         terra_modis_run                              pinned  68d80d7597505390f92449ea7fb315dda7da13773e322148c2552bbcd692903c  create_orac_lut/terra_modis_run
+run         initpath.bash                                pinned  b86db802c5c4c8a4defcf7c8165b7158481f2de7ca279ed624d1f2f2820c73df  create_orac_lut/initpath.bash
+dlm         disort2/src/DISORTtoIDL.dlm                  pinned  3194ac2fb189c7a1c0c6edd956cdc7b22642ef270220002f0710df133543ac03  create_orac_lut/disort2/src/DISORTtoIDL.dlm
+dlm         disort2/src/DISORTtoIDL.so                   pinned  59307e42604ca0f77dc0b7c47f2092dec83cbacc1f6241c6a4a4455e3e1e37ad  create_orac_lut/disort2/src/DISORTtoIDL.so
+dlm         mie/dlm-code/mie_dlm_single.dlm              pinned  d4c891c60a9619a088570855ce2a985cb5c62ab4edd5315b0203d1c7e1f1ce4c  create_orac_lut/mie/dlm-code/mie_dlm_single.dlm
+dlm         mie/dlm-code/mie_dlm_single.so               pinned  8786d4e8398c5df0930c36a1f44e4f426e71741fb4b4dd53f549f667389735e2  create_orac_lut/mie/dlm-code/mie_dlm_single.so
+dlm         disort2_dp/DISORTtoIDL_DP.dlm                pinned  1b9c1cfd8f4ce6eeb2a55cd158d3e5d4585bde9d9de627635d5d1f5da6ffd6f1  create_orac_lut/disort2_dp/DISORTtoIDL_DP.dlm
+dlm         disort2_dp/DISORTtoIDL_DP.so                 pinned  21dfcf7e44ccdecb62aed299e3f93839afddf4194f0be4820cffe783250f5789  create_orac_lut/disort2_dp/DISORTtoIDL_DP.so
+dlm         disort2_dp/libdisort_dp.so                   pinned  2e45aca683fe5eecf4c9d92ff6831f4def62a57f85fc147d7fb63eeb0f476698  create_orac_lut/disort2_dp/libdisort_dp.so
+dlm-source  disort2/src/DISORTfunctions.f                pinned  3f45489e9fc580a8aec6c9604ac6ffdc9e8cad73830a16f185038fe07db55f72  create_orac_lut/disort2/src/DISORTfunctions.f
+dlm-source  disort2/src/BDREF.f                          pinned  31e1c747aefc36e4fdd0ef3f87677f0dfc5aaca92d6dbba7e667d1e51f3b92ef  create_orac_lut/disort2/src/BDREF.f
+dlm-source  disort2/src/PRTFIN.f                         pinned  d3846c637cb4fbbbf96af3048e94209bfdc1a33e454540f70429c768b8520770  create_orac_lut/disort2/src/PRTFIN.f
+dlm-source  disort2/src/DISORTwrapper.c                  pinned  c20f5d8e8c0a8a5cf9fec6d0ba026d3c604e02aab321c3709db8d4e0a2c00c08  create_orac_lut/disort2/src/DISORTwrapper.c
+dlm-source  disort2/src/DISORTtoIDL.c                    pinned  0e8bb0c9d57e556f2dae7dc536066e597a36182f038be1e94dbad8edf6abfb81  create_orac_lut/disort2/src/DISORTtoIDL.c
+dlm-source  disort2/src/DISORTtoIDL.h                    pinned  bea4f7962f85404d1c19c214d022db9eb4ccf1614dd2ac4858e978965efaad0a  create_orac_lut/disort2/src/DISORTtoIDL.h
+dlm-source  disort2/src/DISORTfunctions.h                pinned  6298e4d08fabcbd631b32a5e2869f2154b9e010965d302f8dd0c76b088368981  create_orac_lut/disort2/src/DISORTfunctions.h
+dlm-source  disort2/src/ambrals-fortran.c                pinned  4ecf4c8382ac201c6bbc2b33eb56c247959c85ea861e94192af6a1e3bfff0dc7  create_orac_lut/disort2/src/ambrals-fortran.c
+dlm-source  disort2/src/ambralsfor.c                     pinned  067cecd0647ae0c0620cbbcc1e61890a2a661edb51ad0d8c48ba75e3fa2196e2  create_orac_lut/disort2/src/ambralsfor.c
+dlm-source  disort2/src/ambralsfor.h                     pinned  f562ddb308a82c748f497d81f31c10696143b5a18deb91cbf0fbd22fad0a0e92  create_orac_lut/disort2/src/ambralsfor.h
+dlm-source  disort2/src/Makefile                         pinned  3c1530260198a4ad34bd855733f759194fb4c58a9ae27f322c939a7b8580efb4  create_orac_lut/disort2/src/Makefile
+dlm-source  disort2/src/make.inc                         pinned  0d3c53935d63f25356a884e9dddc466ea38c70bde023e697dd0bbeeeec8f677c  create_orac_lut/disort2/src/make.inc
+dlm-source  disort2/src/disort/ErrPack.f                 pinned  d1b90b20821584ebb712888458f2713f73664db0626545d3ef688468e8c5baaf  create_orac_lut/disort2/src/disort/ErrPack.f
+dlm-source  disort2/src/disort/LINPAK.f                  pinned  8f0ec48b1d96ea1c6b08fbff42529507864ab00b50d65974e4b00efbf3fe96a0  create_orac_lut/disort2/src/disort/LINPAK.f
+dlm-source  disort2/src/disort/RDI1MACH.f                pinned  c59dadbf0ac9ee25e56e7551d042017cc5cc179b102f848eb08f643ab6ea3738  create_orac_lut/disort2/src/disort/RDI1MACH.f
+dlm-source  disort2_dp/DISORTtoIDL_DP.c                  pinned  fa1f8e182dd8132184f0bd680d0cdbb16d8f1c78a0684ab72adb8305783e7a26  create_orac_lut/disort2_dp/DISORTtoIDL_DP.c
+dlm-source  disort2_dp/dp_support.f                      pinned  a79dbb61cf6cf66496ae34303afa26b75a8ab25dbf9efab57fce4b7beef7f28d  create_orac_lut/disort2_dp/dp_support.f
+dlm-source  disort2_dp/exports.map                       pinned  f2d1c3b1879238aba9a42465a69bc1bf5d31b55d96638c2167c86daae1f54cc5  create_orac_lut/disort2_dp/exports.map
+dlm-source  disort2_dp/build_dlm.sh                      pinned  ea21a3170d12fc60d082142e567a384204f554df5fce2beb26986b3f08a42a12  create_orac_lut/disort2_dp/build_dlm.sh
+dlm-source  disort2_dp/BUILD_INFO.txt                    pinned  0441f0773c2fab6c8db6cdccaf28a0144d83ec09482af6444ca79e1882b7c35c  create_orac_lut/disort2_dp/BUILD_INFO.txt
+input       input_files/inst/terra_modis_v1.inst         pinned  8b1f1adcac24e8b066a5735edbffedd2f942157196ad6dc09c5ef9c5e4693d05  create_orac_lut/input_files/inst/terra_modis_v1.inst
+input       input_files/sun/Gueymard2018.sssi            pinned  db1282aa8b0470bda124fd80ad6df230dd5dd63babdaca88fc96f636ea77f21b  create_orac_lut/input_files/sun/Gueymard2018.sssi
+input       input_files/atm/mls.atm                      pinned  45244e3c78ee3fb05c841b1a9882e0551710f9450a4e4bfbf536e6bb1226dc5a  create_orac_lut/input_files/atm/mls.atm
+input       input_files/microphysics/liquid-water_old.mm pinned  0102aec5918ba60ecd44ccb06f07ea7cace849c420ec62d5397509a10f46ffaf  create_orac_lut/input_files/microphysics/liquid-water_old.mm
+input       input_files/microphysics/liquid-water_240.mm pinned  8145e8c5be0cb565a727eecb827d5def620205dcf9f39b15e722f1fe0269cbf2  create_orac_lut/input_files/microphysics/liquid-water_240.mm
+input       input_files/microphysics/water-ice_agg.mm    pinned  9cbbcb55743636f89d672198bb84d13b8e0998699db70bba73009e9eb78e5f24  create_orac_lut/input_files/microphysics/water-ice_agg.mm
+input       input_files/ri/oldwater.ri                   pinned  28a78584f5a0c711ecc9009889e2e477e7e15deb08a021523d30f21b03191a48  create_orac_lut/input_files/ri/oldwater.ri
+input       input_files/ri/H2O_240K_Rowe_2020.ri         pinned  1bbd78290e718b8f9306c8912c907c4d79474913aba7bcf38f4cb72ad93bd7ed  create_orac_lut/input_files/ri/H2O_240K_Rowe_2020.ri
+input       input_files/baum/AggregateSolidColumns_SeverelyRough_AllWavelengths_FullPhaseMatrix.nc pinned  005053043b6964f3f96e3cad2846beafc7a90ed858ac1a26eaf6053d76df65d6  create_orac_lut/input_files/baum/AggregateSolidColumns_SeverelyRough_AllWavelengths_FullPhaseMatrix.nc
+input       input_files/lut/liquid-water-cloud.lut       pinned  5b233f8f7709bd7bf21bcb4800cf33812c4f5fa15ba9c86597f9156dec54b612  create_orac_lut/input_files/lut/liquid-water-cloud.lut
+input       input_files/lut/ice-cloud.lut                pinned  3142e32fcd77279c5189b109385c239214b8b0d72c1d8f1d82fb30c30e3989bd  create_orac_lut/input_files/lut/ice-cloud.lut
+input       input_files/driver/terra_modis_cloud.driver  pinned  877e893fe142b0620234cc8c53c7e11a33a75ed0c40dc20fc84ec157e4835e12  create_orac_lut/input_files/driver/terra_modis_cloud.driver
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch01.txt pinned  31bcac13fb1c24f88995da5368c0f87ac8d26f47ab033076744e44e05b699ade  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch01.txt
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch02.txt pinned  a36d56a891130c1fa04709b09985b5a8b2306d5c20cc9013ad3183898bf68660  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch02.txt
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch03.txt pinned  4377d63209c77f8b0ac522b8369ec2d35ab42ac56f46898aaa1f8da94a41efcf  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch03.txt
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch04.txt pinned  99e75b0417cd009038df18ea6f385b52f0bb2729b078f603f49afefc72723fea  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch04.txt
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch05.txt pinned  e4530a198cf588272a8e34c72b35aaffa58984ecc5e06a19e1101eb273fcfc72  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch05.txt
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch06.txt pinned  010c4ac4462a1c98ca254d601fed0f9bac86ea34971170780a60a9b8165d0af0  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch06.txt
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch07.txt pinned  b52b54f4a71414bdc97f3cfeef5d760194546cd5c7c5c47163783be353ee3c08  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch07.txt
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch08.txt pinned  67af027f2ab8ad0b1b61fa7743b2f3e625928f062511bb3bb0aa0655d6e4712c  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch08.txt
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch09.txt pinned  a43525411b5fc408cc23a6ae75c0b4a4ce8ad64c7aa7d4704432791643bd669b  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch09.txt
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch10.txt pinned  7aa23280a3372ad38ea86aa6f137af950f7eb65bf520c9d348dfcbafce78a771  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch10.txt
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch11.txt pinned  c069c0bd4f6414f7e860aa850952785d754ec44a78231bc52886e66c628f7605  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch11.txt
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch12.txt pinned  5392b0be30b74da23bae97bca34612be3c75636b5b8a4cb47b02ea67cc3d0598  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch12.txt
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch13.txt pinned  57f8245a18e77a3f958f038ff62cc782e97933ddb5a65965f3c385e4d70a64eb  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch13.txt
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch14.txt pinned  ee67ba8a7a545dd3fab3c73d285f0c91999014491015d51373430692a3821bd6  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch14.txt
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch15.txt pinned  140f7165cfbcb2827a34fa6cbed9adb7df1d4b029b8286acd77b62715dc6fe79  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch15.txt
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch16.txt pinned  9006cbe69a30f4d3f37fc77be48943aa97bfc91c8be33acf32764fdf3748e566  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch16.txt
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch17.txt pinned  ffac28daeebc92f2639bf6763c68f5ca3e2e7c7b9390a39a5e4608de3629a725  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch17.txt
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch18.txt pinned  a1d8b79122edd4bb4f6ee45fb75e4f06fb459ced6cac875cd84f1215bcb95778  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch18.txt
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch19.txt pinned  1ae03bc8876fea0b9c06f8a5dc0a57b94abdf058050ea00a832b012f0eb4a32c  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch19.txt
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch20.txt pinned  17cd533721ff36c38276fc3aa7c45d152b7a75f0671828889cd34451a4bf2edf  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch20.txt
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch21.txt pinned  eda37cafc29981693f78dd07a8ab1e8d2c6c23f6c83fa978b6430af6b74f4b8d  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch21.txt
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch22.txt pinned  7558f03c48bc92b41ff9abe6f34a1a4470c18ac5289beda7c71dab223b355f5d  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch22.txt
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch23.txt pinned  6ceb6c273da43cefee69ee2238c251d783dfdceed7c5a33137a605c9a628bc74  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch23.txt
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch24.txt pinned  5cacbda193ca1a064fb5ece215fd07d326eeeea7a73b7d7ecab7da6339311f13  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch24.txt
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch25.txt pinned  91c48bdc7c753ae910b3f6ca6eaff52fc6786a683ace2aee5e59094dbf037d7f  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch25.txt
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch26.txt pinned  97a803391ab419fc6a74aec9045f306d97cf90ae01ac9c6ef5d523eb9a1ad226  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch26.txt
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch27.txt pinned  753f028e635870c44672301773a71024590e400f42f8b4df110ff790e4321d70  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch27.txt
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch28.txt pinned  19b225d31810362ff690b57829d7037ce8785119c44ac6e9854e9c2521745aa2  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch28.txt
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch29.txt pinned  a95326a7d15d285688aae02385a778591ceea6d3e7559c4ac841c439d7b644c9  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch29.txt
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch30.txt pinned  97a33a4e4bd109f9e0cca61235063ccaa1a67d43943262092a398ef0bc4d888e  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch30.txt
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch31.txt pinned  8b24338e210da3da64aed6106a5d476a9410679899a7fc5ad6b20c67af952e27  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch31.txt
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch32.txt pinned  0fd53fc4c6c81691609bf54a95f08a7c1dd0955a3d26e066e6979afb9e4d8174  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch32.txt
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch33.txt pinned  42d1f25283130c1d419ddcd28fcbdde955e414b25d808396b888cf93b12ff8ba  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch33.txt
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch34.txt pinned  583d09b575eed771a89c86968d6d5522a08594a436d9b3a04735311301a02d48  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch34.txt
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch35.txt pinned  de40af3074bc93559eadfebe8130ab228b2a068b1d1eb9977f22f38455f8e96e  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch35.txt
+input       input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch36.txt pinned  fa9223f0be0f7b0c73eab3c6add145bf6f87ac2c577f9246d20e1a7ffc29621f  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch36.txt
+runtime     libifcoremt.so.5                             pinned  39130b583efd3d3768c24aae43d3841f00f827feaf2fa0da77973bcd07387685  /network/software/linux-x86_64/compilers/intel/2022/compiler/2022.1.0/linux/compiler/lib/intel64_lin/libifcoremt.so.5
+runtime     libifport.so.5                               pinned  8dc12854550a9cec285de510231a20fd056552de4b008b24b5c5add271e64e82  /network/software/linux-x86_64/compilers/intel/2022/compiler/2022.1.0/linux/compiler/lib/intel64_lin/libifport.so.5
+runtime     libimf.so                                    pinned  3adedea9be61807b6071c0283fb5e969e116895ccdf0f85fa3eb31091b351056  /network/software/linux-x86_64/compilers/intel/2022/compiler/2022.1.0/linux/compiler/lib/intel64_lin/libimf.so
+runtime     libsvml.so                                   pinned  58470d009cece805ae8e3f0276cf34825839f3c3f6fde94ec4de45e5680fff0c  /network/software/linux-x86_64/compilers/intel/2022/compiler/2022.1.0/linux/compiler/lib/intel64_lin/libsvml.so
+runtime     libintlc.so.5                                pinned  b79687bda5340d1c96be1d6b69ac30a6b1d093a8da7ca411fd56ea139f2b48af  /network/software/linux-x86_64/compilers/intel/2022/compiler/2022.1.0/linux/compiler/lib/intel64_lin/libintlc.so.5
+runtime     libirc.so                                    pinned  110ada6d2b84028b0a7e4e1aa43bf294f9698a5e1c4073bb76b8debf2e9de2ad  /network/software/linux-x86_64/compilers/intel/2022/compiler/2022.1.0/linux/compiler/lib/intel64_lin/libirc.so
+runtime     libifcore.so.5                               pinned  212c117b686535b7917d0a052eaa4aa219606f264315fcc7f190f787f5800c50  /network/software/linux-x86_64/compilers/intel/2022/compiler/2022.1.0/linux/compiler/lib/intel64_lin/libifcore.so.5

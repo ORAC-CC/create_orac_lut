@@ -1,0 +1,14 @@
+IDL 8.9.0 reference output from validation/diagnostics/idl_total_reference.pro
+Host: atmlxint5
+Threading: /TPOOL_NOTHREAD on every TOTAL call
+
+float_total_type=4 value=3
+float_double_type=5 value=5
+double_total_type=5 value=3
+int16_total_type=4 value=10
+dimension_1_type=4 values=100000000 -100000000 7
+dimension_2_type=4 values=100000000 -100000000
+cumulative_type=4 values=100000000 100000000 100000000 0 3
+cumulative_dimension_2_type=4 values=100000000 1 100000000 -100000000 100000000 -100000000
+
+IDL SIZE type code 4 is FLOAT; type code 5 is DOUBLE.

@@ -124,3 +124,13 @@ validation/**/__pycache__/
 /tests/test_idl_v21_ready_mapping.py
 /tests/test_python_v22_campaign.py
 /tests/test_v21_v22_campaign_comparison.py
+
+# Double-precision V21/V22 LUT staging (generated products, never committed)
+# and the symlinked input trees / work directories of the validation runs.
+/staging/
+validation/v21_v22_terra_modis/idl_double/build/
+validation/v21_v22_terra_modis/idl_double/results/**/input_files/
+validation/v21_v22_terra_modis/v22_double/work/
+validation/v21_v22_terra_modis/disort_boundary/run/
+validation/v21_v22_terra_modis/disort_boundary/results/**/input_files
+create_orac_lut/disort2_dp/build/

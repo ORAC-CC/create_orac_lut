@@ -15,6 +15,8 @@ from pathlib import Path
 
 import numpy as np
 
+from .total import idl_total
+
 
 VALID_EPS = np.asarray(
    [0.33490, 0.36690, 0.40190, 0.44030, 0.48230, 0.52830, 0.57870,
@@ -341,16 +343,16 @@ def dubovik_lognormal(base_path, number_conc, rm, s, wn, ri, eps, dqv=None,
    distribution = (float(number_conc) * np.sqrt(8.0 * np.pi) / 3.0 * rd ** 3 / np.log(float(s))
                    * np.exp(-0.5 * (np.log(rd / rm_d) / np.log(float(s))) ** 2))
    scale = (float(wn) * extinction.wvl) ** 2
-   text = np.sum(distribution * kext_interp) / scale
-   tabs = np.sum(distribution * kabs_interp) / scale
+   text = idl_total(distribution * kext_interp) / scale
+   tabs = idl_total(distribution * kabs_interp) / scale
    tsca = text - tabs
-   denominator = np.sum(distribution * (kext_interp - kabs_interp))
-   phase_table = np.sum(distribution[:, None] * k11_interp, axis=0) / denominator
+   denominator = idl_total(distribution * (kext_interp - kabs_interp))
+   phase_table = idl_total(distribution[:, None] * k11_interp, dimension=1) / denominator
    theta = np.deg2rad(scattering.theta)
    sine = np.sin(theta)
    cosine = np.cos(theta)
-   g = np.sum((sine[:-1] * cosine[:-1] * phase_table[:-1]
-               + sine[1:] * cosine[1:] * phase_table[1:]) * np.diff(theta)) * 0.25
+   g = idl_total((sine[:-1] * cosine[:-1] * phase_table[:-1]
+                  + sine[1:] * cosine[1:] * phase_table[1:]) * np.diff(theta)) * 0.25
    phase = phase_table
    if dqv is not None:
       dqv = np.asarray(dqv, dtype=np.float64)
@@ -358,9 +360,9 @@ def dubovik_lognormal(base_path, number_conc, rm, s, wn, ri, eps, dqv=None,
       if dqv.size > theta.size:
          sqv = np.sqrt(1.0 - dqv * dqv)
          dt = np.diff(np.arccos(dqv))
-         norm = 1.0 if not renorm_ph else np.sum((sqv[:-1] * phase[:-1] + sqv[1:] * phase[1:]) * dt) / 4.0
+         norm = 1.0 if not renorm_ph else idl_total((sqv[:-1] * phase[:-1] + sqv[1:] * phase[1:]) * dt) / 4.0
          phase = phase / norm
-         g = np.sum((sqv[:-1] * dqv[:-1] * phase[:-1] + sqv[1:] * dqv[1:] * phase[1:]) * dt) * 0.25
+         g = idl_total((sqv[:-1] * dqv[:-1] * phase[:-1] + sqv[1:] * dqv[1:] * phase[1:]) * dt) * 0.25
          g = g / norm
    return text * 1.0e3, tsca * 1.0e3, tsca / text, float(g), phase
 
@@ -373,7 +375,7 @@ def dubovik_lognormal_multiple_eps(base_path, number_conc, rm, s, wn, ri, eps, n
    neps = np.asarray(neps, dtype=np.float64)
    if eps.ndim != 1 or neps.shape != eps.shape:
       raise ValueError("EPS and NEPS must have the same number of elements")
-   if np.any(neps < 0.0) or np.sum(neps) <= 0.0:
+   if np.any(neps < 0.0) or idl_total(neps) <= 0.0:
       raise ValueError("NEPS values must be non-negative with a positive total")
    if np.ndim(rm) not in (0, 1) or np.size(rm) not in (1, eps.size):
       raise ValueError("Size of RM and EPS are not consistent")
@@ -381,7 +383,7 @@ def dubovik_lognormal_multiple_eps(base_path, number_conc, rm, s, wn, ri, eps, n
       raise ValueError("Size of S and EPS are not consistent")
    if np.ndim(ri) not in (0, 1) or np.size(ri) not in (1, eps.size):
       raise ValueError("Size of RI and EPS are not consistent")
-   weights = neps / np.sum(neps)
+   weights = neps / idl_total(neps)
    rms = np.full(eps.size, rm, dtype=np.float64) if np.size(rm) == 1 else np.asarray(rm, dtype=np.float64)
    spreads = np.full(eps.size, s, dtype=np.float64) if np.size(s) == 1 else np.asarray(s, dtype=np.float64)
    ris = np.full(eps.size, ri, dtype=np.complex128) if np.size(ri) == 1 else np.asarray(ri, dtype=np.complex128)
@@ -393,12 +395,12 @@ def dubovik_lognormal_multiple_eps(base_path, number_conc, rm, s, wn, ri, eps, n
    bscas = np.asarray([value[1] for value in values])
    gs = np.asarray([value[3] for value in values])
    selected_weights = weights[positive]
-   bext = np.sum(bexts * selected_weights)
-   bsca = np.sum(bscas * selected_weights)
-   g = np.sum(bscas * selected_weights * gs) / bsca
+   bext = idl_total(bexts * selected_weights)
+   bsca = idl_total(bscas * selected_weights)
+   g = idl_total(bscas * selected_weights * gs) / bsca
    if dqv is None:
       phase = None
    else:
       phases = np.asarray([value[4] for value in values])
-      phase = np.sum(bscas[:, None] * selected_weights[:, None] * phases, axis=0) / bsca
+      phase = idl_total(bscas[:, None] * selected_weights[:, None] * phases, dimension=1) / bsca
    return bext, bsca, bsca / bext, float(g), phase

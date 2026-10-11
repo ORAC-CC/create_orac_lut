@@ -24,6 +24,7 @@ from pathlib import Path
 import numpy as np
 
 from ..io.v2 import write_v2_lut as ncdf_write_v2_lut
+from .total import idl_total
 
 
 _FILL = np.float32(9.96921e36)          # NetCDF default float fill, as left by the IDL partial writes
@@ -81,15 +82,15 @@ def write_v2_lut(v2_lut_filename, lutstr, inststr, srfstrarr, vavg, bextout, bex
                  td, tfd, rd, rfd, rbd=None, rfbd=None, tfbd=None, tb=None, em=None, include_pressure=False):
    """Write the V2 LUT file ``v2_lut_filename``."""
 
-   numberofsolarchannels = int(np.sum(inststr.solar_channel_flag))
+   numberofsolarchannels = int(idl_total(inststr.solar_channel_flag))
    solar_channels_exist = numberofsolarchannels > 0
    solar_index = np.flatnonzero(inststr.solar_channel_flag)
 
-   numberofthermalchannels = int(np.sum(inststr.thermal_channel_flag))
+   numberofthermalchannels = int(idl_total(inststr.thermal_channel_flag))
    thermal_channels_exist = numberofthermalchannels > 0
    thermal_index = np.flatnonzero(inststr.thermal_channel_flag)
 
-   numberofmixedchannels = int(np.sum(inststr.mixed_channel_flag))
+   numberofmixedchannels = int(idl_total(inststr.mixed_channel_flag))
    mixed_channels_exist = numberofmixedchannels > 0
    mixed_index = np.flatnonzero(inststr.mixed_channel_flag)
 

@@ -25,6 +25,7 @@ import numpy as np
 
 from ..optics.legacy_mie import mie_single_batch
 from .dubovik import dubovik_lognormal_multiple_eps
+from .total import idl_total
 
 
 def quadrature(quadtype, npts):
@@ -131,17 +132,17 @@ def mie_size_dist_new(distname, nd, params, wavenumber, cm, dqv, xres=0.1):
    w1pa = w1p * np.pi * r ** 2                          # area weighted distribution
    w1pv = w1pa * (4.0 / 3.0) * r                        # IDL: W1PA * 4./3. * R  (volume weighted)
 
-   bext = float(np.sum(w1pa * dqxt))
-   bsca = float(np.sum(w1pa * dqsc))
-   g = float(np.sum(w1pa * dg * dqsc) / bsca)
+   bext = float(idl_total(w1pa * dqxt))
+   bsca = float(idl_total(w1pa * dqsc))
+   g = float(idl_total(w1pa * dg * dqsc) / bsca)
    w = bsca / bext
 
    spm = np.zeros((4, dqv.size), dtype=np.float64)
    # IDL: SPM[0,i] = total(W1PA * DSPM[0,i,*] * Dqsc) / Bsca
-   spm[0, :] = np.sum(w1pa[:, None] * f11 * dqsc[:, None], axis=0) / bsca
+   spm[0, :] = idl_total(w1pa[:, None] * f11 * dqsc[:, None], dimension=1) / bsca
    # F33, F12, F34 (spm[1:4]) are not needed for the scalar RT and are left zero.
 
-   vavg = float(np.sum(w1pv))
+   vavg = float(idl_total(w1pv))
    return bext, bsca, w, g, spm, vavg
 
 
@@ -158,10 +159,10 @@ def legpexp(inp, qv, qw, phase):
    if not (qv.shape == qw.shape == phase.shape):
       raise ValueError("legpexp: qv, qw and phase must have equal shapes")
    lc = np.zeros(inp, dtype=np.float64)
-   lc[0] = np.sum(phase * qw) / 2.0
+   lc[0] = idl_total(phase * qw) / 2.0
    if inp == 1:
       return 0, lc
-   lc[1] = 3.0 * np.sum(phase * qv * qw) / 2.0
+   lc[1] = 3.0 * idl_total(phase * qv * qw) / 2.0
    lpnm2 = np.ones_like(qv)
    lpnm1 = qv.copy()
    n = 2
@@ -169,7 +170,7 @@ def legpexp(inp, qv, qw, phase):
       # calculate the nth Legendre polynomial
       lpn = ((2.0 * n - 1.0) / n) * qv * lpnm1 - ((n - 1.0) / n) * lpnm2
       # integrate up the Legendre coefficient
-      lc[n] = (2.0 * n + 1.0) * np.sum(phase * lpn * qw) / 2.0
+      lc[n] = (2.0 * n + 1.0) * idl_total(phase * lpn * qw) / 2.0
       if abs(lc[n]) < 1.0e-9:
          break
       lpnm2 = lpnm1

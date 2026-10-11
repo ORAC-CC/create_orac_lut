@@ -1,0 +1,19 @@
+; V01 source-set check: V21/V22 campaign case 004 (unversioned run).
+platform      = 'earthcare'
+instrument    = 'msi'
+forward_model = 'aerosol'
+in_path       = 'create_orac_lut/input_files'
+instfile      = 'earthcare_msi_v1.inst'
+mmfile        = 'aerosol_a79.mm'
+lutfile       = 'aerosol_test.lut'
+atmospheres   = 2
+channelid     = [1, 6]
+gas           = 0
+no_rayleigh   = 0
+srf_quad      = 1
+reuse_scat    = 0
+scat_only     = 0
+nstreams      = 60
+nmom          = 1000
+version       = 22
+out_path      = 'validation/tmp/source_versioning/compact/unversioned/case004'

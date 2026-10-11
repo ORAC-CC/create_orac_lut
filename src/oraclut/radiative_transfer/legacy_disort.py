@@ -1,4 +1,18 @@
-"""Python boundary for the current production ORAC DISORT implementation."""
+"""Python boundary for the production ORAC DISORT implementation.
+
+Two precisions of the same unmodified DISORT source are available, selected
+by the environment variable ORAC_LUT_DISORT_PRECISION exactly as in the IDL
+generator's call_disort.pro:
+
+* ``double`` (default): create_orac_lut/disort2_dp/libdisort_dp.so, the
+  kernel objects of the IDL DLM DISORTtoIDL_DP (REAL promoted to 8 bytes;
+  built by create_orac_lut/disort2_dp/build_dlm.sh);
+* ``single``: the historical single-precision kernel built here from
+  create_orac_lut/disort2/src (the V22 configuration up to lut-code-v22.1).
+
+GETMOM and PLKAVG always use the single-precision library, as the IDL
+generator calls them through the historical DISORTtoIDL DLM.
+"""
 
 from __future__ import annotations
 
@@ -134,7 +148,7 @@ def plkavg(wavenumber_low: float, wavenumber_high: float, temperature: float) ->
     ))
 
 
-def disort(
+def _disort_single(
     dtauc: np.ndarray,
     single_scatter_albedo: np.ndarray,
     phase_moments: np.ndarray,
@@ -151,7 +165,7 @@ def disort(
     wavenumber_high: float = 0.0,
     temperature: np.ndarray | None = None,
 ) -> dict[str, np.ndarray]:
-    """Call the production kernel with the same argument contract as IDL."""
+    """Historical single-precision kernel (the IDL DISORT DLM equivalent)."""
 
     dtauc = np.ascontiguousarray(np.asarray(dtauc, dtype=np.float32).ravel())
     ssalb = np.ascontiguousarray(np.asarray(single_scatter_albedo, dtype=np.float32).ravel())
@@ -202,6 +216,115 @@ def disort(
         "rfldir": rfldir, "rfldn": rfldn, "flup": flup, "dfdt": dfdt,
         "uavg": uavg, "uu": uu, "albmed": albmed, "trnmed": trnmed,
     }
+
+
+DOUBLE_LIBRARY = _root() / "create_orac_lut" / "disort2_dp" / "libdisort_dp.so"
+_DOUBLE: ctypes.CDLL | None = None
+
+
+def disort_precision() -> str:
+    """The selected DISORT precision: ``double`` (default) or ``single``."""
+
+    precision = os.environ.get("ORAC_LUT_DISORT_PRECISION", "").strip().lower() or "double"
+    if precision not in {"double", "single"}:
+        raise ValueError(f"ORAC_LUT_DISORT_PRECISION must be single or double, not {precision!r}")
+    return precision
+
+
+def _load_double_library() -> ctypes.CDLL:
+    global _DOUBLE
+    if _DOUBLE is not None:
+        return _DOUBLE
+    with _BUILD_LOCK:
+        if _DOUBLE is None:
+            if not DOUBLE_LIBRARY.is_file():
+                raise DisortError(f"{DOUBLE_LIBRARY} is missing; build it with create_orac_lut/disort2_dp/build_dlm.sh")
+            library = ctypes.CDLL(str(DOUBLE_LIBRARY))
+            library.disort_.restype = ctypes.c_int32
+            _DOUBLE = library
+    return _DOUBLE
+
+
+def _disort_double(
+    dtauc: np.ndarray,
+    single_scatter_albedo: np.ndarray,
+    phase_moments: np.ndarray,
+    utau: np.ndarray,
+    umu: np.ndarray,
+    phi: np.ndarray,
+    fbeam: float,
+    umu0: float,
+    fisot: float,
+    *,
+    nstreams: int = 60,
+    plank: bool = False,
+    wavenumber_low: float = 0.0,
+    wavenumber_high: float = 0.0,
+    temperature: np.ndarray | None = None,
+) -> dict[str, np.ndarray]:
+    """Double-precision kernel with the argument handling of the IDL DISORT_DP DLM.
+
+    As in IDL, every input is first held at float32 (the IDL variables are
+    FLOAT) and then widened exactly to float64; the fixed arguments are those
+    of setup_disort (ACCUR = float32 1e-8); MAXCLY etc. equal the actual
+    sizes; TEMPER is zero-padded to NLYR + 1 values; outputs are float64.
+    """
+
+    f32 = np.float32
+    dtauc = np.asarray(dtauc, dtype=f32).ravel()
+    ssalb = np.asarray(single_scatter_albedo, dtype=f32).ravel()
+    if dtauc.shape != ssalb.shape:
+        raise ValueError("dtauc and single_scatter_albedo must have equal shapes")
+    nlyr = dtauc.size
+    phase = np.asarray(phase_moments, dtype=f32)
+    if phase.ndim != 2 or phase.shape[1] != nlyr:
+        raise ValueError("phase_moments must have shape (highest_order + 1, nlayer)")
+    highest_order = phase.shape[0] - 1
+    utau = np.asarray(utau, dtype=f32).ravel()
+    umu = np.asarray(umu, dtype=f32).ravel()
+    phi = np.asarray(phi, dtype=f32).ravel()
+    if utau.size != 2 or umu.size == 0 or phi.size == 0:
+        raise ValueError("production ORAC calls require two utau values and non-empty angles")
+    given = np.zeros(nlyr, dtype=f32) if temperature is None else np.asarray(temperature, dtype=f32).ravel()
+    if given.size not in ({nlyr + 1} if plank else {nlyr}):
+        raise ValueError("temperature must have one value per layer, or one extra boundary value for a Planck call")
+    if np.any(ssalb > 1.0) or np.any(ssalb < 0.0):
+        raise ValueError("single scattering albedo outside [0, 1]")
+    temper = np.zeros(nlyr + 1, dtype=np.float64)
+    temper[:min(given.size, nlyr + 1)] = given[:nlyr + 1]
+    d = lambda a: np.ascontiguousarray(a, dtype=np.float64)
+    dtauc, ssalb, utau, umu, phi = d(dtauc), d(ssalb), d(utau), d(umu), d(phi)
+    phase = np.asfortranarray(phase, dtype=np.float64)
+    ntau, numu, nphi = utau.size, umu.size, phi.size
+    out = {k: np.zeros(ntau) for k in ("rfldir", "rfldn", "flup", "dfdt", "uavg")}
+    out["uu"] = np.zeros((numu, ntau, nphi), order="F")
+    out["albmed"] = np.zeros(numu)
+    out["trnmed"] = np.zeros(numu)
+    i32 = lambda v: ctypes.byref(ctypes.c_int32(int(v)))
+    real = lambda v: ctypes.byref(ctypes.c_double(float(f32(v))))
+    ptr = lambda a: a.ctypes.data_as(ctypes.c_void_p)
+    prnt = np.zeros(5, dtype=np.int32)
+    status = _load_double_library().disort_(
+        i32(nlyr), ptr(dtauc), ptr(ssalb), i32(highest_order), ptr(phase), ptr(temper),
+        real(wavenumber_low), real(wavenumber_high), i32(1), i32(ntau), ptr(utau), i32(nstreams),
+        i32(1), i32(numu), ptr(umu), i32(nphi), ptr(phi), i32(0), real(fbeam), real(umu0),
+        real(0.0), real(fisot), i32(1), real(0.0), real(0.0), real(0.0), real(0.0),
+        i32(int(bool(plank))), i32(0), real(1.0e-8), ptr(prnt), i32(nlyr), i32(ntau), i32(numu),
+        i32(nphi), i32(highest_order),
+        ptr(out["rfldir"]), ptr(out["rfldn"]), ptr(out["flup"]), ptr(out["dfdt"]), ptr(out["uavg"]),
+        ptr(out["uu"]), ptr(out["albmed"]), ptr(out["trnmed"]),
+    )
+    if status:
+        raise DisortError(f"DISORT (double precision) returned error code {status}")
+    return out
+
+
+def disort(*args, **kwargs) -> dict[str, np.ndarray]:
+    """Call DISORT at the selected precision (ORAC_LUT_DISORT_PRECISION, default double)."""
+
+    if disort_precision() == "double":
+        return _disort_double(*args, **kwargs)
+    return _disort_single(*args, **kwargs)
 
 
 def call_disort(
