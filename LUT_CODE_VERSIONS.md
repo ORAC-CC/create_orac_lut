@@ -256,3 +256,45 @@ release is defined by a sealed SourceVault manifest:
 `CODE_VERSION` from `CODE_VERSION_v01`) and `releases/lut_v22_double.release`
 (new Python V22).  Architecture, reproduction, production and the
 equivalence benchmark: `DOUBLE_PRECISION_BASELINE.md`.
+
+## 8. Corrected single-precision V22: reproduction of the V21 IDL arithmetic (2026-10-11)
+
+The double-precision development (section 7) is suspended, not removed.  The
+Python source release `lut-code-v22.3` (`CODE_VERSION`, scientific
+configuration `v22-idl-single`, commits `d38af77` and following) reproduces the V21 IDL
+single-precision calculation, including its numerical imperfections:
+
+* DISORT is the original V21 Intel DLM `create_orac_lut/disort2/src/DISORTtoIDL.so`,
+  called from Python unmodified and with IDL's array memory layout
+  (`ORAC_LUT_DISORT_PRECISION=single`, `ORAC_LUT_DISORT_SP_KERNEL=intel_dlm`);
+* the preprocessing follows the IDL arithmetic (quadrature, FLOAT literals and
+  wavenumbers, FLTARR storage, INTERPOL/INTERPOLATE, glibc elementary
+  functions, integer powers, F0, the writer's /100);
+* 60 streams, NMom = 1000, the original grids and inputs, float32 storage.
+
+The release is `releases/lut_v22_single.release` (58 entries, including the
+Intel DLM and the seven Intel 2022 run-time libraries it loads, pinned by
+absolute path as `intel-runtime-*` library entries, a format launcher v03 still
+parses) and is run with launcher `create_orac_luts_release_v04.py`, which adds
+the Intel library entries and the `disort_sp_kernel` check to v03:
+
+    ORAC_LUT_RELEASE_MANIFEST=lut_v22_single.release ORAC_LUT_DISORT_PRECISION=single \
+    ORAC_LUT_DISORT_SP_KERNEL=intel_dlm python create_orac_luts_release_v04.py runs/<product>_v22_single.run
+
+The three Terra MODIS products are made by `scripts/submit_v22_single.sh`
+(SLURM, `scripts/run_v22_single.slurm`) into `staging/lut_v22_single/` and
+followed with `scripts/monitor_v22_single.sh [--compare]`.  The LUT product
+version remains 22; the sealed releases `lut_v22.release`,
+`lut_v22_double.release` and the IDL V21 manifests are unchanged (the edited
+`CODE_VERSION` is served to them from `CODE_VERSION_v01`/`_v02`, by launcher
+v03/v04 and by `scripts/check_release_manifest.py`).  The `lut-code-v22.3`
+Git tag has not been created.  Validation:
+`validation/v21_v22_terra_modis/REPORT_single_precision_equivalence.md`.
+
+LUT grid definitions (`create_orac_lut/input_files/lut/`) were reorganised by
+the owner on 2026-10-11: the active definitions keep their names
+(`liquid-water-cloud.lut`, `ice-cloud.lut`, `aerosol.lut`, and
+`liquid-water-cloud_test.lut`, `ice-cloud_test.lut`), with SourceVault copies
+`*_v01.lut`; historical and experimental definitions are kept unchanged in
+`lut/archive/`; the obsolete `.lut.bak` files were removed (recoverable from
+Git history before `d38af77`).

@@ -13,7 +13,8 @@ adapters; the IDL-shared Fortran/C kernel sources and the DLM wrapper; the
 gfortran Mie library (the Mie kernel build is numerically immaterial: the
 original IDL Mie DLM gives bitwise-identical scattering properties on the full
 Terra MODIS grids); the original Intel DISORT DLM; and the Intel 2022 Fortran
-run-time libraries it loads (pinned by absolute path).
+run-time libraries it loads (library entries intel-runtime-*, pinned by
+absolute path, so that launcher v03 can still parse the manifest).
 
 Products are made with launcher v04:
    ORAC_LUT_RELEASE_MANIFEST=lut_v22_single.release ORAC_LUT_DISORT_PRECISION=single \\
@@ -84,7 +85,7 @@ def main():
    add("library", "disort-intel-library", legacy_disort.INTEL_DLM_LIBRARY)
    runtime = legacy_disort.intel_runtime_directory()
    for name in legacy_disort.INTEL_RUNTIME_LIBRARIES:
-      add("runtime", "intel-runtime-" + name, runtime / name)
+      add("library", "intel-runtime-" + name, runtime / name)
 
    head = subprocess.run(["/usr/bin/git", "-C", str(ROOT), "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip()
    header = f"""\
@@ -110,7 +111,7 @@ def main():
 # LUT release numbers (V21, V22, ...) and source-file versions (_v01, _v02, ...)
 # are independent: each file's version advances only when that file changes.
 # "pinned" files have no versioned name; their content is fixed by SHA-256.
-# runtime entries are outside the repository (absolute paths).
+# intel-runtime-* library entries are outside the repository (absolute paths).
 #
 # Columns: role  logical-name  file-version  sha256  path
 

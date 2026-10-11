@@ -57,7 +57,18 @@ small test first and then choose interactive, low-priority interactive, or
 SLURM execution appropriately.
 
 For ORAC LUT generation, existing small test LUT definitions are appropriate
-for interactive development. Production-sized LUT generation must not be
+for interactive development.
+
+LUT grid definitions live in `create_orac_lut/input_files/lut/`, shared by the
+IDL and Python generators.  The active definitions keep fixed names
+(`liquid-water-cloud.lut`, `ice-cloud.lut`, `aerosol.lut`, and the short
+diagnostic `liquid-water-cloud_test.lut`, `ice-cloud_test.lut`); a new grid
+replaces the active file under the same name, with SourceVault preserving each
+earlier definition (`<name>_vNN.lut`).  Do not introduce alternative or
+Python-specific grid file names.  Historical and experimental definitions
+(aerosol_test, ash, biomass, sulphuric acid, earlier liquid and ice grids) are
+kept unchanged in `lut/archive/`; they are not approved production grids and
+are not resolved by bare name. Production-sized LUT generation must not be
 launched automatically during development; full production LUTs should use an
 execution method appropriate to their measured or estimated runtime.
 
@@ -250,6 +261,12 @@ Both generators solve DISORT in double precision by default
 IDL DLM `DISORTtoIDL_DP` and the Python library `libdisort_dp.so` are the same
 kernel objects built by `create_orac_lut/disort2_dp/build_dlm.sh`; the
 historical single-precision `DISORTtoIDL.so` is never rebuilt or replaced.
+In single precision the Python generator calls that original Intel DLM itself
+(`ORAC_LUT_DISORT_SP_KERNEL=intel_dlm`, the default for single precision; the
+gfortran build remains selectable) with IDL's array memory layout, which
+reproduces the V21 IDL DISORT calls bitwise; the corrected single-precision
+V22 release is `releases/lut_v22_single.release`
+(`validation/v21_v22_terra_modis/REPORT_single_precision_equivalence.md`).
 
 ## Spectral treatment
 

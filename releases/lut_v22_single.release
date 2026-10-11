@@ -20,7 +20,7 @@
 # LUT release numbers (V21, V22, ...) and source-file versions (_v01, _v02, ...)
 # are independent: each file's version advances only when that file changes.
 # "pinned" files have no versioned name; their content is fixed by SHA-256.
-# runtime entries are outside the repository (absolute paths).
+# intel-runtime-* library entries are outside the repository (absolute paths).
 #
 # Columns: role  logical-name  file-version  sha256  path
 
@@ -30,7 +30,7 @@ disort_precision = single
 disort_sp_kernel = intel_dlm
 library_checkout = /home/g/grainger/project-oraclut
 created = 2026-10-11
-git_head_at_creation = 17de4c0b48fa820ec0c65057b3405c4a40cb4661
+git_head_at_creation = d38af77b286f3b7470130088eced212e5cb57a1f
 
 driver   create_orac_luts                                     v04     4af364bf364836ecce9f1b3d07b9b522c0bf96448654c6f1a0a77497da5cd303  create_orac_luts_v04.py
 package  oraclut                                              v01     664645594755345f6a5fe76d52d948396ec5ae4c9050dcb2d5488a64b3713460  src/oraclut/__init___v01.py
@@ -83,10 +83,10 @@ kernel   disort-DISORTtoIDL.c                                 pinned  0e8bb0c9d5
 kernel   disort-DISORTtoIDL.dlm                               pinned  3194ac2fb189c7a1c0c6edd956cdc7b22642ef270220002f0710df133543ac03  create_orac_lut/disort2/src/DISORTtoIDL.dlm
 library  mie-library                                          pinned  3f79512e8ef476399fc0a71b64ababa4b1638cc95b26dba878dda8c5d91185c0  build/oraclut/liboraclut_mie_gfortran.so
 library  disort-intel-library                                 pinned  59307e42604ca0f77dc0b7c47f2092dec83cbacc1f6241c6a4a4455e3e1e37ad  create_orac_lut/disort2/src/DISORTtoIDL.so
-runtime  intel-runtime-libintlc.so.5                          pinned  b79687bda5340d1c96be1d6b69ac30a6b1d093a8da7ca411fd56ea139f2b48af  /network/software/linux-x86_64/compilers/intel/2022/compiler/2022.1.0/linux/compiler/lib/intel64_lin/libintlc.so.5
-runtime  intel-runtime-libirc.so                              pinned  110ada6d2b84028b0a7e4e1aa43bf294f9698a5e1c4073bb76b8debf2e9de2ad  /network/software/linux-x86_64/compilers/intel/2022/compiler/2022.1.0/linux/compiler/lib/intel64_lin/libirc.so
-runtime  intel-runtime-libsvml.so                             pinned  58470d009cece805ae8e3f0276cf34825839f3c3f6fde94ec4de45e5680fff0c  /network/software/linux-x86_64/compilers/intel/2022/compiler/2022.1.0/linux/compiler/lib/intel64_lin/libsvml.so
-runtime  intel-runtime-libimf.so                              pinned  3adedea9be61807b6071c0283fb5e969e116895ccdf0f85fa3eb31091b351056  /network/software/linux-x86_64/compilers/intel/2022/compiler/2022.1.0/linux/compiler/lib/intel64_lin/libimf.so
-runtime  intel-runtime-libifcore.so.5                         pinned  212c117b686535b7917d0a052eaa4aa219606f264315fcc7f190f787f5800c50  /network/software/linux-x86_64/compilers/intel/2022/compiler/2022.1.0/linux/compiler/lib/intel64_lin/libifcore.so.5
-runtime  intel-runtime-libifport.so.5                         pinned  8dc12854550a9cec285de510231a20fd056552de4b008b24b5c5add271e64e82  /network/software/linux-x86_64/compilers/intel/2022/compiler/2022.1.0/linux/compiler/lib/intel64_lin/libifport.so.5
-runtime  intel-runtime-libifcoremt.so.5                       pinned  39130b583efd3d3768c24aae43d3841f00f827feaf2fa0da77973bcd07387685  /network/software/linux-x86_64/compilers/intel/2022/compiler/2022.1.0/linux/compiler/lib/intel64_lin/libifcoremt.so.5
+library  intel-runtime-libintlc.so.5                          pinned  b79687bda5340d1c96be1d6b69ac30a6b1d093a8da7ca411fd56ea139f2b48af  /network/software/linux-x86_64/compilers/intel/2022/compiler/2022.1.0/linux/compiler/lib/intel64_lin/libintlc.so.5
+library  intel-runtime-libirc.so                              pinned  110ada6d2b84028b0a7e4e1aa43bf294f9698a5e1c4073bb76b8debf2e9de2ad  /network/software/linux-x86_64/compilers/intel/2022/compiler/2022.1.0/linux/compiler/lib/intel64_lin/libirc.so
+library  intel-runtime-libsvml.so                             pinned  58470d009cece805ae8e3f0276cf34825839f3c3f6fde94ec4de45e5680fff0c  /network/software/linux-x86_64/compilers/intel/2022/compiler/2022.1.0/linux/compiler/lib/intel64_lin/libsvml.so
+library  intel-runtime-libimf.so                              pinned  3adedea9be61807b6071c0283fb5e969e116895ccdf0f85fa3eb31091b351056  /network/software/linux-x86_64/compilers/intel/2022/compiler/2022.1.0/linux/compiler/lib/intel64_lin/libimf.so
+library  intel-runtime-libifcore.so.5                         pinned  212c117b686535b7917d0a052eaa4aa219606f264315fcc7f190f787f5800c50  /network/software/linux-x86_64/compilers/intel/2022/compiler/2022.1.0/linux/compiler/lib/intel64_lin/libifcore.so.5
+library  intel-runtime-libifport.so.5                         pinned  8dc12854550a9cec285de510231a20fd056552de4b008b24b5c5add271e64e82  /network/software/linux-x86_64/compilers/intel/2022/compiler/2022.1.0/linux/compiler/lib/intel64_lin/libifport.so.5
+library  intel-runtime-libifcoremt.so.5                       pinned  39130b583efd3d3768c24aae43d3841f00f827feaf2fa0da77973bcd07387685  /network/software/linux-x86_64/compilers/intel/2022/compiler/2022.1.0/linux/compiler/lib/intel64_lin/libifcoremt.so.5

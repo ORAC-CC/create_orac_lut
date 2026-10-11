@@ -1,5 +1,12 @@
 # Double-precision V21/V22 numerical baseline
 
+> **Status 2026-10-11.**  The double-precision development is suspended (not
+> removed): its sources, libraries, manifests and products are unchanged.  The
+> current work reproduces the historical single-precision V21 IDL calculation
+> exactly with the original Intel DISORT kernel and IDL-compatible arithmetic
+> (`releases/lut_v22_single.release`;
+> `validation/v21_v22_terra_modis/REPORT_single_precision_equivalence.md`).
+
 Status (2026-10-11, after the production jobs): **FAIL / not established**
 (section 8).  The double-precision V21 products did not finish (SLURM time
 limit), and the double-precision V22 `pagg` product contains NaN at three

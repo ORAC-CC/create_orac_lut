@@ -45,10 +45,12 @@ SourceVault copy in the same directory (CODE_VERSION_vNN), and the
 substitution is recorded in the provenance, so sealed historical releases
 remain runnable.  Version v04 adds the original V21 IDL DISORT kernel: the
 library entry ``disort-intel-library`` (create_orac_lut/disort2/src/
-DISORTtoIDL.so), a ``runtime`` role for the Intel Fortran run-time libraries it
-needs (pinned files outside the repository, by absolute path), and the
-manifest header key ``disort_sp_kernel``, which must equal the kernel selected
-by ORAC_LUT_DISORT_SP_KERNEL; ORAC_LUT_* settings are recorded in the
+DISORTtoIDL.so), library entries ``intel-runtime-<name>`` for the Intel
+Fortran run-time libraries it needs (pinned files outside the repository,
+given by absolute path; the role set and entry format are those of v03, so
+older launchers still parse every manifest when they look for a release), and
+the manifest header key ``disort_sp_kernel``, which must equal the kernel
+selected by ORAC_LUT_DISORT_SP_KERNEL; ORAC_LUT_* settings are recorded in the
 provenance.  None of these changes anything numerical.  The importlib finder and
 loader classes below are the minimum Python needs for step 3; they exist so
 that per-file versions can be combined freely without editing the imports
@@ -80,7 +82,8 @@ RELEASE_DIR = REPO_ROOT / "releases"
 MANIFEST_SCHEMA = "oraclut-release-manifest-1"
 PROVENANCE_SCHEMA = "oraclut-lut-provenance-1"
 PUBLIC_REPOSITORY = "https://github.com/ORAC-CC/create_orac_lut"
-ROLES = ("driver", "package", "module", "config", "adapter", "kernel", "library", "runtime")
+ROLES = ("driver", "package", "module", "config", "adapter", "kernel", "library")
+RUNTIME_PREFIX = "intel-runtime-"
 PYTHON_ROLES = ("driver", "package", "module")
 VERSIONED_STEM = re.compile(r"_v\d\d$")
 GUARDED_TOP_NAMES = ("oraclut", "create_orac_luts")
@@ -156,10 +159,11 @@ def read_manifest(path):
          refuse(f"{path}:{number}: file version {file_version!r} does not match the file name {file}")
       if role in PYTHON_ROLES and not (suffix and file.endswith(".py")):
          refuse(f"{path}:{number}: Python source {file} must be a versioned *_vNN.py file")
-      if (role == "runtime") != Path(file).is_absolute():
-         refuse(f"{path}:{number}: runtime entries (and only they) are given by absolute path: {file}")
-      if role == "runtime" and file_version != "pinned":
-         refuse(f"{path}:{number}: runtime entry {file} must be pinned")
+      runtime = role == "library" and logical.startswith(RUNTIME_PREFIX)
+      if runtime != Path(file).is_absolute():
+         refuse(f"{path}:{number}: run-time library entries ({RUNTIME_PREFIX}*), and only they, are given by absolute path: {file}")
+      if runtime and file_version != "pinned":
+         refuse(f"{path}:{number}: run-time library entry {file} must be pinned")
       entries.append({"role": role, "logical": logical, "file_version": file_version, "sha256": sha256, "path": file})
    if header.get("manifest_schema") != MANIFEST_SCHEMA:
       refuse(f"{path}: manifest_schema must be {MANIFEST_SCHEMA!r}, got {header.get('manifest_schema')!r}")
@@ -391,7 +395,7 @@ def verify_libraries(manifest):
          intel_used = True
          if library_logical not in logicals:
             refuse(f"{relative(manifest['path'])} selects the Intel kernel for {key} but pins no {library_logical}")
-   runtime_entries = [entry for entry in manifest["entries"] if entry["role"] == "runtime"]
+   runtime_entries = [entry for entry in manifest["entries"] if entry["role"] == "library" and entry["logical"].startswith(RUNTIME_PREFIX)]
    if intel_used:
       directory = disort_module.intel_runtime_directory()
       pinned = {Path(entry["path"]).name: entry for entry in runtime_entries}
@@ -413,7 +417,7 @@ def verify_libraries(manifest):
       records.append({"logical": entry["logical"], "path": entry["path"], "sha256": digest, "built_by_launcher": False,
                       "device": status.st_dev, "inode": status.st_ino})
    for entry in manifest["entries"]:
-      if entry["role"] != "library":
+      if entry["role"] != "library" or entry["logical"].startswith(RUNTIME_PREFIX):
          continue
       if entry["logical"] in intel_paths:
          path = REPO_ROOT / entry["path"]
@@ -598,7 +602,7 @@ def git(*args):
 def git_state(manifest, launcher_paths):
    """Commit, tree status and, for every release file, whether it is in that commit unchanged."""
 
-   tracked_paths = [entry["path"] for entry in manifest["entries"] if entry["role"] not in ("library", "runtime")] + launcher_paths
+   tracked_paths = [entry["path"] for entry in manifest["entries"] if entry["role"] != "library"] + launcher_paths
    try:
       commit = git("rev-parse", "HEAD")
       state = {"available": True, "commit": commit, "branch": git("rev-parse", "--abbrev-ref", "HEAD"),
@@ -782,7 +786,7 @@ def publish_with_provenance(release, private_file, final_file):
       verify_bindings(release["finder"])
       if sha256_file(release["run_file"]["realpath"]) != release["run_file"]["sha256"]:
          refuse(f"the run file {release['run_file']['path']} changed during the calculation")
-      verify_manifest_files(release["manifest"], ("driver", "package", "module", "config", "adapter", "kernel", "library", "runtime"))
+      verify_manifest_files(release["manifest"], ("driver", "package", "module", "config", "adapter", "kernel", "library"))
       mapped = mapped_shared_objects()
       libraries_mapped = []
       for library in release["libraries"]:

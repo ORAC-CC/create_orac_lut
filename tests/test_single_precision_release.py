@@ -34,8 +34,18 @@ def test_manifest_declares_single_precision_and_the_intel_kernel():
    logical = {entry["logical"]: entry for entry in manifest["entries"]}
    assert logical["disort-intel-library"]["path"] == "create_orac_lut/disort2/src/DISORTtoIDL.so"
    assert "disort-library" not in logical and "disort-double-library" not in logical
-   runtime = [entry for entry in manifest["entries"] if entry["role"] == "runtime"]
-   assert len(runtime) == 7 and all(Path(entry["path"]).is_absolute() for entry in runtime)
+   runtime = [entry for entry in manifest["entries"] if entry["logical"].startswith("intel-runtime-")]
+   assert len(runtime) == 7 and all(entry["role"] == "library" and Path(entry["path"]).is_absolute() for entry in runtime)
+
+
+def test_launcher_v03_still_parses_every_manifest():
+   # v03 scans releases/ when no manifest is named; the new manifest must not stop it.
+   import importlib.util
+   spec = importlib.util.spec_from_file_location("launcher_v03", ROOT / "create_orac_luts_release_v03.py")
+   v03 = importlib.util.module_from_spec(spec)
+   spec.loader.exec_module(v03)
+   for path in sorted((ROOT / "releases").glob("lut_v*.release")):
+      v03.read_manifest(path)
 
 
 def test_runtime_entries_must_be_absolute_and_pinned(tmp_path):
