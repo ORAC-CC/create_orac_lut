@@ -61,18 +61,26 @@ def test_interpol_complex_interpolates_a_descending_abscissa():
    assert np.ptp(np.real(result)) > 0.1
 
 
-def test_interpol_complex_leaves_an_ascending_abscissa_bit_for_bit_unchanged():
-   """Sorting must be the identity for already ascending tables (no regression)."""
+def test_interpol_complex_gives_the_same_result_for_ascending_and_descending_tables():
+   """IDL INTERPOL (VALUE_LOCATE) accepts either ordering; reversing the table changes nothing."""
 
    wl = np.array([2.0, 4.0, 6.0, 8.0, 10.0])
-   cm = (1.0 + wl / 10.0) + 1j * (wl / 100.0)
-   probe = np.array([3.0, 5.0, 7.0, 9.0])
+   cm = ((1.0 + wl / 10.0) + 1j * (wl / 100.0)).astype(np.complex64)
+   probe = np.array([3.0, 5.0, 7.0, 9.0], dtype=np.float32)
 
-   result = _interpol_complex(cm, wl, probe)
-   expected = (np.interp(probe, wl, np.real(cm)).astype(np.float32)
-               + 1j * np.interp(probe, wl, np.imag(cm)).astype(np.float32)).astype(np.complex64)
+   ascending = _interpol_complex(cm, wl, probe)
+   descending = _interpol_complex(cm[::-1], wl[::-1], probe)
+   # IDL: p = (xout-x[s])*diff/(x[s+1]-x[s]) + v[s] in DOUBLE COMPLEX, stored COMPLEX
+   s = np.searchsorted(wl, probe.astype(np.float64), side="right") - 1
+   t = probe.astype(np.float64) - wl[s]
+   h = wl[s + 1] - wl[s]
+   expected = np.empty(probe.shape, np.complex64)
+   expected.real = t * (cm.real[s + 1] - cm.real[s]) / h + cm.real[s]
+   expected.imag = t * (cm.imag[s + 1] - cm.imag[s]) / h + cm.imag[s]
 
-   assert np.array_equal(result, expected)
+   assert ascending.dtype == np.complex64
+   assert np.array_equal(ascending, expected)
+   assert np.allclose(descending, ascending, rtol=1e-6, atol=0)
 
 
 def test_water_240k_table_is_descending_in_wavelength():
@@ -209,7 +217,7 @@ def test_aerosol_writer_writes_a_readable_lut_with_aerosol_arguments(tmp_path):
    import netCDF4 as nc
 
    inststr = load_inststr(INPUTS / "inst" / "meteosat-10_seviri_v1.inst", requestedchannelid=[1])
-   lutstr = load_lutstr(INPUTS / "lut" / "aerosol_test.lut", inststr.max_sat_zenith, include_pressure=True)
+   lutstr = load_lutstr(INPUTS / "lut" / "archive" / "aerosol_test.lut", inststr.max_sat_zenith, include_pressure=True)   # archived definition
    srfstrarr, _ = load_srfstrarr(inststr, INPUTS / "sun" / "Gueymard2018.sssi", 1, INPUTS)
 
    nchan = inststr.number_of_nadir_channels

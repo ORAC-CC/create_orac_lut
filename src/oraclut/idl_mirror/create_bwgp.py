@@ -12,10 +12,12 @@ This is the scattering path made explicit:
    T-matrix: dubovik_lognormal_multiple_eps -> bulk properties;
    both paths return Bext, Bsca, w, g and phase function -> Legendre expansion.
 
-Arithmetic follows the validated Python (double precision throughout, single
-precision only where the IDL result is stored in FLTARR by the caller).  Where
-the IDL evaluates an expression in a different order the IDL form is quoted in
-a comment; the validated order is kept so that products stay bitwise identical.
+Arithmetic reproduces the IDL (validation/v21_v22_terra_modis/
+REPORT_single_precision_equivalence.md): DOUBLE where the IDL is DOUBLE, FLOAT
+where the IDL operands are FLOAT (the literals 0.001, 100.0, 0.4 and 4./3., the
+wavenumber 1.0/wl), the IDL evaluation order, glibc exp and pow as called by
+IDL, the IDL quadrature.pro abscissae and weights, and FLTARR storage of the
+create_bwgp results.  The Mie kernel is selected in oraclut.optics.legacy_mie.
 """
 
 import math
@@ -23,29 +25,61 @@ from statistics import NormalDist
 
 import numpy as np
 
+from ..idl_math import idl_exp, idl_pow
 from ..optics.legacy_mie import mie_single_batch
 from .dubovik import dubovik_lognormal_multiple_eps
 from .total import idl_total
 
 
+def _legendre(nn, x):
+   """IDL quadrature.pro: Pro Legendre, nn, x, Pl, Pm, Pn (nn >= 2)."""
+
+   pl = 1.0                                            # value doesn't matter
+   pm = 1.0
+   pn = x
+   for n in range(2, int(nn) + 1):
+      inv = 1.0 / float(n)                             # IDL: in = 1d0/Double(n)
+      pl = pm
+      pm = pn
+      pn = (2.0 - inv) * x * pm - (1.0 - inv) * pl
+   return pl, pm, pn
+
+
 def quadrature(quadtype, npts):
-   """Abscissae and weights on [-1, 1]: 'T' trapezium or 'G' Gauss-Legendre.
+   """Abscissae and weights on [-1, 1]: 'T' trapezium or 'G' Gauss-Legendre (IDL quadrature.pro).
 
    IDL 'T': Abscissa = -1D0+2*Dindgen(NPts)/(N-1); Weight = 2D0/(N-1), ends 1D0/(N-1).
-   IDL 'G': Gauss-Legendre zeros by Newton iteration, returned in ascending
-   order; numpy's leggauss gives the same nodes in the same order.
+   IDL 'G': zeros of P_N by Newton iteration from FirstGuess (to 1d-14) and
+   weights 2(1-x^2)/(N P_(N-1))^2, reversed into ascending order.  The IDL
+   arithmetic is reproduced operation by operation; numpy's leggauss gives
+   nodes and weights that differ in the last bits.
    """
 
    npts = int(npts)
+   n = float(npts)                                     # IDL: N = Double(NPts)
    if quadtype.upper() == "T":
-      abscissa = np.linspace(-1.0, 1.0, npts, dtype=np.float64)      # IDL: -1D0+2*Dindgen(NPts)/(N-1)
-      weight = np.full(npts, 2.0 / (npts - 1), dtype=np.float64)
-      weight[0] = 1.0 / (npts - 1)
-      weight[npts - 1] = 1.0 / (npts - 1)
+      abscissa = -1.0 + 2.0 * np.arange(npts, dtype=np.float64) / (n - 1.0)
+      weight = np.full(npts, 2.0 / (n - 1.0), dtype=np.float64)
+      weight[0] = 1.0 / (n - 1.0)
+      weight[npts - 1] = 1.0 / (n - 1.0)
    elif quadtype.upper() == "G":
       if npts > 2000:
          raise ValueError("Error in quadrature: Too many quadrature points")
-      abscissa, weight = np.polynomial.legendre.leggauss(npts)
+      abscissa = np.zeros(npts, dtype=np.float64)
+      weight = np.zeros(npts, dtype=np.float64)
+      tolerance = 10.0 ** (-14)                        # IDL: 1d1^(-SigFig), SigFig = 14
+      for term, zero in enumerate(range(1, npts + 1)):
+         lx = 19262.0
+         x = math.cos(math.pi * (zero - 0.25) / (npts + 0.5))          # IDL: FirstGuess('G', NPts, Zero)
+         while abs(x - lx) > tolerance:
+            lx = x
+            pl, pm, pn = _legendre(npts, x)
+            x = x - (1.0 - x * x) * pn / (float(npts) * (pm - x * pn))   # IDL: x - NewtonG('G', NPts, x)
+         abscissa[term] = x
+         pl, pm, pn = _legendre(n, x)
+         weight[term] = 2.0 * (1.0 - x * x) / (n * pm) ** 2
+      abscissa = abscissa[::-1].copy()                 # IDL: Reverse(Abscissa)
+      weight = weight[::-1].copy()
    else:
       raise NotImplementedError("quadrature: only trapezium ('T') and Gaussian ('G') are ported")
    return abscissa, weight
@@ -75,6 +109,7 @@ def mie_size_dist_new(distname, nd, params, wavenumber, cm, dqv, xres=0.1):
    """
 
    ru_max = 10000.0
+   xres = float(xres)
    if np.imag(cm) > 0:
       raise ValueError("mie_size_dist_new: imaginary part of the refractive index must be negative")
 
@@ -105,18 +140,22 @@ def mie_size_dist_new(distname, nd, params, wavenumber, cm, dqv, xres=0.1):
 
    if distname == "modified_gamma":
       # params[0] = effective radius, params[1] = effective variance
-      alpha = (1.0 - 3.0 * params[1]) / params[1]
+      alpha = (1.0 - 3 * params[1]) / params[1]
       b = 1.0 / (params[0] * params[1])
-      n = b ** (-alpha - 1.0) * math.gamma(alpha + 1.0)          # IDL: (b^(-alpha-1))*Factorial(alpha)
-      w1p = w1 / n * r ** alpha * np.exp(-b * r)                 # IDL: W1 * (Nd/n) * R^alpha * exp(-b*R), Nd = 1
+      # IDL: N = (b^(-alpha-1))*Factorial(alpha); FACTORIAL is GAMMA(alpha+1d)
+      # for non-integer alpha (math.gamma reproduces the IDL value for the
+      # validated cases) and the exact table value for integer alpha <= 20.
+      n = math.pow(b, -alpha - 1.0) * math.gamma(alpha + 1.0)
+      # IDL: W1P = W1 * (Nd/n) * R^alpha * exp(-b*R)   (DOUBLE; glibc pow and exp)
+      w1p = w1 * (float(nd) / n) * idl_pow(r, alpha) * idl_exp(-b * r)
    else:
       # params[0] = mode radius, params[1] = S
       # IDL: W1P = W1 * Nd / (sqrt(2D0)*sqrt(!dpi)*R*alog(S)) * exp(-0.5D0*(alog(R/Rm)/alog(S))^2)
       log_s = math.log(params[1])
       w1p = (w1 * np.exp(-0.5 * (np.log(r / params[0]) / log_s) ** 2)
              / (math.sqrt(2.0) * math.sqrt(math.pi) * r * log_s))
-   if nd != 1.0:
-      w1p = w1p * nd
+      if nd != 1.0:
+         w1p = w1p * nd
 
    dx = 2.0 * np.pi * r * wavenumber
 
@@ -130,7 +169,7 @@ def mie_size_dist_new(distname, nd, params, wavenumber, cm, dqv, xres=0.1):
    f11 = mie["f11"]                                    # (npts, inp)
 
    w1pa = w1p * np.pi * r ** 2                          # area weighted distribution
-   w1pv = w1pa * (4.0 / 3.0) * r                        # IDL: W1PA * 4./3. * R  (volume weighted)
+   w1pv = w1pa * 4.0 / 3.0 * r                          # IDL: W1PA * 4./3. * R, i.e. ((W1PA*4.)/3.)*R (DOUBLE)
 
    bext = float(idl_total(w1pa * dqxt))
    bsca = float(idl_total(w1pa * dqsc))
@@ -190,7 +229,7 @@ def create_bwgp(distname, rm, s, ri, wl, dqv, scode="mie", tmatrix_path=None, ep
    wavelength when Vavg is wanted).
    """
 
-   wl = np.atleast_1d(np.asarray(wl, dtype=np.float64))
+   wl = np.atleast_1d(np.asarray(wl, dtype=np.float32))  # IDL: FLOAT wavelengths (0.55, srfstrarr.wvl)
    ri = np.atleast_1d(np.asarray(ri))
    if ri.size != wl.size:
       raise ValueError("create_bwgp: Array size mismatch!")
@@ -201,11 +240,12 @@ def create_bwgp(distname, rm, s, ri, wl, dqv, scode="mie", tmatrix_path=None, ep
    # every channel shares one rectangular array.  IDL's loop skips those
    # entries; use the same zero result without emitting a divide-by-zero
    # warning before the per-point zero guard below.
-   wn = np.divide(1.0, wl, out=np.zeros_like(wl), where=wl != 0.0)  # IDL: wn = 1.0/wl
-   bext = np.zeros(inw, dtype=np.float64)
-   w = np.zeros(inw, dtype=np.float64)
-   g = np.zeros(inw, dtype=np.float64)
-   phi = np.zeros((inp, inw), dtype=np.float64)
+   wn = np.divide(np.float32(1.0), wl, out=np.zeros_like(wl), where=wl != 0.0)  # IDL: wn = 1.0/wl (FLOAT)
+   # IDL: Bext = fltarr(Inw); w = Bext; g = Bext; Phi = fltarr(Inp,Inw)
+   bext = np.zeros(inw, dtype=np.float32)
+   w = np.zeros(inw, dtype=np.float32)
+   g = np.zeros(inw, dtype=np.float32)
+   phi = np.zeros((inp, inw), dtype=np.float32)
    vavg = 0.0
 
    dotmatrix = scode is not None and scode.lower() == "tmatrix"
@@ -223,14 +263,17 @@ def create_bwgp(distname, rm, s, ri, wl, dqv, scode="mie", tmatrix_path=None, ep
             elif ri_i.imag < -0.5:
                raise ValueError(f"Imaginary RI is too negative for the Dubovik LUT range: k = {ri_i.imag}")
             bexttmp, bscatmp, wtmp, gtmp, phase = dubovik_lognormal_multiple_eps(
-               tmatrix_path, 1.0, rm, s, wn[i], ri_i, eps, neps, dqv=dqv,
+               tmatrix_path, 1.0, rm, s, float(wn[i]), ri_i, eps, neps, dqv=dqv,
                renorm_ph=True, silent=True)
             phi[:, i] = phase
          else:
             # The legacy wrapper uses Mie for zero/long-wave points and for
             # thermal channels (wl >= 6 micron), even for a T-matrix component.
+            # IDL: [Rm, S, 0.001, 100.0] is DOUBLE (Rm is DOUBLE): the FLOAT
+            # S and literals are promoted from single precision; xres=0.4 is FLOAT.
+            params = [float(rm), float(np.float32(s)), float(np.float32(0.001)), float(np.float32(100.0))]
             bexttmp, bscatmp, wtmp, gtmp, spm, vavgtmp = mie_size_dist_new(
-               distname, 1.0, [rm, s, 0.001, 100.0], wn[i], ri[i], dqv, xres=0.4)
+               distname, 1.0, params, float(wn[i]), ri[i], dqv, xres=np.float32(0.4))
             phi[:, i] = spm[0, :]
             vavg = vavgtmp
          bext[i] = bexttmp

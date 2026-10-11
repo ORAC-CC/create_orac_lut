@@ -116,7 +116,7 @@ def test_caller_attributes_take_precedence_over_defaults(tmp_path):
 
 
 def test_reader_keeps_the_pressure_spacing_keyword():
-    grid = read_lut_grid(INPUTS / "lut" / "aerosol_test.lut")
+    grid = read_lut_grid(INPUTS / "lut" / "archive" / "aerosol_test.lut")   # archived definition
     assert grid.surface_pressure_spacing == "uneven_linear"
     assert read_lut_grid(INPUTS / "lut" / "liquid-water-cloud_test.lut").surface_pressure_spacing is None
 

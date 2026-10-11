@@ -4,6 +4,11 @@ IDL:  pro call_disort, DTAUC, SSALB, PMOM, UTAU, UMU, PHI, FBEAM, UMU0, FISOT,
                        RFLDIR, RFLDN, FLUP, DFDT, UAVG, UU, ALBMED, TRNMED,
                        plank=plank, wnlo=wnlo, wnhi=wnhi, temp=temp, nlayer=nlayer
 
+DISORT changes some of its array arguments in place (SSALB = 1 becomes
+1 - DITHER; UTAU close to the column optical depth is set to it); as in IDL,
+the layer arrays passed to DISORT are copies made here, while UTAU, UMU and PHI
+are the caller's arrays.
+
 Checks the input dimensions against the DISORT_VARS block, sets the thermal
 inputs, compresses the layer stack (adjacent layers with identical SSALB and
 PMOM are merged, which is what happens to the Rayleigh-only layers) for the
@@ -59,9 +64,11 @@ def call_disort(disort_vars, dtauc, ssalb, pmom, utau, umu, phi, fbeam, umu0, fi
          raise ValueError("Wavenumber must be specified for emission calculations!")
       if temp is None:
          raise ValueError("Temperature must be specified for emission calculations!")
-      dtauc1 = dtauc
-      ssalb1 = ssalb
-      pmom1 = pmom
+      # IDL: dtauc1 = dtauc etc. are copies, so DISORT's in-place change of
+      # SSALB (to 1 - DITHER) does not reach the caller; UTAU is passed through.
+      dtauc1 = dtauc.copy()
+      ssalb1 = ssalb.copy()
+      pmom1 = pmom.copy()
       wvnmlo = float(wnlo)
       wvnmhi = float(wnhi)
       temper = np.asarray(temp, dtype=np.float32)

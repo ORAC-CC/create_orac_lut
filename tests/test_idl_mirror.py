@@ -243,7 +243,7 @@ def test_load_inststr_matches_validated_instrument_reader():
       load_inststr(INST, requestedchannelid=[99])
 
 
-@pytest.mark.parametrize("lutfile", ["liquid-water-cloud_test.lut", "aerosol_test.lut", "liquid-water-cloud.lut", "aerosol.lut"])
+@pytest.mark.parametrize("lutfile", ["liquid-water-cloud_test.lut", "archive/aerosol_test.lut", "liquid-water-cloud.lut", "aerosol.lut"])
 def test_load_lutstr_matches_validated_grid_reader(lutfile):
    old = read_lut_grid(INPUTS / "lut" / lutfile)
    pressure = old.surface_pressure is not None
@@ -258,7 +258,7 @@ def test_load_lutstr_matches_validated_grid_reader(lutfile):
 
 def test_load_lutstr_uses_the_instrument_maximum_satellite_zenith_like_idl(tmp_path):
    # ash-plume_test.lut lists 0 89; IDL lut_quadrature replaces the end point by max_sat_zenith.
-   lutstr = load_lutstr(INPUTS / "lut" / "ash-plume_test.lut", np.float32(90.0))
+   lutstr = load_lutstr(INPUTS / "lut" / "archive" / "ash-plume_test.lut", np.float32(90.0))
    assert lutstr.saz.tolist() == [0.0, 90.0]
    # Relative azimuth must be linear (IDL stop), and every count must match its values.
    text = (INPUTS / "lut" / "liquid-water-cloud_test.lut").read_text()
@@ -279,7 +279,10 @@ def test_load_srfstrarr_matches_validated_channel_reader(channels):
    assert nwvl_max == 1
    for srf, channel in zip(srfstrarr, old):
       assert srf.wvl_centre == channel.wavelength_microns and srf.wvn_centre == channel.wavenumber_cm_inverse
-      assert srf.f0 == channel.f0
+      # F0 now follows the IDL types (DOUBLE solar spectrum and INTERPOL), which
+      # reproduces the production V21 LUTs bitwise (test_v21_single_reproduction);
+      # the old reader agrees to float32 rounding.
+      assert np.isclose(srf.f0, channel.f0, rtol=1e-6, atol=0)
       assert (srf.b1, srf.b2, srf.t1, srf.t2) == (channel.b1, channel.b2, channel.t1, channel.t2)
       assert srf.nwvl == 1 and srf.wvl[0] == srf.wvl_centre and srf.val[0] == 1.0
 
@@ -344,7 +347,9 @@ def test_load_mmdat_matches_validated_microphysics_reader(mmfile):
    for comp, old_comp in zip(mmstr.comp, old.components):
       wl, n, k = read_refractive_index(INPUTS / "ri" / old_comp.refractive_index_file)
       assert comp.code == old_comp.scattering_code
-      assert identical(comp.wl, wl) and identical(np.real(comp.cm), n) and identical(np.imag(comp.cm), -k)
+      # IDL: CM = complex(n, -k) is single-precision COMPLEX
+      assert comp.cm.dtype == np.complex64
+      assert identical(comp.wl, wl) and identical(np.real(comp.cm), np.float32(n)) and identical(np.imag(comp.cm), np.float32(-k))
 
 
 def test_load_atmstr_matches_validated_atmosphere_reader():
@@ -378,12 +383,17 @@ def test_interpol_matches_the_validated_idl_compatible_profile_interpolation():
 # scattering: quadrature / mie_size_dist_new / legpexp / create_bwgp / generate_scattering_properties
 # ---------------------------------------------------------------------------
 
-def test_quadrature_gauss_points_match_the_validated_nodes():
+def test_quadrature_reproduces_the_idl_newton_iteration():
+   # quadrature.pro 'G' (Newton iteration) gives nodes and weights that differ
+   # from numpy's leggauss in the last bits; the IDL values are the reference
+   # (they reproduce the V21 IDL phase functions bitwise).
    abscissa, weight = quadrature("g", 64)
    expected_abscissa, expected_weight = np.polynomial.legendre.leggauss(64)
-   assert identical(abscissa, expected_abscissa) and identical(weight, expected_weight)
+   assert np.all(np.diff(abscissa) > 0)
+   assert np.allclose(abscissa, expected_abscissa, rtol=0, atol=1e-15) and np.allclose(weight, expected_weight, rtol=1e-10, atol=0)
+   assert not identical(weight, expected_weight)
    abscissa, weight = quadrature("T", 5)
-   assert identical(abscissa, np.linspace(-1, 1, 5)) and identical(weight, [0.25, 0.5, 0.5, 0.5, 0.25])
+   assert identical(abscissa, -1.0 + 2.0 * np.arange(5) / 4.0) and identical(weight, [0.25, 0.5, 0.5, 0.5, 0.25])
 
 
 @pytest.mark.parametrize("distname", ["modified_gamma", "log_normal"])
@@ -400,10 +410,12 @@ def test_mie_size_dist_new_and_legpexp_match_the_validated_kernels(distname):
       old = _mie_distribution(params[0], 0.0, wavelength, refractive_index, qv, xres=0.4,
                               distribution="log_normal", size_parameters=(params[0], params[1]))
    bext, bsca, w, g, spm, vavg = mie_size_dist_new(distname, 1.0, params, 1.0 / wavelength, refractive_index, qv, xres=0.4)
-   assert (bext, w, g, vavg) == (old[0], old[1], old[2], old[4])
-   assert identical(spm[0], old[3])
+   # The IDL arithmetic (trapezium abscissae, evaluation order, glibc exp/pow,
+   # ((W1PA*4.)/3.)*R, the IDL Mie DLM) agrees with the old kernels to rounding.
+   assert np.allclose([bext, w, g, vavg], [old[0], old[1], old[2], old[4]], rtol=1e-12, atol=0)
+   assert np.allclose(spm[0], old[3], rtol=1e-9, atol=0)
    inlc, lc = legpexp(64, qv, weight, spm[0])
-   assert identical(lc, legendre_moments(qv, weight, old[3]))
+   assert np.allclose(lc, legendre_moments(qv, weight, spm[0]), rtol=0, atol=1e-14)
    assert 0 < inlc < 64
 
 
@@ -463,13 +475,19 @@ def test_generate_scattering_properties_matches_the_validated_cloud_optics():
    imaginary = np.interp(wavelengths, ri_wavelength, ri_imaginary).astype(np.float32)
    optics = legacy_stg_optics(lutstr.efr, wavelengths, real.astype(np.complex64) - 1j * imaginary.astype(np.complex64), phase_order=nmom)
    assert bext.shape == (1, 2, 3) and amom.shape == (nmom, 1, 2, 3)
-   assert identical(bext550, optics.extinction_coefficient[:, 0].astype(np.float32))
-   assert identical(bext[0].T, optics.extinction_coefficient[:, 1:].astype(np.float32))
-   assert identical(bextrat[0].T, (optics.extinction_coefficient[:, 1:] / optics.reference_extinction_coefficient[:, None]).astype(np.float32))
-   assert identical(w[0].T, optics.single_scatter_albedo[:, 1:].astype(np.float32))
-   assert identical(g[0].T, optics.asymmetry_parameter[:, 1:].astype(np.float32))
-   assert identical(vavg, optics.average_volume_per_particle.astype(np.float32))
-   assert identical(np.transpose(amom[:, 0, :, :], (0, 2, 1)), optics.phase_moments[:, :, 1:].astype(np.float32))
+   assert all(a.dtype == np.float32 for a in (bext550, bext, bextrat, w, g, vavg, phs, amom))
+   # The IDL arithmetic (FLOAT wavenumber and literals, IDL quadrature, FLTARR
+   # storage) differs from the old optics only at the float32 rounding level.
+   close = lambda a, b: np.allclose(a, b, rtol=2e-6, atol=0)
+   assert close(bext550, optics.extinction_coefficient[:, 0])
+   assert close(bext[0].T, optics.extinction_coefficient[:, 1:])
+   assert close(bextrat[0].T, optics.extinction_coefficient[:, 1:] / optics.reference_extinction_coefficient[:, None])
+   assert close(w[0].T, optics.single_scatter_albedo[:, 1:])
+   assert close(g[0].T, optics.asymmetry_parameter[:, 1:])
+   assert close(vavg, optics.average_volume_per_particle)
+   assert np.allclose(np.transpose(amom[:, 0, :, :], (0, 2, 1)), optics.phase_moments[:, :, 1:], rtol=0, atol=1e-5)
+   # BextRat is a FLOAT / FLOAT division, as in IDL
+   assert identical(bextrat, bext / bext550[None, None, :])
 
 
 # ---------------------------------------------------------------------------

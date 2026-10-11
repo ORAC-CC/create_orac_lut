@@ -14,6 +14,14 @@ INSTRUMENT = INPUTS / "inst" / "meteosat-10_seviri_v1.inst"
 CONFIGS = ROOT / "configs"
 CLOUD_TEST_CONFIG = "configs/meteosat-10_seviri_cloud_liquid-water_stg_test.driver"
 AEROSOL_TEST_CONFIG = "configs/meteosat-10_seviri_aerosol_a79_test.driver"
+# Historical and experimental LUT definitions (aerosol_test, ash, biomass and
+# others) were moved to create_orac_lut/input_files/lut/archive/ (2026-10-11):
+# they are historical material, not approved production grids, so
+# configurations that name them by bare file name no longer resolve.  The
+# active definitions are liquid-water-cloud.lut, ice-cloud.lut and aerosol.lut
+# (with their _test variants where they exist).  Tests that only need an
+# archived grid name the archived file explicitly.
+ARCHIVE = INPUTS / "lut" / "archive"
 
 
 @pytest.fixture
@@ -46,6 +54,13 @@ def test_template_configuration_parses_and_selects_a_development_grid(capsys):
 
 @pytest.mark.parametrize("config", sorted(path.name for path in CONFIGS.glob("*.driver")))
 def test_every_shipped_configuration_resolves(config, capsys):
+    words = " ".join(line.split("#", 1)[0] for line in (CONFIGS / config).read_text().splitlines()).split()
+    archived = {path.name for path in ARCHIVE.glob("*.lut")} - {path.name for path in (INPUTS / "lut").glob("*.lut")}
+    if any(word in archived for word in words):
+        # names a historical (archived) grid: refused, never resolved implicitly
+        with pytest.raises((FileNotFoundError, SystemExit)):
+            main(["--config", f"configs/{config}", "--dry-run"])
+        return
     assert main(["--config", f"configs/{config}", "--dry-run"]) == 0
     captured = capsys.readouterr().out
     # A configuration always names its grid, and the summary says which kind.
@@ -84,11 +99,11 @@ def test_cloud_configuration_reports_dimensions_workload_and_output(capsys):
 
 
 def test_aerosol_configuration_reports_the_pressure_dimension(capsys):
-    assert main(["--config", AEROSOL_TEST_CONFIG, "--dry-run"]) == 0
+    assert main(["--config", AEROSOL_TEST_CONFIG, "--lut", str(ARCHIVE / "aerosol_test.lut"), "--dry-run"]) == 0
     captured = capsys.readouterr().out
     assert "forward model:       aerosol (particles distributed through the atmospheric column)" in captured
     assert "aerosol / a79, 2 component(s), scattering code mie" in captured
-    assert "LUT grid definition: create_orac_lut/input_files/lut/aerosol_test.lut" in captured
+    assert "LUT grid definition: create_orac_lut/input_files/lut/archive/aerosol_test.lut" in captured
     assert "Rayleigh scattering: on; gas absorption: on" in captured
     assert "surface_pressure     3" in captured
     assert "grid points/channel  96" in captured
@@ -98,7 +113,7 @@ def test_aerosol_configuration_reports_the_pressure_dimension(capsys):
 
 def test_command_line_overrides_the_configuration_file(capsys):
     assert main([
-        "--config", AEROSOL_TEST_CONFIG,
+        "--config", AEROSOL_TEST_CONFIG, "--lut", str(ARCHIVE / "aerosol_test.lut"),
         "--channels", "2,3", "--no-gas", "--version", "22", "--dry-run",
     ]) == 0
     captured = capsys.readouterr().out
@@ -171,16 +186,15 @@ def test_explicit_full_grid_is_resolved_without_running_it(capsys):
 
 
 def test_cli_derives_formulation_and_legacy_output_name_like_makerunfile_v2(capsys):
-    # makerunfile_v2: material 'aerosol' -> FM 'aerosol', lutfile 'aerosol[_test].lut'
-    assert main([
-        "--platform", "meteosat-10", "--instrument", "seviri",
-        "--microphysics", "aerosol_a79.mm", "--test", "--gas", "--channels", "1", "--dry-run",
-    ]) == 0
-    captured = capsys.readouterr().out
-    assert "forward model:       aerosol" in captured
-    assert "instrument file:     create_orac_lut/input_files/inst/meteosat-10_seviri_v1.inst" in captured
-    assert "LUT grid definition: create_orac_lut/input_files/lut/aerosol_test.lut" in captured
-    assert "output:              create_orac_lut/luts/meteosat-10_seviri_aerosol/meteosat-10_seviri_m_aerosol_a12_pa79_v21.nc" in captured
+    # makerunfile_v2: material 'aerosol' -> FM 'aerosol', lutfile 'aerosol[_test].lut'.
+    # The derived aerosol_test.lut is archived, so the derivation now ends in a refusal.
+    with pytest.raises((FileNotFoundError, SystemExit)) as raised:
+        main([
+            "--platform", "meteosat-10", "--instrument", "seviri",
+            "--microphysics", "aerosol_a79.mm", "--test", "--gas", "--channels", "1", "--dry-run",
+        ])
+    message = str(raised.value) + capsys.readouterr().err
+    assert "aerosol_test.lut" in message
 
 
 CLOUD_HEADER = "input_files\nmeteosat-10_seviri_v1.inst\nliquid-water_stg.mm\nliquid-water-cloud_test.lut\n2\n"
@@ -278,7 +292,7 @@ def test_cli_refuses_existing_output_before_scientific_execution(tmp_path):
 
 def test_aerosol_inputs_preserve_components_and_pressure_grid():
     model = read_microphysics(INPUTS / "microphysics" / "aerosol_a79.mm")
-    grid = read_lut_grid(INPUTS / "lut" / "aerosol_test.lut")
+    grid = read_lut_grid(ARCHIVE / "aerosol_test.lut")
     assert [component.component for component in model.components] == ["waf", "saf"]
     assert [component.mixing_ratio for component in model.components] == [0.625, 0.375]
     assert grid.surface_pressure.tolist() == [950.0, 1013.0, 1050.0]
@@ -305,7 +319,7 @@ def test_cloud_pipeline_and_v2_writer(tmp_path):
 def test_aerosol_pipeline_and_pressure_aware_v2_writer(tmp_path):
     result = generate_aerosol(
         ROOT,
-        lut_path=INPUTS / "lut" / "aerosol_test.lut",
+        lut_path=ARCHIVE / "aerosol_test.lut",
         microphysics_path=INPUTS / "microphysics" / "aerosol_a79.mm",
         instrument_path=INSTRUMENT,
         channels=(1,),

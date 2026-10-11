@@ -57,8 +57,9 @@ from oraclut.idl_mirror import (   # noqa: E402  (import after sys.path is set)
    call_disort, generate_scattering_properties, idl_total, interpol, load_atmstr, load_gasstr,
    load_inststr, load_lutstr, load_mmdat, load_srfstrarr, setup_disort, write_v2_lut,
 )
+from oraclut.idl_math import idl_cos_deg, idl_exp, idl_ipow   # noqa: E402  (IDL FLOAT cos(x*!dtor), EXP, integer ^)
 from oraclut.radiative_transfer.legacy_disort import getmom, plkavg   # noqa: E402  (DISORT GETMOM / PLKAVG)
-from oraclut.radiative_transfer.legacy_disort import DOUBLE_LIBRARY, disort_precision   # noqa: E402  (solver precision)
+from oraclut.radiative_transfer.legacy_disort import DOUBLE_LIBRARY, disort_precision, single_kernel, single_library   # noqa: E402  (solver precision, kernel)
 from oraclut.provenance import build_record, write_provenance   # noqa: E402  (provenance sidecar)
 from oraclut.version import LutVersionMismatch, check_lut_version, print_banner   # noqa: E402  (code version)
 
@@ -146,7 +147,8 @@ def _print_execution_configuration(
    print(f"Rayleigh scattering:  {'on' if rayleigh_flag else 'off'}")
    print(f"Scattering only:      {'yes' if scat_only else 'no'}")
    print(f"DISORT streams:       {nstreams}")
-   print(f"DISORT precision:     {disort_precision()}")
+   print(f"DISORT precision:     {disort_precision()}"
+         + (f" (kernel {single_kernel()}: {single_library().relative_to(REPO_ROOT)})" if disort_precision() == "single" else ""))
    print(f"Legendre moments:     {nmom}")
    print(f"Output:               {output}")
    print("LUT dimensions:")
@@ -250,7 +252,8 @@ def _record_provenance(lut_file, *, forward_model, in_path, instfile, mmfile, lu
          "solver": "DISORT (create_orac_lut/disort2 source, oraclut.radiative_transfer.legacy_disort)",
          "disort_precision": disort_precision(),
          "disort_library": (str(DOUBLE_LIBRARY.relative_to(REPO_ROOT)) if disort_precision() == "double"
-                            else "single-precision kernel built from create_orac_lut/disort2/src"),
+                            else str(single_library().relative_to(REPO_ROOT))),
+         "disort_single_kernel": single_kernel() if disort_precision() == "single" else None,
          "nstreams": int(nstreams),
          "rayleigh": bool(rayleigh_flag),
          "gas_absorption": bool(gas_flag),
@@ -591,7 +594,7 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
       columntauray = np.full(nchan, f32(1.0e-6), f32)
    else:
       columntauray = (atmstr.pressure[atmstr.nlevels - 1] / f32(1013.0)) / \
-                     (f32(117.03) * wvl_centre ** f32(4.0) - f32(1.316) * wvl_centre ** f32(2.0))
+                     (f32(117.03) * idl_ipow(wvl_centre, 4) - f32(1.316) * idl_ipow(wvl_centre, 2))   # IDL: wvl_centre^4, ^2 (integer powers)
 
    # Molecular (Rayleigh) phase moments from the DISORT GETMOM procedure.  The
    # IDL calls GETMOM, 2, 0.0, NMom-1 inside the layer loop; the result is the
@@ -618,7 +621,7 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
             gaslvl = np.zeros(atmstr.nlevels, f32)
 
          # Calculate the cumulative Rayleigh optical depth at each level
-         raylvl = columntauray[l] * np.exp(f32(-0.1188) * atmstr.height - f32(0.00116) * atmstr.height ** f32(2.0))
+         raylvl = columntauray[l] * idl_exp(f32(-0.1188) * atmstr.height - f32(0.00116) * idl_ipow(atmstr.height, 2))   # IDL: FLOAT exp, Height^2
 
          # The optical depths of each layer from gas absorption and Rayleigh
          # scattering are the differences between adjacent levels.
@@ -672,7 +675,7 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
                # ---------- DIFFUSE -----------
                fbeam = 0.0                                                    # Direct beam intensity
                fisot = 100.0                                                  # Isotropic illumination intensity
-               umu0 = f32(np.cos(np.deg2rad(f32(50.0))))                      # A nominal value for beam zenith
+               umu0 = idl_cos_deg(f32(50.0))                                  # A nominal value for beam zenith (IDL: cos(50.0*!dtor))
                utau = np.asarray([0.0, totaltau], f32)                        # Output layers (in optical depth)
                # UMu describes downwelling as well as upwelling radiance.  If 90
                # degrees is among the satellite zeniths take a small angle off it,
@@ -680,7 +683,7 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
                tmpsat = lutstr.saz.copy()
                tmpsat[tmpsat == 90.0] = f32(89.99)
                umu = np.zeros(2 * lutstr.saz_n, f32)
-               umu[0:lutstr.saz_n] = -f32(1.0) * np.cos(np.deg2rad(tmpsat)).astype(f32)
+               umu[0:lutstr.saz_n] = -f32(1.0) * idl_cos_deg(tmpsat)          # IDL: -1.0*cos(tmpSat*!dtor)
                umu[lutstr.saz_n:2 * lutstr.saz_n] = -f32(1.0) * umu[lutstr.saz_n - 1::-1]
                bd = np.abs(umu) == 1.0
                umu[bd] = f32(0.99999) * umu[bd] / np.abs(umu[bd])
@@ -689,15 +692,14 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
                   disort_vars, dtau, ssalb, pmom, utau, umu, lutstr.raa, fbeam, umu0, fisot)
 
                # Generate the diffuse LUT variables.
-               # IDL: RFD += (100.*FlUp[0]/(FIsot*!pi)) * val[m]; with FIsot = 100 the factor
-               # cancels and the validated Python evaluates FlUp[0]/!pi directly.
-               rfd[l, r, a] += (flup[0] / f32(np.pi)) * srfstrarr[l].val[m]
-               tfd[l, r, a] += (rfldn[1] / f32(np.pi)) * srfstrarr[l].val[m]
+               # IDL: RFD += (100.*FlUp[0]/(FIsot*!pi)) * val[m]   (FLOAT arithmetic, !pi FLOAT)
+               rfd[l, r, a] += (f32(100.0) * flup[0] / (f32(fisot) * f32(np.pi))) * srfstrarr[l].val[m]
+               tfd[l, r, a] += (f32(100.0) * rfldn[1] / (f32(fisot) * f32(np.pi))) * srfstrarr[l].val[m]
                # RD contains the upwelling intensity
                rd[l, r, a, :] += uu[up, 0, 0] * srfstrarr[l].val[m]
                # TD contains the downwelling intensity without the direct beam
                if inststr.solar_channel_flag[l]:
-                  td[l, r, a, :] += (uu[0:lutstr.saz_n, 1, 0] - f32(100) * np.exp(totaltau / umu[0:lutstr.saz_n])) * srfstrarr[l].val[m]
+                  td[l, r, a, :] += (uu[0:lutstr.saz_n, 1, 0] - f32(100) * idl_exp(totaltau / umu[0:lutstr.saz_n])) * srfstrarr[l].val[m]
                else:
                   td[l, r, a, :] += uu[0:lutstr.saz_n, 1, 0] * srfstrarr[l].val[m]
 
@@ -726,9 +728,8 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
                      # Now calculate the Planck emission across the wavelength interval.
                      bbe = plkavg(float(wnlo), float(wnhi), temp)
                      # Finally, combine to produce the emissivity.
-                     # IDL: Em += (100.0*UU[up,0,0]/BBE) * val[m], divided by 100 again in
-                     # write_v2_lut; the validated Python keeps the fraction UU/BBE throughout.
-                     em[l, r, a, :] += (uu[up, 0, 0] / f32(bbe)) * srfstrarr[l].val[m]
+                     # IDL: Em += (100.0*UU[up,0,0]/BBE) * val[m]  (divided by 100 in write_v2_lut)
+                     em[l, r, a, :] += (f32(100.0) * uu[up, 0, 0] / f32(bbe)) * srfstrarr[l].val[m]
 
                # Now loop over the solar zenith angles and do the direct beam
                # calculations.  Only needed for channels with a solar component.
@@ -739,7 +740,7 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
                      fisot = 0.0                                              # Isotropic illumination intensity
                      # A solar zenith of 90 degrees is altered slightly to prevent DISORT crashing
                      tmpsol = f32(89.99) if lutstr.soz[s] == 90.0 else lutstr.soz[s]
-                     umu0 = f32(np.cos(np.deg2rad(tmpsol)))
+                     umu0 = idl_cos_deg(tmpsol)                               # IDL: cos(tmpsol*!dtor)
 
                      rfldir, rfldn, flup, dfdt, uavg, uu, albmed, trnmed = call_disort(
                         disort_vars, dtau, ssalb, pmom, utau, umu, lutstr.raa, fbeam, umu0, fisot)
@@ -1035,7 +1036,7 @@ def create_orac_aerosol_lut(in_path, instfile, mmfile, lutfile, out_path, atmosp
             columntauray = np.full(nchan, f32(1.0e-6), f32)
          else:
             columntauray = (atmstr.pressure[atmstr.nlevels - 1] / lutstr.prs[k]) / \
-                           (f32(117.03) * wvl_centre ** f32(4.0) - f32(1.316) * wvl_centre ** f32(2.0))
+                           (f32(117.03) * idl_ipow(wvl_centre, 4) - f32(1.316) * idl_ipow(wvl_centre, 2))   # IDL: wvl_centre^4, ^2 (integer powers)
          for m in range(srfstrarr[l].nwvl):
 
             # Do we have a gas optical depth profile for the current channel?
@@ -1049,7 +1050,7 @@ def create_orac_aerosol_lut(in_path, instfile, mmfile, lutfile, out_path, atmosp
                gaslvl = np.zeros(atmstr.nlevels, f32)
 
             # Calculate the cumulative Rayleigh optical depth at each level
-            raylvl = columntauray[l] * np.exp(f32(-0.1188) * atmstr.height - f32(0.00116) * atmstr.height ** f32(2.0))
+            raylvl = columntauray[l] * idl_exp(f32(-0.1188) * atmstr.height - f32(0.00116) * idl_ipow(atmstr.height, 2))   # IDL: FLOAT exp, Height^2
 
             # Layer optical depths from gas absorption and Rayleigh scattering
             taugas = gaslvl[1:nlayers + 1] - gaslvl[0:nlayers]
@@ -1093,12 +1094,12 @@ def create_orac_aerosol_lut(in_path, instfile, mmfile, lutfile, out_path, atmosp
                   # ---------- DIFFUSE -----------
                   fbeam = 0.0
                   fisot = 100.0
-                  umu0 = f32(np.cos(np.deg2rad(f32(50.0))))
+                  umu0 = idl_cos_deg(f32(50.0))                               # IDL: cos(50.0*!dtor)
                   utau = np.asarray([0.0, totaltau], f32)
                   tmpsat = lutstr.saz.copy()
                   tmpsat[tmpsat == 90.0] = f32(89.99)
                   umu = np.zeros(2 * lutstr.saz_n, f32)
-                  umu[0:lutstr.saz_n] = -f32(1.0) * np.cos(np.deg2rad(tmpsat)).astype(f32)
+                  umu[0:lutstr.saz_n] = -f32(1.0) * idl_cos_deg(tmpsat)       # IDL: -1.0*cos(tmpSat*!dtor)
                   umu[lutstr.saz_n:2 * lutstr.saz_n] = -f32(1.0) * umu[lutstr.saz_n - 1::-1]
                   bd = np.abs(umu) == 1.0
                   umu[bd] = f32(0.99999) * umu[bd] / np.abs(umu[bd])
@@ -1106,14 +1107,14 @@ def create_orac_aerosol_lut(in_path, instfile, mmfile, lutfile, out_path, atmosp
                   rfldir, rfldn, flup, dfdt, uavg, uu, albmed, trnmed = call_disort(
                      disort_vars, dtau, ssalb, pmom, utau, umu, lutstr.raa, fbeam, umu0, fisot)
 
-                  # Generate the diffuse LUT variables (IDL: 100.*FlUp[0]/(FIsot*!pi), FIsot = 100)
-                  rfd[l, k, r, a] += (flup[0] / f32(np.pi)) * srfstrarr[l].val[m]
-                  tfd[l, k, r, a] += (rfldn[1] / f32(np.pi)) * srfstrarr[l].val[m]
+                  # Generate the diffuse LUT variables (IDL: RFD += (100.*FlUp[0]/(FIsot*!pi)) * val[m])
+                  rfd[l, k, r, a] += (f32(100.0) * flup[0] / (f32(fisot) * f32(np.pi))) * srfstrarr[l].val[m]
+                  tfd[l, k, r, a] += (f32(100.0) * rfldn[1] / (f32(fisot) * f32(np.pi))) * srfstrarr[l].val[m]
                   # RD contains the upwelling intensity
                   rd[l, k, r, a, :] += uu[up, 0, 0] * srfstrarr[l].val[m]
                   # TD contains the downwelling intensity without the direct beam
                   if inststr.solar_channel_flag[l]:
-                     td[l, k, r, a, :] += (uu[0:lutstr.saz_n, 1, 0] - f32(100) * np.exp(totaltau / umu[0:lutstr.saz_n])) * srfstrarr[l].val[m]
+                     td[l, k, r, a, :] += (uu[0:lutstr.saz_n, 1, 0] - f32(100) * idl_exp(totaltau / umu[0:lutstr.saz_n])) * srfstrarr[l].val[m]
                   else:
                      td[l, k, r, a, :] += uu[0:lutstr.saz_n, 1, 0] * srfstrarr[l].val[m]
 
@@ -1139,8 +1140,8 @@ def create_orac_aerosol_lut(in_path, instfile, mmfile, lutfile, out_path, atmosp
                            plank=True, wnlo=wnlo, wnhi=wnhi, temp=np.full(emnly + 1, temp, f32), nlayer=emnly)
                         # Planck emission across the wavelength interval
                         bbe = plkavg(float(wnlo), float(wnhi), temp)
-                        # Emissivity as a fraction (IDL: 100*UU/BBE here, /100 in write_v2_lut)
-                        em[l, k, r, a, :] += (uu[up, 0, 0] / f32(bbe)) * srfstrarr[l].val[m]
+                        # IDL: Em += (100.0*UU[up,0,0]/BBE) * val[m]  (divided by 100 in write_v2_lut)
+                        em[l, k, r, a, :] += (f32(100.0) * uu[up, 0, 0] / f32(bbe)) * srfstrarr[l].val[m]
 
                   # Direct beam calculations for each solar zenith (solar channels only)
                   if inststr.solar_channel_flag[l]:
@@ -1149,7 +1150,7 @@ def create_orac_aerosol_lut(in_path, instfile, mmfile, lutfile, out_path, atmosp
                         fbeam = 100.0
                         fisot = 0.0
                         tmpsol = f32(89.99) if lutstr.soz[s] == 90.0 else lutstr.soz[s]
-                        umu0 = f32(np.cos(np.deg2rad(tmpsol)))
+                        umu0 = idl_cos_deg(tmpsol)                            # IDL: cos(tmpsol*!dtor)
 
                         rfldir, rfldn, flup, dfdt, uavg, uu, albmed, trnmed = call_disort(
                            disort_vars, dtau, ssalb, pmom, utau, umu, lutstr.raa, fbeam, umu0, fisot)

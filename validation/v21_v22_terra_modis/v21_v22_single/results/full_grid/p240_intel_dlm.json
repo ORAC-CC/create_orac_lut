@@ -1,0 +1,47 @@
+{
+ "product": "p240",
+ "mie_kernel": "intel_dlm",
+ "v21": "/network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/terra_modis_m_liquid-water_a01_p240_v21.nc",
+ "variables": {
+  "extinction_coefficient": {
+   "shape": [
+    20,
+    36
+   ],
+   "differing": 0,
+   "max_ulp": 0,
+   "max_abs": 0.0,
+   "differing_at": []
+  },
+  "extinction_coefficient_ratio": {
+   "shape": [
+    20,
+    36
+   ],
+   "differing": 0,
+   "max_ulp": 0,
+   "max_abs": 0.0,
+   "differing_at": []
+  },
+  "single_scatter_albedo": {
+   "shape": [
+    20,
+    36
+   ],
+   "differing": 0,
+   "max_ulp": 0,
+   "max_abs": 0.0,
+   "differing_at": []
+  },
+  "asymmetry_parameter": {
+   "shape": [
+    20,
+    36
+   ],
+   "differing": 0,
+   "max_ulp": 0,
+   "max_abs": 0.0,
+   "differing_at": []
+  }
+ }
+}

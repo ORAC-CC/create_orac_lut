@@ -323,7 +323,8 @@ def test_validation_configurations_dry_run_and_report_solar_thermal_split(capsys
     out = capsys.readouterr().out
     assert "channels:            2 of 11 available: 1, 9" in out
     assert "solar [1]; thermal [9]" in out
-    assert main(["--config", "configs/validation_meteosat-10_seviri_aerosol_a79_test_ch09.driver", "--dry-run"]) == 0
+    archived = str(ROOT / "create_orac_lut" / "input_files" / "lut" / "archive" / "aerosol_test.lut")
+    assert main(["--config", "configs/validation_meteosat-10_seviri_aerosol_a79_test_ch09.driver", "--lut", archived, "--dry-run"]) == 0
     out = capsys.readouterr().out
     assert "solar none; thermal [9]" in out and "gas absorption: on" in out
 
@@ -440,7 +441,7 @@ def test_aerosol_thermal_emissivity_uses_the_legacy_fraction_convention(tmp_path
     inputs = ROOT / "create_orac_lut" / "input_files"
     result = generate_aerosol(
         ROOT,
-        lut_path=inputs / "lut" / "aerosol_test.lut",
+        lut_path=inputs / "lut" / "archive" / "aerosol_test.lut",   # archived definition
         microphysics_path=inputs / "microphysics" / "aerosol_a79.mm",
         instrument_path=inputs / "inst" / "meteosat-10_seviri_v1.inst",
         channels=(9,), atmosphere_code=2, srf_quad=1, rayleigh=True, gas=True,

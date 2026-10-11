@@ -22,6 +22,8 @@ Array index order follows the IDL: bext[m, l, r] is (SRF point, channel,
 effective radius) and amom[p, m, l, r] adds the moment index first.
 """
 
+import math
+
 import numpy as np
 
 from .create_bwgp import create_bwgp, legpexp, quadrature
@@ -32,35 +34,41 @@ from .total import idl_total
 def _interpol_complex(cm, wl, wvl):
    """IDL: interpol(mmstr.(cc).Cm, mmstr.(cc).wl, wvl) for the complex refractive index.
 
-   The IDL interpolates a single-precision complex array.  The validated Python
-   interpolates the real and imaginary parts in double precision and rounds each
-   to single precision; that is retained (np.interp: no extrapolation is needed
-   within the tabulated wavelength range).
-
-   IDL INTERPOL accepts a monotonically decreasing abscissa, but np.interp
-   requires an increasing one and silently returns an endpoint value otherwise.
-   read_ri deliberately preserves the tabulated ordering of read_ri.pro, so a
-   '#FORMAT = WAVN' table with ascending wavenumber arrives here as descending
-   wavl = 1e4/wavn.  The abscissa and the refractive index are therefore sorted
-   together into ascending wavelength at this interpolation boundary, which is
-   where the Python requirement differs from the IDL; read_ri itself is left
-   alone.  For an already ascending table the sort is the identity, so the
-   previously validated results are unchanged bit for bit.
-
+   Cm is the single-precision COMPLEX array of load_mmdat (complex(n, -k)), wl
+   the DOUBLE wavelengths of read_ri, and wvl FLOAT (0.55 or srfstrarr.wvl).
+   IDL INTERPOL (linear, irregular grid) evaluates
+      s = VALUE_LOCATE(x, xout) > 0L < (m-2)
+      p = (xout-x[s])*diff/(x[s+1] - x[s]) + v[s],   diff = v[s+1] - v[s]
+   where diff is COMPLEX and DOUBLE * COMPLEX is DCOMPLEX, so the double real
+   factors scale each part; the result is stored in a COMPLEX array.
+   VALUE_LOCATE accepts an increasing or a decreasing abscissa (read_ri keeps
+   the tabulated order: a '#FORMAT = WAVN' table gives decreasing wavelength).
    No .ri table in the repository has duplicate wavelengths (checked by
-   validation/refractive_index_ordering.py), so no duplicate abscissae are
-   discarded or collapsed here.
+   validation/refractive_index_ordering.py).
    """
 
-   wvl = np.asarray(wvl, dtype=np.float64)
-   wl = np.asarray(wl, dtype=np.float64)
-   cm = np.asarray(cm)
-   order = np.argsort(wl, kind="stable")          # IDL: INTERPOL needs no such reordering
-   wl = wl[order]
-   cm = cm[order]
-   real = np.interp(wvl, wl, np.real(cm)).astype(np.float32)
-   imag = np.interp(wvl, wl, np.imag(cm)).astype(np.float32)
-   return (real + 1j * imag).astype(np.complex64)
+   cm = np.asarray(cm, dtype=np.complex64).ravel()
+   wl = np.asarray(wl, dtype=np.float64).ravel()
+   xout = np.asarray(wvl, dtype=np.float32)
+   x = xout.astype(np.float64)
+   m = wl.size
+   if m < 2 or cm.size != m:
+      raise ValueError("interpol requires at least two (wl, cm) nodes of equal length")
+   if np.all(np.diff(wl) > 0):
+      s = np.searchsorted(wl, x, side="right") - 1
+   elif np.all(np.diff(wl) < 0):
+      s = np.searchsorted(-wl, -x, side="right") - 1
+   else:
+      raise ValueError("interpol abscissae must be strictly monotonic")
+   s = np.clip(s, 0, m - 2)
+   real = cm.real
+   imag = cm.imag
+   step = x - wl[s]
+   width = wl[s + 1] - wl[s]
+   result = np.empty(xout.shape, dtype=np.complex64)
+   result.real = (step * (real[s + 1] - real[s])) / width + real[s]     # FLOAT diff, DOUBLE arithmetic
+   result.imag = (step * (imag[s + 1] - imag[s])) / width + imag[s]
+   return result
 
 
 def create_range(rat, mr, spd, radii):
@@ -265,22 +273,24 @@ def generate_scattering_properties(srfstrarr, nwvl_max, inststr, mmstr, lutstr, 
    qv = ((qv1 - qv0) * abscissas + (qv0 + qv1)) / 2.0
 
    # **** Call the scattering code for the required range of components and mode radii
-   vavg_c = np.zeros((ncomp, nefr))                    # average volume per particle
+   vavg_c = np.zeros((ncomp, nefr), dtype=np.float32)                    # average volume per particle
    # at the reference wavelength
-   bext550_c = np.zeros((ncomp, nefr))                 # extinction coefficient
-   w550_c = np.zeros((ncomp, nefr))                    # single scattering albedo
-   g550_c = np.zeros((ncomp, nefr))                    # asymmetry parameter
-   phs550_c = np.zeros((nmom, ncomp, nefr))            # phase function
+   bext550_c = np.zeros((ncomp, nefr), dtype=np.float32)                 # extinction coefficient
+   w550_c = np.zeros((ncomp, nefr), dtype=np.float32)                    # single scattering albedo
+   g550_c = np.zeros((ncomp, nefr), dtype=np.float32)                    # asymmetry parameter
+   phs550_c = np.zeros((nmom, ncomp, nefr), dtype=np.float32)            # phase function
    # at the individual channels
-   bext_c = np.zeros((nwvl_max, nchan, ncomp, nefr))
-   w_c = np.zeros((nwvl_max, nchan, ncomp, nefr))
-   g_c = np.zeros((nwvl_max, nchan, ncomp, nefr))
-   phs_c = np.zeros((nmom, nwvl_max, nchan, ncomp, nefr))
+   bext_c = np.zeros((nwvl_max, nchan, ncomp, nefr), dtype=np.float32)
+   w_c = np.zeros((nwvl_max, nchan, ncomp, nefr), dtype=np.float32)
+   g_c = np.zeros((nwvl_max, nchan, ncomp, nefr), dtype=np.float32)
+   phs_c = np.zeros((nmom, nwvl_max, nchan, ncomp, nefr), dtype=np.float32)
 
    for c in range(ncomp):
       if component_types[c] == "baum":
          table = BaumTable(mmstr.compname[c])
-         theta = np.degrees(np.arccos(qv))
+         # IDL: PTheta = acos(QV) (glibc acos); PTheta * 180. / !pi with the FLOAT !pi
+         ptheta = np.array([math.acos(value) for value in qv])
+         theta = ptheta * 180.0 / float(np.float32(np.pi))
          bext1, w1, g1, phs1 = table.interpolate([0.55], lutstr.efr, theta)
          bext550_c[c, :] = bext1[0, :]
          w550_c[c, :] = w1[0, :]
@@ -353,20 +363,20 @@ def generate_scattering_properties(srfstrarr, nwvl_max, inststr, mmstr, lutstr, 
 
    # **** Calculate the scattering parameters of the class for each required
    #      effective radius (weighted by mixing ratio and extinction)
-   vavg = np.zeros(nefr)
+   vavg = np.zeros(nefr, dtype=np.float32)
    # At the reference wavelength
-   bext550 = np.zeros(nefr)                            # Extinction coefficient
-   w550 = np.zeros(nefr)                               # Single scattering albedo
-   g550 = np.zeros(nefr)                               # Asymmetry parameter
-   phs550 = np.zeros((nmom, nefr))                     # Phase function
-   amom550 = np.zeros((nmom, nefr))                    # Legendre moments
+   bext550 = np.zeros(nefr, dtype=np.float32)                            # Extinction coefficient
+   w550 = np.zeros(nefr, dtype=np.float32)                               # Single scattering albedo
+   g550 = np.zeros(nefr, dtype=np.float32)                               # Asymmetry parameter
+   phs550 = np.zeros((nmom, nefr), dtype=np.float32)                     # Phase function
+   amom550 = np.zeros((nmom, nefr), dtype=np.float32)                    # Legendre moments
    # For each channel
-   bextrat = np.zeros((nwvl_max, nchan, nefr))         # Ratio of Bext with that at the reference wavelength
-   bext = np.zeros((nwvl_max, nchan, nefr))            # Extinction coefficient
-   w = np.zeros((nwvl_max, nchan, nefr))               # Single scattering albedo
-   g = np.zeros((nwvl_max, nchan, nefr))               # Asymmetry parameter
-   phs = np.zeros((nmom, nwvl_max, nchan, nefr))       # Phase function
-   amom = np.zeros((nmom, nwvl_max, nchan, nefr))      # Legendre moments
+   bextrat = np.zeros((nwvl_max, nchan, nefr), dtype=np.float32)         # Ratio of Bext with that at the reference wavelength
+   bext = np.zeros((nwvl_max, nchan, nefr), dtype=np.float32)            # Extinction coefficient
+   w = np.zeros((nwvl_max, nchan, nefr), dtype=np.float32)               # Single scattering albedo
+   g = np.zeros((nwvl_max, nchan, nefr), dtype=np.float32)               # Asymmetry parameter
+   phs = np.zeros((nmom, nwvl_max, nchan, nefr), dtype=np.float32)       # Phase function
+   amom = np.zeros((nmom, nwvl_max, nchan, nefr), dtype=np.float32)      # Legendre moments
 
    vavg[:] = vavg_c[0, :]
    two_n_plus_one = 2.0 * np.arange(nmom, dtype=np.float64) + 1.0
@@ -412,8 +422,9 @@ def generate_scattering_properties(srfstrarr, nwvl_max, inststr, mmstr, lutstr, 
             # 0.55 microns, relating the spectral optical depth to the reference
             bextrat[m, l, r] = bext[m, l, r] / bext550[r]
 
-   # The IDL holds all of these in FLTARR (single precision); round here, after
-   # the double-precision combination, exactly as the validated Python did.
+   # All of these are FLTARR in the IDL (and held as float32 above): every
+   # assignment rounds the DOUBLE combination to single precision, legpexp
+   # expands the FLOAT phase function, and bextrat is a FLOAT / FLOAT division.
    f32 = np.float32
    return (nmom, bext550.astype(f32), w550.astype(f32), g550.astype(f32), phs550.astype(f32),
            amom550.astype(f32), bextrat.astype(f32), bext.astype(f32), w.astype(f32), g.astype(f32),

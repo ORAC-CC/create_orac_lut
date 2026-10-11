@@ -1,0 +1,4180 @@
+{
+ "A": {
+  "corrected": {
+   "dimensions_equal": true,
+   "variable_order_equal": true,
+   "attribute_differences": [],
+   "variables": {
+    "F0": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "R_0d": {
+     "status": "ok",
+     "elements": 18,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "R_0v": {
+     "status": "ok",
+     "elements": 1980,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "R_dd": {
+     "status": "ok",
+     "elements": 9,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0,
+      0,
+      0
+     ]
+    },
+    "R_dv": {
+     "status": "ok",
+     "elements": 90,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "SRF_file": {
+     "status": "ok",
+     "elements": 39,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "T_00": {
+     "status": "ok",
+     "elements": 18,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "T_0d": {
+     "status": "ok",
+     "elements": 18,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "T_dd": {
+     "status": "ok",
+     "elements": 9,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0,
+      0,
+      0
+     ]
+    },
+    "T_dv": {
+     "status": "ok",
+     "elements": 90,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "asymmetry_parameter": {
+     "status": "no jointly finite unmasked values",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": false,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "average_volume_per_particle": {
+     "status": "ok",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "central_wavelength": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "central_wavenumber": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "channel_id": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "effective_radius": {
+     "status": "ok",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "extinction_coefficient": {
+     "status": "no jointly finite unmasked values",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": false,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "extinction_coefficient_ratio": {
+     "status": "no jointly finite unmasked values",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": false,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "instrument": {
+     "status": "ok",
+     "elements": 5,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "instrument_filename": {
+     "status": "ok",
+     "elements": 19,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "instrument_version": {
+     "status": "ok",
+     "elements": 7,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "max_sat_zenith": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": []
+    },
+    "mixed_channel_flag": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "number_of_channels": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": []
+    },
+    "oldf0": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "oldf1": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "oldnefr": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "optical_depth": {
+     "status": "ok",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "platform": {
+     "status": "ok",
+     "elements": 5,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "relative_azimuth": {
+     "status": "ok",
+     "elements": 11,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "satellite_zenith": {
+     "status": "ok",
+     "elements": 10,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "single_scatter_albedo": {
+     "status": "no jointly finite unmasked values",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": false,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "snr": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "solar_channel_flag": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "solar_channel_id": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "solar_zenith": {
+     "status": "ok",
+     "elements": 2,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "thermal_channel_flag": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    }
+   },
+   "negative_values": {
+    "reference": {
+     "T_dv": 0,
+     "T_dd": 0,
+     "R_dv": 0,
+     "R_dd": 0,
+     "R_0v": 0,
+     "R_0d": 0,
+     "T_0d": 0,
+     "T_00": 0
+    },
+    "candidate": {
+     "T_dv": 0,
+     "T_dd": 0,
+     "R_dv": 0,
+     "R_dd": 0,
+     "R_0v": 0,
+     "R_0d": 0,
+     "T_0d": 0,
+     "T_00": 0
+    }
+   }
+  },
+  "baseline_17de4c0": {
+   "dimensions_equal": true,
+   "variable_order_equal": true,
+   "attribute_differences": [],
+   "variables": {
+    "F0": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 1,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 7.62939453125e-06,
+     "maximum_relative_difference": 1.024325581476342e-07,
+     "rms_difference": 7.62939453125e-06,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "R_0d": {
+     "status": "ok",
+     "elements": 18,
+     "differing_elements": 18,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 0.7461435794830322,
+     "maximum_relative_difference": 0.6608482740459293,
+     "rms_difference": 0.18807659068888777,
+     "maximum_absolute_index": [
+      1,
+      1,
+      1,
+      0
+     ]
+    },
+    "R_0v": {
+     "status": "ok",
+     "elements": 1980,
+     "differing_elements": 1976,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 0.20557023957371712,
+     "maximum_relative_difference": 17.959629366097396,
+     "rms_difference": 0.03243222187211677,
+     "maximum_absolute_index": [
+      6,
+      9,
+      1,
+      2,
+      1,
+      0
+     ]
+    },
+    "R_dd": {
+     "status": "ok",
+     "elements": 9,
+     "differing_elements": 9,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 4.184246063232422e-05,
+     "maximum_relative_difference": 9.111199858062562e-05,
+     "rms_difference": 2.7217891774719066e-05,
+     "maximum_absolute_index": [
+      2,
+      0,
+      0
+     ]
+    },
+    "R_dv": {
+     "status": "ok",
+     "elements": 90,
+     "differing_elements": 90,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 4.708766937255859e-06,
+     "maximum_relative_difference": 9.319999834835445e-06,
+     "rms_difference": 1.9790726792591636e-06,
+     "maximum_absolute_index": [
+      9,
+      2,
+      2,
+      0
+     ]
+    },
+    "SRF_file": {
+     "status": "ok",
+     "elements": 39,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "T_00": {
+     "status": "ok",
+     "elements": 18,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "T_0d": {
+     "status": "ok",
+     "elements": 18,
+     "differing_elements": 18,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 1.2599351975950412e-05,
+     "maximum_relative_difference": 0.6445422644975243,
+     "rms_difference": 2.9756696736316635e-06,
+     "maximum_absolute_index": [
+      1,
+      1,
+      1,
+      0
+     ]
+    },
+    "T_dd": {
+     "status": "ok",
+     "elements": 9,
+     "differing_elements": 9,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 3.4295953810214996e-07,
+     "maximum_relative_difference": 9.328074654994224e-05,
+     "rms_difference": 1.2441238608151505e-07,
+     "maximum_absolute_index": [
+      0,
+      1,
+      0
+     ]
+    },
+    "T_dv": {
+     "status": "ok",
+     "elements": 90,
+     "differing_elements": 90,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 2.0279549062252045e-07,
+     "maximum_relative_difference": 7.38259908681233e-05,
+     "rms_difference": 5.244071648988765e-08,
+     "maximum_absolute_index": [
+      9,
+      0,
+      1,
+      0
+     ]
+    },
+    "asymmetry_parameter": {
+     "status": "no jointly finite unmasked values",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": false,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "average_volume_per_particle": {
+     "status": "ok",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "central_wavelength": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "central_wavenumber": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "channel_id": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "effective_radius": {
+     "status": "ok",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "extinction_coefficient": {
+     "status": "no jointly finite unmasked values",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": false,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "extinction_coefficient_ratio": {
+     "status": "no jointly finite unmasked values",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": false,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "instrument": {
+     "status": "ok",
+     "elements": 5,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "instrument_filename": {
+     "status": "ok",
+     "elements": 19,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "instrument_version": {
+     "status": "ok",
+     "elements": 7,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "max_sat_zenith": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": []
+    },
+    "mixed_channel_flag": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "number_of_channels": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": []
+    },
+    "oldf0": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "oldf1": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "oldnefr": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "optical_depth": {
+     "status": "ok",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "platform": {
+     "status": "ok",
+     "elements": 5,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "relative_azimuth": {
+     "status": "ok",
+     "elements": 11,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "satellite_zenith": {
+     "status": "ok",
+     "elements": 10,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "single_scatter_albedo": {
+     "status": "no jointly finite unmasked values",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": false,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "snr": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "solar_channel_flag": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "solar_channel_id": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "solar_zenith": {
+     "status": "ok",
+     "elements": 2,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "thermal_channel_flag": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    }
+   },
+   "negative_values": {
+    "reference": {
+     "T_dv": 0,
+     "T_dd": 0,
+     "R_dv": 0,
+     "R_dd": 0,
+     "R_0v": 0,
+     "R_0d": 0,
+     "T_0d": 0,
+     "T_00": 0
+    },
+    "candidate": {
+     "T_dv": 0,
+     "T_dd": 0,
+     "R_dv": 0,
+     "R_dd": 0,
+     "R_0v": 49,
+     "R_0d": 0,
+     "T_0d": 0,
+     "T_00": 0
+    }
+   }
+  }
+ },
+ "B": {
+  "corrected": {
+   "dimensions_equal": true,
+   "variable_order_equal": true,
+   "attribute_differences": [],
+   "variables": {
+    "B1": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "B2": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "E_md": {
+     "status": "ok",
+     "elements": 90,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "F0": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "R_0d": {
+     "status": "ok",
+     "elements": 9,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "R_0v": {
+     "status": "ok",
+     "elements": 990,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "R_dd": {
+     "status": "ok",
+     "elements": 9,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0,
+      0,
+      0
+     ]
+    },
+    "R_dv": {
+     "status": "ok",
+     "elements": 90,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "SRF_file": {
+     "status": "ok",
+     "elements": 39,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "T1": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "T2": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "T_00": {
+     "status": "ok",
+     "elements": 9,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "T_0d": {
+     "status": "ok",
+     "elements": 9,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "T_dd": {
+     "status": "ok",
+     "elements": 9,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0,
+      0,
+      0
+     ]
+    },
+    "T_dv": {
+     "status": "ok",
+     "elements": 90,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "asymmetry_parameter": {
+     "status": "no jointly finite unmasked values",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": false,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "average_volume_per_particle": {
+     "status": "ok",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "central_wavelength": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "central_wavenumber": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "channel_id": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "effective_radius": {
+     "status": "ok",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "extinction_coefficient": {
+     "status": "no jointly finite unmasked values",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": false,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "extinction_coefficient_ratio": {
+     "status": "no jointly finite unmasked values",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": false,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "instrument": {
+     "status": "ok",
+     "elements": 5,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "instrument_filename": {
+     "status": "ok",
+     "elements": 19,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "instrument_version": {
+     "status": "ok",
+     "elements": 7,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "max_sat_zenith": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": []
+    },
+    "mixed_channel_flag": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "mixed_channel_id": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "nedt": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "number_of_channels": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": []
+    },
+    "oldb1": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "oldb2": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "oldf0": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "oldf1": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "oldnebt": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "oldnefr": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "oldt1": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "oldt2": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "oldwvn": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "optical_depth": {
+     "status": "ok",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "platform": {
+     "status": "ok",
+     "elements": 5,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "refbt": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "relative_azimuth": {
+     "status": "ok",
+     "elements": 11,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "satellite_zenith": {
+     "status": "ok",
+     "elements": 10,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "single_scatter_albedo": {
+     "status": "no jointly finite unmasked values",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": false,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "snr": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "solar_channel_flag": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "solar_channel_id": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "solar_zenith": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "thermal_channel_flag": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "thermal_channel_id": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    }
+   },
+   "negative_values": {
+    "reference": {
+     "T_dv": 0,
+     "T_dd": 0,
+     "R_dv": 0,
+     "R_dd": 0,
+     "R_0v": 5,
+     "R_0d": 0,
+     "T_0d": 0,
+     "T_00": 0,
+     "E_md": 0
+    },
+    "candidate": {
+     "T_dv": 0,
+     "T_dd": 0,
+     "R_dv": 0,
+     "R_dd": 0,
+     "R_0v": 5,
+     "R_0d": 0,
+     "T_0d": 0,
+     "T_00": 0,
+     "E_md": 0
+    }
+   }
+  },
+  "baseline_17de4c0": {
+   "dimensions_equal": true,
+   "variable_order_equal": true,
+   "attribute_differences": [],
+   "variables": {
+    "B1": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "B2": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "E_md": {
+     "status": "ok",
+     "elements": 90,
+     "differing_elements": 89,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 6.705522537231445e-07,
+     "maximum_relative_difference": 8.43653379869383e-06,
+     "rms_difference": 2.5697543442903047e-07,
+     "maximum_absolute_index": [
+      4,
+      2,
+      0,
+      0
+     ]
+    },
+    "F0": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 1,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 4.76837158203125e-07,
+     "maximum_relative_difference": 9.804209927742973e-08,
+     "rms_difference": 4.76837158203125e-07,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "R_0d": {
+     "status": "ok",
+     "elements": 9,
+     "differing_elements": 9,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 0.0001230984926223755,
+     "maximum_relative_difference": 0.001955295196674507,
+     "rms_difference": 5.452927310753374e-05,
+     "maximum_absolute_index": [
+      0,
+      1,
+      2,
+      0
+     ]
+    },
+    "R_0v": {
+     "status": "ok",
+     "elements": 990,
+     "differing_elements": 990,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 0.08008979074656963,
+     "maximum_relative_difference": 96.81567305611733,
+     "rms_difference": 0.011986778945906476,
+     "maximum_absolute_index": [
+      10,
+      5,
+      0,
+      1,
+      1,
+      0
+     ]
+    },
+    "R_dd": {
+     "status": "ok",
+     "elements": 9,
+     "differing_elements": 9,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 8.265674114227295e-05,
+     "maximum_relative_difference": 0.0006940539148638458,
+     "rms_difference": 5.039498828702319e-05,
+     "maximum_absolute_index": [
+      1,
+      2,
+      0
+     ]
+    },
+    "R_dv": {
+     "status": "ok",
+     "elements": 90,
+     "differing_elements": 89,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 7.092952728271484e-05,
+     "maximum_relative_difference": 0.0005140399597095581,
+     "rms_difference": 2.0344385889347078e-05,
+     "maximum_absolute_index": [
+      8,
+      1,
+      1,
+      0
+     ]
+    },
+    "SRF_file": {
+     "status": "ok",
+     "elements": 39,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "T1": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "T2": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "T_00": {
+     "status": "ok",
+     "elements": 9,
+     "differing_elements": 8,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 1.1920928955078125e-07,
+     "maximum_relative_difference": 8.844471733461427e-07,
+     "rms_difference": 7.479498955793974e-08,
+     "maximum_absolute_index": [
+      0,
+      0,
+      2,
+      0
+     ]
+    },
+    "T_0d": {
+     "status": "ok",
+     "elements": 9,
+     "differing_elements": 9,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 6.306171417236328e-05,
+     "maximum_relative_difference": 0.0001183869873678399,
+     "rms_difference": 3.0256081980955088e-05,
+     "maximum_absolute_index": [
+      0,
+      1,
+      2,
+      0
+     ]
+    },
+    "T_dd": {
+     "status": "ok",
+     "elements": 9,
+     "differing_elements": 9,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 5.054473876953125e-05,
+     "maximum_relative_difference": 7.011697521048198e-05,
+     "rms_difference": 2.8731582160655765e-05,
+     "maximum_absolute_index": [
+      0,
+      1,
+      0
+     ]
+    },
+    "T_dv": {
+     "status": "ok",
+     "elements": 90,
+     "differing_elements": 89,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 3.165006637573242e-05,
+     "maximum_relative_difference": 5.902786115046302e-05,
+     "rms_difference": 9.823026598047989e-06,
+     "maximum_absolute_index": [
+      9,
+      1,
+      1,
+      0
+     ]
+    },
+    "asymmetry_parameter": {
+     "status": "no jointly finite unmasked values",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": false,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "average_volume_per_particle": {
+     "status": "ok",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "central_wavelength": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "central_wavenumber": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "channel_id": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "effective_radius": {
+     "status": "ok",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "extinction_coefficient": {
+     "status": "no jointly finite unmasked values",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": false,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "extinction_coefficient_ratio": {
+     "status": "no jointly finite unmasked values",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": false,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "instrument": {
+     "status": "ok",
+     "elements": 5,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "instrument_filename": {
+     "status": "ok",
+     "elements": 19,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "instrument_version": {
+     "status": "ok",
+     "elements": 7,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "max_sat_zenith": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": []
+    },
+    "mixed_channel_flag": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "mixed_channel_id": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "nedt": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "number_of_channels": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": []
+    },
+    "oldb1": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "oldb2": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "oldf0": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "oldf1": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "oldnebt": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "oldnefr": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "oldt1": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "oldt2": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "oldwvn": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "optical_depth": {
+     "status": "ok",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "platform": {
+     "status": "ok",
+     "elements": 5,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "refbt": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "relative_azimuth": {
+     "status": "ok",
+     "elements": 11,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "satellite_zenith": {
+     "status": "ok",
+     "elements": 10,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "single_scatter_albedo": {
+     "status": "no jointly finite unmasked values",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": false,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "snr": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "solar_channel_flag": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "solar_channel_id": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "solar_zenith": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "thermal_channel_flag": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "thermal_channel_id": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    }
+   },
+   "negative_values": {
+    "reference": {
+     "T_dv": 0,
+     "T_dd": 0,
+     "R_dv": 0,
+     "R_dd": 0,
+     "R_0v": 5,
+     "R_0d": 0,
+     "T_0d": 0,
+     "T_00": 0,
+     "E_md": 0
+    },
+    "candidate": {
+     "T_dv": 0,
+     "T_dd": 0,
+     "R_dv": 0,
+     "R_dd": 0,
+     "R_0v": 0,
+     "R_0d": 0,
+     "T_0d": 0,
+     "T_00": 0,
+     "E_md": 0
+    }
+   }
+  }
+ },
+ "C": {
+  "corrected": {
+   "dimensions_equal": true,
+   "variable_order_equal": true,
+   "attribute_differences": [],
+   "variables": {
+    "F0": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "R_0d": {
+     "status": "ok",
+     "elements": 9,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "R_0v": {
+     "status": "ok",
+     "elements": 990,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "R_dd": {
+     "status": "ok",
+     "elements": 9,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0,
+      0,
+      0
+     ]
+    },
+    "R_dv": {
+     "status": "ok",
+     "elements": 90,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "SRF_file": {
+     "status": "ok",
+     "elements": 39,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "T_00": {
+     "status": "ok",
+     "elements": 9,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "T_0d": {
+     "status": "ok",
+     "elements": 9,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "T_dd": {
+     "status": "ok",
+     "elements": 9,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0,
+      0,
+      0
+     ]
+    },
+    "T_dv": {
+     "status": "ok",
+     "elements": 90,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "asymmetry_parameter": {
+     "status": "no jointly finite unmasked values",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": false,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "average_volume_per_particle": {
+     "status": "ok",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "central_wavelength": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "central_wavenumber": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "channel_id": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "effective_radius": {
+     "status": "ok",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "extinction_coefficient": {
+     "status": "no jointly finite unmasked values",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": false,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "extinction_coefficient_ratio": {
+     "status": "no jointly finite unmasked values",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": false,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "instrument": {
+     "status": "ok",
+     "elements": 5,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "instrument_filename": {
+     "status": "ok",
+     "elements": 19,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "instrument_version": {
+     "status": "ok",
+     "elements": 7,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "max_sat_zenith": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": []
+    },
+    "mixed_channel_flag": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "number_of_channels": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": []
+    },
+    "oldf0": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "oldf1": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "oldnefr": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "optical_depth": {
+     "status": "ok",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "platform": {
+     "status": "ok",
+     "elements": 5,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "relative_azimuth": {
+     "status": "ok",
+     "elements": 11,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "satellite_zenith": {
+     "status": "ok",
+     "elements": 10,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "single_scatter_albedo": {
+     "status": "no jointly finite unmasked values",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": false,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "snr": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "solar_channel_flag": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "solar_channel_id": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "solar_zenith": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "thermal_channel_flag": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    }
+   },
+   "negative_values": {
+    "reference": {
+     "T_dv": 0,
+     "T_dd": 0,
+     "R_dv": 0,
+     "R_dd": 0,
+     "R_0v": 8,
+     "R_0d": 0,
+     "T_0d": 0,
+     "T_00": 0
+    },
+    "candidate": {
+     "T_dv": 0,
+     "T_dd": 0,
+     "R_dv": 0,
+     "R_dd": 0,
+     "R_0v": 8,
+     "R_0d": 0,
+     "T_0d": 0,
+     "T_00": 0
+    }
+   }
+  },
+  "baseline_17de4c0": {
+   "dimensions_equal": true,
+   "variable_order_equal": true,
+   "attribute_differences": [],
+   "variables": {
+    "F0": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 1,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 7.62939453125e-06,
+     "maximum_relative_difference": 1.024325581476342e-07,
+     "rms_difference": 7.62939453125e-06,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "R_0d": {
+     "status": "ok",
+     "elements": 9,
+     "differing_elements": 9,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 0.00013100448995828629,
+     "maximum_relative_difference": 0.02488119943502585,
+     "rms_difference": 6.962394834985276e-05,
+     "maximum_absolute_index": [
+      0,
+      1,
+      1,
+      0
+     ]
+    },
+    "R_0v": {
+     "status": "ok",
+     "elements": 990,
+     "differing_elements": 990,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 0.011508209630846977,
+     "maximum_relative_difference": 237.15783307326444,
+     "rms_difference": 0.0010687437546569529,
+     "maximum_absolute_index": [
+      10,
+      6,
+      0,
+      1,
+      1,
+      0
+     ]
+    },
+    "R_dd": {
+     "status": "ok",
+     "elements": 9,
+     "differing_elements": 9,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 0.0001771245151758194,
+     "maximum_relative_difference": 0.008406775687135794,
+     "rms_difference": 8.888679423522089e-05,
+     "maximum_absolute_index": [
+      1,
+      0,
+      0
+     ]
+    },
+    "R_dv": {
+     "status": "ok",
+     "elements": 90,
+     "differing_elements": 90,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 5.701184272766113e-05,
+     "maximum_relative_difference": 0.0035034264963947083,
+     "rms_difference": 1.5563403839246118e-05,
+     "maximum_absolute_index": [
+      9,
+      2,
+      1,
+      0
+     ]
+    },
+    "SRF_file": {
+     "status": "ok",
+     "elements": 39,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "T_00": {
+     "status": "ok",
+     "elements": 9,
+     "differing_elements": 4,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 1.1920928955078125e-07,
+     "maximum_relative_difference": 1.6059324429187374e-07,
+     "rms_difference": 5.2566355686676316e-08,
+     "maximum_absolute_index": [
+      0,
+      2,
+      2,
+      0
+     ]
+    },
+    "T_0d": {
+     "status": "ok",
+     "elements": 9,
+     "differing_elements": 9,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 0.00010000169277191162,
+     "maximum_relative_difference": 0.001262107637736067,
+     "rms_difference": 5.845890036824659e-05,
+     "maximum_absolute_index": [
+      0,
+      1,
+      0,
+      0
+     ]
+    },
+    "T_dd": {
+     "status": "ok",
+     "elements": 9,
+     "differing_elements": 9,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 0.00019735097885131836,
+     "maximum_relative_difference": 0.00020023826599830267,
+     "rms_difference": 0.00011759864495748004,
+     "maximum_absolute_index": [
+      0,
+      1,
+      0
+     ]
+    },
+    "T_dv": {
+     "status": "ok",
+     "elements": 90,
+     "differing_elements": 90,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 4.8160552978515625e-05,
+     "maximum_relative_difference": 0.0002538880541215813,
+     "rms_difference": 1.673399282491268e-05,
+     "maximum_absolute_index": [
+      9,
+      2,
+      0,
+      0
+     ]
+    },
+    "asymmetry_parameter": {
+     "status": "no jointly finite unmasked values",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": false,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "average_volume_per_particle": {
+     "status": "ok",
+     "elements": 3,
+     "differing_elements": 1,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 0.001953125,
+     "maximum_relative_difference": 7.282500123074252e-08,
+     "rms_difference": 0.0011276372445109878,
+     "maximum_absolute_index": [
+      1
+     ]
+    },
+    "central_wavelength": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "central_wavenumber": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "channel_id": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "effective_radius": {
+     "status": "ok",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "extinction_coefficient": {
+     "status": "no jointly finite unmasked values",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": false,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "extinction_coefficient_ratio": {
+     "status": "no jointly finite unmasked values",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": false,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "instrument": {
+     "status": "ok",
+     "elements": 5,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "instrument_filename": {
+     "status": "ok",
+     "elements": 19,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "instrument_version": {
+     "status": "ok",
+     "elements": 7,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "max_sat_zenith": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": []
+    },
+    "mixed_channel_flag": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "number_of_channels": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": []
+    },
+    "oldf0": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "oldf1": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "oldnefr": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "optical_depth": {
+     "status": "ok",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "platform": {
+     "status": "ok",
+     "elements": 5,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "relative_azimuth": {
+     "status": "ok",
+     "elements": 11,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "satellite_zenith": {
+     "status": "ok",
+     "elements": 10,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "single_scatter_albedo": {
+     "status": "no jointly finite unmasked values",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": false,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "snr": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "solar_channel_flag": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "solar_channel_id": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "solar_zenith": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "thermal_channel_flag": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    }
+   },
+   "negative_values": {
+    "reference": {
+     "T_dv": 0,
+     "T_dd": 0,
+     "R_dv": 0,
+     "R_dd": 0,
+     "R_0v": 8,
+     "R_0d": 0,
+     "T_0d": 0,
+     "T_00": 0
+    },
+    "candidate": {
+     "T_dv": 0,
+     "T_dd": 0,
+     "R_dv": 0,
+     "R_dd": 0,
+     "R_0v": 0,
+     "R_0d": 0,
+     "T_0d": 0,
+     "T_00": 0
+    }
+   }
+  }
+ },
+ "D": {
+  "corrected": {
+   "dimensions_equal": true,
+   "variable_order_equal": true,
+   "attribute_differences": [],
+   "variables": {
+    "F0": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "R_0d": {
+     "status": "ok",
+     "elements": 9,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "R_0v": {
+     "status": "ok",
+     "elements": 990,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "R_dd": {
+     "status": "ok",
+     "elements": 9,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0,
+      0,
+      0
+     ]
+    },
+    "R_dv": {
+     "status": "ok",
+     "elements": 90,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "SRF_file": {
+     "status": "ok",
+     "elements": 39,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "T_00": {
+     "status": "ok",
+     "elements": 9,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "T_0d": {
+     "status": "ok",
+     "elements": 9,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "T_dd": {
+     "status": "ok",
+     "elements": 9,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0,
+      0,
+      0
+     ]
+    },
+    "T_dv": {
+     "status": "ok",
+     "elements": 90,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "asymmetry_parameter": {
+     "status": "no jointly finite unmasked values",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": false,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "average_volume_per_particle": {
+     "status": "ok",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "central_wavelength": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "central_wavenumber": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "channel_id": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "effective_radius": {
+     "status": "ok",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "extinction_coefficient": {
+     "status": "no jointly finite unmasked values",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": false,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "extinction_coefficient_ratio": {
+     "status": "no jointly finite unmasked values",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": false,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "instrument": {
+     "status": "ok",
+     "elements": 5,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "instrument_filename": {
+     "status": "ok",
+     "elements": 19,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "instrument_version": {
+     "status": "ok",
+     "elements": 7,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "max_sat_zenith": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": []
+    },
+    "mixed_channel_flag": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "number_of_channels": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": []
+    },
+    "oldf0": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "oldf1": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "oldnefr": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "optical_depth": {
+     "status": "ok",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "platform": {
+     "status": "ok",
+     "elements": 5,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "relative_azimuth": {
+     "status": "ok",
+     "elements": 11,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "satellite_zenith": {
+     "status": "ok",
+     "elements": 10,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "single_scatter_albedo": {
+     "status": "no jointly finite unmasked values",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": false,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "snr": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "solar_channel_flag": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "solar_channel_id": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "solar_zenith": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "thermal_channel_flag": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    }
+   },
+   "negative_values": {
+    "reference": {
+     "T_dv": 0,
+     "T_dd": 0,
+     "R_dv": 0,
+     "R_dd": 0,
+     "R_0v": 0,
+     "R_0d": 0,
+     "T_0d": 0,
+     "T_00": 0
+    },
+    "candidate": {
+     "T_dv": 0,
+     "T_dd": 0,
+     "R_dv": 0,
+     "R_dd": 0,
+     "R_0v": 0,
+     "R_0d": 0,
+     "T_0d": 0,
+     "T_00": 0
+    }
+   }
+  },
+  "baseline_17de4c0": {
+   "dimensions_equal": true,
+   "variable_order_equal": true,
+   "attribute_differences": [],
+   "variables": {
+    "F0": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 1,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 3.0517578125e-05,
+     "maximum_relative_difference": 6.037487970305219e-08,
+     "rms_difference": 3.0517578125e-05,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "R_0d": {
+     "status": "ok",
+     "elements": 9,
+     "differing_elements": 9,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 7.420778274536133e-05,
+     "maximum_relative_difference": 0.0002709382788455418,
+     "rms_difference": 3.974292001770291e-05,
+     "maximum_absolute_index": [
+      0,
+      0,
+      2,
+      0
+     ]
+    },
+    "R_0v": {
+     "status": "ok",
+     "elements": 990,
+     "differing_elements": 989,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 5.0514936447143555e-05,
+     "maximum_relative_difference": 0.0003179542552657094,
+     "rms_difference": 2.2235471601044776e-05,
+     "maximum_absolute_index": [
+      2,
+      5,
+      0,
+      0,
+      2,
+      0
+     ]
+    },
+    "R_dd": {
+     "status": "ok",
+     "elements": 9,
+     "differing_elements": 9,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 5.8203935623168945e-05,
+     "maximum_relative_difference": 0.00012236867407056668,
+     "rms_difference": 3.1117233882656874e-05,
+     "maximum_absolute_index": [
+      1,
+      2,
+      0
+     ]
+    },
+    "R_dv": {
+     "status": "ok",
+     "elements": 90,
+     "differing_elements": 90,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 6.636977195739746e-05,
+     "maximum_relative_difference": 0.0002606159284611583,
+     "rms_difference": 2.8190945587945245e-05,
+     "maximum_absolute_index": [
+      5,
+      0,
+      1,
+      0
+     ]
+    },
+    "SRF_file": {
+     "status": "ok",
+     "elements": 39,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "T_00": {
+     "status": "ok",
+     "elements": 9,
+     "differing_elements": 9,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 6.984919309616089e-09,
+     "maximum_relative_difference": 2.813921623981703e-06,
+     "rms_difference": 3.577011405042082e-09,
+     "maximum_absolute_index": [
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "T_0d": {
+     "status": "ok",
+     "elements": 9,
+     "differing_elements": 9,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 7.444620132446289e-05,
+     "maximum_relative_difference": 0.00013040468153850796,
+     "rms_difference": 3.602315850123823e-05,
+     "maximum_absolute_index": [
+      0,
+      1,
+      2,
+      0
+     ]
+    },
+    "T_dd": {
+     "status": "ok",
+     "elements": 9,
+     "differing_elements": 9,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 9.47117805480957e-05,
+     "maximum_relative_difference": 0.00018224531503952795,
+     "rms_difference": 3.6757919930581236e-05,
+     "maximum_absolute_index": [
+      1,
+      1,
+      0
+     ]
+    },
+    "T_dv": {
+     "status": "ok",
+     "elements": 90,
+     "differing_elements": 90,
+     "exactly_equal": false,
+     "maximum_absolute_difference": 7.897615432739258e-05,
+     "maximum_relative_difference": 0.00019011113610056232,
+     "rms_difference": 2.9001612126818132e-05,
+     "maximum_absolute_index": [
+      9,
+      1,
+      1,
+      0
+     ]
+    },
+    "asymmetry_parameter": {
+     "status": "no jointly finite unmasked values",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": false,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "average_volume_per_particle": {
+     "status": "ok",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "central_wavelength": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "central_wavenumber": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "channel_id": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "effective_radius": {
+     "status": "ok",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "extinction_coefficient": {
+     "status": "no jointly finite unmasked values",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": false,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "extinction_coefficient_ratio": {
+     "status": "no jointly finite unmasked values",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": false,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "instrument": {
+     "status": "ok",
+     "elements": 5,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "instrument_filename": {
+     "status": "ok",
+     "elements": 19,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "instrument_version": {
+     "status": "ok",
+     "elements": 7,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "max_sat_zenith": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": []
+    },
+    "mixed_channel_flag": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "number_of_channels": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": []
+    },
+    "oldf0": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "oldf1": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "oldnefr": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "optical_depth": {
+     "status": "ok",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "platform": {
+     "status": "ok",
+     "elements": 5,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "relative_azimuth": {
+     "status": "ok",
+     "elements": 11,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "satellite_zenith": {
+     "status": "ok",
+     "elements": 10,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "single_scatter_albedo": {
+     "status": "no jointly finite unmasked values",
+     "elements": 3,
+     "differing_elements": 0,
+     "exactly_equal": false,
+     "maximum_absolute_difference": null,
+     "maximum_relative_difference": null,
+     "rms_difference": null,
+     "maximum_absolute_index": null
+    },
+    "snr": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "solar_channel_flag": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "solar_channel_id": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "solar_zenith": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": 0.0,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    },
+    "thermal_channel_flag": {
+     "status": "ok",
+     "elements": 1,
+     "differing_elements": 0,
+     "exactly_equal": true,
+     "maximum_absolute_difference": 0.0,
+     "maximum_relative_difference": null,
+     "rms_difference": 0.0,
+     "maximum_absolute_index": [
+      0
+     ]
+    }
+   },
+   "negative_values": {
+    "reference": {
+     "T_dv": 0,
+     "T_dd": 0,
+     "R_dv": 0,
+     "R_dd": 0,
+     "R_0v": 0,
+     "R_0d": 0,
+     "T_0d": 0,
+     "T_00": 0
+    },
+    "candidate": {
+     "T_dv": 0,
+     "T_dd": 0,
+     "R_dv": 0,
+     "R_dd": 0,
+     "R_0v": 0,
+     "R_0d": 0,
+     "T_0d": 0,
+     "T_00": 0
+    }
+   }
+  }
+ }
+}

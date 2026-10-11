@@ -1,0 +1,23 @@
+# Authoritative version definition of the ORAC LUT generator.
+#
+# Read by src/oraclut/version.py and printed at the start of every LUT
+# calculation; see LUT_CODE_VERSIONS.md for the meaning of each field and the
+# release procedure.  One "name = value" assignment per line.
+#
+# code_release          the annotated Git tag of this source release.  A
+#                       working tree whose HEAD is not that tag, or that has
+#                       uncommitted changes, reports itself accordingly.
+# lut_version           the LUT product version this release produces.
+# compatible_lut_versions
+#                       other product versions this release may be asked to
+#                       produce (space separated; may be empty).  Each entry
+#                       must be justified in LUT_CODE_VERSIONS.md.
+# scientific_config     short identifier of the scientific/numerical scheme.
+# scientific_config_description
+#                       one line describing that scheme.
+
+code_release = lut-code-v22.3
+lut_version = 22
+compatible_lut_versions = 21
+scientific_config = v22-idl-single
+scientific_config_description = Python reproduction of the IDL V21 generator with IDL-compatible arithmetic (IDL quadrature.pro nodes, FLOAT wavenumbers and literals, FLTARR storage, IDL INTERPOL/INTERPOLATE, glibc cos/exp, integer powers by squaring, F0 in IDL types, IDL-compatible TOTAL) and the original single-precision V21 DISORT kernel create_orac_lut/disort2/src/DISORTtoIDL.so called with IDL memory layout (release runs set ORAC_LUT_DISORT_PRECISION=single and ORAC_LUT_DISORT_SP_KERNEL=intel_dlm; double precision remains selectable): fixed 0.001-100 um Mie size integration on the legacy radius lattice (size-parameter step 0.4), fixed NMom = 1000 Legendre expansion, DISORT 60 streams, isothermal cloud emission, legacy product grids, float32 storage; version 21 is accepted only for the legacy-comparison run files whose products are compared with the IDL V21 tables

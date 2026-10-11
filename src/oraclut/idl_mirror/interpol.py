@@ -32,3 +32,33 @@ def interpol(v, x, xout):
    x0, x1 = x[segment], x[segment + 1]
    v0, v1 = v[segment], v[segment + 1]
    return (v0 + (xout - x0) * (v1 - v0) / (x1 - x0)).astype(np.float32)
+
+
+def idl_interpol(v, x, xout):
+   """IDL INTERPOL(V, X, XOUT), linear and irregular, in the IDL result type of the operands.
+
+   s = VALUE_LOCATE(X, XOUT) > 0L < (m-2);  p = (XOUT-X[s])*diff/(X[s+1]-X[s]) + V[s],
+   diff = V[s+1] - V[s].  The arithmetic type is that of the operands together
+   (FLOAT if all are FLOAT, DOUBLE if any is DOUBLE), X may be increasing or
+   decreasing (VALUE_LOCATE), and values outside X are extrapolated from the
+   end intervals, as in IDL.
+   """
+
+   v = np.asarray(v)
+   x = np.asarray(x)
+   xout = np.asarray(xout)
+   dtype = np.result_type(v.dtype, x.dtype, xout.dtype)
+   v = v.astype(dtype)
+   x = x.astype(dtype)
+   xo = xout.astype(dtype)
+   m = x.size
+   if x.ndim != 1 or m < 2 or v.shape != x.shape:
+      raise ValueError("interpol requires at least two (x, v) nodes of equal length")
+   if np.all(np.diff(x) > 0):
+      s = np.searchsorted(x, xo, side="right") - 1
+   elif np.all(np.diff(x) < 0):
+      s = np.searchsorted(-x, -xo, side="right") - 1
+   else:
+      raise ValueError("interpol abscissae must be strictly monotonic")
+   s = np.clip(s, 0, m - 2)
+   return (xo - x[s]) * (v[s + 1] - v[s]) / (x[s + 1] - x[s]) + v[s]

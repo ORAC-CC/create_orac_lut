@@ -194,7 +194,7 @@ def load_mmdat(file, in_path):
          tmp = SimpleNamespace(code=code)
          if has_ri:
             tmp.wl = wl
-            tmp.cm = n + 1j * k                         # IDL: complex(n, k); kept double here
+            tmp.cm = (n + 1j * k).astype(np.complex64)  # IDL: complex(n, k) is single-precision COMPLEX
          if has_as:
             tmp.eps = eps
             tmp.neps = neps

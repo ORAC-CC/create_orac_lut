@@ -23,6 +23,8 @@ import re
 import numpy as np
 
 from .segment import segment
+from ..idl_math import idl_ipow
+from .interpol import idl_interpol
 from .total import idl_total
 
 
@@ -41,9 +43,11 @@ def simpson_integral(x, y):
 
    The routine computes deltax and Yave but returns total(x*y); this is
    reproduced deliberately because F0 in every validated product depends on it.
+   The product and TOTAL take the IDL type of the operands (FLOAT x with a
+   DOUBLE y gives a DOUBLE total).
    """
 
-   return idl_total(np.asarray(x, dtype=np.float32) * np.asarray(y, dtype=np.float32))
+   return idl_total(np.asarray(x) * np.asarray(y))
 
 
 def read_srfstr(filename):
@@ -74,8 +78,7 @@ def read_srfstr(filename):
 def load_solar_spectrum(solar_spectrum_filename):
    """IDL: loadxy, solar_spectrum_filename, 0, 1, wvl, val  (columns 0 and 1, '*'/'#' comments).
 
-   Deliberate difference: loadxyz.pro reads DOUBLE; the validated Python read
-   the table as single precision and that is retained here.
+   loadxyz.pro reads the columns as DOUBLE (X[I] = DOUBLE(Line[A])), as here.
    """
 
    rows = []
@@ -85,7 +88,7 @@ def load_solar_spectrum(solar_spectrum_filename):
          continue
       parts = line.split()
       rows.append((float(parts[0]), float(parts[1])))
-   values = np.asarray(rows, dtype=np.float32)
+   values = np.asarray(rows, dtype=np.float64)
    sssi = SimpleNamespace(name=Path(solar_spectrum_filename).name, wvl=values[:, 0], val=values[:, 1])
    return sssi
 
@@ -204,27 +207,23 @@ def load_srfstrarr(inststr, solar_spectrum_filename, qm, in_path):
       srfstrarr[i].wvn_centre = srfstr.wvn_centre
 
       # Calculate the solar constant for the channel (different units for SW and
-      # thermal channels).  IDL uses INTERPOL; np.interp agrees within the
-      # tabulated solar spectrum, which covers every SRF used.
+      # thermal channels).  sssi is DOUBLE, srfstr FLOAT: INTERPOL and the
+      # numerator integral are DOUBLE, the denominator FLOAT, F0 is stored FLOAT.
       if srfstr.wvl_centre > 3:
          # IDL: wvn = 1d4/sssi.wvl
          #      F0 = (simpson_integral(srfstr.wvn, interpol(1d8*sssi.val/wvn^2, wvn, srfstr.wvn)*srfstr.srf)
          #            / simpson_integral(srfstr.wvn, srfstr.srf)) / !pi
-         wvn = np.float64(1e4) / sssi.wvl.astype(np.float64)
-         irradiance = np.float64(1e8) * sssi.val.astype(np.float64) / wvn ** 2
-         order = np.argsort(wvn)                       # np.interp needs ascending abscissae
-         solar_on_srf = np.interp(srfstr.wvn.astype(np.float64), wvn[order], irradiance[order]).astype(np.float32)
+         wvn = 1.0e4 / sssi.wvl
+         solar_on_srf = idl_interpol(1.0e8 * sssi.val / idl_ipow(wvn, 2), wvn, srfstr.wvn)
          srfstrarr[i].f0 = np.float32(
             simpson_integral(srfstr.wvn, solar_on_srf * srfstr.srf)
             / simpson_integral(srfstr.wvn, srfstr.srf) / np.float32(np.pi))
       else:
          # IDL: F0 = (simpson_integral(srfstr.wvl, interpol(sssi.val*10, sssi.wvl, srfstr.wvl)*srfstr.srf)
          #            / simpson_integral(srfstr.wvl, srfstr.srf)) / !pi
-         # (the validated Python multiplies by 10 after interpolating; retained)
-         solar_on_srf = np.interp(srfstr.wvl.astype(np.float64), sssi.wvl.astype(np.float64),
-                                  sssi.val.astype(np.float64)).astype(np.float32)
+         solar_on_srf = idl_interpol(sssi.val * 10, sssi.wvl, srfstr.wvl)
          srfstrarr[i].f0 = np.float32(
-            simpson_integral(srfstr.wvl, solar_on_srf * np.float32(10.0) * srfstr.srf)
+            simpson_integral(srfstr.wvl, solar_on_srf * srfstr.srf)
             / simpson_integral(srfstr.wvl, srfstr.srf) / np.float32(np.pi))
 
       b1, b2, t1, t2 = bbconstants(srfstr.filename, in_path / "bbconstants.pro")

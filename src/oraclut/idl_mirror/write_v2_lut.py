@@ -12,11 +12,9 @@ appears in the file with dimensions (satellite_zenith, optical_depth,
 effective_radius, channels); the Python arrays are indexed [l, r, a, s] as
 the IDL and are transposed (.T reverses all axes) on output.
 
-Numerical conventions retained from the validated Python:
-   * the IDL writes TD/100 etc.; here the operators are multiplied by
-     float32(0.01), which is what the validated products contain;
-   * E_md is written unscaled because the calling routine accumulates UU/BBE
-     (the IDL accumulates 100*UU/BBE and divides by 100 here).
+As in the IDL, the operators accumulated in percent by the calling routine
+(TD, TfD, RD, RfD, RBD, RfBD, TfBD, TB and EM = 100*UU/BBE) are written divided
+by 100 (FLOAT / INTEGER, i.e. a float32 division).
 """
 
 from pathlib import Path
@@ -266,35 +264,34 @@ def write_v2_lut(v2_lut_filename, lutstr, inststr, srfstrarr, vavg, bextout, bex
    # Python arrays are [l, (k,) r, a, s] and .T gives the file order.
    prs = ("surface_pressure",) if include_pressure else ()
    unit_range = np.asarray([0.0, 1.0], dtype=np.float32)
-   scale = np.float32(0.01)          # IDL: /100 (see module docstring)
-   define("T_dv", scale * np.asarray(td, dtype=np.float32).T,
+   percent = np.float32(100)         # IDL: TD /100 etc.
+   define("T_dv", np.asarray(td, dtype=np.float32).T / percent,
           ("satellite_zenith", "optical_depth", "effective_radius", *prs, "channels"),
           long_name="diffuse transmission of direct light", units="dimensionless", valid_range=unit_range)
-   define("T_dd", scale * np.asarray(tfd, dtype=np.float32).T,
+   define("T_dd", np.asarray(tfd, dtype=np.float32).T / percent,
           ("optical_depth", "effective_radius", *prs, "channels"),
           long_name="diffuse transmission", units="dimensionless", valid_range=unit_range)
-   define("R_dv", scale * np.asarray(rd, dtype=np.float32).T,
+   define("R_dv", np.asarray(rd, dtype=np.float32).T / percent,
           ("satellite_zenith", "optical_depth", "effective_radius", *prs, "channels"),
           long_name="direct reflection of diffuse light", units="dimensionless", valid_range=unit_range)
-   define("R_dd", scale * np.asarray(rfd, dtype=np.float32).T,
+   define("R_dd", np.asarray(rfd, dtype=np.float32).T / percent,
           ("optical_depth", "effective_radius", *prs, "channels"),
           long_name="diffuse reflection of diffuse light", units="dimensionless", valid_range=unit_range)
    if solar_channels_exist:
-      define("R_0v", scale * np.asarray(rbd, dtype=np.float32)[solar_index].T,
+      define("R_0v", np.asarray(rbd, dtype=np.float32)[solar_index].T / percent,
              ("relative_azimuth", "satellite_zenith", "solar_zenith", "optical_depth", "effective_radius", *prs, "solar_channels"),
              long_name="bi-directional reflectance", units="dimensionless", valid_range=unit_range)
-      define("R_0d", scale * np.asarray(rfbd, dtype=np.float32)[solar_index].T,
+      define("R_0d", np.asarray(rfbd, dtype=np.float32)[solar_index].T / percent,
              ("solar_zenith", "optical_depth", "effective_radius", *prs, "solar_channels"),
              long_name="diffuse reflectance of direct beam", units="dimensionless", valid_range=unit_range)
-      define("T_0d", scale * np.asarray(tfbd, dtype=np.float32)[solar_index].T,
+      define("T_0d", np.asarray(tfbd, dtype=np.float32)[solar_index].T / percent,
              ("solar_zenith", "optical_depth", "effective_radius", *prs, "solar_channels"),
              long_name="diffuse transmission of diffuse light", units="dimensionless", valid_range=unit_range)
-      define("T_00", scale * np.asarray(tb, dtype=np.float32)[solar_index].T,
+      define("T_00", np.asarray(tb, dtype=np.float32)[solar_index].T / percent,
              ("solar_zenith", "optical_depth", "effective_radius", *prs, "solar_channels"),
              long_name="direct transmission", units="dimensionless", valid_range=unit_range)
    if thermal_channels_exist:
-      # em already holds the emissivity as a fraction (UU/BBE): no scale here
-      define("E_md", np.asarray(em, dtype=np.float32)[thermal_index].T,
+      define("E_md", np.asarray(em, dtype=np.float32)[thermal_index].T / percent,
              ("satellite_zenith", "optical_depth", "effective_radius", *prs, "thermal_channels"),
              long_name="diffuse emissivity", units="dimensionless", valid_range=unit_range)
 

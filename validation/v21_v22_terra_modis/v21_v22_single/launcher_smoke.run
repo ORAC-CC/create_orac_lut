@@ -1,0 +1,26 @@
+; Launcher v04 smoke test for releases/lut_v22_single.release: a compact
+; Terra MODIS liquid-water p240 calculation (active test grid
+; liquid-water-cloud_test.lut, channels 1, 6 and 20) written under validation/.
+;   ORAC_LUT_RELEASE_MANIFEST=lut_v22_single.release ORAC_LUT_DISORT_PRECISION=single \
+;   ORAC_LUT_DISORT_SP_KERNEL=intel_dlm python create_orac_luts_release_v04.py validation/v21_v22_terra_modis/v21_v22_single/launcher_smoke.run
+
+platform      = 'terra'
+instrument    = 'modis'
+forward_model = 'cloud'
+
+in_path       = 'create_orac_lut/input_files'
+instfile      = 'terra_modis_v1.inst'
+mmfile        = 'liquid-water_240.mm'
+lutfile       = 'liquid-water-cloud_test.lut'
+
+atmospheres   = 2
+channelid     = [1, 6, 20]
+
+gas           = 0
+no_rayleigh   = 0
+srf_quad      = 1
+nstreams      = 60
+nmom          = 1000
+version       = 22
+
+out_path      = 'validation/v21_v22_terra_modis/v21_v22_single/launcher_smoke'
