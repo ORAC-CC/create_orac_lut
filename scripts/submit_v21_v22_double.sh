@@ -21,7 +21,9 @@
 # Job IDs are recorded in staging/submissions.tsv; follow progress with
 #    bash scripts/monitor_v21_v22_double.sh
 #
-# Usage: bash scripts/submit_v21_v22_double.sh
+# Usage: bash scripts/submit_v21_v22_double.sh [--v21-only]
+#   --v21-only   submit only the IDL validation and V21 product jobs (e.g. after
+#                a V21 failure while the V22 jobs are still running)
 
 set -euo pipefail
 export PATH=/usr/bin:/bin:$PATH
@@ -40,6 +42,8 @@ declare -A V22FILE=([pold]=terra_modis_m_liquid-water_a01_pold_v22.nc [p240]=ter
 declare -A V22RUN=([pold]=runs/terra_modis_cloud_liquid-water_old_v22_double.run [p240]=runs/terra_modis_cloud_liquid-water_240_v22_double.run [pagg]=runs/terra_modis_cloud_water-ice_agg_v22_double.run)
 
 die() { echo "submit_v21_v22_double.sh: $*" >&2; exit 2; }
+V21_ONLY=0
+case "${1:-}" in "") ;; --v21-only) V21_ONLY=1 ;; *) die "unknown option $1" ;; esac
 
 host="$(hostname -s 2>/dev/null || hostname)"; host="${host%%.*}"
 if [[ "$host" != "$SUBMIT_HOST" ]]; then
@@ -47,7 +51,7 @@ if [[ "$host" != "$SUBMIT_HOST" ]]; then
    [[ "$DISPATCH_HOSTS" == *" $host "* ]] || die "run this from atmlxint1/2/3/5/6 or $SUBMIT_HOST, not $host"
    echo "Dispatching to $SUBMIT_HOST over ssh (repository is on the shared filesystem)"
    ssh -o BatchMode=yes -o ConnectTimeout=20 "$SUBMIT_HOST" \
-      bash -lc "$(printf '%q' "cd $(printf '%q' "$REPO") && ORACLUT_DISPATCHED=1 exec bash scripts/submit_v21_v22_double.sh")" \
+      bash -lc "$(printf '%q' "cd $(printf '%q' "$REPO") && ORACLUT_DISPATCHED=1 exec bash scripts/submit_v21_v22_double.sh ${1:-}")" \
       || die "ssh to $SUBMIT_HOST failed (an expired Kerberos ticket? run kinit and repeat)"
    exit 0
 fi
@@ -89,7 +93,9 @@ for p in "${PRODUCTS[@]}"; do
 done
 
 for p in "${PRODUCTS[@]}"; do
-   if [[ -f "$STAGE22/${V22FILE[$p]}" ]]; then
+   if [[ "$V21_ONLY" == 1 ]]; then
+      note "v22dp_$p" skipped "--v21-only"
+   elif [[ -f "$STAGE22/${V22FILE[$p]}" ]]; then
       note "v22dp_$p" skipped "already staged"
    else
       id=$(ORAC_LUT_RELEASE_MANIFEST=lut_v22_double.release ORAC_LUT_DISORT_PRECISION=double \

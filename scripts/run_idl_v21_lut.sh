@@ -72,6 +72,12 @@ stage_inputs() {   # $1 run directory; $2 optional compact case letter
 }
 
 run_idl() {   # $1 directory, $2 IDL statement, $3 log
+   # Resolve both paths before changing directory: a relative log path would
+   # otherwise be opened relative to the run directory (job 494791).
+   local dir log
+   dir="$(realpath -m -- "$1")"
+   log="$(realpath -m -- "$3")"
+   set -- "$dir" "$2" "$log"
    ( cd "$1" && idl -e "$2" < /dev/null > "$3" 2>&1 )
    status=$?
    cat "$3"
@@ -82,7 +88,7 @@ run_idl() {   # $1 directory, $2 IDL statement, $3 log
 }
 
 validate() {
-   out="$1"
+   out="$(realpath -m -- "$1")"
    mkdir -p "$out" || fail "cannot create $out"
    setup_environment
    ok=1
@@ -113,7 +119,7 @@ validate() {
 
 product() {
    name="$1"
-   stage="$2"
+   stage="$(realpath -m -- "$2")"
    case "$name" in
       pold) mm=liquid-water_old.mm; lut=liquid-water-cloud.lut; file=terra_modis_m_liquid-water_a01_pold_v21.nc ;;
       p240) mm=liquid-water_240.mm; lut=liquid-water-cloud.lut; file=terra_modis_m_liquid-water_a01_p240_v21.nc ;;
