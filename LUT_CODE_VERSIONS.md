@@ -311,3 +311,20 @@ phase-angle index).  Source release `lut-code-v22.4` (commit `c591d2b`;
 2026-10-12) are byte-identical to the production V21 IDL LUTs in all 52
 variables of each file; only the release launcher's provenance attributes are
 added.
+
+## 9. Definitive V21 and V22 releases (2026-10-12)
+
+The translation is complete; see `V21_V22_REFERENCE.md` for the definitive
+summary.  V21 (IDL): `releases/idl_lut_v21_single.release`, tag `idl-lut-v21`.
+V22 (Python): `lut-code-v22.4`, `releases/lut_v22_single-r2.release`, tag
+`lut-code-v22.4` (commit `c591d2b`); its three Terra MODIS products are in the
+shared ORAC LUT directory (the `lut-code-v22.1` products moved to its
+`superseded_v22_lut-code-v22.1_20261012/`).  `releases/README.md` indexes all
+manifests.  The working tree was cleaned: the V21/V22 investigation, the
+double-precision campaign scripts and the superseded run files
+(`runs/*_v22.run`, `*_v22_double.run`, `*_v22_single.run`) are preserved in Git
+(commit `f9b0b3b`); untracked material in the local `archive/`.  The working
+`call_disort.pro` is the original V21 file, and the Python generator defaults
+to single precision with the Intel kernel.  Paths under
+`validation/v21_v22_terra_modis/` cited in the sections above refer to that
+commit.  V23 is the next development version.

@@ -134,3 +134,10 @@ validation/v21_v22_terra_modis/v22_double/work/
 validation/v21_v22_terra_modis/disort_boundary/run/
 validation/v21_v22_terra_modis/disort_boundary/results/**/input_files
 create_orac_lut/disort2_dp/build/
+
+# Local verified backups of external release dependencies and archived
+# development material (see V21_V22_REFERENCE.md); not committed.
+/archive/
+
+# Compact reference data of the regression tests (V21 IDL captures, 1.5 MB)
+!tests/data/**

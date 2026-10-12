@@ -1,9 +1,0 @@
-# Minimal V21 diagnostic for the selected p240 DISORT call.
-input_files
-terra_modis_v1.inst
-liquid-water_240.mm
-compact_p240_node.lut
-2
-channelid=[6]
-srf_quad=1
-version=21

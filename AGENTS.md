@@ -139,15 +139,13 @@ IDL-to-Python ORAC LUT port. Never modify existing IDL `.pro` files. If
 Python and IDL differ, modify Python or document the difference. New IDL
 diagnostics must be separate files under `validation/diagnostics/`.
 
-One owner-approved exception (2026-10-10): `create_orac_lut/call_disort.pro`
-selects the DISORT precision.  Double precision (`DISORT_DP`,
-`create_orac_lut/disort2_dp/`) is the default; `ORAC_LUT_DISORT_PRECISION=single`
-executes the original `DISORT` statement with the historical DLM, and every
-statement before the solver call is the original.  The original file is
-preserved as `call_disort_v01.pro`, and the complete historical source set
-in `releases/idl_lut_v21_single.release`.  No other `.pro` file is changed;
-see `DOUBLE_PRECISION_BASELINE.md`.  Never SourceVault-version a `.dlm` file
-inside the IDL DLM path (a second descriptor of the same module conflicts).
+`create_orac_lut/call_disort.pro` is the original V21 file again
+(2026-10-12, identical to `call_disort_v01.pro`).  The experimental
+precision-selecting version (2026-10-10, double-precision `DISORT_DP`) is
+preserved as `call_disort_v02.pro`, and the V21 reference source set is
+`releases/idl_lut_v21_single.release` (Git tag `idl-lut-v21`).  Never
+SourceVault-version a `.dlm` file inside the IDL DLM path (a second
+descriptor of the same module conflicts).
 
 Treat the existing historical tree as read-only reference material until the Python implementation reproduces at least one complete legacy LUT.
 
@@ -256,17 +254,14 @@ The Python architecture should not assume that the current legacy DISORT wrapper
 
 Do not change the radiative-transfer method during legacy reproduction.
 
-Both generators solve DISORT in double precision by default
-(`ORAC_LUT_DISORT_PRECISION`, `double` or `single`; NSTR 60 unchanged).  The
-IDL DLM `DISORTtoIDL_DP` and the Python library `libdisort_dp.so` are the same
-kernel objects built by `create_orac_lut/disort2_dp/build_dlm.sh`; the
-historical single-precision `DISORTtoIDL.so` is never rebuilt or replaced.
-In single precision the Python generator calls that original Intel DLM itself
-(`ORAC_LUT_DISORT_SP_KERNEL=intel_dlm`, the default for single precision; the
-gfortran build remains selectable) with IDL's array memory layout, which
-reproduces the V21 IDL DISORT calls bitwise; the corrected single-precision
-V22 release is `releases/lut_v22_single.release`
-(`validation/v21_v22_terra_modis/REPORT_single_precision_equivalence.md`).
+DISORT is solved in single precision by the original V21 Intel DLM
+`create_orac_lut/disort2/src/DISORTtoIDL.so` in both generators (never
+rebuilt or replaced; NSTR 60, NMom 1000).  The Python generator calls it with
+IDL's array memory layout (`ORAC_LUT_DISORT_PRECISION=single` and
+`ORAC_LUT_DISORT_SP_KERNEL=intel_dlm` are the defaults) and reproduces the V21
+products bitwise; see `V21_V22_REFERENCE.md`.  The double-precision kernel
+(`create_orac_lut/disort2_dp/`, `ORAC_LUT_DISORT_PRECISION=double`) is
+suspended experimental work, selectable only explicitly and never a reference.
 
 ## Spectral treatment
 

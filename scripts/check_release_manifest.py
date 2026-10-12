@@ -9,7 +9,10 @@ oraclut-idl-release-manifest-1) or a .products file, hashes each listed path
 file.  As in the release launcher (create_orac_luts_release_v03.py and
 later), a pinned ``config`` file (CODE_VERSION) that has since been edited for
 a newer release matches if a same-directory SourceVault copy (CODE_VERSION_vNN)
-has the pinned content; that copy is reported.  Exit status 0 only if every
+has the pinned content; that copy is reported.  The same holds for ``input``
+entries (e.g. the LUT grid definitions liquid-water-cloud.lut, whose V21/V22
+content is preserved as liquid-water-cloud_v01.lut when a later release
+changes the working file); to rerun such a release, check out its Git tag.  Exit status 0 only if every
 file matches.  Nothing is modified.
 """
 
@@ -48,7 +51,7 @@ def check(manifest):
          print(f"MISSING  {role:<11s} {logical}  {path}")
          bad += 1
       elif sha256(full) != digest:
-         copies = sorted(full.parent.glob(f"{full.stem}_v[0-9][0-9]{full.suffix}")) if role == "config" else []
+         copies = sorted(full.parent.glob(f"{full.stem}_v[0-9][0-9]{full.suffix}")) if role in ("config", "input") else []
          served = next((copy for copy in copies if sha256(copy) == digest), None)
          if served is not None:
             print(f"SERVED   {role:<11s} {logical}  {path} from {served.name}")

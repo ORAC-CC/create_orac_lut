@@ -1,6 +1,6 @@
 """Regression tests: reproduce the captured V21 IDL single-precision DISORT calls bitwise.
 
-Reference: validation/v21_v22_terra_modis/v21_v22_single/reference/v21_idl_single_calls.npz,
+Reference: tests/data/v21_idl_single/v21_idl_single_calls.npz,
 the 90 DISORT calls captured inside the V21 IDL generator (four compact Terra
 MODIS p240 cases; diffuse, direct-beam and emission calls) with the outputs of
 the original Intel DLM create_orac_lut/disort2/src/DISORTtoIDL.so.
@@ -18,7 +18,7 @@ import pytest
 from oraclut.radiative_transfer import legacy_disort
 
 ROOT = Path(__file__).resolve().parents[1]
-REFERENCE = ROOT / "validation/v21_v22_terra_modis/v21_v22_single/reference/v21_idl_single_calls.npz"
+REFERENCE = ROOT / "tests/data/v21_idl_single/v21_idl_single_calls.npz"
 OUTPUTS = ("rfldir", "rfldn", "flup", "dfdt", "uavg", "uu", "albmed", "trnmed")
 
 pytestmark = pytest.mark.skipif(not REFERENCE.is_file(), reason="V21 IDL capture reference not present")
@@ -186,7 +186,7 @@ def test_gfortran_kernel_remains_selectable(reference, monkeypatch):
 def _case_geometry(case):
    from oraclut.idl_mirror import load_inststr, load_lutstr
    inststr = load_inststr(ROOT / "create_orac_lut/input_files/inst/terra_modis_v1.inst")
-   return load_lutstr(ROOT / f"validation/v21_v22_terra_modis/idl_double/cases/case_{case}.lut", inststr.max_sat_zenith)
+   return load_lutstr(ROOT / f"tests/data/v21_idl_single/cases/case_{case}.lut", inststr.max_sat_zenith)
 
 
 def _idl_umu(saz):
@@ -269,7 +269,7 @@ def test_idl_exp_uses_the_c_library():
 # End-to-end compact case: the corrected generator against the V21 IDL products
 # ---------------------------------------------------------------------------
 
-COMPACT = ROOT / "validation/v21_v22_terra_modis/v21_v22_single/reference/idl_compact"
+COMPACT = ROOT / "tests/data/v21_idl_single/idl_compact"
 SINGLE_CHANNEL_FILL = {"extinction_coefficient", "extinction_coefficient_ratio", "single_scatter_albedo", "asymmetry_parameter"}
 
 
@@ -286,7 +286,7 @@ def test_compact_case_a_reproduces_v21_idl_bitwise(tmp_path, monkeypatch):
    for entry in (ROOT / "create_orac_lut" / "input_files").iterdir():
       if entry.name != "lut":
          (in_path / entry.name).symlink_to(entry)
-   (in_path / "lut" / "case_A.lut").write_bytes((ROOT / "validation/v21_v22_terra_modis/idl_double/cases/case_A.lut").read_bytes())
+   (in_path / "lut" / "case_A.lut").write_bytes((ROOT / "tests/data/v21_idl_single/cases/case_A.lut").read_bytes())
    create_orac_luts.create_orac_cloud_lut(in_path, "terra_modis_v1.inst", "liquid-water_240.mm", "case_A.lut", tmp_path / "luts", "2",
                                           channelid=[6], gas=0, no_rayleigh=0, srf_quad=1, reuse_scat=0, scat_only=0,
                                           tmatrix_path=None, version=22, driver=None, nstreams=60, nmom=1000, work_path=tmp_path / "work")

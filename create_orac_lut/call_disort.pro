@@ -7,13 +7,6 @@
 ;    identical values for SSALB and PMOM.  This can lead to a significant speed
 ;    increase in some cases like when Rayleigh scattering is the only radiative
 ;    component in layers without cloud.
-;  10/10/26: DISORT precision selection (validation/v21_v22_terra_modis/
-;     REPORT_idl_double_precision.md).  Double precision
-;     (DISORT_DP, the DLM in create_orac_lut/disort2_dp) is the default; the
-;     historical single-precision DISORT DLM is selected with the environment
-;     variable ORAC_LUT_DISORT_PRECISION=single.  Everything before the solver
-;     call, and the single-precision call itself, is unchanged (the original
-;     file is preserved as call_disort_v01.pro).
 
 pro call_disort, DTAUC, SSALB, PMOM, UTAU, UMU, PHI, FBEAM, UMU0, FISOT, $
                  RFLDIR, RFLDN, FLUP, DFDT, UAVG, UU, ALBMED, TRNMED, $
@@ -22,7 +15,6 @@ pro call_disort, DTAUC, SSALB, PMOM, UTAU, UMU, PHI, FBEAM, UMU0, FISOT, $
    common DISORT_VARS, NLYR, NMOM, NTAU, NUMU, NPHI, NSTR, MAXCLY, MAXULV, $
                        MAXUMU, MAXPHI, MAXMOM, USRTAU, USRANG, PHI0, IBCND, $
                        LAMBER, ALBEDO, ONLYFL, ACCUR, PRNT, HEADER
-   common CALL_DISORT_PRECISION, precision_reported
 ;   print, 'Calling DISORT'
 
 ;  If the nlayer keyword has been set, we are only running on a sub-set of the
@@ -100,29 +92,10 @@ pro call_disort, DTAUC, SSALB, PMOM, UTAU, UMU, PHI, FBEAM, UMU0, FISOT, $
    endelse
 
 					; stop
-;  Select the DISORT precision: double (default) or the historical single
-   precision = strlowcase(strtrim(getenv('ORAC_LUT_DISORT_PRECISION'), 2))
-   if precision eq '' then precision = 'double'
-   if (precision ne 'double') and (precision ne 'single') then $
-      message, 'ORAC_LUT_DISORT_PRECISION must be single or double, not ' + precision
-   if n_elements(precision_reported) eq 0 then begin
-      print, 'call_disort: DISORT precision = ' + precision
-      precision_reported = precision
-   endif
-
-   if precision eq 'single' then begin
 ;  Call DISORT
    DISORT, NLYR1, DTAUC1, SSALB1, NMOM, PMOM1, TEMPER, WVNMLO, WVNMHI, USRTAU, $
            NTAU, UTAU, NSTR, USRANG, NUMU, UMU, NPHI, PHI, IBCND, FBEAM, UMU0, $
            PHI0, FISOT, LAMBER, ALBEDO, BTEMP, TTEMP, TEMIS, PLANK, ONLYFL, $
            ACCUR, PRNT, MAXCLY1, MAXULV, MAXUMU, MAXPHI, MAXMOM, RFLDIR, $
            RFLDN, FLUP, DFDT, UAVG, UU, ALBMED, TRNMED
-   endif else begin
-;  Call DISORT_DP (double-precision kernel, same arguments; outputs are DOUBLE)
-   DISORT_DP, NLYR1, DTAUC1, SSALB1, NMOM, PMOM1, TEMPER, WVNMLO, WVNMHI, USRTAU, $
-              NTAU, UTAU, NSTR, USRANG, NUMU, UMU, NPHI, PHI, IBCND, FBEAM, UMU0, $
-              PHI0, FISOT, LAMBER, ALBEDO, BTEMP, TTEMP, TEMIS, PLANK, ONLYFL, $
-              ACCUR, PRNT, MAXCLY1, MAXULV, MAXUMU, MAXPHI, MAXMOM, RFLDIR, $
-              RFLDN, FLUP, DFDT, UAVG, UU, ALBMED, TRNMED
-   endelse
 end

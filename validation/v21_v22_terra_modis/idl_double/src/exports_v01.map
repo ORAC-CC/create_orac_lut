@@ -1,4 +1,0 @@
-{
-   global: IDL_Load;
-   local: *;
-};

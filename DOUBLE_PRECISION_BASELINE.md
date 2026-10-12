@@ -1,5 +1,15 @@
 # Double-precision V21/V22 numerical baseline
 
+> **Historical (2026-10-12).**  This experimental double-precision work is not
+> a reference release; the definitive V21/V22 releases are single precision
+> (`V21_V22_REFERENCE.md`).  The double-precision sources, manifests
+> (`releases/lut_v22_double.release`, `releases/idl_lut_v21_double.release`) and
+> `call_disort_v02.pro` are preserved.  Paths below under
+> `validation/v21_v22_terra_modis/` and the double-precision scripts were
+> removed from the working tree on 2026-10-12; read them at commit `f9b0b3b`
+> (e.g. `git show f9b0b3b:<path>`).  The working `call_disort.pro` is the
+> original single-precision V21 file again.
+
 > **Status 2026-10-11.**  The double-precision development is suspended (not
 > removed): its sources, libraries, manifests and products are unchanged.  The
 > current work reproduces the historical single-precision V21 IDL calculation

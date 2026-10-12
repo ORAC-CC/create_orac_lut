@@ -1,14 +1,11 @@
 """Python boundary for the production ORAC DISORT implementation.
 
 Two precisions of the same unmodified DISORT source are available, selected
-by the environment variable ORAC_LUT_DISORT_PRECISION exactly as in the IDL
-generator's call_disort.pro:
+by the environment variable ORAC_LUT_DISORT_PRECISION:
 
-* ``double`` (default): create_orac_lut/disort2_dp/libdisort_dp.so, the
-  kernel objects of the IDL DLM DISORTtoIDL_DP (REAL promoted to 8 bytes;
-  built by create_orac_lut/disort2_dp/build_dlm.sh);
-* ``single``: the historical single-precision DISORT.  Two compiled kernels
-  of the same source exist, selected by ORAC_LUT_DISORT_SP_KERNEL:
+* ``single`` (default): the historical single-precision DISORT of the V21 IDL
+  and V22 Python reference releases.  Two compiled kernels of the same source
+  exist, selected by ORAC_LUT_DISORT_SP_KERNEL:
 
   - ``intel_dlm`` (preferred; used when the variable is unset): the original
     V21 IDL DLM create_orac_lut/disort2/src/DISORTtoIDL.so (ifort -O3),
@@ -18,6 +15,11 @@ generator's call_disort.pro:
     gfortran -O2 (the V22 configuration up to lut-code-v22.1), kept as a
     compatibility backend.  For identical inputs it differs from the Intel
     kernel.
+
+* ``double`` (experimental, explicit selection only; not a reference):
+  create_orac_lut/disort2_dp/libdisort_dp.so, the kernel objects of the IDL
+  DLM DISORTtoIDL_DP (REAL promoted to 8 bytes; built by
+  create_orac_lut/disort2_dp/build_dlm.sh).
 
 GETMOM and PLKAVG are single-precision routines of the same libraries.  With
 single precision and the Intel kernel they come from DISORTtoIDL.so, as in the
@@ -245,7 +247,7 @@ def _disort_single(
 # is therefore copied into a buffer placed in the same way.  With this layout
 # the kernel reproduces all 90 captured V21 IDL calls bitwise (offsets 8, 24,
 # 40 and 56 modulo 64 all do; 0, 4 and 12 do not:
-# validation/v21_v22_terra_modis/v21_v22_single/REPORT_v21_v22_single_reproduction.md).
+# V21_V22_REFERENCE.md; evidence in Git, commit f9b0b3b).
 #
 # The DLM's Fortran entry points are called directly; its C wrapper only
 # forwards IDL pointers (DISORTwrapper.c) and its IDL_* imports are never
@@ -500,9 +502,9 @@ _DOUBLE: ctypes.CDLL | None = None
 
 
 def disort_precision() -> str:
-    """The selected DISORT precision: ``double`` (default) or ``single``."""
+    """The selected DISORT precision: ``single`` (default; the V21/V22 reference) or ``double`` (experimental)."""
 
-    precision = os.environ.get("ORAC_LUT_DISORT_PRECISION", "").strip().lower() or "double"
+    precision = os.environ.get("ORAC_LUT_DISORT_PRECISION", "").strip().lower() or "single"
     if precision not in {"double", "single"}:
         raise ValueError(f"ORAC_LUT_DISORT_PRECISION must be single or double, not {precision!r}")
     return precision
@@ -597,7 +599,7 @@ def _disort_double(
 
 
 def disort(*args, **kwargs) -> dict[str, np.ndarray]:
-    """Call DISORT at the selected precision (ORAC_LUT_DISORT_PRECISION, default double).
+    """Call DISORT at the selected precision (ORAC_LUT_DISORT_PRECISION, default single).
 
     Single precision uses the kernel selected by ORAC_LUT_DISORT_SP_KERNEL
     (``intel_dlm``, the original V21 kernel, unless ``gfortran`` is chosen).

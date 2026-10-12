@@ -12,8 +12,8 @@ This is the scattering path made explicit:
    T-matrix: dubovik_lognormal_multiple_eps -> bulk properties;
    both paths return Bext, Bsca, w, g and phase function -> Legendre expansion.
 
-Arithmetic reproduces the IDL (validation/v21_v22_terra_modis/
-REPORT_single_precision_equivalence.md): DOUBLE where the IDL is DOUBLE, FLOAT
+Arithmetic reproduces the IDL (V21_V22_REFERENCE.md; detailed evidence in Git,
+commit f9b0b3b): DOUBLE where the IDL is DOUBLE, FLOAT
 where the IDL operands are FLOAT (the literals 0.001, 100.0, 0.4 and 4./3., the
 wavenumber 1.0/wl), the IDL evaluation order, glibc exp and pow as called by
 IDL, the IDL quadrature.pro abscissae and weights, and FLTARR storage of the

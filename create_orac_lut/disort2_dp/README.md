@@ -1,5 +1,10 @@
 # Double-precision DISORT for the ORAC LUT generators
 
+> **Experimental (2026-10-12).**  Not used by the V21/V22 reference releases
+> (`V21_V22_REFERENCE.md`); the working `call_disort.pro` no longer calls
+> `DISORT_DP` (the precision-selecting version is `call_disort_v02.pro`).
+> Validation paths below refer to commit `f9b0b3b`.
+
 This directory holds the double-precision DISORT used by default by both
 LUT generators since 2026-10-10:
 

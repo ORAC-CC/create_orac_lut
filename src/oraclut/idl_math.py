@@ -8,7 +8,7 @@ imports ``cos``, ``cosf``, ``exp``, ``expf``, ``pow`` and ``powf``); FLOAT
 the V21 T_dv operators bitwise), and integer powers are evaluated by repeated
 squaring.  The routines here reproduce
 the IDL arithmetic; each is used where the IDL source has the corresponding
-expression (validation/v21_v22_terra_modis/REPORT_single_precision_equivalence.md).
+expression (V21_V22_REFERENCE.md; detailed evidence in Git, commit f9b0b3b).
 
 * ``idl_cos_deg(x)``  IDL ``cos(x*!dtor)`` for FLOAT x: FLOAT product with the
   FLOAT system variable !DTOR (0.017453292, bits 0x3C8EFA35), then ``cosf``.

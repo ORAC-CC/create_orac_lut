@@ -14,7 +14,9 @@ interpolated slices (1 - w) F(70) + w F(80) at w = 0.25 and w -> 0.5 (solar
 zenith 72.5 and 75-), the supremum of the weight ORAC can give the 80 degree
 support node.  The forward-model and uncertainty definitions mirror
 ``radiance_impact.py``; with ``--validate`` the full-grid results are checked
-against that utility's stored JSON.
+against that utility's stored JSON (the historical V21 / lut-code-v22.1 analysis
+results, removed from the working tree on 2026-10-12: restore
+validation/v21_v22_terra_modis/results/ from commit f9b0b3b first).
 
 Usage:
    python operational_domain.py [--validate]

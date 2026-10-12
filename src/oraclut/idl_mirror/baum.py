@@ -9,8 +9,8 @@ radius before interpolation.
 
 The arithmetic is that of read_baum.pro in IDL: FLOAT tables, FLOAT fractional
 indices from INTERPOL, the FLOAT radius extrapolation, and INTERPOLATE /GRID
-evaluated in double precision (validation/v21_v22_terra_modis/
-REPORT_single_precision_equivalence.md).
+evaluated in double precision (V21_V22_REFERENCE.md; detailed evidence in
+Git, commit f9b0b3b).
 """
 
 from pathlib import Path

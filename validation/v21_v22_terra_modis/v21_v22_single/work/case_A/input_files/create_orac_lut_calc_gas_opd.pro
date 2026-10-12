@@ -1,1 +1,0 @@
-/home/g/grainger/project-oraclut/create_orac_lut/input_files/create_orac_lut_calc_gas_opd.pro

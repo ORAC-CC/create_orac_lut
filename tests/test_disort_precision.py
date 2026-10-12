@@ -1,7 +1,12 @@
-"""Tests for the double-precision DISORT baseline (V21 IDL and V22 Python)."""
+"""DISORT precision selection after the V21/V22 finalisation.
+
+Single precision (the original V21 Intel kernel) is the default and the
+reference; double precision (the suspended experimental development) is
+available only by explicit selection.  The IDL call_disort.pro is the
+original V21 file.
+"""
 
 import os
-import re
 import subprocess
 import sys
 from pathlib import Path
@@ -14,7 +19,6 @@ sys.path.insert(0, str(ROOT / "src"))
 from oraclut.radiative_transfer import legacy_disort as L   # noqa: E402
 
 PYTHON = sys.executable
-CAPTURES = ROOT / "validation/v21_v22_terra_modis/idl_double/results/run_20261010T214143"
 
 
 def _layered_case():
@@ -35,9 +39,10 @@ def _layered_case():
 
 def test_precision_selection(monkeypatch):
    monkeypatch.delenv("ORAC_LUT_DISORT_PRECISION", raising=False)
+   monkeypatch.delenv("ORAC_LUT_DISORT_SP_KERNEL", raising=False)
+   assert L.disort_precision() == "single" and L.single_kernel() == "intel_dlm"
+   monkeypatch.setenv("ORAC_LUT_DISORT_PRECISION", "double")
    assert L.disort_precision() == "double"
-   monkeypatch.setenv("ORAC_LUT_DISORT_PRECISION", "single")
-   assert L.disort_precision() == "single"
    monkeypatch.setenv("ORAC_LUT_DISORT_PRECISION", "quad")
    with pytest.raises(ValueError):
       L.disort_precision()
@@ -65,38 +70,11 @@ def test_double_and_single_paths(monkeypatch):
    assert np.array_equal(L.disort(*_layered_case(), 100.0, 0.6, 0.0, nstreams=16)["uu"], d["uu"])
 
 
-@pytest.mark.skipif(not (CAPTURES.is_dir() and L.DOUBLE_LIBRARY.is_file()), reason="IDL captures or DP library absent")
-def test_python_double_equals_idl_disort_dp(monkeypatch):
-   """The Python boundary reproduces IDL DISORT_DP bitwise on captured IDL calls (NSTR 60)."""
-   sys.path.insert(0, str(ROOT / "validation/v21_v22_terra_modis/idl_double"))
-   analysis = pytest.importorskip("analyse_idl_double")
-   monkeypatch.setenv("ORAC_LUT_DISORT_PRECISION", "double")
-   files = sorted((CAPTURES / "case_B/validation/captures").glob("call_*.sav"))[:4]
-   assert files
-   for path in files:
-      cap = analysis.load_capture(path)
-      a = cap["args"]
-      out = L.disort(a["dtauc"], a["ssalb"], a["pmom"], a["utau"], a["umu"], a["phi"], a["fbeam"], a["umu0"], a["fisot"],
-                     nstreams=60, plank=bool(a["plank"]), wavenumber_low=a["wvnmlo"], wavenumber_high=a["wvnmhi"],
-                     temperature=a["temper"][:a["nlyr"] + 1] if a["plank"] else None)
-      for key in analysis.OUT:
-         assert np.array_equal(out[key], cap["dp"][60][key]), (path.name, key)
-
-
-def test_call_disort_pro_single_branch_is_the_original():
-   original = (ROOT / "create_orac_lut/call_disort_v01.pro").read_text()
-   current = (ROOT / "create_orac_lut/call_disort.pro").read_text()
-   call = re.search(r"\n   DISORT, NLYR1.*?TRNMED\n", original, re.S).group(0)
-   assert call in current, "the single-precision DISORT call must be the original statement"
-   dp = re.search(r"\n   DISORT_DP, NLYR1.*?TRNMED\n", current, re.S).group(0)
-   squash = lambda text: re.sub(r"[\s$]+", "", text)
-   assert squash(dp).replace("DISORT_DP,", "DISORT,") == squash(call)
-   # Everything before the solver section is unchanged apart from the added history and common block.
-   body_original = original.split(";  Call DISORT")[0]
-   body_current = current.split(";  Select the DISORT precision")[0]
-   strip = lambda text: [line for line in text.splitlines()
-                         if not line.startswith(";") and "CALL_DISORT_PRECISION" not in line]
-   assert strip(body_current) == strip(body_original)
+def test_call_disort_pro_is_the_original_v21_file():
+   # The V21 IDL reference: call_disort.pro is the original (single-precision)
+   # file; the experimental precision-selecting version is call_disort_v02.pro.
+   assert (ROOT / "create_orac_lut/call_disort.pro").read_bytes() == (ROOT / "create_orac_lut/call_disort_v01.pro").read_bytes()
+   assert "DISORT_DP" in (ROOT / "create_orac_lut/call_disort_v02.pro").read_text()
 
 
 def test_launcher_requires_manifest_choice_for_v22():
@@ -121,8 +99,9 @@ def test_double_release_refuses_single_precision(monkeypatch):
       launcher.verify_libraries(manifest)
 
 
-@pytest.mark.parametrize("manifest", ["releases/idl_lut_v21_single.release", "releases/idl_lut_v21_double.release"])
-def test_idl_release_manifests_verify(manifest):
+@pytest.mark.parametrize("manifest", ["releases/idl_lut_v21_single.release", "releases/idl_lut_v21_double.release",
+                                      "releases/lut_v22_single-r2.release", "releases/lut_v22_single-r2.dependencies"])
+def test_release_manifests_verify(manifest):
    shared = Path("/network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS")
    if not shared.is_dir() or not (ROOT / "create_orac_lut/disort2_dp/DISORTtoIDL_DP.so").is_file():
       pytest.skip("shared LUT directory or DP build absent")

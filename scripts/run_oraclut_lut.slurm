@@ -76,7 +76,7 @@ echo "Git revision:  $(git -C "$REPO" rev-parse HEAD 2>/dev/null || echo unknown
 echo "Source state:  $(if [[ -z "$(git -C "$REPO" status --porcelain -- create_orac_luts.py src mie create_orac_lut 2>/dev/null)" ]]; then echo clean; else echo MODIFIED; fi)"
 echo "Release files: $(cd "$REPO" && sha256sum create_orac_luts_release_v03.py releases/*.release 2>/dev/null | tr '\n' ';')"
 echo "Manifest:      ${ORAC_LUT_RELEASE_MANIFEST:-<the only manifest of the release>}"
-echo "DISORT:        ${ORAC_LUT_DISORT_PRECISION:-double} precision"
+echo "DISORT:        ${ORAC_LUT_DISORT_PRECISION:-single} precision"
 echo "TMPDIR:        $TMPDIR"
 echo "CPUs:          ${SLURM_CPUS_PER_TASK:-unknown}; memory: ${SLURM_MEM_PER_NODE:-unknown} MB; time limit: see squeue -j ${SLURM_JOB_ID:-}"
 echo "============================================================"

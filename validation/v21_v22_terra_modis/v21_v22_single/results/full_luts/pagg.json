@@ -1,6 +1,6 @@
 {
  "reference": "/network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/terra_modis_m_water-ice_a01_pagg_v21.nc",
- "candidate": "/home/g/grainger/project-oraclut/staging/lut_v22_single-r2/terra_modis_m_water-ice_a01_pagg_v22.nc",
+ "candidate": "/network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS/terra_modis_m_water-ice_a01_pagg_v22.nc",
  "dimensions_equal": true,
  "variable_order_equal": true,
  "attribute_differences": [
