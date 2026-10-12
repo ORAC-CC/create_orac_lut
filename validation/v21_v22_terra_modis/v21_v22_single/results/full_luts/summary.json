@@ -1,0 +1,20 @@
+{
+ "pold": {
+  "raw_bitwise": "52/52",
+  "not_raw_bitwise": [],
+  "decoded_differing": {},
+  "rt_operators_raw_bitwise": true
+ },
+ "p240": {
+  "raw_bitwise": "52/52",
+  "not_raw_bitwise": [],
+  "decoded_differing": {},
+  "rt_operators_raw_bitwise": true
+ },
+ "pagg": {
+  "raw_bitwise": "52/52",
+  "not_raw_bitwise": [],
+  "decoded_differing": {},
+  "rt_operators_raw_bitwise": true
+ }
+}

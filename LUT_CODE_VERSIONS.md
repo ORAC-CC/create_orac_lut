@@ -298,3 +298,16 @@ the owner on 2026-10-11: the active definitions keep their names
 `*_v01.lut`; historical and experimental definitions are kept unchanged in
 `lut/archive/`; the obsolete `.lut.bak` files were removed (recoverable from
 Git history before `d38af77`).
+
+**Revision 2 (2026-10-12).**  The first complete products of
+`lut_v22_single.release` (`lut-code-v22.3`; kept in `staging/lut_v22_single/`)
+left two IDL behaviours unreproduced: FLOAT `EXP` is the DOUBLE `exp` rounded
+to FLOAT, and `INTERPOLATE` converts its location arrays to FLOAT (the Baum
+phase-angle index).  Source release `lut-code-v22.4` (commit `c591d2b`;
+`idl_math` v02, `baum` v03) corrects both and is sealed by
+`releases/lut_v22_single-r2.release`; its run files are
+`runs/*_v22_single-r2.run` and its products go to `staging/lut_v22_single-r2/`
+(same scripts: `scripts/submit_v22_single.sh`, `scripts/monitor_v22_single.sh`).  Its three products (jobs 495405-495407,
+2026-10-12) are byte-identical to the production V21 IDL LUTs in all 52
+variables of each file; only the release launcher's provenance attributes are
+added.
