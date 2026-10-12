@@ -8,11 +8,11 @@
 #SBATCH --mem=8G
 #
 # SLURM batch script for one corrected single-precision V22 Terra MODIS LUT
-# (releases/lut_v22_single.release: IDL-compatible arithmetic, original Intel
+# (releases/lut_v22_single-r2.release: IDL-compatible arithmetic, original Intel
 # DISORT kernel).  Submitted by scripts/submit_v22_single.sh from atmlxint7,
 # which creates the log directory first and drops the login shell's TMPDIR.
 #
-#    sbatch scripts/run_v22_single.slurm runs/<product>_v22_single.run
+#    sbatch scripts/run_v22_single.slurm runs/<product>_v22_single-r2.run
 #
 # The release environment is set here, not inherited.  Run time: the
 # single-precision V22 products of lut-code-v22.1 took 6.7-7.1 h each on
@@ -38,12 +38,12 @@ mkdir -p "$JOB_TMPDIR"
 export TMPDIR="$JOB_TMPDIR" TMP="$JOB_TMPDIR" TEMP="$JOB_TMPDIR"
 export PYTHONPATH="$REPO/src"
 export PYTHONUNBUFFERED=1
-export ORAC_LUT_RELEASE_MANIFEST=lut_v22_single.release
+export ORAC_LUT_RELEASE_MANIFEST=lut_v22_single-r2.release
 export ORAC_LUT_DISORT_PRECISION=single
 export ORAC_LUT_DISORT_SP_KERNEL=intel_dlm
 unset ORAC_LUT_INTEL_RUNTIME
 
-[[ $# -eq 1 && "$1" == runs/*_v22_single.run ]] || { echo "usage: sbatch scripts/run_v22_single.slurm runs/<product>_v22_single.run" >&2; exit 2; }
+[[ $# -eq 1 && "$1" == runs/*_v22_single-r2.run ]] || { echo "usage: sbatch scripts/run_v22_single.slurm runs/<product>_v22_single-r2.run" >&2; exit 2; }
 
 echo "============================================================"
 echo "ORAC V22 LUT SLURM JOB (corrected single precision, original Intel DISORT)"

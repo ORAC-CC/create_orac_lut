@@ -34,15 +34,17 @@ def _index(axis, targets):
 def _grid_interpolate(table, indices):
    """IDL: interpolate(table, i_1, i_2[, i_3], /grid) -- multilinear, edge-clamped.
 
-   IDL evaluates the interpolation in double precision from the (FLOAT or
-   DOUBLE) fractional indices and returns the type of the table (FLOAT); this
-   reproduces the V21 LUT Baum extinction, albedo and asymmetry bitwise.
+   IDL converts the location arrays to FLOAT (the DOUBLE phase-angle index
+   included), evaluates the interpolation in double precision and returns the
+   type of the table (FLOAT); this reproduces the V21 LUT Baum extinction,
+   albedo, asymmetry and the radiative-transfer operators of the pagg LUT
+   bitwise.
    """
 
    result = np.asarray(table, dtype=np.float64)
    for axis, index in enumerate(indices):
       n = result.shape[axis]
-      position = np.clip(np.asarray(index, dtype=np.float64), 0.0, n - 1.0)
+      position = np.clip(np.asarray(index, dtype=np.float32).astype(np.float64), 0.0, n - 1.0)
       lower = np.minimum(np.floor(position).astype(int), n - 2)
       shape = [1] * result.ndim
       shape[axis] = position.size

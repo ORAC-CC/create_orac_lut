@@ -254,12 +254,11 @@ def test_idl_integer_power_is_repeated_squaring():
 
 
 def test_idl_exp_uses_the_c_library():
-   import ctypes, math
+   # IDL FLOAT EXP is the DOUBLE exp rounded to FLOAT (reproduces the V21 T_dv)
+   import math
    from oraclut.idl_math import idl_exp
-   libm = ctypes.CDLL("libm.so.6")
-   libm.expf.restype, libm.expf.argtypes = ctypes.c_float, [ctypes.c_float]
    x = np.linspace(-20, 5, 2001, dtype=np.float32)
-   assert np.array_equal(idl_exp(x), np.array([libm.expf(float(v)) for v in x], np.float32))
+   assert np.array_equal(idl_exp(x), np.array([math.exp(float(v)) for v in x]).astype(np.float32))
    y = np.linspace(-20, 5, 2001)
    assert np.array_equal(idl_exp(y), np.array([math.exp(v) for v in y]))
    with pytest.raises(TypeError):

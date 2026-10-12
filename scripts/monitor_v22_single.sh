@@ -3,7 +3,7 @@
 # monitor_v22_single.sh
 #
 # Report the corrected single-precision V22 LUT jobs (v22sp_*) recorded in
-# staging/submissions.tsv and the products staged in staging/lut_v22_single/.
+# staging/submissions.tsv and the products staged in staging/lut_v22_single-r2/.
 # With --compare, compare each staged product with the production V21 IDL
 # product (validation/v21_v22_terra_modis/v21_v22_single/compare_full_luts.py).
 # Read-only apart from the comparison results.
@@ -31,7 +31,7 @@ if [[ -f staging/submissions.tsv ]]; then
 fi
 
 echo; echo "== Staged products"
-for f in staging/lut_v22_single/terra_modis_m_*_v22.nc; do
+for f in staging/lut_v22_single-r2/terra_modis_m_*_v22.nc; do
    [[ -e "$f" ]] || continue
    echo "$(/usr/bin/sha256sum "$f" | cut -c1-16)  $(stat -c %s "$f") bytes  $f"
 done

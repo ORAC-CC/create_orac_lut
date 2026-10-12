@@ -3,13 +3,13 @@
 # submit_v22_single.sh
 #
 # Submit the three corrected single-precision V22 Terra MODIS LUTs
-# (releases/lut_v22_single.release; launcher create_orac_luts_release_v04.py):
+# (releases/lut_v22_single-r2.release; launcher create_orac_luts_release_v04.py):
 #
-#   v22sp_pold   runs/terra_modis_cloud_liquid-water_old_v22_single.run
-#   v22sp_p240   runs/terra_modis_cloud_liquid-water_240_v22_single.run
-#   v22sp_pagg   runs/terra_modis_cloud_water-ice_agg_v22_single.run
+#   v22sp_pold   runs/terra_modis_cloud_liquid-water_old_v22_single-r2.run
+#   v22sp_p240   runs/terra_modis_cloud_liquid-water_240_v22_single-r2.run
+#   v22sp_pagg   runs/terra_modis_cloud_water-ice_agg_v22_single-r2.run
 #
-# Products go only to the protected staging directory staging/lut_v22_single/,
+# Products go only to the protected staging directory staging/lut_v22_single-r2/,
 # never to the shared ORAC LUT directory.  A product already staged is not
 # submitted again, so the command is safe to repeat.
 #
@@ -26,11 +26,11 @@ cd "$REPO"
 SUBMIT_HOST=atmlxint7
 DISPATCH_HOSTS=" atmlxint1 atmlxint2 atmlxint3 atmlxint5 atmlxint6 "
 PYTHON=/home/g/grainger/miniforge3/envs/science/bin/python
-STAGE=staging/lut_v22_single
+STAGE=staging/lut_v22_single-r2
 RECORD=staging/submissions.tsv
 PRODUCTS=(pold p240 pagg)
 declare -A FILE=([pold]=terra_modis_m_liquid-water_a01_pold_v22.nc [p240]=terra_modis_m_liquid-water_a01_p240_v22.nc [pagg]=terra_modis_m_water-ice_a01_pagg_v22.nc)
-declare -A RUN=([pold]=runs/terra_modis_cloud_liquid-water_old_v22_single.run [p240]=runs/terra_modis_cloud_liquid-water_240_v22_single.run [pagg]=runs/terra_modis_cloud_water-ice_agg_v22_single.run)
+declare -A RUN=([pold]=runs/terra_modis_cloud_liquid-water_old_v22_single-r2.run [p240]=runs/terra_modis_cloud_liquid-water_240_v22_single-r2.run [pagg]=runs/terra_modis_cloud_water-ice_agg_v22_single-r2.run)
 die() { echo "submit_v22_single.sh: $*" >&2; exit 2; }
 [[ $# -eq 0 ]] || die "takes no arguments"
 
@@ -46,12 +46,12 @@ if [[ "$host" != "$SUBMIT_HOST" ]]; then
 fi
 
 # Pre-flight on atmlxint7: every release file verified and committed.
-ORAC_LUT_RELEASE_MANIFEST=lut_v22_single.release "$PYTHON" create_orac_luts_release_v04.py --check 22 > /dev/null \
+ORAC_LUT_RELEASE_MANIFEST=lut_v22_single-r2.release "$PYTHON" create_orac_luts_release_v04.py --check 22 > /dev/null \
    || die "the corrected single-precision V22 release does not verify"
 "$PYTHON" scripts/check_release_manifest.py releases/idl_lut_v21_single.release > /dev/null \
    || die "the V21 reference release files differ from their manifest"
 uncommitted=$(git status --porcelain --untracked-files=all -- releases CODE_VERSION create_orac_luts.py create_orac_luts_release_v04.py \
-              src/oraclut create_orac_lut/disort2/src scripts/run_v22_single.slurm runs/*_v22_single.run | grep -v -E '__pycache__' || true)
+              src/oraclut create_orac_lut/disort2/src scripts/run_v22_single.slurm runs/*_v22_single-r2.run | grep -v -E '__pycache__' || true)
 [[ -z "$uncommitted" ]] || die "release files are not committed (the products must record a committed source state):
 $uncommitted"
 mkdir -p validation/slurm "$STAGE"

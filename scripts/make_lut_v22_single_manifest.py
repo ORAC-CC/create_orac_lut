@@ -1,6 +1,11 @@
-"""Write releases/lut_v22_single.release: the corrected single-precision V22 release manifest.
+"""Write releases/lut_v22_single-r2.release: the corrected single-precision V22 release manifest (revision 2).
 
    python scripts/make_lut_v22_single_manifest.py
+
+Revision 2 (lut-code-v22.4) adds IDL FLOAT EXP (rounded DOUBLE exp) and
+INTERPOLATE with FLOAT locations (Baum phase function) to revision 1
+(releases/lut_v22_single.release, sealed; its products are kept in
+staging/lut_v22_single/).
 
 LUT release V22, single precision: the Python generator with IDL-compatible
 arithmetic that reproduces the V21 IDL lookup tables, solving DISORT with the
@@ -17,8 +22,8 @@ run-time libraries it loads (library entries intel-runtime-*, pinned by
 absolute path, so that launcher v03 can still parse the manifest).
 
 Products are made with launcher v04:
-   ORAC_LUT_RELEASE_MANIFEST=lut_v22_single.release ORAC_LUT_DISORT_PRECISION=single \\
-   ORAC_LUT_DISORT_SP_KERNEL=intel_dlm python create_orac_luts_release_v04.py runs/<product>.run
+   ORAC_LUT_RELEASE_MANIFEST=lut_v22_single-r2.release ORAC_LUT_DISORT_PRECISION=single \\
+   ORAC_LUT_DISORT_SP_KERNEL=intel_dlm python create_orac_luts_release_v04.py runs/<product>_v22_single-r2.run
 
 The script refuses to overwrite an existing manifest (sealed once written).
 """
@@ -32,7 +37,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "releases" / "lut_v22_single.release"
+OUT = ROOT / "releases" / "lut_v22_single-r2.release"
 
 
 def sha256(path):
@@ -91,15 +96,15 @@ def main():
    header = f"""\
 # ORAC LUT release manifest
 #
-# LUT release V22, corrected single precision: the Python generator with
+# LUT release V22, corrected single precision, revision 2: the Python generator with
 # IDL-compatible arithmetic that reproduces the IDL V21 lookup tables, with
 # DISORT solved by the original V21 Intel kernel DISORTtoIDL.so (unmodified,
 # IDL array memory layout).  NSTR 60, NMOM 1000, original LUT grids, float32
 # NetCDF storage.  Validation: validation/v21_v22_terra_modis/
 # REPORT_single_precision_equivalence.md.  A product is made with
 #
-#    ORAC_LUT_RELEASE_MANIFEST=lut_v22_single.release ORAC_LUT_DISORT_PRECISION=single \\
-#    ORAC_LUT_DISORT_SP_KERNEL=intel_dlm python create_orac_luts_release_v04.py runs/<product>.run
+#    ORAC_LUT_RELEASE_MANIFEST=lut_v22_single-r2.release ORAC_LUT_DISORT_PRECISION=single \\
+#    ORAC_LUT_DISORT_SP_KERNEL=intel_dlm python create_orac_luts_release_v04.py runs/<product>_v22_single-r2.run
 #
 # which refuses to run unless every file below has exactly this content and the
 # environment selects single precision and the Intel kernel.  The historical

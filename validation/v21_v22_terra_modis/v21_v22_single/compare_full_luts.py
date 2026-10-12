@@ -1,7 +1,7 @@
 """Stage 9: compare the corrected single-precision V22 Terra MODIS LUTs with the production V21 IDL LUTs.
 
 Reference: the shared V21 products (releases/idl_lut_v21_single.release).
-Candidate: staging/lut_v22_single/ (releases/lut_v22_single.release).
+Candidate: staging/lut_v22_single-r2/ (releases/lut_v22_single-r2.release).
 
 For every product:
 * dimensions, variable set and order, attributes (compare_luts.py);
@@ -35,7 +35,7 @@ import compare_luts                                          # noqa: E402
 import operational_domain as od                              # noqa: E402
 
 V21 = Path("/network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS")
-STAGE = ROOT / "staging" / "lut_v22_single"
+STAGE = ROOT / "staging" / "lut_v22_single-r2"
 OUT = HERE / "results" / "full_luts"
 
 

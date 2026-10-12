@@ -1,4 +1,4 @@
-"""Release launcher v04: the corrected single-precision V22 release (original Intel DISORT kernel)."""
+"""Release launcher v04: the corrected single-precision V22 release, revision 2 (original Intel DISORT kernel)."""
 
 from pathlib import Path
 import subprocess
@@ -8,14 +8,14 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 LAUNCHER = ROOT / "create_orac_luts_release_v04.py"
-MANIFEST = ROOT / "releases" / "lut_v22_single.release"
+MANIFEST = ROOT / "releases" / "lut_v22_single-r2.release"
 SMOKE = ROOT / "validation/v21_v22_terra_modis/v21_v22_single/launcher_smoke.run"
 
-pytestmark = pytest.mark.skipif(not MANIFEST.is_file(), reason="lut_v22_single.release not present")
+pytestmark = pytest.mark.skipif(not MANIFEST.is_file(), reason="lut_v22_single-r2.release not present")
 
 
 def _launch(*args, **environment):
-   env = {"HOME": str(Path.home()), "PATH": "/usr/bin:/bin", "ORAC_LUT_RELEASE_MANIFEST": "lut_v22_single.release", **environment}
+   env = {"HOME": str(Path.home()), "PATH": "/usr/bin:/bin", "ORAC_LUT_RELEASE_MANIFEST": "lut_v22_single-r2.release", **environment}
    return subprocess.run([sys.executable, str(LAUNCHER), *args], cwd=ROOT, env=env, capture_output=True, text=True, timeout=600)
 
 
