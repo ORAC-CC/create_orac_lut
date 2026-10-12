@@ -4,6 +4,7 @@
 |---|---|---|---|---|
 | **V21** | **definitive IDL reference** | `idl_lut_v21_single.release` | IDL, `create_orac_lut/terra_modis_run` | `idl-lut-v21` |
 | **V22** | **definitive Python reference** (bitwise = V21) | `lut_v22_single-r2.release` | `create_orac_luts_release_v04.py` | `lut-code-v22.4` |
+| **V23** | **grid-only successor of V22**: `lut-code-v22.4` code, Grid B (`../V23_RELEASE.md`) | `lut_v23.release` | `create_orac_luts_release_v04.py` | (tag after validation) |
 | V22 | superseded: historical gfortran V22 | `lut_v22.release` | `create_orac_luts_release_v03.py` | `lut-code-v22.1` |
 | V22 | superseded: corrected V22, revision 1 | `lut_v22_single.release` | `create_orac_luts_release_v04.py` | commit `e4036d0` |
 | V22 | experimental: double-precision DISORT | `lut_v22_double.release` | `create_orac_luts_release_v03.py` | commit `37cf766` |
@@ -17,5 +18,6 @@ Supporting records of the definitive V22 release:
 * `lut_v22_single-r2.environment.txt`: the conda environment (`conda list --explicit`);
 * `products/lut_v22/`: the products' provenance records.
 
-Manifests are sealed: never edit them.  Several manifests define V22, so the
+`lut_v23.release` pins its input files as well (entries `input-*`), including
+the Grid B definitions.  Manifests are sealed: never edit them.  Several manifests define V22, so the
 launcher needs `ORAC_LUT_RELEASE_MANIFEST=<file>`.  See `../V21_V22_REFERENCE.md`.

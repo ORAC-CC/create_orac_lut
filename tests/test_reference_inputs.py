@@ -28,7 +28,8 @@ def test_current_input_readers_match_reference_case():
     model = read_microphysics(config.microphysics_file)
     atmosphere = read_atmosphere(config.atmosphere_file, config.atmosphere_code)
     assert instrument.srf_files[1].endswith("ch01.txt")
-    np.testing.assert_array_equal(grid.effective_radius, np.arange(1, 40, 2, dtype="f4"))
+    # the active definition holds Grid B since V23 (1-9 um by 1, then 11-39 um by 2)
+    np.testing.assert_array_equal(grid.effective_radius, np.concatenate([np.arange(1, 10), np.arange(11, 40, 2)]).astype("f4"))
     assert (model.size_distribution, model.size_parameters) == ("modified_gamma", (12.0, 0.1111111))
     assert model.scattering_code == "mie"
     assert atmosphere.height_km.size == 46

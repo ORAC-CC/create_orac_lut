@@ -1,0 +1,230 @@
+{
+ "p240": {
+  "seconds_v23": 41.68980622291565,
+  "seconds_v22": 28.450197458267212,
+  "seconds_per_block_v23": 5.211225777864456,
+  "seconds_per_block_v22": 3.5562746822834015,
+  "dimensions_v23": {
+   "optical_depth": 2,
+   "effective_radius": 2,
+   "satellite_zenith": 21,
+   "solar_zenith": 21,
+   "relative_azimuth": 37,
+   "channels": 2,
+   "length": 39,
+   "st1": 19,
+   "st2": 5,
+   "st3": 5,
+   "st4": 7,
+   "solar_channels": 2,
+   "thermal_channels": 1,
+   "mixed_channels": 1
+  },
+  "metadata_v23": {
+   "lut_release": "V23",
+   "manifest": "releases/lut_v23.release sha256 ea17365bf7a5023fd216e401f3c5",
+   "nan_or_fill": {
+    "max_sat_zenith": 0,
+    "central_wavelength": 0,
+    "central_wavenumber": 0,
+    "oldf0": 0,
+    "oldf1": 0,
+    "F0": 0,
+    "snr": 0,
+    "oldnefr": 0,
+    "refbt": 0,
+    "nedt": 0,
+    "B1": 0,
+    "B2": 0,
+    "T1": 0,
+    "T2": 0,
+    "oldwvn": 0,
+    "oldb1": 0,
+    "oldb2": 0,
+    "oldt1": 0,
+    "oldt2": 0,
+    "oldnebt": 0,
+    "average_volume_per_particle": 0,
+    "extinction_coefficient": 0,
+    "extinction_coefficient_ratio": 0,
+    "single_scatter_albedo": 0,
+    "asymmetry_parameter": 0,
+    "optical_depth": 0,
+    "effective_radius": 0,
+    "satellite_zenith": 0,
+    "solar_zenith": 0,
+    "relative_azimuth": 0,
+    "T_dv": 0,
+    "T_dd": 0,
+    "R_dv": 0,
+    "R_dd": 0,
+    "R_0v": 0,
+    "R_0d": 0,
+    "T_0d": 0,
+    "T_00": 0,
+    "E_md": 0
+   }
+  },
+  "shared_nodes": {
+   "R_0v": {
+    "shared_elements": 72,
+    "differing": 71,
+    "max_abs": 5.751848220825195e-06
+   },
+   "R_0d": {
+    "shared_elements": 24,
+    "differing": 0,
+    "max_abs": 0.0
+   },
+   "T_0d": {
+    "shared_elements": 24,
+    "differing": 0,
+    "max_abs": 0.0
+   },
+   "T_00": {
+    "shared_elements": 24,
+    "differing": 0,
+    "max_abs": 0.0
+   },
+   "R_dv": {
+    "shared_elements": 8,
+    "differing": 7,
+    "max_abs": 2.4437904357910156e-06
+   },
+   "T_dv": {
+    "shared_elements": 8,
+    "differing": 0,
+    "max_abs": 0.0
+   },
+   "R_dd": {
+    "shared_elements": 8,
+    "differing": 0,
+    "max_abs": 0.0
+   },
+   "T_dd": {
+    "shared_elements": 8,
+    "differing": 0,
+    "max_abs": 0.0
+   },
+   "E_md": {
+    "shared_elements": 4,
+    "differing": 4,
+    "max_abs": 2.086162567138672e-07
+   }
+  }
+ },
+ "pagg": {
+  "seconds_v23": 23.30836510658264,
+  "seconds_v22": 10.592634916305542,
+  "seconds_per_block_v23": 2.91354563832283,
+  "seconds_per_block_v22": 1.3240793645381927,
+  "dimensions_v23": {
+   "optical_depth": 2,
+   "effective_radius": 2,
+   "satellite_zenith": 21,
+   "solar_zenith": 21,
+   "relative_azimuth": 37,
+   "channels": 2,
+   "length": 39,
+   "st1": 19,
+   "st2": 5,
+   "st3": 5,
+   "st4": 7,
+   "solar_channels": 2,
+   "thermal_channels": 1,
+   "mixed_channels": 1
+  },
+  "metadata_v23": {
+   "lut_release": "V23",
+   "manifest": "releases/lut_v23.release sha256 ea17365bf7a5023fd216e401f3c5",
+   "nan_or_fill": {
+    "max_sat_zenith": 0,
+    "central_wavelength": 0,
+    "central_wavenumber": 0,
+    "oldf0": 0,
+    "oldf1": 0,
+    "F0": 0,
+    "snr": 0,
+    "oldnefr": 0,
+    "refbt": 0,
+    "nedt": 0,
+    "B1": 0,
+    "B2": 0,
+    "T1": 0,
+    "T2": 0,
+    "oldwvn": 0,
+    "oldb1": 0,
+    "oldb2": 0,
+    "oldt1": 0,
+    "oldt2": 0,
+    "oldnebt": 0,
+    "average_volume_per_particle": 0,
+    "extinction_coefficient": 0,
+    "extinction_coefficient_ratio": 0,
+    "single_scatter_albedo": 0,
+    "asymmetry_parameter": 0,
+    "optical_depth": 0,
+    "effective_radius": 0,
+    "satellite_zenith": 0,
+    "solar_zenith": 0,
+    "relative_azimuth": 0,
+    "T_dv": 0,
+    "T_dd": 0,
+    "R_dv": 0,
+    "R_dd": 0,
+    "R_0v": 0,
+    "R_0d": 0,
+    "T_0d": 0,
+    "T_00": 0,
+    "E_md": 0
+   }
+  },
+  "shared_nodes": {
+   "R_0v": {
+    "shared_elements": 72,
+    "differing": 69,
+    "max_abs": 7.420778274536133e-06
+   },
+   "R_0d": {
+    "shared_elements": 24,
+    "differing": 0,
+    "max_abs": 0.0
+   },
+   "T_0d": {
+    "shared_elements": 24,
+    "differing": 0,
+    "max_abs": 0.0
+   },
+   "T_00": {
+    "shared_elements": 24,
+    "differing": 0,
+    "max_abs": 0.0
+   },
+   "R_dv": {
+    "shared_elements": 8,
+    "differing": 7,
+    "max_abs": 4.887580871582031e-06
+   },
+   "T_dv": {
+    "shared_elements": 8,
+    "differing": 0,
+    "max_abs": 0.0
+   },
+   "R_dd": {
+    "shared_elements": 8,
+    "differing": 0,
+    "max_abs": 0.0
+   },
+   "T_dd": {
+    "shared_elements": 8,
+    "differing": 0,
+    "max_abs": 0.0
+   },
+   "E_md": {
+    "shared_elements": 4,
+    "differing": 1,
+    "max_abs": 2.9802322387695312e-08
+   }
+  }
+ }
+}

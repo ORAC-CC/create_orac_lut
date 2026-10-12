@@ -186,7 +186,8 @@ def test_run_file_with_a_foreign_lut_version_is_refused_before_any_calculation(t
     text = (ROOT / "runs" / "template.run").read_text()
     code = version.read_code_version(ROOT / "CODE_VERSION")
     foreign = 22 if not code.accepts(22) else 1
-    text = text.replace(f"version       = {code.lut_version}", f"version       = {foreign}")
+    import re
+    text = re.sub(r"(?m)^version\s*=.*$", f"version       = {foreign}", text)
     text = text.replace("out_path      = 'luts'", f"out_path      = '{tmp_path / 'out'}'")
     run = tmp_path / "foreign.run"
     run.write_text(text)

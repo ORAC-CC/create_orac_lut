@@ -328,3 +328,20 @@ double-precision campaign scripts and the superseded run files
 to single precision with the Intel kernel.  Paths under
 `validation/v21_v22_terra_modis/` cited in the sections above refer to that
 commit.  V23 is the next development version.
+
+## 10. V23: the V22 code on Grid B (2026-10-12)
+
+LUT release V23 (`releases/lut_v23.release`, `V23_RELEASE.md`) is a grid-only
+successor of the definitive V22: the manifest copies every code, library and
+run-time entry of `releases/lut_v22_single-r2.release`, so V23 runs exactly the
+`lut-code-v22.4` scientific code; the approved Grid B (commit `4bb0ac7`, the
+V23 value-and-Jacobian study) is installed under the active names
+`liquid-water-cloud.lut` and `ice-cloud.lut` (SourceVault `_v02`), and the
+manifest pins every input file.  `CODE_VERSION` keeps `code_release =
+lut-code-v22.4` and `scientific_config = v22-idl-single`; only `lut_version`
+became 23 (compatible: 22, the same code on the `_v01` coarse grids, and 21).
+This V23 supersedes the configuration of the 2026-09-29 `lut-code-v23`
+campaign (uncorrected V22 code with Grid B); the historical
+`runs/terra_modis_cloud_*_v23.run` content of that campaign is in Git
+(`f066fdd`).  A V23 release tag is created only after the complete products
+pass validation.

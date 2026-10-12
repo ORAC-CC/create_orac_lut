@@ -160,10 +160,10 @@ def test_run_file_version_is_read_with_the_driver_comment_rules(tmp_path):
 # ---------------------------------------------------------------------------
 
 def test_a_run_file_without_a_release_manifest_is_refused(tmp_path):
-    run_file = write_run_file(tmp_path / "v23.run", version=23, out_path=str(tmp_path / "out"))
+    run_file = write_run_file(tmp_path / "v98.run", version=98, out_path=str(tmp_path / "out"))
     result = run([str(LAUNCHER), str(run_file)], manifest=None)
     assert result.returncode == 2
-    assert "no release manifest defines LUT release V23" in result.stderr
+    assert "no release manifest defines LUT release V98" in result.stderr
     assert not (tmp_path / "out").exists()
 
 

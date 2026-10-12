@@ -181,8 +181,9 @@ def test_explicit_full_grid_is_resolved_without_running_it(capsys):
     ]) == 0
     captured = capsys.readouterr().out
     assert "liquid-water-cloud.lut  [full grid]" in captured
-    assert "grid points/channel  374,000" in captured
-    assert "estimated workload:  153,340 DISORT states" in captured
+    # liquid-water-cloud.lut holds Grid B since V23 (the V22 coarse grid is liquid-water-cloud_v01.lut)
+    assert "grid points/channel  9,398,592" in captured
+    assert "estimated workload:  538,560 DISORT states" in captured
 
 
 def test_cli_derives_formulation_and_legacy_output_name_like_makerunfile_v2(capsys):
@@ -269,7 +270,10 @@ def test_production_lut_definitions_follow_load_lutstr_grid_rules():
     assert aerosol.optical_depth.size == 20 and aerosol.spacings[0] == "uneven_logarithmic"
     cloud = read_lut_grid(INPUTS / "lut" / "liquid-water-cloud.lut")
     assert cloud.surface_pressure is None
-    assert cloud.optical_depth.size == 17 and cloud.effective_radius.tolist()[:2] == [1.0, 3.0]
+    # Grid B (V23); the V21/V22 coarse grid is preserved as liquid-water-cloud_v01.lut
+    assert cloud.optical_depth.size == 24 and cloud.effective_radius.tolist()[:3] == [1.0, 2.0, 3.0]
+    coarse = read_lut_grid(INPUTS / "lut" / "liquid-water-cloud_v01.lut")
+    assert coarse.optical_depth.size == 17 and coarse.effective_radius.tolist()[:2] == [1.0, 3.0]
 
 
 def test_cli_refuses_existing_output_before_scientific_execution(tmp_path):

@@ -68,7 +68,9 @@ earlier definition (`<name>_vNN.lut`).  Do not introduce alternative or
 Python-specific grid file names.  Historical and experimental definitions
 (aerosol_test, ash, biomass, sulphuric acid, earlier liquid and ice grids) are
 kept unchanged in `lut/archive/`; they are not approved production grids and
-are not resolved by bare name. Production-sized LUT generation must not be
+are not resolved by bare name.  Since V23 (2026-10-12) the active liquid-water
+and ice definitions hold Grid B (`_v02`); the V21/V22 coarse grids are the
+`_v01` copies (`V23_RELEASE.md`). Production-sized LUT generation must not be
 launched automatically during development; full production LUTs should use an
 execution method appropriate to their measured or estimated runtime.
 

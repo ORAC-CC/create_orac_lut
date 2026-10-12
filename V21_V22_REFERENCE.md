@@ -113,8 +113,8 @@ file list beside it).
 
 ## Next: V23
 
-V23 is the next development version.  It will introduce the revised LUT grid
-deliberately: the active definitions keep their names
-(`liquid-water-cloud.lut`, `ice-cloud.lut`), SourceVault preserves the V21/V22
-grids (`*_v01.lut`), and V21/V22 remain reproducible from their tags.  V23 is
-not started here.
+V23 (`V23_RELEASE.md`, 2026-10-12) is the unchanged `lut-code-v22.4` code with
+the approved Grid B installed in the active definitions
+(`liquid-water-cloud.lut`, `ice-cloud.lut`; SourceVault `_v02`).  The V21/V22
+grids remain in the `_v01` copies and at the release tags; to rerun V21 or V22
+after this change, check out `idl-lut-v21` or `lut-code-v22.4`.
