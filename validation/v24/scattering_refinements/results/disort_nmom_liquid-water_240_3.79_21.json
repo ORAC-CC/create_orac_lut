@@ -1,0 +1,79 @@
+{
+ "model": "liquid-water_240",
+ "wavelength": 3.79,
+ "effective_radius": 21.0,
+ "L": 255,
+ "degree_bound": 290,
+ "order": 384,
+ "ssa": 0.8734429478645325,
+ "nstr": 60,
+ "cases": {
+  "1.0": {
+   "seconds_per_call_at_L": 0.07965415964523952,
+   "production_max(1000,L)_bitwise_equal_L": true,
+   "seconds_per_call_production": 0.08309774473309517,
+   "zero_padded_L+512_bitwise_equal_L": true,
+   "historical_max(L,61)_bitwise_equal_production": true,
+   "seconds_per_call_1000": 0.08228956473370393,
+   "truncated_to_N": {
+    "200": {
+     "max_abs_R_difference": 1.4051503701539847e-05,
+     "max_abs_R_difference_sza30": 1.2755709383638347e-05,
+     "fluxes_bitwise_equal": true
+    }
+   },
+   "below_king_threshold_added_to_N": {
+    "291": {
+     "max_abs_R_difference": 0.0,
+     "max_abs_chi_added": 1.3472712528939113e-12
+    }
+   },
+   "max_R": 0.6589297165514618
+  },
+  "8.0": {
+   "seconds_per_call_at_L": 0.07634670535723369,
+   "production_max(1000,L)_bitwise_equal_L": true,
+   "seconds_per_call_production": 0.0844580562164386,
+   "zero_padded_L+512_bitwise_equal_L": true,
+   "historical_max(L,61)_bitwise_equal_production": true,
+   "seconds_per_call_1000": 0.08475268663217624,
+   "truncated_to_N": {
+    "200": {
+     "max_abs_R_difference": 1.436608960531105e-05,
+     "max_abs_R_difference_sza30": 1.436608960531105e-05,
+     "fluxes_bitwise_equal": true
+    }
+   },
+   "below_king_threshold_added_to_N": {
+    "291": {
+     "max_abs_R_difference": 0.0,
+     "max_abs_chi_added": 1.3472712528939113e-12
+    }
+   },
+   "max_R": 0.8336020116286414
+  },
+  "64.0": {
+   "seconds_per_call_at_L": 0.09014401243378718,
+   "production_max(1000,L)_bitwise_equal_L": true,
+   "seconds_per_call_production": 0.09735785688584049,
+   "zero_padded_L+512_bitwise_equal_L": true,
+   "historical_max(L,61)_bitwise_equal_production": true,
+   "seconds_per_call_1000": 0.10040031870206197,
+   "truncated_to_N": {
+    "200": {
+     "max_abs_R_difference": 1.4366089605283294e-05,
+     "max_abs_R_difference_sza30": 1.4366089605283294e-05,
+     "fluxes_bitwise_equal": true
+    }
+   },
+   "below_king_threshold_added_to_N": {
+    "291": {
+     "max_abs_R_difference": 0.0,
+     "max_abs_chi_added": 1.3472712528939113e-12
+    }
+   },
+   "max_R": 0.83505647708428
+  }
+ },
+ "exact_rows": 255
+}

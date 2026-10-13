@@ -260,8 +260,13 @@ DISORT is solved in single precision by the original V21 Intel DLM
 `create_orac_lut/disort2/src/DISORTtoIDL.so` in both generators (never
 rebuilt or replaced; NSTR 60, NMom 1000).  The Python generator calls it with
 IDL's array memory layout (`ORAC_LUT_DISORT_PRECISION=single` and
-`ORAC_LUT_DISORT_SP_KERNEL=intel_dlm` are the defaults) and reproduces the V21
-products bitwise; see `V21_V22_REFERENCE.md`.  The double-precision kernel
+`ORAC_LUT_DISORT_SP_KERNEL=intel_dlm` are the defaults); its V22 code
+reproduces the V21 products bitwise (`V21_V22_REFERENCE.md`).  Since LUT
+release V24 (`V24_RELEASE.md`, 2026-10-13) the working tree holds the V24
+refinements of the Mie-class scattering properties, and a Mie phase function
+passes NMOM = max(1000, L) moments (never truncated); V21-V23 are reproduced
+from their sealed releases, and the V21/V22 regression tests run the V22 code
+from `releases/lut_v23.release` (`tests/sealed_release.py`).  The double-precision kernel
 (`create_orac_lut/disort2_dp/`, `ORAC_LUT_DISORT_PRECISION=double`) is
 suspended experimental work, selectable only explicitly and never a reference.
 

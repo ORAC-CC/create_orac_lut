@@ -1,0 +1,146 @@
+# ORAC LUT release manifest
+#
+# LUT release V24: the V23 release with three refinements of the scattering
+# properties of Mie classes (V24_RELEASE.md).
+#   LUT release      V24
+#   scientific code  lut-code-v24.1 = lut-code-v22.4 (V22/V23) with the driver
+#                    create_orac_luts_v05, create_bwgp_v05,
+#                    generate_scattering_properties_v04 and the new
+#                    legendre_expansion_v01; every other entry is copied from
+#                    releases/lut_v23.release
+#   refinements      liquid-water size integration to 3.5 r_e on the legacy
+#                    radius lattice; nested radius refinement (liquid water,
+#                    ice spheres); adaptive Legendre expansion, DISORT
+#                    NMOM = max(1000, L); Baum and T-matrix classes as V23
+#   grid             Grid B, as V23 (liquid-water-cloud.lut, ice-cloud.lut:
+#                    SourceVault _v02), pinned below
+#   DISORT           the original single-precision Intel kernel DISORTtoIDL.so, NSTR 60
+# A product is made with
+#
+#    ORAC_LUT_RELEASE_MANIFEST=lut_v24.release ORAC_LUT_DISORT_PRECISION=single \
+#    ORAC_LUT_DISORT_SP_KERNEL=intel_dlm python create_orac_luts_release_v04.py runs/<product>_v24.run
+#
+# which refuses to run unless every file below has exactly this content.  The
+# git-ignored Baum table and the external run time are listed in
+# releases/lut_v24.dependencies once the products exist.  This file is sealed:
+# once a product has been made from it, it is never edited.
+#
+# Columns: role  logical-name  file-version  sha256  path
+
+manifest_schema = oraclut-release-manifest-1
+lut_release = 24
+disort_precision = single
+disort_sp_kernel = intel_dlm
+scientific_code = lut-code-v24.1
+scattering = v24-scattering-refinements
+grid = Grid-B
+library_checkout = /home/g/grainger/project-oraclut
+created = 2026-10-13
+git_head_at_creation = 209e145046fa9354333c3f49aaec47bc1367e312
+
+driver   create_orac_luts                                     v05     100f704ed12b65ab461186df0f68e08c207873470a333d0e67f4ae4bc6b82e72  create_orac_luts_v05.py
+package  oraclut                                              v01     664645594755345f6a5fe76d52d948396ec5ae4c9050dcb2d5488a64b3713460  src/oraclut/__init___v01.py
+module   oraclut.idl_math                                     v02     e889c51bf79b89a0779a1e328e967ff24ba71520367826be91cf5b96e9ad966f  src/oraclut/idl_math_v02.py
+package  oraclut.idl_mirror                                   v02     97078eebd53c2df8627d01e74ec84338eeae6be5ae7cde7bbf45913bc67a415b  src/oraclut/idl_mirror/__init___v02.py
+module   oraclut.idl_mirror.baum                              v03     53dc80ff6d9c56e2eab4d784b9b01ffdcf7ae1f7d25c51bafbd4cd406b16237b  src/oraclut/idl_mirror/baum_v03.py
+module   oraclut.idl_mirror.call_disort                       v02     7f2613c4ba028674bf70aa2c9c458b6909755c86fc839672e76895c2c2318aee  src/oraclut/idl_mirror/call_disort_v02.py
+module   oraclut.idl_mirror.create_bwgp                       v05     43202597f9ab6186ef3993f30a6b23760abc7850462618f505e8f7a07ec1d0e4  src/oraclut/idl_mirror/create_bwgp_v05.py
+module   oraclut.idl_mirror.dubovik                           v02     60dd7056406b650a9ecc09fb5e89dd3ab462d2d21d4efd0e9bbfa734ed3d1ec8  src/oraclut/idl_mirror/dubovik_v02.py
+module   oraclut.idl_mirror.generate_scattering_properties    v04     38f27029473f3dcdcdf0509416d8063d8c4ce210a17380c8240ee8315d286564  src/oraclut/idl_mirror/generate_scattering_properties_v04.py
+module   oraclut.idl_mirror.legendre_expansion                v01     5249cf83eb3d11543b60d46a1d8891b0090df120fc0e63fbafe81a2c468d56f1  src/oraclut/idl_mirror/legendre_expansion_v01.py
+module   oraclut.idl_mirror.interpol                          v02     e08952886d097f0d567b46a150b2ad482d3c2ac4714df4f7b033fb13c18644d4  src/oraclut/idl_mirror/interpol_v02.py
+module   oraclut.idl_mirror.load_atmstr                       v01     e2dc0e2c38deea5c8101dd9f44289ce2d79b2f3faab7c3fef9aefaeed714ee45  src/oraclut/idl_mirror/load_atmstr_v01.py
+module   oraclut.idl_mirror.load_gasstr                       v01     2c59ca827b4506d052592ab070084e426edce08000171c48dc9fb2da8750174f  src/oraclut/idl_mirror/load_gasstr_v01.py
+module   oraclut.idl_mirror.load_inststr                      v01     02246e6acd8322a0ea8091c0b03fa4b9fc088504fb34b69414c4b3e45a21125f  src/oraclut/idl_mirror/load_inststr_v01.py
+module   oraclut.idl_mirror.load_lutstr                       v01     b32b91a0f9e47ee057e6b6a48ef709012c6802d74835bee92a82203102ba39d7  src/oraclut/idl_mirror/load_lutstr_v01.py
+module   oraclut.idl_mirror.load_mmdat                        v02     ddf1f2d7186764713810a46c97043d7492f513e5992c3c8f832861a21132710a  src/oraclut/idl_mirror/load_mmdat_v02.py
+module   oraclut.idl_mirror.load_srfstrarr                    v03     6f06cfc5189e337d1e495ece382b51edec9989fc54c9601339d1f52488155d45  src/oraclut/idl_mirror/load_srfstrarr_v03.py
+module   oraclut.idl_mirror.segment                           v01     9db86f3e07779f75618947e61c69fbd913815e309f219cfbc31a11dfb9636001  src/oraclut/idl_mirror/segment_v01.py
+module   oraclut.idl_mirror.setup_disort                      v01     a3d319ff90bc2d57e11033c85c025964ad1d3790605c67daecfc5e367ae36e49  src/oraclut/idl_mirror/setup_disort_v01.py
+module   oraclut.idl_mirror.total                             v01     1e6f30cbfefbeae4158cb9c5a3ec252e72be08e571632a9462b1611935c822ac  src/oraclut/idl_mirror/total_v01.py
+module   oraclut.idl_mirror.write_v2_lut                      v03     bf9eab695e932a09f38480e9f7023d9fd5edf32fc8b1b69e28fe12f0b1761e91  src/oraclut/idl_mirror/write_v2_lut_v03.py
+module   oraclut.idl_total                                    v01     3380dcf7743a1fb35ce04ba9bf4b6fb029efe2c1403c20751fe867fbcd503a46  src/oraclut/idl_total_v01.py
+package  oraclut.io                                           v01     adee29f087d0b56c286cc7e4efe816922e3b7a455e42d6799317af61b7296d19  src/oraclut/io/__init___v01.py
+module   oraclut.io.lut                                       v01     f59f303de93e212780284c1b1d31919093779498459ae17cf043684ddba8818c  src/oraclut/io/lut_v01.py
+module   oraclut.io.netcdf_c                                  v01     9cb57aa9336e28da3381c87d20a1d5d87411f97e92afb51fde49bc47f2e98116  src/oraclut/io/netcdf_c_v01.py
+module   oraclut.io.string_attributes                         v01     f4ad623e9f0e03fb9d1cfd85e1362fe8f748bfca6a2ffc0b488e2e521d05b6ef  src/oraclut/io/string_attributes_v01.py
+module   oraclut.io.v2                                        v01     3f982ff3c8e43655d573cf547d94e2dd7a6d34aa52032f5c2f38459563aa1110  src/oraclut/io/v2_v01.py
+package  oraclut.optics                                       v01     43fdfa4b5ef46e34699b75dbdbd93eda3bf74079863d492c12da05132c78bdcb  src/oraclut/optics/__init___v01.py
+module   oraclut.optics.legacy                                v02     37a70a5bb4412b658f1643f803e5c482f4ea97b5d42dda3259f18a58132fed84  src/oraclut/optics/legacy_v02.py
+module   oraclut.optics.legacy_mie                            v01     18f258c20de259f964b5b9e625e3f7daa3d2a5556fd204f88683aab736ab9612  src/oraclut/optics/legacy_mie_v01.py
+module   oraclut.provenance                                   v01     2bf7d213fb1e8c4d9db83a401c1f0a0677938b1e6bf394cf75dba74ae1b2a297  src/oraclut/provenance_v01.py
+package  oraclut.radiative_transfer                           v01     ced577f8fab65101d2d9e2025220d4353c0f3d5f36c4efc84dc2ba78cce34ab5  src/oraclut/radiative_transfer/__init___v01.py
+module   oraclut.radiative_transfer.legacy_disort             v04     7123aee39295abb4842d7a701adb9487f698a382fc92b12c839be7cce3f3fc09  src/oraclut/radiative_transfer/legacy_disort_v04.py
+module   oraclut.version                                      v01     dc192004ab12c327f30288ccb423768557aa6d887e27afbf40dfc3f25b68ff4d  src/oraclut/version_v01.py
+adapter  mie-adapter                                          pinned  4454fd031eb20efd25f0418aec458fc12ea9ed32ccba1006cc181605e24aa104  src/oraclut/optics/legacy_mie.c
+adapter  disort-adapter                                       pinned  e85a9741ce6bfd5734b5688e57dba63f30bcb6a63a073d029feba8118ddb197d  src/oraclut/radiative_transfer/legacy_disort.c
+kernel   mie-mieint.f                                         pinned  d704cca0c51ee7b2be667f58aec1f0033f914ec5c3a438970d1b49105fb3458c  mie/dlm-code/mieint.f
+kernel   disort-DISORTfunctions.f                             pinned  3f45489e9fc580a8aec6c9604ac6ffdc9e8cad73830a16f185038fe07db55f72  create_orac_lut/disort2/src/DISORTfunctions.f
+kernel   disort-BDREF.f                                       pinned  31e1c747aefc36e4fdd0ef3f87677f0dfc5aaca92d6dbba7e667d1e51f3b92ef  create_orac_lut/disort2/src/BDREF.f
+kernel   disort-PRTFIN.f                                      pinned  d3846c637cb4fbbbf96af3048e94209bfdc1a33e454540f70429c768b8520770  create_orac_lut/disort2/src/PRTFIN.f
+kernel   disort-ambrals-fortran.c                             pinned  4ecf4c8382ac201c6bbc2b33eb56c247959c85ea861e94192af6a1e3bfff0dc7  create_orac_lut/disort2/src/ambrals-fortran.c
+kernel   disort-ambralsfor.c                                  pinned  067cecd0647ae0c0620cbbcc1e61890a2a661edb51ad0d8c48ba75e3fa2196e2  create_orac_lut/disort2/src/ambralsfor.c
+kernel   disort-ambralsfor.h                                  pinned  f562ddb308a82c748f497d81f31c10696143b5a18deb91cbf0fbd22fad0a0e92  create_orac_lut/disort2/src/ambralsfor.h
+kernel   disort-ErrPack.f                                     pinned  d1b90b20821584ebb712888458f2713f73664db0626545d3ef688468e8c5baaf  create_orac_lut/disort2/src/disort/ErrPack.f
+kernel   disort-LINPAK.f                                      pinned  8f0ec48b1d96ea1c6b08fbff42529507864ab00b50d65974e4b00efbf3fe96a0  create_orac_lut/disort2/src/disort/LINPAK.f
+kernel   disort-RDI1MACH.f                                    pinned  c59dadbf0ac9ee25e56e7551d042017cc5cc179b102f848eb08f643ab6ea3738  create_orac_lut/disort2/src/disort/RDI1MACH.f
+kernel   disort-DISORTwrapper.c                               pinned  c20f5d8e8c0a8a5cf9fec6d0ba026d3c604e02aab321c3709db8d4e0a2c00c08  create_orac_lut/disort2/src/DISORTwrapper.c
+kernel   disort-DISORTtoIDL.c                                 pinned  0e8bb0c9d57e556f2dae7dc536066e597a36182f038be1e94dbad8edf6abfb81  create_orac_lut/disort2/src/DISORTtoIDL.c
+kernel   disort-DISORTtoIDL.dlm                               pinned  3194ac2fb189c7a1c0c6edd956cdc7b22642ef270220002f0710df133543ac03  create_orac_lut/disort2/src/DISORTtoIDL.dlm
+library  mie-library                                          pinned  3f79512e8ef476399fc0a71b64ababa4b1638cc95b26dba878dda8c5d91185c0  build/oraclut/liboraclut_mie_gfortran.so
+library  disort-intel-library                                 pinned  59307e42604ca0f77dc0b7c47f2092dec83cbacc1f6241c6a4a4455e3e1e37ad  create_orac_lut/disort2/src/DISORTtoIDL.so
+library  intel-runtime-libintlc.so.5                          pinned  b79687bda5340d1c96be1d6b69ac30a6b1d093a8da7ca411fd56ea139f2b48af  /network/software/linux-x86_64/compilers/intel/2022/compiler/2022.1.0/linux/compiler/lib/intel64_lin/libintlc.so.5
+library  intel-runtime-libirc.so                              pinned  110ada6d2b84028b0a7e4e1aa43bf294f9698a5e1c4073bb76b8debf2e9de2ad  /network/software/linux-x86_64/compilers/intel/2022/compiler/2022.1.0/linux/compiler/lib/intel64_lin/libirc.so
+library  intel-runtime-libsvml.so                             pinned  58470d009cece805ae8e3f0276cf34825839f3c3f6fde94ec4de45e5680fff0c  /network/software/linux-x86_64/compilers/intel/2022/compiler/2022.1.0/linux/compiler/lib/intel64_lin/libsvml.so
+library  intel-runtime-libimf.so                              pinned  3adedea9be61807b6071c0283fb5e969e116895ccdf0f85fa3eb31091b351056  /network/software/linux-x86_64/compilers/intel/2022/compiler/2022.1.0/linux/compiler/lib/intel64_lin/libimf.so
+library  intel-runtime-libifcore.so.5                         pinned  212c117b686535b7917d0a052eaa4aa219606f264315fcc7f190f787f5800c50  /network/software/linux-x86_64/compilers/intel/2022/compiler/2022.1.0/linux/compiler/lib/intel64_lin/libifcore.so.5
+library  intel-runtime-libifport.so.5                         pinned  8dc12854550a9cec285de510231a20fd056552de4b008b24b5c5add271e64e82  /network/software/linux-x86_64/compilers/intel/2022/compiler/2022.1.0/linux/compiler/lib/intel64_lin/libifport.so.5
+library  intel-runtime-libifcoremt.so.5                       pinned  39130b583efd3d3768c24aae43d3841f00f827feaf2fa0da77973bcd07387685  /network/software/linux-x86_64/compilers/intel/2022/compiler/2022.1.0/linux/compiler/lib/intel64_lin/libifcoremt.so.5
+kernel   input-atm/mls.atm                                    pinned  45244e3c78ee3fb05c841b1a9882e0551710f9450a4e4bfbf536e6bb1226dc5a  create_orac_lut/input_files/atm/mls.atm
+kernel   input-bbconstants.pro                                pinned  b1142f57d0ae86496198ec0d29e1a73e7d56ac89aceb4d5d0c275b1cbcf45165  create_orac_lut/input_files/bbconstants.pro
+kernel   input-inst/terra_modis_v1.inst                       pinned  8b1f1adcac24e8b066a5735edbffedd2f942157196ad6dc09c5ef9c5e4693d05  create_orac_lut/input_files/inst/terra_modis_v1.inst
+kernel   input-lut/ice-cloud.lut                              pinned  022aba67de745e3716b3e53b870462f6b209eda8037935c8a66cfd4a70cf7c84  create_orac_lut/input_files/lut/ice-cloud.lut
+kernel   input-lut/liquid-water-cloud.lut                     pinned  b640697cf268936666cfd92451b6daa2f57f63f021e8aef31804b3774d626194  create_orac_lut/input_files/lut/liquid-water-cloud.lut
+kernel   input-microphysics/liquid-water_240.mm               pinned  8145e8c5be0cb565a727eecb827d5def620205dcf9f39b15e722f1fe0269cbf2  create_orac_lut/input_files/microphysics/liquid-water_240.mm
+kernel   input-microphysics/liquid-water_old.mm               pinned  0102aec5918ba60ecd44ccb06f07ea7cace849c420ec62d5397509a10f46ffaf  create_orac_lut/input_files/microphysics/liquid-water_old.mm
+kernel   input-microphysics/water-ice_agg.mm                  pinned  9cbbcb55743636f89d672198bb84d13b8e0998699db70bba73009e9eb78e5f24  create_orac_lut/input_files/microphysics/water-ice_agg.mm
+kernel   input-ri/H2O_240K_Rowe_2020.ri                       pinned  1bbd78290e718b8f9306c8912c907c4d79474913aba7bcf38f4cb72ad93bd7ed  create_orac_lut/input_files/ri/H2O_240K_Rowe_2020.ri
+kernel   input-ri/oldwater.ri                                 pinned  28a78584f5a0c711ecc9009889e2e477e7e15deb08a021523d30f21b03191a48  create_orac_lut/input_files/ri/oldwater.ri
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch01.txt    pinned  31bcac13fb1c24f88995da5368c0f87ac8d26f47ab033076744e44e05b699ade  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch01.txt
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch02.txt    pinned  a36d56a891130c1fa04709b09985b5a8b2306d5c20cc9013ad3183898bf68660  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch02.txt
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch03.txt    pinned  4377d63209c77f8b0ac522b8369ec2d35ab42ac56f46898aaa1f8da94a41efcf  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch03.txt
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch04.txt    pinned  99e75b0417cd009038df18ea6f385b52f0bb2729b078f603f49afefc72723fea  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch04.txt
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch05.txt    pinned  e4530a198cf588272a8e34c72b35aaffa58984ecc5e06a19e1101eb273fcfc72  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch05.txt
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch06.txt    pinned  010c4ac4462a1c98ca254d601fed0f9bac86ea34971170780a60a9b8165d0af0  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch06.txt
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch07.txt    pinned  b52b54f4a71414bdc97f3cfeef5d760194546cd5c7c5c47163783be353ee3c08  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch07.txt
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch08.txt    pinned  67af027f2ab8ad0b1b61fa7743b2f3e625928f062511bb3bb0aa0655d6e4712c  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch08.txt
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch09.txt    pinned  a43525411b5fc408cc23a6ae75c0b4a4ce8ad64c7aa7d4704432791643bd669b  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch09.txt
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch10.txt    pinned  7aa23280a3372ad38ea86aa6f137af950f7eb65bf520c9d348dfcbafce78a771  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch10.txt
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch11.txt    pinned  c069c0bd4f6414f7e860aa850952785d754ec44a78231bc52886e66c628f7605  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch11.txt
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch12.txt    pinned  5392b0be30b74da23bae97bca34612be3c75636b5b8a4cb47b02ea67cc3d0598  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch12.txt
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch13.txt    pinned  57f8245a18e77a3f958f038ff62cc782e97933ddb5a65965f3c385e4d70a64eb  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch13.txt
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch14.txt    pinned  ee67ba8a7a545dd3fab3c73d285f0c91999014491015d51373430692a3821bd6  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch14.txt
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch15.txt    pinned  140f7165cfbcb2827a34fa6cbed9adb7df1d4b029b8286acd77b62715dc6fe79  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch15.txt
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch16.txt    pinned  9006cbe69a30f4d3f37fc77be48943aa97bfc91c8be33acf32764fdf3748e566  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch16.txt
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch17.txt    pinned  ffac28daeebc92f2639bf6763c68f5ca3e2e7c7b9390a39a5e4608de3629a725  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch17.txt
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch18.txt    pinned  a1d8b79122edd4bb4f6ee45fb75e4f06fb459ced6cac875cd84f1215bcb95778  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch18.txt
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch19.txt    pinned  1ae03bc8876fea0b9c06f8a5dc0a57b94abdf058050ea00a832b012f0eb4a32c  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch19.txt
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch20.txt    pinned  17cd533721ff36c38276fc3aa7c45d152b7a75f0671828889cd34451a4bf2edf  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch20.txt
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch21.txt    pinned  eda37cafc29981693f78dd07a8ab1e8d2c6c23f6c83fa978b6430af6b74f4b8d  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch21.txt
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch22.txt    pinned  7558f03c48bc92b41ff9abe6f34a1a4470c18ac5289beda7c71dab223b355f5d  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch22.txt
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch23.txt    pinned  6ceb6c273da43cefee69ee2238c251d783dfdceed7c5a33137a605c9a628bc74  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch23.txt
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch24.txt    pinned  5cacbda193ca1a064fb5ece215fd07d326eeeea7a73b7d7ecab7da6339311f13  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch24.txt
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch25.txt    pinned  91c48bdc7c753ae910b3f6ca6eaff52fc6786a683ace2aee5e59094dbf037d7f  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch25.txt
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch26.txt    pinned  97a803391ab419fc6a74aec9045f306d97cf90ae01ac9c6ef5d523eb9a1ad226  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch26.txt
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch27.txt    pinned  753f028e635870c44672301773a71024590e400f42f8b4df110ff790e4321d70  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch27.txt
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch28.txt    pinned  19b225d31810362ff690b57829d7037ce8785119c44ac6e9854e9c2521745aa2  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch28.txt
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch29.txt    pinned  a95326a7d15d285688aae02385a778591ceea6d3e7559c4ac841c439d7b644c9  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch29.txt
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch30.txt    pinned  97a33a4e4bd109f9e0cca61235063ccaa1a67d43943262092a398ef0bc4d888e  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch30.txt
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch31.txt    pinned  8b24338e210da3da64aed6106a5d476a9410679899a7fc5ad6b20c67af952e27  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch31.txt
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch32.txt    pinned  0fd53fc4c6c81691609bf54a95f08a7c1dd0955a3d26e066e6979afb9e4d8174  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch32.txt
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch33.txt    pinned  42d1f25283130c1d419ddcd28fcbdde955e414b25d808396b888cf93b12ff8ba  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch33.txt
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch34.txt    pinned  583d09b575eed771a89c86968d6d5522a08594a436d9b3a04735311301a02d48  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch34.txt
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch35.txt    pinned  de40af3074bc93559eadfebe8130ab228b2a068b1d1eb9977f22f38455f8e96e  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch35.txt
+kernel   input-srf/rtcoef_eos_1_modis-shifted_srf_ch36.txt    pinned  fa9223f0be0f7b0c73eab3c6add145bf6f87ac2c577f9246d20e1a7ffc29621f  create_orac_lut/input_files/srf/rtcoef_eos_1_modis-shifted_srf_ch36.txt
+kernel   input-sun/Gueymard2018.sssi                          pinned  db1282aa8b0470bda124fd80ad6df230dd5dd63babdaca88fc96f636ea77f21b  create_orac_lut/input_files/sun/Gueymard2018.sssi
+config   CODE_VERSION                                         pinned  9a95bb714a323fb758c499a5aa3fddc467926e5b762c205220901032cd24c15a  CODE_VERSION

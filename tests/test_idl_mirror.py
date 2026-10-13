@@ -40,18 +40,40 @@ def _accepted_run_files():
    example runs/*_v24.run, runs/*_v25.run) stay in the repository as the
    record of those campaigns; the generator refuses them by version and they
    may use settings this release does not read, so they are not exercised here.
+
+   Since LUT release V24 (lut-code-v24.1) the version number 24 is shared with
+   the historical lut-code-v24 campaign of 2026-10-03: its run files that are
+   unchanged since that campaign's commit (HISTORICAL_CAMPAIGNS) are its
+   record, not run files of this release (they omit nmom, which this release
+   requires), so they are not exercised either.
    """
 
    import re
+   import subprocess
    from oraclut.version import read_code_version
 
    code = read_code_version(ROOT / "CODE_VERSION")
+   historical = {}
+   for lut_version, commit in HISTORICAL_CAMPAIGNS.items():
+      listing = subprocess.run(["git", "-C", str(ROOT), "ls-tree", commit, "runs/"], capture_output=True, text=True, check=True)
+      historical[lut_version] = {line.split("\t")[1]: line.split()[2] for line in listing.stdout.splitlines()}
    accepted = []
    for path in sorted(RUNS.glob("*.run")):
       match = re.search(r"^\s*version\s*=\s*(\d+)", path.read_text(), re.MULTILINE)
       if match and code.accepts(int(match.group(1))):
+         blobs = historical.get(int(match.group(1)), {})
+         relative = str(path.relative_to(ROOT))
+         if relative in blobs:
+            blob = subprocess.run(["git", "-C", str(ROOT), "hash-object", relative], capture_output=True, text=True, check=True)
+            if blob.stdout.strip() == blobs[relative]:
+               continue                                  # the historical campaign's own run file
          accepted.append(path)
    return accepted
+
+
+# Historical production campaigns whose LUT version a later release reuses:
+# version -> the commit holding that campaign's run files (LUT_CODE_VERSIONS.md).
+HISTORICAL_CAMPAIGNS = {24: "51717b8"}
 
 
 CONCRETE_RUNS = _accepted_run_files()
@@ -460,14 +482,29 @@ def test_dubovik_branch_reports_a_missing_database(tmp_path):
                   tmatrix_path=tmp_path, eps=[1.0], neps=[1.0])
 
 
-def test_generate_scattering_properties_matches_the_validated_cloud_optics():
-   inststr = load_inststr(INST, requestedchannelid=[1, 9])
-   lutstr = load_lutstr(INPUTS / "lut" / "liquid-water-cloud_test.lut", inststr.max_sat_zenith)
-   srfstrarr, nwvl_max = load_srfstrarr(inststr, INPUTS / "sun" / "Gueymard2018.sssi", 1, INPUTS)
-   mmstr = load_mmdat(INPUTS / "microphysics" / "liquid-water_stg.mm", INPUTS)
-   nmom = 120
-   (nmom, bext550, w550, g550, phs550, amom550, bextrat, bext, w, g, vavg, phs, amom) = \
-      generate_scattering_properties(srfstrarr, nwvl_max, inststr, mmstr, lutstr, nmom)
+def test_generate_scattering_properties_matches_the_validated_cloud_optics(tmp_path):
+   # The IDL port of generate_scattering_properties (the V22 code, lut-code-v22.4)
+   # is checked from its sealed release: the working tree holds the V24 Mie
+   # numerics (tests/test_v24_scattering_refinements.py).
+   from sealed_release import run_with_release
+   saved = tmp_path / "optics.npz"
+   run_with_release(f"""
+import numpy as np
+from pathlib import Path
+from oraclut.idl_mirror import generate_scattering_properties, load_inststr, load_lutstr, load_mmdat, load_srfstrarr
+INPUTS = Path({str(INPUTS)!r})
+inststr = load_inststr(INPUTS / "inst" / "meteosat-10_seviri_v1.inst", requestedchannelid=[1, 9])
+lutstr = load_lutstr(INPUTS / "lut" / "liquid-water-cloud_test.lut", inststr.max_sat_zenith)
+srfstrarr, nwvl_max = load_srfstrarr(inststr, INPUTS / "sun" / "Gueymard2018.sssi", 1, INPUTS)
+mmstr = load_mmdat(INPUTS / "microphysics" / "liquid-water_stg.mm", INPUTS)
+names = ("nmom", "bext550", "w550", "g550", "phs550", "amom550", "bextrat", "bext", "w", "g", "vavg", "phs", "amom")
+np.savez({str(saved)!r}, **dict(zip(names, generate_scattering_properties(srfstrarr, nwvl_max, inststr, mmstr, lutstr, 120))))
+""")
+   lutstr = load_lutstr(INPUTS / "lut" / "liquid-water-cloud_test.lut", load_inststr(INST, requestedchannelid=[1, 9]).max_sat_zenith)
+   srfstrarr, nwvl_max = load_srfstrarr(load_inststr(INST, requestedchannelid=[1, 9]), INPUTS / "sun" / "Gueymard2018.sssi", 1, INPUTS)
+   with np.load(saved) as result:
+      nmom = int(result["nmom"])
+      bext550, bextrat, bext, w, g, vavg, phs, amom = (result[k] for k in ("bext550", "bextrat", "bext", "w", "g", "vavg", "phs", "amom"))
    # the validated optics, computed the old way
    wavelengths = np.asarray([0.55] + [float(s.wvl_centre) for s in srfstrarr])
    ri_wavelength, ri_real, ri_imaginary = read_refractive_index(INPUTS / "ri" / "H2O_Segelstein_1981.ri")
@@ -548,10 +585,14 @@ def _assert_products_identical(new_path, validated_path):
 @pytest.mark.slow
 @pytest.mark.skipif(not VALIDATED_CLOUD_CH1.is_file(), reason="validated cloud product missing")
 def test_create_orac_cloud_lut_reproduces_the_validated_compact_product(tmp_path):
-   status = create_orac_luts.create_orac_cloud_lut(
-      INPUTS, "meteosat-10_seviri_v1.inst", "liquid-water_stg.mm", "liquid-water-cloud_test.lut", tmp_path, 2,
-      channelid=[1], srf_quad=1, version=21, nstreams=60, nmom=1000)
-   assert status == 0
+   # V22 scientific code from its sealed release (a Mie class; see the optics test above)
+   from sealed_release import run_with_release
+   run_with_release(f"""
+status = create_orac_luts.create_orac_cloud_lut(
+   {str(INPUTS)!r}, "meteosat-10_seviri_v1.inst", "liquid-water_stg.mm", "liquid-water-cloud_test.lut", {str(tmp_path)!r}, 2,
+   channelid=[1], srf_quad=1, version=21, nstreams=60, nmom=1000)
+assert status == 0
+""")
    _assert_products_identical(tmp_path / "meteosat-10_seviri_m_liquid-water_a01_pstg_v21.nc", VALIDATED_CLOUD_CH1)
    assert not (tmp_path / "scatfile.npz").exists()
    assert not (tmp_path / "timestamp.txt").exists()
@@ -560,8 +601,13 @@ def test_create_orac_cloud_lut_reproduces_the_validated_compact_product(tmp_path
 @pytest.mark.slow
 @pytest.mark.skipif(not VALIDATED_AEROSOL_CH1.is_file(), reason="validated aerosol product missing")
 def test_create_orac_aerosol_lut_reproduces_the_validated_compact_product(tmp_path):
-   status = create_orac_luts.create_orac_aerosol_lut(
-      INPUTS, "meteosat-10_seviri_v1.inst", "aerosol_a79.mm", "aerosol_test.lut", tmp_path, 2,
-      channelid=[1], gas=1, srf_quad=1, version=21, nstreams=60, nmom=1000)
-   assert status == 0
+   # V22 scientific code from its sealed release (log-normal Mie components use
+   # the V24 adaptive Legendre expansion in the working tree)
+   from sealed_release import run_with_release
+   run_with_release(f"""
+status = create_orac_luts.create_orac_aerosol_lut(
+   {str(INPUTS)!r}, "meteosat-10_seviri_v1.inst", "aerosol_a79.mm", "aerosol_test.lut", {str(tmp_path)!r}, 2,
+   channelid=[1], gas=1, srf_quad=1, version=21, nstreams=60, nmom=1000)
+assert status == 0
+""")
    _assert_products_identical(tmp_path / "meteosat-10_seviri_m_aerosol_a12_pa79_v21.nc", VALIDATED_AEROSOL_CH1)

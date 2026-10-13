@@ -1,0 +1,13 @@
+# Compact ice grid for the V23/V24 comparison (Baum agg: V24 must equal V23)
+# (validation/v24/scattering_refinements/compact_lut.py).  Not a production
+# grid: every value is a node of the approved Grid B ice-cloud.lut.
+4 uneven_logarithmic # optical depth
+0.125 1.0 8.0 64.0
+3 uneven_linear # physical effective radius, microns
+5.0 41.0 93.0
+3 uneven_linear # solar zenith, degrees
+0.0 30.0 60.0
+3 uneven_linear # satellite zenith, degrees
+0.0 30.0 60.0
+7 linear # relative azimuth, degrees, 0-180
+0 180

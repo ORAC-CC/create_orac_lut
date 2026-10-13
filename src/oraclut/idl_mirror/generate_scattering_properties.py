@@ -20,15 +20,97 @@ Sequence, as in the IDL:
 
 Array index order follows the IDL: bext[m, l, r] is (SRF point, channel,
 effective radius) and amom[p, m, l, r] adds the moment index first.
+
+Deliberate differences from the IDL (LUT release V24), for classes whose
+components are all Mie size distributions (uses_adaptive_legendre); Baum and
+T-matrix classes are calculated exactly as in the IDL:
+
+1. Liquid-water modified-gamma integrations end at the first node of the
+   legacy radius lattice at or beyond 3.5 x effective radius instead of at
+   100 um (radius_upper_factor; historical commit c6ad545).
+2. Liquid-water and ice-sphere modified-gamma integrations divide every
+   interval of that lattice into 2^k equal parts, for a size-parameter step of
+   at most LIQUID_REFINED_XRES or ICE_SPHERE_REFINED_XRES (refined_xres;
+   historical commit 96bebbe).
+3. Steps 3 and 5 no longer use the fixed NMom for the quadrature order and the
+   number of Legendre moments: every averaged phase function (one per
+   wavelength and effective radius) is sampled on its own Gauss-Legendre
+   order and keeps the number of coefficients L that King's criterion selects
+   (legendre_expansion.py; historical commit dbcc42c).  The number of moments
+   passed to DISORT, max(nmom, L), is set by the driver.
 """
 
 import math
 
 import numpy as np
 
-from .create_bwgp import create_bwgp, legpexp, quadrature
+from .create_bwgp import create_bwgp, legpexp, mie_integration_limits, quadrature, size_integration_limits
 from .baum import BaumTable
+from .legendre_expansion import (
+   CHECK_THETA, KING_THRESHOLD, MAX_QUADRATURE_ATTEMPTS, MIE_MAX_ANGLES, QUADRATURE_NOISE_LIMIT,
+   RECONSTRUCTION_TOLERANCE, degree_bound, expand, gauss_legendre, legendre_coefficients, quadrature_order,
+)
 from .total import idl_total
+
+# Upper limit of the liquid-water modified-gamma size integration, as a
+# multiple of effective radius, and the largest effective variance for which
+# it was validated (historical commit c6ad545;
+# validation/REPORT_lut_numerics_development.md section 5).  The fraction of
+# the distribution beyond k re depends only on the effective variance and the
+# weighting: at ve = 0.1111111 and k = 3.5 it is 6.6e-7 area-weighted and
+# 6.5e-5 r^6-weighted (scattering by particles small compared with the
+# wavelength, the worst case).
+LIQUID_UPPER_RADIUS_FACTOR = 3.5
+LIQUID_MAX_EFFECTIVE_VARIANCE = 0.1111111
+
+# Largest size-parameter step of the refined radius integration, per class
+# (historical commit 96bebbe; validation/REPORT_lut_numerics_development.md
+# section 14): the coarsest nested refinement of the legacy 0.4 step for which
+# compact MODIS / dual-view SLSTR LUTs are within 1.5e-3 in R_0v at every node
+# (glory included) and 2e-4 in extinction and g of a 64x finer grid.  Ice
+# spheres have weaker narrow resonances than liquid water and meet it at twice
+# the step.
+LIQUID_REFINED_XRES = 0.025
+ICE_SPHERE_REFINED_XRES = 0.05
+
+
+def radius_upper_factor(mmstr, c):
+   """create_bwgp radius_upper_factor of component c (None = the IDL limits 0.001-100 um)."""
+
+   if mmstr.substance.lower() != "liquid-water" or mmstr.distname[c] != "modified_gamma":
+      return None
+   if mmstr.s[c] > LIQUID_MAX_EFFECTIVE_VARIANCE * (1.0 + 1e-6):
+      raise ValueError(f"{mmstr.compname[c]}: the {LIQUID_UPPER_RADIUS_FACTOR:g} x effective-radius upper limit is "
+                       f"validated for effective variance <= {LIQUID_MAX_EFFECTIVE_VARIANCE}, not {mmstr.s[c]}")
+   return LIQUID_UPPER_RADIUS_FACTOR
+
+
+def refined_xres(mmstr, c):
+   """create_bwgp refined_xres of component c (None = the IDL radius grid).
+
+   Liquid-water and water-ice (sphere) modified-gamma Mie components only.
+   """
+
+   if mmstr.distname[c] != "modified_gamma" or str(mmstr.comp[c].code).lower() != "mie":
+      return None
+   return {"liquid-water": LIQUID_REFINED_XRES, "water-ice": ICE_SPHERE_REFINED_XRES}.get(mmstr.substance.lower())
+
+
+def uses_adaptive_legendre(mmstr):
+   """True when every component is a Mie size distribution (V24 adaptive path).
+
+   Baum crystals and Dubovik T-matrix components are interpolated tables
+   rather than band-limited polynomials, so King's criterion cannot terminate
+   their series; those classes keep the fixed nmom expansion of the IDL.
+   create_bwgp uses Mie unless the scattering code is 'tmatrix'.
+   """
+
+   for c in range(mmstr.ncomp):
+      if mmstr.comptype[c].lower() not in ("opac", "user"):
+         return False
+      if str(mmstr.comp[c].code).lower() == "tmatrix":
+         return False
+   return True
 
 
 def _interpol_complex(cm, wl, wvl):
@@ -215,10 +297,18 @@ def create_range(rat, mr, spd, radii):
 
 
 def generate_scattering_properties(srfstrarr, nwvl_max, inststr, mmstr, lutstr, nmom, tmatrix_path=None):
-   """Return (nmom, bext550, w550, g550, phs550, amom550, bextrat, bext, w, g, vavg, phs, amom).
+   """Return (lmom, bext550, w550, g550, phs550, amom550, bextrat, bext, w, g, vavg, phs, amom).
 
    ``nmom`` is the number of phase-function quadrature points / Legendre moments
-   (the IDL n_theta keyword, default 1000 there; required here).
+   (the IDL n_theta keyword, default 1000 there; required here) of Baum and
+   T-matrix classes.  ``lmom[m, l, r]`` is the number of Legendre moments of
+   each phase function, amom[0:lmom, m, l, r]; amom is zero beyond it.  It is
+   nmom everywhere for Baum and T-matrix classes.  For Mie classes
+   (uses_adaptive_legendre, V24) the quadrature order and lmom come from each
+   averaged phase function (_adaptive_mie_scattering_properties), phs / phs550
+   hold the phase function on each one's own Gauss-Legendre nodes (zero beyond
+   its order), and nmom is only the minimum number of DISORT moments, which
+   the driver applies.
    """
 
    nchan = inststr.number_of_nadir_channels
@@ -264,6 +354,12 @@ def generate_scattering_properties(srfstrarr, nwvl_max, inststr, mmstr, lutstr, 
          raise ValueError("Unknown size distribution: " + str(mmstr.distname[0]))
    else:
       raise NotImplementedError("Baran ice-crystal components are not ported to Python")
+
+   # **** Mie classes (V24): the radius integration and the Legendre expansion
+   #      of each averaged phase function (no IDL counterpart; replaces the
+   #      fixed NMom quadrature below)
+   if uses_adaptive_legendre(mmstr):
+      return _adaptive_mie_scattering_properties(srfstrarr, nwvl_max, inststr, mmstr, wvl, aerm550, aerm, lut_mrat, lut_rm)
 
    # **** Generate the quadrature points for the scattering phase function
    #      (IDL: quadrature, 'g', NMom, Abscissas, Weights; QV = cos(scattering angle))
@@ -426,6 +522,213 @@ def generate_scattering_properties(srfstrarr, nwvl_max, inststr, mmstr, lutstr, 
    # assignment rounds the DOUBLE combination to single precision, legpexp
    # expands the FLOAT phase function, and bextrat is a FLOAT / FLOAT division.
    f32 = np.float32
-   return (nmom, bext550.astype(f32), w550.astype(f32), g550.astype(f32), phs550.astype(f32),
+   lmom = np.full((nwvl_max, nchan, nefr), nmom, dtype=np.int64)          # the fixed expansion length
+   return (lmom, bext550.astype(f32), w550.astype(f32), g550.astype(f32), phs550.astype(f32),
            amom550.astype(f32), bextrat.astype(f32), bext.astype(f32), w.astype(f32), g.astype(f32),
            vavg.astype(f32), phs.astype(f32), amom.astype(f32))
+
+
+def _adaptive_mie_wavelength(mmstr, lut_mrat, lut_rm, ri, wl, label):
+   """Mie scattering at one wavelength with an adaptive Legendre expansion of each class phase function (V24).
+
+   ri[c] is the refractive index of component c at the wavelength wl (microns).
+   For each effective radius r the degree bound D_r comes from the largest size
+   parameter of its own size integration (every component with a non-zero
+   mixing ratio, with the limits create_bwgp uses), and the Gauss-Legendre
+   order Nq_r from D_r (legendre_expansion.quadrature_order), so no
+   coefficient is aliased and a small radius is not sampled at the order a
+   large one needs.  The class phase function (weighted by mixing ratio,
+   extinction and albedo as in the class combination) is expanded in double
+   precision and L_r is King's length, accepted only if the series reproduces
+   the directly calculated phase function at the CHECK_THETA angles (same Mie
+   call) to RECONSTRUCTION_TOLERANCE and the rounding noise beyond D_r is below
+   QUADRATURE_NOISE_LIMIT.  Otherwise Nq_r is raised by half and the radius
+   recalculated; the run fails after MAX_QUADRATURE_ATTEMPTS orders.
+
+   Returns (bext_c, w_c, g_c, vavg_c, phs, omega, lmom, diagnostics):
+      bext_c, w_c, g_c, vavg_c   (ncomp, nefr) float32 component properties, as create_bwgp
+      phs                        (max Nq_r, nefr) class phase function at each radius's nodes,
+                                 zero beyond Nq_r (float64)
+      omega                      (max Nq_r, nefr) its Legendre coefficients omega_l, (2l+1)
+                                 included, zero beyond Nq_r (float64)
+      lmom                       (nefr,) L_r
+      diagnostics                dict of (nefr,) arrays: degree, order, noise, error
+   """
+
+   ncomp, nefr = lut_mrat.shape
+   wavenumber = float(np.float32(1.0) / np.float32(wl))           # create_bwgp's FLOAT wavenumber
+   factors = [radius_upper_factor(mmstr, c) for c in range(ncomp)]
+   refine = [refined_xres(mmstr, c) for c in range(ncomp)]
+   check_mu = np.cos(np.deg2rad(CHECK_THETA))
+
+   bext_c = np.zeros((ncomp, nefr), dtype=np.float32)
+   w_c = np.zeros((ncomp, nefr), dtype=np.float32)
+   g_c = np.zeros((ncomp, nefr), dtype=np.float32)
+   vavg_c = np.zeros((ncomp, nefr), dtype=np.float32)
+   lmom = np.zeros(nefr, dtype=np.int64)
+   diagnostics = {name: np.zeros(nefr) for name in ("degree", "order", "noise", "error")}
+   phases = []
+   coefficients = []
+   previous = {}                         # component -> (mode radius, Nq, its results at the previous radius)
+
+   for r in range(nefr):
+      # Largest size parameter reached by this radius's size integration
+      x_max = 0.0
+      for c in range(ncomp):
+         if lut_mrat[c, r] > 0:
+            params, npts = mie_integration_limits(mmstr.distname[c], lut_rm[c, r], mmstr.s[c], wavenumber, factors[c], refine[c])
+            rl, ru, truncated = size_integration_limits(mmstr.distname[c], params, wavenumber)
+            x_max = max(x_max, 2.0 * np.pi * ru * wavenumber)
+      degree = degree_bound(x_max)
+      nq = quadrature_order(degree)
+
+      for attempt in range(MAX_QUADRATURE_ATTEMPTS):
+         if nq + check_mu.size > MIE_MAX_ANGLES:
+            raise ValueError(f"{label}: the quadrature order {nq} needs more than the Mie kernel's {MIE_MAX_ANGLES} "
+                             f"angles (size parameter {x_max:.0f})")
+         # Gauss-Legendre points for this radius (IDL: QV = ((QV1-QV0)*Abscissas + (QV0+QV1))/2,
+         # QV0 = 1, QV1 = -1); the check angles are calculated by the same Mie call
+         abscissas, weights = gauss_legendre(nq)
+         qv = -abscissas
+         dqv = np.concatenate((qv, check_mu))
+         phs_c = np.zeros((dqv.size, ncomp), dtype=np.float64)
+         for c in range(ncomp):
+            # Only call the scattering code if the mode radius (or the order) has changed
+            if c in previous and previous[c][0] == lut_rm[c, r] and previous[c][1] == nq:
+               bext_c[c, r], w_c[c, r], g_c[c, r], vavg_c[c, r], phs_c[:, c] = previous[c][2]
+            elif lut_mrat[c, r] > 0:
+               print(" Performing scattering calculations for component " + mmstr.compname[c] + ", EfR: ", lut_rm[c, r])
+               bext1, w1, g1, phs1, vavg1 = create_bwgp(mmstr.distname[c], lut_rm[c, r], mmstr.s[c], np.asarray([ri[c]]),
+                                                        np.asarray([wl]), dqv, scode=mmstr.comp[c].code,
+                                                        radius_upper_factor=factors[c], refined_xres=refine[c],
+                                                        phase_dtype=np.float64)
+               bext_c[c, r], w_c[c, r], g_c[c, r], vavg_c[c, r] = bext1[0], w1[0], g1[0], vavg1
+               phs_c[:, c] = phs1[:, 0]
+               previous[c] = (lut_rm[c, r], nq, (bext_c[c, r], w_c[c, r], g_c[c, r], vavg_c[c, r], phs_c[:, c].copy()))
+
+         # The class phase function, weighted by mixing ratio and extinction as
+         # in the class combination of generate_scattering_properties
+         mratbextw = lut_mrat[:, r] * bext_c[:, r] * w_c[:, r]
+         phs = idl_total(mratbextw[None, :] * phs_c, dimension=2) / idl_total(mratbextw)
+
+         # Legendre coefficients, King's length and the adequacy tests
+         omega = legendre_coefficients(qv, weights, phs[:nq])
+         lmom[r], noise, error = expand(omega, degree, check_mu, phs[nq:])
+         if error <= RECONSTRUCTION_TOLERANCE and noise <= QUADRATURE_NOISE_LIMIT:
+            break
+         print(f" Legendre expansion {label}, EfR {lut_rm[0, r]:g}: adequacy not demonstrated with Nq = {nq} "
+               f"(reconstruction error {error:.1e}, noise beyond D {noise:.1e}); raising the quadrature order")
+         nq = int(math.ceil(1.5 * nq))
+      else:
+         raise RuntimeError(f"{label}: Legendre expansion adequacy not demonstrated after {MAX_QUADRATURE_ATTEMPTS} orders: "
+                            f"reconstruction error {error:.1e} (limit {RECONSTRUCTION_TOLERANCE:g}), noise beyond D "
+                            f"{noise:.1e} (limit {QUADRATURE_NOISE_LIMIT:g})")
+      diagnostics["degree"][r], diagnostics["order"][r] = degree, nq
+      diagnostics["noise"][r], diagnostics["error"][r] = noise, error
+      phases.append(phs[:nq])
+      coefficients.append(omega)
+
+   nq_max = int(np.max(diagnostics["order"]))
+   phs_out = np.zeros((nq_max, nefr), dtype=np.float64)
+   omega_out = np.zeros((nq_max, nefr), dtype=np.float64)
+   for r in range(nefr):
+      phs_out[:phases[r].size, r] = phases[r]
+      omega_out[:coefficients[r].size, r] = coefficients[r]
+   # omega_0 = 1 and omega_1 / 3 = g (Grainger 1990 section 4.5) are reported,
+   # not used for acceptance; "noise-limited" radii have rounding noise above
+   # King's threshold, so L is conservative (<= D + 1).
+   print(f" Legendre expansion {label}: D = {int(diagnostics['degree'].min())}-{int(diagnostics['degree'].max())}, "
+         f"Nq = {int(diagnostics['order'].min())}-{nq_max}, L = {lmom.min()}-{lmom.max()}, "
+         f"noise beyond D <= {diagnostics['noise'].max():.1e} "
+         f"(noise-limited: {int(np.count_nonzero(diagnostics['noise'] >= KING_THRESHOLD))} of {nefr}), "
+         f"reconstruction error <= {diagnostics['error'].max():.1e}, |omega_0 - 1| <= {np.max(np.abs(omega_out[0] - 1.0)):.1e}")
+   return bext_c, w_c, g_c, vavg_c, phs_out, omega_out, lmom, diagnostics
+
+
+def _adaptive_mie_scattering_properties(srfstrarr, nwvl_max, inststr, mmstr, wvl, aerm550, aerm, lut_mrat, lut_rm):
+   """generate_scattering_properties for a class of Mie components (V24).
+
+   Each wavelength (0.55 microns and every SRF point) is calculated by
+   _adaptive_mie_wavelength.  The class properties are then combined exactly
+   as in the IDL path (weighted by mixing ratio and extinction, IDL TOTAL,
+   FLTARR storage); the moments are chi_l = omega_l / (2l+1), the DISORT
+   convention of legpexp's alc / (2n+1), zero beyond each phase function's L.
+   """
+
+   nchan = inststr.number_of_nadir_channels
+   ncomp, nefr = lut_mrat.shape
+
+   # **** Call the scattering code at 0.55 microns and at each SRF point of each
+   #      channel, each phase function with its own quadrature order
+   print("")
+   bext550_c, w550_c, g550_c, vavg_c, phs550_n, omega550, lmom550, _ = \
+      _adaptive_mie_wavelength(mmstr, lut_mrat, lut_rm, aerm550, 0.55, "0.55 um reference")
+   channel_results = {}
+   for l in range(nchan):
+      for m in range(srfstrarr[l].nwvl):
+         label = f"channel {inststr.channelid[l]} point {m} ({wvl[m, l]:.4f} um)"
+         channel_results[(m, l)] = _adaptive_mie_wavelength(mmstr, lut_mrat, lut_rm, aerm[m, l, :], wvl[m, l], label)
+   print("")
+   print("All scattering calculations completed for each component")
+
+   # **** Calculate the scattering parameters of the class for each required
+   #      effective radius (weighted by mixing ratio and extinction)
+   nqmax = max(result[4].shape[0] for result in channel_results.values())
+   lmax = max(int(np.max(result[6])) for result in channel_results.values())
+   vavg = np.zeros(nefr, dtype=np.float32)
+   # At the reference wavelength
+   bext550 = np.zeros(nefr, dtype=np.float32)                            # Extinction coefficient
+   w550 = np.zeros(nefr, dtype=np.float32)                               # Single scattering albedo
+   g550 = np.zeros(nefr, dtype=np.float32)                               # Asymmetry parameter
+   phs550 = np.zeros((phs550_n.shape[0], nefr), dtype=np.float32)        # Phase function (its own nodes)
+   amom550 = np.zeros((int(np.max(lmom550)), nefr), dtype=np.float32)    # Legendre moments
+   # For each channel
+   bextrat = np.zeros((nwvl_max, nchan, nefr), dtype=np.float32)         # Ratio of Bext with that at the reference wavelength
+   bext = np.zeros((nwvl_max, nchan, nefr), dtype=np.float32)            # Extinction coefficient
+   w = np.zeros((nwvl_max, nchan, nefr), dtype=np.float32)               # Single scattering albedo
+   g = np.zeros((nwvl_max, nchan, nefr), dtype=np.float32)               # Asymmetry parameter
+   phs = np.zeros((nqmax, nwvl_max, nchan, nefr), dtype=np.float32)      # Phase function (each one's own nodes)
+   amom = np.zeros((lmax, nwvl_max, nchan, nefr), dtype=np.float32)      # Legendre moments
+   lmom = np.zeros((nwvl_max, nchan, nefr), dtype=np.int64)              # Number of Legendre moments
+
+   vavg[:] = vavg_c[0, :]
+
+   for l in range(nchan):
+      for m in range(nwvl_max):
+         # QM=2 zero-padded SRF entries are not quadrature points (see the IDL path)
+         if m >= srfstrarr[l].nwvl:
+            continue
+         bext_c, w_c, g_c, _, phs_n, omega, lmom_ml, _ = channel_results[(m, l)]
+         for r in range(nefr):
+            # Calculate the 550 nm quantities (once, with the first channel)
+            if l == 0:
+               mratbext = lut_mrat[:, r] * bext550_c[:, r]
+               tmratbext = idl_total(mratbext)
+               mratbextw = mratbext * w550_c[:, r]
+               tmratbextw = idl_total(mratbextw)
+               bext550[r] = tmratbext / idl_total(lut_mrat[:, r])
+               w550[r] = tmratbextw / tmratbext
+               g550[r] = idl_total(mratbextw * g550_c[:, r]) / tmratbextw
+               phs550[:, r] = phs550_n[:, r]
+               # The Legendre moments of the phase function (alc / (2n+1) of the IDL)
+               amom550[:lmom550[r], r] = omega550[:lmom550[r], r] / (2.0 * np.arange(lmom550[r]) + 1.0)
+
+            mratbext = lut_mrat[:, r] * bext_c[:, r]
+            tmratbext = idl_total(mratbext)
+            mratbextw = mratbext * w_c[:, r]
+            tmratbextw = idl_total(mratbextw)
+            bext[m, l, r] = tmratbext / idl_total(lut_mrat[:, r])
+            w[m, l, r] = tmratbextw / tmratbext
+            g[m, l, r] = idl_total(mratbextw * g_c[:, r]) / tmratbextw
+            phs[:phs_n.shape[0], m, l, r] = phs_n[:, r]
+
+            # The Legendre moments of the phase function (alc / (2n+1) of the IDL)
+            lmom[m, l, r] = lmom_ml[r]
+            amom[:lmom_ml[r], m, l, r] = omega[:lmom_ml[r], r] / (2.0 * np.arange(lmom_ml[r]) + 1.0)
+
+            # Ratio of the extinction coefficient at the current channel and at
+            # 0.55 microns, relating the spectral optical depth to the reference
+            bextrat[m, l, r] = bext[m, l, r] / bext550[r]
+
+   # FLTARR storage, as the IDL path (bextrat is a FLOAT / FLOAT division)
+   return lmom, bext550, w550, g550, phs550, amom550, bextrat, bext, w, g, vavg, phs, amom

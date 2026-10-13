@@ -1,0 +1,121 @@
+{
+ "model": "liquid-water_240",
+ "wavelength": 0.469,
+ "effective_radius": 21.0,
+ "L": 2057,
+ "degree_bound": 2056,
+ "order": 2176,
+ "ssa": 0.9999874234199524,
+ "nstr": 60,
+ "cases": {
+  "1.0": {
+   "seconds_per_call_at_L": 0.10435339234148462,
+   "production_max(1000,L)_bitwise_equal_L": true,
+   "seconds_per_call_production": 0.09707666793838143,
+   "zero_padded_L+512_bitwise_equal_L": true,
+   "seconds_per_call_1000": 0.08404732557634513,
+   "truncated_to_N": {
+    "200": {
+     "max_abs_R_difference": 10.221604281036576,
+     "max_abs_R_difference_sza30": 8.35077566324057,
+     "fluxes_bitwise_equal": true
+    },
+    "500": {
+     "max_abs_R_difference": 4.477680332458262,
+     "max_abs_R_difference_sza30": 3.6581441157193506,
+     "fluxes_bitwise_equal": true
+    },
+    "1000": {
+     "max_abs_R_difference": 0.09263948164511382,
+     "max_abs_R_difference_sza30": 0.0756839680546578,
+     "fluxes_bitwise_equal": true
+    },
+    "1500": {
+     "max_abs_R_difference": 0.0004502323494131044,
+     "max_abs_R_difference_sza30": 0.0003678408031888014,
+     "fluxes_bitwise_equal": true
+    },
+    "2000": {
+     "max_abs_R_difference": 0.0,
+     "max_abs_R_difference_sza30": 0.0,
+     "fluxes_bitwise_equal": true
+    }
+   },
+   "below_king_threshold_added_to_N": {},
+   "max_R": 0.9865575129914507
+  },
+  "8.0": {
+   "seconds_per_call_at_L": 0.09745286358520389,
+   "production_max(1000,L)_bitwise_equal_L": true,
+   "seconds_per_call_production": 0.0979717153434952,
+   "zero_padded_L+512_bitwise_equal_L": true,
+   "seconds_per_call_1000": 0.08487997033322851,
+   "truncated_to_N": {
+    "200": {
+     "max_abs_R_difference": 11.358899944138283,
+     "max_abs_R_difference_sza30": 11.358624486728834,
+     "fluxes_bitwise_equal": true
+    },
+    "500": {
+     "max_abs_R_difference": 4.975884126021093,
+     "max_abs_R_difference_sza30": 4.9757635047974205,
+     "fluxes_bitwise_equal": true
+    },
+    "1000": {
+     "max_abs_R_difference": 0.10294688878199398,
+     "max_abs_R_difference_sza30": 0.10294443201588838,
+     "fluxes_bitwise_equal": true
+    },
+    "1500": {
+     "max_abs_R_difference": 0.0005003413897985975,
+     "max_abs_R_difference_sza30": 0.0005003413897985975,
+     "fluxes_bitwise_equal": true
+    },
+    "2000": {
+     "max_abs_R_difference": 0.0,
+     "max_abs_R_difference_sza30": 0.0,
+     "fluxes_bitwise_equal": true
+    }
+   },
+   "below_king_threshold_added_to_N": {},
+   "max_R": 2.026627586241545
+  },
+  "64.0": {
+   "seconds_per_call_at_L": 0.10014450472469132,
+   "production_max(1000,L)_bitwise_equal_L": true,
+   "seconds_per_call_production": 0.10049551632255316,
+   "zero_padded_L+512_bitwise_equal_L": true,
+   "seconds_per_call_1000": 0.08730076331024368,
+   "truncated_to_N": {
+    "200": {
+     "max_abs_R_difference": 11.358900273704467,
+     "max_abs_R_difference_sza30": 11.35889973441435,
+     "fluxes_bitwise_equal": true
+    },
+    "500": {
+     "max_abs_R_difference": 4.975883976218282,
+     "max_abs_R_difference_sza30": 4.975883916297157,
+     "fluxes_bitwise_equal": true
+    },
+    "1000": {
+     "max_abs_R_difference": 0.1029468887819941,
+     "max_abs_R_difference_sza30": 0.1029468887819941,
+     "fluxes_bitwise_equal": true
+    },
+    "1500": {
+     "max_abs_R_difference": 0.0005003413897985975,
+     "max_abs_R_difference_sza30": 0.0005002814686742019,
+     "fluxes_bitwise_equal": true
+    },
+    "2000": {
+     "max_abs_R_difference": 0.0,
+     "max_abs_R_difference_sza30": 0.0,
+     "fluxes_bitwise_equal": true
+    }
+   },
+   "below_king_threshold_added_to_N": {},
+   "max_R": 2.852657305442612
+  }
+ },
+ "exact_rows": 2057
+}

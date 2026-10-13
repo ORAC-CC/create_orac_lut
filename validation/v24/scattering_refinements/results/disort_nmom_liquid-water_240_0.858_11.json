@@ -1,0 +1,94 @@
+{
+ "model": "liquid-water_240",
+ "wavelength": 0.858,
+ "effective_radius": 11.0,
+ "L": 581,
+ "degree_bound": 622,
+ "order": 704,
+ "ssa": 0.9999532103538513,
+ "nstr": 60,
+ "cases": {
+  "1.0": {
+   "seconds_per_call_at_L": 0.08969008006776373,
+   "production_max(1000,L)_bitwise_equal_L": true,
+   "seconds_per_call_production": 0.09479313855990767,
+   "zero_padded_L+512_bitwise_equal_L": true,
+   "historical_max(L,61)_bitwise_equal_production": true,
+   "seconds_per_call_1000": 0.08423684630542994,
+   "truncated_to_N": {
+    "200": {
+     "max_abs_R_difference": 0.3174292809666549,
+     "max_abs_R_difference_sza30": 0.274931796325553,
+     "fluxes_bitwise_equal": true
+    },
+    "500": {
+     "max_abs_R_difference": 5.437842050787234e-06,
+     "max_abs_R_difference_sza30": 4.703808275358101e-06,
+     "fluxes_bitwise_equal": true
+    }
+   },
+   "below_king_threshold_added_to_N": {
+    "623": {
+     "max_abs_R_difference": 0.0,
+     "max_abs_chi_added": 7.877101748654525e-13
+    }
+   },
+   "max_R": 1.0312358419399859
+  },
+  "8.0": {
+   "seconds_per_call_at_L": 0.07966663672899206,
+   "production_max(1000,L)_bitwise_equal_L": true,
+   "seconds_per_call_production": 0.08430399466305971,
+   "zero_padded_L+512_bitwise_equal_L": true,
+   "historical_max(L,61)_bitwise_equal_production": true,
+   "seconds_per_call_1000": 0.08424833711857597,
+   "truncated_to_N": {
+    "200": {
+     "max_abs_R_difference": 0.33408509156264965,
+     "max_abs_R_difference_sza30": 0.334084791957027,
+     "fluxes_bitwise_equal": true
+    },
+    "500": {
+     "max_abs_R_difference": 5.752427954586192e-06,
+     "max_abs_R_difference_sza30": 5.752427954586192e-06,
+     "fluxes_bitwise_equal": true
+    }
+   },
+   "below_king_threshold_added_to_N": {
+    "623": {
+     "max_abs_R_difference": 0.0,
+     "max_abs_chi_added": 7.877101748654525e-13
+    }
+   },
+   "max_R": 2.0838438712071885
+  },
+  "64.0": {
+   "seconds_per_call_at_L": 0.08193046847979228,
+   "production_max(1000,L)_bitwise_equal_L": true,
+   "seconds_per_call_production": 0.08656891047333677,
+   "zero_padded_L+512_bitwise_equal_L": true,
+   "historical_max(L,61)_bitwise_equal_production": true,
+   "seconds_per_call_1000": 0.08969301761438449,
+   "truncated_to_N": {
+    "200": {
+     "max_abs_R_difference": 0.33408513650349303,
+     "max_abs_R_difference_sza30": 0.33408513650349303,
+     "fluxes_bitwise_equal": true
+    },
+    "500": {
+     "max_abs_R_difference": 5.752427954530681e-06,
+     "max_abs_R_difference_sza30": 5.69250683002398e-06,
+     "fluxes_bitwise_equal": true
+    }
+   },
+   "below_king_threshold_added_to_N": {
+    "623": {
+     "max_abs_R_difference": 0.0,
+     "max_abs_chi_added": 7.877101748654525e-13
+    }
+   },
+   "max_R": 2.8759802848999225
+  }
+ },
+ "exact_rows": 581
+}

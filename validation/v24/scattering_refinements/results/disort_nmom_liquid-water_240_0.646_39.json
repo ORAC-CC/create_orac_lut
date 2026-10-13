@@ -1,0 +1,136 @@
+{
+ "model": "liquid-water_240",
+ "wavelength": 0.646,
+ "effective_radius": 39.0,
+ "L": 2751,
+ "degree_bound": 2750,
+ "order": 2880,
+ "ssa": 0.9999832510948181,
+ "nstr": 60,
+ "cases": {
+  "1.0": {
+   "seconds_per_call_at_L": 0.11134075466543436,
+   "production_max(1000,L)_bitwise_equal_L": true,
+   "seconds_per_call_production": 0.10455289576202631,
+   "zero_padded_L+512_bitwise_equal_L": true,
+   "seconds_per_call_1000": 0.08315605530515313,
+   "truncated_to_N": {
+    "200": {
+     "max_abs_R_difference": 12.849174533439152,
+     "max_abs_R_difference_sza30": 10.417158788405716,
+     "fluxes_bitwise_equal": true
+    },
+    "500": {
+     "max_abs_R_difference": 10.862106633925691,
+     "max_abs_R_difference_sza30": 8.806191339728064,
+     "fluxes_bitwise_equal": true
+    },
+    "1000": {
+     "max_abs_R_difference": 1.214884501234651,
+     "max_abs_R_difference_sza30": 0.984938444206737,
+     "fluxes_bitwise_equal": true
+    },
+    "1500": {
+     "max_abs_R_difference": 0.04172617992619315,
+     "max_abs_R_difference_sza30": 0.03382850081215752,
+     "fluxes_bitwise_equal": true
+    },
+    "2000": {
+     "max_abs_R_difference": 0.0007411194484283623,
+     "max_abs_R_difference_sza30": 0.0006008590761923116,
+     "fluxes_bitwise_equal": true
+    },
+    "2500": {
+     "max_abs_R_difference": 3.1758195999376237e-06,
+     "max_abs_R_difference_sza30": 2.5766083546485685e-06,
+     "fluxes_bitwise_equal": true
+    }
+   },
+   "below_king_threshold_added_to_N": {},
+   "max_R": 0.9809151002215107
+  },
+  "8.0": {
+   "seconds_per_call_at_L": 0.10938315372914076,
+   "production_max(1000,L)_bitwise_equal_L": true,
+   "seconds_per_call_production": 0.1052142462382714,
+   "zero_padded_L+512_bitwise_equal_L": true,
+   "seconds_per_call_1000": 0.08402352966368198,
+   "truncated_to_N": {
+    "200": {
+     "max_abs_R_difference": 14.4090682116264,
+     "max_abs_R_difference_sza30": 14.408568978777403,
+     "fluxes_bitwise_equal": true
+    },
+    "500": {
+     "max_abs_R_difference": 12.18077032836201,
+     "max_abs_R_difference_sza30": 12.18034779455241,
+     "fluxes_bitwise_equal": true
+    },
+    "1000": {
+     "max_abs_R_difference": 1.3623719602998934,
+     "max_abs_R_difference_sza30": 1.3623245327298303,
+     "fluxes_bitwise_equal": true
+    },
+    "1500": {
+     "max_abs_R_difference": 0.046791747010594964,
+     "max_abs_R_difference_sza30": 0.04679009917967042,
+     "fluxes_bitwise_equal": true
+    },
+    "2000": {
+     "max_abs_R_difference": 0.0008311059971865542,
+     "max_abs_R_difference_sza30": 0.0008310760366241898,
+     "fluxes_bitwise_equal": true
+    },
+    "2500": {
+     "max_abs_R_difference": 3.595267471623309e-06,
+     "max_abs_R_difference_sza30": 3.5653069093699585e-06,
+     "fluxes_bitwise_equal": true
+    }
+   },
+   "below_king_threshold_added_to_N": {},
+   "max_R": 2.0184857435253436
+  },
+  "64.0": {
+   "seconds_per_call_at_L": 0.10803324511895578,
+   "production_max(1000,L)_bitwise_equal_L": true,
+   "seconds_per_call_production": 0.10787201362351577,
+   "zero_padded_L+512_bitwise_equal_L": true,
+   "seconds_per_call_1000": 0.0890589573731025,
+   "truncated_to_N": {
+    "200": {
+     "max_abs_R_difference": 14.409068571153146,
+     "max_abs_R_difference_sza30": 14.409068511232022,
+     "fluxes_bitwise_equal": true
+    },
+    "500": {
+     "max_abs_R_difference": 12.18077068788876,
+     "max_abs_R_difference_sza30": 12.180770627967634,
+     "fluxes_bitwise_equal": true
+    },
+    "1000": {
+     "max_abs_R_difference": 1.3623719602998934,
+     "max_abs_R_difference_sza30": 1.3623719602998934,
+     "fluxes_bitwise_equal": true
+    },
+    "1500": {
+     "max_abs_R_difference": 0.046791747010594964,
+     "max_abs_R_difference_sza30": 0.046791747010594964,
+     "fluxes_bitwise_equal": true
+    },
+    "2000": {
+     "max_abs_R_difference": 0.0008311059971864987,
+     "max_abs_R_difference_sza30": 0.0008311059971864987,
+     "fluxes_bitwise_equal": true
+    },
+    "2500": {
+     "max_abs_R_difference": 3.595267471623309e-06,
+     "max_abs_R_difference_sza30": 3.595267471623309e-06,
+     "fluxes_bitwise_equal": true
+    }
+   },
+   "below_king_threshold_added_to_N": {},
+   "max_R": 2.84761026896597
+  }
+ },
+ "exact_rows": 2751
+}

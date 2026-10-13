@@ -275,21 +275,25 @@ SINGLE_CHANNEL_FILL = {"extinction_coefficient", "extinction_coefficient_ratio",
 
 @pytest.mark.slow
 @needs_intel
-def test_compact_case_a_reproduces_v21_idl_bitwise(tmp_path, monkeypatch):
+def test_compact_case_a_reproduces_v21_idl_bitwise(tmp_path):
+   # The V22 scientific code (lut-code-v22.4) is run from its sealed release,
+   # releases/lut_v23.release, because the working tree holds the V24
+   # scattering refinements (tests/sealed_release.py).
    from netCDF4 import Dataset
    from scipy.io import readsav
-   import create_orac_luts
-   monkeypatch.setenv("ORAC_LUT_DISORT_PRECISION", "single")
-   monkeypatch.setenv("ORAC_LUT_DISORT_SP_KERNEL", "intel_dlm")
+   from sealed_release import run_with_release
    in_path = tmp_path / "input_files"
    (in_path / "lut").mkdir(parents=True)
    for entry in (ROOT / "create_orac_lut" / "input_files").iterdir():
       if entry.name != "lut":
          (in_path / entry.name).symlink_to(entry)
    (in_path / "lut" / "case_A.lut").write_bytes((ROOT / "tests/data/v21_idl_single/cases/case_A.lut").read_bytes())
-   create_orac_luts.create_orac_cloud_lut(in_path, "terra_modis_v1.inst", "liquid-water_240.mm", "case_A.lut", tmp_path / "luts", "2",
-                                          channelid=[6], gas=0, no_rayleigh=0, srf_quad=1, reuse_scat=0, scat_only=0,
-                                          tmatrix_path=None, version=22, driver=None, nstreams=60, nmom=1000, work_path=tmp_path / "work")
+   run_with_release(f"""
+create_orac_luts.create_orac_cloud_lut({str(in_path)!r}, "terra_modis_v1.inst", "liquid-water_240.mm", "case_A.lut",
+                                       {str(tmp_path / "luts")!r}, "2", channelid=[6], gas=0, no_rayleigh=0, srf_quad=1,
+                                       reuse_scat=0, scat_only=0, tmatrix_path=None, version=22, driver=None, nstreams=60,
+                                       nmom=1000, work_path={str(tmp_path / "work")!r})
+""", env={"ORAC_LUT_DISORT_PRECISION": "single", "ORAC_LUT_DISORT_SP_KERNEL": "intel_dlm"})
    # scattering properties: bitwise against the IDL scatfile.sav
    idl = readsav(str(COMPACT / "case_A" / "scatfile.sav"))
    python = np.load(tmp_path / "work" / "scatfile.npz")

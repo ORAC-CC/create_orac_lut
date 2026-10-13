@@ -1,0 +1,401 @@
+{
+ "model": "water-ice_agg",
+ "same_variables": true,
+ "same_dimensions": true,
+ "same_coordinates": true,
+ "v24_finite": true,
+ "bitwise_identical_variables": [
+  "instrument_filename",
+  "platform",
+  "instrument",
+  "instrument_version",
+  "max_sat_zenith",
+  "number_of_channels",
+  "SRF_file",
+  "channel_id",
+  "central_wavelength",
+  "central_wavenumber",
+  "solar_channel_flag",
+  "mixed_channel_flag",
+  "thermal_channel_flag",
+  "solar_channel_id",
+  "oldf0",
+  "oldf1",
+  "F0",
+  "snr",
+  "oldnefr",
+  "mixed_channel_id",
+  "thermal_channel_id",
+  "refbt",
+  "nedt",
+  "B1",
+  "B2",
+  "T1",
+  "T2",
+  "oldwvn",
+  "oldb1",
+  "oldb2",
+  "oldt1",
+  "oldt2",
+  "oldnebt",
+  "average_volume_per_particle",
+  "extinction_coefficient",
+  "extinction_coefficient_ratio",
+  "single_scatter_albedo",
+  "asymmetry_parameter",
+  "optical_depth",
+  "effective_radius",
+  "satellite_zenith",
+  "solar_zenith",
+  "relative_azimuth",
+  "T_dv",
+  "T_dd",
+  "R_dv",
+  "R_dd",
+  "R_0v",
+  "R_0d",
+  "T_0d",
+  "T_00",
+  "E_md"
+ ],
+ "operators": {
+  "R_0v": {
+   "median": 0.0,
+   "p99": 0.0,
+   "max": 0.0,
+   "max_at": {
+    "relative_azimuth": 0.0,
+    "satellite_zenith": 0.0,
+    "solar_zenith": 0.0,
+    "optical_depth": 0.125,
+    "effective_radius": 5.0,
+    "solar_channels": 1
+   },
+   "values_at_max": [
+    0.0254498440772295,
+    0.0254498440772295
+   ],
+   "max_rel": 0.0,
+   "max_rel_at": {
+    "relative_azimuth": 0.0,
+    "satellite_zenith": 0.0,
+    "solar_zenith": 0.0,
+    "optical_depth": 0.125,
+    "effective_radius": 5.0,
+    "solar_channels": 1
+   },
+   "max_by_radius": {
+    "5": 0.0,
+    "41": 0.0,
+    "93": 0.0
+   }
+  },
+  "R_0d": {
+   "median": 0.0,
+   "p99": 0.0,
+   "max": 0.0,
+   "max_at": {
+    "solar_zenith": 0.0,
+    "optical_depth": 0.125,
+    "effective_radius": 5.0,
+    "solar_channels": 1
+   },
+   "values_at_max": [
+    0.03700139746069908,
+    0.03700139746069908
+   ],
+   "max_rel": 0.0,
+   "max_rel_at": {
+    "solar_zenith": 0.0,
+    "optical_depth": 0.125,
+    "effective_radius": 5.0,
+    "solar_channels": 1
+   },
+   "max_by_radius": {
+    "5": 0.0,
+    "41": 0.0,
+    "93": 0.0
+   }
+  },
+  "T_0d": {
+   "median": 0.0,
+   "p99": 0.0,
+   "max": 0.0,
+   "max_at": {
+    "solar_zenith": 0.0,
+    "optical_depth": 0.125,
+    "effective_radius": 5.0,
+    "solar_channels": 1
+   },
+   "values_at_max": [
+    0.12591323256492615,
+    0.12591323256492615
+   ],
+   "max_rel": 0.0,
+   "max_rel_at": {
+    "solar_zenith": 0.0,
+    "optical_depth": 0.125,
+    "effective_radius": 5.0,
+    "solar_channels": 1
+   },
+   "max_by_radius": {
+    "5": 0.0,
+    "41": 0.0,
+    "93": 0.0
+   }
+  },
+  "T_00": {
+   "median": 0.0,
+   "p99": 0.0,
+   "max": 0.0,
+   "max_at": {
+    "solar_zenith": 0.0,
+    "optical_depth": 0.125,
+    "effective_radius": 5.0,
+    "solar_channels": 1
+   },
+   "values_at_max": [
+    0.8371164202690125,
+    0.8371164202690125
+   ],
+   "max_rel": 0.0,
+   "max_rel_at": {
+    "solar_zenith": 0.0,
+    "optical_depth": 0.125,
+    "effective_radius": 5.0,
+    "solar_channels": 1
+   },
+   "max_by_radius": {
+    "5": 0.0,
+    "41": 0.0,
+    "93": 0.0
+   }
+  },
+  "R_dv": {
+   "median": 0.0,
+   "p99": 0.0,
+   "max": 0.0,
+   "max_at": {
+    "satellite_zenith": 0.0,
+    "optical_depth": 0.125,
+    "effective_radius": 5.0,
+    "channels": 1
+   },
+   "values_at_max": [
+    0.03697754070162773,
+    0.03697754070162773
+   ],
+   "max_rel": 0.0,
+   "max_rel_at": {
+    "satellite_zenith": 0.0,
+    "optical_depth": 0.125,
+    "effective_radius": 5.0,
+    "channels": 1
+   },
+   "max_by_radius": {
+    "5": 0.0,
+    "41": 0.0,
+    "93": 0.0
+   }
+  },
+  "T_dv": {
+   "median": 0.0,
+   "p99": 0.0,
+   "max": 0.0,
+   "max_at": {
+    "satellite_zenith": 0.0,
+    "optical_depth": 0.125,
+    "effective_radius": 5.0,
+    "channels": 1
+   },
+   "values_at_max": [
+    0.1259625256061554,
+    0.1259625256061554
+   ],
+   "max_rel": 0.0,
+   "max_rel_at": {
+    "satellite_zenith": 0.0,
+    "optical_depth": 0.125,
+    "effective_radius": 5.0,
+    "channels": 1
+   },
+   "max_by_radius": {
+    "5": 0.0,
+    "41": 0.0,
+    "93": 0.0
+   }
+  },
+  "R_dd": {
+   "median": 0.0,
+   "p99": 0.0,
+   "max": 0.0,
+   "max_at": {
+    "optical_depth": 0.125,
+    "effective_radius": 5.0,
+    "channels": 1
+   },
+   "values_at_max": [
+    0.0734768882393837,
+    0.0734768882393837
+   ],
+   "max_rel": 0.0,
+   "max_rel_at": {
+    "optical_depth": 0.125,
+    "effective_radius": 5.0,
+    "channels": 1
+   },
+   "max_by_radius": {
+    "5": 0.0,
+    "41": 0.0,
+    "93": 0.0
+   }
+  },
+  "T_dd": {
+   "median": 0.0,
+   "p99": 0.0,
+   "max": 0.0,
+   "max_at": {
+    "optical_depth": 0.125,
+    "effective_radius": 5.0,
+    "channels": 1
+   },
+   "values_at_max": [
+    0.9264774322509766,
+    0.9264774322509766
+   ],
+   "max_rel": 0.0,
+   "max_rel_at": {
+    "optical_depth": 0.125,
+    "effective_radius": 5.0,
+    "channels": 1
+   },
+   "max_by_radius": {
+    "5": 0.0,
+    "41": 0.0,
+    "93": 0.0
+   }
+  },
+  "E_md": {
+   "median": 0.0,
+   "p99": 0.0,
+   "max": 0.0,
+   "max_at": {
+    "satellite_zenith": 0.0,
+    "optical_depth": 0.125,
+    "effective_radius": 5.0,
+    "thermal_channels": 20
+   },
+   "values_at_max": [
+    0.016317598521709442,
+    0.016317598521709442
+   ],
+   "max_rel": 0.0,
+   "max_rel_at": {
+    "satellite_zenith": 0.0,
+    "optical_depth": 0.125,
+    "effective_radius": 5.0,
+    "thermal_channels": 20
+   },
+   "max_by_radius": {
+    "5": 0.0,
+    "41": 0.0,
+    "93": 0.0
+   }
+  }
+ },
+ "optics": {
+  "extinction_coefficient": {
+   "median": 0.0,
+   "p99": 0.0,
+   "max": 0.0,
+   "max_at": {
+    "effective_radius": 5.0,
+    "channels": 1
+   },
+   "values_at_max": [
+    2.108030319213867,
+    2.108030319213867
+   ],
+   "max_rel": 0.0,
+   "max_rel_at": {
+    "effective_radius": 5.0,
+    "channels": 1
+   },
+   "max_by_radius": {
+    "5": 0.0,
+    "41": 0.0,
+    "93": 0.0
+   }
+  },
+  "extinction_coefficient_ratio": {
+   "median": 0.0,
+   "p99": 0.0,
+   "max": 0.0,
+   "max_at": {
+    "effective_radius": 5.0,
+    "channels": 1
+   },
+   "values_at_max": [
+    1.0196528434753418,
+    1.0196528434753418
+   ],
+   "max_rel": 0.0,
+   "max_rel_at": {
+    "effective_radius": 5.0,
+    "channels": 1
+   },
+   "max_by_radius": {
+    "5": 0.0,
+    "41": 0.0,
+    "93": 0.0
+   }
+  },
+  "single_scatter_albedo": {
+   "median": 0.0,
+   "p99": 0.0,
+   "max": 0.0,
+   "max_at": {
+    "effective_radius": 5.0,
+    "channels": 1
+   },
+   "values_at_max": [
+    1.0,
+    1.0
+   ],
+   "max_rel": 0.0,
+   "max_rel_at": {
+    "effective_radius": 5.0,
+    "channels": 1
+   },
+   "max_by_radius": {
+    "5": 0.0,
+    "41": 0.0,
+    "93": 0.0
+   }
+  },
+  "asymmetry_parameter": {
+   "median": 0.0,
+   "p99": 0.0,
+   "max": 0.0,
+   "max_at": {
+    "effective_radius": 5.0,
+    "channels": 1
+   },
+   "values_at_max": [
+    0.7481256127357483,
+    0.7481256127357483
+   ],
+   "max_rel": 0.0,
+   "max_rel_at": {
+    "effective_radius": 5.0,
+    "channels": 1
+   },
+   "max_by_radius": {
+    "5": 0.0,
+    "41": 0.0,
+    "93": 0.0
+   }
+  }
+ },
+ "r0v_call_outliers": []
+}

@@ -1,18 +1,17 @@
-; Terra MODIS V24 cloud LUT production run: liquid-water_240, liquid-water Grid B.
-; One of the 20 definitive MODIS V24 cloud production runs (Aqua and Terra;
-; six liquid-water and four ice microphysical models).  Submit the whole set
-; with scripts/submit_v24_modis_cloud_luts.sh.
-;
-; Settings follow the legacy terra_modis_cloud.driver (atmosphere 2,
-; channels 1-36, no gas).  The product is written directly to the flat
-; permanent ORAC LUT directory as
-;   terra_modis_m_liquid-water_a01_p240_v24.nc
-;
-; V24 = the V23 product grids (Grid B, unchanged) computed with the revised
-; numerics of create_orac_luts.py, "Versions and numerical changes" 2-4
-; (runs/V24_PRODUCTION.md).
-; nmom is not set (obsolete for Mie classes): the expansion length comes from
-; each size-averaged phase function.
+; Terra MODIS V24 cloud LUT production run: liquid-water_240.
+; V24 = the V23 scientific code (lut-code-v22.4) and Grid B (liquid-water-cloud.lut, SourceVault
+; liquid-water-cloud_v02.lut) with the three V24 refinements of the
+; scattering properties of Mie classes (V24_RELEASE.md); this class: Mie: liquid-water size integration to 3.5 r_e, nested radius refinement, adaptive Legendre expansion.
+; Same instrument, microphysics, refractive index, atmosphere 2, channels 1-36,
+; no gas, Rayleigh on, srf_quad 1, nstreams 60 as V23.  nmom = 1000 is the
+; minimum number of DISORT moments: Mie phase functions pass max(1000, L).
+; Made by the V24 release (releases/lut_v24.release; scripts/submit_v24_release.sh):
+;   ORAC_LUT_RELEASE_MANIFEST=lut_v24.release ORAC_LUT_DISORT_PRECISION=single \
+;   ORAC_LUT_DISORT_SP_KERNEL=intel_dlm python create_orac_luts_release_v04.py runs/terra_modis_cloud_liquid-water_240_v24.run
+; The product is written to the protected staging directory as
+;   staging/lut_v24/terra_modis_m_liquid-water_a01_p240_v24.nc
+; (The previous content of this file, the historical lut-code-v24 run of
+; 2026-10-03, is in Git: git show 51717b8:runs/terra_modis_cloud_liquid-water_240_v24.run.)
 
 platform      = 'terra'
 instrument    = 'modis'
@@ -21,7 +20,7 @@ forward_model = 'cloud'
 in_path       = 'create_orac_lut/input_files'
 instfile      = 'terra_modis_v1.inst'
 mmfile        = 'liquid-water_240.mm'
-lutfile       = 'liquid-water-cloud-grid-b.lut'
+lutfile       = 'liquid-water-cloud.lut'
 
 atmospheres   = 2
 channelid     = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]
@@ -30,6 +29,7 @@ gas           = 0
 no_rayleigh   = 0
 srf_quad      = 1
 nstreams      = 60
+nmom          = 1000
 version       = 24
 
-out_path      = '/network/group/aopp/eodg/RGG004_GRAINGER_ORACFILE/ORAC_LUTS'
+out_path      = 'staging/lut_v24'

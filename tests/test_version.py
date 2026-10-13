@@ -201,8 +201,11 @@ def test_run_file_with_a_foreign_lut_version_is_refused_before_any_calculation(t
 
 
 def test_run_file_with_the_declared_lut_version_passes_the_check(tmp_path, capsys, monkeypatch):
+    import re
+    declared = version.read_code_version(ROOT / "CODE_VERSION").lut_version
     text = (ROOT / "runs" / "template.run").read_text().replace("out_path      = 'luts'",
                                                                f"out_path      = '{tmp_path / 'out'}'")
+    text = re.sub(r"(?m)^version\s*=.*$", f"version       = {declared}", text)
     run = tmp_path / "declared.run"
     run.write_text(text)
     monkeypatch.setattr(create_orac_luts, "create_orac_cloud_lut", lambda *a, **k: 0)

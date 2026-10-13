@@ -1,0 +1,321 @@
+{
+ "model": "water-ice_sph",
+ "consistency": {
+  "w_in_0_1": true,
+  "g_in_-1_1": true,
+  "chi0_is_1": true,
+  "max_abs_chi": 1.0,
+  "max_abs_chi1_minus_g": 0.0,
+  "reference_550nm": {
+   "extinction_rel": [
+    0.000209808349609375,
+    7.152557373046875e-07,
+    5.602836608886719e-06
+   ],
+   "w_abs": [
+    5.960464477539063e-08,
+    0.0,
+    1.1920928955078125e-07
+   ],
+   "g_abs": [
+    -0.00016731023788452148,
+    -5.364418029785156e-07,
+    -3.2186508178710938e-06
+   ]
+  },
+  "seconds": {
+   "v23": 93.44184145331383,
+   "v24": 1782.4917544280179
+  }
+ },
+ "rows": [
+  {
+   "channel": 1,
+   "wavelength": 0.6462792754173279,
+   "effective_radius": 5.0,
+   "extinction_rel": 0.0009590387344360352,
+   "extinction_ratio_rel": 0.0007491111755371094,
+   "w_abs": -2.384185791015625e-07,
+   "g_abs": -0.0007674098014831543,
+   "L_v24": 452,
+   "max_chi_change_l_lt_1000": 0.0007674098014831543,
+   "v24_chi1_minus_g": 0.0
+  },
+  {
+   "channel": 1,
+   "wavelength": 0.6462792754173279,
+   "effective_radius": 41.0,
+   "extinction_rel": 1.7523765563964844e-05,
+   "extinction_ratio_rel": 1.6808509826660156e-05,
+   "w_abs": -1.7881393432617188e-07,
+   "g_abs": -1.537799835205078e-05,
+   "L_v24": 2031,
+   "max_chi_change_l_lt_1000": 0.008097226731479168,
+   "v24_chi1_minus_g": 0.0
+  },
+  {
+   "channel": 1,
+   "wavelength": 0.6462792754173279,
+   "effective_radius": 93.0,
+   "extinction_rel": 7.271766662597656e-06,
+   "extinction_ratio_rel": 1.6689300537109375e-06,
+   "w_abs": -1.1920928955078125e-07,
+   "g_abs": -2.205371856689453e-06,
+   "L_v24": 2031,
+   "max_chi_change_l_lt_1000": 0.09688550978899002,
+   "v24_chi1_minus_g": 0.0
+  },
+  {
+   "channel": 2,
+   "wavelength": 0.8564648628234863,
+   "effective_radius": 5.0,
+   "extinction_rel": 0.0006222724914550781,
+   "extinction_ratio_rel": 0.00041234493255615234,
+   "w_abs": 6.318092346191406e-06,
+   "g_abs": -0.0004538297653198242,
+   "L_v24": 339,
+   "max_chi_change_l_lt_1000": 0.0005539059638977051,
+   "v24_chi1_minus_g": 0.0
+  },
+  {
+   "channel": 2,
+   "wavelength": 0.8564648628234863,
+   "effective_radius": 41.0,
+   "extinction_rel": 8.463859558105469e-06,
+   "extinction_ratio_rel": 7.867813110351562e-06,
+   "w_abs": -7.748603820800781e-07,
+   "g_abs": -6.973743438720703e-06,
+   "L_v24": 1547,
+   "max_chi_change_l_lt_1000": 0.00082465133164078,
+   "v24_chi1_minus_g": 0.0
+  },
+  {
+   "channel": 2,
+   "wavelength": 0.8564648628234863,
+   "effective_radius": 93.0,
+   "extinction_rel": -7.152557373046875e-06,
+   "extinction_ratio_rel": -1.2695789337158203e-05,
+   "w_abs": 8.940696716308594e-07,
+   "g_abs": -4.76837158203125e-07,
+   "L_v24": 1547,
+   "max_chi_change_l_lt_1000": 0.03230535238981247,
+   "v24_chi1_minus_g": 0.0
+  },
+  {
+   "channel": 3,
+   "wavelength": 0.46574240922927856,
+   "effective_radius": 5.0,
+   "extinction_rel": -0.00038248300552368164,
+   "extinction_ratio_rel": -0.0005921721458435059,
+   "w_abs": 0.0,
+   "g_abs": 0.0003222823143005371,
+   "L_v24": 631,
+   "max_chi_change_l_lt_1000": 0.0003222823143005371,
+   "v24_chi1_minus_g": 0.0
+  },
+  {
+   "channel": 3,
+   "wavelength": 0.46574240922927856,
+   "effective_radius": 41.0,
+   "extinction_rel": 5.125999450683594e-06,
+   "extinction_ratio_rel": 4.410743713378906e-06,
+   "w_abs": 0.0,
+   "g_abs": -3.2186508178710938e-06,
+   "L_v24": 2793,
+   "max_chi_change_l_lt_1000": 0.041641511023044586,
+   "v24_chi1_minus_g": 0.0
+  },
+  {
+   "channel": 3,
+   "wavelength": 0.46574240922927856,
+   "effective_radius": 93.0,
+   "extinction_rel": -1.6093254089355469e-06,
+   "extinction_ratio_rel": -7.152557373046875e-06,
+   "w_abs": 0.0,
+   "g_abs": 1.430511474609375e-06,
+   "L_v24": 2793,
+   "max_chi_change_l_lt_1000": 0.18525253236293793,
+   "v24_chi1_minus_g": 0.0
+  },
+  {
+   "channel": 6,
+   "wavelength": 1.6293855905532837,
+   "effective_radius": 5.0,
+   "extinction_rel": -1.436471939086914e-05,
+   "extinction_ratio_rel": -0.00022417306900024414,
+   "w_abs": -5.841255187988281e-06,
+   "g_abs": 1.710653305053711e-05,
+   "L_v24": 177,
+   "max_chi_change_l_lt_1000": 0.00020787399262189865,
+   "v24_chi1_minus_g": 0.0
+  },
+  {
+   "channel": 6,
+   "wavelength": 1.6293855905532837,
+   "effective_radius": 41.0,
+   "extinction_rel": 7.152557373046875e-07,
+   "extinction_ratio_rel": 1.1920928955078125e-07,
+   "w_abs": -1.0728836059570312e-06,
+   "g_abs": 2.384185791015625e-07,
+   "L_v24": 798,
+   "max_chi_change_l_lt_1000": 3.382563591003418e-06,
+   "v24_chi1_minus_g": 0.0
+  },
+  {
+   "channel": 6,
+   "wavelength": 1.6293855905532837,
+   "effective_radius": 93.0,
+   "extinction_rel": -8.344650268554688e-07,
+   "extinction_ratio_rel": -6.377696990966797e-06,
+   "w_abs": 1.9669532775878906e-06,
+   "g_abs": 1.6093254089355469e-06,
+   "L_v24": 837,
+   "max_chi_change_l_lt_1000": 1.7881393432617188e-06,
+   "v24_chi1_minus_g": 0.0
+  },
+  {
+   "channel": 7,
+   "wavelength": 2.1142096519470215,
+   "effective_radius": 5.0,
+   "extinction_rel": -2.384185791015625e-07,
+   "extinction_ratio_rel": -0.00021010637283325195,
+   "w_abs": 0.0,
+   "g_abs": 3.5762786865234375e-07,
+   "L_v24": 136,
+   "max_chi_change_l_lt_1000": 3.5404227674007416e-05,
+   "v24_chi1_minus_g": 0.0
+  },
+  {
+   "channel": 7,
+   "wavelength": 2.1142096519470215,
+   "effective_radius": 41.0,
+   "extinction_rel": 0.0,
+   "extinction_ratio_rel": -8.344650268554688e-07,
+   "w_abs": -1.1920928955078125e-07,
+   "g_abs": 0.0,
+   "L_v24": 621,
+   "max_chi_change_l_lt_1000": 3.889203071594238e-06,
+   "v24_chi1_minus_g": 0.0
+  },
+  {
+   "channel": 7,
+   "wavelength": 2.1142096519470215,
+   "effective_radius": 93.0,
+   "extinction_rel": 1.1920928955078125e-07,
+   "extinction_ratio_rel": -5.4836273193359375e-06,
+   "w_abs": 2.980232238769531e-07,
+   "g_abs": 0.0,
+   "L_v24": 629,
+   "max_chi_change_l_lt_1000": 7.897615432739258e-07,
+   "v24_chi1_minus_g": 0.0
+  },
+  {
+   "channel": 20,
+   "wavelength": 3.7882111072540283,
+   "effective_radius": 5.0,
+   "extinction_rel": 0.0023393630981445312,
+   "extinction_ratio_rel": 0.002129077911376953,
+   "w_abs": -0.0003460049629211426,
+   "g_abs": -0.0007715225219726562,
+   "L_v24": 76,
+   "max_chi_change_l_lt_1000": 0.0007715225219726562,
+   "v24_chi1_minus_g": 0.0
+  },
+  {
+   "channel": 20,
+   "wavelength": 3.7882111072540283,
+   "effective_radius": 41.0,
+   "extinction_rel": -3.3855438232421875e-05,
+   "extinction_ratio_rel": -3.457069396972656e-05,
+   "w_abs": 3.886222839355469e-05,
+   "g_abs": 1.7642974853515625e-05,
+   "L_v24": 354,
+   "max_chi_change_l_lt_1000": 5.2869319915771484e-05,
+   "v24_chi1_minus_g": 0.0
+  },
+  {
+   "channel": 20,
+   "wavelength": 3.7882111072540283,
+   "effective_radius": 93.0,
+   "extinction_rel": 1.3113021850585938e-06,
+   "extinction_ratio_rel": -4.291534423828125e-06,
+   "w_abs": 1.3709068298339844e-06,
+   "g_abs": 4.172325134277344e-07,
+   "L_v24": 361,
+   "max_chi_change_l_lt_1000": 2.1457672119140625e-06,
+   "v24_chi1_minus_g": 0.0
+  },
+  {
+   "channel": 31,
+   "wavelength": 11.018420219421387,
+   "effective_radius": 5.0,
+   "extinction_rel": 0.0,
+   "extinction_ratio_rel": -0.000209808349609375,
+   "w_abs": 0.0,
+   "g_abs": 0.0,
+   "L_v24": 28,
+   "max_chi_change_l_lt_1000": 7.450580596923828e-09,
+   "v24_chi1_minus_g": 0.0
+  },
+  {
+   "channel": 31,
+   "wavelength": 11.018420219421387,
+   "effective_radius": 41.0,
+   "extinction_rel": 2.384185791015625e-07,
+   "extinction_ratio_rel": -4.76837158203125e-07,
+   "w_abs": 0.0,
+   "g_abs": 0.0,
+   "L_v24": 129,
+   "max_chi_change_l_lt_1000": 1.1920928955078125e-07,
+   "v24_chi1_minus_g": 0.0
+  },
+  {
+   "channel": 31,
+   "wavelength": 11.018420219421387,
+   "effective_radius": 93.0,
+   "extinction_rel": 6.4373016357421875e-06,
+   "extinction_ratio_rel": 9.5367431640625e-07,
+   "w_abs": 0.0,
+   "g_abs": 0.0,
+   "L_v24": 134,
+   "max_chi_change_l_lt_1000": 1.6968697309494019e-06,
+   "v24_chi1_minus_g": 0.0
+  },
+  {
+   "channel": 32,
+   "wavelength": 12.032552719116211,
+   "effective_radius": 5.0,
+   "extinction_rel": 0.0,
+   "extinction_ratio_rel": -0.0002097487449645996,
+   "w_abs": 0.0,
+   "g_abs": 0.0,
+   "L_v24": 26,
+   "max_chi_change_l_lt_1000": 5.385629719967255e-10,
+   "v24_chi1_minus_g": 0.0
+  },
+  {
+   "channel": 32,
+   "wavelength": 12.032552719116211,
+   "effective_radius": 41.0,
+   "extinction_rel": 2.384185791015625e-07,
+   "extinction_ratio_rel": -4.172325134277344e-07,
+   "w_abs": 0.0,
+   "g_abs": 0.0,
+   "L_v24": 120,
+   "max_chi_change_l_lt_1000": 1.043081283569336e-07,
+   "v24_chi1_minus_g": 0.0
+  },
+  {
+   "channel": 32,
+   "wavelength": 12.032552719116211,
+   "effective_radius": 93.0,
+   "extinction_rel": 6.4373016357421875e-06,
+   "extinction_ratio_rel": 9.5367431640625e-07,
+   "w_abs": 0.0,
+   "g_abs": 0.0,
+   "L_v24": 124,
+   "max_chi_change_l_lt_1000": 1.603737473487854e-06,
+   "v24_chi1_minus_g": 0.0
+  }
+ ]
+}

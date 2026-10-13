@@ -1,0 +1,59 @@
+{
+ "model": "water-ice_sph",
+ "wavelength": 0.646,
+ "effective_radius": 41.0,
+ "radius_upper_factor": null,
+ "refined_xres": 0.05,
+ "nodes": {
+  "production": [
+   19441,
+   100.0
+  ],
+  "reference": [
+   77761,
+   100.0
+  ],
+  "v23_legacy": [
+   2431,
+   100.0
+  ]
+ },
+ "production_vs_reference": {
+  "extinction_rel": 1.8374233392570716e-06,
+  "w_abs": 5.960464477539063e-08,
+  "g_abs": 1.6689300537109375e-06,
+  "phase_rel_0_5": 0.00012555452403195666,
+  "phase_rel_5_150": 0.0032055984249115266,
+  "phase_rel_150_180": 0.0029759376385932734
+ },
+ "v23_grid_vs_reference": {
+  "extinction_rel": 6.890337522102996e-06,
+  "w_abs": 5.960464477539063e-08,
+  "g_abs": 6.318092346191406e-06,
+  "phase_rel_0_5": 0.00020308440448058018,
+  "phase_rel_5_150": 0.007656617257740583,
+  "phase_rel_150_180": 0.09587123927677155
+ },
+ "production_bulk": {
+  "extinction": 7440.77294921875,
+  "w": 0.9999904036521912,
+  "g": 0.8859883546829224,
+  "seconds": 26.213084807619452
+ },
+ "adaptive_seconds": 102.82418416021392,
+ "legendre": {
+  "degree_bound": 2030,
+  "order": 2176,
+  "L": 2031,
+  "noise": 2.12950737564499e-08,
+  "reconstruction_error": 1.723400888664628e-08,
+  "L_at_2Nq": 2031,
+  "noise_at_2Nq": 6.2226138894394545e-09,
+  "reconstruction_error_at_2Nq": 5.96464599933455e-09,
+  "max_chi_difference_2Nq": 5.9586116422927216e-12,
+  "max_omega_dropped_beyond_L": 0.0,
+  "omega0_minus_1": 4.298339462138756e-12,
+  "omega1_over_3_minus_g": -2.915859220742334e-09,
+  "max_abs_chi": 1.0000000000042983
+ }
+}

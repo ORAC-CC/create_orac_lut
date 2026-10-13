@@ -1,0 +1,25 @@
+{
+ "pold": {
+  "v23_hours": 18.55472222222222,
+  "v23_mie_hours": 0.739185939363181,
+  "v24_mie_hours": 15.49601260984421,
+  "disort_cost_factor": 1.0312290702480036,
+  "v24_hours": 33.86791152678651
+ },
+ "p240": {
+  "v23_hours": 17.13111111111111,
+  "v23_mie_hours": 0.739185939363181,
+  "v24_mie_hours": 15.49601260984421,
+  "disort_cost_factor": 1.0312290702480036,
+  "v24_hours": 32.39984236428067
+ },
+ "pagg": {
+  "v23_hours": 18.70722222222222,
+  "v24_hours": 18.70722222222222,
+  "note": "Baum class: calculated as in V23 (compact products bitwise identical)"
+ },
+ "disort_seconds_per_call_fit": {
+  "intercept": 0.0758125073426032,
+  "per_moment": 1.0850944771272432e-05
+ }
+}

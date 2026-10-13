@@ -1,0 +1,67 @@
+{
+ "model": "liquid-water_240",
+ "wavelength": 0.646,
+ "effective_radius": 5.0,
+ "radius_upper_factor": 3.5,
+ "refined_xres": 0.025,
+ "nodes": {
+  "production": [
+   6817,
+   17.53168888892806
+  ],
+  "reference": [
+   27265,
+   17.53168888892806
+  ],
+  "v23_legacy": [
+   2431,
+   100.0
+  ]
+ },
+ "production_vs_reference": {
+  "extinction_rel": 1.7085779317582706e-05,
+  "w_abs": 5.960464477539063e-08,
+  "g_abs": 1.436471939086914e-05,
+  "phase_rel_0_5": 6.991755459984095e-05,
+  "phase_rel_5_150": 0.0023558123870551784,
+  "phase_rel_150_180": 0.002938285481334457
+ },
+ "v23_grid_vs_reference": {
+  "extinction_rel": 0.0023625150215182966,
+  "w_abs": 1.7881393432617188e-07,
+  "g_abs": 0.0018239021301269531,
+  "phase_rel_0_5": 0.002143506596685496,
+  "phase_rel_5_150": 0.04444386330790351,
+  "phase_rel_150_180": 0.1900409306534966
+ },
+ "production_bulk": {
+  "extinction": 117.4406509399414,
+  "w": 0.9999974966049194,
+  "g": 0.845757007598877,
+  "seconds": 2.138731364160776
+ },
+ "limit_3.5_vs_5.0": {
+  "extinction_rel": 5.846741318871196e-07,
+  "w_abs": 0.0,
+  "g_abs": 5.960464477539063e-08,
+  "phase_rel_0_5": 6.44613069933353e-06,
+  "phase_rel_5_150": 4.194038030203018e-07,
+  "phase_rel_150_180": 4.943305660365382e-07
+ },
+ "adaptive_seconds": 3.3673961269669235,
+ "legendre": {
+  "degree_bound": 390,
+  "order": 448,
+  "L": 359,
+  "noise": 9.116905494432892e-11,
+  "reconstruction_error": 8.544973617574669e-10,
+  "L_at_2Nq": 359,
+  "noise_at_2Nq": 6.980625409311325e-11,
+  "reconstruction_error_at_2Nq": 8.158884678977074e-10,
+  "max_chi_difference_2Nq": 1.509903313490213e-13,
+  "max_omega_dropped_beyond_L": 3.665266007368828e-10,
+  "omega0_minus_1": -7.172040739078511e-14,
+  "omega1_over_3_minus_g": 1.3859350223022204e-08,
+  "max_abs_chi": 0.9999999999999283
+ }
+}

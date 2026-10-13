@@ -345,3 +345,24 @@ campaign (uncorrected V22 code with Grid B); the historical
 `runs/terra_modis_cloud_*_v23.run` content of that campaign is in Git
 (`f066fdd`).  A V23 release tag is created only after the complete products
 pass validation.
+
+## 11. V24: the V23 code with refined Mie scattering properties (2026-10-13)
+
+LUT release V24 (`releases/lut_v24.release`, `V24_RELEASE.md`,
+`validation/v24/REPORT_v24_scattering_refinements.md`) is V23 with exactly
+three numerical refinements of the scattering properties of Mie classes,
+re-implemented in the V23 code from the historical commits `c6ad545` (liquid
+water integrated to 3.5 r_e on the legacy radius lattice), `dbcc42c`
+(adaptive Legendre expansion, King's criterion) and `96bebbe` (nested radius
+refinement for liquid water and ice spheres).  Four files change:
+`create_orac_luts_v05.py`, `create_bwgp_v05.py`,
+`generate_scattering_properties_v04.py` and the new `legendre_expansion_v01.py`;
+the manifest copies every other entry of `lut_v23.release`.  DISORT (binary,
+NSTR 60) is unchanged; each call receives NMOM = max(1000, L) moments (owner
+decision; the historical method passed max(L, NSTR + 1)).  Baum and T-matrix
+classes are calculated as in V23.  `CODE_VERSION`: `code_release =
+lut-code-v24.1`, because `lut-code-v24` already names the historical campaign
+commit `51717b8`; `lut_version = 24`; no compatible versions.  The historical
+`runs/*_v24.run` of that campaign remain in the repository; the three Terra
+MODIS names were replaced (their earlier content is in Git at `51717b8`).  A
+V24 release tag is created only after the complete products pass validation.

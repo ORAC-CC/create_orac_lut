@@ -35,6 +35,15 @@ Numerical results are those of the validated Python implementation
 Fortran sources.  Wherever the IDL expression has been simplified or reordered
 to keep the products bitwise identical to the validated ones, the IDL form is
 quoted in a comment beginning "IDL:".
+
+LUT release V24 (V24_RELEASE.md) refines the scattering properties of Mie
+classes, and nothing else, with three numerical methods
+(generate_scattering_properties, create_bwgp, legendre_expansion):
+liquid-water size integration to 3.5 effective radii on the legacy radius
+lattice, nested refinement of the radius integration of liquid-water and
+ice-sphere distributions, and an adaptive Legendre expansion of every averaged
+phase function.  DISORT then receives max(nmom, L) moments per phase function
+(_disort_moments); Baum and T-matrix classes are calculated as in the IDL.
 """
 
 import ast
@@ -57,11 +66,76 @@ from oraclut.idl_mirror import (   # noqa: E402  (import after sys.path is set)
    call_disort, generate_scattering_properties, idl_total, interpol, load_atmstr, load_gasstr,
    load_inststr, load_lutstr, load_mmdat, load_srfstrarr, setup_disort, write_v2_lut,
 )
+from oraclut.idl_mirror.generate_scattering_properties import (   # noqa: E402  (V24 scattering numerics)
+   LIQUID_REFINED_XRES, ICE_SPHERE_REFINED_XRES, LIQUID_UPPER_RADIUS_FACTOR, radius_upper_factor, refined_xres,
+   uses_adaptive_legendre,
+)
 from oraclut.idl_math import idl_cos_deg, idl_exp, idl_ipow   # noqa: E402  (IDL FLOAT cos(x*!dtor), EXP, integer ^)
 from oraclut.radiative_transfer.legacy_disort import getmom, plkavg   # noqa: E402  (DISORT GETMOM / PLKAVG)
 from oraclut.radiative_transfer.legacy_disort import DOUBLE_LIBRARY, disort_precision, single_kernel, single_library   # noqa: E402  (solver precision, kernel)
 from oraclut.provenance import build_record, write_provenance   # noqa: E402  (provenance sidecar)
 from oraclut.version import LutVersionMismatch, check_lut_version, print_banner   # noqa: E402  (code version)
+
+
+# Identifier of the scattering-property scheme stored in scattering caches
+# (V24: 3.5 r_e liquid limit, nested radius refinement, adaptive Legendre
+# expansion with lmom); caches of another scheme are refused on reuse.
+SCATTERING_SCHEME = "v24-scattering-refinements-1"
+
+
+def _disort_moments(nmom, lmom, moments):
+   """(NMOM, particle moments) of one phase function: max(nmom, lmom) moments (LUT release V24).
+
+   nmom (run file; 1000, the IDL's fixed NMom) is the number of moments the
+   IDL passes to DISORT.  An adaptive Legendre expansion
+   (generate_scattering_properties, Mie classes) gives a phase function lmom
+   moments, which can be more: DISORT then receives all of them.  Shorter
+   expansions are padded with zero moments to nmom, so the moment array is the
+   IDL's whenever lmom <= nmom.  No non-zero moment is ever dropped: moments is
+   zero beyond lmom, and the call fails if a non-zero value lies beyond the
+   moments passed.
+   """
+
+   nlmom = max(int(nmom), int(lmom))
+   moments = np.asarray(moments, dtype=np.float32)
+   used = min(nlmom, moments.size)
+   if np.any(moments[used:] != 0.0):
+      raise ValueError(f"_disort_moments: a non-zero phase moment lies beyond the {nlmom} moments passed to DISORT")
+   particle_pm = np.zeros(nlmom, dtype=np.float32)
+   particle_pm[:used] = moments[:used]
+   return nlmom, particle_pm
+
+
+def _scattering_numerics(mmstr, nmom):
+   """Description of the size integration and Legendre expansion of a class (provenance and log)."""
+
+   if not uses_adaptive_legendre(mmstr):
+      # The V22 numerics are those of the IDL (create_bwgp.py / generate_scattering_properties.py).
+      return {
+         "size_distribution_integration": "legacy IDL linear-radius trapezoid, 0.001-100 um, size-parameter step 0.4 "
+                                          "(create_bwgp.mie_size_dist_new, xres = 0.4, at least 200 nodes)",
+         "legendre_expansion": f"fixed, nmom = {int(nmom)} (IDL generate_scattering_properties)",
+         "nmom": int(nmom),
+      }
+   limits, grids = [], []
+   for c in range(mmstr.ncomp):
+      factor, refine = radius_upper_factor(mmstr, c), refined_xres(mmstr, c)
+      limits.append(f"{mmstr.compname[c]}: " + ("0.001 um to the first legacy-lattice node >= "
+                                                f"{factor:g} r_e" if factor is not None else "the IDL limits"))
+      grids.append(f"{mmstr.compname[c]}: " + (f"legacy trapezoid (xres 0.4) with every interval divided into 2^k, "
+                                               f"size-parameter step <= {refine:g}, >= 3 nodes per r_e sqrt(v_e)"
+                                               if refine is not None else "legacy trapezoid, size-parameter step 0.4"))
+   return {
+      "size_distribution_integration": "V24: " + "; ".join(limits) + " (liquid water: LIQUID_UPPER_RADIUS_FACTOR = "
+                                       f"{LIQUID_UPPER_RADIUS_FACTOR:g})",
+      "radius_integration_grid": "V24: " + "; ".join(grids) + f" (liquid water {LIQUID_REFINED_XRES:g}, ice spheres "
+                                 f"{ICE_SPHERE_REFINED_XRES:g})",
+      "legendre_expansion": "V24 adaptive: Gauss-Legendre order above the degree bound 2 NStop(x_max) of each averaged "
+                            "phase function; L from King's criterion |omega_l| < 1e-9 for all l >= L; series checked "
+                            "to 5e-7 (legendre_expansion.py)",
+      "disort_moments": f"max(nmom, L) per phase function, zero-padded (nmom = {int(nmom)})",
+      "nmom": int(nmom),
+   }
 
 
 @contextlib.contextmanager
@@ -149,7 +223,11 @@ def _print_execution_configuration(
    print(f"DISORT streams:       {nstreams}")
    print(f"DISORT precision:     {disort_precision()}"
          + (f" (kernel {single_kernel()}: {single_library().relative_to(REPO_ROOT)})" if disort_precision() == "single" else ""))
-   print(f"Legendre moments:     {nmom}")
+   if getattr(mmstr, "ncomp", 0) and uses_adaptive_legendre(mmstr):
+      print(f"Legendre moments:     adaptive (King's criterion on each averaged Mie phase function); "
+            f"DISORT NMOM = max({nmom}, L)")
+   else:
+      print(f"Legendre moments:     {nmom}")
    print(f"Output:               {output}")
    print("LUT dimensions:")
    print(f"  Optical depth:       {lutstr.opd_n}")
@@ -240,11 +318,7 @@ def _record_provenance(lut_file, *, forward_model, in_path, instfile, mmfile, lu
             grid[name] = {"n": int(np.size(values)), "spacing": axis(name + "_spacing"), "values": np.asarray(values).tolist()}
       components = {"types": list(getattr(mmstr, "comptype", []) or []), "names": list(getattr(mmstr, "compname", []) or [])}
       numerics = {
-         # The V22 numerics are those of the IDL (create_bwgp.py / generate_scattering_properties.py).
-         "size_distribution_integration": "legacy IDL linear-radius trapezoid, 0.001-100 um, size-parameter step 0.4 "
-                                          "(create_bwgp.mie_size_dist_new, xres = 0.4, at least 200 nodes)",
-         "legendre_expansion": f"fixed, nmom = {int(nmom)} (IDL generate_scattering_properties)",
-         "nmom": int(nmom),
+         **_scattering_numerics(mmstr, nmom),
          "srf_quadrature": int(qm),
          "scattering_cache_reused": bool(reuse_scat),
       }
@@ -535,15 +609,18 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
    # supplied in out_path without modifying it.
    scatfile = _scattering_cache_path(out_path, work_path, reuse_scat)
    if not reuse_scat:
-      (nmom, bext550, w550, g550, phs550, amom550, bextrat, bext, w, g, vavg, phs, amom) = \
+      (lmom, bext550, w550, g550, phs550, amom550, bextrat, bext, w, g, vavg, phs, amom) = \
          generate_scattering_properties(srfstrarr, nwvl_max, inststr, mmstr, lutstr, nmom, tmatrix_path=tmatrix_path)
       # **** write the scattering parameters for the class as a whole for reuse
-      np.savez(scatfile, nmom=nmom, bext550=bext550, w550=w550, g550=g550, phs550=phs550, amom550=amom550,
-               bextrat=bextrat, bext=bext, w=w, g=g, vavg=vavg, phs=phs, amom=amom)
+      np.savez(scatfile, lmom=lmom, scattering_scheme=SCATTERING_SCHEME, bext550=bext550, w550=w550, g550=g550,
+               phs550=phs550, amom550=amom550, bextrat=bextrat, bext=bext, w=w, g=g, vavg=vavg, phs=phs, amom=amom)
    else:
       # **** read the scattering parameters for the class as a whole for reuse
       with np.load(scatfile) as saved:
-         nmom = int(saved["nmom"])
+         if "scattering_scheme" not in saved or str(saved["scattering_scheme"]) != SCATTERING_SCHEME:
+            raise ValueError(f"{scatfile} holds scattering properties of another scheme than {SCATTERING_SCHEME}; "
+                             "recalculate them")
+         lmom = saved["lmom"]
          bext550, w550, g550, phs550, amom550 = (saved[k] for k in ("bext550", "w550", "g550", "phs550", "amom550"))
          bextrat, bext, w, g, vavg, phs, amom = (saved[k] for k in ("bextrat", "bext", "w", "g", "vavg", "phs", "amom"))
    if scat_only:
@@ -565,7 +642,13 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
    # -----------------------------------------------------------------------------
 
    # **** Setup the variables needed for the DISORT calls ****
-   disort_vars = setup_disort(nstreams, nlayers, lutstr.saz_n, lutstr.raa_n, nmom)
+   # IDL: setup_disort, NStreams, NLayers, NSatzen, NRelAzi, NMom (once).  Since
+   # LUT release V24 the number of moments passed to DISORT is
+   # max(nmom, lmom[m, l, r]) for each phase function (see _disort_moments), so
+   # the DISORT variables and the molecular (Rayleigh) moments are set up for
+   # each number of moments that occurs; with nmom moments they are those of
+   # the IDL.
+   disort_by_nmom = {}
 
    # **** Define the LUT table output variables themselves (IDL FLTARR(channels, efr, opd, ...))
    f32 = np.float32
@@ -596,10 +679,10 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
       columntauray = (atmstr.pressure[atmstr.nlevels - 1] / f32(1013.0)) / \
                      (f32(117.03) * idl_ipow(wvl_centre, 4) - f32(1.316) * idl_ipow(wvl_centre, 2))   # IDL: wvl_centre^4, ^2 (integer powers)
 
-   # Molecular (Rayleigh) phase moments from the DISORT GETMOM procedure.  The
-   # IDL calls GETMOM, 2, 0.0, NMom-1 inside the layer loop; the result is the
-   # same every time, so it is evaluated once here.
-   rayleigh_pm = getmom(2, 0.0, nmom - 1)
+   # Molecular (Rayleigh) phase moments come from the DISORT GETMOM procedure.
+   # The IDL calls GETMOM, 2, 0.0, NMom-1 inside the layer loop; the result is
+   # the same every time for one number of moments, so it is evaluated once per
+   # number of moments (disort_by_nmom).
 
    # Indices of the upwelling view directions in UU (IDL: UU[2*saz_n-lindgen(saz_n)-1, ...])
    up = slice(2 * lutstr.saz_n - 1, lutstr.saz_n - 1, -1)
@@ -654,12 +737,18 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
                # NOW USE THE GETMOM PROCEDURE (PART OF DISORT) TO GENERATE PHASE FUNCTION
                # MOMENTS FOR THE MOLECULAR SCATTERING AND COMBINE THEM WITH THE PARTICLE
                # MOMENTS GENERATED EARLIER, WEIGHTED BY SCATTERING OPTICAL DEPTH.
-               pmom = np.zeros((nmom, nlayers), f32, order="F")
+               # (V24: max(nmom, lmom) moments, _disort_moments.)
+               nlmom, particle_pm = _disort_moments(nmom, lmom[m, l, r], amom[:, m, l, r])
+               if nlmom not in disort_by_nmom:
+                  disort_by_nmom[nlmom] = (setup_disort(nstreams, nlayers, lutstr.saz_n, lutstr.raa_n, nlmom),
+                                           getmom(2, 0.0, nlmom - 1))
+               disort_vars, rayleigh_pm = disort_by_nmom[nlmom]
+               pmom = np.zeros((nlmom, nlayers), f32, order="F")
                for h in range(nlayers):
                   if asym[h] == 0.0:
                      pm = rayleigh_pm                                          # Rayleigh scattering only
                   else:
-                     pm = (rayleigh_pm * tauray[h] + amom[:, m, l, r] * w[m, l, r] * tauscat[h]) / \
+                     pm = (rayleigh_pm * tauray[h] + particle_pm * w[m, l, r] * tauscat[h]) / \
                           (tauray[h] + w[m, l, r] * tauscat[h])
                      if np.any(pm > 1.0):
                         pm = pm.copy()
@@ -971,15 +1060,18 @@ def create_orac_aerosol_lut(in_path, instfile, mmfile, lutfile, out_path, atmosp
    # -----------------------------------------------------------------------------
    scatfile = _scattering_cache_path(out_path, work_path, reuse_scat)
    if not reuse_scat:
-      (nmom, bext550, w550, g550, phs550, amom550, bextrat, bext, w, g, vavg, phs, amom) = \
+      (lmom, bext550, w550, g550, phs550, amom550, bextrat, bext, w, g, vavg, phs, amom) = \
          generate_scattering_properties(srfstrarr, nwvl_max, inststr, mmstr, lutstr, nmom, tmatrix_path=tmatrix_path)
       # **** write the scattering parameters for the class as a whole for reuse
-      np.savez(scatfile, nmom=nmom, bext550=bext550, w550=w550, g550=g550, phs550=phs550, amom550=amom550,
-               bextrat=bextrat, bext=bext, w=w, g=g, vavg=vavg, phs=phs, amom=amom)
+      np.savez(scatfile, lmom=lmom, scattering_scheme=SCATTERING_SCHEME, bext550=bext550, w550=w550, g550=g550,
+               phs550=phs550, amom550=amom550, bextrat=bextrat, bext=bext, w=w, g=g, vavg=vavg, phs=phs, amom=amom)
    else:
       # **** read the scattering parameters for the class as a whole for reuse
       with np.load(scatfile) as saved:
-         nmom = int(saved["nmom"])
+         if "scattering_scheme" not in saved or str(saved["scattering_scheme"]) != SCATTERING_SCHEME:
+            raise ValueError(f"{scatfile} holds scattering properties of another scheme than {SCATTERING_SCHEME}; "
+                             "recalculate them")
+         lmom = saved["lmom"]
          bext550, w550, g550, phs550, amom550 = (saved[k] for k in ("bext550", "w550", "g550", "phs550", "amom550"))
          bextrat, bext, w, g, vavg, phs, amom = (saved[k] for k in ("bextrat", "bext", "w", "g", "vavg", "phs", "amom"))
    if scat_only:
@@ -1000,7 +1092,8 @@ def create_orac_aerosol_lut(in_path, instfile, mmfile, lutfile, out_path, atmosp
    # -----------------------------------------------------------------------------
 
    # **** Setup the variables needed for the DISORT calls ****
-   disort_vars = setup_disort(nstreams, nlayers, lutstr.saz_n, lutstr.raa_n, nmom)
+   # (V24: once per number of moments max(nmom, lmom); see create_orac_cloud_lut)
+   disort_by_nmom = {}
 
    # **** Define the LUT table output variables themselves (IDL FLTARR(channels, prs, efr, opd, ...))
    f32 = np.float32
@@ -1024,7 +1117,6 @@ def create_orac_aerosol_lut(in_path, instfile, mmfile, lutfile, out_path, atmosp
    #      channels that need it.
 
    wvl_centre = np.asarray([s.wvl_centre for s in srfstrarr], f32)
-   rayleigh_pm = getmom(2, 0.0, nmom - 1)             # molecular phase moments (constant; see cloud)
    up = slice(2 * lutstr.saz_n - 1, lutstr.saz_n - 1, -1)
 
    for l in range(inststr.number_of_nadir_channels):
@@ -1076,13 +1168,19 @@ def create_orac_aerosol_lut(in_path, instfile, mmfile, lutfile, out_path, atmosp
                   asym[tauscat > 0.0] = g[m, l, r]
 
                   # Molecular and aerosol phase moments combined per layer
-                  pmom = np.zeros((nmom, nlayers), f32, order="F")
+                  # (V24: max(nmom, lmom) moments, _disort_moments)
+                  nlmom, particle_pm = _disort_moments(nmom, lmom[m, l, r], amom[:, m, l, r])
+                  if nlmom not in disort_by_nmom:
+                     disort_by_nmom[nlmom] = (setup_disort(nstreams, nlayers, lutstr.saz_n, lutstr.raa_n, nlmom),
+                                              getmom(2, 0.0, nlmom - 1))      # molecular phase moments
+                  disort_vars, rayleigh_pm = disort_by_nmom[nlmom]
+                  pmom = np.zeros((nlmom, nlayers), f32, order="F")
                   for h in range(nlayers):
                      scattau = tauray[h] + w[m, l, r] * tauscat[h]
                      if asym[h] == 0.0 or scattau == 0.0:
                         pm = rayleigh_pm
                      else:
-                        pm = (rayleigh_pm * tauray[h] + amom[:, m, l, r] * w[m, l, r] * tauscat[h]) / scattau
+                        pm = (rayleigh_pm * tauray[h] + particle_pm * w[m, l, r] * tauscat[h]) / scattau
                         if np.any(pm > 1.0):
                            pm = pm.copy()
                            pm[pm > 1.0] = 1.0

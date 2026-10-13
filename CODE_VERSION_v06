@@ -1,0 +1,23 @@
+# Authoritative version definition of the ORAC LUT generator.
+#
+# Read by src/oraclut/version.py and printed at the start of every LUT
+# calculation; see LUT_CODE_VERSIONS.md for the meaning of each field and the
+# release procedure.  One "name = value" assignment per line.
+#
+# code_release          the annotated Git tag of this source release.  A
+#                       working tree whose HEAD is not that tag, or that has
+#                       uncommitted changes, reports itself accordingly.
+# lut_version           the LUT product version this release produces.
+# compatible_lut_versions
+#                       other product versions this release may be asked to
+#                       produce (space separated; may be empty).  Each entry
+#                       must be justified in LUT_CODE_VERSIONS.md.
+# scientific_config     short identifier of the scientific/numerical scheme.
+# scientific_config_description
+#                       one line describing that scheme.
+
+code_release = lut-code-v24.1
+lut_version = 24
+compatible_lut_versions =
+scientific_config = v24-scattering-refinements
+scientific_config_description = The scientific code of lut-code-v22.4 (V22/V23: IDL-compatible arithmetic, original single-precision V21 Intel DISORT kernel DISORTtoIDL.so, NSTR 60, isothermal cloud emission, float32 storage) with three refinements of the scattering properties of Mie classes and nothing else: liquid-water modified-gamma size integration to the first legacy-lattice node at or beyond 3.5 effective radii, nested refinement of the liquid-water (size-parameter step 0.025) and ice-sphere (0.05) radius integration, and an adaptive Legendre expansion of every averaged phase function (King's criterion), with DISORT receiving max(nmom = 1000, L) moments.  Baum and T-matrix classes are calculated as in V23.  LUT version 24 uses the Grid B definitions of V23 (liquid-water-cloud.lut, ice-cloud.lut: SourceVault _v02).  Earlier versions are produced only by their sealed releases (releases/lut_v23.release, lut_v22_single-r2.release, idl_lut_v21_single.release)
