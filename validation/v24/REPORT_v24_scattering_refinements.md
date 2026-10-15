@@ -4,9 +4,10 @@ Date: 2026-10-13.  Release documentation: `V24_RELEASE.md`.  Scripts and
 results: `validation/v24/scattering_refinements/` (`results/*.json`; the
 NetCDF and npz work files are git-ignored).
 
-**Status:** implemented and validated on compact calculations.  The full V24
-products have **not** been generated; V24 is not validated as a product set
-until they are produced and checked (section 12).
+**Status (2026-10-15):** implemented, validated on compact calculations
+(sections 4-11), and the three full Terra MODIS products were produced and
+**passed validation** (section 13).  Their promotion to the shared ORAC LUT
+directory is pending (section 13).
 
 ## 1. The three methods, recovered from Git
 
@@ -366,3 +367,84 @@ After production: `python validation/v24/scattering_refinements/compare_full_pro
 (structure, Grid B, NaN, provenance, pagg identical to V23, V24 - V23
 statistics), then `scripts/make_release_dependencies.py` for
 `releases/lut_v24.dependencies`, then the release tag.
+
+## 13. Full products (2026-10-15)
+
+**Production.**  `scripts/submit_v24_release.sh` from atmlxint7 at `e2c666a`
+(2026-10-13 23:49; recorded in `staging/submissions.tsv`), launcher v04 with
+`releases/lut_v24.release`: 106 release files verified, 34 Python modules
+loaded from them, original Intel single-precision DISORT; empty error logs
+(`validation/slurm/v24_*_49598[2-4].err`), each output log ending "ORAC V24
+LUT SLURM JOB COMPLETED".
+
+| Product | SLURM | Node | Wall time | Estimate | SHA-256 |
+|---|---|---|---|---|---|
+| `terra_modis_m_liquid-water_a01_pold_v24.nc` | 495982 | atmnode009 | 31.4 h | 33.9 h | `e45035bda89116305ebdee4ab42ffc5ef252016b5b2e918ed1265a00b6fcbee0` |
+| `terra_modis_m_liquid-water_a01_p240_v24.nc` | 495983 | atmnode010 | 33.2 h | 32.4 h | `1287c5dbdbc96811ca4f74e6b93e4b481e335d413ec0754cabaf85e1d12c5c68` |
+| `terra_modis_m_water-ice_a01_pagg_v24.nc` | 495984 | atmnode010 | 18.8 h | 18.7 h | `ffc61063f542e217936c71275c2e764dae2dc522ef344f203725e64aef779fa1` |
+
+**Structure and provenance** (`compare_full_products.py`, `results/full_*.json`):
+for all three, the V23 variable set, Grid B coordinates bitwise
+(`liquid-water-cloud_v02.lut`, `ice-cloud_v02.lut`), 36 channels, no NaN or
+Inf, the fill pattern of V23, the NC_STRING text attributes of V23, embedded
+provenance "LUT release V24, `releases/lut_v24.release`, `lut-code-v24.1`".
+`releases/lut_v24.dependencies` (written from the products' provenance): the
+52 inputs and 76 external shared objects are those of V23, digest for digest,
+apart from the run files and CODE_VERSION.
+
+**pagg** is identical to V23 in all 52 variables (Baum class).
+
+**pold and p240 against V23** (identical Grid B nodes):
+
+| | pold median / p99 / max | p240 median / p99 / max |
+|---|---|---|
+| R_0v | 5.9e-5 / 6.3e-3 / 3.1e-1 | 5.3e-5 / 4.7e-3 / 3.8e-1 |
+| R_0d | 6.7e-5 / 6.1e-3 / 3.2e-1 | 6.2e-5 / 4.3e-3 / 1.3e-1 |
+| T_0d | 5.3e-5 / 6.9e-3 / 2.7e-2 | 4.1e-5 / 5.2e-3 / 1.6e-1 |
+| T_00 | 2.8e-8 / 1.5e-3 / 3.9e-3 | 1.5e-8 / 9.6e-4 / 3.7e-3 |
+| R_dv, T_dv | <= 1.9e-5 / 5.6e-3 / 2.7e-2 | <= 1.4e-5 / 4.5e-3 / 1.2e-2 |
+| R_dd, T_dd | <= 3.7e-5 / 5.4e-3 / 2.1e-2 | <= 3.4e-5 / 4.4e-3 / 9.7e-3 |
+| E_md | 5.4e-6 / 3.0e-3 / 5.7e-3 | 2.5e-6 / 2.9e-3 / 8.1e-3 |
+| extinction ratio (rel.) | max 1.0e-2 | max 1.0e-2 |
+| g | max 1.7e-2 | max 5.5e-3 |
+
+Every maximum was attributed (`full_census.py`, `full_inspection.py`,
+`results/full_census.json`, `results/full_inspection.json`):
+
+* **Isolated single-precision DISORT failures** (the established detector;
+  identical lists to the V22/V23 check for V23).  V23: four calls in pold
+  (including channel 1, tau 90.5, r_e 19 um, SZA 60 deg, the pold maxima of
+  R_0v and R_0d: R_0d + T_0d + T_00 = 0.665 for a conservative call) and three
+  in p240; V24: none in pold, two in p240 (channel 17, tau 8, r_e 17 um,
+  SZA 37.5 deg in R_0v, R_0d and T_0d, the p240 maxima: R_0d + T_0d + T_00 =
+  0.713 against 0.998 at the neighbouring solar zeniths and in V23, and all
+  56 V24 R_0v values below -0.01; channel 16, tau 1/64, r_e 17 um, SZA 67.5 deg
+  in T_0d).  These are the accepted single-precision limitation of the V23
+  baseline (not repaired, as specified); the failures move between nodes
+  because V24 passes different moments.  The detector misses partial
+  failures (some views only); found by inspection: V23 p240 channel 15,
+  tau 11.3, r_e 3 um, SZA 30 deg (R_0v +-0.26 with azimuth), V23 p240 T_0d at
+  the 75 deg edge (channel 19, tau 1/64, r_e 2 um), V24 pold channel 12,
+  tau 0.5, r_e 19 um, SZA 33.75 deg (10 R_0v values to -0.034 at two view
+  zeniths; its fluxes equal V23's to 1e-4).  R_0v < -0.01: pold V23 203 /
+  V24 10, p240 V23 39 / V24 56, each from these calls.
+* **Optics changes** (the intended refinements), once those calls are
+  excluded: pold r_e 2 um at 0.469 um (oldwater, practically non-absorbing):
+  g +0.017, extinction +2.3%, R_0v up to 0.09 at back-scatter; against a 4x
+  finer grid V24 is within 8e-6 / 7e-6 and V23 was 2.3e-2 / 1.7e-2 in error
+  (its xres = 0.4 step aliased the sharp resonances).  The extinction ratio
+  at r_e 2 um (+1%) follows from the corrected 0.55 um reference.  p240
+  0.412 um, r_e 39 um, tau 181-256: R_0v +0.125 at back-scatter, the glory
+  resolved by the adaptive expansion (section 7).  These changes are smooth
+  in solar zenith in both products.
+
+**Conclusion:** the full V24 products pass validation: structure, grid,
+inputs and Baum product as V23; the liquid-water changes are those of the
+three refinements, plus isolated single-precision DISORT failures at a few
+nodes (three V24 calls, against at least nine in V23).
+
+**Promotion (pending).**  By the owner decision of 2026-10-13
+(`LUT_CODE_VERSIONS.md` section 12) the three validated products may replace
+the historical `lut-code-v24` V24 files in the shared ORAC LUT directory.  The
+replacement was not carried out by the agent (shared-directory changes were
+refused by its permission settings); the commands are in `V24_RELEASE.md`.

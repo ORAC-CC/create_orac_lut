@@ -1,0 +1,411 @@
+{
+ "product": "/home/g/grainger/project-oraclut/staging/lut_v24/terra_modis_m_liquid-water_a01_pold_v24.nc",
+ "v23": "/home/g/grainger/project-oraclut/staging/lut_v23/terra_modis_m_liquid-water_a01_pold_v23.nc",
+ "structure": {
+  "optical_depth": {
+   "n": 24,
+   "expected_n": 24,
+   "bitwise": true,
+   "equal": true
+  },
+  "effective_radius": {
+   "n": 24,
+   "expected_n": 24,
+   "bitwise": true,
+   "equal": true
+  },
+  "solar_zenith": {
+   "n": 21,
+   "expected_n": 21,
+   "bitwise": true,
+   "equal": true
+  },
+  "satellite_zenith": {
+   "n": 21,
+   "expected_n": 21,
+   "bitwise": true,
+   "equal": true
+  },
+  "relative_azimuth": {
+   "n": 37,
+   "expected_n": 37,
+   "bitwise": true,
+   "equal": true
+  },
+  "channels": 36,
+  "nan_inf": {},
+  "fill": {
+   "oldnefr": 10,
+   "oldwvn": 20,
+   "oldb1": 20,
+   "oldb2": 20,
+   "oldt1": 20,
+   "oldt2": 20,
+   "oldnebt": 20
+  },
+  "variables": [
+   "instrument_filename",
+   "platform",
+   "instrument",
+   "instrument_version",
+   "max_sat_zenith",
+   "number_of_channels",
+   "SRF_file",
+   "channel_id",
+   "central_wavelength",
+   "central_wavenumber",
+   "solar_channel_flag",
+   "mixed_channel_flag",
+   "thermal_channel_flag",
+   "solar_channel_id",
+   "oldf0",
+   "oldf1",
+   "F0",
+   "snr",
+   "oldnefr",
+   "mixed_channel_id",
+   "thermal_channel_id",
+   "refbt",
+   "nedt",
+   "B1",
+   "B2",
+   "T1",
+   "T2",
+   "oldwvn",
+   "oldb1",
+   "oldb2",
+   "oldt1",
+   "oldt2",
+   "oldnebt",
+   "average_volume_per_particle",
+   "extinction_coefficient",
+   "extinction_coefficient_ratio",
+   "single_scatter_albedo",
+   "asymmetry_parameter",
+   "optical_depth",
+   "effective_radius",
+   "satellite_zenith",
+   "solar_zenith",
+   "relative_azimuth",
+   "T_dv",
+   "T_dd",
+   "R_dv",
+   "R_dd",
+   "R_0v",
+   "R_0d",
+   "T_0d",
+   "T_00",
+   "E_md"
+  ],
+  "provenance": {
+   "lut_release": "V24",
+   "manifest": "releases/lut_v24.release",
+   "manifest_sha256": "317edf0009f352c5ce024e8e6baa48cd6897d557bdc86215fe6acf47bab9ae29",
+   "scientific_code": "lut-code-v24.1",
+   "grid": "Grid-B",
+   "driver": "create_orac_luts_v05.py",
+   "git_commit": "e2c666a3ce8e4da0e7906d2726680961c9184c16"
+  }
+ },
+ "operators": {
+  "R_0v": {
+   "median": 5.915015935897827e-05,
+   "p99": 0.006283819675445557,
+   "max": 0.3097519129514694,
+   "max_index": [
+    1,
+    20,
+    16,
+    20,
+    13,
+    0
+   ],
+   "dimensions": [
+    "relative_azimuth",
+    "satellite_zenith",
+    "solar_zenith",
+    "optical_depth",
+    "effective_radius",
+    "solar_channels"
+   ],
+   "values_at_max": [
+    0.12987400591373444,
+    0.43962591886520386
+   ]
+  },
+  "R_0d": {
+   "median": 6.702088285237551e-05,
+   "p99": 0.006087467074394223,
+   "max": 0.31503260135650635,
+   "max_index": [
+    16,
+    20,
+    13,
+    0
+   ],
+   "dimensions": [
+    "solar_zenith",
+    "optical_depth",
+    "effective_radius",
+    "solar_channels"
+   ],
+   "values_at_max": [
+    0.5994220972061157,
+    0.9144546985626221
+   ]
+  },
+  "T_0d": {
+   "median": 5.294475704431534e-05,
+   "p99": 0.006882311403751373,
+   "max": 0.026626527309417725,
+   "max_index": [
+    0,
+    13,
+    1,
+    2
+   ],
+   "dimensions": [
+    "solar_zenith",
+    "optical_depth",
+    "effective_radius",
+    "solar_channels"
+   ],
+   "values_at_max": [
+    0.526492178440094,
+    0.5531187057495117
+   ]
+  },
+  "T_00": {
+   "median": 2.8033241505909245e-08,
+   "p99": 0.0014743309468030923,
+   "max": 0.003925949335098267,
+   "max_index": [
+    0,
+    8,
+    1,
+    2
+   ],
+   "dimensions": [
+    "solar_zenith",
+    "optical_depth",
+    "effective_radius",
+    "solar_channels"
+   ],
+   "values_at_max": [
+    0.30400317907333374,
+    0.307929128408432
+   ]
+  },
+  "R_dv": {
+   "median": 1.5854835510253906e-05,
+   "p99": 0.005029317736625679,
+   "max": 0.026651620864868164,
+   "max_index": [
+    1,
+    14,
+    1,
+    2
+   ],
+   "dimensions": [
+    "satellite_zenith",
+    "optical_depth",
+    "effective_radius",
+    "channels"
+   ],
+   "values_at_max": [
+    0.5619817972183228,
+    0.5353301763534546
+   ]
+  },
+  "T_dv": {
+   "median": 1.9162893295288086e-05,
+   "p99": 0.005573688447475451,
+   "max": 0.026718974113464355,
+   "max_index": [
+    1,
+    14,
+    1,
+    2
+   ],
+   "dimensions": [
+    "satellite_zenith",
+    "optical_depth",
+    "effective_radius",
+    "channels"
+   ],
+   "values_at_max": [
+    0.4387073218822479,
+    0.4654262959957123
+   ]
+  },
+  "R_dd": {
+   "median": 3.664568066596985e-05,
+   "p99": 0.004823422431945874,
+   "max": 0.021350860595703125,
+   "max_index": [
+    13,
+    1,
+    2
+   ],
+   "dimensions": [
+    "optical_depth",
+    "effective_radius",
+    "channels"
+   ],
+   "values_at_max": [
+    0.5839815735816956,
+    0.5626307129859924
+   ]
+  },
+  "T_dd": {
+   "median": 3.045797348022461e-05,
+   "p99": 0.005373601615428954,
+   "max": 0.02144262194633484,
+   "max_index": [
+    13,
+    1,
+    2
+   ],
+   "dimensions": [
+    "optical_depth",
+    "effective_radius",
+    "channels"
+   ],
+   "values_at_max": [
+    0.41596633195877075,
+    0.4374089539051056
+   ]
+  },
+  "E_md": {
+   "median": 5.364418029785156e-06,
+   "p99": 0.002955019474029541,
+   "max": 0.005716860294342041,
+   "max_index": [
+    0,
+    12,
+    8,
+    0
+   ],
+   "dimensions": [
+    "satellite_zenith",
+    "optical_depth",
+    "effective_radius",
+    "thermal_channels"
+   ],
+   "values_at_max": [
+    0.5756719708442688,
+    0.5699551105499268
+   ]
+  },
+  "extinction_coefficient": {
+   "median": 0.06884574890136719,
+   "p99": 4.1131689453125,
+   "max": 5.3499755859375,
+   "max_index": [
+    13,
+    22
+   ],
+   "dimensions": [
+    "effective_radius",
+    "channels"
+   ],
+   "values_at_max": [
+    1743.34423828125,
+    1748.6942138671875
+   ]
+  },
+  "extinction_coefficient_ratio": {
+   "median": 0.0001704096794128418,
+   "p99": 0.009099203944206238,
+   "max": 0.013719677925109863,
+   "max_index": [
+    1,
+    6
+   ],
+   "dimensions": [
+    "effective_radius",
+    "channels"
+   ],
+   "values_at_max": [
+    1.3587393760681152,
+    1.372459053993225
+   ]
+  },
+  "single_scatter_albedo": {
+   "median": 4.76837158203125e-07,
+   "p99": 0.0009329658746719366,
+   "max": 0.002222776412963867,
+   "max_index": [
+    0,
+    28
+   ],
+   "dimensions": [
+    "effective_radius",
+    "channels"
+   ],
+   "values_at_max": [
+    0.3139544427394867,
+    0.3117316663265228
+   ]
+  },
+  "asymmetry_parameter": {
+   "median": 1.2576580047607422e-05,
+   "p99": 0.005053426027297975,
+   "max": 0.017294585704803467,
+   "max_index": [
+    1,
+    2
+   ],
+   "dimensions": [
+    "effective_radius",
+    "channels"
+   ],
+   "values_at_max": [
+    0.801330029964447,
+    0.8186246156692505
+   ]
+  }
+ },
+ "fill_as_v23": true,
+ "identical_variables": [
+  "instrument_filename",
+  "platform",
+  "instrument",
+  "instrument_version",
+  "max_sat_zenith",
+  "number_of_channels",
+  "SRF_file",
+  "channel_id",
+  "central_wavelength",
+  "central_wavenumber",
+  "solar_channel_flag",
+  "mixed_channel_flag",
+  "thermal_channel_flag",
+  "solar_channel_id",
+  "oldf0",
+  "oldf1",
+  "F0",
+  "snr",
+  "oldnefr",
+  "mixed_channel_id",
+  "thermal_channel_id",
+  "refbt",
+  "nedt",
+  "B1",
+  "B2",
+  "T1",
+  "T2",
+  "oldwvn",
+  "oldb1",
+  "oldb2",
+  "oldt1",
+  "oldt2",
+  "oldnebt",
+  "optical_depth",
+  "effective_radius",
+  "satellite_zenith",
+  "solar_zenith",
+  "relative_azimuth"
+ ],
+ "all_scientific_variables_identical": false
+}

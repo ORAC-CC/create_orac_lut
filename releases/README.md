@@ -23,5 +23,5 @@ Supporting records of the definitive V22 release:
 `input-*`), including the Grid B definitions; `lut_v23.dependencies` lists the
 V23 products' inputs and external shared objects (written by
 `scripts/make_release_dependencies.py` from the products' provenance), and
-`lut_v24.dependencies` follows once the V24 products exist.  Manifests are sealed: never edit them.  Several manifests define V22, so the
+`lut_v24.dependencies` those of the V24 products (2026-10-15).  Manifests are sealed: never edit them.  Several manifests define V22, so the
 launcher needs `ORAC_LUT_RELEASE_MANIFEST=<file>`.  See `../V21_V22_REFERENCE.md`.

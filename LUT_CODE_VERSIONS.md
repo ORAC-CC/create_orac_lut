@@ -9,6 +9,11 @@ production notes `runs/V24_PRODUCTION.md` and `runs/V25_PRODUCTION.md`.
 
 ## 1. Three different things called "version"
 
+*Owner decision of 2026-10-13 (section 12): the three versioning concepts of
+the project are the LUT product version, SourceVault file revisions and the
+release manifest; the naming in this section is under a deferred review and
+is unchanged until the owner approves a proposal.*
+
 | Quantity | Where it is defined | Example | Meaning |
 |---|---|---|---|
 | **LUT product version** | run file `version = N`; product name `_vNN.nc` | 25 | A product set: its grids and the scientific scheme it was produced with.  ORAC users select tables by it. |
@@ -366,3 +371,75 @@ commit `51717b8`; `lut_version = 24`; no compatible versions.  The historical
 `runs/*_v24.run` of that campaign remain in the repository; the three Terra
 MODIS names were replaced (their earlier content is in Git at `51717b8`).  A
 V24 release tag is created only after the complete products pass validation.
+The complete products passed validation on 2026-10-15 (`V24_RELEASE.md`,
+`validation/v24/REPORT_v24_scattering_refinements.md` section 13); whether
+and how V24 is tagged is part of the deferred review of section 12.
+
+## 12. Owner decision on versioning and release naming (2026-10-13): deferred review
+
+Recorded at the owner's request.  **Nothing below has been implemented**: no
+file, tag, manifest or name was changed, and the review starts only after the
+V24 products are produced and validated.
+
+**The three concepts the project retains**
+
+1. **LUT product version** (V21, V22, V23, V24, V25, ...): the scientific
+   definition of the lookup-table product.
+2. **SourceVault file revisions**: every source file keeps a stable active
+   name (`create_orac_luts.py`) and independently numbered historical
+   revisions (`create_orac_luts_v01.py`, `_v02`, ...), `_vNN` inserted before
+   the extension.  These numbers are independent of the LUT version.
+3. **Release manifests** (`releases/*.release`): for each definitive LUT
+   version, the exact source revisions, input files, dependencies, settings
+   and hashes needed to reproduce it.  The manifest, not a second scientific
+   version number, is the authoritative identity of the calculation.
+
+**Naming policy for future work**
+
+* Avoid unnecessary additional code-release numbers (such as
+  `lut-code-v24.1`) when a definitive manifest already identifies the source
+  collection.
+* Do not retrospectively rename existing code-release tags or rewrite
+  historical release manifests.
+* Keep the separate release launcher where it is needed to verify and execute
+  frozen source collections; do not merge it into the scientific generator to
+  simplify filenames.
+* Active filenames stay stable; SourceVault revisions keep the
+  `<name>_vNN.<ext>` form; no alternative scientific generator filenames for
+  different LUT releases.
+
+**V24 product policy**
+
+* The V24 of 2026-10-13 (`V24_RELEASE.md`, `releases/lut_v24.release`)
+  supersedes the historical `lut-code-v24` product definition; the old V24
+  NetCDF products are not needed as alternative production products.
+* When the three new full V24 products have completed **and passed
+  validation**, they may replace the corresponding historical V24 files in the
+  shared ORAC LUT directory.  No existing NetCDF product is overwritten before
+  that validation.  Source history stays in Git and SourceVault; NetCDF products
+  are never committed.
+
+**Deferred work (after V24 production and validation)**
+
+Review the naming and documentation conventions and propose, for owner
+approval before anything is implemented, the smallest administrative changes
+that make the three concepts clear, preferring documentation and naming-policy
+changes to code changes.  Constraints: no restructuring of the scientific code,
+no renaming of existing source files, no change to the release launcher without
+a demonstrated functional need, no change to DISORT, Mie, the scattering
+calculations, LUT definitions or numerical settings, no rewriting of Git
+history, no change to existing tags or sealed manifests, no automatic cleanup.
+
+Items already known to fall within the review (none acted upon):
+
+* `CODE_VERSION` declares `code_release = lut-code-v24.1`, and that content is
+  pinned in the sealed `releases/lut_v24.release`; it is the kind of extra
+  code-release number the policy avoids.  Whether and how the validated V24 is
+  tagged is decided in the review; no `lut-code-v24.1` tag has been created.
+* Section 1 of this document presents the source-code release
+  (`lut-code-...`) as one of the three "versions"; the decision names the
+  release manifest instead.
+* The release procedure of section 5 (`scripts/tag_lut_code_release.sh`) and
+  the "(tag after validation)" entries of `releases/README.md`.
+* Existing tags (`idl-lut-v21`, `lut-code-v22` ... `lut-code-v25.1`) and sealed
+  manifests stay as they are.
