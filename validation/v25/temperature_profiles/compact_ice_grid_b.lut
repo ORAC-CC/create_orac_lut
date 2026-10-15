@@ -1,0 +1,14 @@
+# Compact ice grid for the V24/V25 cloud-temperature comparison
+# (validation/v25/temperature_profiles/compact_lut.py).  Not a production grid:
+# every value is a node of the approved Grid B ice-cloud.lut; all 24 optical
+# depths are kept so that the behaviour along tau can be checked.
+24 uneven_logarithmic # optical depth
+1e-10 0.0078125 0.015625 0.03125 0.0625 0.125 0.25 0.5 1.0 2.0 2.82842712474619 4.0 5.65685424949238 8.0 11.3137084989848 16.0 22.6274169979695 32.0 45.254833995939 64.0 90.509667991878 128.0 181.019335983756 256.0
+3 uneven_linear # physical effective radius, microns
+5.0 33.0 93.0
+3 uneven_linear # solar zenith, degrees
+0.0 30.0 60.0
+4 uneven_linear # satellite zenith, degrees
+0.0 30.0 60.0 75.0
+3 linear # relative azimuth, degrees, 0-180
+0 180

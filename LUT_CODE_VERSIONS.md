@@ -375,6 +375,31 @@ The complete products passed validation on 2026-10-15 (`V24_RELEASE.md`,
 `validation/v24/REPORT_v24_scattering_refinements.md` section 13); whether
 and how V24 is tagged is part of the deferred review of section 12.
 
+## 11a. V25: the V24 code with vertically varying cloud temperature (2026-10-16)
+
+LUT release V25 (`V25_RELEASE.md`, `releases/lut_v25.release`) is the V24
+calculation plus a vertically varying cloud temperature in the
+thermal-emission DISORT call:
+* water ice: the supplied cirrostratus profile;
+* liquid water: the saturated adiabat;
+* cloud top 250 K, as V24.
+
+It re-implements the historical V25 method (tag `lut-code-v25` = `f066fdd`)
+in `create_orac_luts_v07`, `write_v2_lut_v04` and the new
+`cloud_temperature_v02`.  It corrects that method's thin-cloud DISORT failure
+and its thick-cloud layering error
+(`validation/v25/REPORT_v25_temperature_profiles.md`).
+
+`CODE_VERSION` declares `code_release = lut-code-v25.2` and
+`lut_version = 25`.  `oraclut.version` requires a tag-style name, and the
+existing tags `lut-code-v25` and `lut-code-v25.1` name the historical
+campaign.  No tag is created; the name is part of the deferred review of
+section 12.
+
+The historical V25 run files (`f066fdd`) remain in `runs/` as the record of
+that campaign.  The three Terra MODIS names were replaced; their earlier
+content is in Git.
+
 ## 12. Owner decision on versioning and release naming (2026-10-13): deferred review
 
 Recorded at the owner's request.  **Nothing below has been implemented**: no

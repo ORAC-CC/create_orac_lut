@@ -1,0 +1,23 @@
+# Authoritative version definition of the ORAC LUT generator.
+#
+# Read by src/oraclut/version.py and printed at the start of every LUT
+# calculation; see LUT_CODE_VERSIONS.md for the meaning of each field and the
+# release procedure.  One "name = value" assignment per line.
+#
+# code_release          the annotated Git tag of this source release.  A
+#                       working tree whose HEAD is not that tag, or that has
+#                       uncommitted changes, reports itself accordingly.
+# lut_version           the LUT product version this release produces.
+# compatible_lut_versions
+#                       other product versions this release may be asked to
+#                       produce (space separated; may be empty).  Each entry
+#                       must be justified in LUT_CODE_VERSIONS.md.
+# scientific_config     short identifier of the scientific/numerical scheme.
+# scientific_config_description
+#                       one line describing that scheme.
+
+code_release = lut-code-v25.2
+lut_version = 25
+compatible_lut_versions =
+scientific_config = v25-cloud-temperature-profiles
+scientific_config_description = The scientific code of LUT release V24 (releases/lut_v24.release: lut-code-v22.4 with the three V24 refinements of the scattering properties of Mie classes, Grid B, original single-precision V21 Intel DISORT kernel DISORTtoIDL.so, NSTR 60, DISORT NMOM = max(1000, L), float32 storage) with one addition: a vertically varying cloud temperature in the thermal-emission DISORT call, selected by the run-file setting cloud_vertical_profile (water ice: the supplied cirrostratus profile, 8 K/km below the cloud top over a depth of 2-11 km; liquid water: the saturated liquid-water adiabat from 628 hPa along z = tau_055 / 20 km^-1), with the cloud top at the V24 emission temperature 250 K and E_md normalised by B(250 K); the emission call has up to 46 geometric sub-layers with the integral-preserving projection of the profile's Planck radiance, or, for optically thin clouds, isothermal cells at their mean Planck radiance (cloud_temperature.emission_layers); the diffuse and direct-beam calls are those of V24.  Without cloud_vertical_profile the calculation is that of V24.  Earlier versions are produced only by their sealed releases (releases/lut_v24.release, lut_v23.release, lut_v22_single-r2.release, idl_lut_v21_single.release)

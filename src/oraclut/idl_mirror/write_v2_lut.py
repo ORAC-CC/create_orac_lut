@@ -77,8 +77,14 @@ def _solar_uncertainty_variables(inststr, solar_index):
 
 
 def write_v2_lut(v2_lut_filename, lutstr, inststr, srfstrarr, vavg, bextout, bextratout, ssaout, gout,
-                 td, tfd, rd, rfd, rbd=None, rfbd=None, tfbd=None, tb=None, em=None, include_pressure=False):
-   """Write the V2 LUT file ``v2_lut_filename``."""
+                 td, tfd, rd, rfd, rbd=None, rfbd=None, tfbd=None, tb=None, em=None, include_pressure=False,
+                 em_valid_range=None):
+   """Write the V2 LUT file ``v2_lut_filename``.
+
+   ``em_valid_range`` replaces the valid range [0, 1] of E_md (LUT release
+   V25: the emission of a cloud warmer below its top, normalised by the
+   cloud-top Planck radiance, may exceed 1).
+   """
 
    numberofsolarchannels = int(idl_total(inststr.solar_channel_flag))
    solar_channels_exist = numberofsolarchannels > 0
@@ -293,7 +299,8 @@ def write_v2_lut(v2_lut_filename, lutstr, inststr, srfstrarr, vavg, bextout, bex
    if thermal_channels_exist:
       define("E_md", np.asarray(em, dtype=np.float32)[thermal_index].T / percent,
              ("satellite_zenith", "optical_depth", "effective_radius", *prs, "thermal_channels"),
-             long_name="diffuse emissivity", units="dimensionless", valid_range=unit_range)
+             long_name="diffuse emissivity", units="dimensionless",
+             valid_range=unit_range if em_valid_range is None else np.asarray(em_valid_range, dtype=np.float32))
 
    Path(v2_lut_filename).parent.mkdir(parents=True, exist_ok=True)
    ncdf_write_v2_lut(v2_lut_filename, lut_level=2, revision=0, dimensions=dimensions, variables=variables,

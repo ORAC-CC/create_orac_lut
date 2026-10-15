@@ -42,10 +42,11 @@ def _accepted_run_files():
    may use settings this release does not read, so they are not exercised here.
 
    Since LUT release V24 (lut-code-v24.1) the version number 24 is shared with
-   the historical lut-code-v24 campaign of 2026-10-03: its run files that are
-   unchanged since that campaign's commit (HISTORICAL_CAMPAIGNS) are its
-   record, not run files of this release (they omit nmom, which this release
-   requires), so they are not exercised either.
+   the historical lut-code-v24 campaign of 2026-10-03, and since LUT release
+   V25 the number 25 with the historical lut-code-v25 campaign of 2026-10-06:
+   their run files that are unchanged since the campaign's commit
+   (HISTORICAL_CAMPAIGNS) are its record, not run files of this release (they
+   omit nmom, which this release requires), so they are not exercised either.
    """
 
    import re
@@ -73,7 +74,7 @@ def _accepted_run_files():
 
 # Historical production campaigns whose LUT version a later release reuses:
 # version -> the commit holding that campaign's run files (LUT_CODE_VERSIONS.md).
-HISTORICAL_CAMPAIGNS = {24: "51717b8"}
+HISTORICAL_CAMPAIGNS = {24: "51717b8", 25: "f066fdd"}
 
 
 CONCRETE_RUNS = _accepted_run_files()

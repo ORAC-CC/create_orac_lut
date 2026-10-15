@@ -44,6 +44,15 @@ lattice, nested refinement of the radius integration of liquid-water and
 ice-sphere distributions, and an adaptive Legendre expansion of every averaged
 phase function.  DISORT then receives max(nmom, L) moments per phase function
 (_disort_moments); Baum and T-matrix classes are calculated as in the IDL.
+
+LUT release V25 (V25_RELEASE.md) adds one thing to V24: a vertically varying
+cloud temperature in the thermal-emission DISORT call, selected by the run-file
+setting cloud_vertical_profile (cloud_temperature): 'cirrostratus' (water-ice
+LUTs, the supplied cirrostratus profile) or 'wet_adiabat' (liquid-water LUTs,
+the saturated liquid-water adiabat); absent or 'isothermal' is the V24
+calculation.  The cloud top stays at the IDL's emission temperature (250 K),
+by which E_md is still normalised; the diffuse and direct-beam calls are
+unchanged.
 """
 
 import ast
@@ -69,6 +78,9 @@ from oraclut.idl_mirror import (   # noqa: E402  (import after sys.path is set)
 from oraclut.idl_mirror.generate_scattering_properties import (   # noqa: E402  (V24 scattering numerics)
    LIQUID_REFINED_XRES, ICE_SPHERE_REFINED_XRES, LIQUID_UPPER_RADIUS_FACTOR, radius_upper_factor, refined_xres,
    uses_adaptive_legendre,
+)
+from oraclut.idl_mirror.cloud_temperature import (   # noqa: E402  (V25 cloud temperature profile)
+   CLOUD_PROFILES, PROFILE_SUBSTANCE, describe_cloud_profile, emission_layers, setup_cloud_profile,
 )
 from oraclut.idl_math import idl_cos_deg, idl_exp, idl_ipow   # noqa: E402  (IDL FLOAT cos(x*!dtor), EXP, integer ^)
 from oraclut.radiative_transfer.legacy_disort import getmom, plkavg   # noqa: E402  (DISORT GETMOM / PLKAVG)
@@ -298,7 +310,7 @@ def _scattering_cache_path(out_path, work_path, reuse_scat):
 
 def _record_provenance(lut_file, *, forward_model, in_path, instfile, mmfile, lutfile, atmfile, inststr, mmstr,
                        lutstr, qm, atmospheres, gas_flag, rayleigh_flag, scat_only, reuse_scat, nstreams, nmom,
-                       version, driver, tmatrix_path):
+                       version, driver, tmatrix_path, cloudprof=None):
    """Write ``<product>.provenance.json`` next to a published product (oraclut.provenance).
 
    Records the source release and Git commit, the configuration and input
@@ -334,7 +346,8 @@ def _record_provenance(lut_file, *, forward_model, in_path, instfile, mmfile, lu
          "atmosphere_code": str(atmospheres),
          "atmosphere_file": str(atmfile),
          "scattering_only": bool(scat_only),
-         "cloud_emission": "isothermal cloud (legacy IDL)" if forward_model == "cloud" else None,
+         "cloud_emission": (None if forward_model != "cloud" else "isothermal cloud (legacy IDL)" if cloudprof is None
+                            else describe_cloud_profile(cloudprof)),
       }
       configuration = {
          "forward_model": forward_model,
@@ -373,7 +386,10 @@ REQUIRED_RUN_KEYS = (
    "atmospheres", "channelid", "srf_quad", "nstreams", "nmom", "version", "out_path",
 )
 # Keys with the IDL keyword defaults (not set = not present, as in IDL).
-OPTIONAL_RUN_KEYS = {"gas": 0, "no_rayleigh": 0, "reuse_scat": 0, "scat_only": 0, "tmatrix_path": None}
+# cloud_vertical_profile (LUT release V25) not set is the isothermal cloud of
+# the IDL and of V24.
+OPTIONAL_RUN_KEYS = {"gas": 0, "no_rayleigh": 0, "reuse_scat": 0, "scat_only": 0, "tmatrix_path": None,
+                     "cloud_vertical_profile": "isothermal"}
 
 # IDL create_orac_*_lut.pro: Case Atmospheres of ... (MODTRAN model codes)
 ATMOSPHERE_FILES = {
@@ -427,6 +443,11 @@ def read_runfile(runfile):
       raise ValueError(f"{runfile}: forward_model must be 'cloud' or 'aerosol', got {run['forward_model']!r}")
    if str(run["atmospheres"]) not in ATMOSPHERE_FILES:
       raise ValueError(f"{runfile}: atmospheres must be a MODTRAN code 0-6, got {run['atmospheres']!r}")
+   if run["cloud_vertical_profile"] not in CLOUD_PROFILES:
+      raise ValueError(f"{runfile}: cloud_vertical_profile must be one of {CLOUD_PROFILES}, "
+                       f"got {run['cloud_vertical_profile']!r}")
+   if run["cloud_vertical_profile"] != "isothermal" and run["forward_model"] != "cloud":
+      raise ValueError(f"{runfile}: cloud_vertical_profile is defined for the cloud forward model only")
    channels = run["channelid"]
    if not isinstance(channels, (list, tuple)) or not channels:
       raise ValueError(
@@ -449,11 +470,15 @@ def read_runfile(runfile):
 @_with_private_workdir
 def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmospheres,
                           channelid=None, gas=0, no_rayleigh=0, srf_quad=None, reuse_scat=0, scat_only=0,
-                          tmatrix_path=None, version=None, driver=None, nstreams=60, nmom=1000, work_path=None):
+                          tmatrix_path=None, version=None, driver=None, nstreams=60, nmom=1000, work_path=None,
+                          cloud_vertical_profile="isothermal"):
    """Generate an ORAC LUT with the cloud formulation (discrete particle layer).
 
    Arguments follow the IDL function; ``nstreams`` (60) and ``nmom`` (1000) are
    the values hard-wired in the IDL (setup_disort, generate_scattering_properties).
+   ``cloud_vertical_profile`` (LUT release V25) is the temperature profile of
+   the emission call: "isothermal" (the IDL, V24), "cirrostratus" (water ice)
+   or "wet_adiabat" (liquid water); see cloud_temperature.
    """
 
    # -----------------------------------------------------------------------------
@@ -552,6 +577,20 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
    print("    Instrument zenith ", lutstr.saz_n)
    print("     Relative azimuth ", lutstr.raa_n)
    print("SRF quadrature method ", qm)
+
+   # **** LUT release V25: the cloud temperature profile of the emission call
+   #      (None: the isothermal cloud of the IDL).  One profile per LUT, for the
+   #      0.55 um optical depths of the grid; the cloud top is at the emission
+   #      temperature of the IDL (temp = 250.0 below).
+   cloudprof = None
+   if cloud_vertical_profile not in CLOUD_PROFILES:
+      raise ValueError(f"cloud_vertical_profile must be one of {CLOUD_PROFILES}, got {cloud_vertical_profile!r}")
+   if cloud_vertical_profile != "isothermal":
+      if mmstr.substance.lower() != PROFILE_SUBSTANCE[cloud_vertical_profile]:
+         raise ValueError(f"the {cloud_vertical_profile!r} cloud profile is defined for {PROFILE_SUBSTANCE[cloud_vertical_profile]!r}, "
+                          f"not for {mmstr.substance!r}")
+      cloudprof = setup_cloud_profile(cloud_vertical_profile, np.max(lutstr.opd), 250.0)
+      print("Cloud profile:        " + describe_cloud_profile(cloudprof))
 
    # -----------------------------------------------------------------------------
    # Create the output filename
@@ -809,11 +848,22 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
                      emtau = dtau[incloud]
                      emssa = ssalb[incloud]
                      empmo = np.asfortranarray(pmom[:, incloud])
+                     emtemp = np.full(emnly + 1, temp, f32)
+                     # LUT release V25: with a cloud profile, the in-cloud layer becomes
+                     # emission sub-layers whose Planck source follows the temperature
+                     # profile of lutstr.opd[a] below temp at the cloud top (geometric
+                     # sub-layers, none optically too thin for DISORT; one layer with the
+                     # mean Planck radiance for an optically thin cloud); E_md stays
+                     # normalised by B(temp) below.
+                     if cloudprof is not None:
+                        emtau, emssa, empmo, emtemp = emission_layers(
+                           emtau, emssa, empmo, lutstr.opd[a], cloudprof, temp, wnlo, wnhi)
+                        emnly = emtau.size
                      emutau = np.asarray([0.0, idl_total(emtau)], f32)
 
                      rfldir, rfldn, flup, dfdt, uavg, uu, albmed, trnmed = call_disort(
                         disort_vars, emtau, emssa, empmo, emutau, umu, lutstr.raa, fbeam, umu0, fisot,
-                        plank=True, wnlo=wnlo, wnhi=wnhi, temp=np.full(emnly + 1, temp, f32), nlayer=emnly)
+                        plank=True, wnlo=wnlo, wnhi=wnhi, temp=emtemp, nlayer=emnly)
                      # Now calculate the Planck emission across the wavelength interval.
                      bbe = plkavg(float(wnlo), float(wnhi), temp)
                      # Finally, combine to produce the emissivity.
@@ -878,14 +928,17 @@ def create_orac_cloud_lut(in_path, instfile, mmfile, lutfile, out_path, atmosphe
    private_lut_filename = work_path / v2_lut_filename.name
    print("Info: Creating " + str(v2_lut_filename))
 
+   # With a cloud profile (V25) the cloud below the top is warmer than the
+   # normalising temperature, so E_md may exceed 1.
+   em_valid_range = None if cloudprof is None else (0.0, np.finfo(np.float32).max)
    write_v2_lut(private_lut_filename, lutstr, inststr, srfstrarr, vavg, bextout, bextratout, ssaout, gout,
-                td, tfd, rd, rfd, rbd=rbd, rfbd=rfbd, tfbd=tfbd, tb=tb, em=em)
+                td, tfd, rd, rfd, rbd=rbd, rfbd=rfbd, tfbd=tfbd, tb=tb, em=em, em_valid_range=em_valid_range)
    _publish_lut(private_lut_filename, v2_lut_filename)
    _record_provenance(v2_lut_filename, forward_model="cloud", in_path=in_path, instfile=instfile, mmfile=mmfile,
                       lutfile=lutfile, atmfile=atmfile, inststr=inststr, mmstr=mmstr, lutstr=lutstr, qm=qm,
                       atmospheres=atmospheres, gas_flag=gas_flag, rayleigh_flag=rayleigh_flag, scat_only=scat_only,
                       reuse_scat=reuse_scat, nstreams=nstreams, nmom=nmom, version=version, driver=driver,
-                      tmatrix_path=tmatrix_path)
+                      tmatrix_path=tmatrix_path, cloudprof=cloudprof)
 
    # -----------------------------------------------------------------------------
    # Output termination timestamp.
@@ -1365,13 +1418,14 @@ def run(runfile):
       generate = create_orac_cloud_lut
    else:
       generate = create_orac_aerosol_lut
+   options = {"cloud_vertical_profile": settings["cloud_vertical_profile"]} if settings["forward_model"] == "cloud" else {}
    status = generate(in_path, settings["instfile"], settings["mmfile"], settings["lutfile"], out_path,
                      settings["atmospheres"],
                      channelid=settings["channelid"], gas=settings["gas"], no_rayleigh=settings["no_rayleigh"],
                      srf_quad=settings["srf_quad"], reuse_scat=settings["reuse_scat"], scat_only=settings["scat_only"],
                      tmatrix_path=settings["tmatrix_path"],
                      version=settings["version"], driver=runfile,
-                     nstreams=settings["nstreams"], nmom=settings["nmom"])
+                     nstreams=settings["nstreams"], nmom=settings["nmom"], **options)
    if status != 0:
       print("create_orac_lut failed with code: " + str(status))
    return status
